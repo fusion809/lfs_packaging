@@ -1,0 +1,6 @@
+#!/bin/bash
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/qt6/lib
+export XDG_RUNTIME_DIR=/run/user/$(id -u)
+export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"
+export PATH=$PATH:/opt/qt6/bin
+/usr/bin/octave $@

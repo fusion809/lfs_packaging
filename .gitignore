@@ -3,5 +3,5 @@ eog/eog-[0-9.]*
 gnuplot/gnuplot-[0-9.]*
 *.tar*
 *.tgz
-*/*/*
+*/*/*/*
 
