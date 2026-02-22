@@ -1,0 +1,2 @@
+# Scripts for building Flatpak for LFS/BLFS
+To be used in conjunction with scripts in lfs-scripts, as lfs-scripts provides download function for downloading source codes. To be used with bleeding edge systemd edition of LFS and BLFS. This has been forked from [afhpayne's flatpak\_slackbuild repo](https://github.com/afhpayne/flatpak_slackbuild). Their original license is included in here, but the changes I've made are not under that license, but rather GPL-3.0
