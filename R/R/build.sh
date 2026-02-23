@@ -100,3 +100,4 @@ sudo mkdir -p /usr/share/doc/$PRGNAM-$VERSION
 sudo cp -a \
    COPYING README SVN-REVISION VERSION VERSION-NICK \
    /usr/share/doc/$PRGNAM-$VERSION
+sudo install -Dm755 $CWD/$PRGNAM.desktop /usr/share/applications

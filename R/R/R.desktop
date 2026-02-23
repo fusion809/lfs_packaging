@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=R
+Exec=gnome-terminal -- R
+Type=Application
+Icon=R
