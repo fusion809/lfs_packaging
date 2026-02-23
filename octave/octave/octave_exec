@@ -1,6 +1,6 @@
 #!/bin/bash
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/qt6/lib:/opt/jdk/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/qt6/lib:/opt/jdk/lib:/opt/texlive/2025/lib
 export XDG_RUNTIME_DIR=/run/user/$(id -u)
 export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"
-export PATH=$PATH:/opt/qt6/bin:/opt/jdk/lib
+export PATH=$PATH:/opt/qt6/bin:/opt/jdk/bin:/opt/texlive/2025/bin/x86_64-linux
 /usr/bin/octave $@
