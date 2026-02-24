@@ -26,7 +26,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=spice-vdagent
-VERSION=${VERSION:-0.23.0}
+VERSION=$(wget -cqO- https://spice-space.org/download/releases/spice-vdagent/ | grep ".tar.bz2\"" | cut -d '"' -f 8 | cut -d '-' -f 3 | sed 's/.tar.bz2//g' | tail -n 1)
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in

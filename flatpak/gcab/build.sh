@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Slackware build script for "gcab".
+# Maintained by Brenton Horne
+# Originally a Slackware build script for "gcab".
 
 # Copyright 2024 Andrew Payne <phalange@komputermatrix.com>
 # All rights reserved.
@@ -27,7 +28,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=gcab
-VERSION=${VERSION:-1.6}
+VERSION=$(wget -cqO- https://download.gnome.org/sources/gcab/ | grep "[0-9]/" | cut -d '"' -f 4 | sed 's|/$||g' | tail -n 1)
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in

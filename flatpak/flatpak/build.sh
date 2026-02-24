@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Slackware build script for flatpak
+# Maintained by Brenton Horne
+# Originally a Slackware build script for flatpak
 
 # Copyright 2020-2025 Andrew Payne <phalange@komputermatrix.com>
 # Copyright 2017, 2018, 2019 Vincent Batts <vbatts@hashbangbash.com>
@@ -26,7 +27,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=flatpak
-VERSION=${VERSION:-1.16.3}
+VERSION=$(wget -cqO- https://github.com/flatpak/flatpak/releases/ | grep "/tag/" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in

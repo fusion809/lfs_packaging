@@ -26,7 +26,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=spice-protocol
-VERSION=${VERSION:-0.14.5}
+VERSION=$(wget -cqO- https://spice-space.org/download/releases/spice-protocol/ | grep ".tar.bz2\"" | cut -d '"' -f 8 | cut -d '-' -f 3 | sed 's/.tar.bz2//g' | tail -n 1)
 ARCH=noarch
 
 if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then

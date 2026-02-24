@@ -26,7 +26,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=spice
-VERSION=${VERSION:-0.16.0}
+VERSION=$(wget -cqO- https://spice-space.org/download/releases/spice-server/ | grep ".tar.bz2\"" | cut -d '"' -f 8 | sed 's/.tar.bz2//g' | tail -n 1 | cut -d '-' -f 2)
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 PKGTYPE=${PKGTYPE:-tgz}

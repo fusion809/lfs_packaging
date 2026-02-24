@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=orc
-VERSION=${VERSION:-0.4.42}
+VERSION=$(wget -cqO- https://gstreamer.freedesktop.org/src/orc/ | grep ".tar.xz\"" | cut -d '"' -f 2 | sed 's/.tar.xz//g' | cut -d '-' -f 2 | tail -n 1)
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 

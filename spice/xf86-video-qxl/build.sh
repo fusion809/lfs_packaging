@@ -24,9 +24,8 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 cd $(dirname $0) ; CWD=$(pwd)
-
 PRGNAM=xf86-video-qxl
-VERSION=${VERSION:-0.1.6}
+VERSION=$(wget -cqO- https://xorg.freedesktop.org/releases/individual/driver/ | grep "xf86-video-qxl.*.tar.xz\"" | cut -d '"' -f 2 | head -n 1 | sed 's/xf86-video-qxl-//g' | sed 's/.tar.xz//g')
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in

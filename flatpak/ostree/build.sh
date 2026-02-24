@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Slackware build script for ostree
+# Maintained by Brenton Horne
+# Originally a Slackware build script for ostree
 
 # Copyright 2019-2025 Andrew Payne <phalange@komputermatrix.com>
 # Copyright 2017 Vincent Batts <vbatts@hashbangbash.com>
@@ -27,7 +28,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=ostree
-VERSION=${VERSION:-2025.7}
+VERSION=$(wget -cqO- https://github.com/ostreedev/ostree/releases | grep "/tag/" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
