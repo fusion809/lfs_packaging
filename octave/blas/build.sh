@@ -28,7 +28,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=blas
 SRCNAM=lapack
-VERSION=${VERSION:-c0c64400dae807bd7e3752456f57e346667dd963}
+VERSION=$(wget -cqO- https://github.com/Reference-LAPACK/lapack/commits | grep "commit/" | head -n 1 | cut -d '"' -f 18)
 PKGTYPE=${PKGTYPE:-tgz}
 
 if [ -z "$ARCH" ]; then
@@ -58,7 +58,9 @@ if ! which gfortran &> /dev/null; then
 	exit
 fi
 rm -rf $SRCNAM-$VERSION
-wget -c https://github.com/Reference-LAPACK/lapack/archive/$VERSION.tar.gz
+if ! [[ -f $VERSION.tar.gz ]]; then
+	wget -c https://github.com/Reference-LAPACK/lapack/archive/$VERSION.tar.gz
+fi
 tar xvf $CWD/$VERSION.tar.gz
 cd $SRCNAM-$VERSION
 # Avoid adding an RPATH entry to the shared lib.  It's unnecessary (except for

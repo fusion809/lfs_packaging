@@ -24,12 +24,10 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 cd $(dirname $0) ; CWD=$(pwd)
-export JAVA_HOME=/opt/OpenJDK-21.0.9-bin
+export JAVA_HOME=/opt/jdk
 PRGNAM=octave
-VERSION=${VERSION:-11.1.0}
+VERSION=$(wget -cqO- https://ftp.gnu.org/gnu/octave/ | grep ".tar.gz\"" | tail -n 1 | cut -d '"' -f 8 | sed 's/octave-//g' | sed 's/.tar.gz//g')
 BUILD=${BUILD:-1}
-TAG=${TAG:-_SBo}
-PKGTYPE=${PKGTYPE:-tgz}
 
 if [ -z "$ARCH" ]; then
   case "$(uname -m)" in
@@ -206,12 +204,13 @@ if ! [[ -d /opt/OpenJDK-21.0.9-bin/bin ]]; then
 	echo "Java not found. It is required to build GNU Octave."
 	exit
 fi
-if ! [[ -f $PRGNAM-$VERSION.tar.lz ]]; then
-	wget -c https://ftpmirror.gnu.org/gnu/$PRGNAM/$PRGNAM-$VERSION.tar.lz
+filename="$PRGNAM-$VERSION.tar.lz"
+if ! [[ -f $filename ]]; then
+	wget -c https://ftpmirror.gnu.org/gnu/$PRGNAM/$filename
 fi
-rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.lz
-cd $PRGNAM-$VERSION
+rm -rf ${filename/.tar.lz/}
+tar xvf $CWD/$filename
+cd ${filename/.tar.lz/}
 
 autoreconf -vif
 
@@ -222,9 +221,9 @@ autoreconf -vif
 # timezone, then the docs get rebuilt with your local date.
 find . -name stamp-vti -exec touch {} +
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/qt6/lib
-export PATH=$PATH:/opt/qt6/bin
-export JAVA_HOME=/opt/OpenJDK-21.0.9-bin
+export JAVA_HOME=/opt/jdk
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/qt6/lib:$JAVA_HOME/lib
+export PATH=$PATH:/opt/qt6/bin:$JAVA_HOME/bin
 export CPPFLAGS="-I/usr/include"
 export PKG_CONFIG_PATH=/opt/qt6/lib/pkgconfig:$PKG_CONFIG_PATH
 ./configure \

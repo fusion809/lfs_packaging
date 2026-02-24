@@ -1,6 +1,6 @@
 #!/bin/bash
 NAME=lzip
-VERSION=1.25
+VERSION=$(wget -cqO- https://download.savannah.gnu.org/releases/lzip/ | grep "lzip-[0-9.]*.tar.gz\"" | tail -n 1 | cut -d '"' -f 4 | sed 's/lzip-//g' | sed 's/.tar.gz//g')
 FILENAME="$NAME-$VERSION.tar.gz"
 SRC="https://download.savannah.gnu.org/releases/$NAME/$FILENAME"
 if ! [[ -f "$NAME-$VERSION.tar.gz" ]]; then

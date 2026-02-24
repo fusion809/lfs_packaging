@@ -1,13 +1,15 @@
 #!/bin/bash
 set -e
-pkgname=hdf5
-pkgbase=$pkgname
-pkgver=2.0.0
-wget -c https://github.com/HDFGroup/hdf5/archive/hdf5_$pkgver/$pkgname-$pkgver.tar.gz
-rm -rf ${pkgbase}-${pkgbase}-${pkgver/_/-}
-tar xf $pkgname-$pkgver.tar.gz
+NAME=hdf5
+pkgbase=$NAME
+VERSION=$(wget -cqO- https://github.com/HDFGroup/hdf5/releases | grep "tag/[0-9]" | cut -d '"' -f 6 | cut -d '/' -f 6)
+if ! [[ -f $NAME-$VERSION.tar.gz ]]; then
+	wget -c https://github.com/HDFGroup/hdf5/archive/hdf5_$VERSION/$NAME-$VERSION.tar.gz
+fi
+rm -rf ${pkgbase}-${pkgbase}-${VERSION/_/-}
+tar xf $NAME-$VERSION.tar.gz
 export PATH=$PATH:/opt/OpenJDK-21.0.9-bin/bin/
-cd ${pkgbase}-${pkgbase}_${pkgver/_/-}
+cd ${pkgbase}-${pkgbase}_${VERSION/_/-}
   common_cmake_args=(
     -DCMAKE_BUILD_TYPE=None
     -DCMAKE_INSTALL_PREFIX=/usr

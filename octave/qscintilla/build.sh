@@ -1,9 +1,9 @@
 #!/bin/bash
-pkgname=qscintilla
-pkgver=2.14.1
-archive=QScintilla_src-$pkgver
+NAME=qscintilla
+VERSION=$(wget -cqO- https://www.riverbankcomputing.com/software/qscintilla/download | grep ".tar.gz" | head -n 1 | cut -d '/' -f 8 | sed 's/>.*//g' | cut -d '-' -f 2 | sed 's/.tar.gz//g')
+archive=QScintilla_src-$VERSION
 if ! [[ -f $archive.tar.gz ]]; then
-	wget -c https://www.riverbankcomputing.com/static/Downloads/QScintilla/$pkgver/QScintilla_src-$pkgver.tar.gz
+	wget -c https://www.riverbankcomputing.com/static/Downloads/QScintilla/$VERSION/$archive.tar.gz
 fi
 rm -rf $archive
 tar xf $archive.tar.gz

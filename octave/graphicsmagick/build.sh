@@ -1,8 +1,10 @@
 #!/bin/bash
-pkgname=graphicsmagick
-pkgver=1.3.46
-_archive="GraphicsMagick-$pkgver"
-wget -c https://downloads.sourceforge.net/project/$pkgname/$pkgname/$pkgver/$_archive.tar.xz
+NAME=graphicsmagick
+VERSION=$(wget -cqO- https://sourceforge.net/projects/graphicsmagick/files/graphicsmagick/ | grep "/graphicsmagick/[0-9]" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
+_archive="GraphicsMagick-$VERSION"
+if ! [[ -f $_archive.tar.xz ]]; then
+	wget -c https://downloads.sourceforge.net/project/$NAME/$NAME/$VERSION/$_archive.tar.xz
+fi
 tar xf $_archive.tar.xz
 cd $_archive
 sed -e "s:freetype_config='':freetype_config='/usr/bin/pkg-config freetype2':g" -i configure

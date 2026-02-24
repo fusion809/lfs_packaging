@@ -1,10 +1,11 @@
 #!/bin/bash
-pkgname=pcre2
-pkgver=10.47
-wget -c https://github.com/PCRE2Project/pcre2/archive/$pkgname-$pkgver.tar.gz
+NAME=pcre2
+VERSION=$(wget -cqO- https://github.com/PCRE2Project/pcre2/releases | grep "releases/tag/pcre2" | head -n 1 | cut -d '"' -f 6 | cut -d '=' -f 3 | cut -d '/' -f 6 | sed 's/pcre2-//g')
+filename="$NAME-$VERSION.tar.gz"
+wget -c https://github.com/PCRE2Project/pcre2/archive/$filename
 wget -c https://github.com/zherczeg/sljit/archive/master.tar.gz -O sljit-master.tar.gz
-tar xf $pkgname-$pkgver.tar.gz
-cd $pkgname-$pkgname-$pkgver
+tar xf $NAME-$VERSION.tar.gz
+cd $NAME-$NAME-$VERSION
 rm -rf deps/sljit
 tar xf ../sljit-master.tar.gz
 mv sljit-master sljit 

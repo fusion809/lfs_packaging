@@ -1,13 +1,16 @@
 #!/bin/bash
 _name=pmix
-pkgver=5.0.10
-wget -c https://github.com/openpmix/openpmix/releases/download/v$pkgver/$_name-$pkgver.tar.gz
-tar xf $_name-$pkgver.tar.gz
-cd $_name-$pkgver
+VERSION=$(wget -cqO- https://github.com/openpmix/openpmix/releases | grep "/releases/tag/v" | grep -v "rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+filename="$_name-$VERSION.tar.gz"
+if ! [[ -f $filename ]]; then
+	wget -c https://github.com/openpmix/openpmix/releases/download/v$VERSION/$filename
+fi
+tar xf $filename
+cd ${filename/.tar.gz/}
 ./autogen.pl
 local configure_options=(
     --prefix=/usr
-    --sysconfdir=/etc/$pkgname
+    --sysconfdir=/etc/$NAME
   )
 
   # set environment variables for reproducible build
@@ -15,7 +18,6 @@ local configure_options=(
   export HOSTNAME=buildhost
   export USER=builduser
 
-  cd $_name-$pkgver
   ./configure "${configure_options[@]}"
   # prevent excessive overlinking due to libtool
   sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool

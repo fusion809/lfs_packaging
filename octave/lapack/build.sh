@@ -28,7 +28,7 @@ cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=lapack
 SRCNAM=lapack
-VERSION=${VERSION:-c0c64400dae807bd7e3752456f57e346667dd963}
+VERSION=$(wget -cqO- https://github.com/Reference-LAPACK/lapack/commits | grep "commit/" | head -n 1 | cut -d '"' -f 18)
 BUILD=${BUILD:-1}
 PKGTYPE=${PKGTYPE:-tgz}
 
@@ -63,8 +63,10 @@ if ! [[ -f /usr/lib/libblas.so ]]; then
 	echo "libblas.so not found in /usr/lib. You need BLAS installed first!"
 	exit
 fi
-	
-wget -c https://github.com/Reference-LAPACK/lapack/archive/$VERSION.tar.gz
+
+if ! [[ -f $VERSION.tar.gz ]]; then
+	wget -c https://github.com/Reference-LAPACK/lapack/archive/$VERSION.tar.gz
+fi
 rm -rf $SRCNAM-$VERSION
 tar xvf $CWD/$VERSION.tar.gz
 cd $SRCNAM-${VERSION}

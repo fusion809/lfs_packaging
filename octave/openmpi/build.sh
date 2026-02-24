@@ -1,9 +1,13 @@
 #!/bin/bash
 pkgbase=openmpi
-pkgver=5.0.9
-wget -c https://www.open-mpi.org/software/ompi/v${pkgver%.*}/downloads/$pkgbase-$pkgver.tar.bz2
-tar xf $pkgbase-$pkgver.tar.bz2
-cd $pkgbase-$pkgver
+VERSION=$(wget -cqO- https://www-lb.open-mpi.org/software/ompi/ | grep ".tar.gz" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 7 | sed 's/.tar.gz//g' | sed 's/openmpi-//g')
+filename="$pkgbase-$VERSION.tar.bz2"
+rm -rf ${filename/.tar.bz2/}
+if ! [[ -f $filename ]]; then
+	wget -c https://www.open-mpi.org/software/ompi/v${VERSION%.*}/downloads/$filename
+fi
+tar xf $filename
+cd ${filename/.tar.bz2/}
 sed -i 's|WRAPPER__FCFLAGS|WRAPPER_FCFLAGS|g' configure
   sed -i 's|WRAPPER_EXTRA_FCFLAGS|WRAPPER_FCFLAGS|g' configure
   sed -i 's|"-I/usr/include",||' opal/tools/wrappers/opal_wrapper.c
