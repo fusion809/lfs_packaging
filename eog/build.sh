@@ -1,6 +1,6 @@
 #!/bin/bash
 NAME=eog
-VERSION="$(wget -c https://gitlab.gnome.org/GNOME/eog/-/tags -qO- | grep "tags/" | cut -d '/' -f 6 | sed 's/".*//g')"
+VERSION="$(wget -cqO- https://gitlab.gnome.org/GNOME/eog/-/tags | grep "tags/" | cut -d '/' -f 6 | sed 's/".*//g' | head -n 1 | sed 's/^v//g')"
 wget -c https://gitlab.gnome.org/GNOME/$NAME/-/archive/$VERSION/$NAME-$VERSION.tar.bz2
 tar xf $NAME-$VERSION.tar.bz2
 cd $NAME-$VERSION
