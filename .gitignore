@@ -4,4 +4,6 @@ gnuplot/gnuplot-[0-9.]*
 *.tar*
 *.tgz
 */*/*/*
+fastfetch/fastfetch
+hyfetch/hyfetch
 
