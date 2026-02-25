@@ -188,7 +188,7 @@ if ! which gnuplot &> /dev/null ; then
 	echo "Gnuplot isn't installed and it is required for some plotting in Octave."
 fi
 
-if ! which fltk &> /dev/null; then
+if ! [[ -f /usr/lib/libfltk.so ]]; then
 	echo "FLTK is required by some features for GNU Octave."
 fi
 
@@ -200,7 +200,7 @@ if ! [[ -f /usr/include/rapidjson/prettywriter.h ]]; then
 	echo "RapidJSON isn't installed and is required for JSON support in Octave."
 fi
 
-if ! [[ -d /opt/OpenJDK-21.0.9-bin/bin ]]; then
+if ! [[ -d /opt/jdk/bin ]]; then
 	echo "Java not found. It is required to build GNU Octave."
 	exit
 fi
