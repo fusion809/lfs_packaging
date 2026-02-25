@@ -12,4 +12,4 @@ mkdir -p build
 cd build
 cmake .. -DCMAKE_INSTALL_PREFIX=/usr
 cmake --build . --target fastfetch
-sudo cmake --install .
+sudo make install
