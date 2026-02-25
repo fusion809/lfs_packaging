@@ -6,4 +6,5 @@ gnuplot/gnuplot-[0-9.]*
 */*/*/*
 fastfetch/fastfetch
 hyfetch/hyfetch
+octave/jack/jack2
 
