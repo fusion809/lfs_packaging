@@ -3,3 +3,4 @@ Name=R
 Exec=gnome-terminal -- R
 Type=Application
 Icon=R
+Categories=Education;Math;Science;Mathematics;
