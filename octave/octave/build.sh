@@ -248,5 +248,5 @@ sudo make install-strip DESTDIR=/
 sudo mkdir -p /usr/share/doc/$PRGNAM-$VERSION
 sudo cp -a $DOCS /usr/share/doc/$PRGNAM-$VERSION
 sudo install -dm755 $CWD/octave_exec /usr/bin/
-sudo install -dm755 $CWD/org.octave.Octave.desktop /usr/share/applications/
+sudo install -Dm755 $CWD/org.octave.Octave.desktop /usr/share/applications/
 sudo sed -i -e "s|/usr/bin/octave|/usr/bin/octave_cli|g" /usr/share/applications/org.octave.Octave.desktop
