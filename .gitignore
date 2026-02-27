@@ -7,4 +7,4 @@ gnuplot/gnuplot-[0-9.]*
 fastfetch/fastfetch
 hyfetch/hyfetch
 octave/jack/jack2
-
+leptonica/leptonica-[0-9.]*
