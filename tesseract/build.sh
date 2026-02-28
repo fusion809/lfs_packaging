@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+depends=(leptonica)
 NAME=tesseract
 VERSION=$(wget -cqO- https://github.com/tesseract-ocr/tesseract/releases | grep "/tag/" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
 filename="$NAME-$VERSION.tar.gz"

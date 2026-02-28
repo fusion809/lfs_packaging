@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+depends=()
 NAME="leptonica"
 VERSION=$(wget -cqO- https://github.com/DanBloomberg/leptonica/releases | grep "/tag/" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
 filename="$NAME-$VERSION.tar.gz"

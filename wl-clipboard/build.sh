@@ -1,11 +1,14 @@
 #!/bin/bash
 set -e
-if ! [[ -d "wl-clipboard" ]]; then
+depends=()
+NAME="wl-clipboard"
+if ! [[ -d $NAME ]]; then
 	git clone https://github.com/bugaevc/wl-clipboard
 fi
 
-cd wl-clipboard
+cd $NAME
 git pull origin master
+VERSION=$(git log | head -n 1 | cut -d ' ' -f 2)
 mkdir build
 cd build
 CFLAGS="-O2 -fPIC"
@@ -15,3 +18,6 @@ meson setup --prefix=/usr       \
 	    ..
 ninja -j$(nproc)
 sudo ninja install
+cd ..
+rm -rf build
+cd ..
