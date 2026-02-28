@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-depends=(jack)
+depends=(jack2)
 NAME=portaudio
 VERSION=$(wget -cqO- https://github.com/portaudio/portaudio/releases | grep "releases/tag/v" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
 filename="$NAME-v$VERSION.tar.gz"
