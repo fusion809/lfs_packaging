@@ -19,4 +19,5 @@ sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
 make -j$(nproc)
 sudo make install
 cd ..
-rm -rf $direname $filename
+sudo rm -rf $direname $filename
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

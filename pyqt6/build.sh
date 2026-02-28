@@ -26,4 +26,5 @@ sudo make install
 sudo python3 -m compileall -d / /usr/lib
 sudo python3 -O -m compileall -d / /usr/lib
 cd ../..
-rm -rf $direname $filename
+sudo rm -rf $direname $filename
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

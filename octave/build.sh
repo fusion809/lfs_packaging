@@ -113,4 +113,5 @@ sudo install -dm755 ../octave_exec /usr/bin/
 sudo install -Dm755 ../org.octave.Octave.desktop /usr/share/applications/
 sudo sed -i -e "s|/usr/bin/octave|/usr/bin/octave_cli|g" /usr/share/applications/org.octave.Octave.desktop
 cd ..
-rm -rf $direname ${filename}
+sudo rm -rf $direname ${filename}
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

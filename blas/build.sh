@@ -85,4 +85,5 @@ fi
 sudo mkdir -p /usr/share/doc/$PRGNAM-$VERSION
 sudo cp -a $DOCS /usr/share/doc/$PRGNAM-$VERSION
 cd ..
-rm -rf ${filename} $direname
+sudo rm -rf ${filename} $direname
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

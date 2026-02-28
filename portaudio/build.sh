@@ -25,4 +25,5 @@ make -j1
 sudo make install
 sudo install -Dmv644 README.* /usr/share/doc/$direname/
 cd ..
-rm -rf $filename $direname
+sudo rm -rf $filename $direname
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

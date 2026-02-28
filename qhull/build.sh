@@ -23,4 +23,5 @@ cmake --build build
 cmake --build build --target libqhull
 sudo cmake --install build
 cd ..
-rm -rf $filename $direname
+sudo rm -rf $filename $direname
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

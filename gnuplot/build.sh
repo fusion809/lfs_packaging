@@ -51,4 +51,5 @@ DOCDIR="/usr/share/doc/$NAME-$VERSION"
 sudo mkdir -p $DOCDIR
 sudo cp Copyright RELEASE_NOTES NEWS $DOCDIR 
 cd ..
-rm -rf $SRC $filename
+sudo rm -rf $SRC $filename
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

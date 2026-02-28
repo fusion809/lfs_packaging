@@ -53,4 +53,5 @@ sudo cp -a \
    COPYING README.md TODO \
    /usr/share/doc/$direname
 cd ..
-rm -rf $direname $filename
+sudo rm -rf $direname $filename
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

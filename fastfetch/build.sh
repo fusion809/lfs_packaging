@@ -18,3 +18,4 @@ cmake .. \
 	-DCMAKE_CXX_FLAGS:STRING="-O2 -fPIC"
 cmake --build . --target fastfetch
 sudo make install
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

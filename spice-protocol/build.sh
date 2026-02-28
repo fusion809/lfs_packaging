@@ -62,4 +62,4 @@ sudo mkdir -p /usr/share/doc/$direname
 sudo cp -a $DOCS /usr/share/doc/$direname
 cd ..
 rm -rf $direname $filename
-
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

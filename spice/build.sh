@@ -65,3 +65,4 @@ sudo cp -a $DOCS /usr/share/doc/$direname
 sudo rm -f /usr/lib*/*.la
 cd ..
 rm -rf $filename $direname
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

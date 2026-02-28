@@ -69,5 +69,5 @@ sudo install -m 0755 -D scripts/Xspice /usr/bin/Xspice
 sudo mkdir -p /usr/share/doc/$direname
 sudo cp -a COPYING README* TODO* /usr/share/doc/$direname
 cd ..
-rm -rf $filename $direname
-
+sudo rm -rf $filename $direname
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

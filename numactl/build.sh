@@ -21,4 +21,5 @@ make -j$(nproc)
 sudo make install
 sudo install -vDm 644 README.md -t "/usr/share/doc/$direname/"
 cd ..
-rm -rf $direname $filename
+sudo rm -rf $direname $filename
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

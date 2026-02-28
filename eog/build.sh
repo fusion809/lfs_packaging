@@ -17,4 +17,5 @@ meson setup --prefix=/usr       \
 ninja -j$(nproc)
 sudo ninja install
 cd ..
-rm -rf $NAME-$VERSION*
+sudo rm -rf $NAME-$VERSION*
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

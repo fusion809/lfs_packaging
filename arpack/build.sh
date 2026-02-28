@@ -21,4 +21,5 @@ CXXFLAGS="-O2 -fPIC"
     LIBS+=" $(pkg-config --libs ompi-f77) " -j$(nproc)
 sudo make install
 cd ..
-rm -rf $filename $direname
+sudo rm -rf $filename $direname
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

@@ -34,4 +34,5 @@ cmake -S . -B build "${common_cmake_args[@]}"
 make -j$(nproc)
 sudo make install
 cd ..
-rm -rf $direname $filename
+sudo rm -rf $direname $filename
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

@@ -65,4 +65,5 @@ sudo cp -a \
   COPYING NEWS \
   /usr/share/doc/$direname
 cd ..
-rm -rf $filename $direname
+sudo rm -rf $filename $direname
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

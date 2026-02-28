@@ -51,4 +51,5 @@ EOF
 #make -j$(nproc)
 #sudo make install
 cd ../..
-rm -rf $archive*
+sudo rm -rf $archive*
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

@@ -16,3 +16,4 @@ autoreconf
 make -j$(nproc)
 sudo make install
 sudo make install.man
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

@@ -24,3 +24,4 @@ CXXFLAGS="-O2 -fPIC"
 ./waf build
 sudo ./waf install
 cd ..
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

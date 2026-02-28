@@ -58,10 +58,11 @@ export CXXFLAGS="-O2 -fPIC -Wno-error"
 make -j$(nproc)
 sudo make install DESTDIR=/
 cd ..
+sudo rm -rf $direname $filename
 # Install an init script and an X.org configuration file
 sudo install -m 0644 -D 06-spice-vdagent.conf \
   /usr/share/X11/xorg.conf.d/06-spice-vdagent.conf.new
 
 sudo mkdir -p /usr/share/doc/$direname
 sudo cp -a $DOCS /usr/share/doc/$direname
-
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

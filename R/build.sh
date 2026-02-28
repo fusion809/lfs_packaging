@@ -41,7 +41,6 @@ else
   blas_shlib="--disable-BLAS-shlib"
 fi
 
-set -e
 direname="$NAME-$VERSION"
 filename="$direname.tar.xz"
 rm -rf $direname
@@ -71,4 +70,5 @@ sudo cp -a \
    /usr/share/doc/$direname
 cd ..
 sudo install -Dm755 $NAME.desktop /usr/share/applications
-rm -rf $filename $direname
+sudo rm -rf $filename $direname
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

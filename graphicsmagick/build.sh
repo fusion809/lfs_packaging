@@ -29,4 +29,5 @@ sed -i -e "s/LDLOADLIBS =/LDLOADLIBS = -lGraphicsMagick/" Makefile
 make -j$(nproc)
 sudo make install
 cd ..
-rm -rf $_archive*
+sudo rm -rf $_archive*
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

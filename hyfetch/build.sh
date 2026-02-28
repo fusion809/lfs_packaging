@@ -19,4 +19,4 @@ sudo install -Dm 644 "docs/${NAME}.1" "/usr/share/man/man1/${NAME}.1"
 sudo install -Dm 644 "${NAME}/scripts/autocomplete.bash" "/usr/share/bash-completion/completions/${NAME}"
 sudo install -Dm 644 "${NAME}/scripts/autocomplete.zsh" "/usr/share/zsh/site-functions/_${NAME}"
 sudo install -Dm 644 README.md "/usr/share/doc/${NAME}-$VERSION/README.md"
-
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

@@ -17,4 +17,5 @@ CXXFLAGS="-O2 -fPIC"
 make -j$(nproc)
 sudo make install
 cd ..
-rm -rf ${filename/.tar.gz/} $filename
+sudo rm -rf ${filename/.tar.gz/} $filename
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

@@ -9,6 +9,7 @@ fi
 cd $NAME
 git pull origin master
 VERSION=$(git log | head -n 1 | cut -d ' ' -f 2)
+rm -rf build
 mkdir build
 cd build
 CFLAGS="-O2 -fPIC"
@@ -21,3 +22,4 @@ sudo ninja install
 cd ..
 rm -rf build
 cd ..
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

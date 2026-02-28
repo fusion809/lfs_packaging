@@ -12,6 +12,7 @@ cd $NAME
 git pull origin master
 VERSION=$(git log | head -n 1 | cut -d ' ' -f 2)
 find -name CMakeLists.txt | xargs sed -e 's|-Werror||' -i # Don't use -Werror
+rm -rf build
 mkdir -p build
 cd build
 CFLAGS="-O2 -fPIC"
@@ -31,5 +32,6 @@ cmake \
 make -j$(nproc)
 sudo make install
 cd ..
-rm -rf build
+sudo rm -rf build
 cd ..
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME

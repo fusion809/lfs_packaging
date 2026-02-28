@@ -63,4 +63,5 @@ done
 
 sudo rm -f /usr/lib*/*.la
 cd ..
-rm -rf $direname $filename
+sudo rm -rf $direname $filename
+echo $VERSION > /var/lib/lfs-custom-packages/$NAME
