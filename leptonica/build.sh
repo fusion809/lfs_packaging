@@ -9,6 +9,8 @@ fi
 rm -rf ${filename/.tar.gz/}
 tar xf $filename
 cd ${filename/.tar.gz/}
+CFLAGS="-O2 -fPIC"
+CXXFLAGS="-O2 -fPIC"
 ./autogen.sh --prefix=/usr
 ./configure --prefix=/usr
 make -j$(nproc)

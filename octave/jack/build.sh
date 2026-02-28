@@ -10,9 +10,11 @@ cd $NAME
 VERSION=$(git log | head -n 1 | cut -d ' ' -f 2)
 git pull origin master
 sed -i -e "s|python|python3|g" waf
+CLFAGS="-O2 -fPIC"
+CXXFLAGS="-O2 -fPIC"
 ./waf configure \
   --prefix=/usr \
-  --libdir=/usr/lib${LIBDIRSUFFIX} \
+  --libdir=/usr/lib \
   --mandir=/usr/man/man1 \
   --htmldir=/usr/doc/$PRGNAM-$VERSION/html \
   --classic \

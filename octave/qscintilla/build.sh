@@ -13,6 +13,8 @@ export QMAKEFEATURES=$PWD/features/
 export QT6DIR=/opt/qt6
 export PATH=$PATH:$QT6DIR/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$QT6DIR/lib
+CFLAGS="-O2 -fPIC"
+CXXFLAGS="-O2 -fPIC"
 qmake6
 make -j$(nproc)
 sudo make install
@@ -48,4 +50,4 @@ EOF
 #make -j$(nproc)
 #sudo make install
 cd ../..
-rm $archive*
+rm -rf $archive*

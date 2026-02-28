@@ -28,32 +28,6 @@
 NAME=gcab
 VERSION=$(wget -cqO- https://download.gnome.org/sources/gcab/ | grep "[0-9]/" | cut -d '"' -f 4 | sed 's|/$||g' | tail -n 1)
 
-if [ -z "$ARCH" ]; then
-  case "$( uname -m )" in
-    i?86) ARCH=i586 ;;
-    arm*) ARCH=arm ;;
-       *) ARCH=$( uname -m ) ;;
-  esac
-fi
-
-if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
-  echo "$NAME-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
-  exit 0
-fi
-
-if [ "$ARCH" = "i586" ]; then
-  SLKCFLAGS="-O2 -march=i586 -mtune=i686"
-  LIBDIRSUFFIX=""
-elif [ "$ARCH" = "i686" ]; then
-  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
-  LIBDIRSUFFIX=""
-elif [ "$ARCH" = "x86_64" ]; then
-  SLKCFLAGS="-O2 -fPIC"
-  LIBDIRSUFFIX=""
-else
-  SLKCFLAGS="-O2"
-  LIBDIRSUFFIX=""
-fi
 
 set -e
 direname="$NAME-$VERSION"
@@ -67,6 +41,8 @@ cd $direname
 
 mkdir build
 cd build
+  CFLAGS="-O2 -fPIC"
+  CXXFLAGS="-O2 -fPIC"
   meson setup .. \
     --buildtype=release \
     --infodir=/usr/info \

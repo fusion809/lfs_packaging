@@ -11,6 +11,9 @@ cd fastfetch
 git checkout $VERSION
 mkdir -p build
 cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=/usr
+cmake .. \
+	-DCMAKE_INSTALL_PREFIX=/usr \
+	-DCMAKE_C_FLAGS:STRING="-O2 -fPIC" \
+	-DCMAKE_CXX_FLAGS:STRING="-O2 -fPIC"
 cmake --build . --target fastfetch
 sudo make install

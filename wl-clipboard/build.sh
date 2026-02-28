@@ -8,6 +8,8 @@ cd wl-clipboard
 git pull origin master
 mkdir build
 cd build
+CFLAGS="-O2 -fPIC"
+CXXFLAGS="-O2 -fPIC"
 meson setup --prefix=/usr       \
             --buildtype=release \
 	    ..

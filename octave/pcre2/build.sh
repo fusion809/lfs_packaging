@@ -6,11 +6,13 @@ filename="$NAME-$VERSION.tar.gz"
 wget -c https://github.com/PCRE2Project/pcre2/archive/$filename
 wget -c https://github.com/zherczeg/sljit/archive/master.tar.gz -O sljit-master.tar.gz
 tar xf $NAME-$VERSION.tar.gz
-cd $NAME-$NAME-$VERSION
+dirname="$NAME-$NAME-$VERSION"
+cd $direname
 rm -rf deps/sljit
 tar xf ../sljit-master.tar.gz
 mv sljit-master sljit 
 mv sljit deps/sljit
+
 ./autogen.sh
 configure_options=(
     --enable-jit
@@ -22,11 +24,11 @@ configure_options=(
     --prefix=/usr
   )
 
-CFLAGS+=" -ffat-lto-objects"
-CXXFLAGS+=" -ffat-lto-objects"
+CFLAGS+="-O2 -fPIC -ffat-lto-objects"
+CXXFLAGS+="-O2 -fPIC -ffat-lto-objects"
 
 ./configure "${configure_options[@]}"
 make -j$(nproc)
 sudo make install
 cd ..
-rm -rf ${filename} ${filename/.tar.gz/}
+rm -rf ${filename} $direname

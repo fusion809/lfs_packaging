@@ -6,8 +6,12 @@ filename="$NAME-v$VERSION.tar.bz2"
 if ! [[ -f $filename ]]; then
 	wget -c https://gitlab.dkrz.de/k202009/libaec/-/archive/v$VERSION/$NAME-v$VERSION.tar.bz2
 fi
+direname=${filename/.tar.bz2/}
+rm -rf $direname
 tar xf $filename
-cd ${filename/.tar.bz2/}
+cd $direname
+CLFAGS="-O2 -fPIC"
+CXXFLAGS="-O2 -fPIC"
 cmake -B build -S . \
     -DCMAKE_BUILD_TYPE=None \
     -DCMAKE_INSTALL_PREFIX=/usr \
@@ -16,4 +20,4 @@ cmake -B build -S . \
 cmake --build build
 sudo cmake --install build
 cd ..
-rm -rf $filename ${filename/.tar.bz2/}
+rm -rf $filename $direname

@@ -23,29 +23,9 @@
 #  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
+set -e
 NAME=ostree
 VERSION=$(wget -cqO- https://github.com/ostreedev/ostree/releases | grep "/tag/" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
-
-if [ "$ARCH" = "i586" ]; then
-  SLKCFLAGS="-O2 -march=i586 -mtune=i686"
-  LIBDIRSUFFIX=""
-elif [ "$ARCH" = "i686" ]; then
-  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
-  LIBDIRSUFFIX=""
-elif [ "$ARCH" = "x86_64" ]; then
-  SLKCFLAGS="-O2 -fPIC"
-  LIBDIRSUFFIX=""
-elif [ "$ARCH" = "aarch64" ]; then
-  SLKCFLAGS="-O2 -fPIC"
-  LIBDIRSUFFIX=""
-else
-  SLKCFLAGS="-O2"
-  LIBDIRSUFFIX=""
-fi
-
-set -e
-
 direname="lib${NAME}-$VERSION"
 filename="$direname.tar.xz"
 rm -rf $direname
@@ -54,7 +34,8 @@ if ! [[ -f $filename ]]; then
 fi
 tar xvf $filename
 cd $direname
-
+CFLAGS="-O2 -fPIC"
+CXXFLAGS="-O2 -fPIC"
 ./configure \
   --prefix=/usr \
   --libdir=/usr/lib \

@@ -39,6 +39,8 @@ cd $direname
 
 mkdir build
 cd build
+  CFLAGS="-O2 -fPIC"
+  CXXFLAGS="-O2 -fPIC"
   meson setup .. \
     --bindir=/usr/bin \
     --datadir=/usr/share \

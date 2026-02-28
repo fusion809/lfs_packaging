@@ -8,6 +8,8 @@ if ! [[ -f $_archive.tar.xz ]]; then
 fi
 tar xf $_archive.tar.xz
 cd $_archive
+CLFAGS="-O2 -fPIC"
+CXXFLAGS="-O2 -fPIC"
 sed -e "s:freetype_config='':freetype_config='/usr/bin/pkg-config freetype2':g" -i configure
 ./configure \
 	--prefix=/usr \

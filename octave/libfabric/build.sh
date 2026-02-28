@@ -6,13 +6,16 @@ filename="$NAME-$VERSION.tar.bz2"
 if ! [[ -f $filename ]]; then
 	wget -c https://github.com/ofiwg/libfabric/releases/download/v$VERSION/$filename
 fi
-rm -rf ${filename/.tar.bz2/}
+direname=${filename/.tar.bz2/}
+rm -rf $direname
 tar xf $filename
-cd ${filename/.tar.bz2/}
+cd $direname
 autoreconf -fvi
+CLFAGS="-O2 -fPIC"
+CXXFLAGS="-O2 -fPIC"
 ./configure --prefix=/usr
 sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
 make -j$(nproc)
 sudo make install
 cd ..
-rm -rf ${filename/.tar.bz2/} $filename
+rm -rf $direname $filename

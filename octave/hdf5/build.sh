@@ -9,7 +9,9 @@ if ! [[ -f $filename ]]; then
 fi
 rm -rf $direname
 tar xf $filename
-export PATH=$PATH:/opt/OpenJDK-21.0.9-bin/bin/
+export PATH=$PATH:/opt/jdk/bin/
+CLFAGS="-O2 -fPIC"
+CXXFLAGS="-O2 -fPIC"
 cd $direname
 common_cmake_args=(
   -DCMAKE_BUILD_TYPE=None

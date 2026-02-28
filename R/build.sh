@@ -28,9 +28,6 @@
 set -e
 NAME=R
 VERSION=$(wget -cqO- https://cran.r-project.org/sources.html | grep ".tar.gz" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 4 | sed 's/.tar.gz//g' | cut -d '-' -f 2)
-BUILD=${BUILD:-1}
-TAG=${TAG:-_SBo}
-PKGTYPE=${PKGTYPE:-tgz}
 
 if [ "${R_SHLIB:-yes}" = "yes" ]; then
   r_shlib="--enable-R-shlib"
@@ -43,28 +40,6 @@ else
   blas_shlib="--disable-BLAS-shlib"
 fi
 
-if [ -z "$ARCH" ]; then
-  case "$( uname -m )" in
-    i?86) ARCH=i586 ;;
-    arm*) ARCH=arm ;;
-       *) ARCH=$( uname -m ) ;;
-  esac
-fi
-
-if [ "$ARCH" = "i586" ]; then
-  SLKCFLAGS="-O2 -march=i586 -mtune=i686"
-  LIBDIRSUFFIX=""
-elif [ "$ARCH" = "i686" ]; then
-  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
-  LIBDIRSUFFIX=""
-elif [ "$ARCH" = "x86_64" ]; then
-  SLKCFLAGS="-O2 -fPIC"
-  LIBDIRSUFFIX=""
-else
-  SLKCFLAGS="-O2"
-  LIBDIRSUFFIX=""
-fi
-
 set -e
 direname="$NAME-$VERSION"
 filename="$direname.tar.xz"
@@ -74,15 +49,15 @@ if ! [[ -f $filename ]]; then
 fi
 tar xvf $filename
 cd $direname
-CFLAGS="$SLKCFLAGS" \
-CXXFLAGS="$SLKCFLAGS" \
+CFLAGS="-O2 -fPIC"
+CXXFLAGS="-O2 -fPIC"
 ./configure \
   --prefix=/usr \
-  --libdir=/usr/lib${LIBDIRSUFFIX} \
+  --libdir=/usr/lib \
   --sysconfdir=/etc \
   --localstatedir=/var \
   --mandir=/usr/man \
-  rdocdir=/usr/share/doc/$NAME-$VERSION \
+  rdocdir=/usr/share/doc/$direname \
   $r_shlib \
   $blas_shlib
 

@@ -39,7 +39,8 @@ if ! [[ -f $filename ]]; then
 fi
 tar xvf $filename
 cd $direname
-
+CFLAGS="-O2 -fPIC"
+CXXFLAGS="-O2 -fPIC"
 mkdir meson-build
 cd meson-build
 meson setup \

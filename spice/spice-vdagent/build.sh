@@ -25,26 +25,6 @@
 
 NAME=spice-vdagent
 VERSION=$(wget -cqO- https://spice-space.org/download/releases/ | grep "spice-vdagent.*.tar.bz2\"" | cut -d '"' -f 8 | tail -n 1 | cut -d '-' -f 3 | sed 's/.tar.bz2//g')
-if [ -z "$ARCH" ]; then
-  case "$( uname -m )" in
-    i?86) ARCH=i586 ;;
-    arm*) ARCH=arm ;;
-       *) ARCH=$( uname -m ) ;;
-  esac
-fi
-
-# If the variable PRINT_PACKAGE_NAME is set, then this script will report what
-# the name of the created package would be, and then exit. This information
-# could be useful to other scripts.
-if [ "$ARCH" = "i586" ]; then
-  SLKCFLAGS="-O2 -march=i586 -mtune=i686"
-elif [ "$ARCH" = "i686" ]; then
-  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
-elif [ "$ARCH" = "x86_64" ]; then
-  SLKCFLAGS="-O2 -fPIC"
-else
-  SLKCFLAGS="-O2"
-fi
 
 DOCS="COPYING CHANGELOG.md README.md"
 
@@ -65,7 +45,8 @@ cd $direname
   sed -i 's|/etc/sysconfig/spice-vdagentd|/etc/conf.d/spice-vdagentd|' data/spice-vdagentd.1.in
   sed -i 's/strstr(addr, "\/pci");/(char *)strstr(addr, "\/pci");/' src/vdagent/device-info.c
 autoreconf -fi
-export CFLAGS="$SLKCFLAGS -Wno-error"
+export CFLAGS="-O2 -fPIC -Wno-error"
+export CXXFLAGS="-O2 -fPIC -Wno-error"
 ./configure \
   --prefix=/usr \
   --libdir=/usr/lib \

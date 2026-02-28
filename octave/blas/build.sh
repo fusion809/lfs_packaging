@@ -24,33 +24,15 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-cd $(direname $0) ; CWD=$(pwd)
+set -e
 
 PRGNAM=blas
 NAME=lapack
 VERSION=$(wget -cqO- https://github.com/Reference-LAPACK/lapack/commits | grep "commit/" | head -n 1 | cut -d '"' -f 18)
 
-if [ -z "$ARCH" ]; then
-  case "$(uname -m)" in
-    i?86) ARCH=i586 ;;
-    arm*) ARCH=arm ;;
-       *) ARCH=$(uname -m) ;;
-  esac
-fi
-
 DOCS="LICENSE"
 
-if [ "$ARCH" = "i586" ]; then
-  SLKCFLAGS="-O2 -march=i586 -mtune=i686"
-elif [ "$ARCH" = "i686" ]; then
-  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
-elif [ "$ARCH" = "x86_64" ]; then
-  SLKCFLAGS="-O2 -fPIC"
-else
-  SLKCFLAGS="-O2"
-fi
-
-set -e
+CFLAGS="-O2 -fPIC"
 
 if ! which gfortran &> /dev/null; then
 	echo "GCC hasn't been built with Fortran support. This needs to be addressed!"
@@ -69,7 +51,7 @@ cd $direname
 mkdir -p shared
 cd shared
   cmake \
-    -DCMAKE_Fortran_FLAGS:STRING="$SLKCFLAGS" \
+    -DCMAKE_Fortran_FLAGS:STRING="$CFLAGS" \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=None \
     -DCMAKE_RULE_MESSAGES=OFF \
@@ -89,7 +71,7 @@ if [ "${STATIC:-no}" != "no" ]; then
   mkdir -p static
   cd static
     cmake \
-      -DCMAKE_Fortran_FLAGS:STRING="$SLKCFLAGS" \
+      -DCMAKE_Fortran_FLAGS:STRING="$CFLAGS" \
       -DCMAKE_INSTALL_PREFIX=/usr \
       -DCMAKE_BUILD_TYPE=None \
       -DCMAKE_RULE_MESSAGES=OFF \

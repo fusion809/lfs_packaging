@@ -6,9 +6,12 @@ filename="$NAME-$VERSION.tar.bz2"
 if ! [[ -f $filename ]]; then
 	wget -c https://www.open-mpi.org/software/hwloc/v${VERSION%.*}/downloads/$filename
 fi
-rm -rf ${filename/.tar.bz2/}
+direname=${filename/.tar.bz2/}
+rm -rf $direname
 tar xf $filename
-cd $NAME-$VERSION
+cd $direname
+CLFAGS="-O2 -fPIC"
+CXXFLAGS="-O2 -fPIC"
 ./configure \
     --prefix=/usr \
     --sbindir=/usr/bin \
@@ -17,4 +20,4 @@ cd $NAME-$VERSION
 make -j$(nproc)
 sudo make install
 cd ..
-rm -rf $filename ${filename/.tar.bz2/}
+rm -rf $filename $direname

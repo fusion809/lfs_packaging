@@ -30,7 +30,7 @@ VERSION=$(wget -cqO- https://ftp.gnu.org/gnu/octave/ | grep ".tar.gz\"" | tail -
 
 DOCS="AUTHORS BUGS CITATION COPYING ChangeLog INSTALL* NEWS README"
 
-export CXXFLAGS="-std=gnu++17"
+export CXXFLAGS="-O2 -fPIC -std=gnu++17"
 CFLAGS="-O2 -fPIC"
 
 # Use GraphicsMagick by default.  Fall back on ImageMagick from the full
@@ -78,7 +78,7 @@ export CPPFLAGS="-I/usr/include"
 export PKG_CONFIG_PATH=/opt/qt6/lib/pkgconfig:$PKG_CONFIG_PATH
 ./configure \
   --prefix=/usr \
-  --libdir=\${exec_prefix}/lib${LIBDIRSUFFIX} \
+  --libdir=\${exec_prefix}/lib \
   --sysconfdir=/etc \
   --localstatedir=/var \
   --mandir=\${prefix}/man \
@@ -88,7 +88,7 @@ export PKG_CONFIG_PATH=/opt/qt6/lib/pkgconfig:$PKG_CONFIG_PATH
   --with-openssl=auto \
   ${MAGICK} \
   CFLAGS="$CFLAGS" \
-  CXXFLAGS="$CFLAGS -std=gnu++17" \
+  CXXFLAGS="$CXXFLAGS" \
   FFLAGS="$CFLAGS"
 make -j$(nproc)
 # TODO: May fail if not all optional deps are installed (gl2ps in particular).

@@ -27,29 +27,6 @@ VERSION=$(wget -cqO- https://gstreamer.freedesktop.org/src/orc/ | grep ".tar.xz\
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
-if [ -z "$ARCH" ]; then
-  case "$( uname -m )" in
-    i?86) ARCH=i586 ;;
-    arm*) ARCH=arm ;;
-       *) ARCH=$( uname -m ) ;;
-  esac
-fi
-
-if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
-  echo "$NAME-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
-  exit 0
-fi
-
-if [ "$ARCH" = "i586" ]; then
-  SLKCFLAGS="-O2 -march=i586 -mtune=i586"
-elif [ "$ARCH" = "i686" ]; then
-  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
-elif [ "$ARCH" = "x86_64" ]; then
-  SLKCFLAGS="-O2 -fPIC"
-else
-  SLKCFLAGS="-O2"
-fi
-
 DOCS="CONTRIBUTING.md COPYING README RELEASE ROADMAP.md"
 
 # check if libcacard is there
@@ -72,7 +49,8 @@ cd $direname
 
 mkdir build &&
 cd    build &&
-
+CFLAGS="-O2 -fPIC"
+CXXFLAGS="-O2 -fPIC"
 meson setup --prefix=/usr --buildtype=release .. &&
 ninja
 sudo ninja install

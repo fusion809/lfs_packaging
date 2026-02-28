@@ -4,12 +4,15 @@ set -e
 NAME=pyqt6
 VERSION=$(wget -cqO- https://pypi.org/rss/project/pyqt6/releases.xml | grep "pyqt6/[0-9]" | head -n 1 | cut -d '/' -f 6)
 filename="$NAME-$VERSION.tar.gz"
+direname="${filename/.tar.gz/}"
 if ! [[ -f $filename ]]; then
 	wget -c https://pypi.python.org/packages/source/P/PyQt6/$filename
 fi
-rm -rf ${filename/.tar.gz/}
+rm -rf $direname
 tar xf $filename
-cd ${filename/.tar.gz/}
+cd $direname
+CFLAGS="-O2 -fPIC"
+CXXFLAGS="-O2 -fPIC"
 sip-build \
   --confirm-license \
   --no-make \
@@ -22,4 +25,4 @@ sudo make install
 sudo python3 -m compileall -d / /usr/lib
 sudo python3 -O -m compileall -d / /usr/lib
 cd ../..
-rm -rf ${filename/.tar.gz/} $filename
+rm -rf $direname $filename

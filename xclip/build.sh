@@ -9,6 +9,8 @@ fi
 
 cd xclip
 git pull origin master
+CFLAGS="-O2 -fPIC"
+CXXFLAGS="-O2 -fPIC"
 autoreconf
 ./configure --prefix=/usr
 make -j$(nproc)

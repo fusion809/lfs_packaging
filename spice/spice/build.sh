@@ -26,24 +26,6 @@
 NAME=spice
 VERSION=$(wget -cqO- https://spice-space.org/download/releases/spice-server/ | grep ".tar.bz2\"" | cut -d '"' -f 8 | sed 's/.tar.bz2//g' | tail -n 1 | cut -d '-' -f 2)
 
-if [ -z "$ARCH" ]; then
-  case "$( uname -m )" in
-    i?86) ARCH=i586 ;;
-    arm*) ARCH=arm ;;
-       *) ARCH=$( uname -m ) ;;
-  esac
-fi
-
-if [ "$ARCH" = "i586" ]; then
-  SLKCFLAGS="-O2 -march=i586 -mtune=i586"
-elif [ "$ARCH" = "i686" ]; then
-  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
-elif [ "$ARCH" = "x86_64" ]; then
-  SLKCFLAGS="-O2 -fPIC"
-else
-  SLKCFLAGS="-O2"
-fi
-
 DOCS="AUTHORS CHANGELOG.md COPYING README"
 
 # check if libcacard is there
@@ -64,6 +46,8 @@ fi
 tar xvf $filename
 cd $direname
 
+CFLAGS="-O2 -fPIC"
+CXXFLAGS="-O2 -fPIC"
 ./configure \
   --prefix=/usr \
   --libdir=/usr/lib \

@@ -22,7 +22,6 @@
 set -e
 NAME=gnuplot
 VERSION=$(wget -cqO- https://sourceforge.net/p/gnuplot/gnuplot-main/ref/master/tags/ | grep "/tree" | grep -v "git-conv" | tail -n 1 | cut -d '/' -f 6)
-BUILD=1
 
 SRC=$NAME-$VERSION
 rm -rf $SRC
@@ -33,12 +32,15 @@ wget -c https://sourceforge.net/projects/gnuplot/files/gnuplot/$VERSION/$filenam
 tar -zxvf $filename || exit 3
 cd $SRC
 
+CFLAGS="-O2 -fPIC"
+CXXFLAGS="-O2 -fPIC"
+
 ./configure --prefix=/usr \
             --sysconfdir=/etc \
             --mandir=/usr/man \
             --infodir=/usr/info \
             --datadir=/usr/share/gnuplot \
-	    --with-caca \
+            --with-caca \
             --with-readline=gnu 
 
 make -j$(nproc) pkglibexecdir=/usr/bin || exit 1

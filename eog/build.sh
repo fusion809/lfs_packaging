@@ -8,6 +8,8 @@ tar xf $filename
 cd ${filename/.tar.bz2/}
 mkdir build
 cd build
+CFLAGS="-O2 -fPIC"
+CXXFLAGS="-O2 -fPIC"
 meson setup --prefix=/usr       \
             --buildtype=release \
 	    ..

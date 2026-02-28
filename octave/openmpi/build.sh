@@ -3,12 +3,13 @@ set -e
 pkgbase=openmpi
 VERSION=$(wget -cqO- https://www-lb.open-mpi.org/software/ompi/ | grep ".tar.gz" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 7 | sed 's/.tar.gz//g' | sed 's/openmpi-//g')
 filename="$pkgbase-$VERSION.tar.bz2"
-rm -rf ${filename/.tar.bz2/}
+direname="${filename/.tar.bz2/}"
+rm -rf $direname
 if ! [[ -f $filename ]]; then
 	wget -c https://www.open-mpi.org/software/ompi/v${VERSION%.*}/downloads/$filename
 fi
 tar xf $filename
-cd ${filename/.tar.bz2/}
+cd $direname
 sed -i 's|WRAPPER__FCFLAGS|WRAPPER_FCFLAGS|g' configure
   sed -i 's|WRAPPER_EXTRA_FCFLAGS|WRAPPER_FCFLAGS|g' configure
   sed -i 's|"-I/usr/include",||' opal/tools/wrappers/opal_wrapper.c
@@ -42,7 +43,9 @@ export USER=builduser
 ./configure "${configure_options[@]}"
 # prevent excessive overlinking due to libtool
 sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+CFLAGS="-O2 -fPIC"
+CXXFLAGS="-O2 -fPIC"
 make V=1 -j$(nproc)
 sudo make install
 cd ..
-rm -rf ${filename} ${filename/.tar.*/}
+rm -rf ${filename} $direname
