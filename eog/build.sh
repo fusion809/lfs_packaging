@@ -2,7 +2,7 @@
 set -e
 depends=()
 NAME=eog
-VERSION="$(wget -cqO- https://gitlab.gnome.org/GNOME/eog/-/tags | grep "tags/" | cut -d '/' -f 6 | sed 's/".*//g' | head -n 1 | sed 's/^v//g')"
+VERSION="$(wget -cqO- https://gitlab.gnome.org/GNOME/eog/-/tags | grep "tags/" | cut -d '/' -f 6 | sed 's/".*//g' | grep -v "rc" | head -n 1 | sed 's/^v//g')"
 filename="$NAME-$VERSION.tar.bz2"
 wget -c https://gitlab.gnome.org/GNOME/$NAME/-/archive/$VERSION/$filename
 tar xf $filename
