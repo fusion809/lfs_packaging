@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if ! which lzip &> /dev/null; then
 	echo "lzip is not installed and is used to decompress the source code."
 	exit

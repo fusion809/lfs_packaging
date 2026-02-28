@@ -23,6 +23,7 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+set -e
 export JAVA_HOME=/opt/jdk
 NAME=octave
 VERSION=$(wget -cqO- https://ftp.gnu.org/gnu/octave/ | grep ".tar.gz\"" | tail -n 1 | cut -d '"' -f 8 | sed 's/octave-//g' | sed 's/.tar.gz//g')
@@ -30,7 +31,7 @@ VERSION=$(wget -cqO- https://ftp.gnu.org/gnu/octave/ | grep ".tar.gz\"" | tail -
 DOCS="AUTHORS BUGS CITATION COPYING ChangeLog INSTALL* NEWS README"
 
 export CXXFLAGS="-std=gnu++17"
-SLKCFLAGS="-O2 -fPIC"
+CFLAGS="-O2 -fPIC"
 
 # Use GraphicsMagick by default.  Fall back on ImageMagick from the full
 # Slackware install if it's not present.
@@ -50,8 +51,6 @@ fi
 if [ -n "$MAGICK" ]; then
   MAGICK="--with-magick=$MAGICK"
 fi
-
-set -e
 
 source deps-check.sh
 direname="$NAME-$VERSION"
@@ -88,9 +87,9 @@ export PKG_CONFIG_PATH=/opt/qt6/lib/pkgconfig:$PKG_CONFIG_PATH
   --disable-dependency-tracking \
   --with-openssl=auto \
   ${MAGICK} \
-  CFLAGS="$SLKCFLAGS" \
-  CXXFLAGS="$SLKCFLAGS -std=gnu++17" \
-  FFLAGS="$SLKCFLAGS"
+  CFLAGS="$CFLAGS" \
+  CXXFLAGS="$CFLAGS -std=gnu++17" \
+  FFLAGS="$CFLAGS"
 make -j$(nproc)
 # TODO: May fail if not all optional deps are installed (gl2ps in particular).
 #make check
