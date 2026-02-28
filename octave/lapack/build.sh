@@ -26,8 +26,8 @@
 
 cd $(dirname $0) ; CWD=$(pwd)
 
-PRGNAM=lapack
-SRCNAM=lapack
+NAME=lapack
+NAME=lapack
 VERSION=$(wget -cqO- https://github.com/Reference-LAPACK/lapack/commits | grep "commit/" | head -n 1 | cut -d '"' -f 18)
 BUILD=${BUILD:-1}
 PKGTYPE=${PKGTYPE:-tgz}
@@ -41,7 +41,7 @@ if [ -z "$ARCH" ]; then
 fi
 
 if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
-  echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
+  echo "$NAME-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
   exit 0
 fi
 
@@ -64,12 +64,13 @@ if ! [[ -f /usr/lib/libblas.so ]]; then
 	exit
 fi
 
-if ! [[ -f $VERSION.tar.gz ]]; then
-	wget -c https://github.com/Reference-LAPACK/lapack/archive/$VERSION.tar.gz
+filename="$NAME-$VERSION.tar.gz"
+if ! [[ -f $filename ]]; then
+	wget -c https://github.com/Reference-LAPACK/lapack/archive/$VERSION.tar.gz -O $filename
 fi
-rm -rf $SRCNAM-$VERSION
-tar xvf $CWD/$VERSION.tar.gz
-cd $SRCNAM-${VERSION}
+rm -rf ${filename/.tar.gz/}
+tar xvf $CWD/$filename
+cd ${filename/.tar.gz/}
 
 # Allow building only the LAPACK component.
 patch -p1 < $CWD/cmake-piecewise.diff || echo "Patching failed"
@@ -121,5 +122,7 @@ if [ "${STATIC:-no}" != "no" ]; then
   cd ..
 fi
 
-sudo mkdir -p /usr/share/doc/$PRGNAM-$VERSION
-sudo cp -a $DOCS /usr/share/doc/$PRGNAM-$VERSION
+sudo mkdir -p /usr/share/doc/$NAME-$VERSION
+sudo cp -a $DOCS /usr/share/doc/$NAME-$VERSION
+cd ..
+rm -rf $filename ${filename/.tar.gz/}

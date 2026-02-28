@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 NAME=numactl
 VERSION=$(wget -cqO- https://github.com/numactl/numactl/releases | grep "releases/tag/v[0-9]" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
 filename="$NAME-$VERSION.tar.gz"
@@ -11,7 +12,9 @@ cd ${filename/.tar.gz/}
 autoreconf -fiv
 ./configure --prefix=/usr
 # prevent excessive overlinking due to libtool
-  sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
-  make -j$(nproc)
-  sudo make install
+sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+make -j$(nproc)
+sudo make install
 sudo install -vDm 644 README.md -t "/usr/share/doc/$NAME-$VERSION/"
+cd ..
+rm -rf ${filename/.tar.gz} $filename

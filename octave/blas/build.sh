@@ -27,7 +27,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=blas
-SRCNAM=lapack
+NAME=lapack
 VERSION=$(wget -cqO- https://github.com/Reference-LAPACK/lapack/commits | grep "commit/" | head -n 1 | cut -d '"' -f 18)
 PKGTYPE=${PKGTYPE:-tgz}
 
@@ -57,12 +57,13 @@ if ! which gfortran &> /dev/null; then
 	echo "GCC hasn't been built with Fortran support. This needs to be addressed!"
 	exit
 fi
-rm -rf $SRCNAM-$VERSION
-if ! [[ -f $VERSION.tar.gz ]]; then
-	wget -c https://github.com/Reference-LAPACK/lapack/archive/$VERSION.tar.gz
+filename="$NAME-$VERSION.tar.gz"
+rm -rf ${filename/.tar.gz/}
+if ! [[ -f $filename ]]; then
+	wget -c https://github.com/Reference-LAPACK/lapack/archive/$VERSION.tar.gz -O $filename
 fi
-tar xvf $CWD/$VERSION.tar.gz
-cd $SRCNAM-$VERSION
+tar xvf $CWD/$filename
+cd ${filename/.tar.gz/}
 # Avoid adding an RPATH entry to the shared lib.  It's unnecessary (except for
 # running the test suite), and it's broken on 64-bit (needs LIBDIRSUFFIX).
 mkdir -p shared
@@ -101,3 +102,5 @@ if [ "${STATIC:-no}" != "no" ]; then
 fi
 sudo mkdir -p /usr/share/doc/$PRGNAM-$VERSION
 sudo cp -a $DOCS /usr/share/doc/$PRGNAM-$VERSION
+cd ..
+rm -rf ${filename} ${filename/.tar.gz/}

@@ -1,17 +1,20 @@
 #!/bin/bash
+set -e
 NAME="arpack"
-PRGNAM="arpack-ng"
+NAME="arpack-ng"
 VERSION=$(wget -cqO- https://github.com/opencollab/arpack-ng/tags | grep ".tar.gz" | head -n 1 | cut -d '"' -f 4 | cut -d '/' -f 7 | sed 's/.tar.gz//g')
-if ! [[ -f "$NAME-$VERSION.tar.xz" ]]; then
-	wget -c https://github.com/opencollab/arpack-ng/archive/$VERSION.tar.gz -O $NAME-$VERSION.tar.gz
+filename="$NAME-$VERSION.tar.gz"
+if ! [[ -f $filename ]]; then
+	wget -c https://github.com/opencollab/arpack-ng/archive/$VERSION.tar.gz -O $filename
 fi
-rm -rf $PRGNAM-$VERSION
-tar xf $NAME-$VERSION.tar.gz
-cd $PRGNAM-$VERSION
+rm -rf ${filename/.tar.gz/}
+tar xf $filename
+cd ${filename/.tar.gz/}
 ./bootstrap
 ./configure --enable-icb --enable-mpi --prefix=/usr
   make F77=mpif77 \
     CFLAGS+=" $(pkg-config --cflags ompi-f77) " \
     LIBS+=" $(pkg-config --libs ompi-f77) " -j$(nproc)
 sudo make install
-
+cd ..
+rm -rf $filename ${filename/.tar.gz/}

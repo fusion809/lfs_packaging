@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 pkgbase=openmpi
 VERSION=$(wget -cqO- https://www-lb.open-mpi.org/software/ompi/ | grep ".tar.gz" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 7 | sed 's/.tar.gz//g' | sed 's/openmpi-//g')
 filename="$pkgbase-$VERSION.tar.bz2"
@@ -36,10 +37,12 @@ local configure_options=(
     #--with-show-load-errors='^accelerator,rcache,coll/ucc'
   )
 export HOSTNAME=buildhost
-  export USER=builduser
+export USER=builduser
 
-  ./configure "${configure_options[@]}"
-  # prevent excessive overlinking due to libtool
-  sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
-  make V=1 -j$(nproc)
-  sudo make install
+./configure "${configure_options[@]}"
+# prevent excessive overlinking due to libtool
+sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+make V=1 -j$(nproc)
+sudo make install
+cd ..
+rm -rf ${filename} ${filename/.tar.*/}

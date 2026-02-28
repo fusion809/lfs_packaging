@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 NAME=glpk
 VERSION=$(wget -cqO- https://ftp.gnu.org/gnu/glpk/ | grep ".tar.gz\"" | cut -d '"' -f 8 | tail -n 1 | sed 's/glpk-//g' | sed 's/.tar.gz//g')
 if ! [[ -f $NAME-$VERSION.tar.gz ]]; then
@@ -12,3 +13,5 @@ autoreconf -fiv
 ./configure --prefix=/usr --with-gmp
 make -j$(nproc)
 sudo make install
+cd ..
+rm -rf $NAME-$VERSION*

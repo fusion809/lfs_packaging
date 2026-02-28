@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 NAME=pcre2
 VERSION=$(wget -cqO- https://github.com/PCRE2Project/pcre2/releases | grep "releases/tag/pcre2" | head -n 1 | cut -d '"' -f 6 | cut -d '=' -f 3 | cut -d '/' -f 6 | sed 's/pcre2-//g')
 filename="$NAME-$VERSION.tar.gz"
@@ -22,8 +23,10 @@ configure_options=(
   )
 
 CFLAGS+=" -ffat-lto-objects"
-  CXXFLAGS+=" -ffat-lto-objects"
+CXXFLAGS+=" -ffat-lto-objects"
 
-  ./configure "${configure_options[@]}"
-  make -j$(nproc)
-  sudo make install
+./configure "${configure_options[@]}"
+make -j$(nproc)
+sudo make install
+cd ..
+rm -rf ${filename} ${filename/.tar.gz/}

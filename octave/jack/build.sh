@@ -1,5 +1,6 @@
 #!/bin/bash
 # Latest tagged version won't build
+set -e
 NAME=jack2
 if ! [[ -d jack2 ]]; then
 	git clone https://github.com/jackaudio/jack2

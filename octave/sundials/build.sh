@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 NAME=sundials
 VERSION=$(wget -cqO- https://github.com/llnl/sundials/releases | grep "releases/tag/v" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
 filename=$NAME-$VERSION.tar.gz
@@ -16,6 +17,7 @@ cmake -B build -S . \
     -DKLU_INCLUDE_DIR=/usr/include/suitesparse \
     -DENABLE_LAPACK=ON \
     -DEXAMPLES_INSTALL_PATH=/usr/share/sundials/examples
-  cmake --build build
-  sudo cmake --install build
-
+cmake --build build
+sudo cmake --install build
+cd ..
+rm -rf $filename ${filename/.tar.gz/}

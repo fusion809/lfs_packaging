@@ -1,6 +1,7 @@
 #!/bin/bash
 # This builds from the latest git commit as the latest tagged release, 1.1.0,
 # is too old for GNU Octave to be able to use its version of prettywriter.
+set -e
 NAME=rapidjson
 if ! which wget &> /dev/null; then
 	echo "wget not found and used for downloading sources"
@@ -28,11 +29,10 @@ cd $NAME
 git pull origin master
 VERSION=$(git log | head -n 1 | cut -d ' ' -f 2)
 find -name CMakeLists.txt | xargs sed -e 's|-Werror||' -i # Don't use -Werror
-  #patch -p1 -i ../3b2441b8.patch # Fix build with GCC 14
 mkdir -p build
-  cd build
+cd build
 
-  cmake \
+cmake \
       -DCMAKE_BUILD_TYPE=None \
       -DCMAKE_INSTALL_PREFIX:PATH=/usr \
       -DRAPIDJSON_HAS_STDSTRING=ON \
@@ -42,7 +42,7 @@ mkdir -p build
       -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
       ..
 
-  make -j$(nproc)
-  sudo make install
+make -j$(nproc)
+sudo make install
 
 
