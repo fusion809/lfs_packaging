@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 depends=(blas lapack)
-PRGNAME=SuiteSparse
 NAME=suitesparse
+PRGNAME=SuiteSparse
 VERSION=$(wget -cqO- https://github.com/DrTimothyAldenDavis/SuiteSparse/releases | grep "releases/tag/v" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
 filename="$PRGNAME-$VERSION.tar.gz"
 direname="${filename/.tar.gz/}"
