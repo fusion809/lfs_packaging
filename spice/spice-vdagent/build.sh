@@ -23,9 +23,7 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-cd $(dirname $0) ; CWD=$(pwd)
-
-PRGNAM=spice-vdagent
+NAME=spice-vdagent
 VERSION=$(wget -cqO- https://spice-space.org/download/releases/ | grep "spice-vdagent.*.tar.bz2\"" | cut -d '"' -f 8 | tail -n 1 | cut -d '-' -f 3 | sed 's/.tar.bz2//g')
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -52,13 +50,14 @@ DOCS="COPYING CHANGELOG.md README.md"
 
 set -e
 
-rm -rf $PRGNAM-$VERSION
-filename="$PRGNAM-$VERSION.tar.bz2"
+direname="$NAME-$VERSION"
+rm -rf $direname
+filename="$direname.tar.bz2"
 if ! [[ -f $filename ]]; then
 	wget -c https://www.spice-space.org/download/releases/$filename
 fi
-tar xvf $CWD/$filename
-cd $PRGNAM-$VERSION
+tar xvf $filename
+cd $direname
 
   # Set proper paths
   sed -i 's|/etc/sysconfig/spice-vdagentd|/etc/conf.d/spice-vdagentd|
@@ -74,15 +73,15 @@ export CFLAGS="$SLKCFLAGS -Wno-error"
   --localstatedir=/var \
   --mandir=/usr/man \
   --with-init-script=systemd \
-  --docdir=/usr/share/doc/$PRGNAM-$VERSION
+  --docdir=/usr/share/doc/$direname
 
 make -j$(nproc)
 sudo make install DESTDIR=/
-
+cd ..
 # Install an init script and an X.org configuration file
-sudo install -m 0644 -D $CWD/06-spice-vdagent.conf \
+sudo install -m 0644 -D 06-spice-vdagent.conf \
   /usr/share/X11/xorg.conf.d/06-spice-vdagent.conf.new
 
-sudo mkdir -p /usr/share/doc/$PRGNAM-$VERSION
-sudo cp -a $DOCS /usr/share/doc/$PRGNAM-$VERSION
+sudo mkdir -p /usr/share/doc/$direname
+sudo cp -a $DOCS /usr/share/doc/$direname
 

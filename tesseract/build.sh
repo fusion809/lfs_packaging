@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 NAME=tesseract
 VERSION=$(wget -cqO- https://github.com/tesseract-ocr/tesseract/releases | grep "/tag/" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
 filename="$NAME-$VERSION.tar.gz"
@@ -14,3 +15,5 @@ cd ${filename/.tar.gz/}
 ./configure --prefix=/usr
 make -j$(nproc)
 sudo make install
+cd ..
+rm -rf $filename ${filename/.tar.gz/}

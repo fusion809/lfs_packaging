@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 if ! [[ -d "wl-clipboard" ]]; then
 	git clone https://github.com/bugaevc/wl-clipboard
 fi

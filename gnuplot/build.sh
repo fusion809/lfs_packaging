@@ -1,6 +1,6 @@
 #!/bin/sh
-#
-# Slackware build script for Gnuplot
+# Adapted by Brenton Horne for LFS
+# Originally a Slackware build script for Gnuplot
 # Copyright (C) 2008-2020 Georgi D. Sotirov <gdsotirov@gmail.com>
 #
 # This program is free software; you can redistribute it and/or
@@ -19,19 +19,18 @@
 #
 # Visit SlackPack at https://sotirov-bg.net/slackpack/
 #
-
+set -e
 NAME=gnuplot
 VERSION=$(wget -cqO- https://sourceforge.net/p/gnuplot/gnuplot-main/ref/master/tags/ | grep "/tree" | grep -v "git-conv" | tail -n 1 | cut -d '/' -f 6)
 BUILD=1
 
-CWD=${CWD:-`pwd`}
-
-SRC=$CWD/$NAME-$VERSION
+SRC=$NAME-$VERSION
 rm -rf $SRC
 
-wget -c https://sourceforge.net/projects/gnuplot/files/gnuplot/$VERSION/$NAME-$VERSION.tar.gz
+filename="$SRC.tar.gz"
+wget -c https://sourceforge.net/projects/gnuplot/files/gnuplot/$VERSION/$filename
 # Extract the sources
-tar -zxvf $CWD/$NAME-$VERSION.tar.gz || exit 3
+tar -zxvf $filename || exit 3
 cd $SRC
 
 ./configure --prefix=/usr \
@@ -48,5 +47,5 @@ sudo make DESTDIR=/ install || exit 2
 DOCDIR="/usr/share/doc/$NAME-$VERSION"
 sudo mkdir -p $DOCDIR
 sudo cp Copyright RELEASE_NOTES NEWS $DOCDIR 
-
-rm -rf $SRC
+cd ..
+rm -rf $SRC $filename

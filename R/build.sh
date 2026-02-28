@@ -25,9 +25,8 @@
 # with this program (most likely, a file named COPYING).  If not, see
 # <http://www.gnu.org/licenses/>.
 
-cd $(dirname $0) ; CWD=$(pwd)
-
-PRGNAM=R
+set -e
+NAME=R
 VERSION=$(wget -cqO- https://cran.r-project.org/sources.html | grep ".tar.gz" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 4 | sed 's/.tar.gz//g' | cut -d '-' -f 2)
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
@@ -52,13 +51,6 @@ if [ -z "$ARCH" ]; then
   esac
 fi
 
-# could be useful to other scripts.
-if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
-  echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
-  exit 0
-fi
-
-
 if [ "$ARCH" = "i586" ]; then
   SLKCFLAGS="-O2 -march=i586 -mtune=i686"
   LIBDIRSUFFIX=""
@@ -74,13 +66,14 @@ else
 fi
 
 set -e
-
-rm -rf $PRGNAM-$VERSION
-if ! [[ -f $CWD/$PRGNAM-$VERSION.tar.xz ]]; then
-	wget -c https://cran.r-project.org/src/base/$PRGNAM-${VERSION/.*/}/$PRGNAM-$VERSION.tar.xz
+direname="$NAME-$VERSION"
+filename="$direname.tar.xz"
+rm -rf $direname
+if ! [[ -f $filename ]]; then
+	wget -c https://cran.r-project.org/src/base/$NAME-${VERSION/.*/}/$filename
 fi
-tar xvf $CWD/$PRGNAM-$VERSION.tar.xz
-cd $PRGNAM-$VERSION
+tar xvf $filename
+cd $direname
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
 ./configure \
@@ -89,15 +82,17 @@ CXXFLAGS="$SLKCFLAGS" \
   --sysconfdir=/etc \
   --localstatedir=/var \
   --mandir=/usr/man \
-  rdocdir=/usr/share/doc/$PRGNAM-$VERSION \
+  rdocdir=/usr/share/doc/$NAME-$VERSION \
   $r_shlib \
   $blas_shlib
 
 make -j$(nproc)
 sudo make install DESTDIR=/
 
-sudo mkdir -p /usr/share/doc/$PRGNAM-$VERSION
+sudo mkdir -p /usr/share/doc/$direname
 sudo cp -a \
    COPYING README SVN-REVISION VERSION VERSION-NICK \
-   /usr/share/doc/$PRGNAM-$VERSION
-sudo install -Dm755 $CWD/$PRGNAM.desktop /usr/share/applications
+   /usr/share/doc/$direname
+cd ..
+sudo install -Dm755 $NAME.desktop /usr/share/applications
+rm -rf $filename $direname

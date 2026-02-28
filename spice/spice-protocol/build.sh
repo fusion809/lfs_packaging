@@ -23,27 +23,22 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-cd $(dirname $0) ; CWD=$(pwd)
-
-PRGNAM=spice-protocol
+NAME=spice-protocol
 VERSION=$(wget -cqO- https://spice-space.org/download/releases/ | grep "spice-protocol-.*xz\"" | cut -d '"' -f 8  | tail -n 1 | cut -d '-' -f 3 | sed 's/.tar.xz//g')
 ARCH=noarch
-
-if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
-  echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
-  exit 0
-fi
 
 DOCS="COPYING *.md"
 
 set -e
 
-rm -rf $PRGNAM-$VERSION
-if ! [[ -f $PRGNAM-$VERSION.tar.xz ]]; then
-	wget -c https://www.spice-space.org/download/releases/$PRGNAM-$VERSION.tar.xz
+direname="$NAME-$VERSION"
+filename="$direname.tar.xz"
+rm -rf $direname
+if ! [[ -f $filename ]]; then
+	wget -c https://www.spice-space.org/download/releases/$filename
 fi
-tar xvf $CWD/$PRGNAM-$VERSION.tar.xz
-cd $PRGNAM-$VERSION
+tar xvf $filename
+cd $direname
 
 mkdir meson-build
 cd meson-build
@@ -64,6 +59,8 @@ meson setup \
   DESTDIR=/ sudo $NINJA install || exit 1
 cd ..
 
-sudo mkdir -p /usr/share/doc/$PRGNAM-$VERSION
-sudo cp -a $DOCS /usr/share/doc/$PRGNAM-$VERSION
+sudo mkdir -p /usr/share/doc/$direname
+sudo cp -a $DOCS /usr/share/doc/$direname
+cd ..
+rm -rf $direname $filename
 

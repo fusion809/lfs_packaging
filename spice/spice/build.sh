@@ -23,13 +23,8 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-cd $(dirname $0) ; CWD=$(pwd)
-
-PRGNAM=spice
+NAME=spice
 VERSION=$(wget -cqO- https://spice-space.org/download/releases/spice-server/ | grep ".tar.bz2\"" | cut -d '"' -f 8 | sed 's/.tar.bz2//g' | tail -n 1 | cut -d '-' -f 2)
-BUILD=${BUILD:-1}
-TAG=${TAG:-_SBo}
-PKGTYPE=${PKGTYPE:-tgz}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -37,11 +32,6 @@ if [ -z "$ARCH" ]; then
     arm*) ARCH=arm ;;
        *) ARCH=$( uname -m ) ;;
   esac
-fi
-
-if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
-  echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
-  exit 0
 fi
 
 if [ "$ARCH" = "i586" ]; then
@@ -65,18 +55,19 @@ fi
 
 set -e 
 
-rm -rf $PRGNAM-$VERSION
-filename=$PRGNAM-$VERSION.tar.bz2
+direname="$NAME-$VERSION"
+rm -rf $direname
+filename="$direname.tar.bz2"
 if ! [[ -f $filename ]]; then
 	wget -c https://www.spice-space.org/download/releases/spice-server/$filename
 fi
-tar xvf $CWD/$filename
-cd $PRGNAM-$VERSION
+tar xvf $filename
+cd $direname
 
 ./configure \
   --prefix=/usr \
   --libdir=/usr/lib \
-  --docdir=/usr/share/doc/$PRGNAM-$VERSION \
+  --docdir=/usr/share/doc/$direname \
   --disable-static \
   --enable-client \
   --disable-celt051 \
@@ -85,8 +76,9 @@ cd $PRGNAM-$VERSION
 make
 sudo make install DESTDIR=/
 
-sudo mkdir -p /usr/share/doc/$PRGNAM-$VERSION
-sudo cp -a $DOCS /usr/share/doc/$PRGNAM-$VERSION
+sudo mkdir -p /usr/share/doc/$direname
+sudo cp -a $DOCS /usr/share/doc/$direname
 
 sudo rm -f /usr/lib*/*.la
-
+cd ..
+rm -rf $filename $direname

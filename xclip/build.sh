@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 NAME=xclip
 VERSION=$(wget -cqO- https://github.com/astrand/xclip/commit/master | grep "clip@" | head -n 1 | sed 's/.* · astrand\/xclip@//g' | sed 's/ · GitHub<\/title>//g')
 

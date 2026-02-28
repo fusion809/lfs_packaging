@@ -23,11 +23,9 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-cd $(dirname $0) ; CWD=$(pwd)
 export JAVA_HOME=/opt/jdk
-PRGNAM=octave
+NAME=octave
 VERSION=$(wget -cqO- https://ftp.gnu.org/gnu/octave/ | grep ".tar.gz\"" | tail -n 1 | cut -d '"' -f 8 | sed 's/octave-//g' | sed 's/.tar.gz//g')
-BUILD=${BUILD:-1}
 
 if [ -z "$ARCH" ]; then
   case "$(uname -m)" in
@@ -37,10 +35,6 @@ if [ -z "$ARCH" ]; then
   esac
 fi
 
-if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
-  echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
-  exit 0
-fi
 DOCS="AUTHORS BUGS CITATION COPYING ChangeLog INSTALL* NEWS README"
 
 export CXXFLAGS="-std=gnu++17"
@@ -204,13 +198,14 @@ if ! [[ -d /opt/jdk/bin ]]; then
 	echo "Java not found. It is required to build GNU Octave."
 	exit
 fi
-filename="$PRGNAM-$VERSION.tar.lz"
+direname="$NAME-$VERSION"
+filename="$direname.tar.lz"
 if ! [[ -f $filename ]]; then
-	wget -c https://ftpmirror.gnu.org/gnu/$PRGNAM/$filename
+	wget -c https://ftpmirror.gnu.org/gnu/$NAME/$filename
 fi
-rm -rf ${filename/.tar.lz/}
-tar xvf $CWD/$filename
-cd ${filename/.tar.lz/}
+rm -rf ${direname}
+tar xvf $filename
+cd $direname
 
 autoreconf -vif
 
@@ -233,7 +228,7 @@ export PKG_CONFIG_PATH=/opt/qt6/lib/pkgconfig:$PKG_CONFIG_PATH
   --localstatedir=/var \
   --mandir=\${prefix}/man \
   --infodir=\${prefix}/info \
-  --docdir=\${prefix}/share/doc/$PRGNAM-$VERSION \
+  --docdir=\${prefix}/share/doc/$direname \
   --disable-dependency-tracking \
   --with-openssl=auto \
   ${MAGICK} \
@@ -245,10 +240,10 @@ make -j$(nproc)
 #make check
 sudo make install-strip DESTDIR=/
 
-sudo mkdir -p /usr/share/doc/$PRGNAM-$VERSION
-sudo cp -a $DOCS /usr/share/doc/$PRGNAM-$VERSION
-sudo install -dm755 $CWD/octave_exec /usr/bin/
-sudo install -Dm755 $CWD/org.octave.Octave.desktop /usr/share/applications/
+sudo mkdir -p /usr/share/doc/$direname
+sudo cp -a $DOCS /usr/share/doc/$direname
+sudo install -dm755 ../octave_exec /usr/bin/
+sudo install -Dm755 ../org.octave.Octave.desktop /usr/share/applications/
 sudo sed -i -e "s|/usr/bin/octave|/usr/bin/octave_cli|g" /usr/share/applications/org.octave.Octave.desktop
 cd ..
-rm -rf ${filename/.tar.lz/} ${filename}
+rm -rf $direname ${filename}

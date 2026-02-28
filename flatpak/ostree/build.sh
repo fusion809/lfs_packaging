@@ -24,25 +24,8 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
-cd $(dirname $0) ; CWD=$(pwd)
-
-PRGNAM=ostree
+NAME=ostree
 VERSION=$(wget -cqO- https://github.com/ostreedev/ostree/releases | grep "/tag/" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
-
-if [ -z "$ARCH" ]; then
-  case "$( uname -m )" in
-    i?86) ARCH=i586 ;;
-    arm*) ARCH=arm ;;
-       *) ARCH=$( uname -m ) ;;
-  esac
-fi
-
-# could be useful to other scripts.
-if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
-  echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
-  exit 0
-fi
 
 if [ "$ARCH" = "i586" ]; then
   SLKCFLAGS="-O2 -march=i586 -mtune=i686"
@@ -63,12 +46,14 @@ fi
 
 set -e
 
-rm -rf lib${PRGNAM}-$VERSION
-if ! [[ -f lib${PRGNAM}-$VERSION.tar.xz ]]; then
-	wget -c https://github.com/ostreedev/ostree/releases/download/v${VERSION}/lib$PRGNAM-$VERSION.tar.xz
+direname="lib${NAME}-$VERSION"
+filename="$direname.tar.xz"
+rm -rf $direname
+if ! [[ -f $filename ]]; then
+	wget -c https://github.com/ostreedev/ostree/releases/download/v${VERSION}/$filename
 fi
-tar xvf $CWD/lib${PRGNAM}-$VERSION.tar.xz
-cd lib${PRGNAM}-$VERSION
+tar xvf $filename
+cd $direname
 
 ./configure \
   --prefix=/usr \
@@ -76,14 +61,14 @@ cd lib${PRGNAM}-$VERSION
   --sysconfdir=/etc \
   --localstatedir=/var \
   --mandir=/usr/man \
-  --docdir=/usr/share/doc/$PRGNAM-$VERSION \
-  --build=$ARCH-slackware-linux
+  --docdir=/usr/share/doc/$direname
 
-make
+make -j$(nproc)
 sudo make install DESTDIR=/
 
-sudo mkdir -p /usr/share/doc/$PRGNAM-$VERSION
+sudo mkdir -p /usr/share/doc/$direname
 sudo cp -a \
    COPYING README.md TODO \
-   /usr/share/doc/$PRGNAM-$VERSION
-
+   /usr/share/doc/$direname
+cd ..
+rm -rf $direname $filename

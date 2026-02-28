@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 NAME=fastfetch
 VERSION=$(wget -cqO- https://github.com/fastfetch-cli/fastfetch/releases | grep "releases/tag/" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
 

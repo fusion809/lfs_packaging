@@ -24,13 +24,11 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-cd $(dirname $0) ; CWD=$(pwd)
+cd $(direname $0) ; CWD=$(pwd)
 
 NAME=lapack
 NAME=lapack
 VERSION=$(wget -cqO- https://github.com/Reference-LAPACK/lapack/commits | grep "commit/" | head -n 1 | cut -d '"' -f 18)
-BUILD=${BUILD:-1}
-PKGTYPE=${PKGTYPE:-tgz}
 
 if [ -z "$ARCH" ]; then
   case "$(uname -m)" in
@@ -38,11 +36,6 @@ if [ -z "$ARCH" ]; then
     arm*) ARCH=arm ;;
        *) ARCH=$(uname -m) ;;
   esac
-fi
-
-if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
-  echo "$NAME-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
-  exit 0
 fi
 
 DOCS="LICENSE README.md DOCS/lapack.png DOCS/lawn81.tex DOCS/org2.ps"
@@ -64,16 +57,17 @@ if ! [[ -f /usr/lib/libblas.so ]]; then
 	exit
 fi
 
-filename="$NAME-$VERSION.tar.gz"
+direname="$NAME-$VERSION"
+filename="$direname.tar.gz"
 if ! [[ -f $filename ]]; then
 	wget -c https://github.com/Reference-LAPACK/lapack/archive/$VERSION.tar.gz -O $filename
 fi
-rm -rf ${filename/.tar.gz/}
-tar xvf $CWD/$filename
-cd ${filename/.tar.gz/}
+rm -rf $direname
+tar xvf $filename
+cd $direname
 
 # Allow building only the LAPACK component.
-patch -p1 < $CWD/cmake-piecewise.diff || echo "Patching failed"
+patch -p1 < ../cmake-piecewise.diff || echo "Patching failed"
 
 if pkg-config --exists xblas; then
   use_xblas='-DUSE_XBLAS=ON'
@@ -122,7 +116,7 @@ if [ "${STATIC:-no}" != "no" ]; then
   cd ..
 fi
 
-sudo mkdir -p /usr/share/doc/$NAME-$VERSION
-sudo cp -a $DOCS /usr/share/doc/$NAME-$VERSION
+sudo mkdir -p /usr/share/doc/$direname
+sudo cp -a $DOCS /usr/share/doc/$direname
 cd ..
-rm -rf $filename ${filename/.tar.gz/}
+rm -rf $filename $direname

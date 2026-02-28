@@ -23,8 +23,7 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-cd $(dirname $0) ; CWD=$(pwd)
-PRGNAM=xf86-video-qxl
+NAME=xf86-video-qxl
 VERSION=$(wget -cqO- https://xorg.freedesktop.org/releases/individual/driver/ | grep "xf86-video-qxl.*.tar.xz\"" | cut -d '"' -f 2 | head -n 1 | sed 's/xf86-video-qxl-//g' | sed 's/.tar.xz//g')
 
 if [ -z "$ARCH" ]; then
@@ -39,7 +38,7 @@ fi
 # the name of the created package would be, and then exit. This information
 # could be useful to other scripts.
 if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
-  echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
+  echo "$NAME-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
   exit 0
 fi
 
@@ -61,14 +60,15 @@ fi
 
 set -e
 
-rm -rf $PRGNAM-$VERSION
-filename=$PRGNAM-$VERSION.tar.xz
+direname="$NAME-$VERSION"
+rm -rf $direname
+filename="$direname.tar.xz"
 if ! [[ -f $filename ]]; then
 	wget -c https://xorg.freedesktop.org/releases/individual/driver/$filename
 fi
-tar xvf $CWD/$filename
-cd $PRGNAM-$VERSION
-patch -p1 < $CWD/libdrm.patch
+tar xvf $filename
+cd $direname
+patch -p1 < ../libdrm.patch
 
 # autogen.sh can be used in place of configure
 ./configure \
@@ -77,19 +77,21 @@ patch -p1 < $CWD/libdrm.patch
   --sysconfdir=/etc \
   --localstatedir=/var \
   --mandir=/usr/man \
-  --docdir=/usr/share/doc/$PRGNAM-$VERSION \
+  --docdir=/usr/share/doc/$direname \
   $with_xspice
 
 make -j$(nproc)
 sudo make install DESTDIR=/
 
 # add a config file for Xorg and another one for Xspice (if needed)
-sudo install -m 0644 -D $CWD/05-qxl.conf \
+sudo install -m 0644 -D ../05-qxl.conf \
   /usr/share/X11/xorg.conf.d/05-qxl.conf.new
 sudo install -m 0644 -D examples/spiceqxl.xorg.conf.example \
     /etc/X11/spiceqxl.xorg.conf.new
 sudo install -m 0755 -D scripts/Xspice /usr/bin/Xspice
 
-sudo mkdir -p /usr/share/doc/$PRGNAM-$VERSION
-sudo cp -a COPYING README* TODO* /usr/share/doc/$PRGNAM-$VERSION
+sudo mkdir -p /usr/share/doc/$direname
+sudo cp -a COPYING README* TODO* /usr/share/doc/$direname
+cd ..
+rm -rf $filename $direname
 

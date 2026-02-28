@@ -3,14 +3,14 @@ set -e
 NAME=hdf5
 VERSION=$(wget -cqO- https://github.com/HDFGroup/hdf5/releases | grep "tag/[0-9]" | cut -d '"' -f 6 | cut -d '/' -f 6)
 filename="$NAME-$VERSION.tar.gz"
-dirname="$NAME-${NAME}_${VERSION/_/-}"
+direname="$NAME-${NAME}_${VERSION/_/-}"
 if ! [[ -f $filename ]]; then
 	wget -c https://github.com/HDFGroup/hdf5/archive/hdf5_$VERSION/$filename
 fi
-rm -rf $dirname
+rm -rf $direname
 tar xf $filename
 export PATH=$PATH:/opt/OpenJDK-21.0.9-bin/bin/
-cd $dirname
+cd $direname
 common_cmake_args=(
   -DCMAKE_BUILD_TYPE=None
   -DCMAKE_INSTALL_PREFIX=/usr
@@ -30,4 +30,4 @@ cmake -S . -B build "${common_cmake_args[@]}"
 make -j$(nproc)
 sudo make install
 cd ..
-rm -rf $dirname $filename
+rm -rf $direname $filename

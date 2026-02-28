@@ -21,10 +21,8 @@
 # WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-cd $(dirname $0) ; CWD=$(pwd)
-
-PRGNAM=orc
+set -e
+NAME=orc
 VERSION=$(wget -cqO- https://gstreamer.freedesktop.org/src/orc/ | grep ".tar.xz\"" | cut -d '"' -f 2 | sed 's/.tar.xz//g' | cut -d '-' -f 2 | tail -n 1)
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
@@ -38,7 +36,7 @@ if [ -z "$ARCH" ]; then
 fi
 
 if [ ! -z "${PRINT_PACKAGE_NAME}" ]; then
-  echo "$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
+  echo "$NAME-$VERSION-$ARCH-$BUILD$TAG.$PKGTYPE"
   exit 0
 fi
 
@@ -63,12 +61,14 @@ fi
 
 set -e 
 
-rm -rf $PRGNAM-$VERSION
-if ! [[ -f $PRGNAM-$VERSION.tar.xz ]]; then
-	wget -c http://gstreamer.freedesktop.org/src/$PRGNAM/$PRGNAM-$VERSION.tar.xz
+direname="$NAME-$VERSION"
+filename="$direname.tar.xz"
+rm -rf $direname
+if ! [[ -f $filename ]]; then
+	wget -c http://gstreamer.freedesktop.org/src/$NAME/$filename
 fi
-tar xvf $CWD/$PRGNAM-$VERSION.tar.xz
-cd $PRGNAM-$VERSION
+tar xvf $filename
+cd $direname
 
 mkdir build &&
 cd    build &&
@@ -78,11 +78,12 @@ ninja
 sudo ninja install
 
 cd ..
-sudo mkdir -p /usr/share/doc/$PRGNAM-$VERSION
+sudo mkdir -p /usr/share/doc/$direname
 for i in $DOCS
 do
-	sudo cp -a $i /usr/share/doc/$PRGNAM-$VERSION
+	sudo cp -a $i /usr/share/doc/$direname
 done
 
 sudo rm -f /usr/lib*/*.la
-
+cd ..
+rm -rf $direname $filename

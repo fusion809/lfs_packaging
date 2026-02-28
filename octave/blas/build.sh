@@ -24,12 +24,11 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-cd $(dirname $0) ; CWD=$(pwd)
+cd $(direname $0) ; CWD=$(pwd)
 
 PRGNAM=blas
 NAME=lapack
 VERSION=$(wget -cqO- https://github.com/Reference-LAPACK/lapack/commits | grep "commit/" | head -n 1 | cut -d '"' -f 18)
-PKGTYPE=${PKGTYPE:-tgz}
 
 if [ -z "$ARCH" ]; then
   case "$(uname -m)" in
@@ -57,13 +56,14 @@ if ! which gfortran &> /dev/null; then
 	echo "GCC hasn't been built with Fortran support. This needs to be addressed!"
 	exit
 fi
-filename="$NAME-$VERSION.tar.gz"
-rm -rf ${filename/.tar.gz/}
+direname="$NAME-$VERSION"
+filename="$direname.tar.gz"
+rm -rf $direname
 if ! [[ -f $filename ]]; then
 	wget -c https://github.com/Reference-LAPACK/lapack/archive/$VERSION.tar.gz -O $filename
 fi
-tar xvf $CWD/$filename
-cd ${filename/.tar.gz/}
+tar xvf $filename
+cd $direname
 # Avoid adding an RPATH entry to the shared lib.  It's unnecessary (except for
 # running the test suite), and it's broken on 64-bit (needs LIBDIRSUFFIX).
 mkdir -p shared
@@ -103,4 +103,4 @@ fi
 sudo mkdir -p /usr/share/doc/$PRGNAM-$VERSION
 sudo cp -a $DOCS /usr/share/doc/$PRGNAM-$VERSION
 cd ..
-rm -rf ${filename} ${filename/.tar.gz/}
+rm -rf ${filename} $direname
