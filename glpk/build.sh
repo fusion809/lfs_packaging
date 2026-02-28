@@ -7,7 +7,9 @@ filename="$NAME-$VERSION.tar.gz"
 if ! [[ -f $filename ]]; then
 	wget -c https://ftp.gnu.org/gnu/glpk/$filename
 fi
-wget -c "https://gitlab.archlinux.org/archlinux/packaging/packages/glpk/-/raw/main/gcc-15.patch?ref_type=heads&inline=false" -O gcc-15.patch
+if ! [[ -f gcc-15.patch ]]; then
+	wget -c "https://gitlab.archlinux.org/archlinux/packaging/packages/glpk/-/raw/main/gcc-15.patch?ref_type=heads&inline=false" -O gcc-15.patch
+fi
 tar xf $filename
 direname=${filename/.tar.gz/}
 rm -rf $direname
