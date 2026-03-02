@@ -4,7 +4,7 @@ depends=(
   hwloc
 )
 _name=pmix
-VERSION=$(wget -cqO- https://github.com/openpmix/openpmix/releases | grep "/releases/tag/v" | grep -v "rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+VERSION=$(wget -cqO- https://github.com/openpmix/openpmix/releases | grep "/releases/tag/v" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
 filename="$_name-$VERSION.tar.gz"
 direname="${filename/.tar.gz/}"
 if ! [[ -f $filename ]]; then

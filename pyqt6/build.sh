@@ -3,7 +3,7 @@
 set -e
 depends=()
 NAME=pyqt6
-VERSION=$(wget -cqO- https://pypi.org/rss/project/pyqt6/releases.xml | grep "pyqt6/[0-9]" | head -n 1 | cut -d '/' -f 6)
+VERSION=$(wget -cqO- https://pypi.org/rss/project/pyqt6/releases.xml | grep "pyqt6/[0-9]" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '/' -f 6)
 filename="$NAME-$VERSION.tar.gz"
 direname="${filename/.tar.gz/}"
 if ! [[ -f $filename ]]; then

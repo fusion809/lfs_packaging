@@ -2,7 +2,7 @@
 set -e
 depends=(blas lapack)
 NAME=qrupdate
-VERSION=$(wget -cqO- https://github.com/mpimd-csc/qrupdate-ng/releases | grep "releases/tag/v" | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+VERSION=$(wget -cqO- https://github.com/mpimd-csc/qrupdate-ng/releases | grep "releases/tag/v" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
 filename=$NAME-$VERSION.tar.gz
 direname="$NAME-ng-$VERSION"
 wget -c https://github.com/mpimd-csc/qrupdate-ng/archive/v$VERSION.tar.gz -O $filename

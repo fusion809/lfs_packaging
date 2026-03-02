@@ -2,7 +2,7 @@
 set -e
 depends=(openpmix hwloc)
 NAME=prrte
-VERSION=$(wget -cqO- https://github.com/openpmix/prrte/releases | grep -v "rc1" | grep "releases/tag/v" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+VERSION=$(wget -cqO- https://github.com/openpmix/prrte/releases | grep -v "alpha\|beta\|rc" | grep "releases/tag/v" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
 filename="$NAME-$VERSION.tar.gz"
 direname="${filename/.tar.gz/}"
 if ! [[ -f $filename ]]; then

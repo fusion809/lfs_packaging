@@ -2,7 +2,7 @@
 set -e
 depends=()
 NAME="leptonica"
-VERSION=$(wget -cqO- https://github.com/DanBloomberg/leptonica/releases | grep "/tag/" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
+VERSION=$(wget -cqO- https://github.com/DanBloomberg/leptonica/releases | grep "/tag/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
 filename="$NAME-$VERSION.tar.gz"
 if ! [[ -f $filename ]]; then
 	wget -c https://github.com/DanBloomberg/leptonica/archive/ref/tags/${VERSION}.tar.gz -O $filename

@@ -2,7 +2,7 @@
 set -e
 depends=()
 NAME=graphicsmagick
-VERSION=$(wget -cqO- https://sourceforge.net/projects/graphicsmagick/files/graphicsmagick/ | grep "/graphicsmagick/[0-9]" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
+VERSION=$(wget -cqO- https://sourceforge.net/projects/graphicsmagick/files/graphicsmagick/ | grep "/graphicsmagick/[0-9]" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
 _archive="GraphicsMagick-$VERSION"
 if ! [[ -f $_archive.tar.xz ]]; then
 	wget -c https://downloads.sourceforge.net/project/$NAME/$NAME/$VERSION/$_archive.tar.xz

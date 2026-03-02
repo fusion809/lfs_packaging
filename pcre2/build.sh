@@ -2,7 +2,7 @@
 set -e
 depends=()
 NAME=pcre2
-VERSION=$(wget -cqO- https://github.com/PCRE2Project/pcre2/releases | grep "releases/tag/pcre2" | head -n 1 | cut -d '"' -f 6 | cut -d '=' -f 3 | cut -d '/' -f 6 | sed 's/pcre2-//g')
+VERSION=$(wget -cqO- https://github.com/PCRE2Project/pcre2/releases | grep "releases/tag/pcre2" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '=' -f 3 | cut -d '/' -f 6 | sed 's/pcre2-//g')
 filename="$NAME-$VERSION.tar.gz"
 wget -c https://github.com/PCRE2Project/pcre2/archive/$filename
 wget -c https://github.com/zherczeg/sljit/archive/master.tar.gz -O sljit-master.tar.gz

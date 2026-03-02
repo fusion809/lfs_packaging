@@ -26,7 +26,7 @@
 set -e
 depends=(gcab)
 NAME=ostree
-VERSION=$(wget -cqO- https://github.com/ostreedev/ostree/releases | grep "/tag/" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+VERSION=$(wget -cqO- https://github.com/ostreedev/ostree/releases | grep "/tag/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
 direname="lib${NAME}-$VERSION"
 filename="$direname.tar.xz"
 rm -rf $direname

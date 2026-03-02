@@ -22,7 +22,7 @@
 set -e
 depends=()
 NAME=gnuplot
-VERSION=$(wget -cqO- https://sourceforge.net/p/gnuplot/gnuplot-main/ref/master/tags/ | grep "/tree" | grep -v "git-conv" | tail -n 1 | cut -d '/' -f 6)
+VERSION=$(wget -cqO- https://sourceforge.net/p/gnuplot/gnuplot-main/ref/master/tags/ | grep "/tree" | grep -v "alpha\|beta\|rc" | grep -v "git-conv" | tail -n 1 | cut -d '/' -f 6)
 
 SRC=$NAME-$VERSION
 rm -rf $SRC

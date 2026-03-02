@@ -2,7 +2,7 @@
 set -e
 depends=(fastfetch)
 NAME=hyfetch
-VERSION=$(wget -cqO- https://github.com/hykilpikonna/hyfetch/releases | grep "releases/tag/" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
+VERSION=$(wget -cqO- https://github.com/hykilpikonna/hyfetch/releases | grep "releases/tag/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
 if ! [[ -d hyfetch ]]; then
 	git clone https://github.com/hykilpikonna/hyfetch
 fi

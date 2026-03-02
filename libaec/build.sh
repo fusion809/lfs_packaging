@@ -2,7 +2,7 @@
 set -e
 depends=()
 NAME=libaec
-VERSION=$(wget -cqO- https://gitlab.dkrz.de/dkrz-sw/libaec/-/tags | grep 'tags/v' | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 6 | sed 's/v//g')
+VERSION=$(wget -cqO- https://gitlab.dkrz.de/dkrz-sw/libaec/-/tags | grep 'tags/v' | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 6 | sed 's/v//g')
 filename="$NAME-v$VERSION.tar.bz2"
 if ! [[ -f $filename ]]; then
 	wget -c https://gitlab.dkrz.de/k202009/libaec/-/archive/v$VERSION/$NAME-v$VERSION.tar.bz2

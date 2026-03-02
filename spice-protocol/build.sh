@@ -25,7 +25,7 @@
 set -e
 depends=()
 NAME=spice-protocol
-VERSION=$(wget -cqO- https://spice-space.org/download/releases/ | grep "spice-protocol-.*xz\"" | cut -d '"' -f 8  | tail -n 1 | cut -d '-' -f 3 | sed 's/.tar.xz//g')
+VERSION=$(wget -cqO- https://spice-space.org/download/releases/ | grep "spice-protocol-.*xz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 8  | tail -n 1 | cut -d '-' -f 3 | sed 's/.tar.xz//g')
 ARCH=noarch
 
 DOCS="COPYING *.md"

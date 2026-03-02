@@ -8,7 +8,7 @@ depends=(
 )
 
 pkgbase=openmpi
-VERSION=$(wget -cqO- https://www-lb.open-mpi.org/software/ompi/ | grep ".tar.gz" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 7 | sed 's/.tar.gz//g' | sed 's/openmpi-//g')
+VERSION=$(wget -cqO- https://www-lb.open-mpi.org/software/ompi/ | grep ".tar.gz" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 7 | sed 's/.tar.gz//g' | sed 's/openmpi-//g')
 filename="$pkgbase-$VERSION.tar.bz2"
 direname="${filename/.tar.bz2/}"
 rm -rf $direname

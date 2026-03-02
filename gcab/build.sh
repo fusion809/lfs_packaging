@@ -28,7 +28,7 @@
 set -e
 depends=()
 NAME=gcab
-VERSION=$(wget -cqO- https://download.gnome.org/sources/gcab/ | grep "[0-9]/" | cut -d '"' -f 4 | sed 's|/$||g' | tail -n 1)
+VERSION=$(wget -cqO- https://download.gnome.org/sources/gcab/ | grep "[0-9]/" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 4 | sed 's|/$||g' | tail -n 1)
 direname="$NAME-$VERSION"
 filename="$direname.tar.xz"
 rm -rf $direname

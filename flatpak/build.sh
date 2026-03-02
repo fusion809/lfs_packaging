@@ -26,7 +26,7 @@
 set -e
 depends=(gcab ostree)
 NAME=flatpak
-VERSION=$(wget -cqO- https://github.com/flatpak/flatpak/releases/ | grep "/tag/" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
+VERSION=$(wget -cqO- https://github.com/flatpak/flatpak/releases/ | grep "/tag/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
 filename="$NAME-$VERSION.tar.xz"
 direname=${filename/.tar.xz/}
 rm -rf $direname

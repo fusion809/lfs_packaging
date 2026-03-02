@@ -2,7 +2,7 @@
 set -e
 depends=()
 NAME=glpk
-VERSION=$(wget -cqO- https://ftp.gnu.org/gnu/glpk/ | grep ".tar.gz\"" | cut -d '"' -f 8 | tail -n 1 | sed 's/glpk-//g' | sed 's/.tar.gz//g')
+VERSION=$(wget -cqO- https://ftp.gnu.org/gnu/glpk/ | grep ".tar.gz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 8 | tail -n 1 | sed 's/glpk-//g' | sed 's/.tar.gz//g')
 filename="$NAME-$VERSION.tar.gz"
 if ! [[ -f $filename ]]; then
 	wget -c https://ftp.gnu.org/gnu/glpk/$filename

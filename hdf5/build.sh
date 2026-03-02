@@ -3,7 +3,7 @@ set -e
 depends=(libaec
 openmpi)
 NAME=hdf5
-VERSION=$(wget -cqO- https://github.com/HDFGroup/hdf5/releases | grep "tag/[0-9]" | cut -d '"' -f 6 | cut -d '/' -f 6)
+VERSION=$(wget -cqO- https://github.com/HDFGroup/hdf5/releases | grep "tag/[0-9]" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 6 | cut -d '/' -f 6)
 filename="$NAME-$VERSION.tar.gz"
 direname="$NAME-${NAME}_${VERSION/_/-}"
 if ! [[ -f $filename ]]; then

@@ -24,7 +24,7 @@
 set -e
 depends=()
 NAME=orc
-VERSION=$(wget -cqO- https://gstreamer.freedesktop.org/src/orc/ | grep ".tar.xz\"" | cut -d '"' -f 2 | sed 's/.tar.xz//g' | cut -d '-' -f 2 | tail -n 1)
+VERSION=$(wget -cqO- https://gstreamer.freedesktop.org/src/orc/ | grep ".tar.xz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 2 | sed 's/.tar.xz//g' | cut -d '-' -f 2 | tail -n 1)
 
 DOCS="CONTRIBUTING.md COPYING README RELEASE ROADMAP.md"
 

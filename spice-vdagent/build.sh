@@ -26,7 +26,7 @@
 set -e
 depends=(libpciaccess spice-protocol)
 NAME=spice-vdagent
-VERSION=$(wget -cqO- https://spice-space.org/download/releases/ | grep "spice-vdagent.*.tar.bz2\"" | cut -d '"' -f 8 | tail -n 1 | cut -d '-' -f 3 | sed 's/.tar.bz2//g')
+VERSION=$(wget -cqO- https://spice-space.org/download/releases/ | grep "spice-vdagent.*.tar.bz2\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 8 | tail -n 1 | cut -d '-' -f 3 | sed 's/.tar.bz2//g')
 DOCS="COPYING CHANGELOG.md README.md"
 
 direname="$NAME-$VERSION"

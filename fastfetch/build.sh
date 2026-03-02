@@ -2,13 +2,16 @@
 set -e
 depends=()
 NAME=fastfetch
-VERSION=$(wget -cqO- https://github.com/fastfetch-cli/fastfetch/releases | grep "releases/tag/" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
-
 if ! [[ -d fastfetch ]]; then
 	git clone https://github.com/fastfetch-cli/fastfetch
 fi
 
 cd fastfetch
+git checkout master
+git pull origin master
+git fetch --all --tags
+git fetch --prune --prune-tags
+VERSION=$(git describe --tags --abbrev=0)
 git checkout $VERSION
 mkdir -p build
 cd build

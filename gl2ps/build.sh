@@ -2,7 +2,7 @@
 set -e
 depends=()
 NAME=gl2ps
-VERSION=$(wget -cqO- https://geuz.org/gl2ps/src/ | grep "[0-9].tgz" | cut -d '"' -f 8 | tail -n 1 | sed 's/gl2ps-//g' | sed 's/.tgz//g')
+VERSION=$(wget -cqO- https://geuz.org/gl2ps/src/ | grep "[0-9].tgz" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 8 | tail -n 1 | sed 's/gl2ps-//g' | sed 's/.tgz//g')
 filename="$NAME-$VERSION.tgz"
 if ! [[ -f $filename ]]; then
 	wget -c https://geuz.org/gl2ps/src/$filename

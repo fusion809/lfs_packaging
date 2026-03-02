@@ -28,7 +28,7 @@ set -e
 depends=()
 NAME=lapack
 NAME=lapack
-VERSION=$(wget -cqO- https://github.com/Reference-LAPACK/lapack/commits | grep "commit/" | head -n 1 | cut -d '"' -f 18)
+VERSION=$(wget -cqO- https://github.com/Reference-LAPACK/lapack/commits | grep "commit/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 18)
 
 DOCS="LICENSE README.md DOCS/lapack.png DOCS/lawn81.tex DOCS/org2.ps"
 

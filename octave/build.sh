@@ -38,7 +38,7 @@ depends=(
 )
 export JAVA_HOME=/opt/jdk
 NAME=octave
-VERSION=$(wget -cqO- https://ftp.gnu.org/gnu/octave/ | grep ".tar.gz\"" | tail -n 1 | cut -d '"' -f 8 | sed 's/octave-//g' | sed 's/.tar.gz//g')
+VERSION=$(wget -cqO- https://ftp.gnu.org/gnu/octave/ | grep ".tar.gz\"" | grep -v "alpha\|beta\|rc" | tail -n 1 | cut -d '"' -f 8 | sed 's/octave-//g' | sed 's/.tar.gz//g')
 
 DOCS="AUTHORS BUGS CITATION COPYING ChangeLog INSTALL* NEWS README"
 

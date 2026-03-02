@@ -2,7 +2,7 @@
 set -e
 depends=()
 NAME=numactl
-VERSION=$(wget -cqO- https://github.com/numactl/numactl/releases | grep "releases/tag/v[0-9]" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+VERSION=$(wget -cqO- https://github.com/numactl/numactl/releases | grep "releases/tag/v[0-9]" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
 filename="$NAME-$VERSION.tar.gz"
 direname="${filename/.tar.gz/}"
 if ! [[ -f $filename ]]; then

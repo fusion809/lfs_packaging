@@ -2,7 +2,7 @@
 set -e
 depends=(leptonica)
 NAME=tesseract
-VERSION=$(wget -cqO- https://github.com/tesseract-ocr/tesseract/releases | grep "/tag/" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
+VERSION=$(wget -cqO- https://github.com/tesseract-ocr/tesseract/releases | grep "/tag/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
 filename="$NAME-$VERSION.tar.gz"
 direname="${filename/.tar.gz/}"
 if ! [[ -f $filename ]]; then

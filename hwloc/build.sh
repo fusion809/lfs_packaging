@@ -2,7 +2,7 @@
 set -e
 depends=(libpciaccess)
 NAME=hwloc
-VERSION=$(wget -cqO- https://www.open-mpi.org/projects/hwloc/ | grep -i download | grep -v '>Download<' | cut -d '"' -f 2 | cut -d '/' -f 5 | sed 's/^v//g' | head -n 1)
+VERSION=$(wget -cqO- https://www.open-mpi.org/projects/hwloc/ | grep -i download | grep -v '>Download<' | grep -v "alpha\|beta\|rc" | cut -d '"' -f 2 | cut -d '/' -f 5 | sed 's/^v//g' | head -n 1)
 filename="$NAME-$VERSION.tar.bz2"
 if ! [[ -f $filename ]]; then
 	wget -c https://www.open-mpi.org/software/hwloc/v${VERSION%.*}/downloads/$filename

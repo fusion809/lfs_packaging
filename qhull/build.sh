@@ -2,8 +2,8 @@
 set -e
 depends=()
 NAME=qhull
-VERSION=$(wget -cqO- http://www.qhull.org/download/ | grep ".tgz\"" | sed 's/.*Download: Qhull //g' | sed 's/ for Unix.*//g')
-_VERSION=$(wget -cqO- http://www.qhull.org/download/ | grep ".tgz\"" | cut -d '"' -f 2 | cut -d '/' -f 5 | cut -d '-' -f 4 | sed 's/.tgz//')
+VERSION=$(wget -cqO- http://www.qhull.org/download/ | grep ".tgz\"" | grep -v "alpha\|beta\|rc" | sed 's/.*Download: Qhull //g' | sed 's/ for Unix.*//g')
+_VERSION=$(wget -cqO- http://www.qhull.org/download/ | grep ".tgz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 2 | cut -d '/' -f 5 | cut -d '-' -f 4 | sed 's/.tgz//')
 filename="$NAME-${VERSION%.*}-src-$_VERSION.tgz"
 direname="$NAME-$VERSION"
 if ! [[ -f $filename ]]; then

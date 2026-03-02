@@ -26,7 +26,7 @@
 set -e
 depends=(spice spice-protocol)
 NAME=xf86-video-qxl
-VERSION=$(wget -cqO- https://xorg.freedesktop.org/releases/individual/driver/ | grep "xf86-video-qxl.*.tar.xz\"" | cut -d '"' -f 2 | head -n 1 | sed 's/xf86-video-qxl-//g' | sed 's/.tar.xz//g')
+VERSION=$(wget -cqO- https://xorg.freedesktop.org/releases/individual/driver/ | grep "xf86-video-qxl.*.tar.xz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 2 | head -n 1 | sed 's/xf86-video-qxl-//g' | sed 's/.tar.xz//g')
 
 if [ "${XSPICE:-no}" = "yes" ]; then
   with_xspice="--enable-xspice=yes"

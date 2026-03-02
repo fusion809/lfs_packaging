@@ -3,7 +3,7 @@ set -e
 NAME=antigravity
 baseurl="https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/dists/antigravity-debian/main/binary-amd64/Packages"
 filename=$(wget -cqO- $baseurl | grep deb | tail -n 1 | sed 's|Filename: pool/antigravity-debian/||g')
-VERSION=$(echo $filename | cut -d '_' -f 2 | cut -d '-' -f 1)
+VERSION=$(echo $filename | grep -v "beta\|alpha\|rc" | cut -d '_' -f 2 | cut -d '-' -f 1)
 _STR=$(echo $filename | sed 's|antigravity_1.19.6-||g' | sed 's/.deb//g')
 
 if ! [[ -f $filename ]]; then
