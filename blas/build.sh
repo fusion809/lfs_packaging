@@ -26,6 +26,10 @@
 
 set -e
 depends=()
+lfs_depends=(bash coreutils glibc gzip make python sed tar)
+blfs_depends=(cmake 
+gcc # Fortran support required
+wget)
 PRGNAM=blas
 NAME=lapack
 VERSION=$(wget -cqO- https://github.com/Reference-LAPACK/lapack/commits | grep "commit/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 18)

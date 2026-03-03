@@ -1,6 +1,13 @@
 #!/bin/bash
 set -e
-depends=()
+depends=(yyjson) # Can build and run without it
+lfs_depends=(bash coreutils gcc glibc zlib)
+blfs_depends=(cmake dbus dconf imagemagick 
+pulseaudio libxcb libxrandr # These are listed in Arch's PKGBUILD, but I am doubtful these are required, unless you plan to use a GUI for it.
+sqlite
+)
+# Arch https://gitlab.archlinux.org/archlinux/packaging/packages/fastfetch/-/blob/main/PKGBUILD?ref_type=heads
+# has chafa (image output as ascii art), ddcutil, directx-headers, libglvnd, ocl-icd, opencl-headers, vulkan-icd-loader, vulkan-headers and xfconf listed as a dep, but seems to build and run fine without it
 NAME=fastfetch
 if ! [[ -d fastfetch ]]; then
 	git clone https://github.com/fastfetch-cli/fastfetch

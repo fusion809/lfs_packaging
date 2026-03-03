@@ -27,6 +27,8 @@
 
 set -e
 depends=()
+lfs_depends=(bash coreutils gcc glibc meson ninja sed tar xz)
+blfs_depends=(glib gtk-doc vala)
 NAME=gcab
 VERSION=$(wget -cqO- https://download.gnome.org/sources/gcab/ | grep "[0-9]/" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 4 | sed 's|/$||g' | tail -n 1)
 direname="$NAME-$VERSION"

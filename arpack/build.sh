@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
-depends=(openmpi)
+depends=(lapack openmpi)
+lfs_depends=(bash coreutils gzip make sed tar)
+blfs_depends=(gcc # Fortran support needed
+wget)
 NAME="arpack"
 PRGNAME="arpack-ng"
 VERSION=$(wget -cqO- https://github.com/opencollab/arpack-ng/tags | grep ".tar.gz" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 4 | cut -d '/' -f 7 | sed 's/.tar.gz//g')

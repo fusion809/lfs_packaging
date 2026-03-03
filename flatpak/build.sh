@@ -25,6 +25,11 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 set -e
 depends=(gcab ostree)
+lfs_depends=(bash coreutils gcc glibc meson ninja python systemd tar xz zstd)
+blfs_depends=(appstream bubblewrap curl dbus dconf fuse gdk-pixbuf glib gpgme json-glib libarchive libseccomp libxau # Xorg lib
+polkit wayland xdg-dbus-proxy xdg-utils)
+pip_depends=(gobject)
+# libmalcontent is listed for Arch, but seems to run for my uses without it
 NAME=flatpak
 VERSION=$(wget -cqO- https://github.com/flatpak/flatpak/releases/ | grep "/tag/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
 filename="$NAME-$VERSION.tar.xz"

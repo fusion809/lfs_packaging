@@ -21,6 +21,10 @@
 #
 set -e
 depends=()
+lfs_depends=(bash coreutils gcc glibc gzip make readline tar)
+blfs_depends=(cairo gd glib gtk3 )
+# libcaca, libcerf  and wxwidgets are listed for Arch, but seems to run for my uses without them
+
 NAME=gnuplot
 VERSION=$(wget -cqO- https://sourceforge.net/p/gnuplot/gnuplot-main/ref/master/tags/ | grep "/tree" | grep -v "alpha\|beta\|rc" | grep -v "git-conv" | tail -n 1 | cut -d '/' -f 6)
 

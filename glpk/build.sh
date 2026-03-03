@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 depends=()
+lfs_depends=(bash coreutils gcc glibc gmp gzip make sed tar)
+blfs_depends=()
 NAME=glpk
 VERSION=$(wget -cqO- https://ftp.gnu.org/gnu/glpk/ | grep ".tar.gz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 8 | tail -n 1 | sed 's/glpk-//g' | sed 's/.tar.gz//g')
 filename="$NAME-$VERSION.tar.gz"
