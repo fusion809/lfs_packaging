@@ -2,6 +2,7 @@
 set -e
 NAME=antigravity
 baseurl="https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/dists/antigravity-debian/main/binary-amd64/Packages"
+downurl="https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/pool/antigravity-debian/"
 depends=()
 lfs_depends=(bash coreutils glibc sed tar)
 blfs_depends=(libarchive libx11 libxkbfile wget)
@@ -10,7 +11,7 @@ VERSION=$(echo $filename | grep -v "beta\|alpha\|rc" | cut -d '_' -f 2 | cut -d 
 _STR=$(echo $filename | sed 's|antigravity_1.19.6-||g' | sed 's/.deb//g')
 
 if ! [[ -f $filename ]]; then
-	wget -c https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/pool/antigravity-debian/$filename
+	wget -c $downurl/$filename
 fi
 sudo rm -rf $NAME
 mkdir $NAME
