@@ -2,6 +2,9 @@
 set -e
 NAME=xclip
 depends=()
+lfs_depends=(autoconf bash coreutils make)
+blfs_depends=(git libxmu # Xorg library
+)
 if ! [[ -d xclip ]]; then
 	git clone https://github.com/astrand/xclip
 fi

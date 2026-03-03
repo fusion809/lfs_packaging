@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 depends=()
+lfs_depends=(autoconf bash coreutils glibc gzip make sed tar)
+blfs_depends=(wget)
 NAME=numactl
 VERSION=$(wget -cqO- https://github.com/numactl/numactl/releases | grep "releases/tag/v[0-9]" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
 filename="$NAME-$VERSION.tar.gz"

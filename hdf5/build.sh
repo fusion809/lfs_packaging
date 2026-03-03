@@ -2,6 +2,11 @@
 set -e
 depends=(libaec
 openmpi)
+lfs_depends=(bash coreutils glib gzip make sed tar zlib)
+blfs_depends=(cmake 
+gcc # Fortran support is needed
+java
+wget)
 NAME=hdf5
 VERSION=$(wget -cqO- https://github.com/HDFGroup/hdf5/releases | grep "tag/[0-9]" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 6 | cut -d '/' -f 6)
 filename="$NAME-$VERSION.tar.gz"

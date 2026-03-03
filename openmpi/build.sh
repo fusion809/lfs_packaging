@@ -6,6 +6,17 @@ depends=(
   openpmix
   prrte
 )
+lfs_depends=(bash bzip2 coreutils glibc make sed tar)
+blfs_depends=(gcc # Need Fortran support
+valgrind
+)
+# Dependencies useful depending on your hardware include:
+hardware_depends=(cuda
+nvidia #libcuda.so needed
+hip-runtime-amd)
+# Communication frameworks. Not strictly required, but may be useful for better performance
+optional_depends=(openucc
+openucx)
 
 pkgbase=openmpi
 VERSION=$(wget -cqO- https://www-lb.open-mpi.org/software/ompi/ | grep ".tar.gz" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 7 | sed 's/.tar.gz//g' | sed 's/openmpi-//g')

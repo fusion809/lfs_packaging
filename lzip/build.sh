@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 depends=()
+lfs_depends=(bash coreutils glibc gcc gzip make sed tar)
+blfs_depends=(wget)
 NAME=lzip
 VERSION=$(wget -cqO- https://download.savannah.gnu.org/releases/lzip/ | grep "lzip-[0-9.]*.tar.gz\"" | grep -v "alpha\|beta\|rc" | tail -n 1 | cut -d '"' -f 4 | sed 's/lzip-//g' | sed 's/.tar.gz//g')
 filename="$NAME-$VERSION.tar.gz"

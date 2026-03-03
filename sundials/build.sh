@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 depends=(lapack openmpi suitesparse)
+lfs_depends=(bash coreutils glibc gzip make python sed tar)
+blfs_depends=(cmake
+gcc # Fortran support needed
+wget)
 NAME=sundials
 VERSION=$(wget -cqO- https://github.com/llnl/sundials/releases | grep "releases/tag/v" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
 filename=$NAME-$VERSION.tar.gz

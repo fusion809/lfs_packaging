@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 depends=()
+lfs_depends=(bash bzip2 coreutils glibc sed tar)
+blfs_depends=(cmake wget)
 NAME=libaec
 VERSION=$(wget -cqO- https://gitlab.dkrz.de/dkrz-sw/libaec/-/tags | grep 'tags/v' | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 6 | sed 's/v//g')
 filename="$NAME-v$VERSION.tar.bz2"

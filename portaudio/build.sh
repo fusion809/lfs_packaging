@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
-depends=(jack2)
+depends=(jack)
+lfs_depends=(autoconf bash coreutils gcc glibc gzip make sed tar)
+blfs_depends=(alsa-lib cmake wget)
 NAME=portaudio
 VERSION=$(wget -cqO- https://github.com/portaudio/portaudio/releases | grep "releases/tag/v" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
 filename="$NAME-v$VERSION.tar.gz"

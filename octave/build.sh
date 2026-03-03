@@ -31,6 +31,7 @@ depends=(
   gnuplot
   graphicsmagick
   hdf5
+  lzip
   pcre2
   portaudio
   qhull

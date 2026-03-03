@@ -2,12 +2,14 @@
 # Latest tagged version won't build
 set -e
 depends=()
-NAME=jack2
+lfs_depends=(bash coreutils expat python systemd)
+blfs_depends=(alsa-lib dbus opus)
+NAME=jack
 if ! [[ -d jack2 ]]; then
 	git clone https://github.com/jackaudio/jack2
 fi
 
-cd $NAME
+cd jack2
 VERSION=$(git log | head -n 1 | cut -d ' ' -f 2)
 git pull origin master
 sed -i -e "s|python|python3|g" waf
@@ -17,7 +19,7 @@ CXXFLAGS="-O2 -fPIC"
   --prefix=/usr \
   --libdir=/usr/lib \
   --mandir=/usr/man/man1 \
-  --htmldir=/usr/doc/$PRGNAM-$VERSION/html \
+  --htmldir=/usr/doc/$NAME-$VERSION/html \
   --classic \
   --dbus \
   --alsa

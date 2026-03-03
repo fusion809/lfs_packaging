@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 depends=(blas lapack)
+lfs_depends=(bash coreutils glibc gzip make sed tar)
+blfs_depends=(cmake
+gcc # Fortran support needed
+wget)
 NAME=qrupdate
 VERSION=$(wget -cqO- https://github.com/mpimd-csc/qrupdate-ng/releases | grep "releases/tag/v" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
 filename=$NAME-$VERSION.tar.gz

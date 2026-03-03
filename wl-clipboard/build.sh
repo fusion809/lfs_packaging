@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 depends=()
+lfs_depends=(bash coreutils glibc meson ninja)
+blfs_depends=(git wayland wayland-protocols)
 NAME="wl-clipboard"
 if ! [[ -d $NAME ]]; then
 	git clone https://github.com/bugaevc/wl-clipboard

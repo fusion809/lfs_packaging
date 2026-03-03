@@ -2,6 +2,9 @@
 set -e
 NAME=libpciaccess
 VERSION=$(wget -cqO- https://xorg.freedesktop.org/releases/individual/lib/ | grep "libpciaccess.*xz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 2 | cut -d '-' -f 2 | sed 's/.tar.xz//g' | sort -V | tail -n 1)
+depends=()
+lfs_depends=(bash coreutils glibc make meson ninja sed tar xz zlib)
+blfs_depends=(util-macros wget)
 filename="$NAME-$VERSION.tar.xz"
 if ! [[ -f $filename ]]; then
 	wget -c https://xorg.freedesktop.org/releases/individual/lib/$filename

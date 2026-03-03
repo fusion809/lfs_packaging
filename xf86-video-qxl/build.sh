@@ -25,6 +25,10 @@
 
 set -e
 depends=(spice spice-protocol)
+lfs_depends=(bash coreutils glibc make sed systemd tar xz)
+blfs_depends=(libxfont2 # Xorg library
+wget xorgproto xorg-server)
+optional_depends=(libcacard) # Smartcard uspport
 NAME=xf86-video-qxl
 VERSION=$(wget -cqO- https://xorg.freedesktop.org/releases/individual/driver/ | grep "xf86-video-qxl.*.tar.xz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 2 | head -n 1 | sed 's/xf86-video-qxl-//g' | sed 's/.tar.xz//g')
 

@@ -25,6 +25,8 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 set -e
 depends=(gcab)
+lfs_depends=(bash coreutils glibc make python sed systemd tar util-linux xz zlib)
+blfs_depends=(avahi curl e2fsprogs fuse glib gpgme gtk-doc libarchive libgpg-error libsoup libxslt openssl wget which)
 NAME=ostree
 VERSION=$(wget -cqO- https://github.com/ostreedev/ostree/releases | grep "/tag/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
 direname="lib${NAME}-$VERSION"

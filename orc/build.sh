@@ -23,6 +23,9 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 set -e
 depends=()
+lfs_depends=(bash coreutils meson ninja pkgconf sed tar xz)
+blfs_depends=(wget)
+optional_depends=(libcacard) # Provides smartcard support
 NAME=orc
 VERSION=$(wget -cqO- https://gstreamer.freedesktop.org/src/orc/ | grep ".tar.xz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 2 | sed 's/.tar.xz//g' | cut -d '-' -f 2 | tail -n 1)
 
@@ -34,8 +37,6 @@ if pkg-config --exists libcacard ; then
 else
   with_cacard="--disable-smartcard"
 fi
-
-set -e 
 
 direname="$NAME-$VERSION"
 filename="$direname.tar.xz"

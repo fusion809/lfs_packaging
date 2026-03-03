@@ -14,5 +14,5 @@ xclip/xclip
 antigravity/antigravity
 libpciaccess/libpciaccess-[0-9.]*
 */*-[0-9.]*
-jack2/jack2
+jack/jack2
 wget-log

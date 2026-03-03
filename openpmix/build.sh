@@ -3,6 +3,8 @@ set -e
 depends=(
   hwloc
 )
+lfs_depends=(bash bzip2 coreutils make perl python sed tar zlib)
+blfs_depends=(libevent)
 _name=pmix
 VERSION=$(wget -cqO- https://github.com/openpmix/openpmix/releases | grep "/releases/tag/v" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
 filename="$_name-$VERSION.tar.gz"

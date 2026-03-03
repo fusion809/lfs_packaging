@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 depends=()
+lfs_depends=(bash coreutils glibc gzip sed tar)
+blfs_depends=(cmake wget)
 NAME=qhull
 VERSION=$(wget -cqO- http://www.qhull.org/download/ | grep ".tgz\"" | grep -v "alpha\|beta\|rc" | sed 's/.*Download: Qhull //g' | sed 's/ for Unix.*//g')
 _VERSION=$(wget -cqO- http://www.qhull.org/download/ | grep ".tgz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 2 | cut -d '/' -f 5 | cut -d '-' -f 4 | sed 's/.tgz//')

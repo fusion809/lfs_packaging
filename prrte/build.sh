@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
-depends=(openpmix hwloc)
+depends=(hwloc openpmix)
+lfs_depends=(bash coreutils glibc gzip make perl sed tar)
+blfs_depends=(libevent wget)
 NAME=prrte
 VERSION=$(wget -cqO- https://github.com/openpmix/prrte/releases | grep -v "alpha\|beta\|rc" | grep "releases/tag/v" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
 filename="$NAME-$VERSION.tar.gz"

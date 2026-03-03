@@ -2,6 +2,9 @@
 # also need freeglut
 set -e
 depends=()
+lfs_depends=(bash coreutils glibc gcc make python sed tar)
+blfs_depends=(dbus qt6 wget)
+pip_depends=(pyopengl pyqt6-sip pyqt-builder sip)
 NAME=pyqt6
 VERSION=$(wget -cqO- https://pypi.org/rss/project/pyqt6/releases.xml | grep "pyqt6/[0-9]" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '/' -f 6)
 filename="$NAME-$VERSION.tar.gz"

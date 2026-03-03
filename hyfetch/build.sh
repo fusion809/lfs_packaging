@@ -1,13 +1,17 @@
 #!/bin/bash
 set -e
 depends=(fastfetch)
+lfs_depends=(bash coreutils)
+blfs_depends=(git rustc)
 NAME=hyfetch
-VERSION=$(wget -cqO- https://github.com/hykilpikonna/hyfetch/releases | grep "releases/tag/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
 if ! [[ -d hyfetch ]]; then
 	git clone https://github.com/hykilpikonna/hyfetch
 fi
 
 cd hyfetch
+git checkout master
+git fetch --tags --all
+VERSION=$(git describe --tags --abbrev=0)
 git checkout $VERSION
 export PATH=$PATH:/opt/rustc/bin
 cargo fetch --locked --target "$(rustc --print host-tuple)"
