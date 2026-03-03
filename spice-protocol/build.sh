@@ -23,21 +23,22 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 set -e
+# Variable declarations
+name=spice-protocol
+version=$(wget -cqO- https://spice-space.org/download/releases/ | grep "spice-protocol-.*xz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 8  | tail -n 1 | cut -d '-' -f 3 | sed 's/.tar.xz//g')
+docs="COPYING *.md"
+direname="$name-$version"
+filename="$direname.tar.xz"
 depends=()
 lfs_depends=(bash coreutils meson ninja sed tar)
 blfs_depends=(wget)
-name=spice-protocol
-version=$(wget -cqO- https://spice-space.org/download/releases/ | grep "spice-protocol-.*xz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 8  | tail -n 1 | cut -d '-' -f 3 | sed 's/.tar.xz//g')
-ARCH=noarch
-
-DOCS="COPYING *.md"
-direname="$name-$version"
-filename="$direname.tar.xz"
+# Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then
 	wget -c https://www.spice-space.org/download/releases/$filename
 fi
 tar xvf $filename
+# Compile and install
 cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
@@ -59,9 +60,9 @@ meson setup \
   "${NINJA:=ninja}" || exit 1
   DESTDIR=/ sudo $NINJA install || exit 1
 cd ..
-
 sudo mkdir -p /usr/share/doc/$direname
-sudo cp -a $DOCS /usr/share/doc/$direname
+sudo cp -a $docs /usr/share/doc/$direname
+# Cleanup and add to database
 cd ..
 rm -rf $direname $filename
 echo $version > /var/lib/lfs-custom-packages/$name

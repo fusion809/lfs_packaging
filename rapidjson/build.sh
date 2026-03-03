@@ -2,17 +2,20 @@
 # This builds from the latest git commit as the latest tagged release, 1.1.0,
 # is too old for GNU Octave to be able to use its version of prettywriter.
 set -e
+# Variable declarations
+name=rapidjson
 depends=()
 lfs_depends=(bash coreutils make sed)
 blfs_depends=(cmake git)
-name=rapidjson
 source check-deps.sh
+# Fetch and unpack source
 if ! [[ -d rapidjson ]]; then
 	git clone https://github.com/Tencent/rapidjson
 fi
 cd $name
 git pull origin master
 version=$(git log | head -n 1 | cut -d ' ' -f 2)
+# Compile and install
 find -_name CMakeLists.txt | xargs sed -e 's|-Werror||' -i # Don't use -Werror
 rm -rf build
 mkdir -p build
@@ -35,5 +38,6 @@ make -j$(nproc)
 sudo make install
 cd ..
 sudo rm -rf build
+# Cleanup and install to database
 cd ..
 echo $version > /var/lib/lfs-custom-packages/$name

@@ -24,27 +24,28 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 set -e
-depends=(spice spice-protocol)
-lfs_depends=(bash coreutils glibc make sed systemd tar xz)
-blfs_depends=(libxfont2 # Xorg library
-wget xorgproto xorg-server)
-optional_depends=(libcacard) # Smartcard uspport
+# Variable declarations
 name=xf86-video-qxl
 version=$(wget -cqO- https://xorg.freedesktop.org/releases/individual/driver/ | grep "xf86-video-qxl.*.tar.xz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 2 | head -n 1 | sed 's/xf86-video-qxl-//g' | sed 's/.tar.xz//g')
-
 if [ "${XSPICE:-no}" = "yes" ]; then
   with_xspice="--enable-xspice=yes"
 else
   with_xspice=""
 fi
-
 direname="$name-$version"
-rm -rf $direname
 filename="$direname.tar.xz"
+depends=(spice spice-protocol)
+lfs_depends=(bash coreutils glibc make sed systemd tar xz)
+blfs_depends=(libxfont2 # Xorg library
+wget xorgproto xorg-server)
+optional_depends=(libcacard) # Smartcard support
+# Fetch and unpack source
+rm -rf $direname
 if ! [[ -f $filename ]]; then
 	wget -c https://xorg.freedesktop.org/releases/individual/driver/$filename
 fi
 tar xvf $filename
+# Compile and install
 cd $direname
 patch -p1 < ../libdrm.patch
 
@@ -69,9 +70,9 @@ sudo install -m 0644 -D ../05-qxl.conf \
 sudo install -m 0644 -D examples/spiceqxl.xorg.conf.example \
     /etc/X11/spiceqxl.xorg.conf.new
 sudo install -m 0755 -D scripts/Xspice /usr/bin/Xspice
-
 sudo mkdir -p /usr/share/doc/$direname
 sudo cp -a COPYING README* TODO* /usr/share/doc/$direname
+# Cleanup and add to database
 cd ..
 sudo rm -rf $filename $direname
 echo $version > /var/lib/lfs-custom-packages/$name

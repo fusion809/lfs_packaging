@@ -1,17 +1,21 @@
 #!/bin/bash
 set -e
-depends=()
-lfs_depends=(bash coreutils glibc gzip sed tar)
-blfs_depends=(cmake wget)
+# Variable declarations
 name=qhull
 version=$(wget -cqO- http://www.qhull.org/download/ | grep ".tgz\"" | grep -v "alpha\|beta\|rc" | sed 's/.*Download: Qhull //g' | sed 's/ for Unix.*//g')
 _version=$(wget -cqO- http://www.qhull.org/download/ | grep ".tgz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 2 | cut -d '/' -f 5 | cut -d '-' -f 4 | sed 's/.tgz//')
 filename="$name-${version%.*}-src-$_version.tgz"
 direname="$name-$version"
+depends=()
+lfs_depends=(bash coreutils glibc gzip sed tar)
+blfs_depends=(cmake wget)
+# Fetch and unpack source
 if ! [[ -f $filename ]]; then
 	wget -c http://www.qhull.org/download/$filename
 fi
+rm -rf $direname
 tar xf $filename
+# Compile and install
 cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
@@ -24,6 +28,7 @@ cmake -B build -S . \
 cmake --build build
 cmake --build build --target libqhull
 sudo cmake --install build
+# Cleanup and add to database
 cd ..
 sudo rm -rf $filename $direname
 echo $version > /var/lib/lfs-custom-packages/$name

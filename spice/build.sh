@@ -23,31 +23,30 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 set -e
+# Variable declarations
+name=spice
+version=$(wget -cqO- https://spice-space.org/download/releases/spice-server/ | grep ".tar.bz2\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 8 | sed 's/.tar.bz2//g' | tail -n 1 | cut -d '-' -f 2)
+docs="AUTHORS CHANGELOG.md COPYING README"
 depends=(spice-protocol)
 lfs_depends=(bash coreutils make meson sed tar)
 blfs_depends=(glib libjpeg-turbo lz4 opus pixman sasl wget)
 pip_depends=(pyparsing)
-name=spice
-version=$(wget -cqO- https://spice-space.org/download/releases/spice-server/ | grep ".tar.bz2\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 8 | sed 's/.tar.bz2//g' | tail -n 1 | cut -d '-' -f 2)
-
-DOCS="AUTHORS CHANGELOG.md COPYING README"
-
 # check if libcacard is there
 if pkg-config --exists libcacard ; then
   with_cacard="--enable-smartcard"
 else
   with_cacard="--disable-smartcard"
 fi
-
 direname="$name-$version"
-rm -rf $direname
 filename="$direname.tar.bz2"
+# Fetch and unpack source
+rm -rf $direname
 if ! [[ -f $filename ]]; then
 	wget -c https://www.spice-space.org/download/releases/spice-server/$filename
 fi
 tar xvf $filename
+# Compile and install
 cd $direname
-
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 ./configure \
@@ -57,15 +56,13 @@ CXXFLAGS="-O2 -fPIC"
   --disable-static \
   --enable-client \
   --disable-celt051 \
-  $with_cacard \
-
-make
+  $with_cacard
+make -j$(nproc)
 sudo make install DESTDIR=/
-
 sudo mkdir -p /usr/share/doc/$direname
-sudo cp -a $DOCS /usr/share/doc/$direname
-
+sudo cp -a $docs /usr/share/doc/$direname
 sudo rm -f /usr/lib*/*.la
+# Cleanup and add to database
 cd ..
 rm -rf $filename $direname
 echo $version > /var/lib/lfs-custom-packages/$name

@@ -1,5 +1,10 @@
 #!/bin/bash
 set -e
+# Variable declarations
+name=openmpi
+version=$(wget -cqO- https://www-lb.open-mpi.org/software/ompi/ | grep ".tar.gz" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 7 | sed 's/.tar.gz//g' | sed 's/openmpi-//g')
+filename="$name-$version.tar.bz2"
+direname="${filename/.tar.bz2/}"
 depends=(
   hwloc
   libfabric
@@ -17,11 +22,7 @@ hip-runtime-amd)
 # Communication frameworks. Not strictly required, but may be useful for better performance
 optional_depends=(openucc
 openucx)
-
-pkgbase=openmpi
-version=$(wget -cqO- https://www-lb.open-mpi.org/software/ompi/ | grep ".tar.gz" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 7 | sed 's/.tar.gz//g' | sed 's/openmpi-//g')
-filename="$pkgbase-$version.tar.bz2"
-direname="${filename/.tar.bz2/}"
+# Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then
 	wget -c https://www.open-mpi.org/software/ompi/v${version%.*}/downloads/$filename
@@ -38,7 +39,7 @@ local configure_options=(
     --enable-mpi-fortran=all
     --enable-pretty-print-stacktrace
     --libdir=/usr/lib
-    --sysconfdir=/etc/$pkgbase
+    --sysconfdir=/etc/$name
     --with-hwloc=external
     --with-libevent=external
     --with-pmix=external
@@ -55,7 +56,7 @@ local configure_options=(
     # https://docs.open-mpi.org/en/main/installing-open-mpi/configure-cli-options/installation.html
     #--with-show-load-errors='^accelerator,rcache,coll/ucc'
   )
-export HOSTname=buildhost
+export HOSTNAME=buildhost
 export USER=builduser
 
 ./configure "${configure_options[@]}"
@@ -65,6 +66,7 @@ CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 make V=1 -j$(nproc)
 sudo make install
+# Cleanup and add to database
 cd ..
 sudo rm -rf ${filename} $direname
 echo $version > /var/lib/lfs-custom-packages/$name

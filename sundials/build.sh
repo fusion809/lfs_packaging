@@ -1,16 +1,22 @@
 #!/bin/bash
 set -e
+# Variable declarations
+name=sundials
+version=$(wget -cqO- https://github.com/llnl/sundials/releases | grep "releases/tag/v" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+filename=$name-$version.tar.gz
+direname="${filename/.tar.gz/}"
 depends=(lapack openmpi suitesparse)
 lfs_depends=(bash coreutils glibc gzip make python sed tar)
 blfs_depends=(cmake
 gcc # Fortran support needed
 wget)
-name=sundials
-version=$(wget -cqO- https://github.com/llnl/sundials/releases | grep "releases/tag/v" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
-filename=$name-$version.tar.gz
-direname="${filename/.tar.gz/}"
-wget -c https://github.com/llnl/sundials/archive/refs/tags/v$version.tar.gz -O $filename
+# Fetch and unpack source
+if ! [[ -f $filename ]]; then
+    wget -c https://github.com/llnl/sundials/archive/refs/tags/v$version.tar.gz -O $filename
+fi
+rm -rf $direname
 tar xf $filename
+# Compile and install
 cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
@@ -26,9 +32,10 @@ cmake -B build -S . \
     -DENABLE_LAPACK=ON \
     -DEXAMPLES_INSTALL_PATH=/usr/share/sundials/examples \
     -DCMAKE_C_FLAGS="$CFLAGS" \
-    -DCMAKE_CXX_FLAGS="$CXXFLAGS" \
+    -DCMAKE_CXX_FLAGS="$CXXFLAGS"
 cmake --build build
 sudo cmake --install build
+# Cleanup and add to database
 cd ..
 sudo rm -rf $filename $direname
 echo $version > /var/lib/lfs-custom-packages/$name

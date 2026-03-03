@@ -1,5 +1,10 @@
 #!/bin/bash
 set -e
+# Variable declarations
+name=hdf5
+version=$(wget -cqO- https://github.com/HDFGroup/hdf5/releases | grep "tag/[0-9]" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 6 | cut -d '/' -f 6)
+filename="$name-$version.tar.gz"
+direname="$name-${name}_${version/_/-}"
 depends=(libaec
 openmpi)
 lfs_depends=(bash coreutils glib gzip make sed tar zlib)
@@ -7,15 +12,13 @@ blfs_depends=(cmake
 gcc # Fortran support is needed
 java
 wget)
-name=hdf5
-version=$(wget -cqO- https://github.com/HDFGroup/hdf5/releases | grep "tag/[0-9]" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 6 | cut -d '/' -f 6)
-filename="$name-$version.tar.gz"
-direname="$name-${name}_${version/_/-}"
+# Fetch and unpack source
 if ! [[ -f $filename ]]; then
 	wget -c https://github.com/HDFGroup/hdf5/archive/hdf5_$version/$filename
 fi
 rm -rf $direname
 tar xf $filename
+# Compile and install
 export PATH=$PATH:/opt/jdk/bin/
 CLFAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
@@ -38,6 +41,7 @@ common_cmake_args=(
 cmake -S . -B build "${common_cmake_args[@]}"
 make -j$(nproc)
 sudo make install
+# Cleanup and add to database
 cd ..
 sudo rm -rf $direname $filename
 echo $version > /var/lib/lfs-custom-packages/$name

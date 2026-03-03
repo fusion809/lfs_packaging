@@ -26,13 +26,7 @@
 # <http://www.gnu.org/licenses/>.
 
 set -e
-depends=(blas lapack pcre2) # Provided by lfs_packaging
-lfs_depends=(bash bzip2 coreutils glibc make readline sed tar xz zlib zstd) # Provided by LFS
-blfs_depends=(cairo curl 
-gcc # You need GCC built with Fortran support; LFS build doesn't support Fortran
-glib icu java libjpeg-turbo libpng libtiff libtirpc
-libx11 libxmu libxt # Part of Xorg libraries
-pango tk which zip) # Provided by BLFS
+# Variable declarations
 name=R
 version=$(wget -cqO- https://cran.r-project.org/sources.html | grep ".tar.gz" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 4 | sed 's/.tar.gz//g' | cut -d '-' -f 2)
 
@@ -49,11 +43,20 @@ fi
 
 direname="$name-$version"
 filename="$direname.tar.xz"
+depends=(blas lapack pcre2) # Provided by lfs_packaging
+lfs_depends=(bash bzip2 coreutils glibc make readline sed tar xz zlib zstd) # Provided by LFS
+blfs_depends=(cairo curl 
+gcc # You need GCC built with Fortran support; LFS build doesn't support Fortran
+glib icu java libjpeg-turbo libpng libtiff libtirpc
+libx11 libxmu libxt # Part of Xorg libraries
+pango tk which zip) # Provided by BLFS
+# Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then
 	wget -c https://cran.r-project.org/src/base/$name-${version/.*/}/$filename
 fi
 tar xvf $filename
+# Compile and install
 cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
@@ -76,5 +79,6 @@ sudo cp -a \
    /usr/share/doc/$direname
 cd ..
 sudo install -Dm755 $name.desktop /usr/share/applications
+# Cleanup and add to database
 sudo rm -rf $filename $direname
 echo $version > /var/lib/lfs-custom-packages/$name

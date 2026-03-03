@@ -1,15 +1,18 @@
 #!/bin/bash
 # Latest tagged version won't build
 set -e
+# Variable declarations
+name=jack
+direname=jack2
 depends=()
 lfs_depends=(bash coreutils expat python systemd)
 blfs_depends=(alsa-lib dbus opus)
-name=jack
-if ! [[ -d jack2 ]]; then
+# Fetch and unpack source
+if ! [[ -d $direname ]]; then
 	git clone https://github.com/jackaudio/jack2
 fi
-
-cd jack2
+# Compile and install
+cd $direname
 version=$(git log | head -n 1 | cut -d ' ' -f 2)
 git pull origin master
 sed -i -e "s|python|python3|g" waf
@@ -26,4 +29,5 @@ CXXFLAGS="-O2 -fPIC"
 ./waf build
 sudo ./waf install
 cd ..
+# Add to database
 echo $version > /var/lib/lfs-custom-packages/$name

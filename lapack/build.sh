@@ -25,30 +25,31 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 set -e
-depends=()
+# Variable declarations
+name=lapack
+version=$(wget -cqO- https://github.com/Reference-LAPACK/lapack/commits | grep "commit/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 18)
+depends=(blas)
 lfs_depends=(bash coreutils glibc gzip make python sed tar)
 blfs_depends=(cmake 
 gcc # Fortran support required
 wget)
-name=lapack
-version=$(wget -cqO- https://github.com/Reference-LAPACK/lapack/commits | grep "commit/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 18)
-
-DOCS="LICENSE README.md DOCS/lapack.png DOCS/lawn81.tex DOCS/org2.ps"
-
+docs="LICENSE README.md DOCS/lapack.png DOCS/lawn81.tex DOCS/org2.ps"
+direname="$name-$version"
+filename="$direname.tar.gz"
 CFLAGS="-O2 -fPIC"
-
+# Check deps
 if ! [[ -f /usr/lib/libblas.so ]]; then
 	echo "libblas.so not found in /usr/lib. You need BLAS installed first!"
 	exit
 fi
 
-direname="$name-$version"
-filename="$direname.tar.gz"
+# Fetch and unpack source
 if ! [[ -f $filename ]]; then
 	wget -c https://github.com/Reference-LAPACK/lapack/archive/$version.tar.gz -O $filename
 fi
 rm -rf $direname
 tar xvf $filename
+# Compile and install
 cd $direname
 
 # Allow building only the LAPACK component.
@@ -102,7 +103,8 @@ if [ "${STATIC:-no}" != "no" ]; then
 fi
 
 sudo mkdir -p /usr/share/doc/$direname
-sudo cp -a $DOCS /usr/share/doc/$direname
+sudo cp -a $docs /usr/share/doc/$direname
+# Cleanup and add to database
 cd ..
 sudo rm -rf $filename $direname
 echo $version > /var/lib/lfs-custom-packages/$name
