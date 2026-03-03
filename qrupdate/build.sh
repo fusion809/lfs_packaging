@@ -5,11 +5,11 @@ lfs_depends=(bash coreutils glibc gzip make sed tar)
 blfs_depends=(cmake
 gcc # Fortran support needed
 wget)
-NAME=qrupdate
-VERSION=$(wget -cqO- https://github.com/mpimd-csc/qrupdate-ng/releases | grep "releases/tag/v" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
-filename=$NAME-$VERSION.tar.gz
-direname="$NAME-ng-$VERSION"
-wget -c https://github.com/mpimd-csc/qrupdate-ng/archive/v$VERSION.tar.gz -O $filename
+name=qrupdate
+version=$(wget -cqO- https://github.com/mpimd-csc/qrupdate-ng/releases | grep "releases/tag/v" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+filename=$name-$version.tar.gz
+direname="$name-ng-$version"
+wget -c https://github.com/mpimd-csc/qrupdate-ng/archive/v$version.tar.gz -O $filename
 rm -rf $direname
 tar xf $filename
 cd $direname
@@ -17,11 +17,11 @@ CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 cmake -B build -S . \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+    -DCMAKE_POLICY_version_MINIMUM=3.5 \
     -DCMAKE_C_FLAGS="$CFLAGS" \
     -DCMAKE_CXX_FLAGS="$CXXFLAGS"
 cmake --build build --verbose
 sudo cmake --install build
 cd ..
 sudo rm -rf $filename $direname
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

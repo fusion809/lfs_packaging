@@ -4,13 +4,13 @@ set -e
 depends=()
 lfs_depends=(bash coreutils expat python systemd)
 blfs_depends=(alsa-lib dbus opus)
-NAME=jack
+name=jack
 if ! [[ -d jack2 ]]; then
 	git clone https://github.com/jackaudio/jack2
 fi
 
 cd jack2
-VERSION=$(git log | head -n 1 | cut -d ' ' -f 2)
+version=$(git log | head -n 1 | cut -d ' ' -f 2)
 git pull origin master
 sed -i -e "s|python|python3|g" waf
 CLFAGS="-O2 -fPIC"
@@ -19,11 +19,11 @@ CXXFLAGS="-O2 -fPIC"
   --prefix=/usr \
   --libdir=/usr/lib \
   --mandir=/usr/man/man1 \
-  --htmldir=/usr/doc/$NAME-$VERSION/html \
+  --htmldir=/usr/doc/$name-$version/html \
   --classic \
   --dbus \
   --alsa
 ./waf build
 sudo ./waf install
 cd ..
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

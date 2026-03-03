@@ -3,12 +3,12 @@ set -e
 depends=(jack)
 lfs_depends=(autoconf bash coreutils gcc glibc gzip make sed tar)
 blfs_depends=(alsa-lib cmake wget)
-NAME=portaudio
-VERSION=$(wget -cqO- https://github.com/portaudio/portaudio/releases | grep "releases/tag/v" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
-filename="$NAME-v$VERSION.tar.gz"
+name=portaudio
+version=$(wget -cqO- https://github.com/portaudio/portaudio/releases | grep "releases/tag/v" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+filename="$name-v$version.tar.gz"
 direname="${filename/.tar.gz/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/portaudio/portaudio/archive/v$VERSION/$filename
+	wget -c https://github.com/portaudio/portaudio/archive/v$version/$filename
 fi
 tar xf $filename
 cd $direname
@@ -28,4 +28,4 @@ sudo make install
 sudo install -Dmv644 README.* /usr/share/doc/$direname/
 cd ..
 sudo rm -rf $filename $direname
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

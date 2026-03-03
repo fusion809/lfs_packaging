@@ -27,13 +27,13 @@ set -e
 depends=(gcab)
 lfs_depends=(bash coreutils glibc make python sed systemd tar util-linux xz zlib)
 blfs_depends=(avahi curl e2fsprogs fuse glib gpgme gtk-doc libarchive libgpg-error libsoup libxslt openssl wget which)
-NAME=ostree
-VERSION=$(wget -cqO- https://github.com/ostreedev/ostree/releases | grep "/tag/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
-direname="lib${NAME}-$VERSION"
+name=ostree
+version=$(wget -cqO- https://github.com/ostreedev/ostree/releases | grep "/tag/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+direname="lib${name}-$version"
 filename="$direname.tar.xz"
 rm -rf $direname
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/ostreedev/ostree/releases/download/v${VERSION}/$filename
+	wget -c https://github.com/ostreedev/ostree/releases/download/v${version}/$filename
 fi
 tar xvf $filename
 cd $direname
@@ -56,4 +56,4 @@ sudo cp -a \
    /usr/share/doc/$direname
 cd ..
 sudo rm -rf $direname $filename
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

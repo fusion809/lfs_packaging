@@ -5,12 +5,12 @@ lfs_depends=(bash coreutils glibc gmp make mpfr sed tar)
 blfs_depends=(cmake
 gcc # Fortran support needed
 wget)
-NAME=suitesparse
-PRGNAME=SuiteSparse
-VERSION=$(wget -cqO- https://github.com/DrTimothyAldenDavis/SuiteSparse/releases | grep "releases/tag/v" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
-filename="$PRGNAME-$VERSION.tar.gz"
+name=suitesparse
+_name=SuiteSparse
+version=$(wget -cqO- https://github.com/DrTimothyAldenDavis/SuiteSparse/releases | grep "releases/tag/v" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+filename="$_name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
-wget -c https://github.com/DrTimothyAldenDavis/SuiteSparse/archive/v$VERSION.tar.gz -O $filename
+wget -c https://github.com/DrTimothyAldenDavis/SuiteSparse/archive/v$version.tar.gz -O $filename
 rm -rf $direname
 tar xf $filename
 cd $direname
@@ -26,4 +26,4 @@ make -j$(nproc)
 sudo make install
 cd ..
 sudo rm -rf $direname $filename
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

@@ -1,10 +1,10 @@
 #!/bin/bash
-NAME=yyjson
-VERSION=$(wget -cqO- https://github.com/ibireme/yyjson/releases | grep "/tag/[0-9]" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
-filename="$NAME-$VERSION.tar.gz"
+name=yyjson
+version=$(wget -cqO- https://github.com/ibireme/yyjson/releases | grep "/tag/[0-9]" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
+filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/ibireme/yyjson/archive/$VERSION.tar.gz -O $filename
+	wget -c https://github.com/ibireme/yyjson/archive/$version.tar.gz -O $filename
 fi
 rm -rf $direname
 tar xvf $filename
@@ -22,4 +22,4 @@ sudo install -Dm644 README.md /usr/share/doc/$direname
 sudo install -Dm644 doc/*.md /usr/share/doc/$direname
 cd ..
 rm -rf $direname $filename
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

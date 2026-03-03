@@ -26,8 +26,8 @@ depends=()
 lfs_depends=(bash coreutils meson ninja pkgconf sed tar xz)
 blfs_depends=(wget)
 optional_depends=(libcacard) # Provides smartcard support
-NAME=orc
-VERSION=$(wget -cqO- https://gstreamer.freedesktop.org/src/orc/ | grep ".tar.xz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 2 | sed 's/.tar.xz//g' | cut -d '-' -f 2 | tail -n 1)
+name=orc
+version=$(wget -cqO- https://gstreamer.freedesktop.org/src/orc/ | grep ".tar.xz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 2 | sed 's/.tar.xz//g' | cut -d '-' -f 2 | tail -n 1)
 
 DOCS="CONTRIBUTING.md COPYING README RELEASE ROADMAP.md"
 
@@ -38,11 +38,11 @@ else
   with_cacard="--disable-smartcard"
 fi
 
-direname="$NAME-$VERSION"
+direname="$name-$version"
 filename="$direname.tar.xz"
 rm -rf $direname
 if ! [[ -f $filename ]]; then
-	wget -c http://gstreamer.freedesktop.org/src/$NAME/$filename
+	wget -c http://gstreamer.freedesktop.org/src/$name/$filename
 fi
 tar xvf $filename
 cd $direname
@@ -65,4 +65,4 @@ done
 sudo rm -f /usr/lib*/*.la
 cd ..
 sudo rm -rf $direname $filename
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

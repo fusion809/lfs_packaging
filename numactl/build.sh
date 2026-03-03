@@ -3,12 +3,12 @@ set -e
 depends=()
 lfs_depends=(autoconf bash coreutils glibc gzip make sed tar)
 blfs_depends=(wget)
-NAME=numactl
-VERSION=$(wget -cqO- https://github.com/numactl/numactl/releases | grep "releases/tag/v[0-9]" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
-filename="$NAME-$VERSION.tar.gz"
+name=numactl
+version=$(wget -cqO- https://github.com/numactl/numactl/releases | grep "releases/tag/v[0-9]" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/numactl/numactl/archive/v$VERSION.tar.gz -O $NAME-$VERSION.tar.gz
+	wget -c https://github.com/numactl/numactl/archive/v$version.tar.gz -O $name-$version.tar.gz
 fi
 rm -rf $direname
 tar xf $filename
@@ -24,4 +24,4 @@ sudo make install
 sudo install -vDm 644 README.md -t "/usr/share/doc/$direname/"
 cd ..
 sudo rm -rf $direname $filename
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

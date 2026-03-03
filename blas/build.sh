@@ -30,9 +30,9 @@ lfs_depends=(bash coreutils glibc gzip make python sed tar)
 blfs_depends=(cmake 
 gcc # Fortran support required
 wget)
-PRGNAM=blas
-NAME=lapack
-VERSION=$(wget -cqO- https://github.com/Reference-LAPACK/lapack/commits | grep "commit/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 18)
+_name=blas
+name=lapack
+version=$(wget -cqO- https://github.com/Reference-LAPACK/lapack/commits | grep "commit/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 18)
 
 DOCS="LICENSE"
 
@@ -42,11 +42,11 @@ if ! which gfortran &> /dev/null; then
 	echo "GCC hasn't been built with Fortran support. This needs to be addressed!"
 	exit
 fi
-direname="$NAME-$VERSION"
+direname="$name-$version"
 filename="$direname.tar.gz"
 rm -rf $direname
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/Reference-LAPACK/lapack/archive/$VERSION.tar.gz -O $filename
+	wget -c https://github.com/Reference-LAPACK/lapack/archive/$version.tar.gz -O $filename
 fi
 tar xvf $filename
 cd $direname
@@ -86,8 +86,8 @@ if [ "${STATIC:-no}" != "no" ]; then
     sudo make install/strip DESTDIR=/
   cd ..
 fi
-sudo mkdir -p /usr/share/doc/$PRGNAM-$VERSION
-sudo cp -a $DOCS /usr/share/doc/$PRGNAM-$VERSION
+sudo mkdir -p /usr/share/doc/$_name-$version
+sudo cp -a $DOCS /usr/share/doc/$_name-$version
 cd ..
 sudo rm -rf ${filename} $direname
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

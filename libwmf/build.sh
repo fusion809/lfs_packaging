@@ -1,13 +1,13 @@
 #!/bin/bash
-NAME=libwmf
-VERSION=$(wget -cqO- https://github.com/caolanm/libwmf/releases | grep "/tag/v" | grep -v "alpha\|beta\|[0-9]rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+name=libwmf
+version=$(wget -cqO- https://github.com/caolanm/libwmf/releases | grep "/tag/v" | grep -v "alpha\|beta\|[0-9]rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
 depends=()
 lfs_depends=(autoconf bash coreutils glibc gzip make sed tar)
 blfs_depends=(gdk-pixbuf libjpeg-turbo libpng libx11 zlib)
-filename="$NAME-$VERSION.tar.gz"
+filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/caolanm/libwmf/archive/refs/tags/v${VERSION}.tar.gz -O $filename
+	wget -c https://github.com/caolanm/libwmf/archive/refs/tags/v${version}.tar.gz -O $filename
 fi
 tar xf $filename
 cd $direname
@@ -19,4 +19,4 @@ make -j$(nproc)
 sudo make install
 cd ..
 rm -rf $direname $filename
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

@@ -20,23 +20,23 @@
 # Visit SlackPack at https://sotirov-bg.net/slackpack/
 #
 set -e
+# Variable declarations
+name=gnuplot
+version=$(wget -cqO- https://sourceforge.net/p/gnuplot/gnuplot-main/ref/master/tags/ | grep "/tree" | grep -v "alpha\|beta\|rc" | grep -v "git-conv" | tail -n 1 | cut -d '/' -f 6)
+direname="$name-$version"
+filename="$direname.tar.gz"
 depends=()
 lfs_depends=(bash coreutils gcc glibc gzip make readline tar)
-blfs_depends=(cairo gd glib gtk3 )
+blfs_depends=(cairo gd glib gtk3 libwebp libx11 # Xorg libs
+lua pango qt6)
 # libcaca, libcerf  and wxwidgets are listed for Arch, but seems to run for my uses without them
-
-NAME=gnuplot
-VERSION=$(wget -cqO- https://sourceforge.net/p/gnuplot/gnuplot-main/ref/master/tags/ | grep "/tree" | grep -v "alpha\|beta\|rc" | grep -v "git-conv" | tail -n 1 | cut -d '/' -f 6)
-
-SRC=$NAME-$VERSION
-rm -rf $SRC
-
-filename="$SRC.tar.gz"
-wget -c https://sourceforge.net/projects/gnuplot/files/gnuplot/$VERSION/$filename
-# Extract the sources
-tar -zxvf $filename || exit 3
-cd $SRC
-
+# Fetch and unpack source
+if ! [[ -f $filename ]]; then
+	wget -c https://sourceforge.net/projects/gnuplot/files/gnuplot/$version/$filename
+fi
+tar -zxvf $filename
+# Compile and install
+cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 
@@ -50,10 +50,10 @@ CXXFLAGS="-O2 -fPIC"
 
 make -j$(nproc) pkglibexecdir=/usr/bin || exit 1
 sudo make DESTDIR=/ install || exit 2
-
-DOCDIR="/usr/share/doc/$NAME-$VERSION"
-sudo mkdir -p $DOCDIR
-sudo cp Copyright RELEASE_NOTES NEWS $DOCDIR 
+docdir="/usr/share/doc/$name-$version"
+sudo mkdir -p $docdir
+sudo cp Copyright RELEASE_NOTES NEWS $docdir 
+# Cleanup and add to database
 cd ..
-sudo rm -rf $SRC $filename
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+sudo rm -rf $direname $filename
+echo $version > /var/lib/lfs-custom-packages/$name

@@ -3,24 +3,24 @@ set -e
 depends=(hwloc openpmix)
 lfs_depends=(bash coreutils glibc gzip make perl sed tar)
 blfs_depends=(libevent wget)
-NAME=prrte
-VERSION=$(wget -cqO- https://github.com/openpmix/prrte/releases | grep -v "alpha\|beta\|rc" | grep "releases/tag/v" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
-filename="$NAME-$VERSION.tar.gz"
+name=prrte
+version=$(wget -cqO- https://github.com/openpmix/prrte/releases | grep -v "alpha\|beta\|rc" | grep "releases/tag/v" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/openpmix/prrte/releases/download/v$VERSION/$NAME-$VERSION.tar.gz
+	wget -c https://github.com/openpmix/prrte/releases/download/v$version/$name-$version.tar.gz
 fi
 tar xf $filename
 cd $direname
 ./autogen.pl
 configure_options=(
     --prefix=/usr
-    --sysconfdir=/etc/$NAME
+    --sysconfdir=/etc/$name
 )
 
 # set environment variables for reproducible build
 # see https://docs.prrte.org/en/latest/release-notes.html
-export HOSTNAME=buildhost
+export HOSTname=buildhost
 export USER=builduser
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
@@ -31,4 +31,4 @@ make V=1 -j$(nproc)
 sudo make install
 cd ..
 sudo rm -rf $filename $direname
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

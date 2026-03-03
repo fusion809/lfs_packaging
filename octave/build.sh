@@ -49,8 +49,8 @@ java
 libsndfile
 qt6)
 export JAVA_HOME=/opt/jdk
-NAME=octave
-VERSION=$(wget -cqO- https://ftp.gnu.org/gnu/octave/ | grep ".tar.gz\"" | grep -v "alpha\|beta\|rc" | tail -n 1 | cut -d '"' -f 8 | sed 's/octave-//g' | sed 's/.tar.gz//g')
+name=octave
+version=$(wget -cqO- https://ftp.gnu.org/gnu/octave/ | grep ".tar.gz\"" | grep -v "alpha\|beta\|rc" | tail -n 1 | cut -d '"' -f 8 | sed 's/octave-//g' | sed 's/.tar.gz//g')
 
 DOCS="AUTHORS BUGS CITATION COPYING ChangeLog INSTALL* NEWS README"
 
@@ -65,7 +65,7 @@ CFLAGS="-O2 -fPIC"
 # If ImageMagick doesn't work, install GraphicsMagick, or set MAGICK="".
 #
 # TODO: ImageMagick may no longer be compatible.  The --with-magick argument
-# should be the name of a pkg-config file.  Documentation suggests
+# should be the _name of a pkg-config file.  Documentation suggests
 # "ImageMagick++" which does not exist.  "ImageMagick" and "Magick++" exist;
 # the former does not pass configure checks, the latter fails at compile time.
 MAGICK=${MAGICK-GraphicsMagick++}
@@ -77,10 +77,10 @@ if [ -n "$MAGICK" ]; then
 fi
 
 source deps-check.sh
-direname="$NAME-$VERSION"
+direname="$name-$version"
 filename="$direname.tar.lz"
 if ! [[ -f $filename ]]; then
-	wget -c https://ftpmirror.gnu.org/gnu/$NAME/$filename
+	wget -c https://ftpmirror.gnu.org/gnu/$name/$filename
 fi
 rm -rf ${direname}
 tar xvf $filename
@@ -93,7 +93,7 @@ autoreconf -vif
 # If you live far enough east or west that the date contained in version.texi
 # does not match that file's timestamp when printed accounting for your
 # timezone, then the docs get rebuilt with your local date.
-find . -name stamp-vti -exec touch {} +
+find . -_name stamp-vti -exec touch {} +
 
 export JAVA_HOME=/opt/jdk
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/qt6/lib:$JAVA_HOME/lib
@@ -126,4 +126,4 @@ sudo install -Dm755 ../org.octave.Octave.desktop /usr/share/applications/
 sudo sed -i -e "s|/usr/bin/octave|/usr/bin/octave_cli|g" /usr/share/applications/org.octave.Octave.desktop
 cd ..
 sudo rm -rf $direname ${filename}
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

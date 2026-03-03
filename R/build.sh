@@ -22,7 +22,7 @@
 # See the GNU General Public License for more details.
 
 # You may have received a copy of the GNU General Public License along
-# with this program (most likely, a file named COPYING).  If not, see
+# with this program (most likely, a file _named COPYING).  If not, see
 # <http://www.gnu.org/licenses/>.
 
 set -e
@@ -33,8 +33,8 @@ gcc # You need GCC built with Fortran support; LFS build doesn't support Fortran
 glib icu java libjpeg-turbo libpng libtiff libtirpc
 libx11 libxmu libxt # Part of Xorg libraries
 pango tk which zip) # Provided by BLFS
-NAME=R
-VERSION=$(wget -cqO- https://cran.r-project.org/sources.html | grep ".tar.gz" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 4 | sed 's/.tar.gz//g' | cut -d '-' -f 2)
+name=R
+version=$(wget -cqO- https://cran.r-project.org/sources.html | grep ".tar.gz" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 4 | sed 's/.tar.gz//g' | cut -d '-' -f 2)
 
 if [ "${R_SHLIB:-yes}" = "yes" ]; then
   r_shlib="--enable-R-shlib"
@@ -47,11 +47,11 @@ else
   blas_shlib="--disable-BLAS-shlib"
 fi
 
-direname="$NAME-$VERSION"
+direname="$name-$version"
 filename="$direname.tar.xz"
 rm -rf $direname
 if ! [[ -f $filename ]]; then
-	wget -c https://cran.r-project.org/src/base/$NAME-${VERSION/.*/}/$filename
+	wget -c https://cran.r-project.org/src/base/$name-${version/.*/}/$filename
 fi
 tar xvf $filename
 cd $direname
@@ -72,9 +72,9 @@ sudo make install DESTDIR=/
 
 sudo mkdir -p /usr/share/doc/$direname
 sudo cp -a \
-   COPYING README SVN-REVISION VERSION VERSION-NICK \
+   COPYING README SVN-REVISION version version-NICK \
    /usr/share/doc/$direname
 cd ..
-sudo install -Dm755 $NAME.desktop /usr/share/applications
+sudo install -Dm755 $name.desktop /usr/share/applications
 sudo rm -rf $filename $direname
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

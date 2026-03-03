@@ -19,12 +19,12 @@ optional_depends=(openucc
 openucx)
 
 pkgbase=openmpi
-VERSION=$(wget -cqO- https://www-lb.open-mpi.org/software/ompi/ | grep ".tar.gz" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 7 | sed 's/.tar.gz//g' | sed 's/openmpi-//g')
-filename="$pkgbase-$VERSION.tar.bz2"
+version=$(wget -cqO- https://www-lb.open-mpi.org/software/ompi/ | grep ".tar.gz" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 7 | sed 's/.tar.gz//g' | sed 's/openmpi-//g')
+filename="$pkgbase-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
 rm -rf $direname
 if ! [[ -f $filename ]]; then
-	wget -c https://www.open-mpi.org/software/ompi/v${VERSION%.*}/downloads/$filename
+	wget -c https://www.open-mpi.org/software/ompi/v${version%.*}/downloads/$filename
 fi
 tar xf $filename
 cd $direname
@@ -55,7 +55,7 @@ local configure_options=(
     # https://docs.open-mpi.org/en/main/installing-open-mpi/configure-cli-options/installation.html
     #--with-show-load-errors='^accelerator,rcache,coll/ucc'
   )
-export HOSTNAME=buildhost
+export HOSTname=buildhost
 export USER=builduser
 
 ./configure "${configure_options[@]}"
@@ -67,4 +67,4 @@ make V=1 -j$(nproc)
 sudo make install
 cd ..
 sudo rm -rf ${filename} $direname
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

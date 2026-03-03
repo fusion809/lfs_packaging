@@ -3,11 +3,11 @@ set -e
 depends=()
 lfs_depends=(bash bzip2 coreutils glibc sed tar)
 blfs_depends=(cmake wget)
-NAME=libaec
-VERSION=$(wget -cqO- https://gitlab.dkrz.de/dkrz-sw/libaec/-/tags | grep 'tags/v' | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 6 | sed 's/v//g')
-filename="$NAME-v$VERSION.tar.bz2"
+name=libaec
+version=$(wget -cqO- https://gitlab.dkrz.de/dkrz-sw/libaec/-/tags | grep 'tags/v' | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 6 | sed 's/v//g')
+filename="$name-v$version.tar.bz2"
 if ! [[ -f $filename ]]; then
-	wget -c https://gitlab.dkrz.de/k202009/libaec/-/archive/v$VERSION/$NAME-v$VERSION.tar.bz2
+	wget -c https://gitlab.dkrz.de/k202009/libaec/-/archive/v$version/$name-v$version.tar.bz2
 fi
 direname=${filename/.tar.bz2/}
 rm -rf $direname
@@ -24,4 +24,4 @@ cmake --build build
 sudo cmake --install build
 cd ..
 sudo rm -rf $filename $direname
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

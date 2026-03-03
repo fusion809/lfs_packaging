@@ -3,13 +3,13 @@ set -e
 depends=()
 lfs_depends=(bash bzip2coreutils glibc gzip make readline sed tar)
 blfs_depends=(wget)
-NAME=pcre2
-VERSION=$(wget -cqO- https://github.com/PCRE2Project/pcre2/releases | grep "releases/tag/pcre2" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '=' -f 3 | cut -d '/' -f 6 | sed 's/pcre2-//g')
-filename="$NAME-$VERSION.tar.gz"
+name=pcre2
+version=$(wget -cqO- https://github.com/PCRE2Project/pcre2/releases | grep "releases/tag/pcre2" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '=' -f 3 | cut -d '/' -f 6 | sed 's/pcre2-//g')
+filename="$name-$version.tar.gz"
 wget -c https://github.com/PCRE2Project/pcre2/archive/$filename
 wget -c https://github.com/zherczeg/sljit/archive/master.tar.gz -O sljit-master.tar.gz
-tar xf $NAME-$VERSION.tar.gz
-dirname="$NAME-$NAME-$VERSION"
+tar xf $name-$version.tar.gz
+dir_name="$name-$name-$version"
 cd $direname
 rm -rf deps/sljit
 tar xf ../sljit-master.tar.gz
@@ -35,4 +35,4 @@ make -j$(nproc)
 sudo make install
 cd ..
 sudo rm -rf ${filename} $direname
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

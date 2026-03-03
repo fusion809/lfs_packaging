@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-NAME=xclip
+name=xclip
 depends=()
 lfs_depends=(autoconf bash coreutils make)
 blfs_depends=(git libxmu # Xorg library
@@ -11,7 +11,7 @@ fi
 
 cd xclip
 git pull origin master
-VERSION=$(git log | head -n 1 | cut -d ' ' -f 2)
+version=$(git log | head -n 1 | cut -d ' ' -f 2)
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 autoreconf
@@ -19,4 +19,4 @@ autoreconf
 make -j$(nproc)
 sudo make install
 sudo make install.man
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

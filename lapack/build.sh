@@ -30,8 +30,8 @@ lfs_depends=(bash coreutils glibc gzip make python sed tar)
 blfs_depends=(cmake 
 gcc # Fortran support required
 wget)
-NAME=lapack
-VERSION=$(wget -cqO- https://github.com/Reference-LAPACK/lapack/commits | grep "commit/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 18)
+name=lapack
+version=$(wget -cqO- https://github.com/Reference-LAPACK/lapack/commits | grep "commit/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 18)
 
 DOCS="LICENSE README.md DOCS/lapack.png DOCS/lawn81.tex DOCS/org2.ps"
 
@@ -42,10 +42,10 @@ if ! [[ -f /usr/lib/libblas.so ]]; then
 	exit
 fi
 
-direname="$NAME-$VERSION"
+direname="$name-$version"
 filename="$direname.tar.gz"
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/Reference-LAPACK/lapack/archive/$VERSION.tar.gz -O $filename
+	wget -c https://github.com/Reference-LAPACK/lapack/archive/$version.tar.gz -O $filename
 fi
 rm -rf $direname
 tar xvf $filename
@@ -105,4 +105,4 @@ sudo mkdir -p /usr/share/doc/$direname
 sudo cp -a $DOCS /usr/share/doc/$direname
 cd ..
 sudo rm -rf $filename $direname
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

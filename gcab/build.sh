@@ -26,20 +26,22 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 set -e
+# Variable declarations
+name=gcab
+version=$(wget -cqO- https://download.gnome.org/sources/gcab/ | grep "[0-9]/" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 4 | sed 's|/$||g' | tail -n 1)
+direname="$name-$version"
+filename="$direname.tar.xz"
 depends=()
 lfs_depends=(bash coreutils gcc glibc meson ninja sed tar xz)
 blfs_depends=(glib gtk-doc vala)
-NAME=gcab
-VERSION=$(wget -cqO- https://download.gnome.org/sources/gcab/ | grep "[0-9]/" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 4 | sed 's|/$||g' | tail -n 1)
-direname="$NAME-$VERSION"
-filename="$direname.tar.xz"
+# Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then
-	wget -c https://download.gnome.org/sources/gcab/$VERSION/$filename
+	wget -c https://download.gnome.org/sources/gcab/$version/$filename
 fi
 tar xf $filename
 cd $direname
-
+# Compile and install
 mkdir build
 cd build
   CFLAGS="-O2 -fPIC"
@@ -63,6 +65,7 @@ sudo mkdir -p /usr/share/doc/$direname
 sudo cp -a \
    COPYING NEWS README.md RELEASE \
    /usr/share/doc/$direname
+# Cleanup and add to database
 cd ..
 sudo rm -rf $direname $filename
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

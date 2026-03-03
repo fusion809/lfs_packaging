@@ -5,15 +5,15 @@ set -e
 depends=()
 lfs_depends=(bash coreutils make sed)
 blfs_depends=(cmake git)
-NAME=rapidjson
+name=rapidjson
 source check-deps.sh
 if ! [[ -d rapidjson ]]; then
 	git clone https://github.com/Tencent/rapidjson
 fi
-cd $NAME
+cd $name
 git pull origin master
-VERSION=$(git log | head -n 1 | cut -d ' ' -f 2)
-find -name CMakeLists.txt | xargs sed -e 's|-Werror||' -i # Don't use -Werror
+version=$(git log | head -n 1 | cut -d ' ' -f 2)
+find -_name CMakeLists.txt | xargs sed -e 's|-Werror||' -i # Don't use -Werror
 rm -rf build
 mkdir -p build
 cd build
@@ -25,8 +25,8 @@ cmake \
       -DRAPIDJSON_HAS_STDSTRING=ON \
       -DRAPIDJSON_BUILD_CXX11=ON \
       -DRAPIDJSON_ENABLE_INSTRUMENTATION_OPT=OFF \
-      -DDOC_INSTALL_DIR=/usr/share/doc/${NAME}-$VERSION \
-      -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+      -DDOC_INSTALL_DIR=/usr/share/doc/${name}-$version \
+      -DCMAKE_POLICY_version_MINIMUM=3.5 \
 	  -DCMAKE_C_FLAGS="$CFLAGS" \
       -DCMAKE_CXX_FLAGS="$CXXFLAGS" \
       ..
@@ -36,4 +36,4 @@ sudo make install
 cd ..
 sudo rm -rf build
 cd ..
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

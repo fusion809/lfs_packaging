@@ -29,8 +29,8 @@ lfs_depends=(bash coreutils glibc make sed systemd tar xz)
 blfs_depends=(libxfont2 # Xorg library
 wget xorgproto xorg-server)
 optional_depends=(libcacard) # Smartcard uspport
-NAME=xf86-video-qxl
-VERSION=$(wget -cqO- https://xorg.freedesktop.org/releases/individual/driver/ | grep "xf86-video-qxl.*.tar.xz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 2 | head -n 1 | sed 's/xf86-video-qxl-//g' | sed 's/.tar.xz//g')
+name=xf86-video-qxl
+version=$(wget -cqO- https://xorg.freedesktop.org/releases/individual/driver/ | grep "xf86-video-qxl.*.tar.xz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 2 | head -n 1 | sed 's/xf86-video-qxl-//g' | sed 's/.tar.xz//g')
 
 if [ "${XSPICE:-no}" = "yes" ]; then
   with_xspice="--enable-xspice=yes"
@@ -38,7 +38,7 @@ else
   with_xspice=""
 fi
 
-direname="$NAME-$VERSION"
+direname="$name-$version"
 rm -rf $direname
 filename="$direname.tar.xz"
 if ! [[ -f $filename ]]; then
@@ -74,4 +74,4 @@ sudo mkdir -p /usr/share/doc/$direname
 sudo cp -a COPYING README* TODO* /usr/share/doc/$direname
 cd ..
 sudo rm -rf $filename $direname
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

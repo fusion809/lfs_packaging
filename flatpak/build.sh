@@ -24,23 +24,25 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 set -e
+# Variable declarations
+name=flatpak
+version=$(wget -cqO- https://github.com/flatpak/flatpak/releases/ | grep "/tag/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
+filename="$name-$version.tar.xz"
+direname="${filename/.tar.xz/}"
 depends=(gcab ostree)
 lfs_depends=(bash coreutils gcc glibc meson ninja python systemd tar xz zstd)
 blfs_depends=(appstream bubblewrap curl dbus dconf fuse gdk-pixbuf glib gpgme json-glib libarchive libseccomp libxau # Xorg lib
 polkit wayland xdg-dbus-proxy xdg-utils)
 pip_depends=(gobject)
 # libmalcontent is listed for Arch, but seems to run for my uses without it
-NAME=flatpak
-VERSION=$(wget -cqO- https://github.com/flatpak/flatpak/releases/ | grep "/tag/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
-filename="$NAME-$VERSION.tar.xz"
-direname=${filename/.tar.xz/}
+# Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/flatpak/flatpak/releases/download/${VERSION}/$filename
+	wget -c https://github.com/flatpak/flatpak/releases/download/${version}/$filename
 fi
 tar xvf $filename
 cd $direname
-
+# Compile and install
 mkdir build
 cd build
   CFLAGS="-O2 -fPIC"
@@ -57,18 +59,17 @@ cd build
     --prefix=/usr \
     --sbindir=/usr/sbin \
     --sysconfdir=/etc \
-    -Ddocdir=/usr/share/doc/$NAME-$VERSION \
+    -Ddocdir=/usr/share/doc/$name-$version \
     -Dstrip=true
   "${NINJA:=ninja}" -j$(nproc)
   DESTDIR=/ sudo $NINJA install
 cd ..
-
 sudo chmod +x /etc/profile.d/flatpak.sh
-
 sudo mkdir -p /usr/share/doc/$direname
 sudo cp -a \
   COPYING NEWS \
   /usr/share/doc/$direname
+# Cleanup and add to database
 cd ..
 sudo rm -rf $filename $direname
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

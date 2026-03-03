@@ -29,11 +29,11 @@ lfs_depends=(bash coreutils glibc make sed systemd tar)
 blfs_depends=(alsa-lib dbus glib gtk3 libdrm
 libx11 libxinerama libxrandr # Xorg libraries
 wget)
-NAME=spice-vdagent
-VERSION=$(wget -cqO- https://spice-space.org/download/releases/ | grep "spice-vdagent.*.tar.bz2\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 8 | tail -n 1 | cut -d '-' -f 3 | sed 's/.tar.bz2//g')
+name=spice-vdagent
+version=$(wget -cqO- https://spice-space.org/download/releases/ | grep "spice-vdagent.*.tar.bz2\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 8 | tail -n 1 | cut -d '-' -f 3 | sed 's/.tar.bz2//g')
 DOCS="COPYING CHANGELOG.md README.md"
 
-direname="$NAME-$VERSION"
+direname="$name-$version"
 rm -rf $direname
 filename="$direname.tar.bz2"
 if ! [[ -f $filename ]]; then
@@ -69,4 +69,4 @@ sudo install -m 0644 -D 06-spice-vdagent.conf \
 
 sudo mkdir -p /usr/share/doc/$direname
 sudo cp -a $DOCS /usr/share/doc/$direname
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

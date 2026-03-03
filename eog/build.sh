@@ -1,15 +1,18 @@
 #!/bin/bash
 set -e
-depends=()
-lfs_depends=(bash bzip2 coreutils gcc glibc meson ninja sed systemd tar zlib)
-blfs_depends=(cairo dconf exempi gdk-pixbuf glib gnome-desktop gtk3 hicolor-icon-theme littlecms libexif libhandy libjpeg-turbo libpeas libpng librsvg libtiff libx11 # Xorg lib
-libxml2 pango)
-NAME=eog
-VERSION="$(wget -cqO- https://gitlab.gnome.org/GNOME/eog/-/tags | grep "tags/" | cut -d '/' -f 6 | sed 's/".*//g' | grep -v "alpha\|beta\|rc" | head -n 1 | sed 's/^v//g')"
-filename="$NAME-$VERSION.tar.bz2"
-wget -c https://gitlab.gnome.org/GNOME/$NAME/-/archive/$VERSION/$filename
+# Variable declaration
+name=eog
+version="$(wget -cqO- https://gitlab.gnome.org/GNOME/eog/-/tags | grep "tags/" | cut -d '/' -f 6 | sed 's/".*//g' | grep -v "alpha\|beta\|rc" | head -n 1 | sed 's/^v//g')"
+filename="$name-$version.tar.bz2"
+direname="${filename/.tar.bz2/}"
+# Fetch source and unpack it
+if ! [[ -f $filename ]]; then
+	wget -c https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$filename
+fi
+rm -rf $direname
 tar xf $filename
-cd ${filename/.tar.bz2/}
+# Compile and install
+cd $direname
 mkdir build
 cd build
 CFLAGS="-O2 -fPIC"
@@ -19,6 +22,7 @@ meson setup --prefix=/usr       \
 	    ..
 ninja -j$(nproc)
 sudo ninja install
+# Cleanup and add to database
 cd ..
-sudo rm -rf $NAME-$VERSION*
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+sudo rm -rf $name-$version*
+echo $version > /var/lib/lfs-custom-packages/$name

@@ -7,12 +7,12 @@ blfs_depends=(cmake
 gcc # Fortran support is needed
 java
 wget)
-NAME=hdf5
-VERSION=$(wget -cqO- https://github.com/HDFGroup/hdf5/releases | grep "tag/[0-9]" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 6 | cut -d '/' -f 6)
-filename="$NAME-$VERSION.tar.gz"
-direname="$NAME-${NAME}_${VERSION/_/-}"
+name=hdf5
+version=$(wget -cqO- https://github.com/HDFGroup/hdf5/releases | grep "tag/[0-9]" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 6 | cut -d '/' -f 6)
+filename="$name-$version.tar.gz"
+direname="$name-${name}_${version/_/-}"
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/HDFGroup/hdf5/archive/hdf5_$VERSION/$filename
+	wget -c https://github.com/HDFGroup/hdf5/archive/hdf5_$version/$filename
 fi
 rm -rf $direname
 tar xf $filename
@@ -40,4 +40,4 @@ make -j$(nproc)
 sudo make install
 cd ..
 sudo rm -rf $direname $filename
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

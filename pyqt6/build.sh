@@ -5,9 +5,9 @@ depends=()
 lfs_depends=(bash coreutils glibc gcc make python sed tar)
 blfs_depends=(dbus qt6 wget)
 pip_depends=(pyopengl pyqt6-sip pyqt-builder sip)
-NAME=pyqt6
-VERSION=$(wget -cqO- https://pypi.org/rss/project/pyqt6/releases.xml | grep "pyqt6/[0-9]" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '/' -f 6)
-filename="$NAME-$VERSION.tar.gz"
+name=pyqt6
+version=$(wget -cqO- https://pypi.org/rss/project/pyqt6/releases.xml | grep "pyqt6/[0-9]" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '/' -f 6)
+filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 if ! [[ -f $filename ]]; then
 	wget -c https://pypi.python.org/packages/source/P/PyQt6/$filename
@@ -30,4 +30,4 @@ sudo python3 -m compileall -d / /usr/lib
 sudo python3 -O -m compileall -d / /usr/lib
 cd ../..
 sudo rm -rf $direname $filename
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

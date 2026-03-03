@@ -5,24 +5,24 @@ depends=(
 )
 lfs_depends=(bash bzip2 coreutils make perl python sed tar zlib)
 blfs_depends=(libevent)
-_name=pmix
-VERSION=$(wget -cqO- https://github.com/openpmix/openpmix/releases | grep "/releases/tag/v" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
-filename="$_name-$VERSION.tar.gz"
+__name=pmix
+version=$(wget -cqO- https://github.com/openpmix/openpmix/releases | grep "/releases/tag/v" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+filename="$__name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/openpmix/openpmix/releases/download/v$VERSION/$filename
+	wget -c https://github.com/openpmix/openpmix/releases/download/v$version/$filename
 fi
 tar xf $filename
 cd $direname
 ./autogen.pl
 local configure_options=(
     --prefix=/usr
-    --sysconfdir=/etc/$NAME
+    --sysconfdir=/etc/$name
   )
 
 # set environment variables for reproducible build
 # see https://docs.openpmix.org/en/latest/release-notes/general.html
-export HOSTNAME=buildhost
+export HOSTname=buildhost
 export USER=builduser
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
@@ -33,4 +33,4 @@ make V=1 -j$(nproc)
 sudo make install
 cd ..
 sudo rm -rf $filename $direname
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

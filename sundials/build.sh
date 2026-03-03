@@ -5,11 +5,11 @@ lfs_depends=(bash coreutils glibc gzip make python sed tar)
 blfs_depends=(cmake
 gcc # Fortran support needed
 wget)
-NAME=sundials
-VERSION=$(wget -cqO- https://github.com/llnl/sundials/releases | grep "releases/tag/v" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
-filename=$NAME-$VERSION.tar.gz
+name=sundials
+version=$(wget -cqO- https://github.com/llnl/sundials/releases | grep "releases/tag/v" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+filename=$name-$version.tar.gz
 direname="${filename/.tar.gz/}"
-wget -c https://github.com/llnl/sundials/archive/refs/tags/v$VERSION.tar.gz -O $filename
+wget -c https://github.com/llnl/sundials/archive/refs/tags/v$version.tar.gz -O $filename
 tar xf $filename
 cd $direname
 CFLAGS="-O2 -fPIC"
@@ -31,4 +31,4 @@ cmake --build build
 sudo cmake --install build
 cd ..
 sudo rm -rf $filename $direname
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

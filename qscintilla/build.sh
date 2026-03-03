@@ -4,11 +4,11 @@ depends=(pyqt6)
 lfs_depends=(bash coreutils make sed tar)
 blfs_depends=(qt6 wget)
 pip_depends=(sip pyqt-builder)
-NAME=qscintilla
-VERSION=$(wget -cqO- https://www.riverbankcomputing.com/software/qscintilla/download | grep ".tar.gz" | grep -v "alpha\|beta\|[0-9]rc" | head -n 1 | cut -d '/' -f 8 | sed 's/>.*//g' | cut -d '-' -f 2 | sed 's/.tar.gz//g')
-archive=QScintilla_src-$VERSION
+name=qscintilla
+version=$(wget -cqO- https://www.riverbankcomputing.com/software/qscintilla/download | grep ".tar.gz" | grep -v "alpha\|beta\|[0-9]rc" | head -n 1 | cut -d '/' -f 8 | sed 's/>.*//g' | cut -d '-' -f 2 | sed 's/.tar.gz//g')
+archive=QScintilla_src-$version
 if ! [[ -f $archive.tar.gz ]]; then
-	wget -c https://www.riverbankcomputing.com/static/Downloads/QScintilla/$VERSION/$archive.tar.gz
+	wget -c https://www.riverbankcomputing.com/static/Downloads/QScintilla/$version/$archive.tar.gz
 fi
 rm -rf $archive
 tar xf $archive.tar.gz
@@ -44,4 +44,4 @@ EOF
 
 cd ../..
 sudo rm -rf $archive*
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

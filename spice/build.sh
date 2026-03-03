@@ -27,8 +27,8 @@ depends=(spice-protocol)
 lfs_depends=(bash coreutils make meson sed tar)
 blfs_depends=(glib libjpeg-turbo lz4 opus pixman sasl wget)
 pip_depends=(pyparsing)
-NAME=spice
-VERSION=$(wget -cqO- https://spice-space.org/download/releases/spice-server/ | grep ".tar.bz2\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 8 | sed 's/.tar.bz2//g' | tail -n 1 | cut -d '-' -f 2)
+name=spice
+version=$(wget -cqO- https://spice-space.org/download/releases/spice-server/ | grep ".tar.bz2\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 8 | sed 's/.tar.bz2//g' | tail -n 1 | cut -d '-' -f 2)
 
 DOCS="AUTHORS CHANGELOG.md COPYING README"
 
@@ -39,7 +39,7 @@ else
   with_cacard="--disable-smartcard"
 fi
 
-direname="$NAME-$VERSION"
+direname="$name-$version"
 rm -rf $direname
 filename="$direname.tar.bz2"
 if ! [[ -f $filename ]]; then
@@ -68,4 +68,4 @@ sudo cp -a $DOCS /usr/share/doc/$direname
 sudo rm -f /usr/lib*/*.la
 cd ..
 rm -rf $filename $direname
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name

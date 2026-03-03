@@ -3,9 +3,10 @@ set -e
 depends=()
 lfs_depends=(bash coreutils gcc glibc gmp gzip make sed tar)
 blfs_depends=()
-NAME=glpk
-VERSION=$(wget -cqO- https://ftp.gnu.org/gnu/glpk/ | grep ".tar.gz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 8 | tail -n 1 | sed 's/glpk-//g' | sed 's/.tar.gz//g')
-filename="$NAME-$VERSION.tar.gz"
+name=glpk
+version=$(wget -cqO- https://ftp.gnu.org/gnu/glpk/ | grep ".tar.gz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 8 | tail -n 1 | sed 's/glpk-//g' | sed 's/.tar.gz//g')
+filename="$name-$version.tar.gz"
+direname="${filename/.tar.gz/}"
 if ! [[ -f $filename ]]; then
 	wget -c https://ftp.gnu.org/gnu/glpk/$filename
 fi
@@ -13,7 +14,6 @@ if ! [[ -f gcc-15.patch ]]; then
 	wget -c "https://gitlab.archlinux.org/archlinux/packaging/packages/glpk/-/raw/main/gcc-15.patch?ref_type=heads&inline=false" -O gcc-15.patch
 fi
 tar xf $filename
-direname=${filename/.tar.gz/}
 rm -rf $direname
 tar xf $filename
 cd $direname
@@ -26,4 +26,4 @@ make -j$(nproc)
 sudo make install
 cd ..
 sudo rm -rf $filename $direname
-echo $VERSION > /var/lib/lfs-custom-packages/$NAME
+echo $version > /var/lib/lfs-custom-packages/$name
