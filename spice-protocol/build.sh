@@ -24,6 +24,8 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 set -e
 depends=()
+lfs_depends=(bash coreutils meson ninja sed tar)
+blfs_depends=(wget)
 NAME=spice-protocol
 VERSION=$(wget -cqO- https://spice-space.org/download/releases/ | grep "spice-protocol-.*xz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 8  | tail -n 1 | cut -d '-' -f 3 | sed 's/.tar.xz//g')
 ARCH=noarch

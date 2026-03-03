@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 depends=(pyqt6)
+lfs_depends=(bash coreutils make sed tar)
+blfs_depends=(qt6 wget)
+pip_depends=(sip pyqt-builder)
 NAME=qscintilla
 VERSION=$(wget -cqO- https://www.riverbankcomputing.com/software/qscintilla/download | grep ".tar.gz" | grep -v "alpha\|beta\|[0-9]rc" | head -n 1 | cut -d '/' -f 8 | sed 's/>.*//g' | cut -d '-' -f 2 | sed 's/.tar.gz//g')
 archive=QScintilla_src-$VERSION
@@ -39,17 +42,6 @@ Libs: -L\${libdir} -lqscintilla2_qt6
 Cflags: -I\${includedir}
 EOF
 
-#cd ../Python
-#mv pyproject{-qt6,}.toml
-#sip-build \
-#  --no-make \
-#  --qsci-features-dir ../src/features \
-#  --qsci-include-dir ../src \
-#  --qsci-library-dir ../src \
-#  --qmake=/opt/qt6/bin/qmake6
-#cd build
-#make -j$(nproc)
-#sudo make install
 cd ../..
 sudo rm -rf $archive*
 echo $VERSION > /var/lib/lfs-custom-packages/$NAME

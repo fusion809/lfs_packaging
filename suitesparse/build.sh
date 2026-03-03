@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 depends=(blas lapack)
+lfs_depends=(bash coreutils glibc gmp make mpfr sed tar)
+blfs_depends=(cmake
+gcc # Fortran support needed
+wget)
 NAME=suitesparse
 PRGNAME=SuiteSparse
 VERSION=$(wget -cqO- https://github.com/DrTimothyAldenDavis/SuiteSparse/releases | grep "releases/tag/v" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')

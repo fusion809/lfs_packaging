@@ -3,6 +3,8 @@
 # is too old for GNU Octave to be able to use its version of prettywriter.
 set -e
 depends=()
+lfs_depends=(bash coreutils make sed)
+blfs_depends=(cmake git)
 NAME=rapidjson
 source check-deps.sh
 if ! [[ -d rapidjson ]]; then

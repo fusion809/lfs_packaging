@@ -25,17 +25,28 @@
 
 set -e
 depends=(
-  graphicsmagick
-  glpk
-  hdf5
-  qhull
   arpack
-  sundials
   gl2ps
-  qscintilla
-  qrupdate
+  glpk
+  gnuplot
+  graphicsmagick
+  hdf5
   pcre2
+  portaudio
+  qhull
+  qrupdate
+  qscintilla
+  rapidjson
+  suitesparse
+  sundials
 )
+lfs_depends=(bash coreutils make sed tar texinfo)
+blfs_depends=(curl fftw fltk
+gcc # Need Fortran support
+glu
+java
+libsndfile
+qt6)
 export JAVA_HOME=/opt/jdk
 NAME=octave
 VERSION=$(wget -cqO- https://ftp.gnu.org/gnu/octave/ | grep ".tar.gz\"" | grep -v "alpha\|beta\|rc" | tail -n 1 | cut -d '"' -f 8 | sed 's/octave-//g' | sed 's/.tar.gz//g')

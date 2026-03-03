@@ -24,6 +24,9 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 set -e
 depends=(spice-protocol)
+lfs_depends=(bash coreutils make meson sed tar)
+blfs_depends=(glib libjpeg-turbo lz4 opus pixman sasl wget)
+pip_depends=(pyparsing)
 NAME=spice
 VERSION=$(wget -cqO- https://spice-space.org/download/releases/spice-server/ | grep ".tar.bz2\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 8 | sed 's/.tar.bz2//g' | tail -n 1 | cut -d '-' -f 2)
 

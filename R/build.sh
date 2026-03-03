@@ -26,7 +26,13 @@
 # <http://www.gnu.org/licenses/>.
 
 set -e
-depends=(blas lapack pcre2)
+depends=(blas lapack pcre2) # Provided by lfs_packaging
+lfs_depends=(bash bzip2 coreutils glibc make readline sed tar xz zlib zstd) # Provided by LFS
+blfs_depends=(cairo curl 
+gcc # You need GCC built with Fortran support; LFS build doesn't support Fortran
+glib icu java libjpeg-turbo libpng libtiff libtirpc
+libx11 libxmu libxt # Part of Xorg libraries
+pango tk which zip) # Provided by BLFS
 NAME=R
 VERSION=$(wget -cqO- https://cran.r-project.org/sources.html | grep ".tar.gz" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 4 | sed 's/.tar.gz//g' | cut -d '-' -f 2)
 
