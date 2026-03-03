@@ -5,7 +5,6 @@ baseurl="https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/d
 depends=()
 lfs_depends=(bash coreutils glibc sed tar)
 blfs_depends=(libarchive libx11 libxkbfile wget)
-# jq is listed as a make dependency for the AUR package, but it's not required to build this package nor run it.
 filename=$(wget -cqO- $baseurl | grep deb | tail -n 1 | sed 's|Filename: pool/antigravity-debian/||g')
 VERSION=$(echo $filename | grep -v "beta\|alpha\|rc" | cut -d '_' -f 2 | cut -d '-' -f 1)
 _STR=$(echo $filename | sed 's|antigravity_1.19.6-||g' | sed 's/.deb//g')
