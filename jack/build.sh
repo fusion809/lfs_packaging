@@ -15,7 +15,7 @@ fi
 cd $direname
 version=$(git log | head -n 1 | cut -d ' ' -f 2)
 git pull origin master
-sed -i -e "s|python|python3|g" waf
+sed -i -e "s|python$|python3|g" waf
 CLFAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 ./waf configure \
