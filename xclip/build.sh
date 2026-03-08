@@ -11,8 +11,7 @@ if ! [[ -d $name ]]; then
 	git clone https://github.com/astrand/xclip
 fi
 cd $name
-git pull origin master
-version=$(git log | head -n 1 | cut -d ' ' -f 2)
+version=$(git pull origin master -q && git log | head -n 1 | cut -d ' ' -f 2)
 # Compile and install
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
