@@ -17,11 +17,7 @@ if ! [[ -d fastfetch ]]; then
 fi
 
 cd $name
-git checkout master
-git pull origin master
-git fetch --all --tags
-git fetch --prune --prune-tags
-version=$(git describe --tags --abbrev=0)
+version=$(git checkout master -q && git pull origin master -q && git fetch --all --tags -q && git fetch --prune --prune-tags -q && git describe --tags --abbrev=0)
 git checkout $version
 # Compile and install
 mkdir -p build
