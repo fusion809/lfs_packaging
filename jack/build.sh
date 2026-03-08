@@ -13,8 +13,7 @@ if ! [[ -d $direname ]]; then
 fi
 # Compile and install
 cd $direname
-version=$(git log | head -n 1 | cut -d ' ' -f 2)
-git pull origin master
+version=$(git pull origin master -q && git log | head -n 1 | cut -d ' ' -f 2)
 sed -i -e "s|python$|python3|g" waf
 CLFAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
