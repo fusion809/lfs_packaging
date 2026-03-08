@@ -13,8 +13,7 @@ if ! [[ -d rapidjson ]]; then
 	git clone https://github.com/Tencent/rapidjson
 fi
 cd $name
-git pull origin master
-version=$(git log | head -n 1 | cut -d ' ' -f 2)
+version=$(git pull origin master -q && git log | head -n 1 | cut -d ' ' -f 2)
 # Compile and install
 find -_name CMakeLists.txt | xargs sed -e 's|-Werror||' -i # Don't use -Werror
 rm -rf build
