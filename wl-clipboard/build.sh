@@ -10,8 +10,7 @@ if ! [[ -d $name ]]; then
 	git clone https://github.com/bugaevc/wl-clipboard
 fi
 cd $name
-git pull origin master
-version=$(git log | head -n 1 | cut -d ' ' -f 2)
+version=$(git pull origin master -q && git log | head -n 1 | cut -d ' ' -f 2)
 # Compile and install
 rm -rf build
 mkdir build
