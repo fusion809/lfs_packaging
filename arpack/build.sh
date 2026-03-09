@@ -3,7 +3,7 @@ set -e
 # Variable declarations
 name="arpack"
 _name="arpack-ng"
-version=$(wget -cqO- https://github.com/opencollab/arpack-ng/tags | grep ".tar.gz" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 4 | cut -d '/' -f 7 | sed 's/.tar.gz//g')
+version=$(wget -cqO- https://github.com/opencollab/arpack-ng/tags | grep ".tar.gz" | grep -v "alpha\|beta\|\.rc" | head -n 1 | cut -d '"' -f 4 | cut -d '/' -f 7 | sed 's/.tar.gz//g')
 depends=(lapack openmpi)
 lfs_depends=(bash coreutils gzip make sed tar)
 blfs_depends=(gcc # Fortran support needed
