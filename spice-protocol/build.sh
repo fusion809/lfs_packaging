@@ -25,7 +25,7 @@
 set -e
 # Variable declarations
 name=spice-protocol
-version=$(wget -cqO- https://spice-space.org/download/releases/ | grep "spice-protocol-.*xz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 8  | tail -n 1 | cut -d '-' -f 3 | sed 's/.tar.xz//g')
+version=$(wget -cqO- https://spice-space.org/download/releases/ | grep "spice-protocol-.*xz\"" | grep -v "alpha\|beta\|\.rc" | cut -d '"' -f 8  | tail -n 1 | cut -d '-' -f 3 | sed 's/.tar.xz//g')
 docs="COPYING *.md"
 direname="$name-$version"
 filename="$direname.tar.xz"
