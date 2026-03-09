@@ -32,7 +32,7 @@ gcc # Fortran support required
 wget)
 _name=blas
 name=lapack
-version=$(wget -cqO- https://github.com/Reference-LAPACK/lapack/commits | grep "commit/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 18)
+version=$(wget -cqO- https://github.com/Reference-LAPACK/lapack/commits | grep "commit/" | grep -v "alpha\|beta\|\.rc" | head -n 1 | cut -d '"' -f 18)
 
 DOCS="LICENSE"
 
