@@ -27,7 +27,7 @@
 set -e
 # Variable declarations
 name=lapack
-version=$(wget -cqO- https://github.com/Reference-LAPACK/lapack/commits | grep "commit/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 18)
+version=$(wget -cqO- https://github.com/Reference-LAPACK/lapack/commits | grep "commit/" | grep -v "alpha\|beta\|\.rc" | head -n 1 | cut -d '"' -f 18)
 depends=(blas)
 lfs_depends=(bash coreutils glibc gzip make python sed tar)
 blfs_depends=(cmake 
