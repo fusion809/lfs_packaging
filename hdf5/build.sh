@@ -2,7 +2,7 @@
 set -e
 # Variable declarations
 name=hdf5
-version=$(wget -cqO- https://github.com/HDFGroup/hdf5/releases | grep "tag/[0-9]" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 6 | cut -d '/' -f 6)
+version=$(wget -cqO- https://github.com/HDFGroup/hdf5/releases | grep "tag/[0-9]" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 6 | cut -d '/' -f 6 | head -n 1)
 filename="$name-$version.tar.gz"
 direname="$name-${name}_${version/_/-}"
 depends=(libaec
@@ -39,9 +39,10 @@ common_cmake_args=(
   -DHDF5_INSTALL_CMAKE_DIR=lib/cmake/hdf5
 )
 cmake -S . -B build "${common_cmake_args[@]}"
+cd build
 make -j$(nproc)
 sudo make install
 # Cleanup and add to database
-cd ..
+cd ../..
 sudo rm -rf $direname $filename
 echo $version > /var/lib/lfs-custom-packages/$name
