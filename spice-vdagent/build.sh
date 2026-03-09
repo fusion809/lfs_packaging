@@ -26,7 +26,7 @@
 set -e
 # Variable declarations
 name=spice-vdagent
-version=$(wget -cqO- https://spice-space.org/download/releases/ | grep "spice-vdagent.*.tar.bz2\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 8 | tail -n 1 | cut -d '-' -f 3 | sed 's/.tar.bz2//g')
+version=$(wget -cqO- https://spice-space.org/download/releases/ | grep "spice-vdagent.*.tar.bz2\"" | grep -v "alpha\|beta\|\.rc" | cut -d '"' -f 8 | tail -n 1 | cut -d '-' -f 3 | sed 's/.tar.bz2//g')
 docs="COPYING CHANGELOG.md README.md"
 direname="$name-$version"
 filename="$direname.tar.bz2"
