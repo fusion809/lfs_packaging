@@ -27,7 +27,7 @@ set -e
 # Variable declarations
 export JAVA_HOME=/opt/jdk
 name=octave
-version=$(wget -cqO- https://ftp.gnu.org/gnu/octave/ | grep ".tar.gz\"" | grep -v "alpha\|beta\|rc" | tail -n 1 | cut -d '"' -f 8 | sed 's/octave-//g' | sed 's/.tar.gz//g')
+version=$(wget -cqO- https://ftp.gnu.org/gnu/octave/ | grep ".tar.gz\"" | grep -v "alpha\|beta\|\.rc" | tail -n 1 | cut -d '"' -f 8 | sed 's/octave-//g' | sed 's/.tar.gz//g')
 docs="AUTHORS BUGS CITATION COPYING ChangeLog INSTALL* NEWS README"
 depends=(
   arpack
