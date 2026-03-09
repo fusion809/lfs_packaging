@@ -24,7 +24,7 @@
 set -e
 # Variable declarations
 name=orc
-version=$(wget -cqO- https://gstreamer.freedesktop.org/src/orc/ | grep ".tar.xz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 2 | sed 's/.tar.xz//g' | cut -d '-' -f 2 | tail -n 1)
+version=$(wget -cqO- https://gstreamer.freedesktop.org/src/orc/ | grep ".tar.xz\"" | grep -v "alpha\|beta\|\.rc" | cut -d '"' -f 2 | sed 's/.tar.xz//g' | cut -d '-' -f 2 | tail -n 1)
 direname="$name-$version"
 filename="$direname.tar.xz"
 depends=()
