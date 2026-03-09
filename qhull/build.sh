@@ -2,8 +2,8 @@
 set -e
 # Variable declarations
 name=qhull
-version=$(wget -cqO- http://www.qhull.org/download/ | grep ".tgz\"" | grep -v "alpha\|beta\|rc" | sed 's/.*Download: Qhull //g' | sed 's/ for Unix.*//g')
-_version=$(wget -cqO- http://www.qhull.org/download/ | grep ".tgz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 2 | cut -d '/' -f 5 | cut -d '-' -f 4 | sed 's/.tgz//')
+version=$(wget -cqO- http://www.qhull.org/download/ | grep ".tgz\"" | grep -v "alpha\|beta\|\.rc" | sed 's/.*Download: Qhull //g' | sed 's/ for Unix.*//g')
+_version=$(wget -cqO- http://www.qhull.org/download/ | grep ".tgz\"" | grep -v "alpha\|beta\|\.rc" | cut -d '"' -f 2 | cut -d '/' -f 5 | cut -d '-' -f 4 | sed 's/.tgz//')
 filename="$name-${version%.*}-src-$_version.tgz"
 direname="$name-$version"
 depends=()
