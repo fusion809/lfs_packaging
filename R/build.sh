@@ -67,15 +67,16 @@ CXXFLAGS="-O2 -fPIC"
   --localstatedir=/var \
   --mandir=/usr/man \
   rdocdir=/usr/share/doc/$direname \
-  $r_shlib \
-  $blas_shlib
+  --enable-R-shlib \
+  --with-blas="-lblas" \
+  --with-lapack="-llapack"
 
 make -j$(nproc)
 sudo make install DESTDIR=/
 
 sudo mkdir -p /usr/share/doc/$direname
 sudo cp -a \
-   COPYING README SVN-REVISION version version-NICK \
+   COPYING README SVN-REVISION VERSION VERSION-NICK \
    /usr/share/doc/$direname
 cd ..
 sudo install -Dm755 $name.desktop /usr/share/applications
