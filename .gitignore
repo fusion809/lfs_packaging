@@ -16,5 +16,6 @@ libpciaccess/libpciaccess-[0-9.]*
 */*-[0-9.]*
 jack/jack2
 wget-log.*
+wget-log
 hdf5/hdf5-hdf5_[0-9.]*
 
