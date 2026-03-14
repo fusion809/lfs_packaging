@@ -1,4 +1,5 @@
 #!/bin/bash
+# Included because it's required by prison-6.24.0 of kframeworks
 set -e
 name=libdmtx
 version=$(wget -cqO- https://github.com/dmtx/libdmtx/tags | grep "/tag/v" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
