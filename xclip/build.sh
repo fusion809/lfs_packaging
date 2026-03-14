@@ -21,4 +21,4 @@ make -j$(nproc)
 sudo make install
 sudo make install.man
 # Add to database
-echo $version > /var/lib/lfs-custom-packages/$name
+echo $version > /var/lib/custom-packages/$name

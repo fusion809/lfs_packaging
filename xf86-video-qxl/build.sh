@@ -75,4 +75,4 @@ sudo cp -a COPYING README* TODO* /usr/share/doc/$direname
 # Cleanup and add to database
 cd ..
 sudo rm -rf $filename $direname
-echo $version > /var/lib/lfs-custom-packages/$name
+echo $version > /var/lib/custom-packages/$name

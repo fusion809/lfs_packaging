@@ -30,4 +30,4 @@ cmake --build . --target fastfetch
 sudo make install
 cd ..
 # Add to database
-echo $version > /var/lib/lfs-custom-packages/$name
+echo $version > /var/lib/custom-packages/$name

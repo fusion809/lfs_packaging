@@ -39,4 +39,4 @@ cd ..
 sudo rm -rf build
 # Cleanup and install to database
 cd ..
-echo $version > /var/lib/lfs-custom-packages/$name
+echo $version > /var/lib/custom-packages/$name

@@ -29,4 +29,4 @@ sudo cp mime/packages/$name-workspace.xml /usr/share/mime/packages
 sudo cp pixmaps/$name.png /usr/share/pixmaps
 cd ..
 sudo rm -rf $name
-echo $version > /var/lib/lfs-custom-packages/$name
+echo $version > /var/lib/custom-packages/$name

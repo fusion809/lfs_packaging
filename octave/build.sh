@@ -97,4 +97,4 @@ sudo sed -i -e "s|/usr/bin/octave|/usr/bin/octave_cli|g" /usr/share/applications
 # Cleanup and add to database
 cd ..
 sudo rm -rf $direname ${filename}
-echo $version > /var/lib/lfs-custom-packages/$name
+echo $version > /var/lib/custom-packages/$name

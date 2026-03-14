@@ -29,4 +29,4 @@ CXXFLAGS="-O2 -fPIC"
 sudo ./waf install
 cd ..
 # Add to database
-echo $version > /var/lib/lfs-custom-packages/$name
+echo $version > /var/lib/custom-packages/$name

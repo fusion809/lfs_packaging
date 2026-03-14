@@ -90,4 +90,4 @@ sudo mkdir -p /usr/share/doc/$_name-$version
 sudo cp -a $DOCS /usr/share/doc/$_name-$version
 cd ..
 sudo rm -rf ${filename} $direname
-echo $version > /var/lib/lfs-custom-packages/$name
+echo $version > /var/lib/custom-packages/$name

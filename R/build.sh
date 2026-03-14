@@ -82,4 +82,4 @@ cd ..
 sudo install -Dm755 $name.desktop /usr/share/applications
 # Cleanup and add to database
 sudo rm -rf $filename $direname
-echo $version > /var/lib/lfs-custom-packages/$name
+echo $version > /var/lib/custom-packages/$name

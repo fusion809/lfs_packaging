@@ -25,4 +25,4 @@ sudo install -Dm 644 "${name}/scripts/autocomplete.bash" "/usr/share/bash-comple
 sudo install -Dm 644 "${name}/scripts/autocomplete.zsh" "/usr/share/zsh/site-functions/_${name}"
 sudo install -Dm 644 README.md "/usr/share/doc/${name}-$version/README.md"
 # Add to database
-echo $version > /var/lib/lfs-custom-packages/$name
+echo $version > /var/lib/custom-packages/$name

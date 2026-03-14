@@ -28,4 +28,4 @@ sudo install -vDm 644 README.md -t "/usr/share/doc/$direname/"
 # Cleanup and add to database
 cd ..
 sudo rm -rf $direname $filename
-echo $version > /var/lib/lfs-custom-packages/$name
+echo $version > /var/lib/custom-packages/$name

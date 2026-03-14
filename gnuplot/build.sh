@@ -56,4 +56,4 @@ sudo cp Copyright RELEASE_NOTES NEWS $docdir
 # Cleanup and add to database
 cd ..
 sudo rm -rf $direname $filename
-echo $version > /var/lib/lfs-custom-packages/$name
+echo $version > /var/lib/custom-packages/$name
