@@ -27,6 +27,6 @@ meson setup --prefix=/usr       \
 ninja -j$(nproc)
 sudo ninja install
 # Cleanup and add to database
-cd ..
+cd ../..
 sudo rm -rf $direname $filename
 echo $version > /var/lib/custom-packages/$name
