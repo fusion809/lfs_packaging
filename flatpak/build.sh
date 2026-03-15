@@ -26,7 +26,8 @@
 set -e
 # Variable declarations
 name=flatpak
-version=$(wget -cqO- https://github.com/flatpak/flatpak/releases/ | grep "/tag/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
+#version=$(wget -cqO- https://github.com/flatpak/flatpak/releases/ | grep "/tag/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
+version=$(curl -s 'https://api.github.com/repos/flatpak/flatpak/releases?per_page=30' | grep -E '"tag_name"|"prerelease"' | paste - - | grep 'false' | head -1 | grep -oP '(?<="tag_name": ")[^"]+')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 depends=(gcab ostree)
