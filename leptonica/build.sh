@@ -10,7 +10,7 @@ lfs_depends=(bash coreutils glibc gzip make sed tar)
 blfs_depends=(giflib libjpeg-turbo libpng libtiff libwebp openjpeg wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/DanBloomberg/leptonica/archive/ref/tags/${version}.tar.gz -O $filename
+	wget -c https://github.com/DanBloomberg/leptonica/archive/${version}.tar.gz -O $filename
 fi
 rm -rf $direname
 tar xf $filename
