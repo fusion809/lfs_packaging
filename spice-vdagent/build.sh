@@ -63,7 +63,7 @@ export CXXFLAGS="-O2 -fPIC -Wno-error"
 make -j$(nproc)
 sudo make install DESTDIR=/
 # Install an init script and an X.org configuration file
-sudo install -m 0644 -D 06-spice-vdagent.conf \
+sudo install -m 0644 -D $HOME/lfs_packaging/spice-vdagent/06-spice-vdagent.conf \
   /usr/share/X11/xorg.conf.d/06-spice-vdagent.conf.new
 
 sudo mkdir -p /usr/share/doc/$direname
