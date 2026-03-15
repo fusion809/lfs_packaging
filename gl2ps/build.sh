@@ -25,7 +25,7 @@ cmake .. \
   -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_INSTALL_PREFIX=/usr \
   -DCMAKE_EXE_LINKER_FLAGS=-lm \
-  -DCMAKE_POLICY_version_MINIMUM=3.5
+  -DCMAKE_POLICY_VERSION_MINIMUM=3.5
 make -j$(nproc)
 sudo make install
 # Cleanup and add to database

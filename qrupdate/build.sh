@@ -22,7 +22,7 @@ CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 cmake -B build -S . \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_POLICY_version_MINIMUM=3.5 \
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
     -DCMAKE_C_FLAGS="$CFLAGS" \
     -DCMAKE_CXX_FLAGS="$CXXFLAGS"
 cmake --build build --verbose

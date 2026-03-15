@@ -28,7 +28,7 @@ cmake \
       -DRAPIDJSON_BUILD_CXX11=ON \
       -DRAPIDJSON_ENABLE_INSTRUMENTATION_OPT=OFF \
       -DDOC_INSTALL_DIR=/usr/share/doc/${name}-$version \
-      -DCMAKE_POLICY_version_MINIMUM=3.5 \
+      -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
 	  -DCMAKE_C_FLAGS="$CFLAGS" \
       -DCMAKE_CXX_FLAGS="$CXXFLAGS" \
       ..

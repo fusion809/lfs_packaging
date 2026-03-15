@@ -24,7 +24,7 @@ cmake -B build -S . \
     -DCMAKE_C_FLAGS="$CFLAGS -ffat-lto-objects" \
     -DCMAKE_CXX_FLAGS="$CXXFLAGS -ffat-lto-objects" \
     -DCMAKE_SKIP_RPATH=ON \
-    -DCMAKE_POLICY_version_MINIMUM=3.5
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5
 cmake --build build
 cmake --build build --target libqhull
 sudo cmake --install build
