@@ -2,7 +2,7 @@
 set -e
 # Variable declarations
 name=hwloc
-version=$(wget -cqO- https://www.open-mpi.org/projects/hwloc/ | grep -i download | grep -v '>Download<' | grep -v "alpha\|beta\|rc" | cut -d '"' -f 2 | cut -d '/' -f 5 | sed 's/^v//g' | head -n 1)
+version=$(wget -cqO- https://github.com/open-mpi/hwloc/releases | grep "/tag/hwloc-" | head -n 1 | cut -d '/' -f 6 | cut -d '"' -f 1 | cut -d '-' -f 2)
 filename="$name-$version.tar.bz2"
 direname=${filename/.tar.bz2/}
 depends=(libpciaccess)
@@ -10,7 +10,7 @@ lfs_depends=(bash bzip2 coreutils glibc libtool make ncurses systemd sed tar)
 blfs_depends=(wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-	wget -c https://www.open-mpi.org/software/hwloc/v${version%.*}/downloads/$filename
+	wget -c https://github.com/open-mpi/hwloc/releases/download/hwloc-$version/$filename
 fi
 rm -rf $direname
 tar xf $filename
