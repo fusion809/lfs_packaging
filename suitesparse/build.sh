@@ -12,7 +12,7 @@ blfs_depends=(cmake
 gcc # Fortran support needed
 wget)
 # Fetch and unpack source
-if ! [[ - $filename ]]; then
+if ! [[ -f $filename ]]; then
     wget -c https://github.com/DrTimothyAldenDavis/SuiteSparse/archive/v$version.tar.gz -O $filename
 fi
 rm -rf $direname
@@ -24,9 +24,9 @@ CXXFLAGS="-O2 -fPIC"
 CMAKE_OPTIONS="-DBLA_VENDOR=Generic \
                  -DCMAKE_INSTALL_PREFIX=/usr \
                  -DCMAKE_BUILD_TYPE=None \
-                 -DNSTATIC=ON" \
-                 -DCMAKE_C_FLAGS="$CFLAGS" \
-                 -DCMAKE_CXX_FLAGS="$CXXFLAGS"
+                 -DNSTATIC=ON \
+                 -DCMAKE_C_FLAGS=$CFLAGS \
+                 -DCMAKE_CXX_FLAGS=$CXXFLAGS"
 make -j$(nproc)
 sudo make install
 # Cleanup and add to database
