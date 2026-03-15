@@ -32,7 +32,7 @@ cd $direname
 sed -i 's|WRAPPER__FCFLAGS|WRAPPER_FCFLAGS|g' configure
   sed -i 's|WRAPPER_EXTRA_FCFLAGS|WRAPPER_FCFLAGS|g' configure
   sed -i 's|"-I/usr/include",||' opal/tools/wrappers/opal_wrapper.c
-local configure_options=(
+configure_options=(
     --prefix=/usr
     --enable-builtin-atomics
     --enable-memchecker

@@ -20,7 +20,7 @@ tar xf $filename
 # Compile and install
 cd $direname
 ./autogen.pl
-local configure_options=(
+configure_options=(
     --prefix=/usr
     --sysconfdir=/etc/$name
   )
