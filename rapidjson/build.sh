@@ -15,7 +15,7 @@ fi
 cd $name
 version=$(git pull origin master -q && git log | head -n 1 | cut -d ' ' -f 2)
 # Compile and install
-find -_name CMakeLists.txt | xargs sed -e 's|-Werror||' -i # Don't use -Werror
+find . -name CMakeLists.txt | xargs sed -e 's|-Werror||' -i # Don't use -Werror
 rm -rf build
 mkdir -p build
 cd build
