@@ -25,7 +25,8 @@ configure_options=(
 ./configure "${configure_options[@]}"
 make -j1
 sudo make install
-sudo install -Dmv644 README.* /usr/share/doc/$direname/
+sudo mkdir /usr/share/doc/$direname/ -p
+sudo install -Dm644 README.* /usr/share/doc/$direname/
 # Cleanup and add to database
 cd ..
 sudo rm -rf $filename $direname
