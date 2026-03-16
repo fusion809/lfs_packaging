@@ -18,7 +18,7 @@ tar xf $filename
 cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
-./autogen.sh
+sudo ./autogen.sh
 ./configure --prefix=/usr
 make -j$(nproc)
 sudo make install
