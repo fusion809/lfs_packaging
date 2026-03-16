@@ -24,9 +24,7 @@ CXXFLAGS="-O2 -fPIC"
 CMAKE_OPTIONS="-DBLA_VENDOR=Generic \
                  -DCMAKE_INSTALL_PREFIX=/usr \
                  -DCMAKE_BUILD_TYPE=None \
-                 -DNSTATIC=ON \
-                 -DCMAKE_C_FLAGS=$CFLAGS \
-                 -DCMAKE_CXX_FLAGS=$CXXFLAGS"
+                 -DNSTATIC=ON" \
 make -j$(nproc)
 sudo make install
 # Cleanup and add to database

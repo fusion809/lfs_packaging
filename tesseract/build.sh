@@ -12,7 +12,7 @@ blfs_depends=(icu libarchive pango wget)
 if ! [[ -f $filename ]]; then
 	wget -c https://github.com/tesseract-ocr/tesseract/archive/$version.tar.gz -O $filename
 fi
-sudo m -rf $direname
+sudo rm -rf $direname
 tar xf $filename
 # Compile and install
 cd $direname

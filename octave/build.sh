@@ -66,7 +66,6 @@ rm -rf ${direname}
 tar xvf $filename
 # Compile and install
 cd $direname
-autoreconf -vif
 find . -name stamp-vti -exec touch {} +
 export JAVA_HOME=/opt/jdk
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/qt6/lib:$JAVA_HOME/lib
