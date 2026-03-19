@@ -21,8 +21,14 @@ CLFAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 ./configure --prefix=/usr
 make -j$(nproc)
+export DDIR=/tmp/custom_stagedir
+mkdir -p $DDIR
+make install DESTDIR="$DDIR" || true
+if [ -d "$DDIR" ] && [ "$(ls -A "$DDIR" 2>/dev/null)" ]; then
+   find "$DDIR" -type f -o -type l | sed "s|^$DDIR||" | sudo tee -a "/var/lib/book-packages/vim" > /dev/null
+fi
 sudo make install
 # Cleanup and add to database
 cd ..
-sudo rm -rf $filename $direname
+sudo rm -rf $filename $direname $DDIR
 echo $version > /var/lib/custom-packages/$name
