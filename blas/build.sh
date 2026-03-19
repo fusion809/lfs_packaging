@@ -66,6 +66,9 @@ cd shared
     ..
   make -j$(nproc)
   sudo make install/strip DESTDIR=/
+  export DDIR=/tmp/custom_${name}dir
+  mkdir -p $DDIR
+  make install/strip DESTDIR="$DDIR" || true
 cd ..
 
 # cmake doesn't appear to let us build both shared and static libs
@@ -84,6 +87,7 @@ if [ "${STATIC:-no}" != "no" ]; then
       ..
     make -j$(nproc)
     sudo make install/strip DESTDIR=/
+    make install/strip DESTDIR="$DDIR" || true
   cd ..
 fi
 sudo mkdir -p /usr/share/doc/$_name-$version
@@ -91,3 +95,7 @@ sudo cp -a $DOCS /usr/share/doc/$_name-$version
 cd ..
 sudo rm -rf ${filename} $direname
 echo $version > /var/lib/custom-packages/$name
+if [ -d "$DDIR" ] && [ "$(ls -A "$DDIR" 2>/dev/null)" ]; then
+   find "$DDIR" -type f -o -type l | sed "s|^$DDIR||" | sudo tee -a "/var/lib/custom-packages/$name" > /dev/null
+fi
+sudo rm -rf $DDIR
