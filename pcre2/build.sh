@@ -23,7 +23,7 @@ tar xf ../sljit-master.tar.gz
 mv sljit-master sljit 
 mv sljit deps/sljit
 # Compile and install
-./autogen.sh
+sudo ./autogen.sh
 configure_options=(
     --enable-jit
     --enable-pcre2-16
