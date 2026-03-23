@@ -5,6 +5,26 @@ name=eog
 version="$(wget -cqO- https://gitlab.gnome.org/GNOME/eog/-/tags | grep "tags/" | cut -d '/' -f 6 | sed 's/".*//g' | grep -v "alpha\|beta\|\.rc" | grep "$(gnome-shell --version | cut -d ' ' -f 3 | cut -d '.' -f 1)" | head -n 1 | sed 's/^v//g')"
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
+lfs_depends=(glibc
+	gcc
+	systemd
+	zlzib)
+blfs_depends=(cairo
+	dconf
+	exempi
+	gdk-pixbuf
+	glib
+	gnome-desktop
+	gtk3
+	hicolor-icon-theme
+	lcms
+	libexif
+	libhandy
+	libjpeg-turbo
+	libpeas
+	librsvg
+	libx11
+	meson)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
 	wget -c https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$filename
