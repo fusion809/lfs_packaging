@@ -8,6 +8,11 @@ version="$majorver+$minorver"
 filename="openjdk-$majorver-ea+${minorver}_linux-x64_bin.tar.gz"
 direname="jdk-$majorver"
 instdir="jdk-$version"
+blfs_depends=(alsa-lib
+	cups
+	giflib
+	lcms
+	x7lib)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
 	wget -c https://download.java.net/java/early_access/jdk$majorver/$minorver/GPL/$filename

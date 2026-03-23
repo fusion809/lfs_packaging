@@ -4,6 +4,17 @@ name=elfutils
 version=$(wget -cqO- https://sourceware.org/git/?p=elfutils.git\;a=tags | grep "elfutils-" | head -n 1 | cut -d "-" -f 2 | sed "s/<.*//g")
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
+lfs_depends=(bzip2
+	gcc
+	glibc
+	libelf
+	sqlite
+	xz
+	zlib
+	zstd)
+blfs_depends=(curl
+	json-c
+	libarchive)
 if ! [[ -f $filename ]]; then
         wget -c https://sourceware.org/elfutils/ftp/$version/$filename
 fi
