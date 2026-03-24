@@ -4,7 +4,7 @@ set -e
 name=hdf5
 version=$(wget -cqO- https://github.com/HDFGroup/hdf5/releases | grep "tag/[0-9]" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 6 | cut -d '/' -f 6 | head -n 1)
 filename="$name-$version.tar.gz"
-direname="$name-${name}_${version/_/-}"
+direname="${filename/.tar.gz/}"
 depends=(libaec
 openmpi)
 lfs_depends=(bash coreutils glib gzip make sed tar zlib)
@@ -14,7 +14,7 @@ java
 wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/HDFGroup/hdf5/archive/hdf5_$version/$filename
+	wget -c https://github.com/HDFGroup/hdf5/releases/download/$version/$filename
 fi
 rm -rf $direname
 tar xf $filename
