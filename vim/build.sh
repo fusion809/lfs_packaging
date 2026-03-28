@@ -4,8 +4,10 @@ version=$(curl -sL https://github.com/vim/vim/tags | perl -nle 'while (m{href="/
 vimdir=$(echo "vim$version" | sed -E 's/\.[0-9]+$//g' | sed 's/\.//g')
 direname="$name-$version"
 filename="$direname.tar.gz"
-lfs_depends=()
+lfs_depends=(acl gawk glibc gpm libgcrypt zlib)
+# Optional lfs_depends of libcanberra for sound support, tcl for tcl support
 blfs_depends=()
+# Optional blfs_depends of gtk3, libxt, lua, perl, python, ruby for GUI/language support
 depends=()
 if ! [[ -f "$filename" ]]; then
 	wget -c https://github.com/vim/vim/archive/v$version.tar.gz -O $filename
