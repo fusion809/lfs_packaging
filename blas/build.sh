@@ -27,11 +27,9 @@
 set -e
 depends=()
 lfs_depends=(bash coreutils glibc gzip make python sed tar)
-blfs_depends=(cmake 
-gcc # Fortran support required
-wget)
+blfs_depends=(cmake gcc wget)
 _name=blas
-name=lapack
+name=blas
 version=$(wget -cqO- https://github.com/Reference-LAPACK/lapack/commits | grep "commit/" | grep -v "alpha\|beta\|\.rc" | head -n 1 | cut -d '"' -f 18)
 
 DOCS="LICENSE"
@@ -39,19 +37,23 @@ DOCS="LICENSE"
 CFLAGS="-O2 -fPIC"
 
 if ! which gfortran &> /dev/null; then
-	echo "GCC hasn't been built with Fortran support. This needs to be addressed!"
-	exit
+        echo "GCC hasn't been built with Fortran support. This needs to be addressed!"
+        exit
 fi
-direname="$name-$version"
+direname="lapack-$version"
 filename="$direname.tar.gz"
 rm -rf $direname
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/Reference-LAPACK/lapack/archive/$version.tar.gz -O $filename
+        wget -c https://github.com/Reference-LAPACK/lapack/archive/$version.tar.gz -O $filename
 fi
 tar xvf $filename
 cd $direname
-# Avoid adding an RPATH entry to the shared lib.  It's unnecessary (except for
-# running the test suite), and it's broken on 64-bit (needs LIBDIRSUFFIX).
+
+export DDIR=/tmp/custom_${name}dir
+rm -rf $DDIR
+mkdir -p $DDIR
+
+# Avoid adding an RPATH entry to the shared lib.
 mkdir -p shared
 cd shared
   cmake \
@@ -60,20 +62,18 @@ cd shared
     -DCMAKE_BUILD_TYPE=None \
     -DCMAKE_RULE_MESSAGES=OFF \
     -DCMAKE_VERBOSE_MAKEFILE=TRUE \
-    -DBUILD_BLAS=ON \
+    -DCBLAS=ON \
+    -DLAPACKE=OFF \
+    -DBUILD_DEPRECATED=OFF \
     -DBUILD_SHARED_LIBS=ON \
     -DCMAKE_SKIP_RPATH=YES \
     ..
   make -j$(nproc)
-  sudo make install/strip DESTDIR=/
-  export DDIR=/tmp/custom_${name}dir
-  mkdir -p $DDIR
   make install/strip DESTDIR="$DDIR" || true
 cd ..
 
 # cmake doesn't appear to let us build both shared and static libs
-# at the same time, so build it twice.  This may build a non-PIC library
-# on some architectures, which should be faster.
+# at the same time, so build it twice.
 if [ "${STATIC:-no}" != "no" ]; then
   mkdir -p static
   cd static
@@ -83,13 +83,23 @@ if [ "${STATIC:-no}" != "no" ]; then
       -DCMAKE_BUILD_TYPE=None \
       -DCMAKE_RULE_MESSAGES=OFF \
       -DCMAKE_VERBOSE_MAKEFILE=TRUE \
-      -DBUILD_BLAS=ON \
+      -DCBLAS=ON \
+      -DLAPACKE=OFF \
+      -DBUILD_DEPRECATED=OFF \
       ..
     make -j$(nproc)
-    sudo make install/strip DESTDIR=/
     make install/strip DESTDIR="$DDIR" || true
   cd ..
 fi
+
+# Clean LAPACK out of the BLAS package
+rm -f $DDIR/usr/lib/liblapack.* $DDIR/usr/lib/pkgconfig/lapack*.pc
+rm -f $DDIR/usr/lib/cmake/*/lapack-*.cmake $DDIR/usr/lib/cmake/*/lapacke-*.cmake
+rm -f $DDIR/usr/include/lapack*.h
+
+sudo cp -va $DDIR/* /
+
+sudo rm -rf /usr/share/doc/$_name-*
 sudo mkdir -p /usr/share/doc/$_name-$version
 sudo cp -a $DOCS /usr/share/doc/$_name-$version
 cd ..
@@ -98,4 +108,5 @@ echo $version > /var/lib/custom-packages/$name
 if [ -d "$DDIR" ] && [ "$(ls -A "$DDIR" 2>/dev/null)" ]; then
    find "$DDIR" -type f -o -type l | sed "s|^$DDIR||" | sudo tee -a "/var/lib/custom-packages/$name" > /dev/null
 fi
+sudo chmod 777 /var/lib/custom-packages/$name
 sudo rm -rf $DDIR

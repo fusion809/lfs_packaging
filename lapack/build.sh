@@ -30,37 +30,36 @@ name=lapack
 version=$(wget -cqO- https://github.com/Reference-LAPACK/lapack/commits | grep "commit/" | grep -v "alpha\|beta\|\.rc" | head -n 1 | cut -d '"' -f 18)
 depends=(blas)
 lfs_depends=(bash coreutils glibc gzip make python sed tar)
-blfs_depends=(cmake 
-gcc # Fortran support required
-wget)
+blfs_depends=(cmake gcc wget)
 docs="LICENSE README.md DOCS/lapack.png DOCS/lawn81.tex DOCS/org2.ps"
-direname="$name-$version"
+direname="lapack-$version"
 filename="$direname.tar.gz"
 CFLAGS="-O2 -fPIC"
+
 # Check deps
 if ! [[ -f /usr/lib/libblas.so ]]; then
-	echo "libblas.so not found in /usr/lib. You need BLAS installed first!"
-	exit
+        echo "libblas.so not found in /usr/lib. You need BLAS installed first!"
+        exit
 fi
 
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/Reference-LAPACK/lapack/archive/$version.tar.gz -O $filename
+        wget -c https://github.com/Reference-LAPACK/lapack/archive/$version.tar.gz -O $filename
 fi
 rm -rf $direname
 tar xvf $filename
 # Compile and install
 cd $direname
 
-# Allow building only the LAPACK component.
-patch -p1 < ../cmake-piecewise.diff || echo "Patching failed"
-
 if pkg-config --exists xblas; then
   use_xblas='-DUSE_XBLAS=ON'
 fi
 
-# Avoid adding an RPATH entry to the shared lib.  It's unnecessary (except for
-# running the test suite), and it's broken on 64-bit (needs LIBDIRSUFFIX).
+export DDIR=/tmp/custom_${name}dir
+rm -rf $DDIR
+mkdir -p $DDIR
+
+# Avoid adding an RPATH entry to the shared lib.
 mkdir -p shared
 cd shared
   cmake \
@@ -70,19 +69,19 @@ cd shared
     -DCMAKE_RULE_MESSAGES=OFF \
     -DCMAKE_VERBOSE_MAKEFILE=TRUE \
     -DUSE_OPTIMIZED_BLAS=ON \
-    -DBUILD_LAPACK=ON \
-    -DBUILD_DEPRECATED=ON \
+    -DCBLAS=ON \
+    -DLAPACKE=ON \
+    -DBUILD_DEPRECATED=OFF \
     $use_xblas \
     -DBUILD_SHARED_LIBS=ON \
     -DCMAKE_SKIP_RPATH=YES \
     ..
   make -j$(nproc)
-  sudo make install/strip DESTDIR=/
+  make install/strip DESTDIR="$DDIR" || true
 cd ..
 
 # cmake doesn't appear to let us build both shared and static libs
-# at the same time, so build it twice.  This may build a non-PIC library
-# on some architectures, which should be faster.
+# at the same time, so build it twice.
 if [ "${STATIC:-no}" != "no" ]; then
   mkdir -p static
   cd static
@@ -93,18 +92,33 @@ if [ "${STATIC:-no}" != "no" ]; then
       -DCMAKE_RULE_MESSAGES=OFF \
       -DCMAKE_VERBOSE_MAKEFILE=TRUE \
       -DUSE_OPTIMIZED_BLAS=ON \
-      -DBUILD_LAPACK=ON \
-      -DBUILD_DEPRECATED=ON \
+      -DCBLAS=ON \
+      -DLAPACKE=ON \
+      -DBUILD_DEPRECATED=OFF \
       $use_xblas \
       ..
     make -j$(nproc)
-    sudo make install/strip DESTDIR=/
+    make install/strip DESTDIR="$DDIR" || true
   cd ..
 fi
 
+# Clean BLAS out of LAPACK package layout
+rm -f $DDIR/usr/lib/libblas.* $DDIR/usr/lib/pkgconfig/blas*.pc
+rm -f $DDIR/usr/lib/libcblas.* $DDIR/usr/lib/pkgconfig/cblas*.pc
+rm -f $DDIR/usr/lib/cmake/*/blas-*.cmake $DDIR/usr/lib/cmake/*/cblas-*.cmake
+rm -f $DDIR/usr/include/cblas*.h
+
+sudo cp -va $DDIR/* /
+
+sudo rm -rf /usr/share/doc/$name-*
 sudo mkdir -p /usr/share/doc/$direname
 sudo cp -a $docs /usr/share/doc/$direname
 # Cleanup and add to database
 cd ..
 sudo rm -rf $filename $direname
 echo $version > /var/lib/custom-packages/$name
+if [ -d "$DDIR" ] && [ "$(ls -A "$DDIR" 2>/dev/null)" ]; then
+   find "$DDIR" -type f -o -type l | sed "s|^$DDIR||" | sudo tee -a "/var/lib/custom-packages/$name" > /dev/null
+fi
+sudo chmod 777 /var/lib/custom-packages/$name
+sudo rm -rf $DDIR
