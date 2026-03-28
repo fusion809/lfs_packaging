@@ -16,11 +16,13 @@ export DDIR="/tmp/destdir_vim"
 rm -rf "$DDIR" && mkdir -p "$DDIR"
 make install DESTDIR="$DDIR" || true
 sudo make install
+export CP="/var/lib/custom-packages"
 if [ -d "$DDIR" ] && [ "$(ls -A "$DDIR" 2>/dev/null)" ]; then
-    sudo mkdir -p "/var/lib/book-packages" "/var/lib/custom-packages"
-    find "$DDIR" -type f -o -type l | sed "s|^$DDIR||" | sudo tee -a "/var/lib/book-packages/vim" > /dev/null
+    sudo mkdir -p $CP
+    find "$DDIR" -type f -o -type l | sed "s|^$DDIR||" | sudo tee -a "$CP/$name" > /dev/null
 fi
 sudo rm -rf "$DDIR"
+sudo chmod 777 /var/lib/custom-packages/$name
 sudo rm -rf /usr/share/doc/vim-*
 sudo ln -sv ../vim/$vimdir/doc /usr/share/doc/$direname || true
 cd ..
