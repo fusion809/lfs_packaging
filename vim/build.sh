@@ -6,6 +6,7 @@ direname="$name-$version"
 filename="$direname.tar.gz"
 lfs_depends=()
 blfs_depends=()
+depends=()
 if ! [[ -f "$filename" ]]; then
 	wget -c https://github.com/vim/vim/archive/v$version.tar.gz -O $filename
 fi
