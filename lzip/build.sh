@@ -30,6 +30,6 @@ cd ..
 sudo rm -rf $filename $direname
 echo $version > /var/lib/custom-packages/$name
 if [ -d "$DDIR" ] && [ "$(ls -A "$DDIR" 2>/dev/null)" ]; then
-   find "$DDIR" -type f -o -type l | sed "s|^$DDIR||" | sudo tee -a "/var/lib/custom-packages/$name" > /dev/null
+   find "$DDIR" -mindepth 1 | sed "s|^$DDIR||" | sudo tee -a "/var/lib/custom-packages/$name" > /dev/null
 fi
 sudo rm -rf $DDIR
