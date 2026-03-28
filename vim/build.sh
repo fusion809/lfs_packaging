@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 name=vim
 version=$(curl -sL https://github.com/vim/vim/tags | perl -nle 'while (m{href="/vim/vim/releases/tag/v\K[0-9.]+}g) { print $& }' | head -n 1)
 vimdir=$(echo "vim$version" | sed -E 's/\.[0-9]+$//g' | sed 's/\.//g')
