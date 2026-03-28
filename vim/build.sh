@@ -25,7 +25,7 @@ rm -rf "$DDIR" && mkdir -p "$DDIR"
 make install DESTDIR="$DDIR" || true
 sudo make install
 export CP="/var/lib/custom-packages"
-echo "$version" >> $CP
+echo "$version" > $CP
 if [ -d "$DDIR" ] && [ "$(ls -A "$DDIR" 2>/dev/null)" ]; then
     sudo mkdir -p $CP
     find "$DDIR" -type f -o -type l | sed "s|^$DDIR||" | sudo tee -a "$CP/$name" > /dev/null
