@@ -92,7 +92,8 @@ sudo mkdir -p /usr/share/doc/$direname
 sudo cp -a $docs /usr/share/doc/$direname
 sudo install -Dm755 $HOME/lfs_packaging/octave/octave_exec /usr/bin/
 sudo install -Dm755 $HOME/lfs_packaging/octave/org.octave.Octave.desktop /usr/share/applications/
-sudo sed -i -e "s|/usr/bin/octave|/usr/bin/octave_exec|g" /usr/share/applications/org.octave.Octave.desktop
+sudo sed -i -e "s|/usr/bin/octave$|/usr/bin/octave_exec|g" \
+       -e "s|/usr/bin/octave |/usr/bin/octave_exec |g" 	/usr/share/applications/org.octave.Octave.desktop
 # Cleanup and add to database
 cd ..
 sudo rm -rf $direname ${filename}
