@@ -2,7 +2,7 @@
 set -e
 # Variable declarations
 name=graphicsmagick
-version=$(wget -cqO- https://sourceforge.net/projects/graphicsmagick/files/graphicsmagick/ | grep "/graphicsmagick/[0-9]" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
+version=$(wget -cqO- http://www.graphicsmagick.org/ | grep "Released" | cut -d ' ' -f 1 | sed 's/.*<p>//g')
 _archive="GraphicsMagick-$version"
 depends=()
 lfs_depends=(bash bzip2 coreutils libtool perl tar xz)
