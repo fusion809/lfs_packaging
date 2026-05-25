@@ -16,7 +16,8 @@ rm -rf $direname
 tar xf $filename
 # Compile and install
 cd $direname
-autoreconf -fi
+sudo autoreconf -fi
+sudo chmod 777 -R *
 ./configure --prefix=/usr \
 	--with-gsfontmap=/usr/share/ghostscript/Resource/Init/Fontmap.GS
 sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
