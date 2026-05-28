@@ -19,7 +19,7 @@ rm -rf $direname
 tar xf $filename
 # Compile and install
 cd $direname
-./autogen.pl
+sudo ./autogen.pl
 configure_options=(
     --prefix=/usr
     --sysconfdir=/etc/$name
@@ -31,10 +31,10 @@ export HOSTNAME=buildhost
 export USER=builduser
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
-./configure "${configure_options[@]}"
+sudo ./configure "${configure_options[@]}"
 # prevent excessive overlinking due to libtool
-sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
-make V=1 -j$(nproc)
+sudo sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+sudo make V=1 -j$(nproc)
 sudo make install
 # Cleanup and add to database
 cd ..
