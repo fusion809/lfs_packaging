@@ -13,20 +13,17 @@ fi
 rm -rf $direname
 tar xf $filename
 cd $direname
-sed -e 's/^main/int &/'      \
-    -e 's/exit(/return(/'    \
-    -i aczsh.m4 configure.ac &&
-
-sed -e 's/test = /&(char**)/' \
-    -i configure.ac           &&
-
-autoconf
-./configure --prefix=/usr            \
-            --sysconfdir=/etc/zsh    \
+./Util/preconfig
+./configure --prefix=/usr \
+            --sysconfdir=/etc/zsh \
             --enable-etcdir=/etc/zsh \
-            --enable-cap             \
-            --enable-gdbm            &&
-make -j$(nproc)          &&
+            --enable-cap \
+            --enable-pcre \
+            --enable-dynamic \
+            --enable-readnullcmd=pager \
+            --with-tcsetpgrp
+make -j$(nproc)
+sudo make install
 DDIR="/tmp/destdir_zsh"
 rm -rf "$DDIR" && mkdir -p "$DDIR"
 make install DESTDIR="$DDIR" || true
