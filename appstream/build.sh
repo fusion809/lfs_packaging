@@ -24,14 +24,15 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 set -e
 # Variable declarations
-name=AppStream
+name=appstream
 version=$(wget -cqO- https://www.freedesktop.org/software/appstream/releases/ | grep ".tar.xz\"" | tail -n 1 | cut -d '"' -f 2 | sed 's/.tar.xz//g' | cut -d '-' -f 2)
 docs="AUTHORS CHANGELOG.md COPYING README"
 depends=()
 lfs_depends=(freetype2 gcc glibc)
 blfs_depends=(curl itstool libfyaml libxml2 libxmlb libxslt docbook-xsl-nons qt6)
 pip_depends=()
-direname="$name-$version"
+upName=AppStream;
+direname="$upName-$version"
 filename="$direname.tar.xz"
 # Fetch and unpack source
 rm -rf $direname
