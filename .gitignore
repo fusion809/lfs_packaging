@@ -5,6 +5,8 @@ gnuplot/gnuplot-[0-9.]*
 *.tgz
 */*/*/*
 fastfetch/fastfetch
+imagemagick/ImageMagick*
+gtk3/gtk-*
 hyfetch/hyfetch
 octave/jack/jack2
 leptonica/leptonica-[0-9.]*
