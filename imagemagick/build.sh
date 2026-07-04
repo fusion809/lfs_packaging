@@ -1,4 +1,5 @@
 #!/bin/bash
+# Originally a book package; script written to overcome download failure
 set -e
 # Variable declarations
 name=imagemagick

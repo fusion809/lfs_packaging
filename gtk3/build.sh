@@ -1,4 +1,5 @@
 #!/bin/bash
+# Originally a book package, but this script was written to fix a XSL stylesheet build failure
 set -e
 # Variable declarations
 name=gtk3
