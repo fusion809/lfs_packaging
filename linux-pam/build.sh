@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=linux-pam
-version=$(curl -s https://api.github.com/repos/linux-pam/linux-pam/releases/latest | grep -oP '"tag_name":\s*"v\K[0-9.]+')
+version=$(wget -cqO- https://github.com/linux-pam/linux-pam/releases | grep -F "release-v" | head -n 1 | cut -d '"' -f 2 | sed 's/release-v//g')
 if [[ -z ${version// /} ]]; then
 	echo "Version is empty."
 	exit 1
