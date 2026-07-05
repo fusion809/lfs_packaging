@@ -2,6 +2,10 @@
 set -e
 name=linux-pam
 version=$(curl -s https://api.github.com/repos/linux-pam/linux-pam/releases/latest | grep -oP '"tag_name":\s*"v\K[0-9.]+')
+if [[ -z ${version// /} ]]; then
+	echo "Version is empty."
+	exit 1
+fi
 dirname="Linux-PAM-$version"
 filename="$dirname.tar.xz"
 depends=()
