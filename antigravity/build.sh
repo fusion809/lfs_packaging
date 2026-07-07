@@ -19,6 +19,5 @@ sudo mkdir -p /usr/share/antigravity
 sudo cp -r "$direname"/* /usr/share/antigravity
 sudo cp $name.desktop /usr/share/applications/
 sudo cp $name.png /usr/share/pixmaps/
-cd ..
 sudo rm -rf "$direname" "$filename"
 echo $version > /var/lib/custom-packages/$name
