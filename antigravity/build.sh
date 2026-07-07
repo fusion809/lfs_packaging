@@ -1,32 +1,26 @@
 #!/bin/bash
 set -e
 name=antigravity
-baseurl="https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/dists/antigravity-debian/main/binary-amd64/Packages"
-downurl="https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/pool/antigravity-debian"
 depends=()
 lfs_depends=(bash coreutils glibc sed tar)
 blfs_depends=(libarchive 
 libx11 libxkbfile # Xorg libraries
 wget)
-filename=$(wget -cqO- $baseurl | grep deb | tail -n 1 | sed 's|File_name: pool/antigravity-debian/||g' | sed 's|Filename: pool/antigravity-debian/||g')
-version=$(echo $filename | grep -v "beta\|alpha\|rc" | cut -d '_' -f 2 | cut -d '-' -f 1)
-_STR=$(echo $filename | sed "s|antigravity_$version-||g" | sed 's/.deb//g')
+eval "$(curl -s "https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=antigravity-ide" \
+  | grep -E '^(pkgver|_build)=' | sed 's|pkgver|version|g' \
+  | head -2)"
 
+echo "filename=$filename"
+echo "direname=$direname"
 if ! [[ -f $filename ]]; then
-	wget -c $downurl/$filename
+	wget -c "https://edgedl.me.gvt1.com/edgedl/release2/j0qc3/antigravity/stable/$version-$_build/linux-x64/$filename"
 fi
-sudo rm -rf $name
-mkdir $name
-cd $name
-bsdtar xf ../${filename}
-tar xf data.tar.xz
-cd usr/share
-sudo cp -r antigravity /usr/share
-sudo cp applications/$name*.desktop /usr/share/applications/
-sudo cp bash-completion/completions/$name /usr/share/bash-completion/completions
-sudo cp zsh/vendor-completions/_$name /usr/share/zsh/site-functions
-sudo cp mime/packages/$name-workspace.xml /usr/share/mime/packages
-sudo cp pixmaps/$name.png /usr/share/pixmaps
+tar xf "$filename"
+sudo mkdir -p /usr/share/antigravity
+sudo cp -r "$direname"/* /usr/share/antigravity
+sudo cp -r "$direname"/bin/* /usr/bin/
+sudo cp $name.desktop /usr/share/applications/
+sudo cp $name.png /usr/share/pixmaps/
 cd ..
-sudo rm -rf $name
+sudo rm -rf "$direname" "$filename"
 echo $version > /var/lib/custom-packages/$name
