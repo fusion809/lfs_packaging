@@ -6,7 +6,7 @@ version="$(wget -cqO- https://gitlab.gnome.org/World/gedit/$name/-/tags | grep "
 lfs_depends=(glibc
 	gcc
 	systemd
-	zlzib)
+	zlib)
 blfs_depends=(cairo
 	dconf
 	exempi
