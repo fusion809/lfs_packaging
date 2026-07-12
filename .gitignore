@@ -22,4 +22,8 @@ jack/jack2
 wget-log.*
 wget-log
 hdf5/hdf5-hdf5_[0-9.]*
-
+gedit/gedit
+libgedit-gfls/libgedit-gfls
+libgedit-tepl/libgedit-tepl
+libgedit-amtk/libgedit-amtk
+libgedit-gtksourceview/libgedit-gtksourceview
