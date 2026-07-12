@@ -1,30 +1,24 @@
 #!/bin/bash
 set -e
 # Variable declaration
-name=eog
-version="$(wget -cqO- https://gitlab.gnome.org/GNOME/eog/-/tags | grep "tags/" | cut -d '/' -f 6 | sed 's/".*//g' | grep -v "alpha\|beta\|\.rc" | grep "$(gnome-shell --version | cut -d ' ' -f 3 | cut -d '.' -f 1)" | head -n 1 | sed 's/^v//g')"
+name=gnome-maps
+version="$(wget -cqO- https://gitlab.gnome.org/GNOME/gnome-maps/-/tags | grep "tags/" | cut -d '/' -f 6 | sed 's/".*//g' | grep -v "alpha\|beta\|\.rc" | grep "$(gnome-shell --version | cut -d ' ' -f 3 | cut -d '.' -f 1)" | head -n 1 | sed 's/^v//g')"
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
 lfs_depends=(glibc
 	gcc
 	systemd
 	zlib)
-blfs_depends=(cairo
-	dconf
-	exempi
-	gdk-pixbuf
-	glib
-	gnome-desktop
-	gtk3
-	hicolor-icon-theme
-	lcms
-	libexif
-	libhandy
-	libjpeg-turbo
-	libpeas
-	librsvg
-	libx11
-	meson)
+blfs_depends=(blueprint-compiler
+	desktop-file-utils
+	geoclue
+	geocode-glib
+	gjs
+	libadwaita
+	libgweather
+	libportal
+	librest
+	libshumate)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
 	wget -c https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$filename
