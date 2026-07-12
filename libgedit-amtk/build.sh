@@ -8,7 +8,6 @@ lfs_depends=(glibc
 	systemd
 	zlib)
 blfs_depends=(cairo
-	dconf
 	exempi
 	gdk-pixbuf
 	glib
@@ -16,11 +15,7 @@ blfs_depends=(cairo
 	gtk3
 	hicolor-icon-theme
 	lcms
-	libexif
 	libhandy
-	libjpeg-turbo
-	libpeas
-	librsvg
 	libx11
 	meson)
 # Fetch source and unpack it
