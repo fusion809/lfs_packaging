@@ -30,13 +30,9 @@ make install DESTDIR="$DDIR" || true
 make infodir=/usr/share/info install.info DESTDIR="$DDIR" || true
 sudo make install
 sudo make infodir=/usr/share/info install.info
-export CP="/var/lib/custom-packages"
-echo "$version" > $CP/$name
-if [ -d "$DDIR" ] && [ "$(ls -A "$DDIR" 2>/dev/null)" ]; then
-    sudo mkdir -p $CP
-    find "$DDIR" -type f -o -type l | sed "s|^$DDIR||" | sudo tee -a "$CP/$name" > /dev/null
-fi
-sudo rm -rf "$DDIR"
 sudo chmod 777 /var/lib/custom-packages/$name
+old_version=$(cat /var/lib/custom-packages/$name | head -n 1)
+sudo rm -rf /usr/share/zsh/$old_version
+echo "$version" > /var/lib/custom-packages/$name
 cd ..
 rm -rf $filename $direname
