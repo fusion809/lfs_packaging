@@ -32,7 +32,9 @@ sudo make install
 sudo make infodir=/usr/share/info install.info
 sudo chmod 777 /var/lib/custom-packages/$name
 old_version=$(cat /var/lib/custom-packages/$name | head -n 1)
-sudo rm -rf /usr/share/zsh/$old_version
+if [[ "$old_version" != "$version" ]]; then
+	sudo rm -rf /usr/share/zsh/$old_version
+fi
 echo "$version" > /var/lib/custom-packages/$name
 cd ..
 rm -rf $filename $direname
