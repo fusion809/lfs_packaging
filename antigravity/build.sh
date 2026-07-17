@@ -18,6 +18,7 @@ rm -rf "$direname"
 tar xf "$filename"
 sudo mkdir -p /usr/share/antigravity
 sudo ln -sf /usr/share/antigravity/bin/antigravity-ide /usr/bin/
+sudo ln -sf /usr/share/antigravity/bin/antigravity-ide /usr/bin/antigravity
 sudo cp -r "$direname"/* /usr/share/antigravity
 sudo cp $name.desktop /usr/share/applications/
 sudo cp $name.png /usr/share/pixmaps/

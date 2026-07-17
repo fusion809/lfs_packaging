@@ -20,6 +20,7 @@ sudo cp -r bash-completion/completions/code /usr/share/bash-completion/completio
 sudo cp -r mime/packages/code-workspace.xml /usr/share/mime/packages/
 sudo mkdir -p /usr/share/zsh/vendor-completions
 sudo cp -r zsh/vendor-completions/_code /usr/share/zsh/vendor-completions
+sudo ln -sf /usr/share/code/bin/code /usr/bin/
 echo $version > /var/lib/custom-packages/$name
 cd ../../..
 rm -rf $name $filename
