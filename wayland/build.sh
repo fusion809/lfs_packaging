@@ -2,6 +2,7 @@
 name=wayland
 version=$(wget -cqO- https://wayland.freedesktop.org/releases.html | grep "$name-[0-9].*.tar.xz" | grep -v ".9[0-9].tar.xz" | head -n 1 | cut -d '/' -f 8)
 blfs_depends=(libxml2)
+lfs_depends=(coreutils meson ninja tar wget xz)
 filename="$name-$version.tar.xz"
 direname="$name-$version"
 URL="https://gitlab.freedesktop.org/wayland/$name/-/releases/$version/downloads/$filename"

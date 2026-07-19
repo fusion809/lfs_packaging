@@ -3,8 +3,10 @@ name=mesa
 version=$(wget -cqO- https://mesa3d.org/ | grep "relnotes" | head -n 1 | cut -d '/' -f 5 | sed 's/.html.*//g')
 direname="$name-$version"
 filename="$direname.tar.xz"
-depends=(xorg-libs)
-blfs_depends=(libdrm mako pyyaml glslang libva llvm wayland-protocols libclc vulkan-loader cbindgen make-ca rust-bindgen)
+depends=(coreutils meson ninja tar wayland-protocols xorg-libs xz)
+lfs_depends=(linux)
+blfs_depends=(libdrm mako glslang libva llvm libclc vulkan-loader cbindgen make-ca rust-bindgen)
+pip_depends=(pyyaml)
 
 if ! [[ -f $filename ]]; then
 	wget -c https://mesa.freedesktop.org/archive/$filename
