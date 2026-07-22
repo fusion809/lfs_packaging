@@ -16,6 +16,7 @@ fi
 tar xvf $filename
 # Compile and install
 cd $direname
+sudo rm -f /usr/lib/libMagickCore-7.Q16HDRI.so* /usr/lib/libMagickWand-7.Q16HDRI.so* /usr/lib/libMagick++-7.Q16HDRI.so*
 ./configure --prefix=/usr     \
             --sysconfdir=/etc \
             --enable-hdri     \
