@@ -1,12 +1,7 @@
 #!/bin/bash
 set -e
 name=networkmanager
-version=$(
-    git ls-remote --tags https://gitlab.freedesktop.org/NetworkManager/NetworkManager.git |
-    sed -n 's|.*refs/tags/\([0-9][0-9.]*\)$|\1|p' |
-    sort -V |
-    tail -1
-)
+version=$(git ls-remote --tags https://gitlab.freedesktop.org/NetworkManager/NetworkManager.git | sed -n 's|.*refs/tags/\([0-9][0-9.]*\)$|\1|p' | sort -V | tail -1)
 blfs_depends=(libndp curl glib2 iptables libpsl newt nss polkit pygobject systemd vala wpa_supplicant)
 filename="NetworkManager-$version.tar.xz"
 direname="${filename/.tar.xz/}"
