@@ -28,3 +28,5 @@ libgedit-tepl/libgedit-tepl
 libgedit-amtk/libgedit-amtk
 libgedit-gtksourceview/libgedit-gtksourceview
 gnome-maps/gnome-maps-*
+dhcpcd.service
+dhcpcd_.service
