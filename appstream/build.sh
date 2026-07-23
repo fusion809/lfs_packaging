@@ -44,14 +44,15 @@ tar xvf $filename
 cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
-sed -i "s/xsl-ns/xsl/" docs/meson.build
+# sed no longer needed for 1.1.4+ (xsl-ns -> xsl change was for older versions)
 mkdir build
 cd build
 meson setup --prefix=/usr            \
             --buildtype=release      \
             -D apidocs=false         \
             -D bash-completion=false \
-            -D stemming=false   .. &&
+            -D stemming=false        \
+            -D man=false        .. &&
 ninja -j$(nproc)
 sudo ninja install
 sudo mv -v /usr/share/doc/appstream{,-$version}
