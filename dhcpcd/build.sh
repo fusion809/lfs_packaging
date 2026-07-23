@@ -1,8 +1,9 @@
 #!/bin/bash
 name=dhcpcd
-version=10.3.2
+version=$(wget -c https://github.com/NetworkConfiguration/dhcpcd/releases -qO- | grep "tag/" | cut -d '/' -f 6 | cut -d '"' -f 1 | sed 's/v//g' | head -n 1)
 direname="$name-$version"
 filename="$direname.tar.xz"
+lfs_depends=(glibc openssl bash systemd)
 
 if ! [[ -f $filename ]]; then
 	wget -c https://github.com/NetworkConfiguration/$name/releases/download/v$version/$filename
