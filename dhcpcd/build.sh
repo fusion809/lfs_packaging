@@ -32,3 +32,5 @@ sudo strip /usr/lib/dhcpcd/dev/udev.so
 cd ..
 sudo install -Dm644 "$name.service" "/usr/lib/systemd/system"
 sudo install -Dm644 "${name}_.service" "/usr/lib/systemd/system/${name}@.service"
+rm -rf "$direname" "$filename"
+echo "$version" > /var/lib/custom-packages/$name
