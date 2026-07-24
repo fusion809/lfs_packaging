@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-# Variable declaration
 name=pango
 version="$(wget -cqO- https://gitlab.gnome.org/GNOME/$name/-/tags | grep "tags/" | cut -d '/' -f 6 | sed 's/".*//g' | grep -v "alpha\|beta\|\.rc" | grep -v "1.90" | head -n 1 | sed 's/^v//g')"
 filename="$name-$version.tar.bz2"

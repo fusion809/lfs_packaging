@@ -1,17 +1,15 @@
 #!/bin/bash
 set -e
 # Variable declaration
-name=gnome-terminal
-version="$(wget -cqO- https://gitlab.gnome.org/GNOME/gnome-terminal/-/tags | grep "tags/" | cut -d '/' -f 6 | sed 's/".*//g' | grep -v "alpha\|beta\|\.rc" | head -n 1 | sed 's/^v//g')"
+name=gnome-tweaks
+version="$(wget -cqO- https://gitlab.gnome.org/GNOME/gnome-tweaks/-/tags | grep "tags/" | cut -d '/' -f 6 | sed 's/".*//g' | grep -v "alpha\|beta\|\.rc" | head -n 1 | sed 's/^v//g')"
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
-blfs_depends=(dconf
+blfs_depends=(gtk4
 	gsettings-desktop-schemas
-	itstool
-	libhandy
-	vte
-	gnome-shell
-	nautilus)
+	libadwaita
+	libgudev
+	pygobject sound-theme-freedesktop)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
 	wget -c https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$filename
@@ -20,14 +18,12 @@ rm -rf $direname
 tar xf $filename
 # Compile and install
 cd $direname
-sed -i -r 's:"(/system):"/org/gnome\1:g' src/external.gschema.xml
 mkdir build
 cd build
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 meson setup --prefix=/usr       \
             --buildtype=release \
-	    -D docs=false \
 	    ..
 ninja -j$(nproc)
 sudo ninja install
