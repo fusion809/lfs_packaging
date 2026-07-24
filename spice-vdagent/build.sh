@@ -26,7 +26,7 @@
 set -e
 # Variable declarations
 name=spice-vdagent
-version=$(wget -cqO- https://gitlab.freedesktop.org/spice/linux/vd_agent/-/tags | grep "/tags/spice-vdagent-[0-9]" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 7 | sed 's/spice-vdagent-//g')
+version=$(wget -qO- "https://gitlab.freedesktop.org/api/v4/projects/spice%2Flinux%2Fvd_agent/releases?per_page=1" | grep -o '"tag_name":"[^"]*"' | head -n 1 | cut -d'"' -f4 | sed 's/^spice-vdagent-//')
 docs="COPYING CHANGELOG.md README.md"
 direname="$name-$version"
 filename="$direname.tar.bz2"

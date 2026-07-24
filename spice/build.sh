@@ -25,7 +25,7 @@
 set -e
 # Variable declarations
 name=spice
-version=$(wget -cqO- https://gitlab.freedesktop.org/spice/spice/-/tags | grep "/tags/v" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 6 | sed 's/^v//g')
+version=$(wget -qO- "https://gitlab.freedesktop.org/api/v4/projects/spice%2Fspice/releases?per_page=1" | grep -o '"tag_name":"[^"]*"' | head -n 1 | cut -d'"' -f4 | sed 's/^v//')
 docs="AUTHORS CHANGELOG.md COPYING README"
 depends=(spice-protocol)
 lfs_depends=(bash coreutils make meson sed tar)

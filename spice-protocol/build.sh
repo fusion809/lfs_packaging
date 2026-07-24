@@ -25,7 +25,7 @@
 set -e
 # Variable declarations
 name=spice-protocol
-version=$(wget -cqO- https://gitlab.freedesktop.org/spice/spice-protocol/-/tags | grep "/tags/v" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 6 | sed 's/^v//g')
+version=$(wget -qO- "https://gitlab.freedesktop.org/api/v4/projects/spice%2Fspice-protocol/releases?per_page=1" | grep -o '"tag_name":"[^"]*"' | head -n 1 | cut -d'"' -f4 | sed 's/^v//')
 docs="COPYING *.md"
 direname="$name-$version"
 filename="$direname.tar.xz"
