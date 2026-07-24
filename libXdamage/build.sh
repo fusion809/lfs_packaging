@@ -2,7 +2,7 @@
 set -e
 # Variable declarations
 name=libXdamage
-version=$(wget -cqO- https://xorg.freedesktop.org/archive/individual/lib/ | grep "$name" | grep '\.tar\.xz"' | tail -n 1 | cut -d '-' -f 2 | cut -d '"' -f 1 | sed 's/.tar.xz//g')
+version=$(wget -qO- https://xorg.freedesktop.org/archive/individual/lib/ | grep -oP 'href="libXdamage-\K[0-9][^"]+(?=\.tar\.xz")' | sort -V | tail -n 1)
 direname="${name}-$version"
 filename="$direname.tar.xz"
 lfs_depends=(bash coreutils glibc make sed systemd tar util-linux xz zlib)

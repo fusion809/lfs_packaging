@@ -2,7 +2,7 @@
 set -e
 # Variable declarations
 name=libwmf
-version=$(wget -cqO- https://github.com/caolanm/libwmf/releases | grep "/tag/v" | grep -v "alpha\|beta\|[0-9]rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+version=$(git ls-remote --tags https://github.com/caolanm/libwmf.git | grep -oP 'refs/tags/v\K[0-9][0-9.]+$' | sort -V | tail -n 1)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=()

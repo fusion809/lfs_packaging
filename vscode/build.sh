@@ -1,6 +1,6 @@
 #!/bin/bash
 name=vscode
-version=$(wget -cqO- https://github.com/Microsoft/vscode/releases | grep "releases/tag" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
+version=$(git ls-remote --tags https://github.com/microsoft/vscode.git | grep -oP 'refs/tags/\K[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -n 1)
 filename="code_${version}_amd64.deb"
 if ! [[ -f $filename ]]; then
 	wget -c https://update.code.visualstudio.com/${version}/linux-deb-x64/stable -O "$filename"

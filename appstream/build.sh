@@ -25,7 +25,7 @@
 set -e
 # Variable declarations
 name=appstream
-version=$(wget -cqO- https://www.freedesktop.org/software/appstream/releases/ | grep ".tar.xz\"" | tail -n 1 | cut -d '"' -f 2 | sed 's/.tar.xz//g' | cut -d '-' -f 2)
+version=$(wget -qO- https://www.freedesktop.org/software/appstream/releases/ | grep -oP 'href="AppStream-\K[0-9][^"]+(?=\.tar\.xz")' | sort -V | tail -n 1)
 docs="AUTHORS CHANGELOG.md COPYING README"
 depends=()
 lfs_depends=(freetype2 gcc glibc)
