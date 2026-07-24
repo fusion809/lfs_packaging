@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=elfutils
-version=$(wget -cqO- https://sourceware.org/git/?p=elfutils.git\;a=tags | grep "elfutils-" | head -n 1 | cut -d "-" -f 2 | sed "s/<.*//g")
+version=$(git ls-remote --tags https://sourceware.org/git/elfutils.git | grep -oP 'refs/tags/elfutils-\K[0-9.]+$' | sort -V | tail -n 1)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
 lfs_depends=(bzip2
