@@ -29,14 +29,14 @@ name=flatpak
 version=$(wget -cqO- https://github.com/flatpak/flatpak/releases/ | grep "Latest" -B 5 | grep "/tag/" | cut -d '"' -f 6 | cut -d '/' -f 6)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
-depends=(gcab ostree)
+depends=(gcab ostree socat)
 lfs_depends=(bash coreutils gcc glibc meson ninja python systemd tar xz zstd)
 blfs_depends=(appstream bubblewrap curl dbus dconf fuse gdk-pixbuf glib gpgme json-glib libarchive libseccomp libxau # Xorg lib
 polkit wayland xdg-dbus-proxy xdg-utils)
 pip_depends=(gobject)
 # libmalcontent is listed for Arch, but seems to run for my uses without it
 # Fetch and unpack source
-rm -rf $direname
+sudo rm -rf $direname
 if ! [[ -f $filename ]]; then
 	wget -c https://github.com/flatpak/flatpak/releases/download/${version}/$filename
 fi
@@ -59,6 +59,9 @@ cd build
     --prefix=/usr \
     --sbindir=/usr/sbin \
     --sysconfdir=/etc \
+    -D man=disabled \
+    -D gtkdoc=disabled \
+    -D docbook_docs=disabled \
     -Ddocdir=/usr/share/doc/$name-$version \
     -Dstrip=true
   "${NINJA:=ninja}" -j$(nproc)
