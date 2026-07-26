@@ -32,4 +32,8 @@ dhcpcd.service
 dhcpcd_.service
 rofi/rofi
 rofi/libgwater
+uninstalled/rofi/rofi
+uninstalled/rofi/libgwater
+uninstalled/rofi/libnkutils
+gnome-browser-connector/gnome-browser-connector
 rofi/libnkutils
