@@ -19,9 +19,10 @@ blfs_depends=(cairo
 	libx11
 	meson)
 # Fetch source and unpack it
-if [[ ! -d "$direname" ]]; then
+repo_url=https://gitlab.gnome.org/World/gedit/$name.git
+if [[ ! -d "$name" ]]; then
 	git clone --depth 1 --branch "$version" --recurse-submodules --shallow-submodules \
-		https://gitlab.gnome.org/World/gedit/$name.git
+		$repo_url
 fi
 
 git -C "$name" remote set-url origin "$repo_url"
