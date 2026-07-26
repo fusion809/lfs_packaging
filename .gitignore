@@ -30,3 +30,6 @@ libgedit-gtksourceview/libgedit-gtksourceview
 gnome-maps/gnome-maps-*
 dhcpcd.service
 dhcpcd_.service
+rofi/rofi
+rofi/libgwater
+rofi/libnkutils
