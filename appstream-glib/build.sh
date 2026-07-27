@@ -2,7 +2,7 @@
 set -e
 # Variable declarations
 name=appstream-glib
-version=$(wget -cqO- https://people.freedesktop.org/~hughsient/appstream-glib/releases/ | grep "appstream-glib-.*.tar.xz" | tail -n 1 | cut -d '"' -f 2 | sed 's/appstream-glib-//g' | sed 's/.tar.xz//g')
+version=$(wget -cqO- https://people.freedesktop.org/~hughsient/appstream-glib/releases/ | grep -v "sha.*sum" | grep "appstream-glib-.*.tar.xz" | tail -n 1 | cut -d '"' -f 2 | sed 's/appstream-glib-//g' | sed 's/.tar.xz//g')
 depends=()
 blfs_depends=(curl gdk-pixbuf gtk3 json-glib libarchive libyaml gtk-doc)
 pip_depends=()
