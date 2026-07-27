@@ -3,7 +3,9 @@ set -e
 # Variable declarations
 name=suitesparse
 _name=SuiteSparse
-version=$(wget -cqO- https://github.com/DrTimothyAldenDavis/SuiteSparse/releases | grep "releases/tag/v" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+source ~/lfs_packaging/shared-funcs.sh
+#version=$(wget -cqO- https://github.com/DrTimothyAldenDavis/SuiteSparse/releases | grep "releases/tag/v" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+version=$(github_ver DrTimothyAldenDavis/SuiteSparse | sed 's/v//g')
 filename="$_name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=(blas lapack)
