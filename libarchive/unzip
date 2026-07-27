@@ -1,0 +1,34 @@
+#!/bin/sh
+
+dest=
+archive=
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -uod|-oud|-dou|-duo|-odu|-udo)
+            shift
+            dest=$1
+            ;;
+        -d)
+            shift
+            dest=$1
+            ;;
+        -u|-o)
+            ;;
+        --)
+            shift
+            archive=$1
+            break
+            ;;
+        -*)
+            ;;
+        *)
+            archive=$1
+            ;;
+    esac
+    shift
+done
+
+[ -n "$archive" ] || exit 2
+
+exec bsdtar -xf "$archive" ${dest:+-C "$dest"}
