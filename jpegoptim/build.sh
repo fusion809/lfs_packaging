@@ -19,5 +19,5 @@ make -j$(nproc)
 make strip -j$(nproc)
 sudo make install
 cd ..
-rm -rf $direname
+rm -rf $direname $filename
 echo "$version" > /var/lib/custom-packages/$name
