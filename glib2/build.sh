@@ -8,6 +8,7 @@ blfs_depends=(docutils libxslt)
 filename="$_name-$version.tar.xz"
 direname="$_name-$version"
 gobj_filename="gobject-introspection-$gobj_ver.tar.xz"
+gobj_direname="${gobj_filename/.tar.xz/}"
 
 if ! [[ -f $filename ]]; then
 	wget -c https://download.gnome.org/sources/glib/$(echo $version | sed 's/.[0-9]$//g')/$filename
@@ -24,7 +25,9 @@ fi
 rm -rf $direname
 tar xf $filename
 cd $direname
+echo "Patching to remove warnings"
 patch -Np1 -i ../glib-skip_warnings-1.patch
+echo "Initial build of GLIB2..."
 mkdir build &&
 cd    build &&
 
@@ -37,6 +40,18 @@ meson setup ..                  \
       -D sysprof=disabled       &&
 ninja -j$(nproc)
 sudo ninja install
+echo "Initial build of GObject-Introspection..."
+tar xf ../../$gobj_filename &&
+
+meson setup $gobj_direname gi-build \
+            --prefix=/usr --buildtype=release     &&
+ninja -C gi-build -j$(nproc)
+sudo ninja -C gi-build install
+echo "Now rebuilding GLIB2 with introspection enabled..."
+meson configure -D introspection=enabled &&
+ninja -j$(nproc)
+sudo ninja install
+echo "Build finished, cleaning up..."
 cd ../..
 rm -rf $direname $filename $gobj_filename
 echo "$version" > /var/lib/custom-packages/$name
