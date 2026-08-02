@@ -13,6 +13,7 @@ fi
 cd $name
 git checkout master
 git fetch --tags --all
+git reset --hard origin/master  # (or git pull)
 version=$(git describe --tags --abbrev=0)
 git checkout $version
 export PATH=$PATH:/opt/rustc/bin
