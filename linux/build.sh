@@ -12,7 +12,7 @@ fi
 function os-release {
 	cat /etc/os-release | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv} "PRETTY_NAME" | cut -d '"' -f 2 | cut -d ' ' -f 4
 }
-rm -rf $direname
+sudo rm -rf $direname
 tar xf $filename
 cd $direname
 make mrproper
@@ -27,5 +27,5 @@ sudo cp -r Documentation -T /usr/share/doc/$direname
 sudo rm -rf /usr/share/doc/$(uname -r)
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 cd ..
-rm -rf $filename $direname
+sudo rm -rf $filename $direname
 echo "$version" > /var/lib/custom-packages/$name

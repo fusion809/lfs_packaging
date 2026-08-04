@@ -2,7 +2,7 @@
 set -e
 # Variable declarations
 name=qrupdate
-version=$(wget -cqO- https://github.com/mpimd-csc/qrupdate-ng/releases | grep "releases/tag/v" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+version=$(wget -cqO- https://github.com/mpimd-csc/qrupdate-ng/releases | grep "releases/tag/v" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g' | head -n 1)
 filename=$name-$version.tar.gz
 direname="$name-ng-$version"
 depends=(blas lapack)
