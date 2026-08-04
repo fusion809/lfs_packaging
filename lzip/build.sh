@@ -2,7 +2,15 @@
 set -e
 # Variable declarations
 name=lzip
-version=$(wget -cqO- https://download.savannah.gnu.org/releases/lzip/ | grep -oE 'lzip-[0-9.]+\.tar\.gz' | sort -V | tail -n 1 | sed -e 's/lzip-//' -e 's/.tar.gz//')
+# Get versions into temp variables (updates will include these because they are ABOVE the version= line)
+savannah_ver=$(wget -cqO- -T 10 "https://download.savannah.gnu.org/releases/lzip/" | grep -oE 'lzip-[0-9.]+\.tar\.gz' | sort -V | tail -n 1 | sed -e 's/lzip-//' -e 's/.tar.gz//')
+
+arch_ver=$(wget -cqO- -T 10 "https://gitlab.archlinux.org/archlinux/packaging/packages/lzip/-/raw/main/PKGBUILD" | grep "^pkgver=" | cut -d '=' -f 2)
+
+# The FIRST "version=" line must be the final result. 
+# This tells Bash to use savannah_ver, but if it's empty, use arch_ver instead.
+version="${savannah_ver:-$arch_ver}"
+
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=()
