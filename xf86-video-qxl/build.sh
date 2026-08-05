@@ -26,7 +26,9 @@
 set -e
 # Variable declarations
 name=xf86-video-qxl
-version=$(wget -cqO- https://xorg.freedesktop.org/releases/individual/driver/ | grep "xf86-video-qxl.*.tar.xz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 2 | head -n 1 | sed 's/xf86-video-qxl-//g' | sed 's/.tar.xz//g')
+xorg_ver=$(wget -cqO- https://xorg.freedesktop.org/releases/individual/driver/ | grep "xf86-video-qxl.*.tar.xz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 2 | head -n 1 | sed 's/xf86-video-qxl-//g' | sed 's/.tar.xz//g')
+arch_ver=$(wget -cqO- -T 10 "https://gitlab.archlinux.org/archlinux/packaging/packages/$name/-/raw/main/PKGBUILD" | grep "^pkgver=" | cut -d '=' -f 2)
+version=${xorg_ver:-$arch_ver}
 if [ "${XSPICE:-no}" = "yes" ]; then
   with_xspice="--enable-xspice=yes"
 else
