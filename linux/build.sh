@@ -3,7 +3,9 @@ set -e
 name=linux
 #version=$(wget -cqO- https://kernel.org/ | grep "linux/kernel/v" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 8 | sed 's/.tar.xz//g' | sed 's/linux-//g')
 #version=7.1.6
-version=$(wget -cqO- https://www.kernel.org/releases.json | grep -A 2 '"latest_stable":' | grep '"version":' | head -n 1 | cut -d'"' -f4)
+kern_ver=$(wget -cqO- https://www.kernel.org/releases.json | grep -A 2 '"latest_stable":' | grep '"version":' | head -n 1 | cut -d'"' -f4)
+arch_ver=$(wget -cqO- -T 10 "https://gitlab.archlinux.org/archlinux/packaging/packages/$name/-/raw/main/PKGBUILD" | grep "^pkgver=" | cut -d '=' -f 2)
+version=${kern_ver:-$arch_ver}
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 
