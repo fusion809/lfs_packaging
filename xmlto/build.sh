@@ -1,7 +1,9 @@
 #!/bin/bash
 set -e
 name=xmlto
-version=$(wget -cqO- https://pagure.io/xmlto/releases | grep "/xmlto/archive/.*tar.gz" | cut -d '"' -f 2 | cut -d '/' -f 4)
+upst_ver=$(wget -cqO- https://pagure.io/xmlto/releases | grep "/xmlto/archive/.*tar.gz" | cut -d '"' -f 2 | cut -d '/' -f 4)
+arch_ver=$(wget -cqO- -T 10 "https://gitlab.archlinux.org/archlinux/packaging/packages/$name/-/raw/main/PKGBUILD" | grep "^pkgver=" | cut -d '=' -f 2)
+version=${upst_ver:-$arch_ver}
 direname="$name-$version"
 filename="$direname.tar.gz"
 blfs_depends=(docbook-xml docbook-xsl-nons libxslt)
