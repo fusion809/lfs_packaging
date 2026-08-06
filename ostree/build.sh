@@ -48,6 +48,7 @@ CXXFLAGS="-O2 -fPIC"
   --sysconfdir=/etc \
   --localstatedir=/var \
   --mandir=/usr/man \
+  --enable-man=no \
   --docdir=/usr/share/doc/$direname
 make -j$(nproc)
 sudo make install DESTDIR=/
