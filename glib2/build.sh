@@ -2,7 +2,10 @@
 set -e
 name=glib2
 _name=glib
-version=$(git ls-remote --tags --refs https://gitlab.gnome.org/GNOME/glib.git | grep "refs/tags/[0-9]" | tail -n 1 | cut -d '/' -f 3)
+git_ver=$(git ls-remote --tags --refs https://gitlab.gnome.org/GNOME/glib.git | grep "refs/tags/[0-9]" | tail -n 1 | cut -d '/' -f 3)
+arch_ver=$(wget -cqO- -T 10 "https://gitlab.archlinux.org/archlinux/packaging/packages/$name/-/raw/main/PKGBUILD" | grep "^pkgver=" | cut -d '=' -f 2)
+version="${git_ver:-$arch_ver}"
+
 gobj_ver=$(git ls-remote --tags --refs https://gitlab.gnome.org/GNOME/gobject-introspection.git | grep "refs/tags/[0-9]" | tail -n 1 | cut -d '/' -f 3)
 blfs_depends=(docutils libxslt)
 filename="$_name-$version.tar.xz"
