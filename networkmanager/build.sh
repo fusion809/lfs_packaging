@@ -1,7 +1,10 @@
 #!/bin/bash
 set -e
 name=networkmanager
-version=$(git ls-remote --tags https://gitlab.freedesktop.org/NetworkManager/NetworkManager.git | sed -n 's|.*refs/tags/\([0-9][0-9.]*\)$|\1|p' | sort -V | tail -1)
+up_ver=$(git ls-remote --tags https://gitlab.freedesktop.org/NetworkManager/NetworkManager.git | sed -n 's|.*refs/tags/\([0-9][0-9.]*\)$|\1|p' | sort -V | tail -1)
+arch_ver=$(wget -cqO- -T 10 "https://gitlab.archlinux.org/archlinux/packaging/packages/lzip/-/raw/main/PKGBUILD" | grep "^pkgver=" | cut -d '=' -f 2)
+version="${up_ver:-$arch_ver}"
+
 blfs_depends=(libndp curl glib2 iptables libpsl newt nss polkit pygobject systemd vala wpa_supplicant)
 filename="NetworkManager-$version.tar.xz"
 direname="${filename/.tar.xz/}"
