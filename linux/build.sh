@@ -9,9 +9,9 @@ version=${kern_ver:-$arch_ver}
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 
-if ! [[ -f $filename ]]; then
+#if ! [[ -f $filename ]]; then
 	wget -c https://cdn.kernel.org/pub/linux/kernel/v$(echo $version | cut -d '.' -f 1).x/$filename
-fi
+#fi
 
 function os-release {
 	cat /etc/os-release | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv} "PRETTY_NAME" | cut -d '"' -f 2 | cut -d ' ' -f 4
