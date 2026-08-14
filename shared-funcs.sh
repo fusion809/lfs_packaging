@@ -112,3 +112,24 @@ function gn_ver {
 		return 0
 	fi
 }
+
+function lgd_ver {
+	name=$1
+	local up_ver=$(wget -cqO- https://gitlab.gnome.org/World/gedit/$name/-/tags | grep "tags/"| grep -v "alpha\|beta\|\.rc" | cut -d '"' -f 2 | cut -d '/' -f 7 | head -n 1)
+	
+	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
+		echo "$up_ver"
+		return 0
+	fi
+
+	local git_ver=$(git ls-remote --tags --refs "https://gitlab.gnome.org/World/gedit/$name.git" | grep "refs/tags/" | grep -v "alpha\|beta\|rc" | cut -d '/' -f 3 | grep -v ".9" | sort -V | tail -n 1)
+	if echo "$git_ver" | grep -q "[0-9]\.[0-9]"; then
+		echo "$git_ver"
+		return 0
+	fi
+	local arch_ver=$(aver "$name")
+	if echo "$arch_ver" | grep -qP "[0-9]"; then
+		echo "$arch_ver"
+		return 0
+	fi
+}

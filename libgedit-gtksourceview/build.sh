@@ -2,7 +2,7 @@
 set -e
 # Variable declaration
 name=libgedit-gtksourceview
-version="$(git ls-remote --tags https://gitlab.gnome.org/World/gedit/$name.git | grep -oP 'refs/tags/\K[0-9][0-9.]+$' | sort -V | tail -n 1)"
+version=$(lgd_ver $name)
 lfs_depends=(glibc
 	gcc
 	systemd
