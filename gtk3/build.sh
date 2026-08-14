@@ -3,7 +3,7 @@
 set -e
 # Variable declarations
 name=gtk3
-version=$(wget -cqO- https://gitlab.gnome.org/GNOME/gtk/-/tags | grep "\-3\." | head -n 1 | cut -d '/' -f 6)
+version=$(gn_ver $name)
 blfs_depends=(at-spi2-core gdk-pixbuf libeproxy pango)
 lfs_depends=(bash coreutils make meson sed tar)
 direname="gtk-$version"

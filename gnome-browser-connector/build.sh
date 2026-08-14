@@ -1,6 +1,6 @@
 #!/bin/bash
 name=gnome-browser-connector
-version=$(git ls-remote --tags --refs https://gitlab.gnome.org/GNOME/gnome-browser-connector.git | awk '{print $2}' | sed 's|refs/tags/||' | sed 's/^v//g' | sort -V | tail -n1)
+version=$(gn_ver $name)
 lfs_depends=(python meson)
 blfs_depends=(pygobject gnome-shell glib2 git)
 depends=(libarchive) # Required to actually install extensions

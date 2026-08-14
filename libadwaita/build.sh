@@ -2,7 +2,7 @@
 set -e
 # Variable declaration
 name=libadwaita
-version=$(git ls-remote --tags --refs https://gitlab.gnome.org/GNOME/libadwaita.git | grep -v "beta\|alpha\|rc" | tail -n 1 | cut -d '/' -f 3)
+version=$(gn_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 lfs_depends=(glibc

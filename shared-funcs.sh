@@ -80,3 +80,35 @@ function xfd_ver() {
 		return 0
 	fi
 }
+
+function gn_ver {
+	if [[ "$1" == "gtk3" ]]; then
+		local up_ver=$(wget -cqO- https://gitlab.gnome.org/GNOME/gtk/-/tags | grep "tags/" | grep "\-3\." | cut -d '/' -f 6 | sed 's/".*//g' | grep -v "alpha\|beta\|\.rc" | sort -V | tail -n 1 | sed 's/^v//g')
+		if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
+			echo "$up_ver"
+			return 0
+		fi
+
+		local git_ver=$(git ls-remote --tags --refs "https://gitlab.gnome.org/GNOME/gtk.git" | grep "refs/tags/" | grep "\-3\." | grep -v "alpha\|beta\|rc" | cut -d '/' -f 3 | sort -V | tail -n 1)
+		if echo "$git_ver" | grep -q "[0-9]\.[0-9]"; then
+			echo "$git_ver"
+			return 0
+		fi
+	else
+		local up_ver=$(wget -cqO- https://gitlab.gnome.org/GNOME/$1/-/tags | grep "tags/" | cut -d '/' -f 6 | sed 's/".*//g' | grep -v "alpha\|beta\|\.rc" | sort -V | tail -n 1 | sed 's/^v//g')
+		if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
+			echo "$up_ver"
+			return 0
+		fi
+		local git_ver=$(git ls-remote --tags --refs "https://gitlab.gnome.org/GNOME/$1.git" | grep "refs/tags/" | grep -v "alpha\|beta\|rc" | cut -d '/' -f 3 | sort -V | tail -n 1)
+		if echo "$git_ver" | grep -q "[0-9]\.[0-9]"; then
+			echo "$git_ver"
+			return 0
+		fi
+	fi
+	local arch_ver=$(aver "${2:-$1}")
+	if echo "$arch_ver" | grep -qP "[0-9]"; then
+		echo "$arch_ver"
+		return 0
+	fi
+}

@@ -2,7 +2,7 @@
 set -e
 # Variable declaration
 name=gnome-online-accounts
-version="$(wget -cqO- https://gitlab.gnome.org/GNOME/gnome-online-accounts/-/tags | grep "tags/" | cut -d '/' -f 6 | sed 's/".*//g' | grep -v "alpha\|beta\|\.rc" | head -n 1 | sed 's/^v//g')"
+version=$(gn_ver $name)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
 blfs_depends=(dconf
