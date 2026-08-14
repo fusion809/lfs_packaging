@@ -1,6 +1,5 @@
 #!/bin/bash
 name=dhcpcd
-source ~/lfs_packaging/shared-funcs.sh
 get_version() {
 	local up_ver=$(wget -c https://github.com/NetworkConfiguration/dhcpcd/releases -qO- | grep "tag/" | cut -d '/' -f 6 | cut -d '"' -f 1 | sed 's/v//g' | head -n 1)
 	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then

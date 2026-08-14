@@ -26,7 +26,6 @@
 set -e
 # Variable declarations
 name=xf86-video-qxl
-source ~/lfs_packaging/shared-funcs.sh
 version=$(xfd_ver $name)
 if [ "${XSPICE:-no}" = "yes" ]; then
   with_xspice="--enable-xspice=yes"

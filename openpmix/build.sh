@@ -3,7 +3,6 @@ set -e
 # Variable declarations
 name=openpmix
 __name=pmix
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver $name/$name)
 filename="$__name-$version.tar.gz"
 direname="${filename/.tar.gz/}"

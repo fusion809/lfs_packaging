@@ -2,7 +2,6 @@
 set -e
 # Variable declaration
 name=udisks
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver "storaged-project/udisks")
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"

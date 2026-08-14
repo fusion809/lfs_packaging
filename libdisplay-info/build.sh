@@ -1,6 +1,5 @@
 #!/bin/bash
 name=libdisplay-info
-source ~/lfs_packaging/shared-funcs.sh
 get_version() {
 	local up_ver=$(wget -cqO- https://gitlab.freedesktop.org/emersion/libdisplay-info/-/tags | grep "tags/" | grep -v "dev\|rc" | cut -d '/' -f 6 | sed 's/".*//g' | sort -V | tail -n 1)
 	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then

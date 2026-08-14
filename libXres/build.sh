@@ -2,7 +2,6 @@
 set -e
 # Variable declarations
 name=libXres
-source ~/lfs_packaging/shared-funcs.sh
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"

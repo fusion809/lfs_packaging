@@ -3,7 +3,6 @@ set -e
 # Variable declarations
 name=suitesparse
 _name=SuiteSparse
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver "DrTimothyAldenDavis/SuiteSparse")
 filename="$_name-$version.tar.gz"
 direname="${filename/.tar.gz/}"

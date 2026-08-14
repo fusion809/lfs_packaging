@@ -2,7 +2,6 @@
 set -e
 # Variable declarations
 name="leptonica"
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver "DanBloomberg/leptonica")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"

@@ -1,7 +1,6 @@
 #!/bin/bash
 name=gnome-extension-manager
 _name=extension-manager
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver mjakeman/$_name)
 direname=$_name-$version
 filename=$direname.tar.gz

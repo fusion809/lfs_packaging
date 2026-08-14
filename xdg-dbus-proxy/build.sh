@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
 name=xdg-dbus-proxy
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver flatpak/$name)
 blfs_depends=(glib2)
 direname="$name-$version"

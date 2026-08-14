@@ -26,7 +26,6 @@
 set -e
 # Variable declarations
 name=ostree
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver ostreedev/ostree)
 direname="lib${name}-$version"
 filename="$direname.tar.xz"

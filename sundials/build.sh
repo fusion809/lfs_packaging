@@ -2,7 +2,6 @@
 set -e
 # Variable declarations
 name=sundials
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver "llnl/sundials")
 filename=$name-$version.tar.gz
 direname="${filename/.tar.gz/}"

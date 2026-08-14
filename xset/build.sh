@@ -2,7 +2,6 @@
 set -e
 # Variable declarations
 name=xset
-source ~/lfs_packaging/shared-funcs.sh
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"

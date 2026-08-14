@@ -2,7 +2,6 @@
 set -e
 # Variable declaration
 name=libgusb
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver "hughsie/libgusb")
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"

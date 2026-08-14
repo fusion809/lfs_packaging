@@ -2,7 +2,6 @@
 set -e
 # Variable declarations
 name=tesseract
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver "tesseract-ocr/tesseract")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"

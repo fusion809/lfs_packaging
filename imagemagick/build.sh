@@ -3,7 +3,6 @@
 set -e
 # Variable declarations
 name=imagemagick
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver "ImageMagick/ImageMagick")
 lfs_depends=(bzip2 fftw fontconfig freetype glibc gcc xz libpng zlib)
 blfs_depends=(xorg-lib)

@@ -2,7 +2,6 @@
 set -e
 # Variable declarations
 name=qrupdate
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver "mpimd-csc/qrupdate-ng")
 filename=$name-$version.tar.gz
 direname="$name-ng-$version"

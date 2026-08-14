@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
 name=vim
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver "vim/vim")
 majver=$(echo $version | cut -d . -f 1)
 minver=$(echo $version | cut -d . -f 2)

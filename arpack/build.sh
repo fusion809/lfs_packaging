@@ -3,7 +3,6 @@ set -e
 # Variable declarations
 name="arpack"
 _name="arpack-ng"
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver "opencollab/arpack-ng")
 depends=(lapack openmpi)
 lfs_depends=(bash coreutils gzip make sed tar)

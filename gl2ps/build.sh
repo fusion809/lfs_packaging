@@ -2,7 +2,6 @@
 set -e
 # Variable declarations
 name=gl2ps
-source ~/lfs_packaging/shared-funcs.sh
 get_version() {
 	local up_ver=$(wget -cqO- https://geuz.org/gl2ps/src/ | grep "[0-9].tgz" | grep -v "alpha\|beta\|\.rc" | cut -d '"' -f 8 | tail -n 1 | sed 's/gl2ps-//g' | sed 's/.tgz//g')
 	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then

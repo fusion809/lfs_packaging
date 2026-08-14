@@ -2,7 +2,6 @@
 set -e
 name=linux
 #version=$(wget -cqO- https://kernel.org/ | grep "linux/kernel/v" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 8 | sed 's/.tar.xz//g' | sed 's/linux-//g')
-source ~/lfs_packaging/shared-funcs.sh
 get_version() {
 	local up_ver=$(wget -cqO- https://www.kernel.org/releases.json | grep -A 2 '"latest_stable":' | grep '"version":' | head -n 1 | cut -d '"' -f 4)
 	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then

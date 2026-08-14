@@ -2,7 +2,6 @@
 set -e
 # Variable declarations
 name=pcre2
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver PCRE2Project/pcre2)
 filename="$name-$version.tar.gz"
 direname="$name-$name-$version"

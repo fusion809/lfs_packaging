@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
 name=xmlto
-source ~/lfs_packaging/shared-funcs.sh
 get_version() {
 	local up_ver=$(wget -cqO- https://pagure.io/xmlto/releases | grep "/xmlto/archive/.*tar.gz" | cut -d '"' -f 2 | cut -d '/' -f 4)
 	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then

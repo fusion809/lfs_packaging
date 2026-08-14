@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
 name=linux-pam
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver "linux-pam/linux-pam")
 if [[ -z ${version// /} ]]; then
 	echo "Version is empty."

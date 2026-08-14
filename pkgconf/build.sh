@@ -1,6 +1,5 @@
 #!/bin/bash
 name=pkgconf
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver pkgconf/pkgconf)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"

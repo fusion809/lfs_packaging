@@ -2,7 +2,6 @@
 # Included because it's required by prison-6.24.0 of kframeworks
 set -e
 name=libdmtx
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver "dmtx/libdmtx")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"

@@ -2,7 +2,6 @@
 set -e
 # Variable declarations
 name=portaudio
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver "$name/$name")
 filename="$name-v$version.tar.gz"
 direname=$(echo "${filename/.tar.gz/}" | sed 's/v//g')

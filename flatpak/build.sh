@@ -26,7 +26,6 @@
 set -e
 # Variable declarations
 name=flatpak
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver $name/$name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"

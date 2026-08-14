@@ -25,7 +25,6 @@
 set -e
 # Variable declarations
 name=appstream
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver "ximion/appstream")
 docs="AUTHORS CHANGELOG.md COPYING README"
 depends=()

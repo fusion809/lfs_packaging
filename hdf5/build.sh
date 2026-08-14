@@ -2,7 +2,6 @@
 set -e
 # Variable declarations
 name=hdf5
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver "HDFGroup/hdf5")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"

@@ -2,7 +2,6 @@
 set -e
 # Variable declaration
 name=polkit
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver "$name-org/$name")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"

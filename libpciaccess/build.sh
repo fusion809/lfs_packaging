@@ -2,7 +2,6 @@
 set -e
 # Variable declarations
 name=libpciaccess
-source ~/lfs_packaging/shared-funcs.sh
 version=$(xfd_ver $name)
 filename="$name-$version.tar.xz"
 direname=${filename/.tar.xz/}

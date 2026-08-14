@@ -2,7 +2,6 @@
 set -e
 # Variable declarations
 name=prrte
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver "openpmix/prrte")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"

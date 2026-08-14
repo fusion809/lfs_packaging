@@ -2,7 +2,6 @@
 set -e
 # Variable declarations
 name=libfabric
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver "ofiwg/libfabric")
 filename="$name-$version.tar.bz2"
 direname=${filename/.tar.bz2/}

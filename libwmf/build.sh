@@ -2,7 +2,6 @@
 set -e
 # Variable declarations
 name=libwmf
-source ~/lfs_packaging/shared-funcs.sh
 version=$(gh_ver "caolanm/libwmf")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"

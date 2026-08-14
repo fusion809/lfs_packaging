@@ -2,7 +2,6 @@
 set -e
 name=glib2
 _name=glib
-source ~/lfs_packaging/shared-funcs.sh
 get_version() {
 	local up_ver=$(wget -cqO- https://gitlab.gnome.org/GNOME/glib/-/tags | grep "/tags/" | cut -d '/' -f 6 | sed 's/".*//g' | sort -V | tail -n 1)
 	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then

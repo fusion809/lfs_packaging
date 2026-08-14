@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-source ~/lfs_packaging/shared-funcs.sh
 name=elfutils
 get_version() {
 	local up_ver=$(wget -cqO- https://sourceware.org/elfutils/ftp/ | grep -oE 'href="[0-9.]+/"' | sed -E 's/href="([^/]+)\/"/\1/' | sort -V | tail -n 1)
