@@ -2,11 +2,11 @@
 # Originally a book package; script written to overcome download failure
 set -e
 # Variable declarations
-name=imagemagick
-version=$(gh_ver "ImageMagick/ImageMagick")
+name=ImageMagick
+version=$(gh_ver "$name/$name")
 lfs_depends=(bzip2 fftw fontconfig freetype glibc gcc xz libpng zlib)
 blfs_depends=(xorg-lib)
-direname="ImageMagick-$version"
+direname="$name-$version"
 filename="$version.tar.gz"
 # Fetch and unpack source
 sudo rm -rf $direname
