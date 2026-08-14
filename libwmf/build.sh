@@ -2,7 +2,8 @@
 set -e
 # Variable declarations
 name=libwmf
-version=$(git ls-remote --tags https://github.com/caolanm/libwmf.git | grep -oP 'refs/tags/v\K[0-9][0-9.]+$' | sort -V | tail -n 1)
+source ~/lfs_packaging/shared-funcs.sh
+version=$(gh_ver "caolanm/libwmf")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=()

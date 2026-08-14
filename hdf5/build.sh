@@ -2,7 +2,8 @@
 set -e
 # Variable declarations
 name=hdf5
-version=$(wget -cqO- https://github.com/HDFGroup/hdf5/releases | grep "tag/[0-9]" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 6 | cut -d '/' -f 6 | head -n 1)
+source ~/lfs_packaging/shared-funcs.sh
+version=$(gh_ver "HDFGroup/hdf5")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=(libaec

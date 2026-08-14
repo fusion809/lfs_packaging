@@ -3,7 +3,8 @@
 set -e
 # Variable declarations
 name=imagemagick
-version=$(wget -cqO- https://github.com/ImageMagick/ImageMagick/releases | grep "\.tar\.gz" | cut -d '"' -f 2 | cut -d '/' -f 7 | sed 's/.tar.gz//g')
+source ~/lfs_packaging/shared-funcs.sh
+version=$(gh_ver "ImageMagick/ImageMagick")
 lfs_depends=(bzip2 fftw fontconfig freetype glibc gcc xz libpng zlib)
 blfs_depends=(xorg-lib)
 direname="ImageMagick-$version"

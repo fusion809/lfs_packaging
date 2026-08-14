@@ -3,7 +3,8 @@ set -e
 # Variable declarations
 name=openpmix
 __name=pmix
-version=$(wget -cqO- https://github.com/openpmix/openpmix/releases | grep "/releases/tag/v" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+source ~/lfs_packaging/shared-funcs.sh
+version=$(gh_ver $name/$name)
 filename="$__name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=(

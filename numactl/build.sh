@@ -2,7 +2,8 @@
 set -e
 # Variable declarations
 name=numactl
-version=$(wget -cqO- https://github.com/numactl/numactl/releases | grep "releases/tag/v[0-9]" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+source ~/lfs_packaging/shared-funcs.sh
+version=$(gh_ver "numactl/numactl")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=()

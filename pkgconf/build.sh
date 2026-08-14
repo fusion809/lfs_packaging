@@ -1,9 +1,10 @@
 #!/bin/bash
 name=pkgconf
-version=$(wget -cqO- https://github.com/pkgconf/pkgconf/releases | grep "/tag/pkgconf" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | cut -d '-' -f 2)
+source ~/lfs_packaging/shared-funcs.sh
+version=$(gh_ver pkgconf/pkgconf)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
-mversion=$(wget -cqO- https://github.com/mesonbuild/meson/releases | grep "/tag/" | grep -v "rc" | cut -d '"' -f 6 | cut -d '/' -f 6 | head -n 1)
+mversion=$(gh_ver mesonbuild/meson)
 
 if ! [[ -f $filename ]]; then
 	wget -c https://github.com/pkgconf/pkgconf/releases/download/$direname/$filename

@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 name=linux-pam
-version=$(wget -cqO- https://github.com/linux-pam/linux-pam/releases | grep -F "release-v" | head -n 1 | cut -d '"' -f 2 | sed 's/release-v//g')
+source ~/lfs_packaging/shared-funcs.sh
+version=$(gh_ver "linux-pam/linux-pam")
 if [[ -z ${version// /} ]]; then
 	echo "Version is empty."
 	exit 1

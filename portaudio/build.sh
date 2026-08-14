@@ -2,7 +2,8 @@
 set -e
 # Variable declarations
 name=portaudio
-version=$(wget -cqO- https://github.com/portaudio/portaudio/releases | grep "releases/tag/v" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+source ~/lfs_packaging/shared-funcs.sh
+version=$(gh_ver "$name/$name")
 filename="$name-v$version.tar.gz"
 direname=$(echo "${filename/.tar.gz/}" | sed 's/v//g')
 depends=(jack)

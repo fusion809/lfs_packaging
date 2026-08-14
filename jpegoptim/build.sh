@@ -2,7 +2,7 @@
 set -e
 name=jpegoptim
 source ~/lfs_packaging/shared-funcs.sh
-version=$(github_ver tjko/$name | sed 's/v//g')
+version=$(gh_ver "tjko/jpegoptim")
 filename="$name-$version.tar.gz"
 direname="$name-$version"
 blfs_depends=(libjpeg)

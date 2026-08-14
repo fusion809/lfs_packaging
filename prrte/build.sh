@@ -2,7 +2,8 @@
 set -e
 # Variable declarations
 name=prrte
-version=$(wget -cqO- https://github.com/openpmix/prrte/releases | grep -v "alpha\|beta\|rc" | grep "releases/tag/v" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+source ~/lfs_packaging/shared-funcs.sh
+version=$(gh_ver "openpmix/prrte")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=(hwloc openpmix)

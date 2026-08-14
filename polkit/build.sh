@@ -2,7 +2,8 @@
 set -e
 # Variable declaration
 name=polkit
-version=$(wget -cqO- https://github.com/polkit-org/polkit/releases | grep "tag/" | head -n 1 | cut -d '/' -f 6 | cut -d '"' -f 1)
+source ~/lfs_packaging/shared-funcs.sh
+version=$(gh_ver "$name-org/$name")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 blfs_depends=(duktape glib2 libxslt linux-pam systemd)

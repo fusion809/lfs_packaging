@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 name=vim
-version=$(curl -sL https://github.com/vim/vim/tags | perl -nle 'while (m{href="/vim/vim/releases/tag/v\K[0-9.]+}g) { print $& }' | head -n 1)
+source ~/lfs_packaging/shared-funcs.sh
+version=$(gh_ver "vim/vim")
 majver=$(echo $version | cut -d . -f 1)
 minver=$(echo $version | cut -d . -f 2)
 vimdir=$(echo "${name}${majver}${minver}")

@@ -2,7 +2,8 @@
 set -e
 # Variable declaration
 name=libgusb
-version=$(wget -cqO- https://github.com/hughsie/libgusb/releases | grep "/tag/" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
+source ~/lfs_packaging/shared-funcs.sh
+version=$(gh_ver "hughsie/libgusb")
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 blfs_depends=(json-glib

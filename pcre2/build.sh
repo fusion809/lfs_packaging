@@ -2,7 +2,8 @@
 set -e
 # Variable declarations
 name=pcre2
-version=$(wget -cqO- https://github.com/PCRE2Project/pcre2/releases | grep "releases/tag/pcre2" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '=' -f 3 | cut -d '/' -f 6 | sed 's/pcre2-//g')
+source ~/lfs_packaging/shared-funcs.sh
+version=$(gh_ver PCRE2Project/pcre2)
 filename="$name-$version.tar.gz"
 direname="$name-$name-$version"
 depends=()

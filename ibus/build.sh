@@ -2,7 +2,7 @@
 set -e
 source $HOME/lfs_packaging/shared-funcs.sh
 name=ibus
-version=$(github_ver "ibus/ibus")
+version=$(gh_ver "ibus/ibus")
 filename="$name-$version.tar.gz"
 direname="$name-$version"
 blfs_depends=(iso-codes vala dconf glib2 gtk3 gtk4 libnotify)

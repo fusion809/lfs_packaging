@@ -26,7 +26,8 @@
 set -e
 # Variable declarations
 name=ostree
-version=$(wget -cqO- https://github.com/ostreedev/ostree/releases | grep "/tag/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+source ~/lfs_packaging/shared-funcs.sh
+version=$(gh_ver ostreedev/ostree)
 direname="lib${name}-$version"
 filename="$direname.tar.xz"
 depends=(gcab)

@@ -26,7 +26,8 @@
 set -e
 # Variable declarations
 name=flatpak
-version=$(wget -cqO- https://github.com/flatpak/flatpak/releases/ | grep "Latest" -B 5 | grep "/tag/" | cut -d '"' -f 6 | cut -d '/' -f 6)
+source ~/lfs_packaging/shared-funcs.sh
+version=$(gh_ver $name/$name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 depends=(gcab ostree socat)

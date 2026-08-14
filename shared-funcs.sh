@@ -14,5 +14,42 @@ function github_ver {
 	else
 		wget -cqO- https://github.com/"$repo"/releases | grep "/tag/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6
 	fi
+}
 
+function ght_ver {
+	local latest_url=$(curl -Ls -o /dev/null -w '%{url_effective}' "https://github.com/$1/releases/latest")
+	local latest_tag=$(echo "$latest_url" | grep -oP '/tag/\K.*')
+	if [[ -n "$latest_tag" ]]; then
+		echo "$latest_tag" | sed -nE "s/^${1#*/}[[:space:]_-]*//i; s/^[^0-9]*([0-9]+([.-][0-9]+)*).*/\1/p"
+		return 0
+	fi
+	wget -qO- "https://github.com/$1/tags.atom" | grep -v "alpha\|beta\|rc" | grep '<title>' | sed -nE "/<title>Tags from /d; s/.*<title>//; s/^${1#*/}[[:space:]_-]*//i; s/^[^0-9]*([0-9]+([.-][0-9]+)*).*/\1/p" | sort -V | tail -n 1
+}
+function ghl_ver {
+    git ls-remote --tags --refs https://github.com/$1 | cut -d '/' -f 3 | sed 's/v//g' | tail -n 1
+}
+
+function gh_ver {
+	local up_ver=$(ght_ver $1)
+	if echo "$up_ver" | grep -qP "[0-9]"; then
+		echo "$up_ver"
+		return 0
+	fi
+
+	local git_ver=$(ghl_ver $1)
+	if echo "$git_ver" | grep -qP "[0-9]"; then
+		echo "$git_ver"
+		return 0
+	fi
+
+	if [[ -n "$2" ]]; then
+		name="$2"
+	else
+		name=$(echo $1 | cut -d '/' -f 2)
+	fi
+	local arch_ver=$(aver $name)
+	if echo "$arch_ver" | grep -qP "[0-9]"; then
+		echo "$arch_ver"
+		return 0
+	fi
 }

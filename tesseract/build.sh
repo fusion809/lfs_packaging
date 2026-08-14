@@ -2,7 +2,8 @@
 set -e
 # Variable declarations
 name=tesseract
-version=$(git ls-remote --tags https://github.com/tesseract-ocr/tesseract.git | grep -oP 'refs/tags/\K[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -n 1)
+source ~/lfs_packaging/shared-funcs.sh
+version=$(gh_ver "tesseract-ocr/tesseract")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=(leptonica)

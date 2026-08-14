@@ -2,7 +2,8 @@
 set -e
 # Variable declaration
 name=udisks
-version="$(wget -cqO- https://github.com/storaged-project/udisks/releases | grep "/tag/udisks-" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | cut -d '-' -f 2)"
+source ~/lfs_packaging/shared-funcs.sh
+version=$(gh_ver "storaged-project/udisks")
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
 blfs_depends=(libatasmart libblockdev libgudev polkit elogind glib2)

@@ -2,7 +2,8 @@
 set -e
 # Variable declarations
 name=sundials
-version=$(wget -cqO- https://github.com/llnl/sundials/releases | grep "releases/tag/v" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6 | sed 's/^v//g')
+source ~/lfs_packaging/shared-funcs.sh
+version=$(gh_ver "llnl/sundials")
 filename=$name-$version.tar.gz
 direname="${filename/.tar.gz/}"
 depends=(lapack openmpi suitesparse)

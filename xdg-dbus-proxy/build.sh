@@ -2,7 +2,7 @@
 set -e
 name=xdg-dbus-proxy
 source ~/lfs_packaging/shared-funcs.sh
-version=$(github_ver flatpak/$name)
+version=$(gh_ver flatpak/$name)
 blfs_depends=(glib2)
 direname="$name-$version"
 filename="$direname.tar.xz"

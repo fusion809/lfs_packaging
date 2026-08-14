@@ -2,7 +2,8 @@
 set -e
 # Variable declarations
 name="leptonica"
-version=$(wget -cqO- https://github.com/DanBloomberg/leptonica/releases | grep "/tag/" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
+source ~/lfs_packaging/shared-funcs.sh
+version=$(gh_ver "DanBloomberg/leptonica")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=()

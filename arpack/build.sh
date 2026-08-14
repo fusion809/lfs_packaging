@@ -4,27 +4,7 @@ set -e
 name="arpack"
 _name="arpack-ng"
 source ~/lfs_packaging/shared-funcs.sh
-get_version() {
-	local up_ver=$(wget -cqO- https://github.com/opencollab/arpack-ng/tags | grep ".tar.gz" | grep -v "alpha\|beta\|\.rc" | head -n 1 | cut -d '"' -f 4 | cut -d '/' -f 7 | sed 's/.tar.gz//g')
-	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
-		echo "$up_ver"
-		return 0
-	fi
-
-	local git_ver=$(git ls-remote --tags --refs https://github.com/opencollab/arpack-ng | cut -d '/' -f 3 | sed 's/v//g' | tail -n 1)
-	if echo "$git_ver" | grep -q "[0-9]\.[0-9]"; then
-		echo "$git_ver"
-		return 0
-	fi
-
-	local arch_ver=$(aver $name)
-	if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
-		echo "$arch_ver"
-		return 0
-	fi
-}
-
-version=$(get_version)
+version=$(gh_ver "opencollab/arpack-ng")
 depends=(lapack openmpi)
 lfs_depends=(bash coreutils gzip make sed tar)
 blfs_depends=(gcc # Fortran support needed
