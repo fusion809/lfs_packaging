@@ -2,7 +2,8 @@
 set -e
 # Variable declarations
 name=libpciaccess
-version=$(wget -cqO- https://xorg.freedesktop.org/releases/individual/lib/ | grep "libpciaccess.*xz\"" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 2 | cut -d '-' -f 2 | sed 's/.tar.xz//g' | sort -V | tail -n 1)
+source ~/lfs_packaging/shared-funcs.sh
+version=$(xfd_ver $name)
 filename="$name-$version.tar.xz"
 direname=${filename/.tar.xz/}
 depends=()
