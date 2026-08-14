@@ -89,7 +89,7 @@ function gn_ver {
 			return 0
 		fi
 
-		local git_ver=$(git ls-remote --tags --refs "https://gitlab.gnome.org/GNOME/gtk.git" | grep "refs/tags/" | grep "\-3\." | grep -v "alpha\|beta\|rc" | cut -d '/' -f 3 | sort -V | tail -n 1)
+		local git_ver=$(git ls-remote --tags --refs "https://gitlab.gnome.org/GNOME/gtk.git" | grep "refs/tags/v[0-9]" | grep -v "alpha\|beta\|rc" | cut -d '/' -f 3 | sed 's/^v//g' | sort -V | tail -n 1)
 		if echo "$git_ver" | grep -q "[0-9]\.[0-9]"; then
 			echo "$git_ver"
 			return 0
@@ -100,7 +100,7 @@ function gn_ver {
 			echo "$up_ver"
 			return 0
 		fi
-		local git_ver=$(git ls-remote --tags --refs "https://gitlab.gnome.org/GNOME/$1.git" | grep "refs/tags/" | grep -v "alpha\|beta\|rc" | cut -d '/' -f 3 | sort -V | tail -n 1)
+		local git_ver=$(git ls-remote --tags --refs "https://gitlab.gnome.org/GNOME/$1.git" | grep "refs/tags/v[0-9]" | grep -v "alpha\|beta\|rc" | cut -d '/' -f 3 | sed 's/^v//g' | sort -V | tail -n 1)
 		if echo "$git_ver" | grep -q "[0-9]\.[0-9]"; then
 			echo "$git_ver"
 			return 0
