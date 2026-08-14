@@ -1,10 +1,27 @@
 #!/bin/bash
 set -e
 name=elfutils
-#version=$(git ls-remote --tags https://sourceware.org/git/elfutils.git | grep -oP 'refs/tags/elfutils-\K[0-9.]+$' | sort -V | tail -n 1)
-sw_ver=$(wget -cqO- https://sourceware.org/elfutils/ftp/ | grep -oE 'href="[0-9.]+/"' | sed -E 's/href="([^/]+)\/"/\1/' | sort -V | tail -n 1)
-arch_ver=$(wget -cqO- -T 10 "https://gitlab.archlinux.org/archlinux/packaging/packages/$name/-/raw/main/PKGBUILD" | grep "^pkgver=" | cut -d '=' -f 2)
-version=${sw_ver:-$arch_ver}
+get_version() {
+	local up_ver=$(wget -cqO- https://sourceware.org/elfutils/ftp/ | grep -oE 'href="[0-9.]+/"' | sed -E 's/href="([^/]+)\/"/\1/' | sort -V | tail -n 1)
+	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
+		echo "$up_ver"
+		return 0
+	fi
+
+	local git_ver=$(git ls-remote --tags https://sourceware.org/git/elfutils.git | grep -oP 'refs/tags/elfutils-\K[0-9.]+$' | sort -V | tail -n 1)
+	if echo "$git_ver" | grep -q "[0-9]\.[0-9]"; then
+		echo "$git_ver"
+		return 0
+	fi
+
+	local arch_ver=$(wget -cqO- -T 10 "https://gitlab.archlinux.org/archlinux/packaging/packages/$name/-/raw/main/PKGBUILD" | grep "^pkgver=" | cut -d '=' -f 2)
+	if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
+		echo "$arch_ver"
+		return 0
+	fi
+}
+
+version=$(get_version)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
 lfs_depends=(bzip2

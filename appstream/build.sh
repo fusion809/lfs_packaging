@@ -25,7 +25,28 @@
 set -e
 # Variable declarations
 name=appstream
-version=$(wget -qO- https://github.com/ximion/appstream/tags.atom | grep -oP '<title>v\K[^<]+' | head -n 1)
+name=elfutils
+get_version() {
+	local up_ver=$(wget -qO- https://github.com/ximion/appstream/tags.atom | grep -oP '<title>v\K[^<]+' | head -n 1)
+	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
+		echo "$up_ver"
+		return 0
+	fi
+
+	local git_ver=$(git ls-remote --tags --refs https://github.com/ximion/appstream | cut -d '/' -f 3 | sed 's/v//g' | tail -n 1)
+	if echo "$git_ver" | grep -q "[0-9]\.[0-9]"; then
+		echo "$git_ver"
+		return 0
+	fi
+
+	local arch_ver=$(wget -cqO- -T 10 "https://gitlab.archlinux.org/archlinux/packaging/packages/$name/-/raw/main/PKGBUILD" | grep "^pkgver=" | cut -d '=' -f 2)
+	if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
+		echo "$arch_ver"
+		return 0
+	fi
+}
+
+version=$(get_version)
 docs="AUTHORS CHANGELOG.md COPYING README"
 depends=()
 lfs_depends=(freetype2 gcc glibc)
