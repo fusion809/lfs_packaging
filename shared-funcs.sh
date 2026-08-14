@@ -55,7 +55,7 @@ function gh_ver {
 }
 function xfd_ver() {
 	name="$1"
-	if echo $name | grep "lib" &> /dev/null; then
+	if echo $name | grep "lib" &> /dev/null || [[ "$name" == "xtrans" ]]; then
 		type="lib"
 	elif echo $name | grep "xf86" &> /dev/null; then
 		type="driver"
@@ -74,7 +74,7 @@ function xfd_ver() {
 		return 0
 	fi
 
-	local arch_ver=$(aver "${name,,}")
+	local arch_ver=$(aver "$(echo $name | tr '[:upper:]' '[:lower:]')")
 	if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
 		echo "$arch_ver"
 		return 0
