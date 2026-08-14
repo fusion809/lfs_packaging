@@ -1,4 +1,8 @@
 #!/bin/bash
+function aver {
+	wget -cqO- -T 10 "https://gitlab.archlinux.org/archlinux/packaging/packages/$1/-/raw/main/PKGBUILD" | grep "^pkgver=" | cut -d '=' -f 2
+}
+
 function github_ver {
 	repo="$1"
 	exclude="$2"

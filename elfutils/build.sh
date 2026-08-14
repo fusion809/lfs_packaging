@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+source ~/lfs_packaging/shared-funcs.sh
 name=elfutils
 get_version() {
 	local up_ver=$(wget -cqO- https://sourceware.org/elfutils/ftp/ | grep -oE 'href="[0-9.]+/"' | sed -E 's/href="([^/]+)\/"/\1/' | sort -V | tail -n 1)
@@ -14,7 +15,7 @@ get_version() {
 		return 0
 	fi
 
-	local arch_ver=$(wget -cqO- -T 10 "https://gitlab.archlinux.org/archlinux/packaging/packages/$name/-/raw/main/PKGBUILD" | grep "^pkgver=" | cut -d '=' -f 2)
+	local arch_ver=$(aver $name)
 	if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
 		echo "$arch_ver"
 		return 0

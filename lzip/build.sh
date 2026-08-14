@@ -3,9 +3,22 @@ set -e
 # Variable declarations
 name=lzip
 # Get versions into temp variables (updates will include these because they are ABOVE the version= line)
-savannah_ver=$(wget -cqO- -T 10 "https://download.savannah.gnu.org/releases/lzip/" | grep -oE 'lzip-[0-9.]+\.tar\.gz' | sort -V | tail -n 1 | sed -e 's/lzip-//' -e 's/.tar.gz//')
+source ~/lfs_packaging/shared-funcs.sh
+get_version() {
+	local up_ver=$(wget -cqO- -T 10 "https://download.savannah.gnu.org/releases/lzip/" | grep -oE 'lzip-[0-9.]+\.tar\.gz' | sort -V | tail -n 1 | sed -e 's/lzip-//' -e 's/.tar.gz//')
+	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
+		echo "$up_ver"
+		return 0
+	fi
 
-arch_ver=$(wget -cqO- -T 10 "https://gitlab.archlinux.org/archlinux/packaging/packages/lzip/-/raw/main/PKGBUILD" | grep "^pkgver=" | cut -d '=' -f 2)
+	local arch_ver=$(aver $name)
+	if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
+		echo "$arch_ver"
+		return 0
+	fi
+}
+
+version=$(get_version)
 
 # The FIRST "version=" line must be the final result. 
 # This tells Bash to use savannah_ver, but if it's empty, use arch_ver instead.

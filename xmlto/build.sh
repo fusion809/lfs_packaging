@@ -1,9 +1,28 @@
 #!/bin/bash
 set -e
 name=xmlto
-upst_ver=$(wget -cqO- https://pagure.io/xmlto/releases | grep "/xmlto/archive/.*tar.gz" | cut -d '"' -f 2 | cut -d '/' -f 4)
-arch_ver=$(wget -cqO- -T 10 "https://gitlab.archlinux.org/archlinux/packaging/packages/$name/-/raw/main/PKGBUILD" | grep "^pkgver=" | cut -d '=' -f 2)
-version=${upst_ver:-$arch_ver}
+source ~/lfs_packaging/shared-funcs.sh
+get_version() {
+	local up_ver=$(wget -cqO- https://pagure.io/xmlto/releases | grep "/xmlto/archive/.*tar.gz" | cut -d '"' -f 2 | cut -d '/' -f 4)
+	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
+		echo "$up_ver"
+		return 0
+	fi
+
+	local git_ver=$(git ls-remote --tags --refs https://pagure.io/xmlto.git | grep "refs/tags/" | cut -d '/' -f 3)
+	if echo "$git_ver" | grep -q "[0-9]\.[0-9]"; then
+		echo "$git_ver"
+		return 0
+	fi
+
+	local arch_ver=$(aver $name)
+	if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
+		echo "$arch_ver"
+		return 0
+	fi
+}
+
+version=$(get_version)
 direname="$name-$version"
 filename="$direname.tar.gz"
 blfs_depends=(docbook-xml docbook-xsl-nons libxslt)

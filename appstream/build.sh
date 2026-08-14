@@ -25,7 +25,7 @@
 set -e
 # Variable declarations
 name=appstream
-name=elfutils
+source ~/lfs_packaging/shared-funcs.sh
 get_version() {
 	local up_ver=$(wget -qO- https://github.com/ximion/appstream/tags.atom | grep -oP '<title>v\K[^<]+' | head -n 1)
 	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
@@ -39,7 +39,7 @@ get_version() {
 		return 0
 	fi
 
-	local arch_ver=$(wget -cqO- -T 10 "https://gitlab.archlinux.org/archlinux/packaging/packages/$name/-/raw/main/PKGBUILD" | grep "^pkgver=" | cut -d '=' -f 2)
+	local arch_ver=$(aver $name)
 	if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
 		echo "$arch_ver"
 		return 0
