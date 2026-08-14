@@ -2,7 +2,7 @@
 set -e
 # Variable declaration
 name=gedit
-version="$(wget -cqO- https://gitlab.gnome.org/World/$name/$name/-/tags | grep "tags/"| grep -v "alpha\|beta\|\.rc" | grep "$(gnome-shell --version | cut -d ' ' -f 3 | cut -d '.' -f 1)" | cut -d '"' -f 2 | cut -d '/' -f 7)"
+version=$(gn_ver $name)
 lfs_depends=(glibc
 	gcc
 	systemd

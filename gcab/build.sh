@@ -28,7 +28,7 @@
 set -e
 # Variable declarations
 name=gcab
-version=$(wget -cqO- https://download.gnome.org/sources/gcab/ | grep "[0-9]/" | grep -v "alpha\|beta\|rc" | cut -d '"' -f 4 | sed 's|/$||g' | tail -n 1)
+version=$(gn_ver $name)
 direname="$name-$version"
 filename="$direname.tar.xz"
 depends=()
