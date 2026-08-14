@@ -4,7 +4,7 @@ set -e
 name=fastfetch
 depends=(yyjson) # Can build and run without it
 lfs_depends=(bash coreutils gcc glibc zlib)
-blfs_depends=(cmake dbus dconf imagemagick 
+blfs_depends=(cmake dbus dconf ImageMagick 
 pulseaudio libxcb libxrandr sqlite)
 
 # Get the source
