@@ -27,7 +27,7 @@
 set -e
 # Variable declarations
 name=lapack
-version=$(git ls-remote https://github.com/Reference-LAPACK/lapack.git HEAD | awk '{print substr($1, 1, 7)}')
+version=$(git ls-remote https://github.com/Reference-LAPACK/lapack.git HEAD | awk '{print $1}')
 depends=(blas)
 lfs_depends=(bash coreutils glibc gzip make python sed tar)
 blfs_depends=(cmake gcc wget)

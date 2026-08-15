@@ -30,7 +30,7 @@ lfs_depends=(bash coreutils glibc gzip make python sed tar)
 blfs_depends=(cmake gcc wget)
 _name=blas
 name=blas
-version=$(git ls-remote https://github.com/Reference-LAPACK/lapack.git HEAD | awk '{print substr($1, 1, 7)}')
+version=$(git ls-remote https://github.com/Reference-LAPACK/lapack.git HEAD | awk '{print $1}')
 
 DOCS="LICENSE"
 
