@@ -2,7 +2,7 @@
 set -e
 name=power-profiles-daemon
 get_ver() {
-      up_ver=$(wget -cqO- https://gitlab.freedesktop.org/upower/power-profiles-daemon/-/tags | grep "/tags/" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 6)
+      up_ver=$(wget --timeout=15 -cqO- https://gitlab.freedesktop.org/upower/power-profiles-daemon/-/tags | grep "/tags/" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 6)
       if echo "$up_ver" | grep -qP "[0-9]"; then
 		echo "$up_ver"
 		return 0
