@@ -178,7 +178,7 @@ function gnu_ver {
 		echo "$up_ver"
 		return 0
 	fi
-	if [[ "$name" == "octave"]]; then
+	if [[ "$name" == "octave" ]]; then
 		local git_ver=$(git ls-remote --tags --refs https://github.com/gnu-octave/octave.git | grep "release-" | cut -d '/' -f 3 | sed 's/release-//g' | sed 's/-/./g' | sort -V | tail -n1)
 	elif [[ "$name" == "glpk" ]]; then
 		local git_ver=$(git ls-remote --tags --refs https://salsa.debian.org/science-team/glpk.git | grep "upstream" | cut -d '/' -f 4 | sort -V | tail -n 1)
@@ -190,7 +190,7 @@ function gnu_ver {
 		return 0
 	fi
 	local arch_ver=$(aver $name)
-    if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
+    	if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
 		echo "$arch_ver"
 		return 0
 	fi
