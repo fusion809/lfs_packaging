@@ -28,28 +28,42 @@
 set -e
 # Variable declarations
 name=R
-version=$(wget -cqO- https://cran.r-project.org/sources.html | grep ".tar.gz" | grep -v "alpha\|beta\|\.rc" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 4 | sed 's/.tar.gz//g' | cut -d '-' -f 2)
+function get_version {
+  local up_ver1=$(wget -cqO- https://cran.r-project.org/sources.html | grep ".tar.gz" | grep -v "alpha\|beta\|\.rc" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 4 | sed 's/.tar.gz//g' | cut -d '-' -f 2) 
+  if echo "$up_ver1" | grep -q "[0-9]\.[0-9]"; then
+		echo "$up_ver1"
+		return 0
+	fi
 
-if [ "${R_SHLIB:-yes}" = "yes" ]; then
-  r_shlib="--enable-R-shlib"
-else
-  r_shlib="--disable-R-shlib"
-fi
-if [ "${BLAS_SHLIB:-yes}" = "yes" ]; then
-  blas_shlib="--enable-BLAS-shlib"
-else
-  blas_shlib="--disable-BLAS-shlib"
-fi
+  local up_ver2=$(
+    curl -fsSL https://cran.r-project.org/src/base/ |
+    grep -oE 'href="R-[0-9]+/"' |
+    grep -oE '[0-9]+' |
+    sort -V |
+    tail -n1 |
+    xargs -I{} curl -fsSL "https://cran.r-project.org/src/base/R-{}/" |
+    grep -oE 'R-[0-9]+\.[0-9]+\.[0-9]+\.tar\.gz' |
+    sort -V |
+    tail -n1 |
+    sed 's/^R-//; s/\.tar\.gz$//'
+  )
+  if echo "$up_ver2" | grep -q "[0-9]\.[0-9]"; then
+    echo "$up_ver2"
+    return 0
+  fi
 
+  local arch_ver=$(aver $name)
+  if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
+		echo "$arch_ver"
+		return 0
+	fi
+}
+version=$(get_version)
 direname="$name-$version"
 filename="$direname.tar.xz"
-depends=(blas lapack pcre2) # Provided by lfs_packaging
-lfs_depends=(bash bzip2 coreutils glibc make readline sed tar xz zlib zstd) # Provided by LFS
-blfs_depends=(cairo curl 
-gcc # You need GCC built with Fortran support; LFS build doesn't support Fortran
-glib icu java libjpeg-turbo libpng libtiff libtirpc
-libx11 libxmu libxt # Part of Xorg libraries
-pango tk which zip) # Provided by BLFS
+depends=(blas lapack pcre2)
+lfs_depends=(bash bzip2 coreutils glibc make readline sed tar xz zlib zstd)
+blfs_depends=(cairo curl gcc glib icu java libjpeg-turbo libpng libtiff libtirpc libx11 libxmu libxt pango tk which zip)
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then
