@@ -114,7 +114,7 @@ function gn_ver {
 }
 
 function lgd_ver {
-	name=$1
+	local name=$1
 	local up_ver=$(wget -cqO- https://gitlab.gnome.org/World/gedit/$name/-/tags | grep "tags/"| grep -v "alpha\|beta\|\.rc" | cut -d '"' -f 2 | cut -d '/' -f 7 | head -n 1)
 	
 	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
@@ -135,17 +135,18 @@ function lgd_ver {
 }
 
 function spice_ver {
-	up_ver=$(wget -qO- "https://gitlab.freedesktop.org/api/v4/projects/spice%2F$1/releases?per_page=1" | grep -o '"tag_name":"[^"]*"' | grep -v "server" | head -n 1 | cut -d'"' -f4 | sed 's/^v//')
+	local name=$1
+	local up_ver=$(wget -qO- "https://gitlab.freedesktop.org/api/v4/projects/spice%2F$name/releases?per_page=1" | grep -o '"tag_name":"[^"]*"' | grep -v "server" | head -n 1 | cut -d'"' -f4 | sed 's/^v//')
 	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
 		echo "$up_ver"
 		return 0
 	fi
-	git_ver=$(git ls-remote --tags --refs https://gitlab.com/spice/$1.git | cut -d '/' -f 3 | grep -v "server" | sed 's/v//g' | sort -V | tail -n 1)
-	if echo "$git_ver" | grep -q "[0-9]\.[0-9]"; then
+	local git_ver=$(git ls-remote --tags --refs https://gitlab.com/spice/$name.git | cut -d '/' -f 3 | grep -v "server" | sed 's/v//g' | sort -V | tail -n 1)
+	if echo "$git_ver" | grep -q "[0-9]\.[0-9]" &> /dev/null && ! ( [[ $name == "spice-protocol" ]] && [[ $git_ver == "0.14.4" ]] ); then
 		echo "$git_ver"
 		return 0
 	fi
-	arch_ver=$(aver $1)
+	local arch_ver=$(aver $name)
 	if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
 		echo "$arch_ver"
 		return 0
