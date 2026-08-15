@@ -135,12 +135,12 @@ function lgd_ver {
 }
 
 function spice_ver {
-	up_ver=$(wget -qO- "https://gitlab.freedesktop.org/api/v4/projects/spice%2F$1/releases?per_page=1" | grep -o '"tag_name":"[^"]*"' | head -n 1 | cut -d'"' -f4 | sed 's/^v//')
+	up_ver=$(wget -qO- "https://gitlab.freedesktop.org/api/v4/projects/spice%2F$1/releases?per_page=1" | grep -o '"tag_name":"[^"]*"' | grep -v "server" | head -n 1 | cut -d'"' -f4 | sed 's/^v//')
 	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
 		echo "$up_ver"
 		return 0
 	fi
-	git_ver=$(git ls-remote --tags --refs https://gitlab.com/spice/$1.git | cut -d '/' -f 3 | sed 's/v//g' | sort -V | tail -n 1)
+	git_ver=$(git ls-remote --tags --refs https://gitlab.com/spice/$1.git | cut -d '/' -f 3 | grep -v "server" | sed 's/v//g' | sort -V | tail -n 1)
 	if echo "$git_ver" | grep -q "[0-9]\.[0-9]"; then
 		echo "$git_ver"
 		return 0
