@@ -133,3 +133,65 @@ function lgd_ver {
 		return 0
 	fi
 }
+
+function spice_ver {
+	up_ver=$(wget -qO- "https://gitlab.freedesktop.org/api/v4/projects/spice%2F$1/releases?per_page=1" | grep -o '"tag_name":"[^"]*"' | head -n 1 | cut -d'"' -f4 | sed 's/^v//')
+	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
+		echo "$up_ver"
+		return 0
+	fi
+	git_ver=$(git ls-remote --tags --refs https://gitlab.com/spice/$1.git | cut -d '/' -f 3 | sed 's/v//g' | sort -V | tail -n 1)
+	if echo "$git_ver" | grep -q "[0-9]\.[0-9]"; then
+		echo "$git_ver"
+		return 0
+	fi
+	arch_ver=$(aver $1)
+	if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
+		echo "$arch_ver"
+		return 0
+	fi
+}
+
+function sf_ver {
+    local up_ver=$(wget -cqO- https://sourceforge.net/p/$1/ref/master/tags/ | grep "/tree" | grep -v "alpha\|beta\|rc" | grep -v "git-conv" | tail -n 1 | cut -d '/' -f 6)
+    if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
+		echo "$up_ver"
+		return 0
+	fi
+    local git_ver=$(git ls-remote --tags --refs https://git.code.sf.net/p/$1.git | grep "tags/[v0-9.]+" | cut -d '/' -f 3 | sort -V | tail -n 1)
+    if echo "$git_ver" | grep -q "[0-9]\.[0-9]"; then
+		echo "$git_ver"
+		return 0
+	fi
+	local name=$(echo $1 | cut -d '/' -f 1)
+    local arch_ver=$(aver $name)
+    if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
+		echo "$arch_ver"
+		return 0
+	fi
+}
+
+function gnu_ver {
+	local name=$1
+	local up_ver=$(wget -qO- https://ftp.gnu.org/gnu/$name/ | grep -E "$name-[0-9.]+.tar.[a-z]*\"" | sed "s/.*$name-//g" | sed 's/.tar.*//g' | cut -d '"' -f 1 | uniq | sort -V | tail -n 1)
+	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
+		echo "$up_ver"
+		return 0
+	fi
+	if [[ "$name" == "octave"]]; then
+		local git_ver=$(git ls-remote --tags --refs https://github.com/gnu-octave/octave.git | grep "release-" | cut -d '/' -f 3 | sed 's/release-//g' | sed 's/-/./g' | sort -V | tail -n1)
+	elif [[ "$name" == "glpk" ]]; then
+		local git_ver=$(git ls-remote --tags --refs https://salsa.debian.org/science-team/glpk.git | grep "upstream" | cut -d '/' -f 4 | sort -V | tail -n 1)
+	elif [[ "$name" == "libtool" ]]; then
+		local git_ver=$(git ls-remote --tags --refs git://git.savannah.gnu.org/libtool.git | cut -d '/' -f 3 | sed 's/v//g' | grep -v "[a-z]" | sort -V | tail -n 1)
+	fi
+	if echo "$git_ver" | grep -q "[0-9]\.[0-9]"; then
+		echo "$git_ver"
+		return 0
+	fi
+	local arch_ver=$(aver $name)
+    if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
+		echo "$arch_ver"
+		return 0
+	fi
+}

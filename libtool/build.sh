@@ -1,6 +1,6 @@
 #!/bin/bash
 name=libtool
-version=$(wget -cqO- https://ftp.gnu.org/gnu/libtool/ | grep "libtool-[0-9.]*.tar.xz\"" | tail -n 1 | cut -d '"' -f 8 | sed 's/.tar.xz//g' | sed 's/libtool-//g')
+version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 

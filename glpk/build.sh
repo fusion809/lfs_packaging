@@ -4,7 +4,7 @@ depends=()
 lfs_depends=(bash coreutils gcc glibc gmp gzip make sed tar)
 blfs_depends=()
 name=glpk
-version=$(wget -cqO- https://ftp.gnu.org/gnu/glpk/ | grep ".tar.gz\"" | grep -v "alpha\|beta\|\.rc" | cut -d '"' -f 8 | tail -n 1 | sed 's/glpk-//g' | sed 's/.tar.gz//g')
+version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 if ! [[ -f $filename ]]; then
