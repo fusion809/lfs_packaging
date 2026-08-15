@@ -1,34 +1,8 @@
 #!/bin/bash
-
-# Originally a SlackBuild script for R
-# Adapted to be used for LFS by Brenton Horne
-
-# Authors as a SlackBuild script: 
-# 2019-2025 Andrew Payne <phalange@komputermatrix.com>
-# 2014-2017 melikamp, Andrew Rowland
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 3 of the License, or
-# (at your option) any later version, with the following exception:
-# the text of the GPL license may be omitted.
-
-# This program is distributed in the hope that it will be useful, but
-# without any warranty; without even the implied warranty of
-# merchantability or fitness for a particular purpose. Compiling,
-# interpreting, executing or merely reading the text of the program
-# may result in lapses of consciousness and/or very being, up to and
-# including the end of all existence and the Universe as we know it.
-# See the GNU General Public License for more details.
-
-# You may have received a copy of the GNU General Public License along
-# with this program (most likely, a file _named COPYING).  If not, see
-# <http://www.gnu.org/licenses/>.
-
 set -e
 # Variable declarations
 name=R
-function get_version {
+function R_version {
   local up_ver1=$(wget -cqO- https://cran.r-project.org/sources.html | grep ".tar.gz" | grep -v "alpha\|beta\|\.rc" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 4 | sed 's/.tar.gz//g' | cut -d '-' -f 2) 
   if echo "$up_ver1" | grep -q "[0-9]\.[0-9]"; then
 		echo "$up_ver1"
@@ -58,7 +32,7 @@ function get_version {
 		return 0
 	fi
 }
-version=$(get_version)
+version=$(R_version)
 direname="$name-$version"
 filename="$direname.tar.xz"
 depends=(blas lapack pcre2)
