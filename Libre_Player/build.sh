@@ -21,5 +21,6 @@ cmake -S . -B build "${common_cmake_args[@]}"
 cd build
 make -j$(nproc)
 sudo make install
-cd ..
+cd ../..
+sudo install -Dm755 $name.desktop /usr/share/applications/
 echo "$version" > /var/lib/custom-packages/$name
