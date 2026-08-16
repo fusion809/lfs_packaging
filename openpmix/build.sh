@@ -9,7 +9,7 @@ direname="${filename/.tar.gz/}"
 depends=(
   hwloc
 )
-lfs_depends=(bash bzip2 coreutils make perl python sed tar zlib)
+lfs_depends=(bash bzip2 coreutils glibc make perl python sed systemd tar zlib)
 blfs_depends=(libevent)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then

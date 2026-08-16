@@ -6,6 +6,8 @@ version=$(gh_ver "$name-org/$name")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 blfs_depends=(duktape glib2 libxslt linux-pam systemd)
+lfs_depends=(expat glibc libffi systemd util-linux zlib)
+depends=(glib2 linux-pam pcre2)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
 	wget -c https://github.com/polkit-org/polkit/archive/$version/$filename

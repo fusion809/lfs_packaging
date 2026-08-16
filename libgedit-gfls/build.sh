@@ -3,10 +3,8 @@ set -e
 # Variable declaration
 name=libgedit-gfls
 version=$(lgd_ver $name)
-lfs_depends=(glibc
-	gcc
-	systemd
-	zlib)
+lfs_depends=(gcc glibc libffi systemd util-linux zlib)
+depends=(glib2 pcre2)
 blfs_depends=(cairo
 	exempi
 	gdk-pixbuf

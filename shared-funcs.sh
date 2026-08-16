@@ -3,6 +3,7 @@ source ~/lfs_packaging/base-version.sh
 source ~/lfs_packaging/version-checks.sh
 source ~/lfs_packaging/freedesktop.sh
 source ~/lfs_packaging/gnome.sh
+source ~/lfs_packaging/add_deps.sh
 
 # codeberg version fetcher
 function cb_ver {
@@ -16,6 +17,12 @@ function cb_ver {
 	ver_check "$arch_ver" "$name" && return
 	local lfs_vers=$(lfs_ver $name)
 	ver_check "$lfs_vers" "$name" && return
+}
+
+function cmi {
+	./configure $@
+	make -j$(nproc)
+	sudo make install
 }
 
 # github version fetcher
@@ -50,6 +57,15 @@ function gnu_ver {
 	ver_check "$lfs_vers" "$name" && return
 }
 
+function mni {
+	mkdir build
+	cd build
+	CFLAGS="-O2 -fPIC"
+	CXXFLAGS="-O2 -fPIC"
+	meson setup "$@" ..
+	ninja -j$(nproc)
+	sudo ninja install
+}
 # SourceForge version fetcher
 function sf_ver {
 	local name=$1

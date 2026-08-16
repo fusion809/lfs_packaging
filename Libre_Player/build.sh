@@ -3,7 +3,9 @@ set -e
 name=Libre_Player
 version=$(git ls-remote https://github.com/Procurador1337/Libre_Player.git HEAD | awk '{print $1}')
 direname=$name
-blfs_depends=(cmake qt6)
+blfs_depends=(brotli cmake double-conversion flac fontconfig freetype graphite2 harfbuzz keyutils lame libXau libXdmcp libdrm libogg libpng libsndfile libvorbis libxcb libxkbcommon libxml2 llvm lm-sensors mpg123 opus pulseaudio qt6 spirv-tools)
+lfs_depends=(bzip2 dbus e2fsprogs expat gcc glibc libelf libffi openssl systemd xz zlib zstd)
+depends=(glib2 libX11 libXext libXxf86vm libpciaccess libxshmfence mesa mitkrb pcre2 wayland)
 
 if ! [[ -d $direname/.git ]]; then
 	git clone https://github.com/Procurador1337/Libre_Player

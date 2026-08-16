@@ -4,9 +4,9 @@ set -e
 name=spice
 version=$(spice_ver $name)
 docs="AUTHORS CHANGELOG.md COPYING README"
-depends=(spice-protocol)
-lfs_depends=(bash coreutils make meson sed tar)
-blfs_depends=(glib libjpeg-turbo lz4 opus pixman sasl wget)
+depends=(elfutils glib2 orc pcre2 spice-protocol)
+lfs_depends=(bash bzip2 coreutils gcc glibc libelf libffi lz4 make meson openssl sed systemd tar util-linux xz zlib zstd)
+blfs_depends=(cyrus-sasl glib gst-plugins-base gstreamer libdrm libjpeg-turbo libunwind lz4 opus pixman sasl wget)
 pip_depends=(pyparsing)
 # check if libcacard is there
 if pkg-config --exists libcacard ; then

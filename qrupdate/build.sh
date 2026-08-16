@@ -6,7 +6,7 @@ version=$(gh_ver "mpimd-csc/qrupdate-ng")
 filename=$name-$version.tar.gz
 direname="$name-ng-$version"
 depends=(blas lapack)
-lfs_depends=(bash coreutils glibc gzip make sed tar)
+lfs_depends=(bash coreutils gcc glibc gzip make sed tar)
 blfs_depends=(cmake
 gcc # Fortran support needed
 wget)

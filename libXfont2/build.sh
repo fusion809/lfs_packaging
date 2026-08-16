@@ -5,8 +5,9 @@ name=libXfont2
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"
-lfs_depends=(bash coreutils glibc make sed systemd tar util-linux xz zlib)
-blfs_depends=(libxcb fontconfig xorg-libs)
+lfs_depends=(bash bzip2 coreutils glibc make sed systemd tar util-linux xz zlib)
+depends=(libfontenc)
+blfs_depends=(brotli fontconfig freetype libpng libxcb xorg-libs)
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then

@@ -2,7 +2,7 @@
 name=wayland
 version=$(way_ver $name)
 blfs_depends=(libxml2)
-lfs_depends=(coreutils meson ninja tar wget xz)
+lfs_depends=(coreutils expat gcc glibc libffi meson ninja tar wget xz)
 filename="$name-$version.tar.xz"
 direname="$name-$version"
 URL="https://gitlab.freedesktop.org/wayland/$name/-/releases/$version/downloads/$filename"

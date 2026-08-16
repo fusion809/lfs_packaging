@@ -17,9 +17,9 @@ version=$(get_version)
 
 filename="$name-$version.tgz"
 direname=${filename/.tgz/}
-depends=()
-lfs_depends=(bash coreutils gcc glibc gzip make sed tar)
-blfs_depends=(cmake)
+depends=(libICE libSM libX11 libXext libXi libXmu libXrandr libXrender libXt libXxf86vm libpciaccess libxshmfence mesa)
+lfs_depends=(bash bzip2 coreutils expat gcc glibc gzip libelf libffi make sed tar util-linux xz zlib zstd)
+blfs_depends=(cmake freeglut glu libXau libXdmcp libdrm libpng libxcb libxml2 llvm lm-sensors spirv-tools)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
 	wget -c https://geuz.org/gl2ps/src/$filename

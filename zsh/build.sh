@@ -13,8 +13,8 @@ get_version() {
 version=$(get_version)
 direname="$name-$version"
 filename="$direname.tar.xz"
-depends=()
-lfs_depends=(libcap pcre2)
+depends=(pcre2)
+lfs_depends=(glibc libcap ncurses pcre2 perl texinfo)
 blfs_depends=()
 if ! [[ -f $filename ]]; then
 	wget -c https://sourceforge.net/projects/zsh/files/zsh/$version/$filename
@@ -23,23 +23,18 @@ rm -rf $direname
 tar xf $filename
 cd $direname
 ./Util/preconfig
-./configure --prefix=/usr \
-            --sysconfdir=/etc/zsh \
-            --enable-etcdir=/etc/zsh \
-            --enable-cap \
-            --enable-pcre \
-            --enable-dynamic \
-            --enable-readnullcmd=pager \
-            --with-tcsetpgrp
-make -j$(nproc)
-sudo make install
-DDIR="/tmp/destdir_zsh"
-rm -rf "$DDIR" && mkdir -p "$DDIR"
-make install DESTDIR="$DDIR" || true
-make infodir=/usr/share/info install.info DESTDIR="$DDIR" || true
-sudo make install
+configure_options=(
+    --prefix=/usr \
+    --sysconfdir=/etc/zsh \
+    --enable-etcdir=/etc/zsh \
+    --enable-cap \
+    --enable-pcre \
+    --enable-dynamic \
+    --enable-readnullcmd=pager \
+    --with-tcsetpgrp
+)
+cmi "${configure_options[@]}"
 sudo make infodir=/usr/share/info install.info
-sudo chmod 777 /var/lib/custom-packages/$name
 old_version=$(cat /var/lib/custom-packages/$name | head -n 1)
 if [[ "$old_version" != "$version" ]]; then
 	sudo rm -rf /usr/share/zsh/$old_version

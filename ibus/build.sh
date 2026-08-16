@@ -5,8 +5,9 @@ name=ibus
 version=$(gh_ver "ibus/ibus")
 filename="$name-$version.tar.gz"
 direname="$name-$version"
-blfs_depends=(iso-codes vala dconf glib2 gtk3 gtk4 libnotify)
-lfs_depends=(wget python zip coreutils bash tar gzip)
+blfs_depends=(at-spi2-core brotli cairo dconf fontconfig freetype fribidi gdk-pixbuf glib2 glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk3 gtk4 harfbuzz iso-codes lcms2 libXau libXdmcp libdrm libepoxy libgudev libjpeg-turbo libnotify libpng libseccomp libsoup libtiff libunwind libwebp libxcb libxkbcommon libxml2 llvm lm-sensors pixman spirv-tools vala vulkan-loader)
+depends=(elfutils glib2 gtk3 libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXres libXxf86vm libnotify libpciaccess libxshmfence mesa orc pango pcre2 wayland)
+lfs_depends=(bash bzip2 coreutils dbus expat gcc gettext glibc gzip libelf libffi python systemd tar util-linux wget xz zip zlib zstd)
 if ! [[ -f $filename ]]; then
 	wget -c https://github.com/ibus/ibus/archive/$version/$filename
 fi

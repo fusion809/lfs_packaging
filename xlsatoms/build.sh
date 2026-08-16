@@ -6,7 +6,7 @@ version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"
 lfs_depends=(bash coreutils glibc make sed systemd tar util-linux xz zlib)
-blfs_depends=(libpng mesa xbitmaps xcb-util libxcb fontconfig xorg-libs)
+blfs_depends=(fontconfig libXau libXdmcp libpng libxcb mesa xbitmaps xcb-util xorg-libs)
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then

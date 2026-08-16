@@ -2,10 +2,9 @@
 set -e
 # Variable declarations
 name=xclip
-depends=()
-lfs_depends=(autoconf bash coreutils make)
-blfs_depends=(git libxmu # Xorg library
-)
+depends=(libICE libSM libX11 libXext libXmu libXt)
+lfs_depends=(autoconf bash coreutils glibc make util-linux)
+blfs_depends=(git libXau libXdmcp libxcb libxmu)
 # Fetch source
 if ! [[ -d $name ]]; then
 	git clone https://github.com/astrand/xclip

@@ -9,7 +9,7 @@ fi
 dirname="Linux-PAM-$version"
 filename="$dirname.tar.xz"
 depends=()
-lfs_depends=(libxcrypt)
+lfs_depends=(gdbm glibc libxcrypt systemd)
 blfs_depends=()
 
 if ! [ -f "$filename" ]; then

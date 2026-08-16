@@ -2,8 +2,8 @@
 set -e
 # Variable declarations
 name="wl-clipboard"
-depends=()
-lfs_depends=(bash coreutils glibc meson ninja)
+depends=(wayland)
+lfs_depends=(bash coreutils glibc libffi meson ninja)
 blfs_depends=(git wayland wayland-protocols)
 # Fetch and unpack source
 if ! [[ -d $name ]]; then

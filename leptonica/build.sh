@@ -6,7 +6,7 @@ version=$(gh_ver "DanBloomberg/leptonica")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=()
-lfs_depends=(bash coreutils glibc gzip make sed tar)
+lfs_depends=(bash coreutils glibc gzip make sed tar xz zlib zstd)
 blfs_depends=(giflib libjpeg-turbo libpng libtiff libwebp openjpeg wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then

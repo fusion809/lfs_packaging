@@ -1,6 +1,7 @@
 #!/bin/bash
 name=libtool
 version=$(gnu_ver $name)
+lfs_depends=(glibc)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 

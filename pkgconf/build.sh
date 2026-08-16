@@ -1,6 +1,7 @@
 #!/bin/bash
 name=pkgconf
 version=$(gh_ver pkgconf/pkgconf)
+lfs_depends=(glibc)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 mversion=$(gh_ver mesonbuild/meson)

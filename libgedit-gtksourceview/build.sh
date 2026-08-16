@@ -3,21 +3,9 @@ set -e
 # Variable declaration
 name=libgedit-gtksourceview
 version=$(lgd_ver $name)
-lfs_depends=(glibc
-	gcc
-	systemd
-	zlib)
-blfs_depends=(cairo
-	exempi
-	gdk-pixbuf
-	glib
-	gnome-desktop
-	gtk3
-	hicolor-icon-theme
-	lcms
-	libhandy
-	libx11
-	meson)
+lfs_depends=(bzip2 dbus expat gcc glibc libffi systemd util-linux zlib)
+depends=(glib2 gtk3 libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXres libgedit-amtk libgedit-gfls pango pcre2 wayland)
+blfs_depends=(at-spi2-core brotli cairo exempi fontconfig freetype fribidi gdk-pixbuf glib glycin gnome-desktop graphite2 gtk3 harfbuzz hicolor-icon-theme lcms lcms2 libXau libXdmcp libepoxy libhandy libpng libseccomp libx11 libxcb libxkbcommon libxml2 meson pixman)
 # Fetch source and unpack it
 repo_url="https://gitlab.gnome.org/World/gedit/$name.git"
 if [[ ! -d "$name/.git" ]]; then

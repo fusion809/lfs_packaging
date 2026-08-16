@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 depends=()
-lfs_depends=(bash coreutils glibc gzip make python sed tar)
+lfs_depends=(bash coreutils gcc glibc gzip make python sed tar)
 blfs_depends=(cmake gcc wget)
 _name=blas
 name=blas

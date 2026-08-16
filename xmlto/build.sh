@@ -16,6 +16,7 @@ version=$(get_version)
 direname="$name-$version"
 filename="$direname.tar.gz"
 blfs_depends=(docbook-xml docbook-xsl-nons libxslt)
+lfs_depends=(glibc)
 xslver=$(cat /var/lib/book-packages/docbook-xsl-nons | head -n 1)
 
 if ! [[ -f $filename ]]; then

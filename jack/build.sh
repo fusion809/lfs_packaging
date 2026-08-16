@@ -4,8 +4,8 @@ set -e
 # Variable declarations
 name=jack
 direname=jack2
-depends=()
-lfs_depends=(bash coreutils expat python systemd)
+depends=(portaudio)
+lfs_depends=(bash coreutils dbus expat gcc glibc python systemd)
 blfs_depends=(alsa-lib dbus opus)
 # Fetch and unpack source
 if ! [[ -d $direname ]]; then

@@ -11,13 +11,9 @@ filename="$name-$version.tar.xz"
 edFilename="$name-editor-$edVersion.tar.xz"
 direname="${filename/.tar.xz/}"
 edDirename="${edFilename/.tar.xz/}"
-blfs_depends=(dconf
-	gsettings-desktop-schemas
-	itstool
-	libhandy
-	vte
-	gnome-shell
-	nautilus)
+blfs_depends=(at-spi2-core brotli cairo dconf fontconfig freetype fribidi gdk-pixbuf glycin gnome-shell graphite2 gsettings-desktop-schemas harfbuzz itstool lcms2 libXau libXdmcp libepoxy libhandy libpng libseccomp libsoup libxcb libxkbcommon nautilus pixman vte webkitgtk)
+lfs_depends=(bzip2 dbus expat gcc glibc libffi systemd util-linux zlib)
+depends=(glib2 gtk3 libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXres pango pcre2 wayland)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
 	wget -c https://download.gnome.org/sources/dconf/$(echo "${version}" | sed 's/.[0-9]$//g')/$filename

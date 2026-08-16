@@ -7,7 +7,7 @@ version=$(gh_ver "DrTimothyAldenDavis/SuiteSparse")
 filename="$_name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=(blas lapack)
-lfs_depends=(btomsh coreutils glibc gmp make mpfr sed tar)
+lfs_depends=(btomsh coreutils gcc glibc gmp make mpfr sed tar)
 blfs_depends=(cmake
 gcc # Fortran support needed
 wget)

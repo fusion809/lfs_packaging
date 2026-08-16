@@ -12,9 +12,9 @@ get_version() {
 version=$(get_version)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
-depends=()
-lfs_depends=(bash coreutils glibc gcc make python sed tar)
-blfs_depends=(dbus qt6 wget)
+depends=(glib2 libX11 libXext libXxf86vm libpciaccess libxshmfence mesa mitkrb pcre2 wayland)
+lfs_depends=(bash bzip2 coreutils dbus e2fsprogs expat gcc glibc libelf libffi make openssl python sed systemd tar xz zlib zstd)
+blfs_depends=(brotli dbus double-conversion flac fontconfig freetype graphite2 harfbuzz keyutils lame libXau libXdmcp libdrm libogg libpng libsndfile libvorbis libxcb libxkbcommon libxml2 llvm lm-sensors mpg123 opus pulseaudio qt6 spirv-tools wget)
 pip_depends=(pyopengl pyqt6-sip pyqt-builder sip)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then

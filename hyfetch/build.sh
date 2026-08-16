@@ -3,7 +3,7 @@ set -e
 # Variable declarations
 name=hyfetch
 depends=(fastfetch)
-lfs_depends=(bash coreutils)
+lfs_depends=(bash coreutils gcc glibc)
 blfs_depends=(git rustc)
 # Fetch and unpack source
 if ! [[ -d $name ]]; then

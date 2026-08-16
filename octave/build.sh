@@ -5,30 +5,9 @@ export JAVA_HOME=/opt/jdk
 name=octave
 version=$(gnu_ver $name)
 docs="AUTHORS BUGS CITATION COPYING ChangeLog INSTALL* NEWS README"
-depends=(
-  arpack
-  gl2ps
-  glpk
-  gnuplot
-  graphicsmagick
-  hdf5
-  lzip
-  pcre2
-  portaudio
-  qhull
-  qrupdate
-  qscintilla
-  rapidjson
-  suitesparse
-  sundials
-)
-lfs_depends=(bash coreutils make sed tar texinfo)
-blfs_depends=(curl fftw fltk
-gcc # Need Fortran support
-glu
-java
-libsndfile
-qt6)
+depends=(arpack blas gl2ps glib2 glpk gnuplot graphicsmagick gtk3 hdf5 hwloc jack lapack libICE libSM libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXft libXi libXinerama libXmu libXrandr libXrender libXres libXt libXxf86vm libaec libfabric libpciaccess libxshmfence lzip mesa mitkrb numactl openldap openmpi openpmix pango pcre2 portaudio qhull qrupdate qscintilla rapidjson suitesparse sundials wayland)
+lfs_depends=(bash bzip2 coreutils dbus e2fsprogs expat gcc glibc gmp libelf libffi make ncurses openssl readline sed systemd tar texinfo util-linux xz zlib zstd)
+blfs_depends=(alsa-lib at-spi2-core brotli cairo curl cyrus-sasl double-conversion fftw flac fltk fontconfig freeglut freetype fribidi gcc gdk-pixbuf glu glycin graphite2 harfbuzz java keyutils lame lcms2 libXau libXdmcp libdrm libepoxy libevent libidn2 libogg libpng libpsl libseccomp libsndfile libunistring libvorbis libxcb libxkbcommon libxml2 llvm lm-sensors mpg123 nghttp2 opus pixman qt6 spirv-tools webkitgtk)
 direname="$name-$version"
 filename="$direname.tar.lz"
 export CXXFLAGS="-O2 -fPIC -std=gnu++17"

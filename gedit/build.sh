@@ -3,25 +3,9 @@ set -e
 # Variable declaration
 name=gedit
 version=$(gn_ver $name)
-lfs_depends=(glibc
-	gcc
-	systemd
-	zlib)
-blfs_depends=(cairo
-	exempi
-	gdk-pixbuf
-	glib
-	gnome-desktop
-	gtk3
-	hicolor-icon-theme
-	lcms
-	libhandy
-	libx11
-	meson)
-depends=(libgedit-tepl
-	libgedit-amtk
-	libgedit-gtksourceview
-	libgedit-gfls)
+lfs_depends=(bzip2 dbus expat gcc glibc libffi systemd util-linux zlib)
+blfs_depends=(at-spi2-core brotli cairo enchant exempi fontconfig freetype fribidi gdk-pixbuf glib glycin gnome-desktop graphite2 gspell gtk3 harfbuzz hicolor-icon-theme lcms lcms2 libXau libXdmcp libepoxy libhandy libpeas libpng libseccomp libx11 libxcb libxkbcommon libxml2 meson pixman webkitgtk)
+depends=(glib2 gtk3 libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXres libgedit-amtk libgedit-gfls libgedit-gtksourceview libgedit-tepl pango pcre2 wayland)
 # Fetch source and unpack it
 repo_url="https://gitlab.gnome.org/World/gedit/$name.git"
 if [[ ! -d "$name/.git" ]]; then

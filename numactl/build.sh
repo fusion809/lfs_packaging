@@ -6,7 +6,7 @@ version=$(gh_ver "numactl/numactl")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=()
-lfs_depends=(autoconf bash coreutils glibc gzip make sed tar)
+lfs_depends=(autoconf bash coreutils gcc glibc gzip make sed tar)
 blfs_depends=(wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then

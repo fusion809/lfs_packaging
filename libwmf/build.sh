@@ -5,9 +5,9 @@ name=libwmf
 version=$(gh_ver "caolanm/libwmf")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
-depends=()
-lfs_depends=(autoconf bash coreutils glibc gzip make sed tar)
-blfs_depends=(gdk-pixbuf libjpeg-turbo libpng libx11 zlib)
+depends=(glib2 libX11 pcre2)
+lfs_depends=(autoconf bash bzip2 coreutils expat gcc glibc gzip libffi make sed tar util-linux zlib)
+blfs_depends=(brotli fontconfig freetype gdk-pixbuf glycin lcms2 libXau libXdmcp libjpeg-turbo libpng libseccomp libx11 libxcb zlib)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
 	wget -c https://github.com/caolanm/libwmf/archive/refs/tags/v${version}.tar.gz -O $filename

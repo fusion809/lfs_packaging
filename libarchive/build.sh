@@ -5,7 +5,8 @@ name=libarchive
 version=$(gh_ver "libarchive/libarchive")
 direname="$name-$version"
 filename="$direname.tar.xz"
-lfs_depends=(wget coreutils make gcc tar xz)
+lfs_depends=(acl bzip2 coreutils gcc glibc lz4 make openssl tar wget xz zlib zstd)
+blfs_depends=(libxml2)
 if ! [[ -f $filename ]]; then
 	wget -c https://github.com/libarchive/libarchive/releases/download/v$version/$filename
 fi

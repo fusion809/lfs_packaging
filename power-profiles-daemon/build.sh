@@ -12,7 +12,9 @@ get_ver() {
 version=$(get_ver)
 filename="$name-$version.tar.gz"
 direname="$name-$version"
-blfs_depends=(polkit pygobject upower)
+blfs_depends=(libgudev polkit pygobject upower)
+lfs_depends=(glibc libffi systemd util-linux zlib)
+depends=(glib2 pcre2 polkit)
 if ! [[ -f $filename ]]; then
 	wget -c https://gitlab.freedesktop.org/upower/power-profiles-daemon/-/archive/$version/$filename
 fi

@@ -5,7 +5,9 @@ name=libnotify
 version=$(gn_ver libnotify)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
-blfs_depends=(gdk-pixbuf glib2)
+blfs_depends=(brotli fontconfig freetype gdk-pixbuf glib2 glycin lcms2 libpng libseccomp)
+lfs_depends=(bzip2 expat gcc glibc libffi util-linux zlib)
+depends=(glib2 pcre2)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
 	wget -c https://download.gnome.org/sources/libnotify/$(echo $version | sed 's/.[0-9]$//g')/$filename

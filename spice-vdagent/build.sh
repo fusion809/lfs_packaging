@@ -6,11 +6,9 @@ version=$(spice_ver $name)
 docs="COPYING CHANGELOG.md README.md"
 direname="$name-$version"
 filename="$direname.tar.bz2"
-depends=(libpciaccess spice-protocol)
-lfs_depends=(bash coreutils glibc make sed systemd tar)
-blfs_depends=(alsa-lib dbus glib gtk3 libdrm
-libx11 libxinerama libxrandr # Xorg libraries
-wget)
+depends=(glib2 gtk3 libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXres libpciaccess pango pcre2 spice-protocol wayland)
+lfs_depends=(bash bzip2 coreutils dbus expat gcc glibc libffi make sed systemd tar util-linux zlib)
+blfs_depends=(alsa-lib at-spi2-core brotli cairo dbus fontconfig freetype fribidi gdk-pixbuf glib glycin graphite2 gtk3 harfbuzz lcms2 libXau libXdmcp libdrm libepoxy libpng libseccomp libx11 libxcb libxinerama libxkbcommon libxrandr pixman wget)
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then

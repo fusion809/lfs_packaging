@@ -17,6 +17,8 @@ get_gobj() {
 
 gobj_ver=$(get_gobj)
 blfs_depends=(docutils libxslt)
+lfs_depends=(bzip2 glibc libelf libffi util-linux xz zlib zstd)
+depends=(pcre2)
 filename="$_name-$version.tar.xz"
 direname="$_name-$version"
 gobj_filename="gobject-introspection-$gobj_ver.tar.xz"

@@ -3,7 +3,9 @@ set -e
 name=networkmanager
 version=$(gfd_ver "NetworkManager/NetworkManager")
 
-blfs_depends=(libndp curl glib2 iptables libpsl newt nss polkit pygobject systemd vala wpa_supplicant)
+blfs_depends=(brotli curl cyrus-sasl glib2 iptables libidn2 libndp libpsl libunistring newt nghttp2 nspr nss polkit pygobject systemd vala wpa_supplicant)
+lfs_depends=(glibc libffi ncurses openssl readline systemd util-linux zlib zstd)
+depends=(glib2 openldap pcre2)
 filename="NetworkManager-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 

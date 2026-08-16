@@ -6,8 +6,8 @@ version=$(gh_ver "openpmix/prrte")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=(hwloc openpmix)
-lfs_depends=(bash coreutils glibc gzip make perl sed tar)
-blfs_depends=(libevent wget)
+lfs_depends=(bash coreutils glibc gzip make perl sed systemd tar)
+blfs_depends=(libevent libnl wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
 	wget -c https://github.com/openpmix/prrte/releases/download/v$version/$name-$version.tar.gz

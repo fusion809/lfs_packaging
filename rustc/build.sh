@@ -18,9 +18,9 @@ version=$(get_version)
 filename="$name-$version-src.tar.xz"
 direname="${filename/.tar.xz/}"
 ssl_src="https://github.com/lfs-book/rust-openssl/archive/v0.10.78/rust-openssl-0.10.78.tar.gz"
-depends=()
-lfs_depends=(coreutils glibc python)
-blfs_depends=(llvm cmake curl)
+depends=(openldap)
+lfs_depends=(coreutils gcc glibc libffi openssl python zlib zstd)
+blfs_depends=(brotli cmake curl cyrus-sasl libidn2 libpsl libunistring libxml2 llvm nghttp2)
 if ! [[ -f $filename ]]; then
 	wget -c https://static.rust-lang.org/dist/$filename
 	wget -c $ssl_src

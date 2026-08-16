@@ -5,11 +5,9 @@ name=sundials
 version=$(gh_ver "llnl/sundials")
 filename=$name-$version.tar.gz
 direname="${filename/.tar.gz/}"
-depends=(lapack openmpi suitesparse)
-lfs_depends=(bash coreutils glibc gzip make python sed tar)
-blfs_depends=(cmake
-gcc # Fortran support needed
-wget)
+depends=(hwloc lapack libfabric numactl openmpi openpmix suitesparse)
+lfs_depends=(bash coreutils gcc glibc gzip make python sed systemd tar)
+blfs_depends=(cmake gcc libevent wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
     wget -c https://github.com/llnl/sundials/archive/refs/tags/v$version.tar.gz -O $filename

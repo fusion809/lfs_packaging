@@ -15,7 +15,7 @@ dirname="krb5-$version"
 filename="$dirname.tar.gz"
 depends=()
 lfs_depends=(bash e2fsprogs glibc openssl)
-blfs_depends=()
+blfs_depends=(keyutils lmdb)
 
 if ! [ -f "$filename" ]; then
     wget -c "https://kerberos.org/dist/krb5/$majVer/$filename"

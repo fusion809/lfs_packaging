@@ -7,11 +7,8 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=(libaec
 openmpi)
-lfs_depends=(bash coreutils glib gzip make sed tar zlib)
-blfs_depends=(cmake 
-gcc # Fortran support is needed
-java
-wget)
+lfs_depends=(bash coreutils gcc glib glibc gzip make sed tar zlib)
+blfs_depends=(cmake freetype gcc java wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
 	wget -c https://github.com/HDFGroup/hdf5/releases/download/$version/$filename
