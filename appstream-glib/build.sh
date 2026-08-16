@@ -4,16 +4,10 @@ set -e
 name=appstream-glib
 get_version() {
 	local up_ver=$(wget -T 5 -cqO- https://people.freedesktop.org/~hughsient/appstream-glib/releases/ | grep -v "sha.*sum" | grep "appstream-glib-.*.tar.xz" | tail -n 1 | cut -d '"' -f 2 | sed 's/appstream-glib-//g' | sed 's/.tar.xz//g')
-	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
-		echo "$up_ver"
-		return 0
-	fi
+	ver_check "$up_ver" && return
 
 	local arch_ver=$(aver $name)
-	if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
-		echo "$arch_ver"
-		return 0
-	fi
+	ver_check "$arch_ver" && return
 }
 version=$(get_version)
 depends=()

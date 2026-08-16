@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=pango
-version="$(wget -cqO- https://gitlab.gnome.org/GNOME/$name/-/tags | grep "tags/" | cut -d '/' -f 6 | sed 's/".*//g' | grep -v "alpha\|beta\|\.rc" | grep -v "1.90" | head -n 1 | sed 's/^v//g')"
+version=$(gn_ver pango)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
 blfs_depends=(fontconfig harfbuzz freetype fribidi glib2 cairo)

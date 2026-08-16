@@ -5,16 +5,10 @@ get_version() {
     local majVer=$(wget -T 5 -cqO- https://kerberos.org/dist/krb5/ | grep "/</a>" | tail -n 1 | cut -d '"' -f 8 | sed 's|/||g')
     if echo "$majVer" | grep -q "[0-9]"; then
         local version=$(wget -T 5 -cqO- https://kerberos.org/dist/krb5/$majVer/ | cut -d '"' -f 8 | grep "^krb5" | grep -v "asc" | cut -d '-' -f 2 | sed 's/.tar.gz//g' | sort | uniq | tail -n 1)
-        if echo "$version" | grep -q "[0-9]\.[0-9]"; then
-            echo "$version"
-            return 0
-        fi
+        ver_check "$version" && return
     fi
     local arch_ver=$(aver $name)
-    if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
-        echo "$arch_ver"
-        return 0
-    fi
+    ver_check "$arch_ver" && return
 }
 version=$(get_version)
 dirname="krb5-$version"

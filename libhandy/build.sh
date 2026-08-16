@@ -2,7 +2,7 @@
 set -e
 # Variable declaration
 name=libhandy
-version="$(wget -cqO- https://gitlab.gnome.org/GNOME/$name/-/tags | grep "tags/" | cut -d '/' -f 6 | sed 's/".*//g' | grep -v "alpha\|beta\|\.rc" | head -n 1 | sed 's/^v//g')"
+version=$(gn_ver libhandy)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 blfs_depends=(gtk3 vala)

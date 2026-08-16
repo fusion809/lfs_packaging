@@ -2,22 +2,13 @@
 name=mesa
 get_version() {
       local up_ver=$(wget -T 5 -cqO- https://mesa3d.org/ | grep "relnotes" | head -n 1 | cut -d '/' -f 5 | sed 's/.html.*//g')
-      if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
-            echo "$up_ver"
-            return 0
-      fi
+      ver_check "$up_ver" && return
 
       local git_ver=$(git ls-remote --tags --refs https://gitlab.freedesktop.org/mesa/mesa.git | grep -E "refs/tags/mesa-[0-9.]+$" | cut -d '-' -f 2 | sort -V | tail -n 1)
-      if echo "$git_ver" | grep -q "[0-9]\.[0-9]"; then
-            echo "$git_ver"
-            return 0
-      fi
+      ver_check "$git_ver" && return
 
       local arch_ver=$(aver $name)
-      if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
-            echo "$arch_ver"
-            return 0
-      fi
+      ver_check "$arch_ver" && return
 }
 version=$(get_version)
 direname="$name-$version"

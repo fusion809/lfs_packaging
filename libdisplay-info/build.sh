@@ -2,22 +2,13 @@
 name=libdisplay-info
 get_version() {
 	local up_ver=$(wget --timeout=5 -cqO- https://gitlab.freedesktop.org/emersion/libdisplay-info/-/tags | grep "tags/" | grep -v "dev\|rc" | cut -d '/' -f 6 | sed 's/".*//g' | sort -V | tail -n 1)
-	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
-		echo "$up_ver"
-		return 0
-	fi
+	ver_check "$up_ver" && return
 
 	local git_ver=$(git ls-remote --tags https://gitlab.freedesktop.org/emersion/libdisplay-info.git | grep -v "\^{}" | cut -d '/' -f 3 | tail -n 1)
-	if echo "$git_ver" | grep -q "[0-9]\.[0-9]"; then
-		echo "$git_ver"
-		return 0
-	fi
+	ver_check "$git_ver" && return
 
-	local blfs_ver=$(wget --timeout=5 -cqO- https://www.linuxfromscratch.org/blfs/view/systemd/index.html | grep "libdisplay-info" | sed 's/.*libdisplay-info-//g' | sed 's|</a>||g')
-	if echo "$blfs_ver" | grep -q "[0-9]\.[0-9]"; then
-		echo "$blfs_ver"
-		return 0
-	fi
+	local blfs_ver=$(wget --timeout=5 -cqO- https://www.linuxfromscratch.org/blfs/view/systemd/index.html | grep "$name" | sed "s/.*$name-//g" | sed 's|</a>||g')
+	ver_check "$blfs_ver" && return
 }
 
 version=$(get_version)

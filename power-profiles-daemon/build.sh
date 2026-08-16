@@ -3,20 +3,11 @@ set -e
 name=power-profiles-daemon
 get_ver() {
       up_ver=$(wget --timeout=15 -cqO- https://gitlab.freedesktop.org/upower/power-profiles-daemon/-/tags | grep "/tags/" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 6)
-      if echo "$up_ver" | grep -qP "[0-9]"; then
-		echo "$up_ver"
-		return 0
-	fi
+	  ver_check "$up_ver" && return
       git_ver=$(git ls-remote --tags --refs https://gitlab.freedesktop.org/upower/power-profiles-daemon.git | cut -d '/' -f 3 | sort -V | tail -n 1)
-      if echo "$git_ver" | grep -qP "[0-9]"; then
-		echo "$git_ver"
-		return 0
-	fi
+	  ver_check "$git_ver" && return
       arch_ver=$(aver $name)
-      if echo "$arch_ver" | grep -qP "[0-9]"; then
-		echo "$arch_ver"
-		return 0
-	fi
+	  ver_check "$arch_ver" && return
 }
 version=$(get_ver)
 filename="$name-$version.tar.gz"

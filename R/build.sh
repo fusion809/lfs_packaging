@@ -4,10 +4,7 @@ set -e
 name=R
 function R_version {
   local up_ver1=$(wget -cqO- https://cran.r-project.org/sources.html | grep ".tar.gz" | grep -v "alpha\|beta\|\.rc" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 4 | sed 's/.tar.gz//g' | cut -d '-' -f 2) 
-  if echo "$up_ver1" | grep -q "[0-9]\.[0-9]"; then
-		echo "$up_ver1"
-		return 0
-	fi
+  ver_check "$up_ver1" && return
 
   local up_ver2=$(
     curl -fsSL https://cran.r-project.org/src/base/ |
@@ -21,16 +18,10 @@ function R_version {
     tail -n1 |
     sed 's/^R-//; s/\.tar\.gz$//'
   )
-  if echo "$up_ver2" | grep -q "[0-9]\.[0-9]"; then
-    echo "$up_ver2"
-    return 0
-  fi
+  ver_check "$up_ver2" && return
 
   local arch_ver=$(aver $name)
-  if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
-		echo "$arch_ver"
-		return 0
-	fi
+  ver_check "$arch_ver" && return
 }
 version=$(R_version)
 direname="$name-$version"

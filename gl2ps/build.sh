@@ -4,22 +4,13 @@ set -e
 name=gl2ps
 get_version() {
 	local up_ver=$(wget -T 5 -cqO- https://geuz.org/gl2ps/src/ | grep "[0-9].tgz" | grep -v "alpha\|beta\|\.rc" | cut -d '"' -f 8 | tail -n 1 | sed 's/gl2ps-//g' | sed 's/.tgz//g')
-	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
-		echo "$up_ver"
-		return 0
-	fi
+	ver_check "$up_ver" && return
 
 	local git_ver=$(git ls-remote --tags --refs https://gitlab.onelab.info/gl2ps/gl2ps.git | grep "gl2ps_" | tail -n 1 | cut -d '/' -f 3 | sed 's/gl2ps_//g' | tr '_' '.')
-	if echo "$git_ver" | grep -q "[0-9]\.[0-9]"; then
-		echo "$git_ver"
-		return 0
-	fi
+	ver_check "$git_ver" && return
 
 	local arch_ver=$(aver $name)
-	if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
-		echo "$arch_ver"
-		return 0
-	fi
+	ver_check "$arch_ver" && return
 }
 
 version=$(get_version)

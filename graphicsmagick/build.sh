@@ -4,16 +4,10 @@ set -e
 name=graphicsmagick
 get_version() {
 	local up_ver=$(wget -cqO- http://www.graphicsmagick.org/ | grep "Released" | cut -d ' ' -f 1 | sed 's/.*<p>//g')
-	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
-		echo "$up_ver"
-		return 0
-	fi
+	ver_check "$up_ver" && return
 
 	local arch_ver=$(aver $name)
-	if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
-		echo "$arch_ver"
-		return 0
-	fi
+	ver_check "$arch_ver" && return
 }
 version=$(get_version)
 _archive="GraphicsMagick-$version"

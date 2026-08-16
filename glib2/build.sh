@@ -6,22 +6,13 @@ version=$(gn_ver $_name $name)
 
 get_gobj() {
       local up_ver=$(wget -cqO- https://gitlab.gnome.org/GNOME/gobject-introspection/-/tags | grep "/tags/[0-9]" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 2| cut -d '/' -f 6)
-      if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
-		echo "$up_ver"
-		return 0
-	fi
+      ver_check "$up_ver" && return
 
       local git_ver=$(git ls-remote --tags --refs https://gitlab.gnome.org/GNOME/gobject-introspection.git | grep "refs/tags/[0-9]" | tail -n 1 | cut -d '/' -f 3)
-	if echo "$git_ver" | grep -q "[0-9]\.[0-9]"; then
-		echo "$git_ver"
-		return 0
-	fi
+	ver_check "$git_ver" && return
 
 	local arch_ver=$(aver gobject-introspection)
-	if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
-		echo "$arch_ver"
-		return 0
-	fi
+	ver_check "$arch_ver" && return
 }
 
 gobj_ver=$(get_gobj)
