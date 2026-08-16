@@ -15,7 +15,7 @@ cd $direname
 git stash
 git pull origin main
 common_cmake_args=(
-  -DCMAKE_BUILD_TYPE=None
+  -DCMAKE_BUILD_TYPE=Release
   -DCMAKE_INSTALL_PREFIX=/usr
   -Wno-dev
 )
