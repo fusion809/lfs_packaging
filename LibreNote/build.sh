@@ -2,10 +2,10 @@
 set -e
 name=LibreNote
 version=$(git ls-remote https://github.com/Procurador1337/$name.git HEAD | awk '{print $1}')
+depends=(glib2 libX11 libXext libXxf86vm libpciaccess libxshmfence mesa pcre2 wayland)
+blfs_depends=(brotli double-conversion fontconfig freetype git graphite2 harfbuzz libXau libXdmcp libdrm libpng libxcb libxkbcommon libxml2 llvm lm-sensors qt6 spirv-tools)
+lfs_depends=(bzip2 cmake coreutils dbus expat gcc glibc libelf libffi make systemd xz zlib zstd)
 direname=$name
-blfs_depends=(brotli cmake double-conversion flac fontconfig freetype graphite2 harfbuzz keyutils lame libXau libXdmcp libdrm libogg libpng libsndfile libvorbis libxcb libxkbcommon libxml2 llvm lm-sensors mpg123 opus pulseaudio qt6 spirv-tools)
-lfs_depends=(bzip2 dbus e2fsprogs expat gcc glibc libelf libffi openssl systemd xz zlib zstd)
-depends=(glib2 libX11 libXext libXxf86vm libpciaccess libxshmfence mesa mitkrb pcre2 wayland)
 
 if ! [[ -d $direname/.git ]]; then
 	git clone https://github.com/Procurador1337/$name
