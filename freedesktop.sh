@@ -4,16 +4,17 @@ function gfd_ver {
 	local repo=$1
 	local name=$(echo $repo | cut -d '/' -f 2 | tr '[:upper:]' '[:lower:]')
 	local up_ver=$(fdt_ver $repo)
-	ver_check "$up_ver" && return
+	local inst_ver=$(pkgver $name)
+	ver_check "$up_ver" "$inst_ver" && return
 
 	local git_ver=$(gfl_ver $repo)
-	ver_check "$git_ver" "$name" && return
+	ver_check "$git_ver" "$inst_ver" && return
 
 	local arch_ver=$(aver $name)
-	ver_check "$arch_ver" "$name" && return
+	ver_check "$arch_ver" "$inst_ver" && return
 
 	local lfs_vers=$(lfs_ver $name)
-	ver_check "$lfs_vers" "$name" && return
+	ver_check "$lfs_vers" "$inst_ver" && return
 	echo "$(pkgver $name)"
 }
 
@@ -24,14 +25,14 @@ function spice_ver {
 	else
 		local repo="spice/$name"
 	fi
-	local repo_url=$(echo $repo | sed "s|/|%2F|g")
-	local up_ver=$(wget --timeout=5 -cqO- "https://gitlab.freedesktop.org/api/v4/projects/${repo_url}/releases?per_page=1" | grep -o '"tag_name":"[^"]*"' | grep -v "server" | sed 's|spice-vdagent-||g' | head -n 1 | cut -d'"' -f4 | sed 's/^v//')
-	ver_check "$up_ver" && return
-	local git_ver=$(git ls-remote --tags --refs https://gitlab.freedesktop.org/$repo.git | cut -d '/' -f 3 | grep "[0-9]" | grep -v "server\|common\|client" | sed 's/^v//g' | sed 's|spice-vdagent-||g' | sort -V | tail -n 1)
-	ver_check "$git_ver" "$name" && return
+	local up_ver=$(wsp_ver $repo)
+	local inst_ver=$(pkgver $name)
+	ver_check "$up_ver" "$inst_ver" && return
+	local git_ver=$(gsp_ver $repo)
+	ver_check "$git_ver" "$inst_ver" && return
 
 	local arch_ver=$(aver $name)
-	ver_check "$arch_ver" "$name" && return
+	ver_check "$arch_ver" "$inst_ver" && return
 	echo "$(pkgver $name)"
 }
 
@@ -41,12 +42,13 @@ function way_ver {
     ver_check "$up_ver" && return
 
     local git_ver=$(git ls-remote --tags --refs https://gitlab.freedesktop.org/wayland/$name.git | grep "refs/tags/[0-9.]*$" | cut -d '/' -f 3 | sort -V | tail -n 1)
-    ver_check "$git_ver" "$name" && return
+	local inst_ver=$(pkgver $name)
+	ver_check "$up_ver" "$inst_ver" && return
 
     local arch_ver=$(aver $name)
-    ver_check "$arch_ver" "$name" && return
+    ver_check "$arch_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)
-	ver_check "$lfs_vers" "$name" && return
+	ver_check "$lfs_vers" "$inst_ver" && return
 }
 
 # xorg.freedesktop.org version fetcher
@@ -60,13 +62,14 @@ function xfd_ver() {
 		type="app"
 	fi
 	local up_ver=$(wxfd_ver $type $name)
-	ver_check "$up_ver" && return
+	local inst_ver=$(pkgver $name)
+	ver_check "$up_ver" "$inst_ver" && return
 
 	local git_ver=$(gxfd_ver $type $name)
-	ver_check "$git_ver" && return
+	ver_check "$git_ver" "$inst_ver" && return
 
 	local arch_ver=$(aver $name)
-	ver_check "$arch_ver" "$name" && return
+	ver_check "$arch_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)
-	ver_check "$lfs_vers" "$name" && return
+	ver_check "$lfs_vers" "$inst_ver" && return
 }

@@ -6,7 +6,8 @@ function aver {
 }
 
 function fdt_ver {
-    wget --timeout=5 -cqO- https://gitlab.freedesktop.org/$repo/-/tags | grep "tags/" | grep -v "dev\|rc" | cut -d '/' -f 6 | sed 's/".*//g' | sort -V | tail -n 1
+    local repo=${1:-$repo}
+    wget --timeout=5 -cqO- "https://gitlab.freedesktop.org/$repo/-/tags" | grep -oE 'tags/[v0-9.][^"]*' | grep -vE "dev|rc|alpha|beta" | sed 's|tags/||; s/^v//' | sort -V | tail -n 1
 }
 
 function gh_com {
@@ -14,7 +15,7 @@ function gh_com {
 }
 
 function gfl_ver {
-    git ls-remote --tags "https://gitlab.freedesktop.org/$1.git" | sed -n 's|.*refs/tags/\([0-9][0-9.]*\)$|\1|p' | sort -V | tail -1
+    git ls-remote --tags "https://gitlab.freedesktop.org/$1.git" | sed -n 's|.*refs/tags/v\?\([0-9][0-9.]*\)$|\1|p' | grep -vE "dev|rc|alpha|beta" | sort -V | tail -1
 }
 
 function gglpk_ver {
@@ -69,12 +70,16 @@ function gsf_ver {
     git ls-remote --tags --refs https://git.code.sf.net/p/$1.git | grep "tags/[v0-9.]+" | cut -d '/' -f 3 | sort -V | tail -n 1
 }
 
+function gsp_ver {
+    git ls-remote --tags --refs https://gitlab.freedesktop.org/$1.git | cut -d '/' -f 3 | grep "[0-9]" | grep -v "server\|common\|client" | sed -E 's|[a-z_-]+||g' | sort -V | tail -n 1
+}
+
 function gxfd_ver {
     git ls-remote --tags --refs https://gitlab.freedesktop.org/xorg/$1/$2.git | grep "$2-" -i | cut -d '/' -f 3 | cut -d '-' -f 2 | tr '_' '.' | sort -V | tail -n 1
 }
 
 function lfs_ver {
-	wget --timeout=5 -cqO- https://www.linuxfromscratch.org/{b,}lfs/view/systemd/index.html https://www.linuxfromscratch.org/slfs/view/stable/ | grep -iE ">$1-[0-9.]+" | sed "s/.*$1-//I" | sed 's|</a>||g' | grep -E "^[0-9.]+$" | tail -n 1
+	wget --timeout=5 -cqO- https://www.linuxfromscratch.org/{b,}lfs/view/systemd/index.html https://www.linuxfromscratch.org/blfs/view/systemd/longindex.html https://www.linuxfromscratch.org/slfs/view/stable/ | grep -iE ">$1-[0-9.]+" | sed -E "s/.*$1-([0-9.]+).*/\1/I" | grep -E "^[0-9.]+$" | sort -V | tail -n 1
 }
 
 function wgn_ver {
@@ -91,6 +96,11 @@ function wlgd_ver {
 
 function wsf_ver {
     wget --timeout=5 -cqO- https://sourceforge.net/p/$1/ref/master/tags/ | grep "/tree" | grep -v "alpha\|beta\|rc" | grep -v "git-conv" | tail -n 1 | cut -d '/' -f 6
+}
+
+function wsp_ver {
+	local repo_url=$(echo $1 | sed "s|/|%2F|g")
+    wget --timeout=5 -cqO- "https://gitlab.freedesktop.org/api/v4/projects/${repo_url}/releases?per_page=1" | grep -o '"tag_name":"[^"]*"' | grep -v "server" | sed -E 's|[a-z_-]+||g' | head -n 1 | cut -d'"' -f4
 }
 
 function wxfd_ver {
