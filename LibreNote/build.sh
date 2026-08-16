@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-name=Libre_Player
+name=LibreNote
 version=$(git ls-remote https://github.com/Procurador1337/$name.git HEAD | awk '{print $1}')
 direname=$name
 blfs_depends=(brotli cmake double-conversion flac fontconfig freetype graphite2 harfbuzz keyutils lame libXau libXdmcp libdrm libogg libpng libsndfile libvorbis libxcb libxkbcommon libxml2 llvm lm-sensors mpg123 opus pulseaudio qt6 spirv-tools)
@@ -23,5 +23,4 @@ cmaki "${common_cmake_args[@]}"
 cd ..
 rm -rf build
 cd ..
-sudo install -Dm755 $name.desktop /usr/share/applications/
 echo "$version" > /var/lib/custom-packages/$name
