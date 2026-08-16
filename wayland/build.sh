@@ -1,6 +1,6 @@
 #!/bin/bash
 name=wayland
-version=$(wget -cqO- https://wayland.freedesktop.org/releases.html | grep "$name-[0-9].*.tar.xz" | grep -v ".9[0-9].tar.xz" | head -n 1 | cut -d '/' -f 8)
+version=$(way_ver $name)
 blfs_depends=(libxml2)
 lfs_depends=(coreutils meson ninja tar wget xz)
 filename="$name-$version.tar.xz"

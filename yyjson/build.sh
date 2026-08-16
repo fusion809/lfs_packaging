@@ -1,6 +1,6 @@
 #!/bin/bash
 name=yyjson
-version=$(wget -cqO- https://github.com/ibireme/yyjson/releases | grep "/tag/[0-9]" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 6 | cut -d '/' -f 6)
+version=$(gh_ver ibireme/yyjson)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=()

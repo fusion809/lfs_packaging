@@ -2,7 +2,20 @@
 set -e
 # Variable declarations
 name=qscintilla
-version=$(wget -cqO- https://www.riverbankcomputing.com/software/qscintilla/download | grep ".tar.gz" | grep -v "alpha\|beta\|[0-9]rc" | head -n 1 | cut -d '/' -f 8 | sed 's/>.*//g' | cut -d '-' -f 2 | sed 's/.tar.gz//g')
+get_version() {
+    local up_ver=$(wget -T 5 -cqO- https://www.riverbankcomputing.com/software/qscintilla/download | grep ".tar.gz" | grep -v "alpha\|beta\|[0-9]rc" | head -n 1 | cut -d '/' -f 8 | sed 's/>.*//g' | cut -d '-' -f 2 | sed 's/.tar.gz//g')
+    if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
+        echo "$up_ver"
+        return 0
+    fi
+
+    local arch_ver=$(aver $name)
+    if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
+        echo "$arch_ver"
+        return 0
+    fi
+}
+version=$(get_version)
 archive=QScintilla_src-$version
 depends=(pyqt6)
 lfs_depends=(bash coreutils make sed tar)

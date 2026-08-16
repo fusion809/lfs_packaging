@@ -1,7 +1,26 @@
 #!/bin/bash
 set -e
 name=rustc
-version=$(wget -cqO- https://blog.rust-lang.org/releases/latest | grep "\-[0-9]\." | head -n 1 | cut -d '/' -f 5 | cut -d '-' -f 2)
+get_version() {
+    local up_ver=$(wget -T 5 -cqO- https://blog.rust-lang.org/releases/latest | grep "\-[0-9]\." | head -n 1 | cut -d '/' -f 5 | cut -d '-' -f 2)
+    if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
+        echo "$up_ver"
+        return 0
+    fi
+
+    local git_ver=$(git ls-remote --tags --refs https://github.com/rust-lang/rust.git | grep "refs/tags/[0-9.]*$" | cut -d '/' -f 3 | sort -V | tail -n 1)
+    if echo "$git_ver" | grep -q "[0-9]\.[0-9]"; then
+        echo "$git_ver"
+        return 0
+    fi
+
+    local arch_ver=$(aver rust)
+    if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
+        echo "$arch_ver"
+        return 0
+    fi
+}
+version=$(get_version)
 filename="$name-$version-src.tar.xz"
 direname="${filename/.tar.xz/}"
 ssl_src="https://github.com/lfs-book/rust-openssl/archive/v0.10.78/rust-openssl-0.10.78.tar.gz"

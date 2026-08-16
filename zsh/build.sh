@@ -1,7 +1,25 @@
 #!/bin/bash
 set -e
 name=zsh
-version=$(wget -cqO- https://sourceforge.net/p/zsh/code/ref/master/tags/ | grep "zsh-[0-9.]*" | grep -v test | cut -d '"' -f 2 | cut -d '/' -f 6 | cut -d '-' -f 2 | tail -n 1)
+get_version() {
+    local up_ver=$(git ls-remote --tags --refs git://git.code.sf.net/p/zsh/code.git | grep "refs/tags/zsh-[0-9.]*$" | cut -d '-' -f 2 | sort -V | tail -n 1)
+    if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
+        echo "$up_ver"
+        return 0
+    fi
+    local git_ver=$(git ls-remote --tags --refs git://git.code.sf.net/p/zsh/code.git | grep "refs/tags/zsh-[0-9.]*$" | cut -d '-' -f 2 | sort -V | tail -n 1)
+    if echo "$git_ver" | grep -q "[0-9]\.[0-9]"; then
+        echo "$git_ver"
+        return 0
+    fi
+
+    local arch_ver=$(aver $name)
+    if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
+        echo "$arch_ver"
+        return 0
+    fi
+}
+version=$(get_version)
 direname="$name-$version"
 filename="$direname.tar.xz"
 depends=()

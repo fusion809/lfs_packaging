@@ -196,3 +196,24 @@ function gnu_ver {
 		return 0
 	fi
 }
+
+function way_ver {
+    local name=$1
+    local up_ver=$(wget -T 5 -cqO- https://wayland.freedesktop.org/releases.html | grep "$name-[0-9].*.tar.xz" | grep -v ".9[0-9].tar.xz" | head -n 1 | cut -d '/' -f 8)
+      if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
+            echo "$up_ver"
+            return 0
+      fi
+
+      local git_ver=$(git ls-remote --tags --refs https://gitlab.freedesktop.org/wayland/$name.git | grep "refs/tags/[0-9.]*$" | cut -d '/' -f 3 | sort -V | tail -n 1)
+      if echo "$git_ver" | grep -q "[0-9]\.[0-9]"; then
+            echo "$git_ver"
+            return 0
+      fi
+
+      local arch_ver=$(aver $name)
+      if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
+            echo "$arch_ver"
+            return 0
+      fi
+}
