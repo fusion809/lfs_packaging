@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=Libre_Player
-version=$(git ls-remote https://github.com/Procurador1337/$name.git HEAD | awk '{print $1}')
+version=$(gh_com "Procurador1337/$name")
 direname=$name
 blfs_depends=(brotli cmake double-conversion flac fontconfig freetype graphite2 harfbuzz keyutils lame libXau libXdmcp libdrm libogg libpng libsndfile libvorbis libxcb libxkbcommon libxml2 llvm lm-sensors mpg123 opus pulseaudio qt6 spirv-tools)
 lfs_depends=(bzip2 dbus e2fsprogs expat gcc glibc libelf libffi openssl systemd xz zlib zstd)

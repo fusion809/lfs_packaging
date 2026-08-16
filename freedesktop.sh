@@ -14,6 +14,7 @@ function gfd_ver {
 
 	local lfs_vers=$(lfs_ver $name)
 	ver_check "$lfs_vers" "$name" && return
+	echo "$(pkgver $name)"
 }
 
 function spice_ver {
@@ -23,13 +24,15 @@ function spice_ver {
 	else
 		local repo="spice/$name"
 	fi
-	local up_ver=$(wget --timeout=5 -cqO- "https://gitlab.freedesktop.org/api/v4/projects/$repo/releases?per_page=1" | grep -o '"tag_name":"[^"]*"' | grep -v "server" | head -n 1 | cut -d'"' -f4 | sed 's/^v//')
+	local repo_url=$(echo $repo | sed "s|/|%2F|g")
+	local up_ver=$(wget --timeout=5 -cqO- "https://gitlab.freedesktop.org/api/v4/projects/${repo_url}/releases?per_page=1" | grep -o '"tag_name":"[^"]*"' | grep -v "server" | sed 's|spice-vdagent-||g' | head -n 1 | cut -d'"' -f4 | sed 's/^v//')
 	ver_check "$up_ver" && return
-	local git_ver=$(git ls-remote --tags --refs https://gitlab.com/$repo.git | cut -d '/' -f 3 | grep "[0-9]" | grep -v "server\|common\|client" | sed 's/^v//g' | sed 's|spice-vdagent-||g' | sort -V | tail -n 1)
+	local git_ver=$(git ls-remote --tags --refs https://gitlab.freedesktop.org/$repo.git | cut -d '/' -f 3 | grep "[0-9]" | grep -v "server\|common\|client" | sed 's/^v//g' | sed 's|spice-vdagent-||g' | sort -V | tail -n 1)
 	ver_check "$git_ver" "$name" && return
 
 	local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$name" && return
+	echo "$(pkgver $name)"
 }
 
 function way_ver {

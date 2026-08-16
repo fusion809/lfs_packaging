@@ -12,11 +12,6 @@ get_version() {
 }
 
 version=$(get_version)
-
-# The FIRST "version=" line must be the final result. 
-# This tells Bash to use savannah_ver, but if it's empty, use arch_ver instead.
-version="${savannah_ver:-$arch_ver}"
-
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=()

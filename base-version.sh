@@ -1,4 +1,5 @@
 #!/bin/bash
+GIT_TERMINAL_PROMPT=0
 function aver {
     local name=$(echo $1 | tr '[:upper:]' '[:lower:]')
 	wget --timeout=5 -cqO- -T 10 "https://gitlab.archlinux.org/archlinux/packaging/packages/$name/-/raw/main/PKGBUILD" | grep "^pkgver=" | cut -d '=' -f 2
@@ -6,6 +7,10 @@ function aver {
 
 function fdt_ver {
     wget --timeout=5 -cqO- https://gitlab.freedesktop.org/$repo/-/tags | grep "tags/" | grep -v "dev\|rc" | cut -d '/' -f 6 | sed 's/".*//g' | sort -V | tail -n 1
+}
+
+function gh_com {
+    git ls-remote https://github.com/$repo.git HEAD
 }
 
 function gfl_ver {
