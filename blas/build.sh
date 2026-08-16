@@ -24,10 +24,6 @@ fi
 tar xvf $filename
 cd $direname
 
-export DDIR=/tmp/custom_${name}dir
-rm -rf $DDIR
-mkdir -p $DDIR
-
 # Avoid adding an RPATH entry to the shared lib.
 mkdir -p shared
 cd shared
@@ -44,7 +40,7 @@ cd shared
     -DCMAKE_SKIP_RPATH=YES \
     ..
   make -j$(nproc)
-  make install/strip DESTDIR="$DDIR" || true
+  sudo make install/strip
 cd ..
 
 # cmake doesn't appear to let us build both shared and static libs
@@ -63,16 +59,14 @@ if [ "${STATIC:-no}" != "no" ]; then
       -DBUILD_DEPRECATED=OFF \
       ..
     make -j$(nproc)
-    make install/strip DESTDIR="$DDIR" || true
+    sudo make install/strip
   cd ..
 fi
 
 # Clean LAPACK out of the BLAS package
-rm -f $DDIR/usr/lib/liblapack.* $DDIR/usr/lib/pkgconfig/lapack*.pc
-rm -f $DDIR/usr/lib/cmake/*/lapack-*.cmake $DDIR/usr/lib/cmake/*/lapacke-*.cmake
-rm -f $DDIR/usr/include/lapack*.h
-
-sudo cp -va $DDIR/* /
+sudo rm -f /usr/lib/liblapack.* /usr/lib/pkgconfig/lapack*.pc
+sudo rm -f /usr/lib/cmake/*/lapack-*.cmake /usr/lib/cmake/*/lapacke-*.cmake
+sudo rm -f /usr/include/lapack*.h
 
 sudo rm -rf /usr/share/doc/$_name-*
 sudo mkdir -p /usr/share/doc/$_name-$version
@@ -80,8 +74,3 @@ sudo cp -a $DOCS /usr/share/doc/$_name-$version
 cd ..
 sudo rm -rf ${filename} $direname
 echo $version > /var/lib/custom-packages/$name
-if [ -d "$DDIR" ] && [ "$(ls -A "$DDIR" 2>/dev/null)" ]; then
-   find "$DDIR" -type f -o -type l | sed "s|^$DDIR||" | sudo tee -a "/var/lib/custom-packages/$name" > /dev/null
-fi
-sudo chmod 777 /var/lib/custom-packages/$name
-sudo rm -rf $DDIR
