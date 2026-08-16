@@ -1,6 +1,6 @@
 #!/bin/bash
 name=make-ca
-version=$(wget -cqO- https://github.com/lfs-book/make-ca/releases | grep "tag/v" | head -n 1 | cut -d '/' -f 6 | cut -d '"' -f 1 | sed 's/v//g')
+version=$(gh_ver "lfs-book/make-ca")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 

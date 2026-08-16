@@ -1,6 +1,25 @@
 #!/bin/bash
 name=openldap
-version=$(wget -cqO- https://www.openldap.org/software/download/OpenLDAP/openldap-release/ | grep "openldap-[0-9.]*.tgz\"" | cut -d '"' -f 2 | cut -d '-' -f 2 | sed 's/.tgz//g' | tail -n 1)
+get_version() {
+    local up_ver=$(wget --timeout=5 -cqO- https://www.openldap.org/software/download/OpenLDAP/openldap-release/ | grep "openldap-[0-9.]*.tgz\"" | cut -d '"' -f 2 | cut -d '-' -f 2 | sed 's/.tgz//g' | tail -n 1)
+    if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
+        echo "$up_ver"
+        return 0
+    fi
+
+    local git_ver=$(git ls-remote --tags --refs "https://git.openldap.org/openldap/openldap.git" | grep -E "refs/tags/OPENLDAP_REL_ENG_[0-9_]+$" | sed 's/.*OPENLDAP_REL_ENG_//g' | tr '_' '.' | sort -V | tail -n 1)
+    if echo "$git_ver" | grep -q "[0-9]\.[0-9]"; then
+        echo "$git_ver"
+        return 0
+    fi
+
+    local arch_ver=$(aver $name)
+    if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
+        echo "$arch_ver"
+        return 0
+    fi
+}
+version=$(get_version)
 direname="$name-$version"
 filename="$direname.tgz"
 blfs_depends=(cyrus-sasl)

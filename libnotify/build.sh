@@ -2,7 +2,7 @@
 set -e
 # Variable declaration
 name=libnotify
-version=$(wget -cqO- https://gitlab.gnome.org/GNOME/libnotify/-/tags | grep "tags/" | cut -d '/' -f 6 | sed 's/".*//g' | grep -v "alpha\|beta\|\.rc" | head -n 1 | sed 's/^v//g')
+version=$(gn_ver libnotify)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 blfs_depends=(gdk-pixbuf glib2)

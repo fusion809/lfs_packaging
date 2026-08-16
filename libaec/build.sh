@@ -2,8 +2,20 @@
 set -e
 # Variable declarations
 name=libaec
-#version=$(wget -cqO- https://gitlab.dkrz.de/dkrz-sw/libaec/-/tags | grep 'tags/v' | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 6 | sed 's/v//g')
-version=$(curl -sL "https://gitlab.dkrz.de/api/v4/projects/dkrz-sw%2Flibaec/repository/tags" | perl -nle 'while (m{"name":"v?([0-9.]+)"}g) { print $1 }' | sort -V | tail -n 1)
+get_version() {
+    local up_ver=$(wget -T 5 -cqO- "https://gitlab.dkrz.de/api/v4/projects/dkrz-sw%2Flibaec/repository/tags" | perl -nle 'while (m{"name":"v?([0-9.]+)"}g) { print $1 }' | sort -V | tail -n 1)
+    if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
+        echo "$up_ver"
+        return 0
+    fi
+
+    local arch_ver=$(aver $name)
+    if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
+        echo "$arch_ver"
+        return 0
+    fi
+}
+version=$(get_version)
 filename="$name-v$version.tar.bz2"
 direname=${filename/.tar.bz2/}
 depends=()

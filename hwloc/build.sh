@@ -2,7 +2,7 @@
 set -e
 # Variable declarations
 name=hwloc
-version=$(wget -cqO- https://github.com/open-mpi/hwloc/releases | grep "/tag/hwloc-" | head -n 1 | cut -d '/' -f 6 | cut -d '"' -f 1 | cut -d '-' -f 2)
+version=$(gh_ver "open-mpi/hwloc")
 filename="$name-$version.tar.bz2"
 direname=${filename/.tar.bz2/}
 depends=(libpciaccess)
