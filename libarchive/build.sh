@@ -14,9 +14,7 @@ fi
 rm -rf $direname
 tar xf $filename
 cd $direname
-./configure --prefix=/usr --disable-static &&
-make -j$(nproc)
-sudo make install
+cmi --prefix=/usr --disable-static
 sudo install -Dm755 ../unzip /usr/bin/
 cd ..
 rm -rf $direname $filename

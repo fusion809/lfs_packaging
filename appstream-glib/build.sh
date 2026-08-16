@@ -24,17 +24,16 @@ fi
 tar xvf $filename
 # Compile and install
 cd $direname
-CFLAGS="-O2 -fPIC"
-CXXFLAGS="-O2 -fPIC"
+meson_options=(
+	--prefix=/usr            \
+    --buildtype=release      \
+    -D rpm=false         \
+    -D man=false
+)
 # sed no longer needed for 1.1.4+ (xsl-ns -> xsl change was for older versions)
 mkdir build
 cd build
-meson setup --prefix=/usr            \
-            --buildtype=release      \
-            -D rpm=false         \
-            -D man=false        .. &&
-ninja -j$(nproc)
-sudo ninja install
+mni "${meson_options[@]}"
 # Cleanup and add to database
 cd ..
 rm -rf $filename $direname

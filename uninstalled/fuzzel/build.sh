@@ -13,11 +13,9 @@ fi
 rm -rf "$name"
 tar xf "$filename"
 cd "$name"
-meson build --buildtype=release --prefix=/usr
 sed -i -e "691s|*ret|*ret=NULL|g" shm.c
-ninja -C build
-sudo ninja -C build install
-cd ..
+mni --buildtype=release --prefix=/usr
+cd ../..
 rm -rf "$name" "$filename"
 echo "$version" > /var/lib/custom-packages/$name
 

@@ -31,8 +31,7 @@ cd $direname
             --disable-slapd   &&
 
 make -j$(nproc) depend &&
-make -j$(nproc)
-sudo make install
+maki
 cd ..
 rm -rf $direname $filename
 echo "$version" > /var/lib/custom-packages/$name

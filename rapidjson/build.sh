@@ -17,11 +17,9 @@ version=$(git pull origin master -q && git log | head -n 1 | cut -d ' ' -f 2)
 # Compile and install
 find . -name CMakeLists.txt | xargs sed -e 's|-Werror||' -i # Don't use -Werror
 rm -rf build
-mkdir -p build
-cd build
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
-cmake \
+cmake_options=(
       -DCMAKE_BUILD_TYPE=None \
       -DCMAKE_INSTALL_PREFIX:PATH=/usr \
       -DRAPIDJSON_HAS_STDSTRING=ON \
@@ -31,12 +29,10 @@ cmake \
       -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
 	  -DCMAKE_C_FLAGS="$CFLAGS" \
       -DCMAKE_CXX_FLAGS="$CXXFLAGS" \
-      ..
-
-make -j$(nproc)
-sudo make install
+)
+cmaki "${cmake_options[@]}"
 cd ..
-sudo rm -rf build
+rm -rf build
 # Cleanup and install to database
 cd ..
 echo $version > /var/lib/custom-packages/$name

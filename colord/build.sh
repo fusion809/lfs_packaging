@@ -29,11 +29,7 @@ cd $direname
 sudo groupadd -g 71 colord &&
 sudo useradd -c "Color Daemon Owner" -d /var/lib/colord -u 71 \
         -g colord -s /bin/false colord
-mkdir build
-cd build
-CFLAGS="-O2 -fPIC"
-CXXFLAGS="-O2 -fPIC"
-meson setup ..                  \
+meson_options=(
       --prefix=/usr             \
       --buildtype=release       \
       -D daemon_user=colord     \
@@ -43,9 +39,9 @@ meson setup ..                  \
       -D argyllcms_sensor=false \
       -D bash_completion=false  \
       -D docs=false             \
-      -D man=false              &&
-ninja -j$(nproc)
-sudo ninja install
+      -D man=false
+)
+mni "${meson_options[@]}"
 # Cleanup and add to database
 cd ../..
 sudo rm -rf $direname $filename

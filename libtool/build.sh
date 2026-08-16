@@ -11,9 +11,7 @@ fi
 
 tar xf $filename
 cd "$direname"
-./configure --prefix=/usr
-make -j$(nproc)
-sudo make install
+cmi --prefix=/usr
 sudo rm -fv /usr/lib/libltdl.a
 cd ..
 echo "$version" > /var/lib/custom-packages/$name

@@ -19,10 +19,20 @@ function cb_ver {
 	ver_check "$lfs_vers" "$name" && return
 }
 
+function maki {
+	make "$@" -j$(nproc)
+	sudo make "$@" install
+}
+
+function cmaki {
+	cmake -S . -B build "$@"
+	cd build
+	maki
+}
+
 function cmi {
 	./configure $@
-	make -j$(nproc)
-	sudo make install
+	maki
 }
 
 # github version fetcher

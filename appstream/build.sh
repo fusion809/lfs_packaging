@@ -24,14 +24,15 @@ CXXFLAGS="-O2 -fPIC"
 # sed no longer needed for 1.1.4+ (xsl-ns -> xsl change was for older versions)
 mkdir build
 cd build
-meson setup --prefix=/usr            \
+meson_options=(
+            --prefix=/usr            \
             --buildtype=release      \
             -D apidocs=false         \
             -D bash-completion=false \
             -D stemming=false        \
-            -D man=false        .. &&
-ninja -j$(nproc)
-sudo ninja install
+            -D man=false
+)
+mni "${meson_options[@]}"
 sudo mv -v /usr/share/doc/appstream{,-$version}
 # Cleanup and add to database
 cd ..

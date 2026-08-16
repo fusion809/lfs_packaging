@@ -12,8 +12,7 @@ fi
 rm -rf $direname
 tar xf "$filename"
 cd "$direname"
-make PREFIX=/usr -j$(nproc)
-sudo make PREFIX=/usr install
+maki "PREFIX=/usr"
 cd ..
 rm -rf "$direname"
 echo "$version" > /var/lib/custom-packages/$name

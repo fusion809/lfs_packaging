@@ -30,26 +30,18 @@ patch -Np1 -i ../mitkrb-1.22.2-openssl_4_fixes-1.patch
 cd src &&
 sed -i -e '/eq 0/{N;s/12 //}' plugins/kdb/db2/libdb2/test/run.test &&
 
-./configure --prefix=/usr            \
-            --sysconfdir=/etc        \
-            --localstatedir=/var/lib \
-            --runstatedir=/run       \
-            --with-system-et         \
-            --with-system-ss         \
-            --with-system-verto=no   \
-            --enable-dns-for-realm   \
-            --disable-rpath          &&
-	    make -j$(nproc)
-sudo make install &&
-export DDIR="/tmp/destdir_mitkrb"
-rm -rf "$DDIR" && mkdir -p "$DDIR"
-# Force prefix=/usr for install to ensure it skips /usr/local
-make install DESTDIR="$DDIR" || true
-if [ -d "$DDIR" ] && [ "$(ls -A "$DDIR" 2>/dev/null)" ]; then
-    sudo mkdir -p "$CP"
-    find "$DDIR" -type f -o -type l | sed "s|^$DDIR||" | sudo tee -a "$CP/$name" > /dev/null
-fi
-sudo rm -rf "$DDIR"
+configure_options=(
+    --prefix=/usr            \
+    --sysconfdir=/etc        \
+    --localstatedir=/var/lib \
+    --runstatedir=/run       \
+    --with-system-et         \
+    --with-system-ss         \
+    --with-system-verto=no   \
+    --enable-dns-for-realm   \
+    --disable-rpath
+)
+cmi "${configure_options[@]}"
 sudo cp -vfr ../doc -T /usr/share/doc/$dirname
 export CP="/var/lib/custom-packages"
 echo "$version" > "$CP/$name"

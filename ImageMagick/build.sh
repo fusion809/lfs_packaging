@@ -18,14 +18,16 @@ tar xvf $filename
 # Compile and install
 cd $direname
 sudo rm -f /usr/lib/libMagickCore-7.Q16HDRI.so* /usr/lib/libMagickWand-7.Q16HDRI.so* /usr/lib/libMagick++-7.Q16HDRI.so*
-./configure --prefix=/usr     \
-            --sysconfdir=/etc \
-            --enable-hdri     \
-            --with-modules    \
-            --with-perl       \
-            --disable-static  &&
-make -j$(nproc)
-sudo make install DESTDIR=/
+configure_options=(
+    --prefix=/usr     \
+    --sysconfdir=/etc \
+    --enable-hdri     \
+    --with-modules    \
+    --with-perl       \
+    --disable-static
+)
+
+cmi "${configure_options[@]}"
 sudo make DOCUMENTATION_PATH=/usr/share/doc/imagemagick-${version/-.*/} install
 # Cleanup and add to database
 cd ..

@@ -15,9 +15,7 @@ version=$(git pull origin master -q && git log | head -n 1 | cut -d ' ' -f 2)
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 autoreconf
-./configure --prefix=/usr
-make -j$(nproc)
-sudo make install
+cmi "--prefix=/usr"
 sudo make install.man
 # Add to database
 echo $version > /var/lib/custom-packages/$name

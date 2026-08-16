@@ -22,8 +22,7 @@ CXXFLAGS="-O2 -fPIC"
 ./configure --prefix=/usr
 # prevent excessive overlinking due to libtool
 sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
-make -j$(nproc)
-sudo make install
+maki
 sudo install -vDm 644 README.md -t "/usr/share/doc/$direname/"
 # Cleanup and add to database
 cd ..

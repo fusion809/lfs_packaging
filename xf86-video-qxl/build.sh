@@ -28,7 +28,7 @@ patch -p1 < ../libdrm.patch
 # autogen.sh can be used in place of configure
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
-./configure \
+configure_options=(
   --prefix=/usr \
   --libdir=/usr/lib \
   --sysconfdir=/etc \
@@ -36,9 +36,8 @@ CXXFLAGS="-O2 -fPIC"
   --mandir=/usr/man \
   --docdir=/usr/share/doc/$direname \
   $with_xspice
-
-make -j$(nproc)
-sudo make install DESTDIR=/
+)
+cmi "${configure_options[@]}"
 
 # add a config file for Xorg and another one for Xspice (if needed)
 sudo install -m 0644 -D ../05-qxl.conf \

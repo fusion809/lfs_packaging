@@ -18,7 +18,7 @@ tar xvf $filename
 cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
-./configure \
+configure_options=(
   --prefix=/usr \
   --libdir=/usr/lib \
   --sysconfdir=/etc \
@@ -26,8 +26,8 @@ CXXFLAGS="-O2 -fPIC"
   --mandir=/usr/man \
   --enable-man=no \
   --docdir=/usr/share/doc/$direname
-make -j$(nproc)
-sudo make install DESTDIR=/
+)
+cmi "${configure_options[@]}"
 sudo mkdir -p /usr/share/doc/$direname
 sudo cp -a \
    COPYING README.md TODO \

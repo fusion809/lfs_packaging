@@ -13,12 +13,7 @@ fi
 rm -rf $direname
 tar xf $filename
 cd $direname
-mkdir build &&
-cd    build &&
-
-meson setup --prefix=/usr --buildtype=release -D man=disabled .. &&
-ninja -j$(nproc)
-sudo ninja install
+mni --prefix=/usr --buildtype=release -D man=disabled
 cd ../..
 rm -rf $direname $filename
 echo "$version" > /var/lib/custom-packages/$name

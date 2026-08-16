@@ -25,12 +25,12 @@ sed -e "s/'elinks'/'lynx'/"                       \
     -i meson.build
 mkdir build
 cd build
-meson setup ..        \
+meson_options=(
   --prefix=/usr       \
   --buildtype=release \
   -D docdir=/usr/share/doc/$dirname
-ninja -j$(nproc)
-sudo ninja install
+)
+mni "${meson_options[@]}"
 sudo chmod -v 4755 /usr/sbin/unix_chkpwd
 
 # Create PAM configuration files (must use proper heredocs, NOT inline)

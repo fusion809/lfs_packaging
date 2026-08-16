@@ -16,21 +16,17 @@ fi
 tar xf $filename
 cd $direname
 # Compile and install
-mkdir build
-cd build
-  CFLAGS="-O2 -fPIC"
-  CXXFLAGS="-O2 -fPIC"
-  meson setup .. \
-    --buildtype=release \
-    --infodir=/usr/info \
-    --libdir=/usr/lib \
-    --localstatedir=/var \
-    --mandir=/usr/man \
-    --prefix=/usr \
-    --sysconfdir=/etc \
-    -Dstrip=true
-  "${NINJA:=ninja}"
-  DESTDIR=/ sudo $NINJA install
+meson_options=(
+  --buildtype=release \
+  --infodir=/usr/info \
+  --libdir=/usr/lib \
+  --localstatedir=/var \
+  --mandir=/usr/man \
+  --prefix=/usr \
+  --sysconfdir=/etc \
+  -Dstrip=true
+)
+mni "${meson_options[@]}"
 cd ..
 
 sudo rm -f /usr/lib*/*.la

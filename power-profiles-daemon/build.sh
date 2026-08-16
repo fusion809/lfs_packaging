@@ -22,17 +22,13 @@ fi
 rm -rf "$direname"
 tar xf "$filename"
 cd "$direname"
-mkdir build &&
-cd build &&
-
-meson setup                \
+meson_options=(
       --prefix=/usr        \
       --buildtype=release  \
       -D gtk_doc=false     \
-      -D tests=false       \
-      .. &&
-      ninja -j$(nproc)
-sudo ninja install
+      -D tests=false
+)
+mni "${meson_options[@]}"
 cd ../..
 rm -rf "$direname" "$filename"
 

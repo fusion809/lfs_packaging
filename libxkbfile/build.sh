@@ -19,10 +19,8 @@ cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 XORG_CONFIG="--prefix=/usr"
-meson setup $XORG_CONFIG --buildtype=release build
-ninja -C build
-sudo ninja -C build install
-cd ..
+mni $XORG_CONFIG --buildtype=release
+cd ../..
 sudo rm -rf $direname $filename
 sudo /sbin/ldconfig
 echo $version > /var/lib/custom-packages/$name

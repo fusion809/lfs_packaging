@@ -32,13 +32,7 @@ fi
 tar xvf $filename
 # Compile and install
 cd $direname
-mkdir build &&
-cd    build &&
-CFLAGS="-O2 -fPIC"
-CXXFLAGS="-O2 -fPIC"
-meson setup --prefix=/usr --buildtype=release .. &&
-ninja
-sudo ninja install
+mni --prefix=/usr --buildtype=release .. &&
 cd ..
 sudo mkdir -p /usr/share/doc/$direname
 for i in $docs

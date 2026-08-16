@@ -17,16 +17,13 @@ tar xf $filename
 cd "$direname"
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
-mkdir build &&
-cd    build &&
-
-meson setup --prefix=/usr            \
-            --buildtype=release      \
-            --wrap-mode=nofallback   \
-            -D introspection=enabled \
-            ..                       &&
-ninja -j$(nproc)
-sudo ninja install
+meson_options=(
+    --prefix=/usr            \
+    --buildtype=release      \
+    --wrap-mode=nofallback   \
+    -D introspection=enabled
+    )
+mni "${meson_options[@]}"
 # Cleanup and add to database
 cd ../..
 sudo rm -rf $direname $filename

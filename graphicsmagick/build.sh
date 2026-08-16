@@ -25,7 +25,7 @@ cd $_archive
 CLFAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 sed -e "s:freetype_config='':freetype_config='/usr/bin/pkg-config freetype2':g" -i configure
-./configure \
+configure_options=(
 	--prefix=/usr \
 	--enable-shared \
 	--with-modules \
@@ -33,14 +33,13 @@ sed -e "s:freetype_config='':freetype_config='/usr/bin/pkg-config freetype2':g" 
 	--with-quantum-depth=16 \
 	--with-magick_plus_plus \
 	--with-threads
-make -j$(nproc)
-sudo make install
+)
+cmi "${configure_options[@]}"
 cd PerlMagick
 sed -i -e "s:'LDDLFLAGS'  => \"\(.*\)\":'LDDLFLAGS'  => \"-L${pkgdir}/usr/lib \1\":" Makefile.PL
 perl Makefile.PL INSTALLDIRS=vendor PREFIX=/usr DESTDIR="${pkgdir}"
 sed -i -e "s/LDLOADLIBS =/LDLOADLIBS = -lGraphicsMagick/" Makefile
-make -j$(nproc)
-sudo make install
+maki
 # Cleanup and add to database
 cd ..
 sudo rm -rf $_archive*

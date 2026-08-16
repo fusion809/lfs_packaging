@@ -33,17 +33,8 @@ tar xf $filename
 cd $direname
 CLFAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
-./configure --prefix=/usr
-make -j$(nproc)
-export DDIR=/tmp/custom_stagedir
-mkdir -p $DDIR
-make install DESTDIR="$DDIR" || true
-sudo make install
+cmi --prefix=/usr
 # Cleanup and add to database
 cd ..
 sudo rm -rf $filename $direname
 echo $version > /var/lib/custom-packages/$name
-if [ -d "$DDIR" ] && [ "$(ls -A "$DDIR" 2>/dev/null)" ]; then
-   find "$DDIR" -mindepth 1 | sed "s|^$DDIR||" | sudo tee -a "/var/lib/custom-packages/$name" > /dev/null
-fi
-sudo rm -rf $DDIR

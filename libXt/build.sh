@@ -20,10 +20,11 @@ CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 XORG_CONFIG="--prefix=/usr"
 docdir="--docdir=/usr/share/doc/$packagedir"
-./configure $XORG_CONFIG $docdir --disable-devel-docs \
+configure_options=(
+	$XORG_CONFIG $docdir --disable-devel-docs \
 	                  --with-appdefaultdir=/etc/X11/app-defaults
-make -j$(nproc)
-sudo make install
+)
+cmi "${configure_options[@]}"
 cd ..
 sudo rm -rf $direname $filename
 sudo /sbin/ldconfig

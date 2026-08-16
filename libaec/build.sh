@@ -25,14 +25,14 @@ tar xf $filename
 cd $direname
 CLFAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
-cmake -B build -S . \
+cmake_options=(
     -DCMAKE_BUILD_TYPE=None \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -Wno-dev \
     -DBUILD_STATIC_LIBS=OFF
-cmake --build build
-sudo cmake --install build
+)
+cmaki "${cmake_options[@]}"
 # Cleanup and add to database
-cd ..
+cd ../..
 sudo rm -rf $filename $direname
 echo $version > /var/lib/custom-packages/$name

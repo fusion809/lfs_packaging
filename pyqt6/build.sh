@@ -33,8 +33,7 @@ sip-build \
   --api-dir /opt/qt6/qsci/api/python \
   --pep484-pyi
 cd build
-make -j$(nproc)
-sudo make install
+maki
 sudo python3 -m compileall -d / /usr/lib
 sudo python3 -O -m compileall -d / /usr/lib
 # Cleanup and add to database

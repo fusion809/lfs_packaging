@@ -19,9 +19,7 @@ cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 ./autogen.sh --prefix=/usr
-./configure --prefix=/usr
-make -j$(nproc)
-sudo make install
+cmi --prefix=/usr
 # Cleanup and add to database
 cd ..
 sudo rm -rf $direname $filename

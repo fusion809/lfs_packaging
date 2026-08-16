@@ -13,14 +13,15 @@ rm -rf $direname
 tar xvf $filename
 # Compile and install
 cd $direname
-cmake -B build -S . \
-	  -DCMAKE_BUILD_TYPE='None' \
-	  -DCMAKE_INSTALL_PREFIX='/usr' \
-	  -DBUILD_SHARED_LIBS='ON' \
-	  -DYYJSON_BUILD_TESTS='ON' \
-	  -Wno-dev
-cmake --build build
-sudo cmake --install build
+cmake_options=(
+	-DCMAKE_BUILD_TYPE='None' \
+	-DCMAKE_INSTALL_PREFIX='/usr' \
+	-DBUILD_SHARED_LIBS='ON' \
+	-DYYJSON_BUILD_TESTS='ON' \
+	-Wno-dev
+)
+cmaki "${cmake_options[@]}"
+cd ..
 sudo mkdir -p /usr/share/doc/$direname
 sudo install -Dm644 README.md /usr/share/doc/$direname
 sudo install -Dm644 doc/*.md /usr/share/doc/$direname

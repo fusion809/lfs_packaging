@@ -15,9 +15,10 @@ fi
 rm -rf $direname
 tar xf $filename
 cd $direname
-meson setup _build --prefix=/usr -D backtrace=false
-meson compile -C _build
-sudo meson install -C _build
-cd ..
+meson_options=(
+    --prefix=/usr -D backtrace=false
+)
+mni "${meson_options[@]}"
+cd ../..
 rm -rf $filename $direname
 echo "$version" > /var/lib/custom-packages/$name

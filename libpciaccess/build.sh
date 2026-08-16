@@ -20,12 +20,12 @@ mkdir build
 cd build
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
-meson setup --prefix=/usr       \
-	    --libdir=/usr/lib   \
-            --buildtype=release \
-	    ..
-ninja -j$(nproc)
-sudo ninja install
+meson_options=(
+	--prefix=/usr       \
+	--libdir=/usr/lib   \
+    --buildtype=release
+)
+mni "${meson_options[@]}"
 # Cleanup and add to database
 cd ../..
 sudo rm -rf $direname $filename

@@ -10,20 +10,21 @@ if ! [[ -f $filename ]]; then
 	wget -c https://github.com/pkgconf/pkgconf/releases/download/$direname/$filename
 fi
 
-mfilename="meson-$mversion.tar.gz"
-if ! [[ -f $mfilename ]]; then
-	wget -c https://github.com/mesonbuild/meson/releases/download/$mversion/$mfilename
-fi
+# mfilename="meson-$mversion.tar.gz"
+# if ! [[ -f $mfilename ]]; then
+# 	wget -c https://github.com/mesonbuild/meson/releases/download/$mversion/$mfilename
+# fi
 
-tar xf $filename
-cd "$direname"
-tar xf ../$mfilename
-mkdir build
-cd    build
+# tar xf $filename
+# cd "$direname"
+# tar xf ../$mfilename
+# mkdir build
+# cd    build
 
-python3 ../${mfilename/.tar.gz/}/meson.py setup --prefix=/usr --buildtype=release ..
-ninja -j$(nproc)
-sudo ninja install
+# python3 ../${mfilename/.tar.gz/}/meson.py setup --prefix=/usr --buildtype=release ..
+# ninja -j$(nproc)
+# sudo ninja install
+mni --prefix=/usr --buildtype=release
 sudo mv /usr/share/doc/pkgconf{,-$version}
 if ! [[ -f /usr/bin/pkg-config ]]; then
 	sudo ln -sv pkgconf /usr/bin/pkg-config

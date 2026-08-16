@@ -25,14 +25,16 @@ export NOCONFIGURE=1
 #sudo ./autogen.sh --disable-gtk2 --disable-python2 --disable-emoji-dict --disable-appindicator &&
 sudo autoreconf -fi
 
-sudo ./configure --prefix=/usr          \
-            --sysconfdir=/etc      \
-            --disable-python2      \
-            --disable-appindicator \
-            --disable-gtk2         \
-            --disable-emoji-dict   &&
-sudo make -j$(nproc)
-sudo make install
+configure_options=(
+    --prefix=/usr          \
+    --sysconfdir=/etc      \
+    --disable-python2      \
+    --disable-appindicator \
+    --disable-gtk2         \
+    --disable-emoji-dict
+)
+sudo chown $USER . -R
+cmi "${configure_options[@]}"
 sudo gtk-query-immodules-3.0 --update-cache
 cd ..
 sudo rm -rf "$direname" "$filename" "UCD.zip"

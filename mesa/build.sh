@@ -28,7 +28,7 @@ mkdir build &&
 cd    build &&
 
 XORG_PREFIX=/usr
-meson setup ..                 \
+meson_options=(
       --prefix=$XORG_PREFIX    \
       --buildtype=release      \
       -D platforms=x11,wayland \
@@ -36,10 +36,9 @@ meson setup ..                 \
       -D vulkan-drivers=auto   \
       -D valgrind=disabled     \
       -D video-codecs=all      \
-      -D libunwind=disabled    &&
-
-ninja -j$(nproc)
-sudo ninja install
+      -D libunwind=disabled
+)
+mni "${meson_options[@]}"
 sudo cp -rv ../docs -T /usr/share/doc/$direname
 cd ../..
 rm -rf $direname $filename

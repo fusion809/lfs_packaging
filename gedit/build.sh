@@ -24,14 +24,12 @@ cd "$name"
 sudo rm -rf build
 mkdir build
 cd build
-CFLAGS="-O2 -fPIC"
-CXXFLAGS="-O2 -fPIC"
-meson setup --prefix=/usr       \
-            --buildtype=release \
-			-D gtk_doc=false    \
-	    ..
-ninja -j$(nproc)
-sudo ninja install
+meson_options=(
+    --prefix=/usr       \
+    --buildtype=release \
+	-D gtk_doc=false
+)
+mni "${meson_options[@]}"
 # Cleanup and add to database
 cd ..
 echo $version > /var/lib/custom-packages/$name

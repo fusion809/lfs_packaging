@@ -30,12 +30,10 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$QT6DIR/lib
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 qmake6
-make -j$(nproc)
-sudo make install
+maki
 cd ../designer
 qmake6 INCLUDEPATH+=../src QMAKE_LIBDIR+=../src
-make -j$(nproc)
-sudo make install
+maki
 
 sudo tee /opt/qt6/lib/pkgconfig/Qt6Scintilla.pc << 'EOF'
 prefix=/opt/qt6

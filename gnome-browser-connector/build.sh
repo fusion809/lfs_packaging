@@ -10,11 +10,10 @@ fi
 
 cd $name
 git checkout v$version
-mkdir build
-cd build
-meson setup --prefix=/usr
-ninja -j$(nproc)
-sudo ninja install
+meson_options=(
+    --prefix=/usr
+)
+mni "${meson_options[@]}"
 cd ..
 rm -rf build
 echo "$version" > /var/lib/custom-packages/$name

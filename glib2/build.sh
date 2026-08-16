@@ -3,19 +3,7 @@ set -e
 name=glib2
 _name=glib
 version=$(gn_ver $_name $name)
-
-get_gobj() {
-      local up_ver=$(wget -cqO- https://gitlab.gnome.org/GNOME/gobject-introspection/-/tags | grep "/tags/[0-9]" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 2| cut -d '/' -f 6)
-      ver_check "$up_ver" && return
-
-      local git_ver=$(git ls-remote --tags --refs https://gitlab.gnome.org/GNOME/gobject-introspection.git | grep "refs/tags/[0-9]" | tail -n 1 | cut -d '/' -f 3)
-	ver_check "$git_ver" && return
-
-	local arch_ver=$(aver gobject-introspection)
-	ver_check "$arch_ver" && return
-}
-
-gobj_ver=$(get_gobj)
+gobj_ver=$(gn_ver "gobject-introspection")
 blfs_depends=(docutils libxslt)
 lfs_depends=(bzip2 glibc libelf libffi util-linux xz zlib zstd)
 depends=(pcre2)
@@ -45,15 +33,15 @@ echo "Initial build of GLIB2..."
 mkdir build &&
 cd    build &&
 
-meson setup ..                  \
+meson_options=(
       --prefix=/usr             \
       --buildtype=release       \
       -D introspection=disabled \
       -D glib_debug=disabled    \
       -D man-pages=disabled      \
-      -D sysprof=disabled       &&
-ninja -j$(nproc)
-sudo ninja install
+      -D sysprof=disabled
+)
+mni "${meson_options[@]}"
 echo "Initial build of GObject-Introspection..."
 tar xf ../../$gobj_filename &&
 

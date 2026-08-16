@@ -21,8 +21,7 @@ CLFAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 ./configure --prefix=/usr
 sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
-make -j$(nproc)
-sudo make install
+maki
 # Cleanup and add to database
 cd ..
 sudo rm -rf $direname $filename

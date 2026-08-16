@@ -13,9 +13,7 @@ if ! [[ -f "$filename" ]]; then
 fi
 tar xf "$filename"
 cd "$name"
-meson build --buildtype=release --prefix=/usr
-ninja -C build
-sudo ninja -C build install
-cd ..
+mni --buildtype=release --prefix=/usr
+cd ../..
 rm -rf "$name" "$filename"
 echo "$version" > /var/lib/custom-packages/$name

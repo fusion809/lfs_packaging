@@ -30,10 +30,6 @@ if pkg-config --exists xblas; then
   use_xblas='-DUSE_XBLAS=ON'
 fi
 
-export DDIR=/tmp/custom_${name}dir
-rm -rf $DDIR
-mkdir -p $DDIR
-
 # Avoid adding an RPATH entry to the shared lib.
 mkdir -p shared
 cd shared

@@ -25,7 +25,7 @@ cd $direname
 autoreconf -fi
 export CFLAGS="-O2 -fPIC -Wno-error"
 export CXXFLAGS="-O2 -fPIC -Wno-error"
-./configure \
+configure_options=(
   --prefix=/usr \
   --libdir=/usr/lib \
   --sysconfdir=/etc \
@@ -33,9 +33,8 @@ export CXXFLAGS="-O2 -fPIC -Wno-error"
   --mandir=/usr/man \
   --with-init-script=systemd \
   --docdir=/usr/share/doc/$direname
-
-make -j$(nproc)
-sudo make install DESTDIR=/
+)
+cmi "${configure_options[@]}"
 # Install an init script and an X.org configuration file
 sudo install -m 0644 -D $HOME/lfs_packaging/spice-vdagent/06-spice-vdagent.conf \
   /usr/share/X11/xorg.conf.d/06-spice-vdagent.conf.new

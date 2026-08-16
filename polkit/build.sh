@@ -19,17 +19,13 @@ cd $direname
 #sudo groupadd -fg 27 polkitd &&
 #sudo useradd -c "PolicyKit Daemon Owner" -d /etc/polkit-1 -u 27 \
 #        -g polkitd -s /bin/false polkitd
-mkdir build
-cd build
-CFLAGS="-O2 -fPIC"
-CXXFLAGS="-O2 -fPIC"
-meson setup ..                     \
+meson_options=(
       --prefix=/usr                \
       --buildtype=release          \
       -D man=false                 \
       -D session_tracking=logind
-ninja -j$(nproc)
-sudo ninja install
+)
+mni "${meson_options[@]}"
 # Cleanup and add to database
 cd ../..
 sudo rm -rf $direname $filename

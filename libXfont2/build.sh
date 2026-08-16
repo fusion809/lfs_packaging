@@ -20,9 +20,7 @@ CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 XORG_CONFIG="--prefix=/usr"
 docdir="--docdir=/usr/share/doc/$packagedir"
-./configure $XORG_CONFIG $docdir --disable-devel-docs
-make -j$(nproc)
-sudo make install
+cmi $XORG_CONFIG $docdir --disable-devel-docs
 cd ..
 sudo rm -rf $direname $filename
 sudo /sbin/ldconfig

@@ -22,9 +22,7 @@ cd $direname
             --disable-static     \
             --enable-available-modules &&
 sed -i -e "s|http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl|/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2/manpages/docbook.xsl|g" doc/man/Makefile
-	    make -j$(nproc)
-
-sudo make install
+maki
 # Cleanup and add to database
 cd ../..
 sudo rm -rf $direname $filename

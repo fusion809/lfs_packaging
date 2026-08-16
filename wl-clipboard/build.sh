@@ -13,15 +13,11 @@ cd $name
 version=$(git pull origin master -q && git log | head -n 1 | cut -d ' ' -f 2)
 # Compile and install
 rm -rf build
-mkdir build
-cd build
-CFLAGS="-O2 -fPIC"
-CXXFLAGS="-O2 -fPIC"
-meson setup --prefix=/usr       \
-            --buildtype=release \
-	    ..
-ninja -j$(nproc)
-sudo ninja install
+meson_options=(
+	--prefix=/usr       \
+    --buildtype=release
+)
+mni "${meson_options[@]}"
 cd ..
 # Cleanup and add to database
 rm -rf build

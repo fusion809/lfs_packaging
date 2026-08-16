@@ -16,15 +16,13 @@ rm -rf $direname
 tar xf $filename
 # Compile and install
 cd $direname
-CLFAGS="-O2 -fPIC"
-CXXFLAGS="-O2 -fPIC"
-./configure \
+configure_options=(
     --prefix=/usr \
     --sbindir=/usr/bin \
     --enable-plugins \
     --sysconfdir=/etc
-make -j$(nproc)
-sudo make install
+)
+cmi "${configure_options[@]}"
 # Cleanup and add to database
 cd ..
 sudo rm -rf $filename $direname

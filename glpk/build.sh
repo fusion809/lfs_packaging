@@ -21,9 +21,11 @@ patch -Np1 -i ../gcc-15.patch
 CLFAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 autoreconf -fiv
-./configure --prefix=/usr --with-gmp
-make -j$(nproc)
-sudo make install
+configure_options=(
+	--prefix=/usr 
+	--with-gmp
+)
+cmi "${configure_options[@]}"
 cd ..
 sudo rm -rf $filename $direname
 echo $version > /var/lib/custom-packages/$name

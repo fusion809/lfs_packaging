@@ -19,9 +19,7 @@ tar xvf $filename
 cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
-mkdir meson-build
-cd meson-build
-meson setup \
+meson_option=(
   --prefix=/usr \
   --libdir=lib \
   --libexecdir=/usr/libexec \
@@ -33,9 +31,8 @@ meson setup \
   --sysconfdir=/etc \
   --localstatedir=/var \
   --buildtype=release \
-  .. || exit 1
-  "${NINJA:=ninja}" || exit 1
-  DESTDIR=/ sudo $NINJA install || exit 1
+)
+mni "${meson_options[@]}"
 cd ..
 sudo mkdir -p /usr/share/doc/$direname
 sudo cp -a $docs /usr/share/doc/$direname

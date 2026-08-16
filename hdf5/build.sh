@@ -35,10 +35,7 @@ common_cmake_args=(
   -DHDF5_ENABLE_SZIP_ENCODING=ON
   -DHDF5_INSTALL_CMAKE_DIR=lib/cmake/hdf5
 )
-cmake -S . -B build "${common_cmake_args[@]}"
-cd build
-make -j$(nproc)
-sudo make install
+cmaki "${common_cmake_args[@]}"
 # Cleanup and add to database
 cd ../..
 sudo rm -rf $direname $filename

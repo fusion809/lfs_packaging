@@ -26,7 +26,7 @@ tar xvf $filename
 cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
-./configure \
+configure_options=(
   --prefix=/usr \
   --libdir=/usr/lib \
   --docdir=/usr/share/doc/$direname \
@@ -34,8 +34,8 @@ CXXFLAGS="-O2 -fPIC"
   --enable-client \
   --disable-celt051 \
   $with_cacard
-make -j$(nproc)
-sudo make install DESTDIR=/
+)
+cmi "${configure_options[@]}"
 sudo mkdir -p /usr/share/doc/$direname
 sudo cp -a $docs /usr/share/doc/$direname
 sudo rm -f /usr/lib*/*.la

@@ -25,8 +25,7 @@ CMAKE_OPTIONS="-DBLA_VENDOR=Generic \
                  -DCMAKE_INSTALL_PREFIX=/usr \
                  -DCMAKE_BUILD_TYPE=None \
                  -DNSTATIC=ON" \
-make -j$(nproc)
-sudo make install
+maki
 # Cleanup and add to database
 cd ..
 sudo rm -rf $direname $filename

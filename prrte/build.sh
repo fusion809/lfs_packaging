@@ -31,8 +31,7 @@ CXXFLAGS="-O2 -fPIC"
 ./configure "${configure_options[@]}"
 # prevent excessive overlinking due to libtool
 sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
-make V=1 -j$(nproc)
-sudo make install
+maki V=1
 # Cleanup and add to database
 cd ..
 sudo rm -rf $filename $direname

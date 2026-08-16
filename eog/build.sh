@@ -16,15 +16,11 @@ rm -rf $direname
 tar xf $filename
 # Compile and install
 cd $direname
-mkdir build
-cd build
-CFLAGS="-O2 -fPIC"
-CXXFLAGS="-O2 -fPIC"
-meson setup --prefix=/usr       \
-            --buildtype=release \
-	    ..
-ninja -j$(nproc)
-sudo ninja install
+meson_options=(
+    --prefix=/usr       \
+    --buildtype=release
+)
+mni "${meson_options[@]}"
 # Cleanup and add to database
 cd ../..
 sudo rm -rf $filename $direname

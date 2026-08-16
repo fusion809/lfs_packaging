@@ -35,16 +35,15 @@ tar xf $filename
 cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
-cmake -B build -S . \
+cmake_options=(
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_C_FLAGS="$CFLAGS -ffat-lto-objects" \
     -DCMAKE_CXX_FLAGS="$CXXFLAGS -ffat-lto-objects" \
     -DCMAKE_SKIP_RPATH=ON \
     -DCMAKE_POLICY_VERSION_MINIMUM=3.5
-cmake --build build
-cmake --build build --target libqhull
-sudo cmake --install build
+)
+cmaki "${cmake_options[@]}"
 # Cleanup and add to database
-cd ..
+cd ../..
 sudo rm -rf $filename $direname
 echo $version > /var/lib/custom-packages/$name

@@ -16,9 +16,7 @@ fi
 tar xf $filename
 cd $direname
 autoreconf -vi
-./configure --prefix=/usr
-make -j$(nproc)
-sudo make install
+cmi --prefix=/usr
 cd ..
 sudo rm -rf $filename $direname
 echo "$version" > /var/lib/custom-packages/$name

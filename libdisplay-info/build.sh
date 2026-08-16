@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 name=libdisplay-info
 version=$(gfd_ver emersion/libdisplay-info)
 direname="$name-$version"
@@ -12,12 +13,7 @@ fi
 rm -rf "$direname"
 tar xf $filename
 cd $direname
-mkdir build &&
-cd    build &&
-
-meson setup --prefix=/usr --buildtype=release .. &&
-ninja -j$(nproc)
-sudo ninja install
+mni --prefix=/usr --buildtype=release
 cd ../..
 rm -rf $direname $filename
 echo "$version" > /var/lib/custom-packages/$name

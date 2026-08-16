@@ -25,14 +25,7 @@ CXXFLAGS="-O2 -fPIC"
     CFLAGS+="-O2 -fPIC $(pkg-config --cflags ompi-f77) " \
     LIBS+=" $(pkg-config --libs ompi-f77) " -j$(nproc)
 sudo make install
-export DDIR=/tmp/custom_arpackdir
-mkdir -p $DDIR
-make install DESTDIR="$DDIR" || true
 # Cleanup and add to database
 cd ..
 sudo rm -rf $filename $direname
 echo $version > /var/lib/custom-packages/$name
-if [ -d "$DDIR" ] && [ "$(ls -A "$DDIR" 2>/dev/null)" ]; then
-   find "$DDIR" -type f -o -type l | sed "s|^$DDIR||" | sudo tee -a "/var/lib/custom-packages/$name" > /dev/null
-fi
-sudo rm -rf $DDIR

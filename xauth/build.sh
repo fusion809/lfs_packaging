@@ -19,9 +19,7 @@ cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 XORG_CONFIG="--prefix=/usr"
-./configure $XORG_CONFIG
-make -j$(nproc)
-sudo make install
+cmi $XORG_CONFIG
 cd ..
 sudo rm -rf $direname $filename
 sudo rm -f /usr/bin/xkeystone

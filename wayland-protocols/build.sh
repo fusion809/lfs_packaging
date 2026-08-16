@@ -12,14 +12,11 @@ fi
 
 tar xf $filename
 cd $direname
-mkdir build &&
-cd    build &&
-
-meson setup ..            \
+meson_options=(
       --prefix=/usr       \
-      --buildtype=release &&
-ninja -j$(nproc)
-sudo ninja install
+      --buildtype=release
+)
+mni "${meson_options[@]}"
 cd ../..
 rm -rf $direname $filename
 echo "$version" > /var/lib/custom-packages/$name

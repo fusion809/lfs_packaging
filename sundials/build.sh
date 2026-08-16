@@ -18,7 +18,7 @@ tar xf $filename
 cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
-cmake -B build -S . \
+cmake_options=(
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DBUILD_STATIC_LIBS=OFF \
     -DENABLE_MPI=ON \
@@ -31,8 +31,8 @@ cmake -B build -S . \
     -DEXAMPLES_INSTALL_PATH=/usr/share/sundials/examples \
     -DCMAKE_C_FLAGS="$CFLAGS" \
     -DCMAKE_CXX_FLAGS="$CXXFLAGS"
-cmake --build build
-sudo cmake --install build
+)
+cmaki "$cmake_options[@]"
 # Cleanup and add to database
 cd ..
 sudo rm -rf $filename $direname

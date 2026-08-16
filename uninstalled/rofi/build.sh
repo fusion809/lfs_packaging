@@ -20,8 +20,8 @@ git config submodule.subprojects/libgwater.url ../libgwater
 git config submodule.subprojects/libnkutils.url ../libnkutils
 git -c protocol.file.allow=always submodule update
 
-meson setup build --prefix=/usr
-ninja -C build
-sudo ninja -C build install
+mni "--prefix=/usr"
+cd ..
+rm -rf build
 cd ..
 echo "$version" > /var/lib/custom-packages/$name

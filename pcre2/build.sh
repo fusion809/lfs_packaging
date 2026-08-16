@@ -35,9 +35,7 @@ configure_options=(
   )
 CFLAGS+="-O2 -fPIC -ffat-lto-objects"
 CXXFLAGS+="-O2 -fPIC -ffat-lto-objects"
-./configure "${configure_options[@]}"
-make -j$(nproc)
-sudo make install
+cmi "${configure_options[@]}"
 # Cleanup and add to database
 cd ..
 sudo rm -rf ${filename} $direname

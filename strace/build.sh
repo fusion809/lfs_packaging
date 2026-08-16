@@ -12,9 +12,7 @@ if ! [[ -f $filename ]]; then
 fi
 tar xf "$filename"
 cd "$direname"
-./configure --prefix=/usr --enable-mpers=no
-make -j$(nproc)
-sudo make install
+cmi --prefix=/usr --enable-mpers=no
 cd ..
 sudo rm -rf "$direname" "$filename" "UCD.zip"
 echo "$version" > /var/lib/custom-packages/$name

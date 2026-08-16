@@ -36,9 +36,7 @@ local configure_options=(
 	--sysconfdir=/etc
 )
 
-./configure "${configure_options[@]}"
-make -j$(nproc)
-sudo make install
+cmi "${configure_options[@]}"
 sudo strip /usr/bin/dhcpcd
 sudo strip /usr/lib/dhcpcd/dev/udev.so
 cd ..

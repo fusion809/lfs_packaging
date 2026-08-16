@@ -12,15 +12,12 @@ fi
 
 tar xf $filename
 cd $direname
-mkdir build &&
-cd    build &&
-
-meson setup ..            \
-      --prefix=/usr       \
-      --buildtype=release \
-      -D documentation=false &&
-ninja -j$(nproc)
-sudo ninja install
+meson_options=(
+    --prefix=/usr       \
+    --buildtype=release \
+    -D documentation=false
+)
+mni "${meson_options[@]}"
 cd ../..
 rm -rf $direname $filename
 for link in /usr/lib/libwayland*.so.[01]; do
