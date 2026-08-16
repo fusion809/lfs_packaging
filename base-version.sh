@@ -9,7 +9,7 @@ function fdt_ver {
 }
 
 function gfl_ver {
-    git ls-remote --tags https://gitlab.freedesktop.org/$1.git | sed -n 's|.*refs/tags/\([0-9][0-9.]*\)$|\1|p' | sort -V | tail -1
+    git ls-remote --tags "https://gitlab.freedesktop.org/$1.git" | sed -n 's|.*refs/tags/\([0-9][0-9.]*\)$|\1|p' | sort -V | tail -1
 }
 
 function gglpk_ver {

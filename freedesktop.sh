@@ -18,10 +18,14 @@ function gfd_ver {
 
 function spice_ver {
 	local name=$1
-	local up_ver=$(wget --timeout=5 -cqO- "https://gitlab.freedesktop.org/api/v4/projects/spice%2F$name/releases?per_page=1" | grep -o '"tag_name":"[^"]*"' | grep -v "server" | head -n 1 | cut -d'"' -f4 | sed 's/^v//')
+	if [[ "$name" == "spice-vdagent" ]]; then
+		local repo="spice/linux/vd_agent"
+	else
+		local repo="spice/$name"
+	fi
+	local up_ver=$(wget --timeout=5 -cqO- "https://gitlab.freedesktop.org/api/v4/projects/$repo/releases?per_page=1" | grep -o '"tag_name":"[^"]*"' | grep -v "server" | head -n 1 | cut -d'"' -f4 | sed 's/^v//')
 	ver_check "$up_ver" && return
-
-	local git_ver=$(git ls-remote --tags --refs https://gitlab.com/spice/$name.git | cut -d '/' -f 3 | grep "[0-9]" | grep -v "server\|common\|client" | sed 's/v//g' | sort -V | tail -n 1)
+	local git_ver=$(git ls-remote --tags --refs https://gitlab.com/$repo.git | cut -d '/' -f 3 | grep "[0-9]" | grep -v "server\|common\|client" | sed 's/^v//g' | sed 's|spice-vdagent-||g' | sort -V | tail -n 1)
 	ver_check "$git_ver" "$name" && return
 
 	local arch_ver=$(aver $name)

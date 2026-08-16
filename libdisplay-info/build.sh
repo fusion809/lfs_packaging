@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=libdisplay-info
-version=$(gfd_ver emersion/libdisplay-info)
+version=$(gfd_ver "emersion/libdisplay-info")
 direname="$name-$version"
 filename="$direname.tar.xz"
 blfs_depends=(hwdata)
