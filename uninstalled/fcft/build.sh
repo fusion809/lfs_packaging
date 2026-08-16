@@ -1,14 +1,15 @@
 #!/bin/bash
 set -e
 name=fcft
-version=$(wget -cqO- https://codeberg.org/dnkl/fcft/tags | grep "/tag/" | head -n 1 | cut -d '"' -f 4 | cut -d '/' -f 6)
+repo=dnkl/$name
+version=$(cb_ver $repo)
 lfs_depends=(meson pixman ninja)
 blfs_depends=(freetype2 fontconfig)
 direname="$name-$version"
 filename="$name-$version.tar.gz"
 
 if ! [[ -f "$filename" ]]; then
-	wget -c https://codeberg.org/dnkl/fcft/archive/$version.tar.gz -O $filename 
+	wget -c https://codeberg.org/$repo/archive/$version.tar.gz -O $filename 
 fi
 tar xf "$filename"
 cd "$name"

@@ -1,13 +1,14 @@
 #!/bin/bash
 set -e
 name=fuzzel
-version=$(wget -cqO- https://codeberg.org/dnkl/fuzzel/tags | grep "/tag/" | head -n 1 | cut -d '"' -f 4 | cut -d '/' -f 6)
+repo=dnkl/$name
+version=$(cb_ver $repo)
 direname="$name-$version"
 filename="$direname.tar.gz"
 depends=(scdoc fcft)
 blfs_depends=(fontconfig libpng libxkbcommon pixman wayland meson wayland-protocols)
 if ! [[ -f "$filename" ]]; then
-	wget -c https://codeberg.org/dnkl/$name/archive/$version.tar.gz -O $filename
+	wget -c https://codeberg.org/$repo/archive/$version.tar.gz -O $filename
 fi
 rm -rf "$name"
 tar xf "$filename"

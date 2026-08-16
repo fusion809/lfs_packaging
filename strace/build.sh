@@ -1,13 +1,13 @@
 #!/bin/bash
 set -e
-source $HOME/lfs_packaging/shared-funcs.sh
 name=strace
-version=$(github_ver "$name/$name" | sed 's/v//g')
+repo="$name/$name"
+version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"
 direname="$name-$version"
 lfs_depends=(wget python zip coreutils bash tar xz)
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/$name/$name/releases/download/v$version/$filename
+	wget -c https://github.com/$repo/archive/v$version/$filename
 fi
 tar xf "$filename"
 cd "$direname"

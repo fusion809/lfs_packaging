@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=rofi
-version=$(git ls-remote --tags https://github.com/davatorium/rofi | grep -v "beta\|RC" | tail -n 1 | cut -d '/' -f 3)
+version=$(gh_ver davatorium/rofi)
 
 if ! [[ -d rofi ]]; then
 	git clone https://github.com/davatorium/rofi.git
