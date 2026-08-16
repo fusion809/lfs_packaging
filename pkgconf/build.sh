@@ -1,29 +1,16 @@
 #!/bin/bash
 name=pkgconf
 version=$(gh_ver pkgconf/pkgconf)
-lfs_depends=(glibc)
+lfs_depends=(bash coreutils glibc meson ninja tar xz)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
-mversion=$(gh_ver mesonbuild/meson)
 
 if ! [[ -f $filename ]]; then
 	wget -c https://github.com/pkgconf/pkgconf/releases/download/$direname/$filename
 fi
 
-# mfilename="meson-$mversion.tar.gz"
-# if ! [[ -f $mfilename ]]; then
-# 	wget -c https://github.com/mesonbuild/meson/releases/download/$mversion/$mfilename
-# fi
-
-# tar xf $filename
-# cd "$direname"
-# tar xf ../$mfilename
-# mkdir build
-# cd    build
-
-# python3 ../${mfilename/.tar.gz/}/meson.py setup --prefix=/usr --buildtype=release ..
-# ninja -j$(nproc)
-# sudo ninja install
+tar xf $filename
+cd "$direname"
 mni --prefix=/usr --buildtype=release
 sudo mv /usr/share/doc/pkgconf{,-$version}
 if ! [[ -f /usr/bin/pkg-config ]]; then
