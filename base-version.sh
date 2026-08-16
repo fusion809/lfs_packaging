@@ -10,7 +10,7 @@ function fdt_ver {
 }
 
 function gh_com {
-    git ls-remote https://github.com/$repo.git HEAD
+    git ls-remote https://github.com/$1.git HEAD | awk '{ print $1 }'
 }
 
 function gfl_ver {
