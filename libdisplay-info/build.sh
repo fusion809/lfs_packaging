@@ -1,7 +1,7 @@
 #!/bin/bash
 name=libdisplay-info
 get_version() {
-	local up_ver=$(wget -cqO- https://gitlab.freedesktop.org/emersion/libdisplay-info/-/tags | grep "tags/" | grep -v "dev\|rc" | cut -d '/' -f 6 | sed 's/".*//g' | sort -V | tail -n 1)
+	local up_ver=$(wget --timeout=5 -cqO- https://gitlab.freedesktop.org/emersion/libdisplay-info/-/tags | grep "tags/" | grep -v "dev\|rc" | cut -d '/' -f 6 | sed 's/".*//g' | sort -V | tail -n 1)
 	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
 		echo "$up_ver"
 		return 0
@@ -13,9 +13,9 @@ get_version() {
 		return 0
 	fi
 
-	local arch_ver=$(aver $name)
-	if echo "$arch_ver" | grep -q "[0-9]\.[0-9]"; then
-		echo "$arch_ver"
+	local blfs_ver=$(wget --timeout=5 -cqO- https://www.linuxfromscratch.org/blfs/view/systemd/index.html | grep "libdisplay-info" | sed 's/.*libdisplay-info-//g' | sed 's|</a>||g')
+	if echo "$blfs_ver" | grep -q "[0-9]\.[0-9]"; then
+		echo "$blfs_ver"
 		return 0
 	fi
 }

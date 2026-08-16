@@ -142,7 +142,7 @@ function spice_ver {
 		return 0
 	fi
 	local git_ver=$(git ls-remote --tags --refs https://gitlab.com/spice/$name.git | cut -d '/' -f 3 | grep "[0-9]" | grep -v "server\|common\|client" | sed 's/v//g' | sort -V | tail -n 1)
-	if echo "$git_ver" | grep -q "[0-9]\.[0-9]" &> /dev/null && ! ( [[ $name == "spice-protocol" ]] && [[ $git_ver == "0.14.4" ]] ); then
+	if echo "$git_ver" | grep -q "[0-9]\.[0-9]" &> /dev/null && ! ( [[ $name == "spice-protocol" ]] && [[ $git_ver == "0.14.4" ]] ) && ! ( [[$name == "spice" ]] && [[ $git_ver == "0.15.0" ]] ); then
 		echo "$git_ver"
 		return 0
 	fi
