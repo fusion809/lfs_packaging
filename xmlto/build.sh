@@ -2,7 +2,7 @@
 set -e
 name=xmlto
 get_version() {
-	local up_ver=$(wget -cqO- https://pagure.io/xmlto/releases | grep "/xmlto/archive/.*tar.gz" | cut -d '"' -f 2 | cut -d '/' -f 4)
+	local up_ver=$(wget -T 5 -cqO- https://pagure.io/xmlto/releases | grep "/xmlto/archive/.*tar.gz" | cut -d '"' -f 2 | cut -d '/' -f 4)
 	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
 		echo "$up_ver"
 		return 0

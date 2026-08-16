@@ -2,7 +2,7 @@
 set -e
 name=networkmanager
 get_version() {
-	local up_ver=$(wget -cqO- https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/tags | grep "tags/" | grep -v "dev\|rc" | cut -d '/' -f 6 | sed 's/".*//g' | sort -V | tail -n 1)
+	local up_ver=$(wget --timeout=5 -cqO- https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/tags | grep "tags/" | grep -v "dev\|rc" | cut -d '/' -f 6 | sed 's/".*//g' | sort -V | tail -n 1)
 	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
 		echo "$up_ver"
 		return 0

@@ -2,7 +2,7 @@
 set -e
 name=elfutils
 get_version() {
-	local up_ver=$(wget -cqO- https://sourceware.org/elfutils/ftp/ | grep -oE 'href="[0-9.]+/"' | sed -E 's/href="([^/]+)\/"/\1/' | sort -V | tail -n 1)
+	local up_ver=$(wget -T 5 -cqO- https://sourceware.org/elfutils/ftp/ | grep -oE 'href="[0-9.]+/"' | sed -E 's/href="([^/]+)\/"/\1/' | sort -V | tail -n 1)
 	if echo "$up_ver" | grep -q "[0-9]\.[0-9]"; then
 		echo "$up_ver"
 		return 0
