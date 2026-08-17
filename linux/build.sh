@@ -1,20 +1,24 @@
 #!/bin/bash
 set -e
 name=linux
-#version=$(wget -cqO- https://kernel.org/ | grep "linux/kernel/v" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 8 | sed 's/.tar.xz//g' | sed 's/linux-//g')
+get_base_version() {
+	local up_ver=$(wget -T 5 -cqO- https://www.kernel.org/releases.json 2>/dev/null | grep -A 2 '"latest_stable":' | grep '"version":' | head -n 1 | cut -d '"' -f 4)
+	if [[ -z "$up_ver" ]]; then
+		up_ver=$(aver $name)
+	fi
+	echo "$up_ver"
+}
 get_version() {
-	local up_ver=$(wget -T 5 -cqO- https://www.kernel.org/releases.json | grep -A 2 '"latest_stable":' | grep '"version":' | head -n 1 | cut -d '"' -f 4)
-	ver_check "$up_ver" && return
-
-	local arch_ver=$(aver $name)
-	ver_check "$arch_ver" && return
+	local base_ver=$(get_base_version)
+	if [[ $base_ver =~ ^[0-9]+\.[0-9]+$ ]]; then
+		echo "${base_ver}.0"
+	else
+		echo "$base_ver"
+	fi
 }
 
-base_version=$(get_version)
-if [[ $base_version =~ ^[0-9]+\.[0-9]+$ ]]; then
-    version="${base_version}.0"
-fi
-
+version=$(get_version)
+base_version=$(get_base_version)
 remote_filename="$name-${base_version}.tar.xz"
 filename="$name-$version.tar.xz"
 remote_direname="${remote_filename/.tar.xz/}"
