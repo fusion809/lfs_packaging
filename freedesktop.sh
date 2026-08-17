@@ -15,7 +15,7 @@ function gfd_ver {
 
 	local lfs_vers=$(lfs_ver $name)
 	ver_check "$lfs_vers" "$inst_ver" && return
-	echo "$(pkgver $name)"
+	echo "$inst_ver"
 }
 
 function spice_ver {
@@ -33,22 +33,23 @@ function spice_ver {
 
 	local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$inst_ver" && return
-	echo "$(pkgver $name)"
+	echo "$inst_ver"
 }
 
 function way_ver {
     local name=$1
+	local inst_ver=$(pkgver $name)
     local up_ver=$(wget -T 5 -cqO- https://wayland.freedesktop.org/releases.html | grep "$name-[0-9].*.tar.xz" | grep -v ".9[0-9].tar.xz" | head -n 1 | cut -d '/' -f 8)
-    ver_check "$up_ver" && return
+    ver_check "$up_ver" "$inst_ver" && return
 
     local git_ver=$(git ls-remote --tags --refs https://gitlab.freedesktop.org/wayland/$name.git | grep "refs/tags/[0-9.]*$" | cut -d '/' -f 3 | sort -V | tail -n 1)
-	local inst_ver=$(pkgver $name)
-	ver_check "$up_ver" "$inst_ver" && return
+	ver_check "$git_ver" "$inst_ver" && return
 
     local arch_ver=$(aver $name)
     ver_check "$arch_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)
 	ver_check "$lfs_vers" "$inst_ver" && return
+	echo "$inst_ver"
 }
 
 # xorg.freedesktop.org version fetcher
@@ -72,4 +73,5 @@ function xfd_ver() {
 	ver_check "$arch_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)
 	ver_check "$lfs_vers" "$inst_ver" && return
+	echo "$inst_ver"
 }

@@ -10,7 +10,7 @@ function pkgver {
 
 # Echoes $1 and returns 0 if it looks like a valid version string, otherwise returns 1.
 function ver_check {
-	if echo "$1" | grep -qE "[0-9.]+" &> /dev/null &&  [[ "$(printf '%s\n%s\n' "$2" "$1" | sort -V | head -n1)" == "$inst_ver" ]]; then
+	if echo "$1" | grep -qE "[0-9.]+" &> /dev/null &&  [[ "$(printf '%s\n%s\n' "$2" "$1" | sort -V | head -n1)" == "$2" ]]; then
 		echo "$1"
 		return 0
 	fi
