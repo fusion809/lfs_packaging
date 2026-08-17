@@ -10,34 +10,39 @@ get_version() {
 	ver_check "$arch_ver" && return
 }
 
-version=$(get_version)
+base_version=$(get_version)
+if [[ $base_version =~ ^[0-9]+\.[0-9]+$ ]]; then
+    version="${base_version}.0"
+fi
 
+remote_filename="$name-${base_version}.tar.xz"
 filename="$name-$version.tar.xz"
+remote_direname="${remote_filename/.tar.xz/}"
 direname="${filename/.tar.xz/}"
 
 #if ! [[ -f $filename ]]; then
-	wget -c https://cdn.kernel.org/pub/linux/kernel/v$(echo $version | cut -d '.' -f 1).x/$filename
+wget -c https://cdn.kernel.org/pub/linux/kernel/v$(echo ${base_version} | cut -d '.' -f 1).x/${remote_filename} -O $filename
 #fi
 
 function os-release {
 	cat /etc/os-release | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv} "PRETTY_NAME" | cut -d '"' -f 2 | cut -d ' ' -f 4
 }
-if [[ $version =~ ^[0-9]+\.[0-9]+$ ]]; then
-    version+=".0"
-fi
 sudo rm -rf $direname
 tar xf $filename
+mv $remote_direname $direname
 cd $direname
 make mrproper
 sudo cp /boot/config-$(uname -r) .config
 make -j$(nproc)
 sudo make headers_install
 sudo make modules_install
-sudo cp -iv arch/x86/boot/bzImage /boot/vmlinuz-$version-lfs-$(os-release)
-sudo cp -iv System.map /boot/System.map-$version
+sudo cp -v arch/x86/boot/bzImage /boot/vmlinuz-$version-lfs-$(os-release)
+sudo cp -v System.map /boot/System.map-$version
 sudo cp .config /boot/config-$version
 sudo cp -r Documentation -T /usr/share/doc/$direname
-sudo rm -rf /usr/share/doc/$(uname -r)
+if [[ "$version" != $(uname -r) ]]; then
+	sudo rm -rf /usr/share/doc/$(uname -r)
+fi
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 cd ..
 sudo rm -rf $filename $direname
