@@ -18,29 +18,25 @@ fi
 tar xvf $filename
 cd $direname
 # Compile and install
-mkdir build
-cd build
-  CFLAGS="-O2 -fPIC"
-  CXXFLAGS="-O2 -fPIC"
-  meson setup .. \
-    --bindir=/usr/bin \
-    --datadir=/usr/share \
-    --includedir=/usr/include \
-    --infodir=/usr/info \
-    --libdir=/usr/lib \
-    --libexecdir=/usr/libexec \
-    --localstatedir=/var \
-    --mandir=/usr/man \
-    --prefix=/usr \
-    --sbindir=/usr/sbin \
-    --sysconfdir=/etc \
-    -D man=disabled \
-    -D gtkdoc=disabled \
-    -D docbook_docs=disabled \
-    -Ddocdir=/usr/share/doc/$name-$version \
-    -Dstrip=true
-  "${NINJA:=ninja}" -j$(nproc)
-  DESTDIR=/ sudo $NINJA install
+meson_options=(
+  --bindir=/usr/bin \
+  --datadir=/usr/share \
+  --includedir=/usr/include \
+  --infodir=/usr/info \
+  --libdir=/usr/lib \
+  --libexecdir=/usr/libexec \
+  --localstatedir=/var \
+  --mandir=/usr/man \
+  --prefix=/usr \
+  --sbindir=/usr/sbin \
+  --sysconfdir=/etc \
+  -D man=disabled \
+  -D gtkdoc=disabled \
+  -D docbook_docs=disabled \
+  -Ddocdir=/usr/share/doc/$name-$version \
+  -Dstrip=true
+)
+mni "${meson_options[@]}"
 cd ..
 sudo chmod +x /etc/profile.d/flatpak.sh
 sudo mkdir -p /usr/share/doc/$direname

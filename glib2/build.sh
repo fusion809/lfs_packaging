@@ -30,9 +30,6 @@ cd $direname
 echo "Patching to remove warnings"
 patch -Np1 -i ../glib-skip_warnings-1.patch
 echo "Initial build of GLIB2..."
-mkdir build &&
-cd    build &&
-
 meson_options=(
       --prefix=/usr             \
       --buildtype=release       \
@@ -43,16 +40,10 @@ meson_options=(
 )
 mni "${meson_options[@]}"
 echo "Initial build of GObject-Introspection..."
-tar xf ../../$gobj_filename &&
-
-meson setup $gobj_direname gi-build \
-            --prefix=/usr --buildtype=release     &&
-ninja -C gi-build -j$(nproc)
-sudo ninja -C gi-build install
+tar xf ../../$gobj_filename
+mni --prefix=/usr --buildtype=release $gobj_direname
 echo "Now rebuilding GLIB2 with introspection enabled..."
-meson configure -D introspection=enabled &&
-ninja -j$(nproc)
-sudo ninja install
+mni -D introspection=enabled
 echo "Build finished, cleaning up..."
 cd ../..
 rm -rf $direname $filename $gobj_filename

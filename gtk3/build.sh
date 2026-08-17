@@ -20,15 +20,13 @@ cd $direname
 mkdir build &&
 cd    build &&
 
-meson setup ..            \
+meson_options=(
       --prefix=/usr       \
       --buildtype=release \
       -D man=true         \
-      -D broadway_backend=true &&
-docbookver=$(cat /var/lib/book-packages/docbook-xsl-nons | head -n 1)
-sed -i -e "s|http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl|/usr/share/xml/docbook/xsl-stylesheets-nons-$docbookver/manpages/docbook.xsl|g" build.ninja ../docs/reference/gtk/meson.build 
-ninja -j$(nproc)
-sudo ninja install
+      -D broadway_backend=true
+)
+mni "${meson_options[@]}"
 cd ..
 rm -rf $filename $direname
 echo $version > /var/lib/custom-packages/$name

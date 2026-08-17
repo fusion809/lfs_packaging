@@ -36,7 +36,7 @@ cd ..              &&
 tar -xf ../$edFilename &&
 cd $edDirename                &&
 
-mni "${meson_options[0,1]}"
+mni "${meson_options[@]:0:2}"
 # Cleanup and add to database
 cd ../..
 sudo rm -rf $direname $filename $edFilename
