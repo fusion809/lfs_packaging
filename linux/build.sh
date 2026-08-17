@@ -22,6 +22,9 @@ direname="${filename/.tar.xz/}"
 function os-release {
 	cat /etc/os-release | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv} "PRETTY_NAME" | cut -d '"' -f 2 | cut -d ' ' -f 4
 }
+if [[ $version =~ ^[0-9]+\.[0-9]+$ ]]; then
+    version+=".0"
+fi
 sudo rm -rf $direname
 tar xf $filename
 cd $direname
