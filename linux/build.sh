@@ -29,7 +29,9 @@ function os-release {
 }
 sudo rm -rf $direname
 tar xf $filename
-mv $remote_direname $direname
+if [[ $remote_direname != $direname ]]; then
+	mv $remote_direname $direname
+fi
 cd $direname
 make mrproper
 sudo cp /boot/config-$(uname -r) .config
