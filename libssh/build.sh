@@ -10,6 +10,9 @@ get_version() {
 	#ver_check $arch_ver $inst_ver && return
 }	
 version=$(get_version)
+depends=(mitkrb)
+blfs_depends=(keyutils)
+lfs_depends=(e2fsprogs glibc openssl zlib)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 if ! [[ -f $filename ]]; then
