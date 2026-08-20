@@ -41,14 +41,14 @@ function ggnu_ver {
 }
 
 function ghl_ver {
-    git ls-remote --tags --refs https://github.com/$1 | cut -d '/' -f 3 | sed 's/v//g' | tail -n 1
+    git ls-remote --tags --refs https://github.com/$1.git | cut -d '/' -f 3 | sed 's/^[a-zA-Z0-9-]*-//g' | grep -E "^[0-9.]+$" | sort -V | tail -n 1
 }
 
 function ght_ver {
 	local latest_url=$(curl -Ls -o /dev/null -w '%{url_effective}' "https://github.com/$1/releases/latest")
 	local latest_tag=$(echo "$latest_url" | grep -oP '/tag/\K.*')
 	if [[ -n "$latest_tag" ]]; then
-		echo "$latest_tag" | sed -nE "s/^${1#*/}[[:space:]_-]*//i; s/^[^0-9]*([0-9]+([.-][0-9]+)*).*/\1/p"
+		echo "$latest_tag" | sed -nE "s/^${1#*/}[[:space:]_-]*//i; s/^[^0-9]*([0-9]+([.-][0-9]+)*).*/\1/p" | head -n 1
 		return 0
 	fi
 	wget --timeout=5 -cqO- "https://github.com/$1/tags.atom" | grep -v "alpha\|beta\|rc" | grep '<title>' | sed -nE "/<title>Tags from /d; s/.*<title>//; s/^${1#*/}[[:space:]_-]*//i; s/^[^0-9]*([0-9]+([.-][0-9]+)*).*/\1/p" | sort -V | tail -n 1
