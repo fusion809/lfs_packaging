@@ -38,7 +38,7 @@ if [[ $remote_direname != $direname ]]; then
 fi
 cd $direname
 make mrproper
-sudo cp /boot/config-$(uname -r) .config
+sudo cp ../config .config
 make -j$(nproc)
 sudo make headers_install
 sudo make modules_install
