@@ -96,6 +96,11 @@ sed -ri src/tools/cargo/Cargo.lock \
     -e '/name = "openssl-macros"/,/^$/{/source|checksum/d}'
 export LIBSSH2_SYS_USE_PKG_CONFIG=1
 export LIBSQLITE3_SYS_USE_PKG_CONFIG=1
+(
+	export PATH=$PATH:/opt/rustc-$(cat /var/lib/custom-packages/rustc | head -n 1)/bin
+    cd src/tools/cargo
+    cargo update --offline
+)
 ./x.py build
 sudo ./x.py install
 sudo rm -fv /opt/rustc-$version/share/doc/rustc-$version/*.old   &&
