@@ -15,11 +15,10 @@ if ! [[ -f "$filename" ]]; then
 fi
 
 # Unpack and build
+rm -rf "$direname"
 tar xf "$filename"
 cd "$direname"
 grep -rl '^#!.*python$' | xargs sed -i '1s/python/&3/'
-mkdir build &&
-cd    build &&
 
 meson_options=(
     --prefix=/usr               \

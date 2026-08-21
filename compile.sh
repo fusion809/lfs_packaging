@@ -42,11 +42,13 @@ if ((${#meson_args[@]})); then
 fi
 echo "source_dir=$source_dir"
 	if ( echo $PWD | grep "build" &> /dev/null ) && ( echo $source_dir | grep "gobject-introspection" &>/dev/null ); then
+		echo "Option 1 build, should be gobject-introspection"
 		meson setup "$source_dir" gi-build "${meson_args[@]}" || exit 1
 		ninja -C gi-build -j$(nproc)
 		sudo ninja -C gi-build install
 		return 0;
 	elif ! ( echo $PWD | grep "build" &> /dev/null ); then
+		echo "Optional 2 build, should be generally applicable"
 		mkdir build
 		cd build
 		meson setup "${meson_args[@]}" "$source_dir" || exit 1
@@ -65,6 +67,7 @@ echo "source_dir=$source_dir"
 			sed -i "s|http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl|/usr/share/xml/docbook/xsl-stylesheets-nons-$docbookver/manpages/docbook.xsl|g" "${files[@]}"
 		fi
 	elif [[ -f build.ninja ]]; then
+		echo "Option 3 build"
 		echo "${meson_args[@]}"
 		meson configure "${meson_args[@]}" || exit 1
 	fi
