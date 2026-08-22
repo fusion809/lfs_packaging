@@ -2,7 +2,8 @@
 set -e
 # Variable declarations
 name=libXfont2
-version=$(xfd_ver $name)
+_name=libXfont
+version=$(xfd_ver $_name)
 direname="${name}-$version"
 filename="$direname.tar.xz"
 lfs_depends=(bash bzip2 coreutils glibc make sed systemd tar util-linux xz zlib)

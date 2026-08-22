@@ -66,7 +66,13 @@ function xfd_ver() {
 	local inst_ver=$(pkgver $name)
 	ver_check "$up_ver" "$inst_ver" && return
 
-	local git_ver=$(gxfd_ver $type $name)
+	if [[ "$name" == "libXfont2" ]]; then
+		local git_ver=$(gxfd_ver $type "libXfont")
+	elif [[ "$name" == "xtrans" ]]; then
+		local git_ver=$(gxfd_ver $type "libxtrans")
+	else
+		local git_ver=$(gxfd_ver $type $name)
+	fi
 	ver_check "$git_ver" "$inst_ver" && return
 
 	local arch_ver=$(aver $name)
