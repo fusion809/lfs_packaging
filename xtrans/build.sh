@@ -2,7 +2,7 @@
 set -e
 # Variable declarations
 name=xtrans
-version=$(xfd_ver lib$name)
+version=$(xfd_ver $name)
 direname="lib$name-$version"
 filename="$direname.tar.xz"
 lfs_depends=(bash coreutils glibc make sed systemd tar util-linux xz zlib)
