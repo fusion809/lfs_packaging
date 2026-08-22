@@ -3,14 +3,18 @@ set -e
 # Variable declaration
 name=colord
 get_version() {
-      local up_ver=$(wget --timeout=5 -cqO- https://www.freedesktop.org/software/colord/releases/ | grep "colord-[0-9.]*.tar.xz\"" | tail -n 1 | cut -d '"' -f 2 | sed 's/.tar.xz//g' | sed 's/colord-//g')
-      ver_check "$up_ver" && return
+      local inst_ver=$(pkgver $name)
+      local up_ver=$(wget --timeout=5 -t 1 -cqO- https://www.freedesktop.org/software/colord/releases/ | grep "colord-[0-9.]*.tar.xz\"" | tail -n 1 | cut -d '"' -f 2 | sed 's/.tar.xz//g' | sed 's/colord-//g')
+      ver_check "$up_ver" "$inst_ver" && return
 
-      local git_ver=$(git ls-remote --tags --refs https://github.com/hughsie/colord.git | grep "refs/tags" | cut -d '/' -f 3 | sort -V | tail -n 1)
-      ver_check "$git_ver" && return
+      local git_ver=$(timeout 5 git ls-remote --tags --refs https://github.com/hughsie/colord.git 2>/dev/null | grep "refs/tags" | cut -d '/' -f 3 | sort -V | tail -n 1)
+      ver_check "$git_ver" "$inst_ver" && return
 
       local arch_ver=$(aver $name)
-      ver_check "$arch_ver" && return
+      ver_check "$arch_ver" "$inst_ver" && return
+
+      local lfs_ver=$(lfs_ver $name)
+      ver_check "$lfs_ver" "$inst_ver" && return;
 }
 version=$(get_version)
 filename="$name-$version.tar.xz"
