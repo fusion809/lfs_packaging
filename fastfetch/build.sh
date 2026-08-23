@@ -6,14 +6,17 @@ depends=(yyjson) # Can build and run without it
 lfs_depends=(bash coreutils gcc glibc zlib)
 blfs_depends=(cmake dbus dconf ImageMagick 
 pulseaudio libxcb libxrandr sqlite)
+version=$(gh_ver "fastfetch-cli/fastfetch")
+filename="$name-$version.tar.gz"
+direname="${filename/.tar.gz/}"
 
 # Get the source
-if ! [[ -d fastfetch ]]; then
-	git clone https://github.com/fastfetch-cli/fastfetch
+if ! [[ -f $filename ]]; then
+	wget -c https://github.com/fastfetch-cli/fastfetch/archive/$version.tar.gz -O $filename
 fi
-
-cd $name
-version=$(git checkout master -q && git pull origin master -q && git fetch --all --tags -q && git fetch --prune --prune-tags -q && git describe --tags --abbrev=0)
+rm -rf $direname
+tar xf $filename
+cd $direname
 git checkout $version
 # Compile and install
 mkdir -p build
@@ -24,6 +27,7 @@ cmake .. \
 	-DCMAKE_CXX_FLAGS:STRING="-O2 -fPIC"
 cmake --build . --target fastfetch
 sudo make install
-cd ..
+cd ../..
+rm -rf $filename $direname
 # Add to database
 echo $version > /var/lib/custom-packages/$name
