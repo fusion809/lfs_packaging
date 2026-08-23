@@ -3,7 +3,7 @@
 set -e
 # Variable declarations
 name=ImageMagick
-version=$(gh_ver "$name/$name")
+version=$(gh_ver "$name/$name" | sed 's/\.\([0-9]*\)$/-\1/')
 lfs_depends=(bzip2 expat fftw fontconfig freetype gcc glibc libffi libpng util-linux xz zlib zstd)
 depends=(glib2 libICE libSM libX11 libXext libXrender libXt libwmf numactl pango pcre2)
 blfs_depends=(brotli cairo fontconfig freetype fribidi graphite2 graphviz harfbuzz highway lcms2 libXau libXdmcp libaom libde265 libheif libjpeg-turbo libjxl libpng libraw libtiff libwebp libxcb libxml2 openjpeg pixman webkitgtk x264 x265 xorg-lib)
