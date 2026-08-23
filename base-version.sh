@@ -23,7 +23,13 @@ function gglpk_ver {
 }
 
 function ggn_ver {
-    timeout 5 git ls-remote --tags --refs "https://gitlab.gnome.org/GNOME/$1.git" 2>/dev/null | grep "refs/tags/$2" | grep -v "alpha\|beta\|rc" | cut -d '/' -f 3 | grep -v ".9" | sed 's/^v//g'| sort -V | tail -n 1
+	if [[ "$1" == "polkit-gnome" ]]; then
+		URL="https://gitlab.gnome.org/Archive/policykit-gnome"
+	else
+		URL="https://gitlab.gnome.org/GNOME/$1"
+	fi
+
+    timeout 5 git ls-remote --tags --refs "$URL.git" 2>/dev/null | grep "refs/tags/$2" | grep -v "alpha\|beta\|rc" | cut -d '/' -f 3 | grep -v ".9" | sed 's/^v//g'| sort -V | tail -n 1
 }
 
 function ggnu_ver {
@@ -83,7 +89,12 @@ function lfs_ver {
 }
 
 function wgn_ver {
-    wget --timeout=5 -t 1 -cqO- https://gitlab.gnome.org/GNOME/$1/-/tags | grep "tags/$2" | cut -d '/' -f 6 | sed 's/".*//g' | grep -v "alpha\|beta\|\.rc" | sort -V | tail -n 1 | sed 's/^v//g'
+	if [[ "$1" == "polkit-gnome" ]]; then
+		URL="https://gitlab.gnome.org/Archive/policykit-gnome"
+	else
+		URL="https://gitlab.gnome.org/GNOME/$1"
+	fi
+    wget --timeout=5 -t 1 -cqO- $URL/-/tags | grep "tags/$2" | cut -d '/' -f 6 | sed 's/".*//g' | grep -v "alpha\|beta\|\.rc" | sort -V | tail -n 1 | sed 's/^v//g'
 }
 
 function wgnu_ver {
