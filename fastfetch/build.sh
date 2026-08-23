@@ -2,7 +2,7 @@
 set -e
 # Variable declarations
 name=fastfetch
-depends=(yyjson) # Can build and run without it
+depends=(yyjson)
 lfs_depends=(bash coreutils gcc glibc zlib)
 blfs_depends=(cmake dbus dconf ImageMagick 
 pulseaudio libxcb libxrandr sqlite)
@@ -17,7 +17,6 @@ fi
 rm -rf $direname
 tar xf $filename
 cd $direname
-git checkout $version
 # Compile and install
 mkdir -p build
 cd build
