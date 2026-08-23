@@ -23,5 +23,4 @@ cmaki "${common_cmake_args[@]}"
 cd ..
 rm -rf build
 cd ..
-sudo install -Dm755 $name.desktop /usr/share/applications/
 echo "$version" > /var/lib/custom-packages/$name
