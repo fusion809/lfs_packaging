@@ -2,24 +2,26 @@
 set -e
 # Variable declarations
 name="wl-clipboard"
+repo="bugaevc/wl-clipboard"
+version=$(git ls-remote https://github.com/$repo.git HEAD | awk '{print $1}')
+filename="$name-$version.tar.gz"
+direname="${filename/.tar.gz/}"
 depends=(wayland)
 lfs_depends=(bash coreutils glibc libffi meson ninja)
-blfs_depends=(git wayland wayland-protocols)
+blfs_depends=(wayland wayland-protocols)
 # Fetch and unpack source
-if ! [[ -d $name ]]; then
-	git clone https://github.com/bugaevc/wl-clipboard
+if ! [[ -f $filename ]]; then
+	wget -c https://github.com/$repo/archive/${version}.tar.gz -O $filename
 fi
-cd $name
-version=$(git pull origin master -q && git log | head -n 1 | cut -d ' ' -f 2)
+tar xvf $filename
+cd $direname
 # Compile and install
-rm -rf build
 meson_options=(
 	--prefix=/usr       \
     --buildtype=release
 )
 mni "${meson_options[@]}"
-cd ..
+cd ../..
 # Cleanup and add to database
-rm -rf build
-cd ..
+rm -rf $filename $direname
 echo $version > /var/lib/custom-packages/$name

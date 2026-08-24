@@ -47,7 +47,7 @@ function ggnu_ver {
 }
 
 function ghl_ver {
-    timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | sed 's/^[a-zA-Z0-9-]*-//g' | grep -E "^[0-9.]+$" | sort -V | tail -n 1
+    timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | sed 's/^[a-zA-Z0-9-]*-//g' | sed 's/^v//g' | grep -E "^[0-9.]+$" | sort -V | tail -n 1
 }
 
 function ght_ver {
