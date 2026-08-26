@@ -13,6 +13,8 @@ function cb_ver {
 	ver_check "$arch_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)
 	ver_check "$lfs_vers" "$inst_ver" && return
+	echo "$(date +"%r %d/%M/%Y"), $name
+" >> ~/failed_versioning.log
 	echo $inst_ver
 }
 
@@ -32,6 +34,8 @@ function gh_ver {
 	ver_check "$arch_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)
 	ver_check "$lfs_vers" "$inst_ver" && return
+	echo "$(date +"%r %d/%M/%Y"), $name
+" >> ~/failed_versioning.log
 	echo $inst_ver
 }
 
@@ -47,6 +51,8 @@ function gnu_ver {
 	ver_check "$arch_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)
 	ver_check "$lfs_vers" "$inst_ver" && return
+	echo "$(date +"%r %d/%M/%Y"), $name
+" >> ~/failed_versioning.log
 	echo $inst_ver
 }
 
@@ -63,5 +69,7 @@ function sf_ver {
 	ver_check "$arch_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)
 	ver_check "$lfs_vers" "$inst_ver" && return
+	echo "$(date +"%r %d/%M/%Y"), $name
+" >> ~/failed_versioning.log
 	echo "$inst_ver"
 }
