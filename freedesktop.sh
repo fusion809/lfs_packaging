@@ -16,7 +16,7 @@ function gfd_ver {
 	local lfs_vers=$(lfs_ver $name)
 	ver_check "$lfs_vers" "$inst_ver" && return
 	echo "$(date +"%r %d/%M/%Y"), $name
-" >> ~/failed_versioning.log
+" >> ~/logs/failed_versioning.log
 	echo "$inst_ver"
 }
 
@@ -36,7 +36,7 @@ function spice_ver {
 	local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$inst_ver" && return
 	echo "$(date +"%r %d/%M/%Y"), $name
-" >> ~/failed_versioning.log
+" >> ~/logs/failed_versioning.log
 	echo "$inst_ver"
 }
 
@@ -54,7 +54,7 @@ function way_ver {
 	local lfs_vers=$(lfs_ver $name)
 	ver_check "$lfs_vers" "$inst_ver" && return
 	echo "$(date +"%r %d/%M/%Y"), $name
-" >> ~/failed_versioning.log
+" >> ~/logs/failed_versioning.log
 	echo "$inst_ver"
 }
 
@@ -86,6 +86,6 @@ function xfd_ver() {
 	local lfs_vers=$(lfs_ver $name)
 	ver_check "$lfs_vers" "$inst_ver" && return
 	echo "$(date +"%r %d/%M/%Y"), $name
-" >> ~/failed_versioning.log
+" >> ~/logs/failed_versioning.log
 	echo "$inst_ver"
 }

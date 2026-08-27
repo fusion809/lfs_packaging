@@ -22,7 +22,7 @@ function gn_ver {
 	local lfs_vers=$(lfs_ver "$1")
 	ver_check "$lfs_vers" "$inst_ver" && return
 	echo "$(date +"%r %d/%M/%Y"), $name
-" >> ~/failed_versioning.log
+" >> ~/logs/failed_versioning.log
 	echo "$inst_ver"
 }
 
@@ -40,6 +40,6 @@ function lgd_ver {
 	local lfs_vers=$(lfs_ver $name)
 	ver_check "$lfs_vers" "$inst_ver" && return
 	echo "$(date +"%r %d/%M/%Y"), $name
-" >> ~/failed_versioning.log
+" >> ~/logs/failed_versioning.log
 	echo "$inst_ver"
 }
