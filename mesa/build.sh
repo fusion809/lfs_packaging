@@ -15,18 +15,16 @@ direname="$name-$version"
 filename="$direname.tar.xz"
 depends=(coreutils libX11 libXext libXxf86vm libdisplay-info libpciaccess libxshmfence meson ninja tar wayland wayland-protocols xorg-libs xz)
 lfs_depends=(bzip2 expat gcc glibc libelf libffi linux systemd xz zlib zstd)
-blfs_depends=(cbindgen glslang libXau libXdmcp libclc libdrm libva libxcb libxml2 llvm lm-sensors make-ca mako rust-bindgen spirv-tools vulkan-loader xcb-util-keysyms)
+blfs_depends=(cbindgen glslang libXau libXdmcp libclc libdrm libva libxcb libxml2 llvm lm-sensors make-ca mako rust-bindgen spirv-tools vulkan-loader xcb-util-keysyms rustc spirv-llvm-translator)
 pip_depends=(pyyaml)
 
 if ! [[ -f $filename ]]; then
 	wget -c https://mesa.freedesktop.org/archive/$filename
 fi
-
+rm -rf $direname
 tar xf $filename
 cd $direname
-mkdir build &&
-cd    build &&
-
+export PATH=$PATH:/opt/rustc/bin
 XORG_PREFIX=/usr
 meson_options=(
       --prefix=$XORG_PREFIX    \

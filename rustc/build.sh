@@ -101,6 +101,16 @@ export LIBSQLITE3_SYS_USE_PKG_CONFIG=1
     cd src/tools/cargo
     cargo update --offline
 )
+# Strip unrecognized amx-tf32 feature to prevent LLVM fatal error:
+# 1. Remove amx-tf32 from compiler target features (fixes LLVM fatal error)
+find compiler/ -type f -name "*.rs" -exec sed -i "/amx-tf32/d; /amx_tf32/d" {} + 2>/dev/null || true
+
+# 2. Map amx-tf32 to amx-tile in stdarch/core (fixes core library build)
+find library/ -type f -name "*.rs" -exec sed -i 's/"amx-tf32"/"amx-tile"/g; s/"amx_tf32"/"amx_tile"/g' {} + 2>/dev/null || true
+
+# 3 lto = "off" to fix build
+sed -i 's/lto = "thin"/lto = "off"/' bootstrap.toml
+
 ./x.py build
 sudo ./x.py install
 sudo rm -fv /opt/rustc-$version/share/doc/rustc-$version/*.old   &&

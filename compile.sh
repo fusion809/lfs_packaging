@@ -8,7 +8,25 @@ function maki {
 function cmaki {
 	cmake -S . -B build "$@"
 	cd build
-	maki
+	generator=
+for arg in "$@"; do
+    if [[ "$generator" == "-G" ]]; then
+        if [[ "$arg" == "Ninja" ]]; then
+            generator="Ninja"
+        else
+            generator=
+        fi
+    elif [[ "$arg" == "-G" ]]; then
+        generator="-G"
+    fi
+done
+
+if [[ "$generator" == "Ninja" ]]; then
+    ninja -j$(nproc)
+    sudo ninja install
+else
+    maki
+fi
 }
 
 function cmi {
