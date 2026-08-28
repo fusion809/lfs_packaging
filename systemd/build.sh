@@ -40,7 +40,7 @@ meson_options=(
       -D docdir=/usr/share/doc/$direname
 )
 mni "${meson_options[@]}"
-tar xf ../../$_filename \
+sudo tar -xf ../../$_filename \
     --no-same-owner --strip-components=1 \
     -C /usr/share/man
 cd ../..
