@@ -76,8 +76,11 @@ function xfd_ver() {
 	ver_check "$git_ver" "$inst_ver" && return
 
 	local arch_ver=$(aver $name)
+	if ! [[ "$arch_ver" =~ ^[0-9.]+$ ]]; then
+		local arch_ver=$(aver xorg-$name)
+	fi
 	ver_check "$arch_ver" "$inst_ver" && return
-	local lfs_vers=$(lfs_ver $name)
+	local lfs_vers=$(wget -T 5 -t 1 -cqO- https://www.linuxfromscratch.org/blfs/view/systemd/x/x7$type.html | grep -E "$name-[0-9.]+" | sed 's/^.*\s//g' | cut -d '-' -f 2 | sed 's/.tar.xz//g')
 	ver_check "$lfs_vers" "$inst_ver" && return
 	fver "$name" "$inst_ver"
 }

@@ -6,7 +6,7 @@ get_version() {
   local inst_ver=$(pkgver $name)
   local up_ver=$(wget -T 5 -cqO- https://www-lb.open-mpi.org/software/ompi/ | grep ".tar.gz" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 7 | sed 's/.tar.gz//g' | sed 's/openmpi-//g')
   ver_check "$up_ver" "$inst_ver" && return
-  local ghub_ver=$(gh_ver open-mpi/ompi)
+  local ghub_ver=$(gh_ver open-mpi/ompi "$name")
   ver_check "$ghub_ver" "$inst_ver" && return
 }
 version=$(get_version)
