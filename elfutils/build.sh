@@ -11,7 +11,7 @@ get_version() {
 
 	local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$inst_ver" && return
-	fver "$name "$inst_ver"
+	fver "$name" "$inst_ver"
 }
 
 version=$(get_version)
