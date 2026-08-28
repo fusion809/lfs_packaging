@@ -51,7 +51,7 @@ function ghl_ver {
 }
 
 function ght_ver {
-	local latest_url=$(curl -Ls -o /dev/null -w '%{url_effective}' "https://github.com/$1/releases/latest")
+	local latest_url=$(curl --max-time 5 --connect-timeout 5 -Ls -o /dev/null -w '%{url_effective}' "https://github.com/$1/releases/latest")
 	local latest_tag=$(echo "$latest_url" | grep -oP '/tag/\K.*')
 	if [[ -n "$latest_tag" ]]; then
 		echo "$latest_tag" | sed -nE "s/^${1#*/}[[:space:]_-]*//i; s/^[^0-9]*([0-9]+([.-][0-9]+)*).*/\1/p" | head -n 1
