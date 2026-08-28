@@ -4,20 +4,22 @@
 set -e
 # Variable declarations
 name=rapidjson
+repo="Tencent/$name"
+version=$(git ls-remote https://github.com/$repo.git HEAD | awk '{print $1}')
 depends=()
 lfs_depends=(bash coreutils make sed)
 blfs_depends=(cmake git)
-source check-deps.sh
+filename="$name-$version.tar.gz"
+direname="${filename/.tar.gz/}"
 # Fetch and unpack source
-if ! [[ -d rapidjson ]]; then
-	git clone https://github.com/Tencent/rapidjson
+if ! [[ -f $filename ]]; then
+	wget -c "https://github.com/$repo/archive/$version.tar.gz" -O $filename
 fi
-cd $name
-version=$(git pull origin master -q && git log | head -n 1 | cut -d ' ' -f 2)
+rm -rf $direname
+tar xf $filename
+cd $direname
 # Compile and install
 find . -name CMakeLists.txt | xargs sed -e 's|-Werror||' -i # Don't use -Werror
-rm -rf build
-CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 cmake_options=(
       -DCMAKE_BUILD_TYPE=None \
@@ -27,12 +29,9 @@ cmake_options=(
       -DRAPIDJSON_ENABLE_INSTRUMENTATION_OPT=OFF \
       -DDOC_INSTALL_DIR=/usr/share/doc/${name}-$version \
       -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
-	  -DCMAKE_C_FLAGS="$CFLAGS" \
       -DCMAKE_CXX_FLAGS="$CXXFLAGS" \
 )
 cmaki "${cmake_options[@]}"
-cd ..
-rm -rf build
-# Cleanup and install to database
-cd ..
+cd ../..
+rm -rf $filename $direname
 echo $version > /var/lib/custom-packages/$name
