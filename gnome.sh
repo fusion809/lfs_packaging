@@ -21,9 +21,7 @@ function gn_ver {
 
 	local lfs_vers=$(lfs_ver "$1")
 	ver_check "$lfs_vers" "$inst_ver" && return
-	echo "$(date +"%r %d/%M/%Y"), $name
-" >> ~/logs/failed_versioning.log
-	echo "$inst_ver"
+	fver "$name" "$inst_ver"
 }
 
 # libgedit-* version fetcher
@@ -39,7 +37,5 @@ function lgd_ver {
 	ver_check "$arch_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)
 	ver_check "$lfs_vers" "$inst_ver" && return
-	echo "$(date +"%r %d/%M/%Y"), $name
-" >> ~/logs/failed_versioning.log
-	echo "$inst_ver"
+	fver "$name" "$inst_ver"
 }

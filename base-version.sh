@@ -1,13 +1,24 @@
 #!/bin/bash
 GIT_TERMINAL_PROMPT=0
 function aver {
-    local name=$(echo $1 | tr '[:upper:]' '[:lower:]')
-	wget --timeout=5 -t 1 -cqO- "https://gitlab.archlinux.org/archlinux/packaging/packages/$name/-/raw/main/PKGBUILD" | grep "^pkgver=" | cut -d '=' -f 2
+	local name=$(echo $1 | tr '[:upper:]' '[:lower:]')
+	local URL="https://gitlab.archlinux.org/archlinux/packaging/packages/$name/-/raw/main/PKGBUILD"
+	if [[ -n $2 ]]; then
+		local no="$2"
+	else
+		local no=1
+	fi
+    wget -T 5 -t 1 -cqO- "$URL" | grep -E "^[_]*pkgver=" | cut -d '=' -f 2 | head -n "$no" | tail -n 1
 }
 
 function fdt_ver {
     local repo=$1
     wget --timeout=5 -t 1 -cqO- "https://gitlab.freedesktop.org/$repo/-/tags" | grep -oE 'tags/[v0-9.][^"]*' | grep -vE "dev|rc|alpha|beta" | sed 's|tags/||; s/^v//' | sort -V | tail -n 1
+}
+
+function fver {
+	echo "$(date +"%r %d/%M/%Y"), $1\n" >> ~/logs/failed_versioning.log
+	echo "$2"
 }
 
 function gh_com {

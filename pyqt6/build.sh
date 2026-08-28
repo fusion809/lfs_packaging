@@ -4,10 +4,12 @@ set -e
 # Variable declarations
 name=pyqt6
 get_version() {
-    local up_ver=$(wget -T 5 -cqO- https://pypi.org/rss/project/pyqt6/releases.xml | grep "pyqt6/[0-9]" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '/' -f 6)
-    ver_check "$up_ver" && return
-    local arch_ver=$(aver $name)
-    ver_check "$arch_ver" && return
+  local inst_ver=$(pkgver $name)
+  local up_ver=$(wget -T 5 -cqO- https://pypi.org/rss/project/pyqt6/releases.xml | grep "pyqt6/[0-9]" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '/' -f 6)
+  ver_check "$up_ver" "$inst_ver" && return
+  local arch_ver=$(aver $name)
+  ver_check "$arch_ver" "$inst_ver" && return
+  fver "$name" "$inst_ver"
 }
 version=$(get_version)
 filename="$name-$version.tar.gz"

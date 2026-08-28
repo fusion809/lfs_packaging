@@ -2,13 +2,18 @@
 set -e
 name=zsh
 get_version() {
+    local inst_ver=$(pkgver $name)
     local up_ver=$(git ls-remote --tags --refs git://git.code.sf.net/p/zsh/code.git | grep "refs/tags/zsh-[0-9.]*$" | cut -d '-' -f 2 | sort -V | tail -n 1)
-    ver_check "$up_ver" && return
+    ver_check "$up_ver" "$inst_ver" && return
     local git_ver=$(git ls-remote --tags --refs git://git.code.sf.net/p/zsh/code.git | grep "refs/tags/zsh-[0-9.]*$" | cut -d '-' -f 2 | sort -V | tail -n 1)
-    ver_check "$git_ver" && return
+    ver_check "$git_ver" "$inst_ver" && return
 
     local arch_ver=$(aver $name)
-    ver_check "$arch_ver" && return
+    ver_check "$arch_ver" "$inst_ver" && return
+
+    local lfs_ver=$(lfs_ver $name)
+    ver-check "$lfs_ver" "$inst_ver" && return
+    fver "$name" "$inst_ver"
 }
 version=$(get_version)
 direname="$name-$version"

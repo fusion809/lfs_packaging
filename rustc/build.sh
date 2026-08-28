@@ -2,17 +2,20 @@
 set -e
 name=rustc
 get_version() {
+    local inst_ver=$(pkgver $name)
     local up_ver=$(wget -T 5 -cqO- https://blog.rust-lang.org/releases/latest | grep "\-[0-9]\." | head -n 1 | cut -d '/' -f 5 | cut -d '-' -f 2)
-    ver_check "$up_ver" && return
+    ver_check "$up_ver" "$inst_ver" && return
 
     local git_ver=$(git ls-remote --tags --refs https://github.com/rust-lang/rust.git | grep "refs/tags/[0-9.]*$" | cut -d '/' -f 3 | sort -V | tail -n 1)
-    ver_check "$git_ver" && return
+    ver_check "$git_ver" "$inst_ver" && return
 
     local arch_ver=$(aver rust)
-    ver_check "$arch_ver" && return
+    ver_check "$arch_ver" "$inst_ver" && return
 
     local lfs_vers=$(lfs_ver rust)
-    ver_check "$lfs_vers" && return
+    ver_check "$lfs_vers" "$inst_ver" && return
+
+    fver "$name" "$inst_ver"
 }
 version=$(get_version)
 filename="$name-$version-src.tar.xz"

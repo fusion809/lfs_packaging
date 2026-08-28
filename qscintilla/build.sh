@@ -3,11 +3,14 @@ set -e
 # Variable declarations
 name=qscintilla
 get_version() {
+	local inst_ver=$(pkgver $name)
     local up_ver=$(wget -T 5 -cqO- https://www.riverbankcomputing.com/software/qscintilla/download | grep ".tar.gz" | grep -v "alpha\|beta\|[0-9]rc" | head -n 1 | cut -d '/' -f 8 | sed 's/>.*//g' | cut -d '-' -f 2 | sed 's/.tar.gz//g')
-    ver_check "$up_ver" && return
+    ver_check "$up_ver" "$inst_ver" && return
 
     local arch_ver=$(aver $name)
-    ver_check "$arch_ver" && return
+    ver_check "$arch_ver" "$inst_ver" && return
+
+	fver "$name" "$inst_ver"
 }
 version=$(get_version)
 archive=QScintilla_src-$version

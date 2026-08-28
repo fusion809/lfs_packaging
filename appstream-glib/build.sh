@@ -12,6 +12,7 @@ get_version() {
 
 	local lfs_ver=$(lfs_ver $name)
 	ver_check "$lfs_ver" "$inst_ver" && return;
+	fver "$name" "$inst_ver"
 }
 version=$(get_version)
 depends=(glib2 gtk3 libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libarchive openldap pango pcre2 wayland)

@@ -1,11 +1,21 @@
 #!/bin/bash
 
 function pkgver {
+    if [[ -n $2 ]]; then
         find /var/lib/{book,custom}-packages -type f -name "$1" -exec sh -c '
-    for file; do
-        head -n1 "$file"
-    done
-' sh {} +
+            lines=$1
+            shift
+            for file; do
+                head -n "$lines" "$file" | tail -n 1
+            done
+        ' sh "$2" {} +
+    else
+        find /var/lib/{book,custom}-packages -type f -name "$1" -exec sh -c '
+            for file; do
+                head -n 1 "$file"
+            done
+        ' sh {} +
+    fi
 }
 
 # Echoes $1 and returns 0 if it looks like a valid version string, otherwise returns 1.
