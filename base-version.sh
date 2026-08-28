@@ -58,17 +58,17 @@ function ggnu_ver {
 }
 
 function ghl_ver {
-    timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | sed 's/^[a-zA-Z0-9-]*-//g' | sed 's/^v//g' | grep -E "^[0-9.]+$" | sort -V | tail -n 1
+    timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | sort -V | tail -n 1
 }
 
 function ght_ver {
 	local latest_url=$(curl --max-time 5 --connect-timeout 5 -Ls -o /dev/null -w '%{url_effective}' "https://github.com/$1/releases/latest")
 	local latest_tag=$(echo "$latest_url" | grep -oP '/tag/\K.*')
 	if [[ -n "$latest_tag" ]]; then
-		echo "$latest_tag" | sed -nE "s/^${1#*/}[[:space:]_-]*//i; s/^[^0-9]*([0-9]+([.-][0-9]+)*).*/\1/p" | head -n 1
+		echo "$latest_tag" | sed -nE "s/^${1#*/}[[:space:]_-]*//i; s/^[^0-9]*([0-9]+([._-][0-9]+)*).*/\1/p" | tr '_' '.' | head -n 1
 		return 0
 	fi
-	wget --timeout=5 -t 1 -cqO- "https://github.com/$1/tags.atom" | grep -v "alpha\|beta\|rc" | grep '<title>' | sed -nE "/<title>Tags from /d; s/.*<title>//; s/^${1#*/}[[:space:]_-]*//i; s/^[^0-9]*([0-9]+([.-][0-9]+)*).*/\1/p" | sort -V | tail -n 1
+	wget --timeout=5 -t 1 -cqO- "https://github.com/$1/tags.atom" | grep -v "alpha\|beta\|rc" | grep '<title>' | sed -nE "/<title>Tags from /d; s/.*<title>//; s/^${1#*/}[[:space:]_-]*//i; s/^[^0-9]*([0-9]+([._-][0-9]+)*).*/\1/p" | tr '_' '.' | sort -V | tail -n 1
 }
 
 function glgd {
