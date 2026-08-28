@@ -17,7 +17,7 @@ function fdt_ver {
 }
 
 function fver {
-	echo "$(date +"%r %d/%M/%Y"), $1\n" >> ~/logs/failed_versioning.log
+	echo "$(date +"%r %d/%m/%Y"), $1\n" >> ~/logs/failed_versioning.log
 	echo "$2"
 }
 
