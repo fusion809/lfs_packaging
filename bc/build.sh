@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 name=bc
 repo="gavinhoward/bc"
 version=$(gh_ver $repo)

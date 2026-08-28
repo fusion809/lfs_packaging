@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 name=expat
 repo="libexpat/libexpat"
 version=$(gh_ver $repo)
