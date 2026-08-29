@@ -133,3 +133,12 @@ echo "source_dir=$source_dir"
 function pfile {
 	wget -cqO- https://www.linuxfromscratch.org/lfs/view/systemd/chapter08/$1.html | grep "\.patch" | cut -d '/' -f 2 | sed 's/<//g'
 }
+
+function gap_patches {
+	patches=$(pfile $1)
+	for i in $patches
+do
+wget -c https://www.linuxfromscratch.org/patches/lfs/development/$i
+patch -Np1 -i "$i"
+done
+}

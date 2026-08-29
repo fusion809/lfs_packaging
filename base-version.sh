@@ -101,7 +101,12 @@ function goct_ver {
 }
 
 function gsf_ver {
-    timeout 5 git ls-remote --tags --refs https://git.code.sf.net/p/$1.git 2>/dev/null | grep "tags/[v0-9.]+" | cut -d '/' -f 3 | sort -V | tail -n 1
+	if [[ "$1" == "e2fsprogs/e2fsprogs" ]]; then
+		URL="https://git.kernel.org/pub/scm/fs/ext2/e2fsprogs.git"
+	else
+		URL="https://git.code.sf.net/p/$1.git"
+	fi
+    timeout 5 git ls-remote --tags --refs $URL 2>/dev/null | grep -E "tags/[v0-9.]+" | cut -d '/' -f 3 | sed 's/^v//g' | sort -V | tail -n 1
 }
 
 function gsp_ver {

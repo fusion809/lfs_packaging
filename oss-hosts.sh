@@ -65,11 +65,12 @@ function ngnu_ver {
 
 # SourceForge version fetcher
 function sf_ver {
-	local name=$1
+	local repo=$1
+	local name=$(echo $repo | cut -d '/' -f 1)
     local inst_ver=$(pkgver $name)
-    local up_ver=$(wsf_ver $name)
+    local up_ver=$(wsf_ver $repo)
 	ver_check "$up_ver" "$inst_ver" && return
-    local git_ver=$(gsf_ver $name)
+    local git_ver=$(gsf_ver $repo)
 	ver_check "$git_ver" "$inst_ver" && return
 	local name=$(echo $1 | cut -d '/' -f 1)
     local arch_ver=$(aver $name)
