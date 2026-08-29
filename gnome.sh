@@ -13,7 +13,7 @@ function gn_ver {
 		local up_ver=$(wgn_ver "$1")
 		ver_check "$up_ver" "$inst_ver" && return
 
-		local git_ver=$(ggn_ver "$1" "v[0-9]")
+		local git_ver=$(ggn_ver "$1")
 		ver_check "$git_ver" "$inst_ver" && return
 	fi
 	local arch_ver=$(aver "$1")
@@ -21,7 +21,7 @@ function gn_ver {
 
 	local lfs_vers=$(lfs_ver "$1")
 	ver_check "$lfs_vers" "$inst_ver" && return
-	fver "$name" "$inst_ver"
+	fver "$1" "$inst_ver"
 }
 
 # libgedit-* version fetcher
