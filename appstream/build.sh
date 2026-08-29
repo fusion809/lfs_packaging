@@ -22,8 +22,6 @@ cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 # sed no longer needed for 1.1.4+ (xsl-ns -> xsl change was for older versions)
-mkdir build
-cd build
 meson_options=(
             --prefix=/usr            \
             --buildtype=release      \
