@@ -18,14 +18,7 @@ cd $direname
 make -j$(nproc)
 make -j$(nproc) html
 
-if ! (make check); then
-	passes=$(cat $(find -name '*.log') | grep -c ^PASS | wc -l)
-	read -p "$passes tests passed. A minimum of 199 should have passed. Proceed to installation anyway? [y/N] " -n 1 -r < /dev/tty
-	echo
-	if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-		exit 1
-	fi
-fi
+make check
 sudo make install
 sudo make install-html
 cd ../..

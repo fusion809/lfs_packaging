@@ -13,6 +13,9 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
+depends=(bzip2 glibc xz zstd)
+blfs_depends=(libseccomp)
+lfs_depends=(zlib)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
