@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-name=gdbm
+name=gettext
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
