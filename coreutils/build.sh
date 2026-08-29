@@ -4,7 +4,7 @@ name=coreutils
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-lfs_depends=(glibc gcc automake autoconf tar xz wget m4 make)
+lfs_depends=(glibc gcc automake autoconf tar xz wget m4 make patch)
 if ! [[ -f $filename ]]; then
     wget -c https://ftpmirror.gnu.org/$name/$filename
 fi
