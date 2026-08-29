@@ -4,7 +4,8 @@ name=coreutils
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-lfs_depends=(glibc gcc automake autoconf tar xz wget m4 make patch)
+lfs_depends=(acl attr autoconf automake gcc glibc gmp libcap m4 make patch tar wget xz)
+depends=(openssl)
 if ! [[ -f $filename ]]; then
     wget -c https://ftpmirror.gnu.org/$name/$filename
 fi
@@ -26,4 +27,4 @@ mv -v /usr/share/man/man1/chroot.1 /usr/share/man/man8/chroot.8
 sed -i 's/"1"/"8"/' /usr/share/man/man8/chroot.8"
 cd ..
 rm -rf $filename $patch_filename $direname
-echo "$name" > /var/lib/custom-packages/$name
+echo "$version" > /var/lib/custom-packages/$name
