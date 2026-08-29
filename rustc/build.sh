@@ -6,33 +6,30 @@ get_version() {
     local up_ver=$(wget -T 5 -cqO- https://blog.rust-lang.org/releases/latest | grep "\-[0-9]\." | head -n 1 | cut -d '/' -f 5 | cut -d '-' -f 2)
     ver_check "$up_ver" "$inst_ver" && return
 
-    local git_ver=$(git ls-remote --tags --refs https://github.com/rust-lang/rust.git | grep "refs/tags/[0-9.]*$" | cut -d '/' -f 3 | sort -V | tail -n 1)
-    ver_check "$git_ver" "$inst_ver" && return
-
-    local arch_ver=$(aver rust)
-    ver_check "$arch_ver" "$inst_ver" && return
-
-    local lfs_vers=$(lfs_ver rust)
-    ver_check "$lfs_vers" "$inst_ver" && return
+    local ghub_ver=$(gh_ver rust-lang/rust)
+    ver_check "$ghub_ver" "$inst_ver" && return
 
     fver "$name" "$inst_ver"
 }
 version=$(get_version)
 filename="$name-$version-src.tar.xz"
 direname="${filename/.tar.xz/}"
-ssl_src="https://github.com/lfs-book/rust-openssl/archive/v0.10.78/rust-openssl-0.10.78.tar.gz"
 depends=(openldap)
 lfs_depends=(coreutils gcc glibc libffi openssl python zlib zstd)
 blfs_depends=(brotli cmake curl cyrus-sasl libidn2 libpsl libunistring libxml2 llvm nghttp2)
+if [[ $(free -h | tail -n 2 | head -n 1 | sed 's/Mem:\s*//g' | cut -d ' ' -f 1 | sed 's/Gi//g') -lt 15 ]]; then
+	echo "You need to increase the RAM allocated to this VM to at least 16GB otherwise the build will fail." && exit 1
+fi
 if ! [[ -f $filename ]]; then
 	wget -c https://static.rust-lang.org/dist/$filename
-	wget -c $ssl_src
+	#wget -c $ssl_src
 fi
 
 tar xf $filename
 cd $direname
 sudo mkdir -pv /opt/$name-$version      &&
 sudo ln -svfn $name-$version /opt/$name
+change_id=$(cat src/bootstrap/src/utils/change_tracker.rs | grep "change_id" | sed 's/^\s*change_id:\s//g' | cut -d ',' -f 1 | grep -E "^[0-9]+$" | sort -V | tail -n 1)
 cat << EOF > bootstrap.toml
 # See bootstrap.toml.example for more possible options,
 # and see src/bootstrap/defaults/bootstrap.dist.toml for a few options
@@ -42,7 +39,7 @@ cat << EOF > bootstrap.toml
 # Tell x.py that the editors have reviewed the content of this file
 # and updated it to follow the major changes of the building system,
 # so x.py will not warn users to review that information.
-change-id = 154508
+change-id = $change_id
 
 [llvm]
 # When using the system installed copy of LLVM, prefer the shared libraries
@@ -85,18 +82,6 @@ llvm-config = "/usr/bin/llvm-config"
 [target.i686-unknown-linux-gnu]
 llvm-config = "/usr/bin/llvm-config"
 EOF
-tar xf ../rust-openssl-0.10.78.tar.gz &&
-
-cat >> src/tools/cargo/Cargo.toml << EOF &&
-[patch.crates-io]
-openssl = { path = "../../../rust-openssl-0.10.78/openssl" }
-openssl-sys = { path = "../../../rust-openssl-0.10.78/openssl-sys" }
-EOF
-
-sed -ri src/tools/cargo/Cargo.lock \
-    -e '/name = "openssl-sys"/,/^$/{/source|checksum/d;s/0.9.112/0.9.114/}' \
-    -e '/name = "openssl"/,/^$/{/source|checksum/d;s/0.10.76/0.10.78/}'     \
-    -e '/name = "openssl-macros"/,/^$/{/source|checksum/d}'
 export LIBSSH2_SYS_USE_PKG_CONFIG=1
 export LIBSQLITE3_SYS_USE_PKG_CONFIG=1
 (
