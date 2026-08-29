@@ -27,14 +27,15 @@ export LD_LIBRARY_PATH=/usr/lib:/opt/rustc/lib:/opt/qt6/lib
              --enable-kernel=5.10
 make -j$(nproc)
 sed '/test-installation/s@$(PERL)@echo not running@' -i ../Makefile
-if ! (make check); then
-	grep '^FAIL:' $(find -name '*.log')
+if ! make -k check; then
+	grep '^FAIL:' $(find -name '*.test-result' -o -name 'tests.sum' 2>/dev/null) || true
 	read -p 'Build failed tests. Proceed to installation anyway? [y/N] ' -n 1 -r < /dev/tty
 	echo
 	if [[ ! $REPLY =~ ^[Yy]$ ]]; then
 		exit 1
 	fi
 fi
+
 sudo make install
 sudo sed '/RTLDLIST=/s@/usr@@g' -i /usr/bin/ldd
 sudo su -c "localedef -i C -f UTF-8 C.UTF-8
