@@ -35,6 +35,25 @@ function gh_ver {
 	fver "$name" "$inst_ver"
 }
 
+# github version fetcher
+function gl_ver {
+	if [[ -n "$2" ]]; then
+		name="$2"
+	else
+		name=$(echo $1 | cut -d '/' -f 2)
+	fi
+	local inst_ver=$(pkgver $name)
+	local up_ver=$(glt_ver $1)
+	ver_check "$up_ver" "$inst_ver" && return
+	local git_ver=$(gll_ver $1)
+	ver_check "$git_ver" "$inst_ver" && return
+	local arch_ver=$(aver $name)
+	ver_check "$arch_ver" "$inst_ver" && return
+	local lfs_vers=$(lfs_ver $name)
+	ver_check "$lfs_vers" "$inst_ver" && return
+	fver "$name" "$inst_ver"
+}
+
 # GNU version fetcher
 function gnu_ver {
 	local name=$1

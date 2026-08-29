@@ -67,7 +67,11 @@ function ggnu_ver {
 }
 
 function ghl_ver {
-    timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | sort -V | tail -n 1
+	if [[ "$1" == "openpmix/prrte" ]]; then
+		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep "^3" | sort -V | tail -n 1
+	else
+		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | sort -V | tail -n 1
+	fi
 }
 
 function ght_ver {
@@ -86,6 +90,14 @@ function glgd {
 
 function glib_ver {
     timeout 5 git ls-remote --tags --refs git://git.savannah.gnu.org/libtool.git 2>/dev/null | cut -d '/' -f 3 | sed 's/v//g' | grep -v "[a-z]" | sort -V | tail -n 1
+}
+
+function gll_ver {
+	timeout 5 git ls-remote --tags --refs https://gitlab.com/$1.git 2> /dev/null | cut -d '/' -f 3 | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv} -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv} -E "^[0-9]+(\.[0-9]+)+$" | sort -V | tail -n 1
+}
+
+function glt_ver {
+	wget -T 5 -t 1 -cqO- https://gitlab.com/$1/-/tags | grep -E "[v]*[0-9]+\.[0-9]+\.[0-9]+" | grep "^<a href=" | cut -d '"' -f 2 | cut -d '/' -f 6 | grep -E "^[v]*[0-9.]+$" | sed 's/^v//g' | sort -V | tail -n 1	
 }
 
 function gngnu_ver {
