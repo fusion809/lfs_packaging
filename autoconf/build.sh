@@ -1,17 +1,17 @@
 #!/bin/bash
 set -e
-name=bash
+name=autoconf
 version=$(gnu_ver $name)
-filename="$name-$version.tar.gz"
+filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-lfs_depends=(gcc glibc gzip make ncurses readline tar wget)
+lfs_depends=(glibc gcc tar xz wget make)
 if ! [[ -f $filename ]]; then
     wget -c https://ftpmirror.gnu.org/$name/$filename
 fi
 rm -rf $direname
 tar xf $filename
 cd $direname
-cmi --prefix=/usr --without-bash-malloc --with-installed-readline --docdir=/usr/share/doc/"$direname"
+cmi --prefix=/usr
 cd ..
 rm -rf $filename $direname
 echo "$version" > /var/lib/custom-packages/$name
