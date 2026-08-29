@@ -1,8 +1,14 @@
 #!/bin/bash
 
 function maki {
-	make "$@" -j$(nproc)
-	sudo make "$@" install
+    if [[ "$1" == "html" ]]; then
+        make -j$(nproc)
+        make -j$(nproc) html
+        sudo make install
+    else
+        make "$@" -j$(nproc)
+        sudo make "$@" install
+    fi
 }
 
 function cmaki {
@@ -30,8 +36,26 @@ fi
 }
 
 function cmi {
-	./configure $@
-	maki
+    local configure_args=()
+    local html=false
+
+    for arg in "$@"; do
+        if [[ "$arg" == "html" ]]; then
+            html=true
+        else
+            configure_args+=("$arg")
+        fi
+    done
+
+    ./configure "${configure_args[@]}"
+
+    if $html; then
+        make -j$(nproc)
+        make -j$(nproc) html
+        sudo make install
+    else
+        maki
+    fi
 }
 
 function mni {
@@ -92,4 +116,8 @@ echo "source_dir=$source_dir"
 	ninja -j$(nproc)
 	sudo ninja install
 
+}
+
+function pfile {
+	wget -cqO- https://www.linuxfromscratch.org/lfs/view/systemd/chapter08/$1.html | grep "\.patch" | cut -d '/' -f 2 | sed 's/<//g'
 }
