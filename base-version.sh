@@ -45,6 +45,10 @@ function ggn_ver {
     timeout 5 git ls-remote --tags --refs "$URL.git" 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|\.9[0-9]" | sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' | grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^${2:-[0-9]}" | sort -V | tail -n 1
 }
 
+function ggcc_ver {
+    timeout 5 git ls-remote --tags --refs https://gitlab.com/gnutools/gcc.git 2>/dev/null | grep -oE "releases/gcc-[0-9]+\.[0-9]+\.[0-9]+" | sed "s|releases/gcc-||" | sort -V | tail -n 1
+}
+
 function ggnu_ver {
     local name=$1
     if [[ "$name" == "octave" ]]; then
@@ -55,6 +59,9 @@ function ggnu_ver {
         return 0;
 	elif [[ "$name" == "libtool" ]]; then
 	    echo $(glib_ver)
+        return 0;
+	elif [[ "$name" == "gcc" ]]; then
+	    echo $(ggcc_ver)
         return 0;
 	fi
 }
@@ -113,7 +120,7 @@ function wgn_ver {
 }
 
 function wgnu_ver {
-    wget --timeout=5 -t 1 -cqO- https://ftp.gnu.org/gnu/$1/ | grep -E "$1-[0-9.]+.tar.[a-z]*\"" | sed "s/.*$1-//g" | sed 's/.tar.*//g' | cut -d '"' -f 1 | uniq | sort -V | tail -n 1
+    wget --timeout=5 -t 1 -cqO- "https://ftp.gnu.org/gnu/$1/" | sed -nE "s/.*href=[\"\x27]?$1-([0-9]+(\.[0-9]+)*)(\/|\.tar\.[a-z0-9]+)[\"\x27]?.*/\1/p" | sort -V | tail -n 1
 }
 
 function wlgd_ver {
