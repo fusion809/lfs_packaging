@@ -5,13 +5,15 @@ version=$(ngnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 lfs_depends=(gcc glibc make tar wget xz)
-if ! [[ -f $filename ]]; then
-    wget -c https://download.savannah.nongnu.org/releases/$name/$filename
+if ! [[ -f $filename ]] && ! [[ -d $name ]] ; then
+	wget -c https://download.savannah.nongnu.org/releases/$name/$filename || ( git clone https://git.savannah.nongnu.org/git/$name.git )
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+if [[ -f $filename ]]; then
+	rm -rf $direname && tar xf $filename && cd $direname
+elif [[ -d $name ]]; then
+	cd $name && git checkout v$version
+fi
 cmi --prefix=/usr --disable-static --sysconfdir=/etc --docdir=/usr/share/doc/$direname
 cd ..
-rm -rf $filename $direname
+rm -rf $filename $direname $name
 echo "$version" > /var/lib/custom-packages/$name

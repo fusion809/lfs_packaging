@@ -89,7 +89,12 @@ function glib_ver {
 }
 
 function gngnu_ver {
-	timeout 5 git ls-remote --tags --refs https://git.savannah.nongnu.org/git/$1.git 2>/dev/null | cut -d '/' -f 3 | sed 's/v//g' | grep -v "[a-z]" | sort -V | tail -n 1
+	if [[ "$1" == "libpipeline" ]]; then
+		URL="https://gitlab.com/libpipeline/libpipeline.git"
+	else
+		URL="https://git.savannah.nongnu.org/git/$1.git"
+	fi
+	timeout 5 git ls-remote --tags --refs $URL 2>/dev/null | cut -d '/' -f 3 | sed 's/v//g' | grep -v "[a-z]" | sort -V | tail -n 1
 }
 function goct_ver {
     timeout 5 git ls-remote --tags --refs https://github.com/gnu-octave/octave.git 2>/dev/null | grep "release-" | cut -d '/' -f 3 | sed 's/release-//g' | sed 's/-/./g' | sort -V | tail -n1

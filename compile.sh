@@ -47,7 +47,19 @@ function cmi {
         fi
     done
 
-    ./configure "${configure_args[@]}"
+    if [[ -f "configure" ]] ; then
+    	./configure "${configure_args[@]}"
+    elif [[ -f "autogen.sh" ]]; then
+	    sudo ./autogen.sh "${configure_args[@]}"
+	    sudo chown $USER . -R
+	    ./configure "${configure_args[@]}"
+    elif [[ -f "bootstrap" ]]; then
+	sudo ./bootstrap
+	    sudo chown $USER . -R
+	./configure "${configure_args[@]}"
+    else
+	    echo "configure and autogen.sh scripts not found" && exit 1
+    fi
 
     if $html; then
         make -j$(nproc)
