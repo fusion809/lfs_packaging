@@ -88,6 +88,9 @@ function glib_ver {
     timeout 5 git ls-remote --tags --refs git://git.savannah.gnu.org/libtool.git 2>/dev/null | cut -d '/' -f 3 | sed 's/v//g' | grep -v "[a-z]" | sort -V | tail -n 1
 }
 
+function gngnu_ver {
+	timeout 5 git ls-remote --tags --refs https://git.savannah.nongnu.org/git/$1.git 2>/dev/null | cut -d '/' -f 3 | sed 's/v//g' | grep -v "[a-z]" | sort -V | tail -n 1
+}
 function goct_ver {
     timeout 5 git ls-remote --tags --refs https://github.com/gnu-octave/octave.git 2>/dev/null | grep "release-" | cut -d '/' -f 3 | sed 's/release-//g' | sed 's/-/./g' | sort -V | tail -n1
 }
@@ -125,6 +128,10 @@ function wgnu_ver {
 
 function wlgd_ver {
     wget --timeout=5 -t 1 -cqO- https://gitlab.gnome.org/World/gedit/$1/-/tags | grep "tags/"| grep -v "alpha\|beta\|\.rc" | cut -d '"' -f 2 | cut -d '/' -f 7 | head -n 1
+}
+
+function wngnu_ver {
+	wget -T 5 -t 1 -cqO- https://cgit.git.savannah.nongnu.org/cgit/"$1".git/refs/ | cut -d '=' -f 3 | cut -d "'" -f 1 | grep -E "^v[0-9]+.[0-9]+.[0-9]+" | sed 's/^v//g' | sort -V | tail -n 1
 }
 
 function wsf_ver {
