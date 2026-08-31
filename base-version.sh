@@ -49,6 +49,10 @@ function ggcc_ver {
     timeout 5 git ls-remote --tags --refs https://gitlab.com/gnutools/gcc.git 2>/dev/null | grep -oE "releases/gcc-[0-9]+\.[0-9]+\.[0-9]+" | sed "s|releases/gcc-||" | sort -V | tail -n 1
 }
 
+function ggrub_ver {
+	timeout 5 git ls-remote --tags --refs https://gitlab.freedesktop.org/gnu-grub/grub.git | grep -E "grub-[0-9]+\.[0-9]+$" | cut -d '-' -f 2 | sort -V | tail -n 1
+}
+
 function ggnu_ver {
     local name=$1
     if [[ "$name" == "octave" ]]; then
@@ -62,7 +66,10 @@ function ggnu_ver {
         return 0;
 	elif [[ "$name" == "gcc" ]]; then
 	    echo $(ggcc_ver)
-        return 0;
+	    return 0;
+        elif [[ "$name" == "grub" ]]; then
+		echo $(ggrub_ver)
+		return 0;
 	fi
 }
 

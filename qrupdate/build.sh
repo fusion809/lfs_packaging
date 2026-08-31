@@ -2,7 +2,7 @@
 set -e
 # Variable declarations
 name=qrupdate
-version=$(gh_ver "mpimd-csc/qrupdate-ng")
+version=$(gh_ver "mpimd-csc/qrupdate-ng" "qrupdate")
 filename=$name-$version.tar.gz
 direname="$name-ng-$version"
 depends=(blas lapack)
