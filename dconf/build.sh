@@ -2,11 +2,8 @@
 set -e
 # Variable declaration
 name=dconf
-function pkgver {
-	wget -cqO- https://gitlab.gnome.org/GNOME/$1/-/tags | grep "tags/" | cut -d '/' -f 6 | sed 's/".*//g' | grep -v "alpha\|beta\|\.rc" | head -n 1 | sed 's/^v//g'
-}
-version="$(pkgver $name)"
-edVersion="$(pkgver $name-editor)"
+version="$(gn_ver $name)"
+edVersion="$(gn_ver $name-editor)"
 filename="$name-$version.tar.xz"
 edFilename="$name-editor-$edVersion.tar.xz"
 direname="${filename/.tar.xz/}"
