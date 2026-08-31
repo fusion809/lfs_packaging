@@ -9,6 +9,11 @@ function gn_ver {
 
 		local git_ver=$(ggn_ver "gtk" "3")
 		ver_check "$git_ver" "$inst_ver" && return
+	elif [[ "$1" == "libpeas" ]]; then
+		local up_ver=$(wlp_ver "$1")
+		ver_check "$up_ver" "$inst_ver" && return
+		local git_ver=$(glp_ver "$1")
+		ver_check "$git_ver" "$inst_ver" && return
 	else
 		local up_ver=$(wgn_ver "$1")
 		ver_check "$up_ver" "$inst_ver" && return

@@ -13,7 +13,7 @@ function aver {
 
 function fdt_ver {
     local repo=$1
-    wget --timeout=5 -t 1 -cqO- "https://gitlab.freedesktop.org/$repo/-/tags" | grep -oE 'tags/[v0-9.][^"]*' | grep -vE "dev|rc|alpha|beta" | sed 's|tags/||; s/^v//' | sort -V | tail -n 1
+    wget --timeout=2 -t 1 -cqO- "https://gitlab.freedesktop.org/$repo/-/tags" | grep -oE 'tags/[v0-9.][^"]*' | grep -vE "dev|rc|alpha|beta" | sed 's|tags/||; s/^v//' | sort -V | tail -n 1
 }
 
 function fver {
@@ -92,7 +92,7 @@ function ght_ver {
 		echo "$latest_tag" | sed -nE "s/^${1#*/}[[:space:]_-]*//i; s/^[^0-9]*([0-9]+([._-][0-9]+)*).*/\1/p" | tr '_' '.' | head -n 1
 		return 0
 	fi
-	wget --timeout=5 -t 1 -cqO- "https://github.com/$1/tags.atom" | grep -v "alpha\|beta\|rc" | grep '<title>' | sed -nE "/<title>Tags from /d; s/.*<title>//; s/^${1#*/}[[:space:]_-]*//i; s/^[^0-9]*([0-9]+([._-][0-9]+)*).*/\1/p" | tr '_' '.' | sort -V | tail -n 1
+	wget --timeout=2 -t 1 -cqO- "https://github.com/$1/tags.atom" | grep -v "alpha\|beta\|rc" | grep '<title>' | sed -nE "/<title>Tags from /d; s/.*<title>//; s/^${1#*/}[[:space:]_-]*//i; s/^[^0-9]*([0-9]+([._-][0-9]+)*).*/\1/p" | tr '_' '.' | sort -V | tail -n 1
 }
 
 function glgd {
@@ -109,6 +109,10 @@ function gglib2_ver {
 
 function gll_ver {
 	timeout 2 git ls-remote --tags --refs https://gitlab.com/$1.git 2> /dev/null | cut -d '/' -f 3 | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv} -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv} -E "^[0-9]+(\.[0-9]+)+$" | sort -V | tail -n 1
+}
+
+function glp_ver {
+	timeout 5 git ls-remote --tags --refs https://gitlab.gnome.org/GNOME/libpeas.git | grep "refs/tags/libpeas-1" | cut -d '-' -f 2 | sort -V | tail -n 1
 }
 
 function glt_ver {
@@ -145,7 +149,7 @@ function gxfd_ver {
 }
 
 function lfs_ver {
-	wget --timeout=5 -t 1 -cqO- https://www.linuxfromscratch.org/{b,}lfs/view/systemd/index.html https://www.linuxfromscratch.org/blfs/view/systemd/longindex.html https://www.linuxfromscratch.org/slfs/view/stable/ | grep -iE ">$1-[0-9.]+" | sed -E "s/.*$1-([0-9.]+).*/\1/I" | grep -E "^[0-9.]+$" | sort -V | tail -n 1
+	wget --timeout=2 -t 1 -cqO- https://www.linuxfromscratch.org/{b,}lfs/view/systemd/index.html https://www.linuxfromscratch.org/blfs/view/systemd/longindex.html https://www.linuxfromscratch.org/slfs/view/stable/ | grep -iE ">$1-[0-9.]+" | sed -E "s/.*$1-([0-9.]+).*/\1/I" | grep -E "^[0-9.]+$" | sort -V | tail -n 1
 }
 
 function wgn_ver {
@@ -156,15 +160,19 @@ function wgn_ver {
 	else
 		URL="https://gitlab.gnome.org/GNOME/$1"
 	fi
-    wget --timeout=5 -t 1 -cqO- "$URL/-/tags" | grep -oE "tags/[^\"]+" | sed 's|tags/||' | grep -viE "alpha|beta|\.rc|rc[0-9]|\.9[0-9]" | sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' | grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^${2:-[0-9]}" | sort -V | tail -n 1
+    wget --timeout=2 -t 1 -cqO- "$URL/-/tags" | grep -oE "tags/[^\"]+" | sed 's|tags/||' | grep -viE "alpha|beta|\.rc|rc[0-9]|\.9[0-9]" | sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' | grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^${2:-[0-9]}" | sort -V | tail -n 1
 }
 
 function wgnu_ver {
-    wget --timeout=5 -t 1 -cqO- "https://ftp.gnu.org/gnu/$1/" | sed -nE "s/.*href=[\"\x27]?$1-([0-9]+(\.[0-9]+)*)(\/|\.tar\.[a-z0-9]+)[\"\x27]?.*/\1/p" | sort -V | tail -n 1
+    wget --timeout=2 -t 1 -cqO- "https://ftp.gnu.org/gnu/$1/" | sed -nE "s/.*href=[\"\x27]?$1-([0-9]+(\.[0-9]+)*)(\/|\.tar\.[a-z0-9]+)[\"\x27]?.*/\1/p" | sort -V | tail -n 1
 }
 
 function wlgd_ver {
-    wget --timeout=5 -t 1 -cqO- https://gitlab.gnome.org/World/gedit/$1/-/tags | grep "tags/"| grep -v "alpha\|beta\|\.rc" | cut -d '"' -f 2 | cut -d '/' -f 7 | head -n 1
+    wget --timeout=2 -t 1 -cqO- https://gitlab.gnome.org/World/gedit/$1/-/tags | grep "tags/"| grep -v "alpha\|beta\|\.rc" | cut -d '"' -f 2 | cut -d '/' -f 7 | head -n 1
+}
+
+function wlp_ver {
+	wget --timeout=2 -t 1 -cqO- "$1/-/tags" | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv} -oE "tags/[^\"]+" | sed 's|tags/||' | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv} -viE "alpha|beta|\.rc|rc[0-9]|\.9[0-9]" | sed -E 's/libpeas-//g' | grep '^1' | sort -V | tail -n 1
 }
 
 function wngnu_ver {
@@ -172,14 +180,14 @@ function wngnu_ver {
 }
 
 function wsf_ver {
-    wget --timeout=5 -t 1 -cqO- https://sourceforge.net/p/$1/ref/master/tags/ | grep "/tree" | grep -v "alpha\|beta\|rc" | grep -v "git-conv" | tail -n 1 | cut -d '/' -f 6
+    wget --timeout=2 -t 1 -cqO- https://sourceforge.net/p/$1/ref/master/tags/ | grep "/tree" | grep -v "alpha\|beta\|rc" | grep -v "git-conv" | tail -n 1 | cut -d '/' -f 6
 }
 
 function wsp_ver {
 	local repo_url=$(echo $1 | sed "s|/|%2F|g")
-    wget --timeout=5 -t 1 -cqO- "https://gitlab.freedesktop.org/api/v4/projects/${repo_url}/releases?per_page=1" | grep -o '"tag_name":"[^"]*"' | grep -v "server" | sed -E 's|[a-z_-]+||g' | head -n 1 | cut -d'"' -f4
+    wget --timeout=2 -t 1 -cqO- "https://gitlab.freedesktop.org/api/v4/projects/${repo_url}/releases?per_page=1" | grep -o '"tag_name":"[^"]*"' | grep -v "server" | sed -E 's|[a-z_-]+||g' | head -n 1 | cut -d'"' -f4
 }
 
 function wxfd_ver {
-    wget --timeout=5 -t 1 -cqO- https://xorg.freedesktop.org/archive/individual/$1/ | grep "$2-" | grep '\.tar\.xz"' | cut -d '"' -f 2 | cut -d '-' -f 2 | sed 's/.tar.*$//g' | sort -V | tail -n 1
+    wget --timeout=2 -t 1 -cqO- https://xorg.freedesktop.org/archive/individual/$1/ | grep "$2-" | grep '\.tar\.xz"' | cut -d '"' -f 2 | cut -d '-' -f 2 | sed 's/.tar.*$//g' | sort -V | tail -n 1
 }
