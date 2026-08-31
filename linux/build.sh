@@ -2,7 +2,7 @@
 set -e
 name=linux
 get_base_version() {
-	local up_ver=$(wget -T 5 -cqO- https://www.kernel.org/releases.json 2>/dev/null | grep -A 2 '"latest_stable":' | grep '"version":' | head -n 1 | cut -d '"' -f 4)
+	local up_ver=$(wget -T 2 -cqO- https://www.kernel.org/releases.json 2>/dev/null | grep -A 2 '"latest_stable":' | grep '"version":' | head -n 1 | cut -d '"' -f 4)
 	if [[ -z "$up_ver" ]]; then
 		up_ver=$(aver $name)
 	fi

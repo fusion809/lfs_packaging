@@ -3,7 +3,7 @@ set -e
 # Variable declarations
 name=libaec
 get_version() {
-    local up_ver=$(wget -T 5 -cqO- "https://gitlab.dkrz.de/api/v4/projects/dkrz-sw%2Flibaec/repository/tags" | perl -nle 'while (m{"name":"v?([0-9.]+)"}g) { print $1 }' | sort -V | tail -n 1)
+    local up_ver=$(wget -T 2 -cqO- "https://gitlab.dkrz.de/api/v4/projects/dkrz-sw%2Flibaec/repository/tags" | perl -nle 'while (m{"name":"v?([0-9.]+)"}g) { print $1 }' | sort -V | tail -n 1)
     local inst_ver=$(pkgver $name)
     ver_check "$up_ver" "$inst_ver" && return
 

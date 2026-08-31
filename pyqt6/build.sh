@@ -5,7 +5,7 @@ set -e
 name=pyqt6
 get_version() {
   local inst_ver=$(pkgver $name)
-  local up_ver=$(wget -T 5 -cqO- https://pypi.org/rss/project/pyqt6/releases.xml | grep "pyqt6/[0-9]" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '/' -f 6)
+  local up_ver=$(wget -T 2 -cqO- https://pypi.org/rss/project/pyqt6/releases.xml | grep "pyqt6/[0-9]" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '/' -f 6)
   ver_check "$up_ver" "$inst_ver" && return
   local arch_ver=$(aver $name)
   ver_check "$arch_ver" "$inst_ver" && return

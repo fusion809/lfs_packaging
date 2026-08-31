@@ -3,9 +3,9 @@ set -e
 name=zlib
 get_version() {
 	local inst_ver=$(pkgver $name)
-	local up_ver=$(wget -T 5 -t 1 -cqO- https://zlib.net/fossils | grep -E "zlib-[0-9]+\.[0-9]+" | cut -d '"' -f 4 | cut -d '-' -f 2 | sed 's/.tar.gz//g' | sort -V | tail -n 1)
+	local up_ver=$(wget -T 2 -t 1 -cqO- https://zlib.net/fossils | grep -E "zlib-[0-9]+\.[0-9]+" | cut -d '"' -f 4 | cut -d '-' -f 2 | sed 's/.tar.gz//g' | sort -V | tail -n 1)
 	ver_check "$up_ver" "$inst_ver" && return
-	local git_ver=$(timeout 5 git ls-remote --tags --refs https://github.com/madler/zlib.git | grep -E "refs/tags/v[0-9.]+$" | cut -d '/' -f 3 | sed 's/^v//g' | sort -V)
+	local git_ver=$(timeout 2 git ls-remote --tags --refs https://github.com/madler/zlib.git | grep -E "refs/tags/v[0-9.]+$" | cut -d '/' -f 3 | sed 's/^v//g' | sort -V)
 	ver_check "$git_ver" "$inst_ver" && return
 	local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$inst_ver" && return

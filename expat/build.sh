@@ -13,7 +13,7 @@ fi
 rm -rf $direname
 tar xf $filename
 cd $direname
-cmi "--prefix=/usr --disable-static --docdir=/usr/share/doc/$direname"
+cmi --prefix=/usr --disable-static --docdir=/usr/share/doc/$direname
 sudo install -v -m644 doc/*.{html,css} /usr/share/doc/$direname
 cd ..
 rm -rf $filename $direname

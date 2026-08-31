@@ -3,7 +3,7 @@ set -e
 name=xmlto
 get_version() {
 	local inst_ver=$(pkgver $name)
-	local up_ver=$(wget -T 5 -cqO- https://pagure.io/xmlto/releases | grep "/xmlto/archive/.*tar.gz" | cut -d '"' -f 2 | cut -d '/' -f 4)
+	local up_ver=$(wget -T 2 -cqO- https://pagure.io/xmlto/releases | grep "/xmlto/archive/.*tar.gz" | cut -d '"' -f 2 | cut -d '/' -f 4)
 	ver_check "$up_ver" "$inst_ver" && return
 
 	local git_ver=$(git ls-remote --tags --refs https://pagure.io/xmlto.git | grep "refs/tags/" | cut -d '/' -f 3)

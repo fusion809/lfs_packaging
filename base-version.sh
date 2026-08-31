@@ -8,7 +8,7 @@ function aver {
 	else
 		local no=1
 	fi
-    wget -T 5 -t 1 -cqO- "$URL" | grep -E "^[_]*pkgver=" | cut -d '=' -f 2 | head -n "$no" | tail -n 1
+    wget -T 2 -t 1 -cqO- "$URL" | grep -E "^[_]*pkgver=" | cut -d '=' -f 2 | head -n "$no" | tail -n 1
 }
 
 function fdt_ver {
@@ -22,15 +22,15 @@ function fver {
 }
 
 function gh_com {
-    timeout 5 git ls-remote https://github.com/$1.git HEAD 2>/dev/null | awk '{ print $1 }'
+    timeout 2 git ls-remote https://github.com/$1.git HEAD 2>/dev/null | awk '{ print $1 }'
 }
 
 function gfl_ver {
-    timeout 5 git ls-remote --tags "https://gitlab.freedesktop.org/$1.git" 2>/dev/null | sed -n 's|.*refs/tags/v\?\([0-9][0-9.]*\)$|\1|p' | grep -vE "dev|rc|alpha|beta" | sort -V | tail -1
+    timeout 2 git ls-remote --tags "https://gitlab.freedesktop.org/$1.git" 2>/dev/null | sed -n 's|.*refs/tags/v\?\([0-9][0-9.]*\)$|\1|p' | grep -vE "dev|rc|alpha|beta" | sort -V | tail -1
 }
 
 function gglpk_ver {
-    timeout 5 git ls-remote --tags --refs https://salsa.debian.org/science-team/glpk.git 2>/dev/null | grep "upstream" | cut -d '/' -f 4 | sort -V | tail -n 1
+    timeout 2 git ls-remote --tags --refs https://salsa.debian.org/science-team/glpk.git 2>/dev/null | grep "upstream" | cut -d '/' -f 4 | sort -V | tail -n 1
 }
 
 function ggn_ver {
@@ -43,18 +43,18 @@ function ggn_ver {
 	fi
 
 	if [[ "${1}${2}" == "gtk3" ]]; then
-		timeout 5 git ls-remote --tags --refs "$URL.git" 2>/dev/null | cut -d '/' -f 3 | grep -E "^3\.[02468]+\.[0-9]+$" | sort -V | tail -n 1
+		timeout 2 git ls-remote --tags --refs "$URL.git" 2>/dev/null | cut -d '/' -f 3 | grep -E "^3\.[02468]+\.[0-9]+$" | sort -V | tail -n 1
 	else		
-    	timeout 5 git ls-remote --tags --refs "$URL.git" 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|\.9[0-9]" | sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' | grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^${2:-[0-9]}" | sort -V | tail -n 1
+    	timeout 2 git ls-remote --tags --refs "$URL.git" 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|\.9[0-9]" | sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' | grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^${2:-[0-9]}" | sort -V | tail -n 1
 	fi
 }
 
 function ggcc_ver {
-    timeout 5 git ls-remote --tags --refs https://gitlab.com/gnutools/gcc.git 2>/dev/null | grep -oE "releases/gcc-[0-9]+\.[0-9]+\.[0-9]+" | sed "s|releases/gcc-||" | sort -V | tail -n 1
+    timeout 2 git ls-remote --tags --refs https://gitlab.com/gnutools/gcc.git 2>/dev/null | grep -oE "releases/gcc-[0-9]+\.[0-9]+\.[0-9]+" | sed "s|releases/gcc-||" | sort -V | tail -n 1
 }
 
 function ggrub_ver {
-	timeout 5 git ls-remote --tags --refs https://gitlab.freedesktop.org/gnu-grub/grub.git | grep -E "grub-[0-9]+\.[0-9]+$" | cut -d '-' -f 2 | sort -V | tail -n 1
+	timeout 2 git ls-remote --tags --refs https://gitlab.freedesktop.org/gnu-grub/grub.git | grep -E "grub-[0-9]+\.[0-9]+$" | cut -d '-' -f 2 | sort -V | tail -n 1
 }
 
 function ggnu_ver {
@@ -79,14 +79,14 @@ function ggnu_ver {
 
 function ghl_ver {
 	if [[ "$1" == "openpmix/prrte" ]]; then
-		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep "^3" | sort -V | tail -n 1
+		timeout 2 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep "^3" | sort -V | tail -n 1
 	else
-		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | sort -V | tail -n 1
+		timeout 2 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | sort -V | tail -n 1
 	fi
 }
 
 function ght_ver {
-	local latest_url=$(curl --max-time 5 --connect-timeout 5 -Ls -o /dev/null -w '%{url_effective}' "https://github.com/$1/releases/latest")
+	local latest_url=$(curl --max-time 5 --connect-timeout 2 -Ls -o /dev/null -w '%{url_effective}' "https://github.com/$1/releases/latest")
 	local latest_tag=$(echo "$latest_url" | grep -oP '/tag/\K.*')
 	if [[ -n "$latest_tag" ]]; then
 		echo "$latest_tag" | sed -nE "s/^${1#*/}[[:space:]_-]*//i; s/^[^0-9]*([0-9]+([._-][0-9]+)*).*/\1/p" | tr '_' '.' | head -n 1
@@ -96,23 +96,23 @@ function ght_ver {
 }
 
 function glgd {
-    timeout 5 git ls-remote --tags --refs "https://gitlab.gnome.org/World/gedit/$1.git" 2>/dev/null | grep "refs/tags/" | grep -v "alpha\|beta\|rc" | cut -d '/' -f 3 | grep -v ".9" | sort -V | tail -n 1
+    timeout 2 git ls-remote --tags --refs "https://gitlab.gnome.org/World/gedit/$1.git" 2>/dev/null | grep "refs/tags/" | grep -v "alpha\|beta\|rc" | cut -d '/' -f 3 | grep -v ".9" | sort -V | tail -n 1
 }
 
 function glib_ver {
-    timeout 5 git ls-remote --tags --refs git://git.savannah.gnu.org/libtool.git 2>/dev/null | cut -d '/' -f 3 | sed 's/v//g' | grep -v "[a-z]" | sort -V | tail -n 1
+    timeout 2 git ls-remote --tags --refs git://git.savannah.gnu.org/libtool.git 2>/dev/null | cut -d '/' -f 3 | sed 's/v//g' | grep -v "[a-z]" | sort -V | tail -n 1
 }
 
 function gglib2_ver {
-	timeout 5 git ls-remote --tags --refs https://gitlab.gnome.org/GNOME/glib.git | grep -E "refs/tags/[0-9.]+" | cut -d '/' -f 3 | sed 's/GLIB_//g' | tr '_' '.' | sort -V | tail -n 1
+	timeout 2 git ls-remote --tags --refs https://gitlab.gnome.org/GNOME/glib.git | grep -E "refs/tags/[0-9.]+" | cut -d '/' -f 3 | sed 's/GLIB_//g' | tr '_' '.' | sort -V | tail -n 1
 }
 
 function gll_ver {
-	timeout 5 git ls-remote --tags --refs https://gitlab.com/$1.git 2> /dev/null | cut -d '/' -f 3 | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv} -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv} -E "^[0-9]+(\.[0-9]+)+$" | sort -V | tail -n 1
+	timeout 2 git ls-remote --tags --refs https://gitlab.com/$1.git 2> /dev/null | cut -d '/' -f 3 | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv} -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv} -E "^[0-9]+(\.[0-9]+)+$" | sort -V | tail -n 1
 }
 
 function glt_ver {
-	wget -T 5 -t 1 -cqO- https://gitlab.com/$1/-/tags | grep -E "[v]*[0-9]+\.[0-9]+" | grep "^<a href=" | cut -d '"' -f 2 | cut -d '/' -f 6 | grep -E "^[v]*[0-9.]+$" | sed 's/^v//g' | sort -V | tail -n 1	
+	wget -T 2 -t 1 -cqO- https://gitlab.com/$1/-/tags | grep -E "[v]*[0-9]+\.[0-9]+" | grep "^<a href=" | cut -d '"' -f 2 | cut -d '/' -f 6 | grep -E "^[v]*[0-9.]+$" | sed 's/^v//g' | sort -V | tail -n 1	
 }
 
 function gngnu_ver {
@@ -121,10 +121,10 @@ function gngnu_ver {
 	else
 		URL="https://git.savannah.nongnu.org/git/$1.git"
 	fi
-	timeout 5 git ls-remote --tags --refs $URL 2>/dev/null | cut -d '/' -f 3 | sed 's/v//g' | grep -v "[a-z]" | sort -V | tail -n 1
+	timeout 2 git ls-remote --tags --refs $URL 2>/dev/null | cut -d '/' -f 3 | sed 's/v//g' | grep -v "[a-z]" | sort -V | tail -n 1
 }
 function goct_ver {
-    timeout 5 git ls-remote --tags --refs https://github.com/gnu-octave/octave.git 2>/dev/null | grep "release-" | cut -d '/' -f 3 | sed 's/release-//g' | sed 's/-/./g' | sort -V | tail -n1
+    timeout 2 git ls-remote --tags --refs https://github.com/gnu-octave/octave.git 2>/dev/null | grep "release-" | cut -d '/' -f 3 | sed 's/release-//g' | sed 's/-/./g' | sort -V | tail -n1
 }
 
 function gsf_ver {
@@ -133,15 +133,15 @@ function gsf_ver {
 	else
 		URL="https://git.code.sf.net/p/$1.git"
 	fi
-    timeout 5 git ls-remote --tags --refs $URL 2>/dev/null | grep -E "tags/[v0-9.]+" | cut -d '/' -f 3 | sed 's/^v//g' | sort -V | tail -n 1
+    timeout 2 git ls-remote --tags --refs $URL 2>/dev/null | grep -E "tags/[v0-9.]+" | cut -d '/' -f 3 | sed 's/^v//g' | sort -V | tail -n 1
 }
 
 function gsp_ver {
-    timeout 5 git ls-remote --tags --refs https://gitlab.freedesktop.org/$1.git 2>/dev/null | cut -d '/' -f 3 | grep "[0-9]" | grep -v "server\|common\|client" | sed -E 's|[a-z_-]+||g' | sort -V | tail -n 1
+    timeout 2 git ls-remote --tags --refs https://gitlab.freedesktop.org/$1.git 2>/dev/null | cut -d '/' -f 3 | grep "[0-9]" | grep -v "server\|common\|client" | sed -E 's|[a-z_-]+||g' | sort -V | tail -n 1
 }
 
 function gxfd_ver {
-    timeout 5 git ls-remote --tags --refs https://gitlab.freedesktop.org/xorg/$1/$2.git 2>/dev/null | grep "$2-" -i | cut -d '/' -f 3 | cut -d '-' -f 2 | tr '_' '.' | sort -V | tail -n 1
+    timeout 2 git ls-remote --tags --refs https://gitlab.freedesktop.org/xorg/$1/$2.git 2>/dev/null | grep "$2-" -i | cut -d '/' -f 3 | cut -d '-' -f 2 | tr '_' '.' | sort -V | tail -n 1
 }
 
 function lfs_ver {
@@ -168,7 +168,7 @@ function wlgd_ver {
 }
 
 function wngnu_ver {
-	wget -T 5 -t 1 -cqO- https://cgit.git.savannah.nongnu.org/cgit/"$1".git/refs/ | cut -d '=' -f 3 | cut -d "'" -f 1 | grep -E "^v[0-9]+.[0-9]+.[0-9]+" | sed 's/^v//g' | sort -V | tail -n 1
+	wget -T 2 -t 1 -cqO- https://cgit.git.savannah.nongnu.org/cgit/"$1".git/refs/ | cut -d '=' -f 3 | cut -d "'" -f 1 | grep -E "^v[0-9]+.[0-9]+.[0-9]+" | sed 's/^v//g' | sort -V | tail -n 1
 }
 
 function wsf_ver {
