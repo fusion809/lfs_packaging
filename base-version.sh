@@ -97,7 +97,7 @@ function gll_ver {
 }
 
 function glt_ver {
-	wget -T 5 -t 1 -cqO- https://gitlab.com/$1/-/tags | grep -E "[v]*[0-9]+\.[0-9]+\.[0-9]+" | grep "^<a href=" | cut -d '"' -f 2 | cut -d '/' -f 6 | grep -E "^[v]*[0-9.]+$" | sed 's/^v//g' | sort -V | tail -n 1	
+	wget -T 5 -t 1 -cqO- https://gitlab.com/$1/-/tags | grep -E "[v]*[0-9]+\.[0-9]+" | grep "^<a href=" | cut -d '"' -f 2 | cut -d '/' -f 6 | grep -E "^[v]*[0-9.]+$" | sed 's/^v//g' | sort -V | tail -n 1	
 }
 
 function gngnu_ver {
