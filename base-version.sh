@@ -42,7 +42,11 @@ function ggn_ver {
 		URL="https://gitlab.gnome.org/GNOME/$1"
 	fi
 
-    timeout 5 git ls-remote --tags --refs "$URL.git" 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|\.9[0-9]" | sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' | grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^${2:-[0-9]}" | sort -V | tail -n 1
+	if [[ "${1}${2}" == "gtk3" ]]; then
+		timeout 5 git ls-remote --tags --refs "$URL.git" 2>/dev/null | cut -d '/' -f 3 | grep -E "^3\.[02468]+\.[0-9]+$" | sort -V | tail -n 1
+	else		
+    	timeout 5 git ls-remote --tags --refs "$URL.git" 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|\.9[0-9]" | sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' | grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^${2:-[0-9]}" | sort -V | tail -n 1
+	fi
 }
 
 function ggcc_ver {
@@ -97,6 +101,10 @@ function glgd {
 
 function glib_ver {
     timeout 5 git ls-remote --tags --refs git://git.savannah.gnu.org/libtool.git 2>/dev/null | cut -d '/' -f 3 | sed 's/v//g' | grep -v "[a-z]" | sort -V | tail -n 1
+}
+
+function gglib2_ver {
+	timeout 5 git ls-remote --tags --refs https://gitlab.gnome.org/GNOME/glib.git | grep -E "refs/tags/[0-9.]+" | cut -d '/' -f 3 | sed 's/GLIB_//g' | tr '_' '.' | sort -V | tail -n 1
 }
 
 function gll_ver {
