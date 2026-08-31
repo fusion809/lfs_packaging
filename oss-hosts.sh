@@ -3,7 +3,11 @@
 # codeberg version fetcher
 function cb_ver {
 	local repo=$1
-	local name=$(echo $repo | cut -d '/' -f 2)
+	if ! [[ -n $2 ]]; then
+		local name=$(echo $repo | cut -d '/' -f 2)
+	else
+		local name=$2
+	fi
 	local inst_ver=$(pkgver $name)
 	local up_ver=$(wget -cqO- https://codeberg.org/$repo/tags | grep "/tag/" | head -n 1 | cut -d '"' -f 4 | cut -d '/' -f 6)
 	ver_check "$up_ver" "$inst_ver" && return
