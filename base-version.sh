@@ -8,7 +8,7 @@ function aver {
 	else
 		local no=1
 	fi
-    wget -T 2 -t 1 -cqO- "$URL" | grep -E "^[_]*pkgver=" | cut -d '=' -f 2 | head -n "$no" | tail -n 1
+    wget -T 5 -t 1 -cqO- "$URL" | grep -E "^[_]*pkgver=" | cut -d '=' -f 2 | head -n "$no" | tail -n 1
 }
 
 function fdt_ver {
@@ -17,7 +17,12 @@ function fdt_ver {
 }
 
 function fver {
-	echo "$(date +"%r %d/%m/%Y"), $1" >> ~/logs/failed_versioning.log
+	# Only log as a failure when inst_ver is also unknown.
+	# If inst_ver is set, upstream sources are temporarily unreachable/stale —
+	# return the installed version silently rather than spamming the log.
+	if [[ -z "$2" ]]; then
+		echo "$(date +"%r %d/%m/%Y"), $1" >> ~/logs/failed_versioning.log
+	fi
 	echo "$2"
 }
 
@@ -43,9 +48,9 @@ function ggn_ver {
 	fi
 
 	if [[ "${1}${2}" == "gtk3" ]]; then
-		timeout 2 git ls-remote --tags --refs "$URL.git" 2>/dev/null | cut -d '/' -f 3 | grep -E "^3\.[02468]+\.[0-9]+$" | sort -V | tail -n 1
+		timeout 5 git ls-remote --tags --refs "$URL.git" 2>/dev/null | cut -d '/' -f 3 | grep -E "^3\.[02468]+\.[0-9]+$" | sort -V | tail -n 1
 	else		
-    	timeout 2 git ls-remote --tags --refs "$URL.git" 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|\.9[0-9]" | sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' | grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^${2:-[0-9]}" | sort -V | tail -n 1
+    	timeout 5 git ls-remote --tags --refs "$URL.git" 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|\.9[0-9]" | sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' | grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^${2:-[0-9]}" | sort -V | tail -n 1
 	fi
 }
 
@@ -79,14 +84,14 @@ function ggnu_ver {
 
 function ghl_ver {
 	if [[ "$1" == "openpmix/prrte" ]]; then
-		timeout 2 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep "^3" | sort -V | tail -n 1
+		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep "^3" | sort -V | tail -n 1
 	else
-		timeout 2 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | sort -V | tail -n 1
+		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | sort -V | tail -n 1
 	fi
 }
 
 function ght_ver {
-	local latest_url=$(curl --max-time 5 --connect-timeout 2 -Ls -o /dev/null -w '%{url_effective}' "https://github.com/$1/releases/latest")
+	local latest_url=$(curl --max-time 10 --connect-timeout 3 -Ls -o /dev/null -w '%{url_effective}' "https://github.com/$1/releases/latest")
 	local latest_tag=$(echo "$latest_url" | grep -oP '/tag/\K.*')
 	if [[ -n "$latest_tag" ]]; then
 		echo "$latest_tag" | sed -nE "s/^${1#*/}[[:space:]_-]*//i; s/^[^0-9]*([0-9]+([._-][0-9]+)*).*/\1/p" | tr '_' '.' | head -n 1
@@ -104,7 +109,7 @@ function glib_ver {
 }
 
 function gglib2_ver {
-	timeout 2 git ls-remote --tags --refs https://gitlab.gnome.org/GNOME/glib.git | grep -E "refs/tags/[0-9.]+" | cut -d '/' -f 3 | sed 's/GLIB_//g' | tr '_' '.' | sort -V | tail -n 1
+	timeout 5 git ls-remote --tags --refs https://gitlab.gnome.org/GNOME/glib.git 2>/dev/null | cut -d '/' -f 3 | grep -E "^[0-9]+\.[02468]+\.[0-9]+$" | sort -V | tail -n 1
 }
 
 function gll_ver {
@@ -160,7 +165,7 @@ function wgn_ver {
 	else
 		URL="https://gitlab.gnome.org/GNOME/$1"
 	fi
-    wget --timeout=2 -t 1 -cqO- "$URL/-/tags" | grep -oE "tags/[^\"]+" | sed 's|tags/||' | grep -viE "alpha|beta|\.rc|rc[0-9]|\.9[0-9]" | sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' | grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^${2:-[0-9]}" | sort -V | tail -n 1
+    wget --timeout=5 -t 1 -cqO- "$URL/-/tags" | grep -oE "tags/[^\"]+" | sed 's|tags/||' | grep -viE "alpha|beta|\.rc|rc[0-9]|\.9[0-9]" | sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' | grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^${2:-[0-9]}" | sort -V | tail -n 1
 }
 
 function wgnu_ver {
