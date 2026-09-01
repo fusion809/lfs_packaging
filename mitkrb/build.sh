@@ -13,6 +13,7 @@ get_version() {
   fver "$name" "$inst_ver"
 }
 version=$(get_version)
+majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 dirname="krb5-$version"
 filename="$dirname.tar.gz"
 depends=()
@@ -21,14 +22,11 @@ blfs_depends=(keyutils lmdb)
 
 if ! [ -f "$filename" ]; then
     wget -c "https://kerberos.org/dist/krb5/$majVer/$filename"
-    wget -c https://www.linuxfromscratch.org/patches/blfs/svn/mitkrb-1.22.2-upstream_fix-1.patch https://www.linuxfromscratch.org/patches/blfs/svn/mitkrb-1.22.2-security_fix-1.patch https://www.linuxfromscratch.org/patches/blfs/svn/mitkrb-1.22.2-openssl_4_fixes-1.patch
 fi
 rm -rf "$dirname"
 tar xf "$filename"
 cd "$dirname"
-patch -Np1 -i ../mitkrb-1.22.2-upstream_fix-1.patch
-patch -Np1 -i ../mitkrb-1.22.2-security_fix-1.patch
-patch -Np1 -i ../mitkrb-1.22.2-openssl_4_fixes-1.patch
+gap_patches $name
 cd src &&
 sed -i -e '/eq 0/{N;s/12 //}' plugins/kdb/db2/libdb2/test/run.test &&
 
