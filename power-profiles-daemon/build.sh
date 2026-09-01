@@ -2,12 +2,16 @@
 set -e
 name=power-profiles-daemon
 get_ver() {
-      up_ver=$(wget --timeout=15 -cqO- https://gitlab.freedesktop.org/upower/power-profiles-daemon/-/tags | grep "/tags/" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 6)
-	  ver_check "$up_ver" && return
-      git_ver=$(git ls-remote --tags --refs https://gitlab.freedesktop.org/upower/power-profiles-daemon.git | cut -d '/' -f 3 | sort -V | tail -n 1)
-	  ver_check "$git_ver" && return
-      arch_ver=$(aver $name)
-	  ver_check "$arch_ver" && return
+      local inst_ver=$(pkgver $name)
+      local up_ver=$(wget --timeout=5 -cqO- https://gitlab.freedesktop.org/upower/power-profiles-daemon/-/tags | grep "/tags/" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 6)
+      ver_check "$up_ver" "$inst_ver" && return
+      local git_ver=$(timeout 5 git ls-remote --tags --refs https://gitlab.freedesktop.org/upower/power-profiles-daemon.git | cut -d '/' -f 3 | sort -V | tail -n 1)
+      ver_check "$git_ver" "$inst_ver" && return
+      local arch_ver=$(aver $name)
+      ver_check "$arch_ver" "$inst_ver" && return
+      local lfs_vers=$(lfs_ver $name)
+      ver_check "$lfs_vers" "$inst_ver" && return
+      fver "$name" "$inst_ver"
 }
 version=$(get_ver)
 filename="$name-$version.tar.gz"
