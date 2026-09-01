@@ -5,7 +5,7 @@ set -e
 # Variable declarations
 name=rapidjson
 repo="Tencent/$name"
-version=$(git ls-remote https://github.com/$repo.git HEAD | awk '{print $1}')
+version=$(gh_com $repo)
 depends=()
 lfs_depends=(bash coreutils make sed)
 blfs_depends=(cmake git)
