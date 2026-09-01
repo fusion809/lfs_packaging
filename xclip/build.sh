@@ -2,20 +2,27 @@
 set -e
 # Variable declarations
 name=xclip
-depends=(libICE libSM libX11 libXext libXmu libXt)
+depends=()
 lfs_depends=(autoconf bash coreutils glibc make util-linux)
-blfs_depends=(git libXau libXdmcp libxcb libxmu)
+blfs_depends=(git libXau libXdmcp libxcb libxmu libICE libSM libX11 libXext libXt)
+repo="astrand/xclip"
+version=$(gh_com $repo)
+filename="$name-$version.tar.gz"
+direname="${filename/.tar.*/}"
 # Fetch source
-if ! [[ -d $name ]]; then
-	git clone https://github.com/astrand/xclip
+if ! [[ -f $filename ]]; then
+	wget -c https://github.com/$repo/archive/$version.tar.gz -O $filename
 fi
-cd $name
-version=$(git pull origin master -q && git log | head -n 1 | cut -d ' ' -f 2)
+rm -rf $direname
+tar xf $filename
+cd $direname
 # Compile and install
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 autoreconf
 cmi "--prefix=/usr"
 sudo make install.man
+cd ..
+rm -rf $filename $direname
 # Add to database
 echo $version > /var/lib/custom-packages/$name
