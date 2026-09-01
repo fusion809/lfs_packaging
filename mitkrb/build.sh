@@ -10,6 +10,8 @@ get_version() {
   fi
   local arch_ver=$(aver $name)
   ver_check "$arch_ver" "$inst_ver" && return
+  local lfs_vers=$(lfs_ver $name)
+  ver_check "$lfs_vers" "$inst_ver" && return
   fver "$name" "$inst_ver"
 }
 version=$(get_version)

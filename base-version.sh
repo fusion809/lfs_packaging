@@ -154,7 +154,34 @@ function gxfd_ver {
 }
 
 function lfs_ver {
-	wget --timeout=5 -t 1 -cqO- https://www.linuxfromscratch.org/{b,}lfs/view/systemd/index.html https://www.linuxfromscratch.org/blfs/view/systemd/longindex.html https://www.linuxfromscratch.org/slfs/view/stable/ | grep -iE ">$1-[0-9.]+" | sed -E "s/.*$1-([0-9.]+).*/\1/I" | grep -E "^[0-9.]+$" | sort -V | tail -n 1
+	# Some local package names differ from LFS/BLFS tarball names — map them here.
+	# fallback_page: relative path to the individual BLFS page for packages whose
+	# version doesn't appear in the index pages (e.g. listed by display name, not tarball).
+	local search_name fallback_page
+	case "$1" in
+		mitkrb) search_name="krb5"; fallback_page="postlfs/mitkrb.html" ;;
+		*)       search_name="$1";  fallback_page="" ;;
+	esac
+
+	# Try the index pages first.
+	local ver
+	ver=$(wget --timeout=5 -t 1 -cqO- \
+		https://www.linuxfromscratch.org/{b,}lfs/view/systemd/index.html \
+		https://www.linuxfromscratch.org/blfs/view/systemd/longindex.html \
+		https://www.linuxfromscratch.org/slfs/view/stable/ \
+		| grep -iE ">$search_name-[0-9.]+" \
+		| sed -E "s/.*$search_name-([0-9.]+).*/\1/I" \
+		| grep -E "^[0-9.]+$" | sort -V | tail -n 1)
+
+	# If not found and a fallback page is defined, scrape the individual BLFS page.
+	if [[ -z "$ver" && -n "$fallback_page" ]]; then
+		ver=$(wget --timeout=5 -t 1 -cqO- \
+			"https://www.linuxfromscratch.org/blfs/view/systemd/$fallback_page" \
+			| grep -iE "$search_name-[0-9]+\.[0-9]" \
+			| sed -E "s/.*$search_name-([0-9]+\.[0-9]+(\.[0-9]+)?).*/\1/I" \
+			| grep -E "^[0-9.]+$" | sort -V | tail -n 1)
+	fi
+	echo "$ver"
 }
 
 function wgn_ver {
