@@ -3,10 +3,10 @@ set -e
 name=perl
 get_version() {
 	local inst_ver=$(pkgver $name)
-	local majVer=$(wget -T 2 -t 1 -cqO- https://www.cpan.org/src | grep "a href=\"[0-9.]+/\"" -E | cut -d '"' -f 2 | cut -d '/' -f 1)
-	local up_ver=$(wget -T 2 -t 1 -cqO- https://www.cpan.org/src/$majVer | grep "perl-[0-9]+\.[0-9]+[02468]\.[0-9]+\.tar\.xz\"" -E | cut -d '"' -f 4 | cut -d '-' -f 2 | sed 's/.tar.*//g')
+	local majVer=$(wget -T 5 -t 1 -cqO- https://www.cpan.org/src | grep "a href=\"[0-9.]+/\"" -E | cut -d '"' -f 2 | cut -d '/' -f 1)
+	local up_ver=$(wget -T 5 -t 1 -cqO- https://www.cpan.org/src/$majVer | grep "perl-[0-9]+\.[0-9]+[02468]\.[0-9]+\.tar\.xz\"" -E | cut -d '"' -f 4 | cut -d '-' -f 2 | sed 's/.tar.*//g')
 	ver_check "$up_ver" "$inst_ver" && return
-	local git_ver=$(timeout 2 git ls-remote --tags --refs https://github.com/Perl/perl5.git | grep "refs/tags/v[0-9]+\.[0-9]+[02468]\.[0-9]+$" -E | cut -d '/' -f 3 | sed 's/v//g')
+	local git_ver=$(timeout 5 git ls-remote --tags --refs https://github.com/Perl/perl5.git | grep "refs/tags/v[0-9]+\.[0-9]+[02468]\.[0-9]+$" -E | cut -d '/' -f 3 | sed 's/v//g')
 	ver_check "$git_ver" "$inst_ver" && return
 	local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$inst_ver" && return

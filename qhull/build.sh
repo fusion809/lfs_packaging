@@ -4,7 +4,7 @@ set -e
 name=qhull
 get_version() {
     local inst_ver=$(pkgver $name)
-    local up_ver=$(wget -T 2 -cqO- http://www.qhull.org/download/ | grep ".tgz\"" | grep -v "alpha\|beta\|\.rc" | sed 's/.*Download: Qhull //g' | sed 's/ for Unix.*//g')
+    local up_ver=$(wget -T 5 -cqO- http://www.qhull.org/download/ | grep ".tgz\"" | grep -v "alpha\|beta\|\.rc" | sed 's/.*Download: Qhull //g' | sed 's/ for Unix.*//g')
     ver_check "$up_ver" "$inst_ver" && return
 
     local git_ver=$(git ls-remote --tags --refs https://github.com/qhull/qhull.git | grep "refs/tags/[0-9.]*$" | cut -d '/' -f 3 | sort -V | tail -n 1)
@@ -17,7 +17,7 @@ get_version() {
 }
 get_alt_version() {
     local inst_ver=$(pkgver $name 2)
-    local alt_ver=$(wget -T 2 -cqO- http://www.qhull.org/download/ | grep ".tgz\"" | grep -v "alpha\|beta\|\.rc" | cut -d '"' -f 2 | cut -d '/' -f 5 | cut -d '-' -f 4 | sed 's/.tgz//')
+    local alt_ver=$(wget -T 5 -cqO- http://www.qhull.org/download/ | grep ".tgz\"" | grep -v "alpha\|beta\|\.rc" | cut -d '"' -f 2 | cut -d '/' -f 5 | cut -d '-' -f 4 | sed 's/.tgz//')
     ver_check "$alt_ver" "$inst_ver" && return
     local git_ver=$(git ls-remote --tags --refs https://github.com/qhull/qhull.git | grep "refs/tags/v[0-9.]*$" | cut -d '/' -f 3 | sed 's/^v//g' | sort -V | tail -n 1)
     ver_check "$git_ver" "$inst_ver" && return

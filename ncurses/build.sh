@@ -3,9 +3,9 @@ set -e
 name=ncurses
 get_version() {
     local inst_ver=$(pkgver $name)
-    local up_ver=$(wget -T 2 -t 1 -cqO- https://invisible-mirror.net/archives/ncurses | grep -E "ncurses-[0-9.]+" | cut -d '"' -f 4 | grep -v "asc" | sed 's/.tar.*//g' | sed 's/ncurses-//g' | sort -V | tail -n 1)
+    local up_ver=$(wget -T 5 -t 1 -cqO- https://invisible-mirror.net/archives/ncurses | grep -E "ncurses-[0-9.]+" | cut -d '"' -f 4 | grep -v "asc" | sed 's/.tar.*//g' | sed 's/ncurses-//g' | sort -V | tail -n 1)
     ver_check "$up_ver" "$inst_ver" && return
-    local git_ver=$(timeout 2 git ls-remote --tags --refs https://github.com/ThomasDickey/ncurses-snapshots.git | grep -E "refs/tags/v[0-9_]+" | cut -d '/' -f 3 | sed 's/v//g' | sed -E 's/_[0-9]+$//g' | tr '_' '.' | sort -V | tail -n 1)
+    local git_ver=$(timeout 5 git ls-remote --tags --refs https://github.com/ThomasDickey/ncurses-snapshots.git | grep -E "refs/tags/v[0-9_]+" | cut -d '/' -f 3 | sed 's/v//g' | sed -E 's/_[0-9]+$//g' | tr '_' '.' | sort -V | tail -n 1)
     ver_check "$git_ver" "$inst_ver" && return
     local arch_ver=$(aver $name)
     ver_check "$arch_ver" "$inst_ver" && return

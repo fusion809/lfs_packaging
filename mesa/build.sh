@@ -2,7 +2,7 @@
 name=mesa
 get_version() {
   local inst_ver=$(pkgver $name)
-  local up_ver=$(wget -T 2 -cqO- https://mesa3d.org/ | grep "relnotes" | head -n 1 | cut -d '/' -f 5 | sed 's/.html.*//g')
+  local up_ver=$(wget -T 5 -cqO- https://mesa3d.org/ | grep "relnotes" | head -n 1 | cut -d '/' -f 5 | sed 's/.html.*//g')
   ver_check "$up_ver" "$inst_ver" && return
   local git_ver=$(git ls-remote --tags --refs https://gitlab.freedesktop.org/mesa/mesa.git | grep -E "refs/tags/mesa-[0-9.]+$" | cut -d '-' -f 2 | sort -V | tail -n 1)
   ver_check "$git_ver" "$inst_ver" && return

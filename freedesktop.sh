@@ -39,7 +39,7 @@ function spice_ver {
 function way_ver {
     local name=$1
 	local inst_ver=$(pkgver $name)
-    local up_ver=$(wget -T 2 -cqO- https://wayland.freedesktop.org/releases.html | grep "$name-[0-9].*.tar.xz" | grep -v ".9[0-9].tar.xz" | head -n 1 | cut -d '/' -f 8)
+    local up_ver=$(wget -T 5 -cqO- https://wayland.freedesktop.org/releases.html | grep "$name-[0-9].*.tar.xz" | grep -v ".9[0-9].tar.xz" | head -n 1 | cut -d '/' -f 8)
     ver_check "$up_ver" "$inst_ver" && return
 
     local git_ver=$(git ls-remote --tags --refs https://gitlab.freedesktop.org/wayland/$name.git | grep "refs/tags/[0-9.]*$" | cut -d '/' -f 3 | sort -V | tail -n 1)
@@ -80,7 +80,7 @@ function xfd_ver() {
 		local arch_ver=$(aver xorg-$name)
 	fi
 	ver_check "$arch_ver" "$inst_ver" && return
-	local lfs_vers=$(wget -T 2 -t 1 -cqO- https://www.linuxfromscratch.org/blfs/view/systemd/x/x7$type.html | grep -E "$name-[0-9.]+" | sed 's/^.*\s//g' | cut -d '-' -f 2 | sed 's/.tar.xz//g')
+	local lfs_vers=$(wget -T 5 -t 1 -cqO- https://www.linuxfromscratch.org/blfs/view/systemd/x/x7$type.html | grep -E "$name-[0-9.]+" | sed 's/^.*\s//g' | cut -d '-' -f 2 | sed 's/.tar.xz//g')
 	ver_check "$lfs_vers" "$inst_ver" && return
 	fver "$name" "$inst_ver"
 }
