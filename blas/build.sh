@@ -5,7 +5,8 @@ lfs_depends=(bash coreutils gcc glibc gzip make python sed tar)
 blfs_depends=(cmake gcc wget)
 _name=blas
 name=blas
-version=$(git ls-remote https://github.com/Reference-LAPACK/lapack.git HEAD | awk '{print $1}')
+repo="Reference-LAPACK/lapack"
+version=$(gh_com $repo)
 
 DOCS="LICENSE"
 
@@ -19,7 +20,7 @@ direname="lapack-$version"
 filename="$direname.tar.gz"
 rm -rf $direname
 if ! [[ -f $filename ]]; then
-        wget -c https://github.com/Reference-LAPACK/lapack/archive/$version.tar.gz -O $filename
+        wget -c https://github.com/$repo/archive/$version.tar.gz -O $filename
 fi
 tar xvf $filename
 cd $direname

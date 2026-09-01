@@ -2,7 +2,8 @@
 set -e
 # Variable declarations
 name=lapack
-version=$(git ls-remote https://github.com/Reference-LAPACK/lapack.git HEAD | awk '{print $1}')
+repo="Reference-LAPACK/lapack"
+version=$(gh_com $repo)
 depends=(blas glib2 libX11 libXext libXxf86vm libpciaccess libxshmfence mesa mitkrb pcre2 wayland)
 lfs_depends=(bash bzip2 coreutils dbus e2fsprogs expat gcc glibc gzip libelf libffi make openssl python sed systemd tar xz zlib zstd)
 blfs_depends=(brotli cmake double-conversion flac fontconfig freetype gcc graphite2 harfbuzz karchive keyutils lame libXau libXdmcp libdrm libogg libpng libsndfile libvorbis libxcb libxkbcommon libxml2 libxslt llvm lm-sensors mpg123 opus pulseaudio qt6 spirv-tools wget)
@@ -19,7 +20,7 @@ fi
 
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-        wget -c https://github.com/Reference-LAPACK/lapack/archive/$version.tar.gz -O $filename
+        wget -c https://github.com/$repo/archive/$version.tar.gz -O $filename
 fi
 rm -rf $direname
 tar xvf $filename

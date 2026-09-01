@@ -5,7 +5,7 @@ set -e
 name=jack
 reponame=jack2
 repo=jackaudio/$reponame
-version=$(git ls-remote https://github.com/$repo.git HEAD | awk '{print $1}')
+version=$(gh_com $repo)
 filename="$reponame-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(portaudio)
@@ -33,5 +33,6 @@ CXXFLAGS="-O2 -fPIC"
 ./waf build
 sudo ./waf install
 cd ..
+rm -rf $filename $direname
 # Add to database
 echo $version > /var/lib/custom-packages/$name
