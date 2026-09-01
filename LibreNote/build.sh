@@ -20,7 +20,6 @@ common_cmake_args=(
   -Wno-dev
 )
 cmaki "${common_cmake_args[@]}"
-cd ..
-rm -rf build
-cd ..
+cd ../..
+rm -rf $filename $direname
 echo "$version" > /var/lib/custom-packages/$name
