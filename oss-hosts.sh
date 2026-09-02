@@ -74,10 +74,11 @@ function gnu_ver {
 }
 
 function ngnu_ver {
+	local name=$1
 	local inst_ver=$(pkgver $name)
 	local up_ver=$(wngnu_ver $name)
 	ver_check "$up_ver" "$inst_ver" && return
-	local git_ver=$(ggnu_ver $name)
+	local git_ver=$(gngnu_ver $name)
 	ver_check "$git_ver" "$inst_ver" && return
 	local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$inst_ver" && return

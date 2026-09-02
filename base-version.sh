@@ -76,9 +76,12 @@ function ggnu_ver {
 	elif [[ "$name" == "gcc" ]]; then
 	    echo $(ggcc_ver)
 	    return 0;
-        elif [[ "$name" == "grub" ]]; then
+    elif [[ "$name" == "grub" ]]; then
 		echo $(ggrub_ver)
 		return 0;
+    else
+        timeout 5 git ls-remote --tags --refs "https://git.savannah.gnu.org/git/$name.git" 2>/dev/null | cut -d '/' -f 3 | sed -E "s/^(${name}|release)[-_]//; s/^[vVrR]//" | grep -viE "alpha|beta|rc|dev|snapshot" | grep -E '^[0-9]+(\.[0-9]+)+$' | sort -V | tail -n 1
+        return 0;
 	fi
 }
 
@@ -130,7 +133,7 @@ function gngnu_ver {
 	else
 		URL="https://git.savannah.nongnu.org/git/$1.git"
 	fi
-	timeout 5 git ls-remote --tags --refs $URL 2>/dev/null | cut -d '/' -f 3 | sed 's/v//g' | grep -v "[a-z]" | sort -V | tail -n 1
+	timeout 5 git ls-remote --tags --refs $URL 2>/dev/null | cut -d '/' -f 3 | sed -E 's/^[vVrR]//' | grep -viE "alpha|beta|rc|dev|snapshot" | grep -E '^[0-9]+(\.[0-9]+)+$' | sort -V | tail -n 1
 }
 function goct_ver {
     timeout 5 git ls-remote --tags --refs https://github.com/gnu-octave/octave.git 2>/dev/null | grep "release-" | cut -d '/' -f 3 | sed 's/release-//g' | sed 's/-/./g' | sort -V | tail -n1
@@ -208,7 +211,7 @@ function wlp_ver {
 }
 
 function wngnu_ver {
-	wget -T 5 -t 1 -cqO- https://cgit.git.savannah.nongnu.org/cgit/"$1".git/refs/ | cut -d '=' -f 3 | cut -d "'" -f 1 | grep -E "^v[0-9]+.[0-9]+.[0-9]+" | sed 's/^v//g' | sort -V | tail -n 1
+	wget -T 5 -t 1 -cqO- https://download.savannah.nongnu.org/releases/"$1"/ | grep -oE "$1-[0-9]+(\.[0-9]+)+(\.tar\.[a-z0-9]+|\.src\.tar\.gz)" | sed -E "s/$1-([0-9]+(\.[0-9]+)+).*/\1/" | sort -V | tail -n 1
 }
 
 function wsf_ver {
