@@ -80,7 +80,7 @@ function ggnu_ver {
 		echo $(ggrub_ver)
 		return 0;
     else
-        timeout 5 git ls-remote --tags --refs "https://git.savannah.gnu.org/git/$name.git" 2>/dev/null | cut -d '/' -f 3 | sed -E "s/^(${name}|release)[-_]//; s/^[vVrR]//" | grep -viE "alpha|beta|rc|dev|snapshot" | grep -E '^[0-9]+(\.[0-9]+)+$' | sort -V | tail -n 1
+        timeout 5 git ls-remote --tags --refs "https://https.git.savannah.gnu.org/git/$name.git" 2>/dev/null | cut -d '/' -f 3 | sed -E "s/^(${name}|release)[-_]//; s/^[vVrR]//" | grep -viE "alpha|beta|rc|dev|snapshot" | grep -E '^[0-9]+(\.[0-9]+)+$' | sort -V | tail -n 1
         return 0;
 	fi
 }
@@ -124,6 +124,12 @@ function glp_ver {
 }
 
 function glt_ver {
+	local encoded=$(echo "$1" | sed "s|/|%2F|g")
+	local api_ver=$(curl -s --connect-timeout 3 --max-time 5 "https://gitlab.com/api/v4/projects/${encoded}/repository/tags?per_page=1" 2>/dev/null | grep -oP '"name":"\K[^"]+' | sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | head -n 1)
+	if [[ -n "$api_ver" ]]; then
+		echo "$api_ver"
+		return 0
+	fi
 	wget -T 5 -t 1 -cqO- https://gitlab.com/$1/-/tags | grep -E "[v]*[0-9]+\.[0-9]+" | grep "^<a href=" | cut -d '"' -f 2 | cut -d '/' -f 6 | grep -E "^[v]*[0-9.]+$" | sed 's/^v//g' | sort -V | tail -n 1	
 }
 
@@ -131,7 +137,7 @@ function gngnu_ver {
 	if [[ "$1" == "libpipeline" ]]; then
 		URL="https://gitlab.com/libpipeline/libpipeline.git"
 	else
-		URL="https://git.savannah.nongnu.org/git/$1.git"
+		URL="https://https.git.savannah.nongnu.org/git/$1.git"
 	fi
 	timeout 5 git ls-remote --tags --refs $URL 2>/dev/null | cut -d '/' -f 3 | sed -E 's/^[vVrR]//' | grep -viE "alpha|beta|rc|dev|snapshot" | grep -E '^[0-9]+(\.[0-9]+)+$' | sort -V | tail -n 1
 }
@@ -199,7 +205,7 @@ function wgn_ver {
 }
 
 function wgnu_ver {
-    wget --timeout=5 -t 1 -cqO- "https://ftp.gnu.org/gnu/$1/" | sed -nE "s/.*href=[\"\x27]?$1-([0-9]+(\.[0-9]+)*)(\/|\.tar\.[a-z0-9]+)[\"\x27]?.*/\1/p" | sort -V | tail -n 1
+    curl -sL --connect-timeout 3 --max-time 5 "https://ftp.gnu.org/gnu/$1/" 2>/dev/null | sed -nE "s/.*href=[\"\x27]?$1-([0-9]+(\.[0-9]+)*)(\/|\.tar\.[a-z0-9]+|\.zip)[\"\x27]?.*/\1/p" | sort -V | tail -n 1
 }
 
 function wlgd_ver {
@@ -211,7 +217,7 @@ function wlp_ver {
 }
 
 function wngnu_ver {
-	wget -T 5 -t 1 -cqO- https://download.savannah.nongnu.org/releases/"$1"/ | grep -oE "$1-[0-9]+(\.[0-9]+)+(\.tar\.[a-z0-9]+|\.src\.tar\.gz)" | sed -E "s/$1-([0-9]+(\.[0-9]+)+).*/\1/" | sort -V | tail -n 1
+	curl -sL --connect-timeout 3 --max-time 5 "https://download.savannah.nongnu.org/releases/$1/" 2>/dev/null | grep -oE "$1-[0-9]+(\.[0-9]+)+(\.tar\.[a-z0-9]+|\.src\.tar\.gz|\.zip)" | sed -E "s/$1-([0-9]+(\.[0-9]+)+).*/\1/" | sort -V | tail -n 1
 }
 
 function wsf_ver {
