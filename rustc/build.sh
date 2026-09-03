@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=rustc
+# Takes about 3hrs 10 mins to compile, roughly
 get_version() {
     local inst_ver=$(pkgver $name)
     local up_ver=$(wget -T 5 -cqO- https://blog.rust-lang.org/releases/latest | grep "\-[0-9]\." | head -n 1 | cut -d '/' -f 5 | cut -d '-' -f 2)
