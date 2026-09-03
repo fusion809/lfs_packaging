@@ -135,9 +135,21 @@ function pfile {
 }
 
 function gap_patches {
-	pfile "$1" | grep -v '^[[:space:]]*$' | while IFS= read -r i; do
-		wget -c "https://www.linuxfromscratch.org/patches/lfs/development/$i" || \
-		wget -c "https://www.linuxfromscratch.org/patches/blfs/svn/$i"
-		patch -Np1 -i "$i"
-	done
+    local patches
+
+    patches=$(pfile "$1" | grep -v '^[[:space:]]*$')
+
+    if [[ -z "$patches" ]]; then
+        echo "No patches found."
+        return
+    fi
+
+    while IFS= read -r i; do
+        echo "Getting and applying $i"
+
+        wget -c "https://www.linuxfromscratch.org/patches/lfs/development/$i" ||
+        wget -c "https://www.linuxfromscratch.org/patches/blfs/svn/$i"
+
+        patch -Np1 -i "$i"
+    done <<< "$patches"
 }
