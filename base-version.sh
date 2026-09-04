@@ -26,6 +26,12 @@ function fver {
 	echo "$2"
 }
 
+function gent_ver {
+	local pkg="$1"
+	local name=$(echo $pkg | cut -d '/' -f 2)
+	wget -T 5 -t 1 -cqO- https://packages.gentoo.org/packages/$pkg | grep -oE "$name-[0-9.]+ebuild" | sed 's/\.ebuild//g' | sed "s/$name-//g" | sort -V | tail -n 1
+}
+
 function gh_com {
     timeout 5 git ls-remote https://github.com/$1.git HEAD 2>/dev/null | awk '{ print $1 }'
 }
