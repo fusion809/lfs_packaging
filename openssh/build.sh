@@ -47,5 +47,5 @@ tar xf $systemd_filename
 cd blfs-systemd-units*
 sudo make install-sshd
 cd ..
-rm -rf $filename $direname
+rm -rf $filename $direname $systemd_filename
 echo "$version" | sudo tee /var/lib/custom-packages/$name
