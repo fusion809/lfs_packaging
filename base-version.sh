@@ -91,6 +91,9 @@ function ggnu_ver {
     elif [[ "$name" == "libunistring" ]]; then
 	    timeout 5 git ls-remote --tags --refs https://https.git.savannah.gnu.org/git/libunistring.git | grep "refs/tags/v[0-9.]+" -oE | sed 's/.*v//g' | sort -V | tail -n 1
 	    return 0;
+    elif [[ "$name" == "nettle" ]]; then
+	    timeout 5 git ls-remote --tags --refs https://git.lysator.liu.se/nettle/nettle.git | grep "refs/tags/nettle_[0-9.]+_release" -oE | cut -d '_' -f 2 | sort -V | tail -n 1
+	    return 0;
     else
         timeout 5 git ls-remote --tags --refs "https://https.git.savannah.gnu.org/git/$name.git" 2>/dev/null | cut -d '/' -f 3 | sed -E "s/^(${name}|release)[-_]//; s/^[vVrR]//" | grep -viE "alpha|beta|rc|dev|snapshot" | grep -E '^[0-9]+(\.[0-9]+)+$' | sort -V | tail -n 1
         return 0;
