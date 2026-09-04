@@ -15,7 +15,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-majVer=$(echo $version | sed 's/\.[0-9]+$//g')
+majVer=$(echo $version | sed -E 's/.[0-9]+$//g')
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 blfs_depends=(curl libarchive libuv nghttp2)

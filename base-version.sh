@@ -88,6 +88,9 @@ function ggnu_ver {
     elif [[ "$name" == "libtasn1" ]]; then
 	    gl_ver gnutls/libtasn1
 	    return 0;
+    elif [[ "$name" == "libunistring" ]]; then
+	    timeout 5 git ls-remote --tags --refs https://https.git.savannah.gnu.org/git/libunistring.git | grep "refs/tags/v[0-9.]+" -oE | sed 's/.*v//g' | sort -V | tail -n 1
+	    return 0;
     else
         timeout 5 git ls-remote --tags --refs "https://https.git.savannah.gnu.org/git/$name.git" 2>/dev/null | cut -d '/' -f 3 | sed -E "s/^(${name}|release)[-_]//; s/^[vVrR]//" | grep -viE "alpha|beta|rc|dev|snapshot" | grep -E '^[0-9]+(\.[0-9]+)+$' | sort -V | tail -n 1
         return 0;
@@ -109,7 +112,11 @@ function ght_ver {
 		echo "$latest_tag" | sed -nE "s/^${1#*/}[[:space:]_-]*//i; s/^[^0-9]*([0-9]+([._-][0-9]+)*).*/\1/p" | tr '_' '.' | head -n 1
 		return 0
 	fi
-	wget --timeout=5 -t 1 -cqO- "https://github.com/$1/tags.atom" | grep -v "alpha\|beta\|rc" | grep '<title>' | sed -nE "/<title>Tags from /d; s/.*<title>//; s/^${1#*/}[[:space:]_-]*//i; s/^[^0-9]*([0-9]+([._-][0-9]+)*).*/\1/p" | tr '_' '.' | sort -V | tail -n 1
+	if [[ "$1" == "webmproject/libvpx" ]]; then
+		wget -T 5 -t 1 -cqO- https://github.com/webmproject/libvpx/tags.atom | grep "link.*v[0-9.]+" -oE | sed 's/.*v//g' | head -n 1
+	else
+		wget --timeout=5 -t 1 -cqO- "https://github.com/$1/tags.atom" | grep -v "alpha\|beta\|rc" | grep '<title>' | sed -nE "/<title>Tags from /d; s/.*<title>//; s/^${1#*/}[[:space:]_-]*//i; s/^[^0-9]*([0-9]+([._-][0-9]+)*).*/\1/p" | tr '_' '.' | sort -V | tail -n 1
+	fi
 }
 
 function glgd {
