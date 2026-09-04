@@ -2,6 +2,7 @@
 set -e
 name=libtasn1
 version=$(gnu_ver libtasn1)
+depends=(glibc gcc make tar gzip coreutils wget)
 filename="$name-v${version}.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
