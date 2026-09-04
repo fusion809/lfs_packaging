@@ -48,3 +48,4 @@ LibreWeather/LibreWeather
 .*.swp
 blas/lapack-*
 lapack/lapack-*
+icu/icu
