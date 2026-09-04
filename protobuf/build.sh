@@ -18,7 +18,7 @@ cmake_options=(-D CMAKE_INSTALL_PREFIX=/usr      \
       -D protobuf_BUILD_TESTS=OFF       \
       -D protobuf_BUILD_SHARED_LIBS=ON  \
       -G Ninja)
-mni "${cmake_options[@]}"
+cmaki "${cmake_options[@]}"
 cd ../..
 rm -rf $filename $direname
 echo $version | sudo tee /var/lib/custom-packages/$name

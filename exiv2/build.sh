@@ -21,7 +21,7 @@ cmake_options=(-D CMAKE_INSTALL_PREFIX=/usr   \
       -D EXIV2_BUILD_SAMPLES=no      \
       -D CMAKE_SKIP_INSTALL_RPATH=ON \
       -G Ninja)
-mni "${cmake_options[@]}"
+cmaki "${cmake_options[@]}"
 cd ../..
 rm -rf $filename $direname
 echo $version | sudo tee /var/lib/custom-packages/$name

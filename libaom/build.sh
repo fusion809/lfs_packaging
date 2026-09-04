@@ -30,7 +30,7 @@ cmake_options=(-D CMAKE_INSTALL_PREFIX=/usr \
       -D BUILD_SHARED_LIBS=1       \
       -D ENABLE_DOCS=no            \
       -G Ninja)
-mni "${cmake_options[@]}"
+cmaki "${cmake_options[@]}"
 cd ../..
 rm -rf $filename $direname
 echo $version | sudo tee /var/lib/custom-packages/$name
