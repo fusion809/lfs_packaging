@@ -14,6 +14,7 @@ get_version() {
 	fver "$name" "$inst_ver" && return
 }
 version=$(get_version)
+depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="$name-$version"
 if ! [[ -f $filename ]]; then

@@ -14,6 +14,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
+depends=(glibc linux-pam openssl zlib)
 filename="$name-$version.tar.gz"
 direname="$name-$version"
 if ! [[ -f $filename ]]; then
