@@ -4,6 +4,7 @@ name=help2man
 version=$(gnu_ver help2man)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
+depends=(wget tar xz make gcc coreutils)
 if ! [[ -f $filename ]]; then
 	wget -c https://ftp.gnu.org/gnu/$name/$filename
 fi
