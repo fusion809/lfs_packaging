@@ -131,7 +131,13 @@ echo "source_dir=$source_dir"
 }
 
 function pfile {
-	wget -cqO- https://www.linuxfromscratch.org/lfs/view/systemd/chapter08/$1.html https://www.linuxfromscratch.org/blfs/view/systemd/postlfs/$1.html | grep "\.patch" | cut -d '/' -f 2 | sed 's/<//g' | grep -v '^[[:space:]]*$'
+    wget -cqO- \
+        "https://www.linuxfromscratch.org/lfs/view/systemd/chapter08/$1.html" \
+        "https://www.linuxfromscratch.org/blfs/view/systemd/postlfs/$1.html" |
+    grep '\.patch' |
+    cut -d '/' -f 2 |
+    grep -oE '[^[:space:]<"]+\.patch' |
+    grep -v '^[[:space:]]*$'
 }
 
 function gap_patches {
