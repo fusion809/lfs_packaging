@@ -44,7 +44,7 @@ URL=$(wget -cqO- https://www.linuxfromscratch.org/blfs/view/systemd/introduction
 wget -c $URL
 systemd_filename=$(echo $URL | sed 's|https.*/||g')
 tar xf $systemd_filename
-cd blfs-systemd-units*
+cd blfs-systemd-units*[0-9]
 sudo make install-sshd
 cd ..
 rm -rf $filename $direname $systemd_filename
