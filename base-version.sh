@@ -85,6 +85,9 @@ function ggnu_ver {
     elif [[ "$name" == "grub" ]]; then
 		echo $(ggrub_ver)
 		return 0;
+    elif [[ "$name" == "libtasn1" ]]; then
+	    gl_ver gnutls/libtasn1
+	    return 0;
     else
         timeout 5 git ls-remote --tags --refs "https://https.git.savannah.gnu.org/git/$name.git" 2>/dev/null | cut -d '/' -f 3 | sed -E "s/^(${name}|release)[-_]//; s/^[vVrR]//" | grep -viE "alpha|beta|rc|dev|snapshot" | grep -E '^[0-9]+(\.[0-9]+)+$' | sort -V | tail -n 1
         return 0;

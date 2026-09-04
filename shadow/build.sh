@@ -5,7 +5,7 @@ repo="shadow-maint/shadow"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(linux-pam)
+depends=(acl glibc libxcrypt linux-pam systemd)
 if ! [[ -f $filename ]]; then
 	wget -c https://github.com/$repo/releases/download/$version/$filename
 fi
