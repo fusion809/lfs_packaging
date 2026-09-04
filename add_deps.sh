@@ -8,12 +8,15 @@ function add_deps {
 		echo "Usage: add_deps <package_name> [--dry-run] [--verbose]"
 		return 1
 	fi
-	python3 ~/lfs_packaging/add_deps.py "$@"
+	for pkg in "$@"
+	do
+		python3 ~/lfs_packaging/add_deps.py "$pkg"
+	done
 }
 
 function add_deps_new {
 	new_pkgs=$(git ls-files --others --exclude-standard | grep "build.sh" | cut -d '/' -f 1)
 	while read -r pkg; do
-    	add_deps "$pkg"
+    		add_deps "$pkg"
 	done <<< "$new_pkgs"
 }

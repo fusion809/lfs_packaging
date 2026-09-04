@@ -3,6 +3,7 @@ set -e
 name=bubblewrap
 repo="containers/$name"
 version=$(gh_ver $repo)
+depends=(glibc libcap)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 # User namespace support is required in the kernel

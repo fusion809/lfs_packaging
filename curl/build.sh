@@ -11,7 +11,7 @@ version=$(get_version)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 blfs_depends=(brotli cyrus-sasl libpsl libunistring make-ca nghttp2)
-depends=(glibc libidn2 libpsl nghttp2 openldap openssl zlib zstd)
+depends=(glibc libidn2 libpsl libunistring nghttp2 openldap openssl zlib zstd)
 if ! [[ -f $filename ]]; then
 	wget -c https://curl.se/download/$filename
 fi

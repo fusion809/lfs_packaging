@@ -2,6 +2,7 @@
 set -e
 name=libunistring
 version=$(gnu_ver libunistring)
+depends=(glibc)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

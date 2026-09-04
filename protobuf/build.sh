@@ -3,6 +3,7 @@ set -e
 name=protobuf
 repo="protocolbuffers/$name"
 version=$(gh_ver $repo)
+depends=(abseil-cpp gcc glibc zlib)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
