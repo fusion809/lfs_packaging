@@ -49,3 +49,4 @@ LibreWeather/LibreWeather
 blas/lapack-*
 lapack/lapack-*
 icu/icu
+inih/inih-r[0-9]*
