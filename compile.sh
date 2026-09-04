@@ -101,7 +101,7 @@ echo "source_dir=$source_dir"
 		ninja -C gi-build -j$(nproc)
 		sudo ninja -C gi-build install
 		return 0;
-	elif ! ( echo $PWD | grep "build" &> /dev/null ); then
+	elif ! ( echo $PWD | grep "build" &> /dev/null ) && ( ! [[ -d build ]] || ! [[ -n $(ls -A build) ]] ) ; then
 		echo "Optional 2 build, should be generally applicable"
 		mkdir build
 		cd build
@@ -120,8 +120,27 @@ echo "source_dir=$source_dir"
 		if ((${#files[@]})); then
 			sed -i "s|http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl|/usr/share/xml/docbook/xsl-stylesheets-nons-$docbookver/manpages/docbook.xsl|g" "${files[@]}"
 		fi
+	elif [[ -n $(ls -A build) ]]; then
+		echo "Optional 3 build, applicable to p11-kit"
+		mkdir p11-build
+		cd p11-build
+		meson setup "${meson_args[@]}" "$source_dir" || exit 1
+		docbookver=$(head -n 1 /var/lib/book-packages/docbook-xsl-nons)
+		files=()
+
+		while IFS= read -r -d '' file; do
+			files+=("$file")
+		done < <(find . -type f \( -name build.ninja -o -name intro-targets.json \) -print0)
+
+		if [[ -f ../docs/reference/gtk/meson.build ]]; then
+			files+=(../docs/reference/gtk/meson.build)
+		fi
+
+		if ((${#files[@]})); then
+			sed -i "s|http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl|/usr/share/xml/docbook/xsl-stylesheets-nons-$docbookver/manpages/docbook.xsl|g" "${files[@]}"
+		fi
 	elif [[ -f build.ninja ]]; then
-		echo "Option 3 build"
+		echo "Option 4 build"
 		echo "${meson_args[@]}"
 		meson configure "${meson_args[@]}" || exit 1
 	fi
