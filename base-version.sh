@@ -13,7 +13,11 @@ function aver {
 
 function fdt_ver {
     local repo=$1
-    wget --timeout=5 -t 1 -cqO- "https://gitlab.freedesktop.org/$repo/-/tags" | grep -oE 'tags/[v0-9.][^"]*' | grep -vE "dev|rc|alpha|beta" | sed 's|tags/||; s/^v//' | sort -V | tail -n 1
+    if [[ $repo != "gstreamer/gstreamer" ]]; then
+    	wget --timeout=5 -t 1 -cqO- "https://gitlab.freedesktop.org/$repo/-/tags" | grep -oE 'tags/[v0-9.][^"]*' | grep -vE "dev|rc|alpha|beta" | sed 's|tags/||; s/^v//' | sort -V | tail -n 1
+    else
+    	wget --timeout=5 -t 1 -cqO- "https://gitlab.freedesktop.org/$repo/-/tags" | grep -oE 'tags/[v0-9.][^"]*' | grep -vE "dev|rc|alpha|beta" | sed 's|tags/||; s/^v//' | grep -oE "[0-9]+\.[0-9]*[02468]\.[0-9]+" | sort -V | tail -n 1
+    fi
 }
 
 function fver {
@@ -37,7 +41,12 @@ function gh_com {
 }
 
 function gfl_ver {
-    timeout 5 git ls-remote --tags "https://gitlab.freedesktop.org/$1.git" 2>/dev/null | sed -n 's|.*refs/tags/v\?\([0-9][0-9.]*\)$|\1|p' | grep -vE "dev|rc|alpha|beta" | sort -V | tail -1
+    if [[ "$1" != "gstreamer/gstreamer" ]]; then
+	    timeout 5 git ls-remote --tags "https://gitlab.freedesktop.org/$1.git" 2>/dev/null | sed -n 's|.*refs/tags/v\?\([0-9][0-9.]*\)$|\1|p' | grep -vE "dev|rc|alpha|beta" | sort -V | tail -1
+    else
+	    timeout 5 git ls-remote --tags "https://gitlab.freedesktop.org/$1.git" 2>/dev/null | sed -n 's|.*refs/tags/v\?\([0-9][0-9.]*\)$|\1|p' | grep -vE "dev|rc|alpha|beta" | grep -oE "[0-9]+\.[0-9]*[02468]\.[0-9]+" | sort -V | tail -1
+    fi
+
 }
 
 function gglpk_ver {
