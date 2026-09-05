@@ -101,6 +101,25 @@ function ngnu_ver {
 	fver "$name" "$inst_ver"
 }
 
+function sd_ver {
+	local repo=$1
+	if [[ -n $2 ]]; then
+		local name=$2
+	else
+		local name=$(echo $1 | cut -d '/' -f 2)
+	fi
+	local inst_ver=$(pkgver $name)
+	local up_ver=$(wget -T 5 -t 1 -cqO- https://salsa.debian.org/$repo/-/tags | grep "[v]*[0-9]+.[0-9]+.[0-9]+" -oE | sed 's/^v//g' | sort -V | tail -n 1)
+	ver_check "$up_ver" "$inst_ver" && return
+	local git_ver=$(timeout 5 git ls-remote --tags --refs https://salsa.debian.org/iso-codes-team/iso-codes.git | grep "[v]*[0-9]+.[0-9]+.[0-9]+" -oE | sed 's/^v//g' | sort -V | tail -n 1)
+	ver_check "$git_ver" "$inst_ver" && return
+    local arch_ver=$(aver $name)
+	ver_check "$arch_ver" "$inst_ver" && return
+	local lfs_vers=$(lfs_ver $name)
+	ver_check "$lfs_vers" "$inst_ver" && return
+	fver "$name" "$inst_ver"
+}
+
 # SourceForge version fetcher
 function sf_ver {
 	local repo=$1

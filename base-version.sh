@@ -105,6 +105,8 @@ function ggnu_ver {
 function ghl_ver {
 	if [[ "$1" == "openpmix/prrte" ]]; then
 		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep "^3" | sort -V | tail -n 1
+	elif [[ "$1" == "GNOME/librsvg" ]]; then
+		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep -oE "[0-9]+.[0-9]+.[0-8][0-9]*" | sort -V | tail -n 1
 	else
 		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | sort -V | tail -n 1
 	fi
@@ -136,7 +138,7 @@ function ght_ver {
     latest_tag=$(grep -oP '/tag/\K.*' <<< "$latest_url")
 
     # Only use the GitHub "latest release" result if its tag is stable.
-    if [[ -n "$latest_tag" ]] &&
+    if [[ -n "$latest_tag" ]] && [[ $repo != "GNOME/librsvg" ]] &&
        ! grep -qiE '(alpha|beta|rc|pre|preview|dev|snapshot)' <<< "$latest_tag"; then
 
         version=$(sed -nE \
@@ -160,6 +162,11 @@ function ght_ver {
             sed 's/.*v//' |
             head -n 1
         return
+    elif [[ "$repo" == "GNOME/librsvg" ]]; then
+	wget -T 5 -t 1 -cqO- \
+            https://github.com/$repo/tags.atom | grep -v "beta" |
+            grep -oE "[0-9]+\.[0-9]+\.[0-8]" | sort -V | tail -n 1
+	return
     fi
 
     # Fall back to finding the highest stable tag.
