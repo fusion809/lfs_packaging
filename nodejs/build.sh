@@ -5,7 +5,7 @@ repo=$name/node
 version=$(gh_ver $repo $name)
 filename="node-v$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(which brotli c-ares icu libuv nghttp2 simdutf)
+depends=(brotli c-ares gcc glibc icu libuv nghttp2 openssl simdutf which zlib)
 if ! [[ -f $filename ]]; then
 	wget -c https://nodejs.org/dist/v$version/$filename
 fi
