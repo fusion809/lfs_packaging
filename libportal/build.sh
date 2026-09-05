@@ -12,7 +12,9 @@ fi
 rm -rf "$direname"
 tar xf "$filename"
 cd "$direname"
-gap_patches $name
+#gap_patches $name
+sed -i "s/requires: \[qt6_dep/requires: ['Qt6Core', 'Qt6Gui', 'Qt6Widgets'/" libportal/meson.build
+export PKG_CONFIG_PATH="/opt/qt6/lib/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}"
 meson_options=(--prefix=/usr       \
             --buildtype=release \
             -D vapi=false       \

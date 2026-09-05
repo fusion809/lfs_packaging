@@ -7,7 +7,7 @@ filename="shaderc-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(cmake glslang spirv-tools)
 if ! [[ -f $filename ]]; then
-	wget -c
+	wget -c https://github.com/google/shaderc/archive/v$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

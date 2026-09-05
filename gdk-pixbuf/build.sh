@@ -1,7 +1,9 @@
 #!/bin/bash
 set -e
 name=gdk-pixbuf
-version=$(gn_ver $name)
+#version=$(gn_ver $name)
+version=2.44.7 # 2.44.8 and later require 2.2.x versions of glycin which are pre-release
+majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(glib2 shared-mime-info docutils glycin)
