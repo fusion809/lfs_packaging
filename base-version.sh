@@ -119,7 +119,7 @@ function ghl_ver {
 	elif [[ "$1" == "KhronosGroup/Vulkan-Loader" ]] || [[ "$1" == "KhronosGroup/Vulkan-Headers" ]]; then
             timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep -oE "[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+" | sort -V | tail -n 1
 	else
-		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | sort -V | tail -n 1
+		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | tr '-' '.' | sort -V | tail -n 1
 	fi
 }
 
@@ -158,7 +158,7 @@ function ght_ver {
             "s/^${repo#*/}[[:space:]_-]*//i;
              s/^[^0-9]*([0-9]+([._-][0-9]+)*).*/\1/p" \
             <<< "$latest_tag" |
-            tr '_' '.' |
+            tr '_' '.' | tr '-' '.' |
             head -n 1)
 
         if [[ -n "$version" ]]; then
@@ -196,7 +196,7 @@ function ght_ver {
             "s/.*<title>//;
              s/^${repo#*/}[[:space:]_-]*//i;
              s/^[^0-9]*([0-9]+([._-][0-9]+)*).*/\1/p" |
-        tr '_' '.' |
+        tr '_' '.' | tr '-' '.' |
         sort -V |
         tail -n 1
 }
