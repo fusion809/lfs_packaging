@@ -18,6 +18,8 @@ meson_options=(--prefix=/usr           \
             --buildtype=release     \
             -D libglycin-gtk4=false \
 	    -D tests=false)
+export PATH=$PATH:/opt/rustc/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rustc/lib
 mni "${meson_options[@]}"
 cd ../..
 rm -rf "$filename" "$direname"
