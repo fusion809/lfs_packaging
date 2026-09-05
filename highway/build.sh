@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-name=double-conversion
+name=highway
 repo=google/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
@@ -12,10 +12,11 @@ fi
 rm -rf "$direname"
 tar xf "$filename"
 cd "$direname"
-cmake_options=(-D CMAKE_INSTALL_PREFIX=/usr        \
-      -D CMAKE_POLICY_VERSION_MINIMUM=3.5 \
-      -D BUILD_SHARED_LIBS=ON             \
-      -D BUILD_TESTING=ON)
+cmake_options=(-D CMAKE_INSTALL_PREFIX=/usr \
+      -D CMAKE_BUILD_TYPE=Release  \
+      -D BUILD_TESTING=OFF         \
+      -D BUILD_SHARED_LIBS=ON      \
+      -G Ninja)
 cmaki "${cmake_options[@]}"
 cd ../..
 rm -rf "$filename" "$direname"
