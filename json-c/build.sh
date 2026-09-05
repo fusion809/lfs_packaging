@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=json-c
-version=$(gh_ver $name/$name | sed -E 's/-[0-9]+//g')
+version=$(gh_ver $name/$name | sed -E 's/[.-][0-9]+$//g')
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(cmake)

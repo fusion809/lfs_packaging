@@ -20,7 +20,15 @@ meson_options=(--prefix=/usr           \
 	    -D tests=false)
 export PATH=$PATH:/opt/rustc/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rustc/lib
+for pkg in rustc cargo rustdoc
+do
+	sudo ln -sf /opt/rustc/bin/$pkg /usr/bin/
+done
 mni "${meson_options[@]}"
+for pkg in rustc cargo rustdoc
+do
+	sudo rm /usr/bin/$pkg
+done
 cd ../..
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
