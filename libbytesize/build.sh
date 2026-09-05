@@ -3,6 +3,7 @@ set -e
 name=libbytesize
 repo="storaged-project/libbytesize"
 version=$(gh_ver $repo)
+depends=(glibc gmp mpfr pcre2)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
