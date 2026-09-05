@@ -73,6 +73,20 @@ function gnu_ver {
 	fver "$name" "$inst_ver"
 }
 
+function kap_ver {
+	local name=$1
+	local inst_ver=$(pkgver $name)
+	local up_ver=$(wkap_ver)
+	ver_check "$up_ver" "$inst_ver" && return
+	local git_ver=$(gkap_ver $name)	
+	ver_check "$git_ver" "$inst_ver" && return
+	local arch_ver=$(aver $name)
+	ver_check "$arch_ver" "$inst_ver" && return
+	local lfs_vers=$(lfs_ver $name)
+	ver_check "$lfs_vers" "$inst_ver" && return
+	fver "$name" "$inst_ver"
+}
+
 function ngnu_ver {
 	local name=$1
 	local inst_ver=$(pkgver $name)

@@ -108,18 +108,70 @@ function ghl_ver {
 	fi
 }
 
+#function ght_ver {
+#	local latest_url=$(curl --max-time 10 --connect-timeout 3 -Ls -o /dev/null -w '%{url_effective}' "https://github.com/$1/releases/latest")
+#	local latest_tag=$(echo "$latest_url" | grep -oP '/tag/\K.*')
+#	if [[ -n "$latest_tag" ]]; then
+#		echo "$latest_tag" | sed -nE "s/^${1#*/}[[:space:]_-]*//i; s/^[^0-9]*([0-9]+([._-][0-9]+)*).*/\1/p" | tr '_' '.' | head -n 1
+#		return 0
+#	fi
+#	if [[ "$1" == "webmproject/libvpx" ]]; then
+#		wget -T 5 -t 1 -cqO- https://github.com/webmproject/libvpx/tags.atom | grep "link.*v[0-9.]+" -oE | sed 's/.*v//g' | head -n 1
+#	else
+#		wget --timeout=5 -t 1 -cqO- "https://github.com/$1/tags.atom" | grep -v "alpha\|beta\|rc" | grep '<title>' | sed -nE "/<title>Tags from /d; s/.*<title>//; s/^${1#*/}[[:space:]_-]*//i; s/^[^0-9]*([0-9]+([._-][0-9]+)*).*/\1/p" | tr '_' '.' | sort -V | tail -n 1
+#	fi
+#}
 function ght_ver {
-	local latest_url=$(curl --max-time 10 --connect-timeout 3 -Ls -o /dev/null -w '%{url_effective}' "https://github.com/$1/releases/latest")
-	local latest_tag=$(echo "$latest_url" | grep -oP '/tag/\K.*')
-	if [[ -n "$latest_tag" ]]; then
-		echo "$latest_tag" | sed -nE "s/^${1#*/}[[:space:]_-]*//i; s/^[^0-9]*([0-9]+([._-][0-9]+)*).*/\1/p" | tr '_' '.' | head -n 1
-		return 0
-	fi
-	if [[ "$1" == "webmproject/libvpx" ]]; then
-		wget -T 5 -t 1 -cqO- https://github.com/webmproject/libvpx/tags.atom | grep "link.*v[0-9.]+" -oE | sed 's/.*v//g' | head -n 1
-	else
-		wget --timeout=5 -t 1 -cqO- "https://github.com/$1/tags.atom" | grep -v "alpha\|beta\|rc" | grep '<title>' | sed -nE "/<title>Tags from /d; s/.*<title>//; s/^${1#*/}[[:space:]_-]*//i; s/^[^0-9]*([0-9]+([._-][0-9]+)*).*/\1/p" | tr '_' '.' | sort -V | tail -n 1
-	fi
+    local repo="$1"
+    local latest_url
+    local latest_tag
+    local version
+
+    latest_url=$(curl --max-time 10 --connect-timeout 3 -Ls \
+        -o /dev/null -w '%{url_effective}' \
+        "https://github.com/$repo/releases/latest")
+
+    latest_tag=$(grep -oP '/tag/\K.*' <<< "$latest_url")
+
+    # Only use the GitHub "latest release" result if its tag is stable.
+    if [[ -n "$latest_tag" ]] &&
+       ! grep -qiE '(alpha|beta|rc|pre|preview|dev|snapshot)' <<< "$latest_tag"; then
+
+        version=$(sed -nE \
+            "s/^${repo#*/}[[:space:]_-]*//i;
+             s/^[^0-9]*([0-9]+([._-][0-9]+)*).*/\1/p" \
+            <<< "$latest_tag" |
+            tr '_' '.' |
+            head -n 1)
+
+        if [[ -n "$version" ]]; then
+            echo "$version"
+            return 0
+        fi
+    fi
+
+    # Special handling for libvpx.
+    if [[ "$repo" == "webmproject/libvpx" ]]; then
+        wget -T 5 -t 1 -cqO- \
+            https://github.com/webmproject/libvpx/tags.atom |
+            grep -oE 'link.*v[0-9.]+' |
+            sed 's/.*v//' |
+            head -n 1
+        return
+    fi
+
+    # Fall back to finding the highest stable tag.
+    wget --timeout=5 -t 1 -cqO- \
+        "https://github.com/$repo/tags.atom" |
+        grep '<title>' |
+        grep -vE '<title>Tags from |(alpha|beta|rc|pre|preview|dev|snapshot)' |
+        sed -nE \
+            "s/.*<title>//;
+             s/^${repo#*/}[[:space:]_-]*//i;
+             s/^[^0-9]*([0-9]+([._-][0-9]+)*).*/\1/p" |
+        tr '_' '.' |
+        sort -V |
+        tail -n 1
 }
 
 function glgd {
@@ -132,6 +184,10 @@ function glib_ver {
 
 function gglib2_ver {
 	timeout 5 git ls-remote --tags --refs https://gitlab.gnome.org/GNOME/glib.git 2>/dev/null | cut -d '/' -f 3 | grep -E "^[0-9]+\.[02468]+\.[0-9]+$" | sort -V | tail -n 1
+}
+
+function gkap_ver {
+	timeout 5 git ls-remote --tags --refs https://github.com/KDE/$1.git | grep -oE "[0-9]+\.[02468]+\.[0-9]+" | sort -V | tail -n 1
 }
 
 function gll_ver {
@@ -225,6 +281,10 @@ function wgn_ver {
 
 function wgnu_ver {
     curl -sL --connect-timeout 3 --max-time 5 "https://ftp.gnu.org/gnu/$1/" 2>/dev/null | sed -nE "s/.*href=[\"\x27]?$1-([0-9]+(\.[0-9]+)*)(\/|\.tar\.[a-z0-9]+|\.zip)[\"\x27]?.*/\1/p" | sort -V | tail -n 1
+}
+
+function wkap_ver {
+	wget -T 5 -t 1 -c https://download.kde.org/stable/release-service -qO- | grep -oE "[0-9]+\.[0-9]+\.[0-9]+" | sort -V | tail -n 1
 }
 
 function wlgd_ver {
