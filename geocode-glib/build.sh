@@ -14,7 +14,8 @@ fi
 rm -rf "$direname"
 tar xf "$filename"
 cd "$direname"
-options=(--prefix=/usr --buildtype=release)
+options=(--prefix=/usr --buildtype=release -D enable-gtk-doc=false \
+            -D soup2=false)
 mni "${options[@]}"
 cd ../..
 rm -rf "$filename" "$direname"
