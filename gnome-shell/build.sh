@@ -15,6 +15,8 @@ fi
 rm -rf "$direname"
 tar xf "$filename"
 cd "$direname"
+sed -e '/(ICalProperty/s/ICalProperty/const &/' \
+    -i src/calendar-server/gnome-shell-calendar-server.c
 options=(--prefix=/usr --buildtype=release -D tests=false)
 mni "${options[@]}"
 cd ../..
