@@ -2,7 +2,7 @@
 set -e
 name=gtk4
 _name=gtk
-version=$(gn_ver $_name)
+version=$(gn_ver $_name $name)
 majVer=$(echo $version | sed -E 's/.[0-9]+$//g')
 filename="$_name-$version.tar.xz"
 direname="${filename/.tar.*/}"

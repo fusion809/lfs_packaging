@@ -4,6 +4,7 @@
 function gn_ver {
 	local pkg_name="${2:-$1}"
 	[[ "$pkg_name" == "glib" ]] && pkg_name="glib2"
+	[[ "$pkg_name" == "gtk" ]] && pkg_name="gtk4"
 	local inst_ver=$(pkgver "$pkg_name")
 	if [[ "$1" == "gtk3" ]]; then
 		local up_ver=$(wgn_ver "gtk" "3")
@@ -11,6 +12,15 @@ function gn_ver {
 
 		local git_ver=$(ggn_ver "gtk" "3")
 		ver_check "$git_ver" "$inst_ver" && return
+	elif [[ "$1" == "gtk" || "$1" == "gtk4" ]]; then
+		local up_ver=$(wgn_ver "gtk" "4")
+		ver_check "$up_ver" "$inst_ver" && return
+
+		local git_ver=$(ggn_ver "gtk" "4")
+		ver_check "$git_ver" "$inst_ver" && return
+
+		local arch_ver=$(aver "gtk4")
+		ver_check "$arch_ver" "$inst_ver" && return
 	elif [[ "$1" == "glib" || "$1" == "glib2" ]]; then
 		local up_ver=$(wgn_ver "glib")
 		ver_check "$up_ver" "$inst_ver" && return
