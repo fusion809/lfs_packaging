@@ -8,13 +8,13 @@ function pkgver {
             for file; do
                 head -n "$lines" "$file" | tail -n 1
             done
-        ' sh "$2" {} +
+        ' sh "$2" {} + | sort -V | tail -n 1
     else
         find /var/lib/{book,custom}-packages -type f -name "$1" -exec sh -c '
             for file; do
                 head -n 1 "$file"
             done
-        ' sh {} +
+        ' sh {} + | sort -V | tail -n 1
     fi
 }
 

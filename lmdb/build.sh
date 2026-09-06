@@ -3,7 +3,7 @@ set -e
 name=lmdb
 get_version() {
   local inst_ver=$(pkgver $name)
-  local git_ver=$(timeout 5 git ls-remote --tags --refs https://git.openldap.org/openldap/openldap.git | grep -oE "refs/tags/LMDB_[0-9.]+$" | sed 's/.*LMDB_//g' | sort -V | tail -n 1)
+  local git_ver=$(timeout 15 git ls-remote --tags --refs https://git.openldap.org/openldap/openldap.git 'refs/tags/LMDB_*' | grep -oE "refs/tags/LMDB_[0-9.]+$" | sed 's/.*LMDB_//g' | sort -V | tail -n 1)
   ver_check "$git_ver" "$inst_ver" && return
   local arch_ver=$(aver $name)
   ver_check "$arch_ver" "$inst_ver" && return
