@@ -3,6 +3,7 @@ set -e
 name=kwallet-pam
 repo=KDE/$name
 version=$(gh_ver $repo)
+depends=(glibc libgcrypt libgpg-error linux-pam)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

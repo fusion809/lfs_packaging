@@ -3,6 +3,9 @@ set -e
 name=plasma-systemmonitor
 repo=KDE/$name
 version=$(gh_ver $repo)
+depends=(acl attica attr brotli bzip2 double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu keyutils libX11 libXext libXfixes libXxf86vm libffi libksysguard libpciaccess libpng libxkbcommon libxml2 libxshmfence mesa mitkrb openssl pcre2 systemd util-linux wayland xz zlib zstd)
+blfs_depends=(karchive kauth kcodecs kconfig kcoreaddons kcrash kdbusaddons kglobalaccel ki18n kio kitemmodels knewstuff kpackage kservice kwindowsystem libXau libXdmcp libdrm libxcb llvm lm-sensors qt6 solid spirv-tools syndication xcb-util-keysyms)
+lfs_depends=(dbus libelf)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

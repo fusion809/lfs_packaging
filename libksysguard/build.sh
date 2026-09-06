@@ -3,6 +3,9 @@ set -e
 name=libksysguard
 repo=KDE/$name
 version=$(gh_ver $repo)
+depends=(brotli bzip2 double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu keyutils libX11 libXext libXxf86vm libffi libpciaccess libpng libxkbcommon libxml2 libxshmfence mesa mitkrb openssl pcre2 systemd util-linux wayland xz zlib zstd)
+blfs_depends=(karchive kauth kconfig kcoreaddons ki18n kpackage kservice libXau libXdmcp libdrm libnl libpcap libxcb llvm lm-sensors qt6 solid spirv-tools)
+lfs_depends=(dbus libelf)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

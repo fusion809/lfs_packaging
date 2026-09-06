@@ -3,6 +3,9 @@ set -e
 name=libkscreen
 repo=KDE/$name
 version=$(gh_ver $repo)
+depends=(brotli bzip2 double-conversion expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu libX11 libXext libXxf86vm libffi libpciaccess libpng libxkbcommon libxml2 libxshmfence mesa pcre2 systemd wayland xz zlib zstd)
+blfs_depends=(libXau libXdmcp libdrm libsndfile libxcb llvm lm-sensors qt6 spirv-tools)
+lfs_depends=(dbus libelf)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

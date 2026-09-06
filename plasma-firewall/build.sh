@@ -3,6 +3,9 @@ set -e
 name=plasma-firewall
 repo=KDE/$name
 version=$(gh_ver $repo)
+depends=(brotli bzip2 double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu keyutils libX11 libXext libXxf86vm libffi libpciaccess libpng libxkbcommon libxml2 libxshmfence mesa mitkrb openssl pcre2 systemd util-linux wayland xz zlib zstd)
+blfs_depends=(breeze-icons karchive kauth kcmutils kcodecs kcolorscheme kconfig kconfigwidgets kcoreaddons kglobalaccel kguiaddons ki18n kiconthemes kitemviews kwidgetsaddons kxmlgui libXau libXdmcp libdrm libxcb llvm lm-sensors qt6 spirv-tools)
+lfs_depends=(dbus libelf)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

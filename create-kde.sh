@@ -7,9 +7,12 @@ while read -r line; do
 
     pkg=$(       echo $file|sed 's|^.*/||')    # Remove directory
     name=$(      echo $pkg |sed 's|-6.*$||')   # Isolate package name
-    cd /var/lib/book-packages
-    mv $name ../custom-packages
+    source add_deps.sh
+    cp -r attica $name
+    sed -i -e "s|attica|$name|g" $name/build.sh
+    mv /var/lib/book-packages/$name /var/lib/custom-packages/$name
+    add_deps $name
 
-done < plasma-6.7.4.md5
+done < frameworks-6.29.0.md5
 
 exit

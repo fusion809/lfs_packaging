@@ -3,6 +3,9 @@ set -e
 name=plasma-setup
 repo=KDE/$name
 version=$(gh_ver $repo)
+depends=(brotli bzip2 double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu keyutils libX11 libXext libXfixes libXxf86vm libffi libpciaccess libplasma libpng libxkbcommon libxml2 libxshmfence mesa mitkrb openssl pcre2 plasma-activities plasma-workspace systemd util-linux wayland xz zlib zstd)
+blfs_depends=(breeze-icons karchive kauth kcolorscheme kconfig kcoreaddons kglobalaccel kguiaddons ki18n kiconthemes kirigami knotifications kpackage kservice ksvg kwindowsystem libXau libXdmcp libcanberra libdrm libogg libsndfile libvorbis libxcb llvm lm-sensors qt6 spirv-tools webkitgtk xcb-util-keysyms)
+lfs_depends=(dbus libelf)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
