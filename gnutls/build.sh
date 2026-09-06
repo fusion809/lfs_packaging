@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=gnutls
-repo="gpg/$name"
+repo="$name/$name"
 version=$(gh_ver $repo)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"

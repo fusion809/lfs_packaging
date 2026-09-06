@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=gcr
-repo=GNOME/$name
+repo=GNOME/${name}3
 version=$(gh_ver $repo)
 depends=(brotli bzip2 expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXres libepoxy libffi libgcrypt libgpg-error libpng libxkbcommon p11-kit pango pcre2 systemd util-linux wayland zlib)
 blfs_depends=(at-spi2-core cairo lcms2 libXau libXdmcp libseccomp libxcb pixman)
