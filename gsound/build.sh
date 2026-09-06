@@ -1,8 +1,7 @@
 #!/bin/bash
 set -e
 name=gsound
-repo=GNOME/$name
-version=$(gh_ver $repo)
+version=$(gn_ver $name)
 depends=(glib2 glibc libffi pcre2 systemd util-linux zlib)
 blfs_depends=(libcanberra libogg libvorbis webkitgtk)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
