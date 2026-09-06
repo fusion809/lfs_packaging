@@ -74,6 +74,8 @@ function ggn_ver {
 		timeout 15 git ls-remote --tags --refs "$URL.git" 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|\.9[0-9]" | grep -E "^3\.[02468]+\.[0-9]+$" | sort -V | tail -n 1
 	elif [[ "${1}${2}" == "gtk4" || "$1" == "gtk" || "$1" == "gtk4" ]]; then
 		timeout 15 git ls-remote --tags --refs "$URL.git" 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|\.9[0-9]" | grep -E "^${2:-4}\.[02468]+\.[0-9]+$" | sort -V | tail -n 1
+	elif [[ "${1}" == "gjs" ]]; then
+		timeout 15 git ls-remote --tags --refs "$URL.git" 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|\.9[0-9]" | grep -E "^[0-9]+\.[02468]+\.[0-9]+$" | sort -V | tail -n 1
 	else		
     	timeout 5 git ls-remote --tags --refs "$URL.git" 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|\.9[0-9]" | sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' | grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^${2:-[0-9]}" | sort -V | tail -n 1
 	fi
