@@ -8,7 +8,11 @@ function aver {
 	else
 		local no=1
 	fi
-    wget -T 5 -t 1 -cqO- "$URL" | grep -E "^[_]*pkgver=" | cut -d '=' -f 2 | head -n "$no" | tail -n 1
+	if [[ "$name" == "gcc" ]]; then
+		wget -T 5 -t 1 -cqO- "$URL" | grep -E "^[_]*pkgver=" | cut -d '=' -f 2 | head -n "$no" | sed 's/1+r.*/0/g' | tail -n 1
+	else
+	    wget -T 5 -t 1 -cqO- "$URL" | grep -E "^[_]*pkgver=" | cut -d '=' -f 2 | head -n "$no" | sed 's/+r.*//g' | tail -n 1
+	fi
 }
 
 function fdt_ver {
