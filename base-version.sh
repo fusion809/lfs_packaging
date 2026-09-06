@@ -58,6 +58,8 @@ function ggn_ver {
 		URL="https://gitlab.gnome.org/Archive/policykit-gnome"
 	elif [[ "$1" == "gedit" ]]; then
 		URL="https://gitlab.gnome.org/World/gedit/gedit"
+	elif [[ "$1" == "glib2" ]]; then
+		URL="https://gitlab.gnome.org/GNOME/glib"
 	else
 		URL="https://gitlab.gnome.org/GNOME/$1"
 	fi
@@ -210,7 +212,7 @@ function glib_ver {
 }
 
 function gglib2_ver {
-	timeout 5 git ls-remote --tags --refs https://gitlab.gnome.org/GNOME/glib.git 2>/dev/null | cut -d '/' -f 3 | grep -E "^[0-9]+\.[02468]+\.[0-9]+$" | sort -V | tail -n 1
+	timeout 5 git ls-remote --tags --refs https://gitlab.gnome.org/GNOME/glib.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|\.9[0-9]" | grep -E '^[0-9]+(\.[0-9]+)+$' | sort -V | tail -n 1
 }
 
 function gkap_ver {
@@ -300,6 +302,8 @@ function wgn_ver {
 		URL="https://gitlab.gnome.org/Archive/policykit-gnome"
 	elif [[ "$1" == "gedit" ]]; then
 		URL="https://gitlab.gnome.org/World/gedit/gedit"
+	elif [[ "$1" == "glib2" ]]; then
+		URL="https://gitlab.gnome.org/GNOME/glib"
 	else
 		URL="https://gitlab.gnome.org/GNOME/$1"
 	fi

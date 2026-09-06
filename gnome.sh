@@ -2,14 +2,16 @@
 
 # gnome version fetcher
 function gn_ver {
-	local inst_ver=$(pkgver "$1")
+	local pkg_name="${2:-$1}"
+	[[ "$pkg_name" == "glib" ]] && pkg_name="glib2"
+	local inst_ver=$(pkgver "$pkg_name")
 	if [[ "$1" == "gtk3" ]]; then
 		local up_ver=$(wgn_ver "gtk" "3")
 		ver_check "$up_ver" "$inst_ver" && return
 
 		local git_ver=$(ggn_ver "gtk" "3")
 		ver_check "$git_ver" "$inst_ver" && return
-	elif [[ "$1" == "glib" ]]; then
+	elif [[ "$1" == "glib" || "$1" == "glib2" ]]; then
 		local up_ver=$(wgn_ver "glib")
 		ver_check "$up_ver" "$inst_ver" && return
 
@@ -30,12 +32,12 @@ function gn_ver {
 		local git_ver=$(ggn_ver "$1")
 		ver_check "$git_ver" "$inst_ver" && return
 	fi
-	local arch_ver=$(aver "$1")
+	local arch_ver=$(aver "$pkg_name")
 	ver_check "$arch_ver" "$inst_ver" && return
 
 	local lfs_vers=$(lfs_ver "$1")
 	ver_check "$lfs_vers" "$inst_ver" && return
-	fver "$1" "$inst_ver"
+	fver "$pkg_name" "$inst_ver"
 }
 
 # libgedit-* version fetcher
