@@ -294,6 +294,7 @@ function lfs_ver {
 	local search_name fallback_page
 	case "$1" in
 		mitkrb) search_name="krb5"; fallback_page="postlfs/mitkrb.html" ;;
+		vte) search_name="vte" ; fallback_page="gnome/vte.html";;
 		*)       search_name="$1";  fallback_page="" ;;
 	esac
 
@@ -304,6 +305,7 @@ function lfs_ver {
 		https://www.linuxfromscratch.org/blfs/view/systemd/longindex.html \
 		https://www.linuxfromscratch.org/slfs/view/stable/ \
 		| grep -iE ">$search_name-[0-9.]+" \
+		| grep -vE "vte-2\.[0-9]+" \
 		| sed -E "s/.*$search_name-([0-9.]+).*/\1/I" \
 		| grep -E "^[0-9.]+$" | sort -V | tail -n 1)
 
