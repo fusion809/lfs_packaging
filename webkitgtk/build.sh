@@ -24,6 +24,7 @@ fi
 rm -rf "$direname"
 tar xf "$filename"
 cd "$direname"
+echo "Compiling with GTK+3 support"
 options1=(-D CMAKE_BUILD_TYPE=Release     \
       -D CMAKE_INSTALL_PREFIX=/usr    \
       -D CMAKE_SKIP_INSTALL_RPATH=ON  \
@@ -42,6 +43,7 @@ options1=(-D CMAKE_BUILD_TYPE=Release     \
       -D ENABLE_SPEECH_SYNTHESIS=OFF  \
       -W no-author -G Ninja)
 cmaki "${options1[@]}"
+echo "Compiling with GTK+4 support"
 options2=(-D CMAKE_BUILD_TYPE=Release         \
       -D CMAKE_INSTALL_PREFIX=/usr        \
       -D CMAKE_SKIP_INSTALL_RPATH=ON      \
