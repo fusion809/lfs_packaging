@@ -16,7 +16,7 @@ cd "$direname"
 sed -e "/OUTDIR/s|,| / 'librsvg-2.62.3', '--no-namespace-dir',|" \
     -e '/output/s|Rsvg-2.0|librsvg-2.62.3|'                      \
     -i doc/meson.build
-mni --prefix=/usr --buildtype=release
+mni --prefix=/usr --buildtype=release -Dpixbuf-loader=enabled
 cd ../..
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"

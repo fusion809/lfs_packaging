@@ -130,6 +130,8 @@ function ghl_ver {
             timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep -oE "[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+" | sort -V | tail -n 1
 	elif [[ "$1" == "GNOME/gcr3" ]]; then
 		timeout 5 git ls-remote --tags --refs https://github.com/GNOME/gcr.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep -oE "3\.[0-8][0-9]*\.[0-9]+" | sort -V | tail -n 1
+	elif [[ "$1" == "GNOME/libgtop" ]]; then
+		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep -oE "2\.[0-8][0-9]*\.[0-9]+" | sort -V | tail -n 1
 	else
 		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | tr '-' '.' | sort -V | tail -n 1
 	fi
