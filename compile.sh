@@ -153,6 +153,7 @@ function pfile {
     wget -cqO- \
         "https://www.linuxfromscratch.org/lfs/view/systemd/chapter08/$1.html" \
 	"https://www.linuxfromscratch.org/blfs/view/systemd/general/$1.html" \
+	"https://www.linuxfromscratch.org/blfs/view/systemd/basicnet/$1.html" \
         "https://www.linuxfromscratch.org/blfs/view/systemd/postlfs/$1.html" |
     grep '\.patch' |
     cut -d '/' -f 2 |
