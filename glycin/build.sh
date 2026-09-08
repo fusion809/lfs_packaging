@@ -30,5 +30,16 @@ do
 	sudo rm /usr/bin/$pkg
 done
 cd ../..
-rm -rf "$filename" "$direname"
+rm -rf "$direname"
+tar xf $filename
+cd $direname
+options=(--prefix=/usr               \
+            --buildtype=release         \
+            -D libglycin=false          \
+            -D libglycin-gtk4=true      \
+            -D glycin-loaders=false     \
+	    -D glycin-thumbnailer=false)
+mni "${options[@]}"
+cd ../..
+rm -rf $direname $filename
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
