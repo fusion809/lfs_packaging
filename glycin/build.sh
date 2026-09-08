@@ -25,10 +25,6 @@ do
 	sudo ln -sf /opt/rustc/bin/$pkg /usr/bin/
 done
 mni "${meson_options[@]}"
-for pkg in rustc cargo rustdoc
-do
-	sudo rm /usr/bin/$pkg
-done
 cd ../..
 rm -rf "$direname"
 tar xf $filename
@@ -40,6 +36,10 @@ options=(--prefix=/usr               \
             -D glycin-loaders=false     \
 	    -D glycin-thumbnailer=false)
 mni "${options[@]}"
+for pkg in rustc cargo rustdoc
+do
+	sudo rm /usr/bin/$pkg
+done
 cd ../..
 rm -rf $direname $filename
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
