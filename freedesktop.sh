@@ -59,6 +59,8 @@ function xfd_ver() {
 		type="lib"
 	elif echo $name | grep "xf86" &> /dev/null; then
 		type="driver"
+	elif echo $name | grep "proto" &> /dev/null; then
+		type="proto"
 	else
 		type="app"
 	fi
