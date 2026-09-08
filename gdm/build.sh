@@ -1,4 +1,5 @@
 #!/bin/bash
+# Oddly seems necessary to launch GNOME via SDDM
 set -e
 name=gdm
 repo=GNOME/$name
