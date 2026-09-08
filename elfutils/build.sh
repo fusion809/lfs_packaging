@@ -26,6 +26,18 @@ fi
 rm -rf $direname
 tar xf $filename
 cd $direname
+./configure --prefix=/usr        \
+            --disable-debuginfod \
+            --enable-libdebuginfod=dummy
+make -C lib -j$(nproc)
+make -C libelf -j$(nproc)
+sudo su -c "make -C libelf install
+install -vm644 config/libelf.pc /usr/lib/pkgconfig
+rm /usr/lib/libelf.a"
+cd ..
+rm -rf $direname
+tar xf $filename
+cd $direname
 MOCK_GCC_DIR="/tmp/mock_gcc_elfutils"
 mkdir -p "$MOCK_GCC_DIR"
 cat > "$MOCK_GCC_DIR/gcc" <<\GCCEOF
@@ -41,9 +53,7 @@ exec "$REAL_GCC" "${newargs[@]}"
 GCCEOF
 chmod +x "$MOCK_GCC_DIR/gcc"
 export PATH="$MOCK_GCC_DIR:$PATH"
-./configure --prefix=/usr --sysconfdir=/etc --program-prefix="eu-"
-make -j$(nproc)
-sudo make install
+cmi --prefix=/usr --sysconfdir=/etc --program-prefix="eu-"
 cd ..
 sudo rm -rf $name-$version*
 echo $version > /var/lib/custom-packages/$name
