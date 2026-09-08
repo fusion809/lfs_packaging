@@ -9,8 +9,7 @@ get_version() {
 	ver_check "$lfs_vers" "$inst_ver" && return
 	fver "$name" "$inst_ver"
 }
-repo="docbook/xsl10-stylesheets"
-version=$(gh_ver $repo)
+version=$(get_version)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
