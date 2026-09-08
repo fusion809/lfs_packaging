@@ -381,5 +381,9 @@ function wsp_ver {
 }
 
 function wxfd_ver {
-    wget --timeout=5 -t 1 -cqO- https://xorg.freedesktop.org/archive/individual/$1/ | grep "$2-" | grep '\.tar\.xz"' | cut -d '"' -f 2 | cut -d '-' -f 2 | sed 's/.tar.*$//g' | sort -V | tail -n 1
+    wget --timeout=5 -t 1 -cqO- https://xorg.freedesktop.org/archive/individual/$1/ | grep "$2-" | grep '\.tar\.xz"' | cut -d '"' -f 2 | sed 's/$2-//g' | sed 's/.tar.*$//g' | sort -V | tail -n 1
+}
+
+function wxcb_ver {
+	wget -T 5 -t 1 -cqO- https://xorg.freedesktop.org/archive/individual/lib/ | grep "$1-[0-9]+\.[0-9]+\.[0-9]+" -oE | sed "s/$1-//g" | sort -V | tail -n 1
 }

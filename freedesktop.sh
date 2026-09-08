@@ -55,7 +55,7 @@ function way_ver {
 # xorg.freedesktop.org version fetcher
 function xfd_ver() {
 	name="$1"
-	if echo $name | grep "lib" &> /dev/null || [[ "$name" == "xtrans" ]]; then
+	if echo $name | grep "lib" &> /dev/null || [[ "$name" == "xtrans" ]] || echo $name | grep "xcb-util-" &> /dev/null; then
 		type="lib"
 	elif echo $name | grep "xf86" &> /dev/null; then
 		type="driver"
@@ -86,3 +86,16 @@ function xfd_ver() {
 	ver_check "$lfs_vers" "$inst_ver" && return
 	fver "$name" "$inst_ver"
 }
+
+function xcb_ver {
+	local name=$1
+	local inst_ver=$(pkgver $name)
+	local up_ver=$(wxcb_ver $name)
+	ver_check "$up_ver" "$inst_ver" && return
+	local arch_ver=$(aver $name)
+	ver_check "$arch_ver" "$inst_ver" && return
+	local lfs_vers=$(lfs_ver $name)
+	ver_check "$lfs_vers" "$inst_ver" && return
+	fver "$name" "$inst_ver"
+}
+
