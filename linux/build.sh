@@ -35,9 +35,6 @@ direname="${filename/.tar.xz/}"
 wget -c https://cdn.kernel.org/pub/linux/kernel/v$(echo ${base_version} | cut -d '.' -f 1).x/${remote_filename} -O $filename
 #fi
 
-function os-release {
-	cat /etc/os-release | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv} "PRETTY_NAME" | cut -d '"' -f 2 | cut -d ' ' -f 4
-}
 sudo rm -rf $direname
 tar xf $filename
 if [[ $remote_direname != $direname ]]; then
@@ -49,7 +46,7 @@ sudo cp ../config .config
 make -j$(nproc)
 sudo make headers_install
 sudo make modules_install
-sudo cp -v arch/x86/boot/bzImage /boot/vmlinuz-$version-lfs-$(os-release)
+sudo cp -v arch/x86/boot/bzImage /boot/vmlinuz-$version-lfs-$(cat /etc/lfs-release)
 sudo cp -v System.map /boot/System.map-$version
 sudo cp .config /boot/config-$version
 sudo cp -r Documentation -T /usr/share/doc/$direname
