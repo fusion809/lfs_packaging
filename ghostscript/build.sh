@@ -2,7 +2,7 @@
 set -e
 name=ghostscript
 repo=ArtifexSoftware/ghostpdl-downloads
-version=$(gh_ver $repo)
+version=$(gh_ver $repo | sed -E 's/(..)(..)/\1.\2./')
 verd=$(echo $version | sed 's/\.//g')
 depends=(brotli bzip2 dbus expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz libICE libSM libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXres libXt libepoxy libffi libpaper libpng libxcrypt libxkbcommon openssl pango pcre2 systemd util-linux wayland xz zlib zstd)
 blfs_depends=(at-spi2-core avahi cairo cups lcms2 libXau libXdmcp libjpeg-turbo libseccomp libtiff libwebp libxcb openjpeg pixman)
