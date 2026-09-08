@@ -91,7 +91,7 @@ sudo cp -a $docs /usr/share/doc/$direname
 # Cleanup and add to database
 cd ..
 sudo rm -rf $filename $direname
-echo $version > /var/lib/custom-packages/$name
+echo $version | sudo tee /var/lib/custom-packages/$name
 if [ -d "$DDIR" ] && [ "$(ls -A "$DDIR" 2>/dev/null)" ]; then
    find "$DDIR" -type f -o -type l | sed "s|^$DDIR||" | sudo tee -a "/var/lib/custom-packages/$name" > /dev/null
 fi
