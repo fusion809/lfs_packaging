@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=polkit-qt
-repo=KDE/$name
+repo=KDE/$name-1
 version=$(gh_ver $repo)
 depends=(brotli bzip2 dbus double-conversion expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu libX11 libXext libXxf86vm libffi libpciaccess libpng libxkbcommon libxml2 libxshmfence mesa pcre2 polkit systemd util-linux wayland xz zlib zstd)
 blfs_depends=(libXau libXdmcp libdrm libxcb llvm lm-sensors qt6 spirv-tools)
