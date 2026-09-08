@@ -13,7 +13,7 @@ get_version() {
 	ver_check "$lfs_vers" "$inst_ver" && return
 	fver "$name" "$inst_ver"
 }
-version=$(gh_ver $repo)
+version=$(get_version)
 depends=(glibc json-c keyutils libaio libnvme ncurses openssl readline systemd util-linux)
 filename="$name.$version.tgz"
 direname="${filename/.tar.*/}"
