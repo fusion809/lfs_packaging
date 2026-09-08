@@ -31,7 +31,8 @@ fi
 
 tar xf "$filename"
 cd "$direname"
-sed -i -e "s|http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl|/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2/manpages/docbook.xsl|g" format/docbook/man
+docbook_ver=$(pkgver docbook-xsl-nons)
+sed -i -e "s|http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl|/usr/share/xml/docbook/xsl-stylesheets-nons-$docbook_ver/manpages/docbook.xsl|g" format/docbook/man
 autoreconf -fiv                                  &&
 LINKS="/usr/bin/links" cmi "--prefix=/usr"
 cd ..

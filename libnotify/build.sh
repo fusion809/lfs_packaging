@@ -16,7 +16,8 @@ rm -rf $direname
 tar xf $filename
 # Compile and install
 cd $direname
-sed -i -e "s|http://docbook.sourceforge.net/release/xsl-ns/current/manpages/docbook.xsl|/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2/manpages/docbook.xsl|g" meson.build
+docbook_ver=$(pkgver docbook-xsl-nons)
+sed -i -e "s|http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl|/usr/share/xml/docbook/xsl-stylesheets-nons-$docbook_ver/manpages/docbook.xsl|g" meson.build
 meson_options=(
   --prefix=/usr                \
   --buildtype=release          \
