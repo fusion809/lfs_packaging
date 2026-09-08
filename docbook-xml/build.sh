@@ -13,7 +13,7 @@ get_version() {
 }
 version=$(get_version)
 filename="$name-$version.zip"
-direname="${filename/.tar.*/}"
+direname="${filename/.zip/}"
 if ! [[ -f $filename ]]; then
 	wget -c https://archive.docbook.org/xml/$version/$filename
 fi
