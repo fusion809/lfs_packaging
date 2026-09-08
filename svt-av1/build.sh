@@ -2,7 +2,7 @@
 set -e
 name=svt-av1
 repo=AOMediaCodec/SVT-AV1
-version=$(gl_ver $repo)
+version=$(gl_ver $repo | sed 's/-cpp-extended//g')
 depends=(gcc glibc)
 filename="SVT-AV1-v$version.tar.gz"
 direname="${filename/.tar.*/}"
