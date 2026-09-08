@@ -5,8 +5,6 @@ get_version() {
 	local inst_ver=$(pkgver $name)
 	local git_ver=$(timeout 5 git ls-remote --tags --refs  https://github.com/docbook/xslt10-stylesheets.git | grep "refs/tags/release" | cut -d '/' -f 4 | tail -n 1)
 	ver_check "$git_ver" "$inst_ver" && return
-	local arch_ver=$(aver $name)
-	ver_check "$arch_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)
 	ver_check "$lfs_vers" "$inst_ver" && return
 	fver "$name" "$inst_ver"
