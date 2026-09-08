@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=phonon-backend-vlc
-repo=KDE/$name
+repo=KDE/phonon-vlc
 version=$(gh_ver $repo)
 depends=(brotli bzip2 dbus double-conversion expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu libX11 libXext libXxf86vm libffi libpciaccess libpng libxkbcommon libxml2 libxshmfence mesa pcre2 phonon systemd wayland xz zlib zstd)
 blfs_depends=(flac lame libXau libXdmcp libdrm libogg libsndfile libvorbis libxcb llvm lm-sensors mpg123 opus pulseaudio qt6 spirv-tools vlc)
