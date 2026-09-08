@@ -132,6 +132,8 @@ function ghl_ver {
 		timeout 5 git ls-remote --tags --refs https://github.com/GNOME/gcr.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep -oE "3\.[0-8][0-9]*\.[0-9]+" | sort -V | tail -n 1
 	elif [[ "$1" == "GNOME/libgtop" ]]; then
 		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep -oE "2\.[0-8][0-9]*\.[0-9]+" | sort -V | tail -n 1
+	elif [[ "$1" == "GNOME/gvfs" ]]; then
+		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep -oE "[0-9]+\.[0-9][02468]\.[0-8][0-9]*" | sort -V | tail -n 1
 	else
 		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | tr '-' '.' | sort -V | tail -n 1
 	fi
@@ -167,7 +169,7 @@ function ght_ver {
     latest_tag=$(grep -oP '/tag/\K.*' <<< "$latest_url")
 
     # Only use the GitHub "latest release" result if its tag is stable.
-    if [[ -n "$latest_tag" ]] && [[ "$1" != "GNOME/gcr3" ]] &&[[ $repo != "GNOME/librsvg" ]] &&
+    if [[ -n "$latest_tag" ]] && [[ "$1" != "GNOME/gvfs" ]] && [[ "$1" != "GNOME/gcr3" ]] &&[[ $repo != "GNOME/librsvg" ]] &&
 	    [[ $repo != "KhronosGroup/Vulkan-Loader" ]] &&
             [[ $repo != "KhronosGroup/Vulkan-Headers" ]] &&
 	! grep -qiE '(alpha|beta|rc|pre|preview|dev|snapshot|[0-9]+\.[0-9]+\.9[0-9])' <<< "$latest_tag"; then
@@ -199,9 +201,14 @@ function ght_ver {
             grep -oE "[0-9]+\.[0-9]+\.[0-8]" | sort -V | tail -n 1
 	return
 	elif [[ "$1" == "GNOME/gcr3" ]]; then
-wget -T 5 -t 1 -cqO- \
-            https://github.com/$repo/tags.atom | grep -v "beta" |
+	wget -T 5 -t 1 -cqO- \
+		    https://github.com/$repo/tags.atom | grep -v "beta" |
             grep -oE "3\.[0-8][0-9]*\.[0-9]" | sort -V | tail -n 1
+	return
+	elif [[ "$1" == "GNOME/gvfs" ]]; then
+	wget -T 5 -t 1 -cqO- \
+		    https://github.com/$repo/tags.atom | grep -v "beta" |
+            grep -oE "[0-9]+\.[0-9][02468]\.[0-9]+" | sort -V | tail -n 1
 	return
     elif [[ "$repo" == "KhronosGroup/Vulkan-Loader" ]] || [[ "$repo" == "KhronosGroup/Vulkan-Headers" ]]; then
 	wget -T 5 -t 1 -cqO- \
