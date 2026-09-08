@@ -55,7 +55,7 @@ function way_ver {
 # xorg.freedesktop.org version fetcher
 function xfd_ver() {
 	name="$1"
-	if echo $name | grep "lib" &> /dev/null || [[ "$name" == "xtrans" ]] || echo $name | grep "xcb-util-" &> /dev/null; then
+	if echo $name | grep "^lib" &> /dev/null || [[ "$name" == "xtrans" ]] || echo $name | grep "xcb-util-" &> /dev/null; then
 		type="lib"
 	elif echo $name | grep "xf86" &> /dev/null; then
 		type="driver"
