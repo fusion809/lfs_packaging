@@ -3,7 +3,7 @@ set -e
 name=gcr4
 _name=gcr
 repo=GNOME/$_name
-version=$(gh_ver $repo)
+version=$(gh_ver $repo $name)
 depends=(brotli bzip2 elfutils expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk4 harfbuzz icu libX11 libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXxf86vm libepoxy libffi libgcrypt libgpg-error libgudev libpciaccess libpng libsecret libxkbcommon libxml2 libxshmfence mesa orc p11-kit pango pcre2 systemd util-linux vulkan-loader wayland xz zlib zstd)
 blfs_depends=(cairo lcms2 libXau libXdmcp libdrm libjpeg-turbo libseccomp libtiff libunwind libwebp libxcb llvm lm-sensors pixman spirv-tools)
 lfs_depends=(libelf)
