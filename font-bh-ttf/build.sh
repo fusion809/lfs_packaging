@@ -2,7 +2,6 @@
 set -e
 name=font-bh-ttf
 depends=(glibc)
-repo=$name/$name
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local up_ver=$(wget -cqO- -T 5 -t 1 https://www.x.org/pub/individual/font/ | grep "$name-[0-9]+\.[0-9]+\.[0-9]+" -oE | sed "s/$name-//g" | sort -V | tail -n 1)
@@ -13,6 +12,7 @@ get_version() {
 	ver_check "$lfs_vers" "$inst_ver" && return
 	fver "$name" "$inst_ver"
 }
+version=$(get_version)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
