@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=libcdio
-version=$(gn_ver $name)
+version=$(gnu_ver $name)
 depends=(gcc glibc ncurses)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"

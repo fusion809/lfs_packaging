@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=modemmanger
-repo=mobile-broadband/ModemManager
+repo=linux-mobile-broadband/ModemManager
 version=$(gh_ver $repo)
 depends=(glib2 glibc libffi libgudev libmbim libqmi pcre2 polkit systemd util-linux zlib)
 filename="ModemManager-$version.tar.gz"
