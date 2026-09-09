@@ -18,7 +18,7 @@ cd $direname
 if ! [[ -f configure ]]; then
 	autoreconf
 fi
-#if ( [[ -f /var/lib/book-packages/texlive ]] || [[ -f /var/lib/custom-packages/texlive ]] ); then
+#if ( [[ -f /var/lib/custom-packages/texlive ]] || [[ -f /var/lib/custom-packages/texlive ]] ); then
 #	export PATH=$PATH:/opt/texlive/$(ls /opt/texlive/[0-9]* -ld | sed 's|.*/opt/texlive/||g')/bin/x86_64-linux
 #	cmi --prefix=/usr --disable-static
 #	sudo su -c "chmod   -v   755 /usr/lib/lib{hogweed,nettle}.so &&

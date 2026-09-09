@@ -10,6 +10,8 @@ if ! [[ -f $filename ]]; then
 fi
 rm -rf "$direname"
 tar xf "$filename"
+export PATH=$PATH:/opt/qt6/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/qt6/lib
 cd "$direname"
 cmaki -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_LIBEXECDIR=libexec -D BUILD_QT5=OFF -D BUILD_TESTING=OFF
 cd ../..

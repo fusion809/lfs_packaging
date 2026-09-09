@@ -23,7 +23,7 @@ direname="$name-$version"
 filename="$direname.tar.gz"
 blfs_depends=(docbook-xml docbook-xsl-nons libxslt)
 lfs_depends=(glibc)
-xslver=$(cat /var/lib/book-packages/docbook-xsl-nons | head -n 1)
+xslver=$(cat /var/lib/custom-packages/docbook-xsl-nons | head -n 1)
 
 if ! [[ -f $filename ]]; then
 	wget -c https://pagure.io/xmlto/archive/$version/$filename
