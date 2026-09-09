@@ -11,6 +11,7 @@ get_version() {
 	ver_check "$lfs_vers" "$inst_ver" && return
 	fver "$name" "$inst_ver"
 }
+version=$(get_version)
 depends=(glibc hwloc libevent libfabric numactl openmpi systemd)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
