@@ -1,10 +1,18 @@
 #!/bin/bash
 set -e
 name=slang
-repo=shader-$name/$name
-version=$(gh_ver $repo)
-depends=(gcc glibc glslang)
-blfs_depends=(spirv-tools)
+get_version() {
+	local inst_ver=$(pkgver $name)
+	local up_ver=$(wget -cqO- -T 5 -t 1 https://www.jedsoft.org/releases/slang/ | grep -oE "slang-[0-9]+\.[0-9]+\.[0-9]+" | cut -d '-' -f 2 | sort -V | tail -n 1)
+	ver_check "$up_ver" "$inst_ver" && return
+	local arch_ver=$(aver $name)
+	ver_check "$arch_ver" "$inst_ver" && return
+	local lfs_vers=$(lfs_ver $name)
+	ver_check "$lfs_vers" "$inst_ver" && return
+	fver "$name" "$inst_ver"
+}
+version=$(get_version)
+depends=(gcc glibc glslang spirv-tools)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
