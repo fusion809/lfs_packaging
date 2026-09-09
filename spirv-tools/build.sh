@@ -1,8 +1,19 @@
 #!/bin/bash
 set -e
 name=spirv-tools
-repo=KhronosGroup/SPIRV-Tools
-version=$(gh_ver $repo)
+get_version() {
+	local inst_ver=$(pkgver $name)
+	local up_ver=$(wget -cqO- -T 5 -t 1 https://github.com/KhronosGroup/SPIRV-Tools/tags | grep "vulkan-sdk-[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+" -oE | sed 's/vulkan-sdk-//g' | sort -V | tail -n 1)
+	ver_check "$up_ver" "$inst_ver" && return
+	local git_ver=$(timeout 5 git ls-remote --tags --refs https://github.com/KhronosGroup/SPIRV-Tools.git | grep "vulkan-sdk-" | sed 's/.*vulkan-sdk-//g' | sort -V | tail -n 1)
+	ver_check "$git_ver" "$inst_ver" && return
+	local arch_ver=$(aver $name)
+	ver_check "$arch_ver" "$inst_ver" && return
+	local lfs_vers=$(lfs_ver $name)
+	ver_check "$lfs_vers" "$inst_ver" && return
+	fver "$name" "$inst_ver"
+}
+version=$(get_version)
 depends=(gcc glibc)
 filename="SPIRV-Tools-vulkan-sdk-$version.tar.gz"
 direname="${filename/.tar.*/}"
