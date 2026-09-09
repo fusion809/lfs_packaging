@@ -1,9 +1,9 @@
 #!/bin/bash
 set -e
-name=perl-xml-parser
+name=perl-class-inspector
 get_version() {
 	local inst_ver=$(pkgver $name)
-	local up_ver=$(wget -cqO- -T 5 -t 1 https://www.cpan.org/authors/id/T/TO/TODDR | grep "XML-Parser-[0-9]+\.[0-9]+" -oE | cut -d '-' -f 2 | sort -V | tail -n 1)
+	local up_ver=$(wget -cqO- -T 5 -t 1 https://www.cpan.org/authors/id/P/PL/PLICEASE | grep "Class-Inspector-[0-9]+\.[0-9]+" -oE | cut -d '-' -f 2 | sort -V | tail -n 1)
 	ver_check "$up_ver" "$inst_ver" && return
 	local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$inst_ver" && return
@@ -12,11 +12,11 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-filename="XML-Parser-$version.tar.gz"
+filename="Class-Inspector-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(perl-file-sharedir)
 if ! [[ -f $filename ]]; then
-	wget -c https://www.cpan.org/authors/id/T/TO/TODDR/$filename
+	wget -c https://www.cpan.org/authors/id/P/PL/PLICEASE/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"
