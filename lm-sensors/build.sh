@@ -3,8 +3,9 @@ set -e
 name=lm-sensors
 repo=hramrach/$name
 version=$(gh_ver $repo | sed 's/-/./g')
+_version=$(echo $version | sed 's/./-/g')
 depends=(glibc)
-filename="$name-${version/./-/}.tar.gz"
+filename="$name-$_version.tar.gz"
 direname="${filename/.tar.*/}"
 # Kernel config options required, too
 if ! [[ -f $filename ]]; then
