@@ -27,4 +27,4 @@ tar xf $filename
 cd $direname
 cmi --prefix=/usr
 cd ..
-echo "$version" > /var/lib/custom-packages/$name
+echo "$version" sudo tee /var/lib/custom-packages/$name

@@ -17,4 +17,4 @@ sudo /usr/sbin/make-ca -g --force
 sudo systemctl enable update-pki.timer
 cd ..
 rm -rf "$filename" "$direname"
-echo "$version" > /var/lib/custom-packages/$name
+echo "$version" sudo tee /var/lib/custom-packages/$name

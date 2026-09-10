@@ -40,5 +40,5 @@ mni "${meson_options[@]}"
 sudo cp -rv ../docs -T /usr/share/doc/$direname
 cd ../..
 rm -rf $direname $filename
-echo "$version" > /var/lib/custom-packages/$name
+echo "$version" sudo tee /var/lib/custom-packages/$name
 

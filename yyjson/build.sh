@@ -28,4 +28,4 @@ sudo install -Dm644 doc/*.md /usr/share/doc/$direname
 # Cleanup and add to database
 cd ..
 rm -rf $direname $filename
-echo $version > /var/lib/custom-packages/$name
+echo $version sudo tee /var/lib/custom-packages/$name

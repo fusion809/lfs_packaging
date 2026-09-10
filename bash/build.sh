@@ -14,4 +14,4 @@ cd $direname
 cmi --prefix=/usr --without-bash-malloc --with-installed-readline --docdir=/usr/share/doc/"$direname"
 cd ..
 rm -rf $filename $direname
-echo "$version" > /var/lib/custom-packages/$name
+echo "$version" sudo tee /var/lib/custom-packages/$name

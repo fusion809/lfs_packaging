@@ -75,4 +75,4 @@ localedef -i zh_HK -f BIG5-HKSCS zh_HK.BIG5-HKSCS
 localedef -i zh_TW -f UTF-8 zh_TW.UTF-8"
 cd ../..
 rm -rf $direname $filename
-echo "$version" > /var/lib/custom-packages/$name
+echo "$version" sudo tee /var/lib/custom-packages/$name

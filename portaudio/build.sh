@@ -30,4 +30,4 @@ sudo install -Dm644 README.* /usr/share/doc/$direname/
 # Cleanup and add to database
 cd ..
 sudo rm -rf $filename $direname
-echo $version > /var/lib/custom-packages/$name
+echo $version sudo tee /var/lib/custom-packages/$name

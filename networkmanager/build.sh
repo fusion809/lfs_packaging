@@ -47,4 +47,4 @@ for file in $(echo ../man/*.[1578]); do
 done
 cd ../..
 rm -rf "$direname" "$filename"
-echo "$version" > /var/lib/custom-packages/$name
+echo "$version" sudo tee /var/lib/custom-packages/$name

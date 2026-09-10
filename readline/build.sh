@@ -28,4 +28,4 @@ sudo make install
 sudo install -v -m644 doc/*.{ps,pdf,html,dvi} /usr/share/doc/$direname
 cd ..
 rm -rf $filename $direname
-echo "$version" > /var/lib/custom-packages/$name
+echo "$version" sudo tee /var/lib/custom-packages/$name

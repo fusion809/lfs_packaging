@@ -23,4 +23,4 @@ mni $XORG_CONFIG --buildtype=release
 cd ../..
 sudo rm -rf $direname $filename
 sudo /sbin/ldconfig
-echo $version > /var/lib/custom-packages/$name
+echo $version sudo tee /var/lib/custom-packages/$name

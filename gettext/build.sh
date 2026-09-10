@@ -15,4 +15,4 @@ cmi --prefix=/usr --disable-static --docdir=/usr/share/doc/$direname
 sudo chmod -v 0755 /usr/lib/preloadable_libintl.so
 cd ..
 rm -rf $filename $direname
-echo "$version" > /var/lib/custom-packages/$name
+echo "$version" sudo tee /var/lib/custom-packages/$name

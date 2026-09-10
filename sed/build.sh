@@ -16,4 +16,4 @@ cmi --prefix=/usr html
 sudo install -vDm644 doc/sed.html -t /usr/share/doc/$direname
 cd ..
 rm -rf $filename $direname
-echo "$version" > /var/lib/custom-packages/$name
+echo "$version" sudo tee /var/lib/custom-packages/$name

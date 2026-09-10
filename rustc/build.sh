@@ -112,5 +112,5 @@ sudo ln -sfv /opt/rustc/share/zsh/site-functions/_cargo \
 
 sudo mv -v /etc/bash_completion.d/cargo /usr/share/bash-completion/completions
 unset LIB{SSH2,SQLITE3}_SYS_USE_PKG_CONFIG
-echo $version >> /var/lib/custom-packages/$name
+echo $version >sudo tee /var/lib/custom-packages/$name
 sudo find /opt -maxdepth 1 -type d -name 'rustc-*' ! -name "rustc-$version" -exec sudo rm -rf {} +

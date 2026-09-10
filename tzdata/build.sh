@@ -35,5 +35,5 @@ sudo zic -d $ZONEINFO -p America/New_York
 unset ZONEINFO tz
 cd ..
 rm -rf $filename $direname
-echo "$version" > /var/lib/custom-packages/$name
+echo "$version" sudo tee /var/lib/custom-packages/$name
 

@@ -16,4 +16,4 @@ cd $direname
 cmaki -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release -D BUILD_SHARED_LIBS=ON -D CMAKE_SKIP_INSTALL_RPATH=ON -D LLVM_EXTERNAL_SPIRV_HEADERS_SOURCE_DIR=/usr -G Ninja
 cd ../..
 rm -rf $direname $filename
-echo "$version" > /var/lib/custom-packages/$name
+echo "$version" sudo tee /var/lib/custom-packages/$name

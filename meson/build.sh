@@ -18,4 +18,4 @@ install -vDm644 data/shell-completions/bash/meson /usr/share/bash-completion/com
 install -vDm644 data/shell-completions/zsh/_meson /usr/share/zsh/site-functions/_meson"
 cd ..
 rm -rf $filename $direname
-echo "$version" > /var/lib/custom-packages/$name
+echo "$version" sudo tee /var/lib/custom-packages/$name

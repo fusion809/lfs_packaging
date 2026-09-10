@@ -37,4 +37,4 @@ autoreconf -fiv                                  &&
 LINKS="/usr/bin/links" cmi "--prefix=/usr"
 cd ..
 rm -rf "$direname"
-echo "$version" > /var/lib/custom-packages/$name
+echo "$version" sudo tee /var/lib/custom-packages/$name

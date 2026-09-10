@@ -44,6 +44,6 @@ old_version=$(cat /var/lib/custom-packages/$name | head -n 1)
 if [[ "$old_version" != "$version" ]]; then
 	sudo rm -rf /usr/share/zsh/$old_version
 fi
-echo "$version" > /var/lib/custom-packages/$name
+echo "$version" sudo tee /var/lib/custom-packages/$name
 cd ..
 rm -rf $filename $direname

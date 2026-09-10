@@ -26,4 +26,4 @@ cd $direname
 cmi --prefix=/usr
 sudo rm -fv /usr/lib/libz.a
 cd ..
-echo "$version" > /var/lib/custom-packages/$name
+echo "$version" sudo tee /var/lib/custom-packages/$name

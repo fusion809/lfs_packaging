@@ -38,4 +38,4 @@ cmi "${configure_options[@]}"
 sudo gtk-query-immodules-3.0 --update-cache
 cd ..
 sudo rm -rf "$direname" "$filename" "UCD.zip"
-echo "$version" > /var/lib/custom-packages/$name
+echo "$version" sudo tee /var/lib/custom-packages/$name

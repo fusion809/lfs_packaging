@@ -45,4 +45,4 @@ sudo su -c "make install
 unset BUILD_ZLIB BUILD_BZIP2"
 cd ..
 rm -rf $filename $direname
-echo $version > /var/lib/custom-packages/$name
+echo $version sudo tee /var/lib/custom-packages/$name

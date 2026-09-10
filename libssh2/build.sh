@@ -32,4 +32,4 @@ cmake_options=(
 cmaki "${cmake_options[@]}" 
 cd ..
 #rm -rf $filename $direname
-echo "$version" > /var/lib/custom-packages/$name
+echo "$version" sudo tee /var/lib/custom-packages/$name

@@ -52,4 +52,4 @@ sudo sed -i -e "s|/usr/bin/octave$|/usr/bin/octave_exec|g" \
 # Cleanup and add to database
 cd ..
 sudo rm -rf $direname ${filename}
-echo $version > /var/lib/custom-packages/$name
+echo $version sudo tee /var/lib/custom-packages/$name

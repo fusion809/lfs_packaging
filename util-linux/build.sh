@@ -42,4 +42,4 @@ configure_options=(--bindir=/usr/bin     \
 cmi "${configure_options[@]}"
 cd ..
 rm -rf $direname $filename
-echo "$version" > /var/lib/custom-packages/$name
+echo "$version" sudo tee /var/lib/custom-packages/$name

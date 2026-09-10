@@ -26,4 +26,4 @@ cd $direname
 cmaki -D CMAKE_INSTALL_PREFIX=/usr
 cd ..
 #rm -rf $direname $filename
-echo "$version" > /var/lib/custom-packages/$name
+echo "$version" sudo tee /var/lib/custom-packages/$name

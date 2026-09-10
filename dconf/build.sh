@@ -37,4 +37,4 @@ mni "${meson_options[@]:0:2}"
 # Cleanup and add to database
 cd ../..
 sudo rm -rf $direname $filename $edFilename
-echo $version > /var/lib/custom-packages/$name
+echo $version sudo tee /var/lib/custom-packages/$name

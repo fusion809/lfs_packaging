@@ -46,4 +46,4 @@ sudo cp -a \
 # Cleanup and add to database
 cd ..
 sudo rm -rf $filename $direname
-echo $version > /var/lib/custom-packages/$name
+echo $version sudo tee /var/lib/custom-packages/$name

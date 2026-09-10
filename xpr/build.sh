@@ -23,4 +23,4 @@ cmi $XORG_CONFIG
 cd ..
 sudo rm -rf $direname $filename
 sudo rm -f /usr/bin/xkeystone
-echo $version > /var/lib/custom-packages/$name
+echo $version sudo tee /var/lib/custom-packages/$name
