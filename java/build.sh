@@ -25,4 +25,4 @@ sudo mv $direname /opt/$instdir
 sudo ln -sf /opt/$instdir /opt/jdk
 sudo chown root:root -R /opt/$instdir
 rm -rf $filename
-echo $version > /var/lib/custom-packages/$name
+echo $version | sudo tee /var/lib/custom-packages/$name

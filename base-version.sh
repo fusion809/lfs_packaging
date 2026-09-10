@@ -138,6 +138,8 @@ function ghl_ver {
 		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep -oE "[0-9]+\.[0-9][02468]\.[0-8][0-9]*" | sort -V | tail -n 1
 	elif [[ "$1" == "GNOME/at-spi2-core" ]]; then
 		timeout 5 git ls-remote --tags --refs https://github.com/GNOME/at-spi2-core.git | grep -oE "refs/tags/[0-9]+\.[0-9]*[02468]+\.[0-8][0-9]*" | cut -d '/' -f 3 | sort -V | tail -n 1
+	elif echo $1 | grep "KDE" &> /dev/null; then
+		timeout 5 git ls-remote --tags --refs https://github.com/$1.git | grep -oE "refs/tags/[v]*[0-9]+\.[0-9]+\.[0-8][0-9]*" | cut -d '/' -f 3 | sed 's/^v//g' | sort -V | tail -n 1 
 	else
 		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | tr '-' '.' | sort -V | tail -n 1
 	fi
@@ -173,7 +175,7 @@ function ght_ver {
     latest_tag=$(grep -oP '/tag/\K.*' <<< "$latest_url")
 
     # Only use the GitHub "latest release" result if its tag is stable.
-    if [[ "$1" != "GNOME/at-spi2-core" ]] && [[ -n "$latest_tag" ]] && [[ "$1" != "GNOME/gvfs" ]] && [[ "$1" != "GNOME/gcr3" ]] &&[[ $repo != "GNOME/librsvg" ]] &&
+    if [[ "$1" != "GNOME/at-spi2-core" ]] && [[ -n "$latest_tag" ]] && [[ "$1" != "GNOME/gvfs" ]] && [[ "$1" != "GNOME/gcr3" ]] && [[ $repo != "GNOME/librsvg" ]] && ! echo $repo | grep KDE &> /dev/null &&
 	    [[ $repo != "KhronosGroup/Vulkan-Loader" ]] &&
             [[ $repo != "KhronosGroup/Vulkan-Headers" ]] &&
 	! grep -qiE '(alpha|beta|rc|pre|preview|dev|snapshot|init|[0-9]+\.[0-9]+\.9[0-9])' <<< "$latest_tag"; then
@@ -222,6 +224,10 @@ function ght_ver {
     elif [[ "$repo" == "GNOME/at-spi2-core" ]]; then
 	    wget -T 5 -t 1 -cqO- https://github.com/GNOME/at-spi2-core/tags.atom | grep -oE "[0-9]+\.[0-9]*[02468]+\.[0-8][0-9]*" | sort -V | tail -n 1
 	return
+elif echo $repo | grep "KDE" &> /dev/null; then
+	    wget -T 5 -t 1 -cqO- https://github.com/$repo/tags.atom | grep -oE "[0-9]+\.[0-9]+\.[0-8][0-9]*" | sort -V | tail -n 1
+
+	    return
     fi
 
     # Fall back to finding the highest stable tag.

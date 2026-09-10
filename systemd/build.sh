@@ -4,7 +4,8 @@ name=systemd
 repo=$name/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
-_filename="$name-man-pages-$version.tar.xz"
+_version=$(lfs_ver $name)
+_filename="$name-man-pages-$_version.tar.xz"
 direname="${filename/.tar.*/}"
 lfs_depends=(acl bash dbus hwdata glibc kbd kmod lz4 openssl pcre2 util-linux meson ninja wget xz gzip tar coreutils)
 
@@ -45,4 +46,5 @@ sudo tar -xf ../../$_filename \
     -C /usr/share/man
 cd ../..
 rm -rf $filename $direname
-echo "$version" > /var/lib/custom-packages/$name
+echo "$version" | sudo tee /var/lib/custom-packages/$name
+echo "$_version" | sudo tee -a /var/lib/custom-packages/$name
