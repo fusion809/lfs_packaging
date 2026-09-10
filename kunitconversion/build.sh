@@ -14,7 +14,7 @@ fi
 rm -rf "$direname"
 tar xf "$filename"
 cd "$direname"
-camke_options=(-D CMAKE_INSTALL_PREFIX=/usr \
+cmake_options=(-D CMAKE_INSTALL_PREFIX=/usr \
             -D CMAKE_INSTALL_LIBEXECDIR=libexec \
             -D CMAKE_PREFIX_PATH=/opt/qt6        \
             -D CMAKE_SKIP_INSTALL_RPATH=ON      \

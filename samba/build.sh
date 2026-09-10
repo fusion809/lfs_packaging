@@ -23,7 +23,7 @@ options=(--prefix=/usr                          \
     --enable-selftest                      \
     --disable-rpath-install                \
     --systemd-install-services)
-PYTHON=$PWD/pyvenv/bin/python3             \
+#PYTHON=$PWD/pyvenv/bin/python3             \
 ./configure "${options[@]}"
 make -j$(nproc)
 sed '1s@^.*$@#!/usr/bin/python3@' \
