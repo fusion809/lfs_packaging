@@ -6,7 +6,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 lfs_depends=(glibc gcc tar xz wget make)
 if ! [[ -f $filename ]]; then
-    wget -c https://ftpmirror.gnu.org/$name/$filename
+    wget -c https://ftpmirror.gnu.org/$name/$filename || wget -c https://ftp.gnu.org/gnu/$name/$filename
 fi
 rm -rf $direname
 tar xf $filename
