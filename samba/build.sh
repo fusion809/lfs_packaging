@@ -2,7 +2,12 @@
 set -e
 name=samba
 repo=$name-team/$name
-version=$(gh_ver $repo)
+get_version() {
+	local inst_ver=$(pkgver $name)
+	local up_ver=$(wget -T 5 -t 1 -cqO- https://download.samba.org/pub/samba/stable/ | grep "samba-[0-9]+\.[0-9]+\.[0-9]+" -oE | cut -d '-' -f 2 | sort -V | tail -n 1)
+	ver_check "$up_ver" "$inst_ver" && return
+	echo "$(gh_ver $repo)"
+}
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
