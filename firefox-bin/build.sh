@@ -10,6 +10,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
+depends=(alsa-lib at-spi2-core brotli bzip2 cairo dbus expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz libX11 libXau libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libXrandr libXrender libXres libepoxy libffi libpng libseccomp libxcb libxkbcommon nspr nss pango pcre2 pixman systemd util-linux wayland zlib)
 filename="firefox-$version.tar.xz"
 direname="firefox"
 if ! [[ -f $filename ]]; then
