@@ -4,12 +4,8 @@ name=groff
 version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-lfs_depends=(gcc glibc gzip make tar util-linux wget)
-blfs_depends=(libXau libXdmcp libxcb)
-depends=(gcc libICE libSM libX11 libXaw libXext libXmu libXpm libXt)
-if ! [[ -f $filename ]]; then
-    wget -c https://ftpmirror.gnu.org/$name/$filename
-fi
+depends=(gcc glibc gzip make tar util-linux wget libXau libXdmcp libxcb libICE libSM libX11 libXaw libXext libXmu libXpm libXt)
+gnu_download $name $filename
 rm -rf $direname
 tar xf $filename
 cd $direname

@@ -6,9 +6,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 lfs_depends=(acl attr autoconf automake gcc glibc gmp libcap m4 make patch tar wget xz)
 depends=(openssl)
-if ! [[ -f $filename ]]; then
-    wget -c https://ftpmirror.gnu.org/$name/$filename
-fi
+gnu_download $name $filename
 patch_filename=$(wget -cqO- https://www.linuxfromscratch.org/lfs/view/systemd/chapter08/coreutils.html | grep "\.patch" | cut -d '/' -f 2 | sed 's/<//g')
 if [[ -n $patch_filename ]] && ( ! [[ -f $patch_filename ]] ); then
     wget -c https://www.linuxfromscratch.org/patches/lfs/development/$patch_filename

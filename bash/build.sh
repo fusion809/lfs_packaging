@@ -5,9 +5,7 @@ version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 lfs_depends=(gcc glibc gzip make ncurses readline tar wget)
-if ! [[ -f $filename ]]; then
-    wget -c https://ftpmirror.gnu.org/$name/$filename
-fi
+gnu_download $name $filename
 rm -rf $direname
 tar xf $filename
 cd $direname

@@ -4,11 +4,8 @@ name=inetutils
 version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-lfs_depends=(gcc glibc gzip make ncurses readline tar wget)
-depends=(libxcrypt pcre2)
-if ! [[ -f $filename ]]; then
-    wget -c https://ftpmirror.gnu.org/$name/$filename
-fi
+depends=(gcc glibc gzip make ncurses readline tar wget libxcrypt pcre2)
+gnu_download $name $filename
 rm -rf $direname
 tar xf $filename
 cd $direname

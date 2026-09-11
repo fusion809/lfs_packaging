@@ -6,6 +6,7 @@ source ~/lfs_packaging/gnome.sh
 source ~/lfs_packaging/oss-hosts.sh
 source ~/lfs_packaging/add_deps.sh
 source ~/lfs_packaging/compile.sh
+source ~/lfs_packaging/download.sh
 function get_ngnu_git {
 	local name=$1
 	if [[ "$name" == "libpipeline" ]]; then

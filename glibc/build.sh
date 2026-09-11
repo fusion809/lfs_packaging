@@ -4,16 +4,14 @@ name=glibc
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c https://ftpmirror.gnu.org/$name/$filename
-fi
+gnu_download $name $filename
 rm -rf $direname
 tar xf $filename
 cd $direname
 for i in $(pfile glibc | tr '\n' ' ')
 do
-wget -c https://www.linuxfromscratch.org/patches/lfs/development/$i
-patch -Np1 -i "$i"
+	wget -c https://www.linuxfromscratch.org/patches/lfs/development/$i
+	patch -Np1 -i "$i"
 done
 mkdir -v build
 cd       build

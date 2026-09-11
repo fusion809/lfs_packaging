@@ -5,10 +5,8 @@ version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 patch_filename=$(pfile $name)
-lfs_depends=(acl gcc glibc make tar wget xz)
-if ! [[ -f $filename ]]; then
-    wget -c https://ftpmirror.gnu.org/$name/$filename
-fi
+depends=(acl gcc glibc make tar wget xz)
+gnu_download $name $filename
 
 if ! [[ -f $patch_filename ]]; then
 	wget -c https://www.linuxfromscratch.org/patches/lfs/development/$patch_filename

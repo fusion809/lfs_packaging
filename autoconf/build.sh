@@ -4,10 +4,8 @@ name=autoconf
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-lfs_depends=(glibc gcc tar xz wget make)
-if ! [[ -f $filename ]]; then
-    wget -c https://ftpmirror.gnu.org/$name/$filename || wget -c https://ftp.gnu.org/gnu/$name/$filename
-fi
+depends=(glibc gcc tar xz wget make)
+gnu_download $name $filename
 rm -rf $direname
 tar xf $filename
 cd $direname

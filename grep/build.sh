@@ -4,11 +4,8 @@ name=grep
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-lfs_depends=(gcc glibc make tar wget xz)
-depends=(pcre2)
-if ! [[ -f $filename ]]; then
-    wget -c https://ftpmirror.gnu.org/$name/$filename
-fi
+depends=(gcc glibc make tar wget xz pcre2)
+gnu_download $name $filename
 rm -rf $direname
 tar xf $filename
 cd $direname

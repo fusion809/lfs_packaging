@@ -5,9 +5,7 @@ version=$(gnu_ver $name)
 depends=(gcc glibc ncurses)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c https://ftpmirror.gnu.org/libcdio/$filename
-fi
+gnu_download $name $filename
 pr_url=$(wget -cqO- https://www.linuxfromscratch.org/blfs/view/systemd/multimedia/libcdio.html | grep "libcdio-paranoia" | cut -d '"' -f 2 | head -n 1)
 pr_filename=$(echo $pr_url | sed 's|.*libcdio/||g')
 pr_direname=$(echo $pr_filename | sed 's/.tar.*//g')
