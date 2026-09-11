@@ -12,7 +12,7 @@ fi
 rm -rf $direname
 tar xf $filename
 cd $direname
-cmi "--prefix=/usr --disable-static --docdir=/usr/share/doc/$direname"
+cmi --prefix=/usr --disable-static --docdir=/usr/share/doc/$direname
 sudo su -c "ln -sv flex   /usr/bin/lex
 ln -sv flex.1 /usr/share/man/man1/lex.1"
 cd ..

@@ -20,7 +20,7 @@ cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 autoreconf
-cmi "--prefix=/usr"
+cmi --prefix=/usr
 sudo make install.man
 cd ..
 rm -rf $filename $direname
