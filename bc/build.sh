@@ -12,7 +12,7 @@ fi
 rm -rf $direname
 tar xf $filename
 cd $direname
-CC='gcc -std=c99' cmi "--prefix=/usr -G -O3 -r"
+CC='gcc -std=c99' cmi --prefix=/usr -G -O3 -r
 cd ..
 rm -rf $filename $direname
 echo "$version" sudo tee /var/lib/custom-packages/$name
