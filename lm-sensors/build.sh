@@ -2,14 +2,14 @@
 set -e
 name=lm-sensors
 repo=hramrach/$name
-version=$(gh_ver $repo | sed 's/-/./g')
-_version=$(echo $version | sed 's/./-/g')
+version=$(gh_ver $repo | sed 's/-/\./g')
+_version=$(echo $version | sed 's/\./-/g')
 depends=(glibc)
 filename="$name-$_version.tar.gz"
 direname="${filename/.tar.*/}"
 # Kernel config options required, too
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/$repo/archive/V${version/./-}/$filename
+	wget -c https://github.com/$repo/archive/V${_version}/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"
