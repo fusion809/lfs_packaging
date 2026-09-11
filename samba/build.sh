@@ -8,6 +8,7 @@ get_version() {
 	ver_check "$up_ver" "$inst_ver" && return
 	echo "$(gh_ver $repo)"
 }
+version=$(get_version)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
