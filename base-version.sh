@@ -126,6 +126,8 @@ function ggnu_ver {
 function ghl_ver {
 	if [[ "$1" == "openpmix/prrte" ]]; then
 		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep "^3" | sort -V | tail -n 1
+	elif [[ "$1" == "openpmix/openpmix" ]]; then
+		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep "^5" | sort -V | tail -n 1
 	elif [[ "$1" == "GNOME/librsvg" ]]; then
 		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep -oE "[0-9]+.[0-9]+.[0-8][0-9]*" | sort -V | tail -n 1
 	elif [[ "$1" == "KhronosGroup/Vulkan-Loader" ]] || [[ "$1" == "KhronosGroup/Vulkan-Headers" ]]; then
