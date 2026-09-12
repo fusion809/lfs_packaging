@@ -4,7 +4,7 @@ name=libsecret
 repo=GNOME/$name
 version=$(gh_ver $repo)
 depends=(glib2 glibc libffi libgcrypt libgpg-error pcre2 systemd util-linux zlib)
-majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
+majVer=$(echo $version | cut -d '.' -f1-2)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

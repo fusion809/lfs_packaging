@@ -43,6 +43,7 @@ options=(--prefix=/usr      \
 	    --docdir=/usr/share/doc/$direname)
 cmi "${options[@]}"
 sudo install -v -o ntp -g ntp -d /var/lib/ntp
+sudo install -Dm644 ../ntp.conf /etc/ntp.conf
 cd ../
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
