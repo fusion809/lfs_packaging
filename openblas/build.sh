@@ -6,7 +6,7 @@ version=$(gh_ver $repo)
 filename="OpenBLAS-$version.tar.gz"
 direname="${filename/.tar.*/}"
 # gcc needs Fortran
-depends=(cmake gcc tar gzip)
+depends=(cmake gcc glibc gzip tar)
 if ! [[ -f $filename ]]; then
 	wget -c https://github.com/$repo/releases/download/v$version/$filename
 fi

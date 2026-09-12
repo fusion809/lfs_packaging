@@ -1,10 +1,10 @@
 #!/bin/bash
 set -e
+# Combine lapack and blas
 depends=()
 lfs_depends=(bash coreutils gcc glibc gzip make python sed tar)
 blfs_depends=(cmake gcc wget)
-_name=blas
-name=blas
+name=blas-lapack
 repo="Reference-LAPACK/lapack"
 version=$(gh_com $repo)
 
@@ -68,16 +68,11 @@ if [ "${STATIC:-no}" != "no" ]; then
   cd ..
 fi
 
-# Clean LAPACK out of the BLAS package
-rm -f $DDIR/usr/lib/liblapack.* $DDIR/usr/lib/pkgconfig/lapack*.pc
-rm -f $DDIR/usr/lib/cmake/*/lapack-*.cmake $DDIR/usr/lib/cmake/*/lapacke-*.cmake
-rm -f $DDIR/usr/include/lapack*.h
-
 sudo cp -va $DDIR/* /
-
-sudo rm -rf /usr/share/doc/$_name-*
-sudo mkdir -p /usr/share/doc/$_name-$version
-sudo cp -a $DOCS /usr/share/doc/$_name-$version
+sudo rm -rf /usr/share/doc/blas-*
+sudo rm -rf /usr/share/doc/$name-*
+sudo mkdir -p /usr/share/doc/$name-$version
+sudo cp -a $DOCS /usr/share/doc/$name-$version
 cd ..
 sudo rm -rf ${filename} $direname
 echo $version | sudo tee /var/lib/custom-packages/$name

@@ -31,9 +31,7 @@ function R_version {
 version=$(R_version)
 direname="$name-$version"
 filename="$direname.tar.xz"
-depends=(blas lapack pcre2)
-lfs_depends=(bash bzip2 coreutils glibc make readline sed tar xz zlib zstd)
-blfs_depends=(cairo curl gcc glib icu java libjpeg-turbo libpng libtiff libtirpc libx11 libxmu libxt pango tk which zip)
+depends=(blas-lapack pcre2 bash bzip2 coreutils glibc make readline sed tar xz zlib zstd cairo curl gcc glib icu java libjpeg-turbo libpng libtiff libtirpc libx11 libxmu libxt pango tk which zip)
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then

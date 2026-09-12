@@ -5,11 +5,7 @@ name=qrupdate
 version=$(gh_ver "mpimd-csc/qrupdate-ng" "qrupdate")
 filename=$name-$version.tar.gz
 direname="$name-ng-$version"
-depends=(blas lapack)
-lfs_depends=(bash coreutils gcc glibc gzip make sed tar)
-blfs_depends=(cmake
-gcc # Fortran support needed
-wget)
+depends=(blas-lapack bash coreutils gcc glibc gzip make sed tar cmake wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
 	wget -c https://github.com/mpimd-csc/qrupdate-ng/archive/v$version.tar.gz -O $filename
