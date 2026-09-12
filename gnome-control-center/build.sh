@@ -5,7 +5,7 @@ repo=GNOME/$name
 get_version() {
 	ver=$(gh_ver $repo)
 	majVer=$(echo $ver | sed -E 's/\.[0-9]+$//g')
-	gdVer=$(pkgver gnome-desktop)
+	gdVer=$(gh_ver GNOME/gnome-desktop)
 	gdMajVer=$(echo $gdVer | sed -E 's/\.[0-9]+$//g')
 	if [[ "$majVer" == "$gdMajVer" ]]; then
 		echo $ver
