@@ -149,19 +149,6 @@ function ghl_ver {
 	fi
 }
 
-#function ght_ver {
-#	local latest_url=$(curl --max-time 10 --connect-timeout 3 -Ls -o /dev/null -w '%{url_effective}' "https://github.com/$1/releases/latest")
-#	local latest_tag=$(echo "$latest_url" | grep -oP '/tag/\K.*')
-#	if [[ -n "$latest_tag" ]]; then
-#		echo "$latest_tag" | sed -nE "s/^${1#*/}[[:space:]_-]*//i; s/^[^0-9]*([0-9]+([._-][0-9]+)*).*/\1/p" | tr '_' '.' | head -n 1
-#		return 0
-#	fi
-#	if [[ "$1" == "webmproject/libvpx" ]]; then
-#		wget -T 5 -t 1 -cqO- https://github.com/webmproject/libvpx/tags.atom | grep "link.*v[0-9.]+" -oE | sed 's/.*v//g' | head -n 1
-#	else
-#		wget --timeout=5 -t 1 -cqO- "https://github.com/$1/tags.atom" | grep -v "alpha\|beta\|rc" | grep '<title>' | sed -nE "/<title>Tags from /d; s/.*<title>//; s/^${1#*/}[[:space:]_-]*//i; s/^[^0-9]*([0-9]+([._-][0-9]+)*).*/\1/p" | tr '_' '.' | sort -V | tail -n 1
-#	fi
-#}
 function ght_ver {
 	if [[ "$1" == "GNOME/gcr3" ]]; then
 		local repo="GNOME/gcr"
@@ -307,6 +294,10 @@ function gsp_ver {
     timeout 5 git ls-remote --tags --refs https://gitlab.freedesktop.org/$1.git 2>/dev/null | cut -d '/' -f 3 | grep "[0-9]" | grep -v "server\|common\|client" | sed -E 's|[a-z_-]+||g' | sort -V | tail -n 1
 }
 
+function gver {
+	local repo=$1
+	wget -T 5 -t 1 -cqO- https://gitweb.gentoo.org/repo/gentoo.git/tree/$repo | grep "\-[0-9]+\.[0-9.]+[_p0-9]*" -oE | grep -v "9999" | grep -vE "[prc][0-9]+" | sed 's/^-//g' | sed 's/\.$//g' | sort -V | tail -n 1
+}
 function gxfd_ver {
     timeout 5 git ls-remote --tags --refs https://gitlab.freedesktop.org/xorg/$1/$2.git 2>/dev/null | grep "$2-" -i | cut -d '/' -f 3 | cut -d '-' -f 2 | tr '_' '.' | sort -V | tail -n 1
 }
