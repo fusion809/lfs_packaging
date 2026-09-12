@@ -3,7 +3,7 @@ set -e
 name=xcursor-themes
 get_version() {
 	local inst_ver=$(pkgver $name)
-	local up_ver=$(wget -T 5 -t 1 -cqO- https://www.x.org/pub/individual/data/ | grep "$name-[0-9]+\.[0-9]+\.[0-9]+" -oE | cut -d '-' -f 2 | sort -V | tail -n 1)
+	local up_ver=$(wget -T 5 -t 1 -cqO- https://www.x.org/pub/individual/data/ | grep "$name-[0-9]+\.[0-9]+\.[0-9]+" -oE | sed "s/$name-//g" | sort -V | tail -n 1)
 	ver_check "$up_ver" "$inst_ver" && return
 	local vat_ver=$(vatver $name)
 	ver_check "$vat_ver" "$inst_ver" && return
