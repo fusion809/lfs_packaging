@@ -1,19 +1,8 @@
 #!/bin/bash
 set -e
 name=tcl
-get_version() {
-	local inst_ver=$(pkgver $name)
-	local up_ver=$(wget -T 5 -t 1 -cqO- https://github.com/tcltk/tcl/releases | grep "core-[0-9-]+" -oE | sed 's/core-//g' | tr '-' '.' | sed 's/\.$//g' | grep "^8\." | sort -V | tail -n 1)
-	ver_check "$up_ver" "$inst_ver" && return
-	local git_ver=$(timeout 5 git ls-remote --tags --refs https://github.com/tcltk/tcl.git | grep -oE "core-8-[0-9]-[0-9]+$" | sed 's/core-//g' | tr '-' '.' | sort -V | tail -n 1)
-	ver_check "$git_ver" "$inst_ver" && return
-	local arch_ver=$(aver $name)
-	ver_check "$arch_ver" "$inst_ver" && return
-	local lfs_vers=$(lfs_ver $name)
-	ver_check "$lfs_vers" "$inst_ver" && return
-	fver "$name" "$inst_ver"
-}
-version=$(get_version)
+repo=tcltk/tcl
+version=$(gh_ver $repo)
 lfs_depends=(zlib gcc make tar gzip coreutils bash)
 filename="${name}${version}-src.tar.gz"
 docs_filename="${name}${version}-html.tar.gz"
@@ -29,6 +18,7 @@ tar xf $filename
 cd $direname
 SRCDIR=$(pwd)
 cd unix
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD
 ./configure --prefix=/usr           \
             --mandir=/usr/share/man \
             --disable-rpath
