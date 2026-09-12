@@ -125,7 +125,7 @@ echo "source_dir=$source_dir"
 		mkdir p11-build
 		cd p11-build
 		meson setup "${meson_args[@]}" "$source_dir" || exit 1
-		docbookver=$(head -n 1 /var/lib/book-packages/docbook-xsl-nons)
+		docbookver=$(head -n 1 /var/lib/custom-packages/docbook-xsl-nons)
 		files=()
 
 		while IFS= read -r -d '' file; do
