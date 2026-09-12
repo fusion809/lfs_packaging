@@ -6,6 +6,9 @@ get_version() {
 	ver_check "$up_ver" "$inst_ver" && return
 	local git_ver=$(timeout 5 git ls-remote --tags --refs https://github.com/file/file.git | grep "refs/tags/FILE" | sed 's/.*FILE//g' | tr '_' '.' | sort -V | tail -n 1)
 	ver_check "$git_ver" "$inst_ver" && return
+	local vat_ver=$(vatver $name)
+	ver_check "$vat_ver" "$inst_ver" && return
+
 	local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)

@@ -7,6 +7,9 @@ get_version() {
     local up_ver=$(wget -T 5 -cqO- https://www.riverbankcomputing.com/software/qscintilla/download | grep ".tar.gz" | grep -v "alpha\|beta\|[0-9]rc" | head -n 1 | cut -d '/' -f 8 | sed 's/>.*//g' | cut -d '-' -f 2 | sed 's/.tar.gz//g')
     ver_check "$up_ver" "$inst_ver" && return
 
+    local vat_ver=$(vatver $name)
+    ver_check "$vat_ver" "$inst_ver" && return
+
     local arch_ver=$(aver $name)
     ver_check "$arch_ver" "$inst_ver" && return
 

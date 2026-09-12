@@ -15,6 +15,9 @@ get_version() {
 	local patchVer=$(echo $base_ver | cut -d '.' -f 3)
 	local git_ver=$(echo "${majVer}${minVer}0${patchVer}00")
 	ver_check "$git_ver" "$inst_ver" && return
+	local vat_ver=$(vatver $name)
+	ver_check "$vat_ver" "$inst_ver" && return
+
 	local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)

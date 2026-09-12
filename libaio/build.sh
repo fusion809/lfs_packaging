@@ -5,6 +5,9 @@ get_version() {
 	local inst_ver=$(pkgver $name)
 	local git_ver=$(timeout 5 git ls-remote --tags --refs https://pagure.io/libaio.git | grep "refs/tags/libaio-[0-9.]+$" -oE | cut -d '-' -f 2)
 	ver_check "$git_ver" "$inst_ver" && return
+	local vat_ver=$(vatver $name)
+	ver_check "$vat_ver" "$inst_ver" && return
+
 	local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)

@@ -10,6 +10,9 @@ get_version() {
 	local git_ver=$(timeout 5 git ls-remote --tags --refs https://gitlab.onelab.info/gl2ps/gl2ps.git | grep "gl2ps_" | tail -n 1 | cut -d '/' -f 3 | sed 's/gl2ps_//g' | tr '_' '.')
 	ver_check "$git_ver" "$inst_ver" && return
 
+	local vat_ver=$(vatver $name)
+	ver_check "$vat_ver" "$inst_ver" && return
+
 	local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$inst_ver" && return
 	fver "$name" "$inst_ver"

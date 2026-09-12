@@ -5,6 +5,9 @@ get_version() {
 	local inst_ver=$(pkgver $name)
 	local up_ver=$(wget -cqO- -T 5 -t 1 https://sourceware.org/pub/valgrind | grep "valgrind-[0-9]+\.[0-9]+\.[0-9]+" -oE | cut -d '-' -f 2 | sort -V | tail -n 1)
 	ver_check "$up_ver" "$inst_ver" && return
+	local vat_ver=$(vatver $name)
+	ver_check "$vat_ver" "$inst_ver" && return
+
 	local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)

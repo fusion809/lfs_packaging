@@ -5,6 +5,9 @@ get_version() {
 	local inst_ver=$(pkgver $name)
 	local git_ver=$(timeout 5 git ls-remote --tags --refs git://linux-nfs.org/~steved/libtirpc.git | grep "libtirpc-[0-9-]+$" -oE | sed 's/libtirpc-//g' | sed 's/-/./g' | tail -n 1)
 	ver_check "$up_ver" "$inst_ver" && return
+	local vat_ver=$(vatver $name)
+	ver_check "$vat_ver" "$inst_ver" && return
+
 	local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)

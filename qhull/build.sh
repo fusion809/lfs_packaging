@@ -10,6 +10,9 @@ get_version() {
     local git_ver=$(git ls-remote --tags --refs https://github.com/qhull/qhull.git | grep "refs/tags/[0-9.]*$" | cut -d '/' -f 3 | sort -V | tail -n 1)
     ver_check "$git_ver" "$inst_ver" && return
 
+    local vat_ver=$(vatver $name)
+    ver_check "$vat_ver" "$inst_ver" && return
+
     local arch_ver=$(aver $name)
     ver_check "$arch_ver" "$inst_ver" && return
 

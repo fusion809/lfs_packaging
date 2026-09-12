@@ -7,6 +7,9 @@ get_version() {
 	ver_check "$up_ver" "$inst_ver" && return
 	local git_ver=$(timeout 5 git ls-remote --tags --refs https://github.com/mozilla/nss.git | grep -oE 'NSS_[0-9_]+RTM' | sed 's/NSS_//g' | sed 's/_RTM//g' | tr '_' '.' | sort -V | tail -n 1)
 	ver_check "$git_ver" "$inst_ver" && return
+	local vat_ver=$(vatver $name)
+	ver_check "$vat_ver" "$inst_ver" && return
+
 	local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)

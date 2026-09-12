@@ -8,6 +8,9 @@ get_version() {
     local git_ver=$(git ls-remote --tags --refs git://git.code.sf.net/p/zsh/code.git | grep "refs/tags/zsh-[0-9.]*$" | cut -d '-' -f 2 | sort -V | tail -n 1)
     ver_check "$git_ver" "$inst_ver" && return
 
+    local vat_ver=$(vatver $name)
+    ver_check "$vat_ver" "$inst_ver" && return
+
     local arch_ver=$(aver $name)
     ver_check "$arch_ver" "$inst_ver" && return
 
