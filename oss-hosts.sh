@@ -13,6 +13,9 @@ function cb_ver {
 	ver_check "$up_ver" "$inst_ver" && return
 	local git_ver=$(git ls-remote --tags https://codeberg.org/$repo.git | grep -v "\^{}" | cut -d '/' -f 3 | sort -V | tail -n 1)
 	ver_check "$git_ver" "$inst_ver" && return
+	local vat_ver=$(vatver $name)
+	ver_check "$vat_ver" "$inst_ver" && return
+
 	local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)
@@ -32,6 +35,9 @@ function gh_ver {
 	ver_check "$up_ver" "$inst_ver" && return
 	local git_ver=$(ghl_ver $1)
 	ver_check "$git_ver" "$inst_ver" && return
+	local vat_ver=$(vatver $name)
+	ver_check "$vat_ver" "$inst_ver" && return
+
 	local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)
@@ -51,6 +57,9 @@ function gl_ver {
 	ver_check "$up_ver" "$inst_ver" && return
 	local git_ver=$(gll_ver $1)
 	ver_check "$git_ver" "$inst_ver" && return
+	local vat_ver=$(vatver $name)
+	ver_check "$vat_ver" "$inst_ver" && return
+
 	local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)
@@ -66,6 +75,9 @@ function gnu_ver {
 	ver_check "$up_ver" "$inst_ver" && return
 	local git_ver=$(ggnu_ver $name)
 	ver_check "$git_ver" "$inst_ver" && return
+	local vat_ver=$(vatver $name)
+	ver_check "$vat_ver" "$inst_ver" && return
+
 	local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)
@@ -80,6 +92,9 @@ function kap_ver {
 	ver_check "$up_ver" "$inst_ver" && return
 	local git_ver=$(gkap_ver $name)	
 	ver_check "$git_ver" "$inst_ver" && return
+	local vat_ver=$(vatver $name)
+	ver_check "$vat_ver" "$inst_ver" && return
+
 	local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)
@@ -94,6 +109,9 @@ function ngnu_ver {
 	ver_check "$up_ver" "$inst_ver" && return
 	local git_ver=$(gngnu_ver $name)
 	ver_check "$git_ver" "$inst_ver" && return
+	local vat_ver=$(vatver $name)
+	ver_check "$vat_ver" "$inst_ver" && return
+
 	local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)
@@ -113,6 +131,9 @@ function sd_ver {
 	ver_check "$up_ver" "$inst_ver" && return
 	local git_ver=$(timeout 5 git ls-remote --tags --refs https://salsa.debian.org/$repo.git | grep "[v]*[0-9]+\.[0-9]+\.[0-9]+" -oE | sed 's/^v//g' | sort -V | tail -n 1)
 	ver_check "$git_ver" "$inst_ver" && return
+    local vat_ver=$(vatver $name)
+    ver_check "$vat_ver" "$inst_ver" && return
+
     local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)
@@ -130,6 +151,9 @@ function sf_ver {
     local git_ver=$(gsf_ver $repo)
 	ver_check "$git_ver" "$inst_ver" && return
 	local name=$(echo $1 | cut -d '/' -f 1)
+    local vat_ver=$(vatver $name)
+    ver_check "$vat_ver" "$inst_ver" && return
+
     local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)

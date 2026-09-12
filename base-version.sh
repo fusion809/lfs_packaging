@@ -335,7 +335,7 @@ function lfs_ver {
 	echo "$ver"
 }
 
-function vat_ver {
+function vatver {
 	export VAT_URL="https://raw.githubusercontent.com/tox-wtf/vat/refs/heads/master/p/"
 	wget -cqO- -T 5 -t 1 "$VAT_URL/$1/v.tsv" | grep -F release | cut -f3
 }

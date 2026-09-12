@@ -10,6 +10,9 @@ function gfd_ver {
 	local git_ver=$(gfl_ver $repo)
 	ver_check "$git_ver" "$inst_ver" && return
 
+	local vat_ver=$(vatver $name)
+	ver_check "$vat_ver" "$inst_ver" && return
+
 	local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$inst_ver" && return
 
@@ -31,6 +34,9 @@ function spice_ver {
 	local git_ver=$(gsp_ver $repo)
 	ver_check "$git_ver" "$inst_ver" && return
 
+	local vat_ver=$(vatver $name)
+	ver_check "$vat_ver" "$inst_ver" && return
+
 	local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$inst_ver" && return
 	fver "$name" "$inst_ver"
@@ -44,6 +50,9 @@ function way_ver {
 
     local git_ver=$(git ls-remote --tags --refs https://gitlab.freedesktop.org/wayland/$name.git | grep "refs/tags/[0-9.]*$" | cut -d '/' -f 3 | sort -V | tail -n 1)
 	ver_check "$git_ver" "$inst_ver" && return
+
+    local vat_ver=$(vatver $name)
+    ver_check "$vat_ver" "$inst_ver" && return
 
     local arch_ver=$(aver $name)
     ver_check "$arch_ver" "$inst_ver" && return
@@ -77,6 +86,9 @@ function xfd_ver() {
 	fi
 	ver_check "$git_ver" "$inst_ver" && return
 
+	local vat_ver=$(vatver $name)
+	ver_check "$vat_ver" "$inst_ver" && return
+
 	local arch_ver=$(aver $name)
 	if ! [[ "$arch_ver" =~ ^[0-9.]+$ ]]; then
 		local arch_ver=$(aver xorg-$name)
@@ -92,6 +104,9 @@ function xcb_ver {
 	local inst_ver=$(pkgver $name)
 	local up_ver=$(wxcb_ver $name)
 	ver_check "$up_ver" "$inst_ver" && return
+	local vat_ver=$(vatver $name)
+	ver_check "$vat_ver" "$inst_ver" && return
+
 	local arch_ver=$(aver $name)
 	ver_check "$arch_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)
