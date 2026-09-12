@@ -142,6 +142,8 @@ function ghl_ver {
 		timeout 5 git ls-remote --tags --refs https://github.com/$1.git | grep -oE "refs/tags/[v]*[0-9]+\.[0-9]+\.[0-8][0-9]*" | cut -d '/' -f 3 | sed 's/^v//g' | sort -V | tail -n 1 
 	elif echo $1 | grep hyfetch &> /dev/null; then
 		timeout 5 git ls-remote --tags --refs https://github.com/$1.git | grep -oE "refs/tags/[0-9]+\.[0-9]+\.[0-8][0-9]*" | cut -d '/' -f 3 | sed 's/^v//g' | sort -V | tail -n 1 
+	elif [[ "$1" == "tcltk/tcl" ]]; then
+		timeout 5 git ls-remote --tags --refs https://github.com/$1.git | grep "core-[0-9-]+$" -oE | sed 's/^core-//g' | tr '-' '.' | sort -V | tail -n 1
 	else
 		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | tr '-' '.' | sort -V | tail -n 1
 	fi
