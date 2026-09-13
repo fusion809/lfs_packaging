@@ -12,7 +12,7 @@ fi
 rm -rf $direname
 tar xf $filename
 cd $direname
-gap_patches $name
+gap_patches $name || echo "Applying patches failed... Continuing anyway."
 sudo autoreconf -fiv
 sudo chown $USER -R .
 sed '/saslint/a #include <time.h>'       -i lib/saslutil.c &&

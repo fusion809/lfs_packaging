@@ -6,7 +6,7 @@ version=$(gh_ver $repo)
 depends=(dbus gcc glibc lapack libxcrypt linux-pam openssl systemd zlib)
 blfs_depends=(avahi xdg-utils)
 filename="$name-$version-source.tar.gz"
-direname="${filename/.tar.*/}"
+direname="${filename/-source.tar.*/}"
 # Kernel options required
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/releases/download/v$version/$filename

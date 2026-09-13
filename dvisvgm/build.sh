@@ -3,7 +3,7 @@ set -e
 name=dvisvgm
 repo=mgieseki/$name
 version=$(gh_ver $repo)
-depends=(brotli bzip2 cups dbus expat fontconfig freetype gcc ghostscript glibc libICE libSM libX11 libXau libXdmcp libXext libXt libjpeg-turbo libpaper libpng libwebp libxcb libxcrypt openjpeg openssl systemd texlive tiff util-linux xz zlib zstd)
+depends=(brotli bzip2 cups dbus expat fontconfig freetype gcc ghostscript glibc libICE libSM libX11 libXau libXdmcp libXext libXt libjpeg-turbo libpaper libpng libwebp libxcb libxcrypt openjpeg openssl systemd texlive tiff util-linux xz zlib zstd woff2)
 blfs_depends=(avahi lcms2 potrace)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"

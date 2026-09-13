@@ -39,8 +39,6 @@ meson_options=(
     -D man=false
 )
 # sed no longer needed for 1.1.4+ (xsl-ns -> xsl change was for older versions)
-mkdir build
-cd build
 mni "${meson_options[@]}"
 # Cleanup and add to database
 cd ..

@@ -13,7 +13,7 @@ fi
 rm -rf "$direname"
 tar xf "$filename"
 cd "$direname"
-gap_patches "$name"
+gap_patches "$name" || echo "Applying patches failed... Continuing with build anyway"
 options=(--prefix=/usr        \
     --sysconfdir=/etc    \
     --localstatedir=/var \

@@ -17,7 +17,7 @@ fi
 
 tar xf "$filename"
 cd "$direname"
-local configure_options=(
+configure_options=(
 	--dbdir=/var/lib/$name
 	--libexecdir=/usr/lib/$name
 	--prefix=/usr

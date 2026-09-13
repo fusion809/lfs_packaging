@@ -19,7 +19,8 @@ tar xf $filename
 cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
-./bootstrap
+sudo ./bootstrap
+sudo chown $USER -R .
 ./configure --enable-icb --enable-mpi --prefix=/usr
   make F77=mpif77 \
     CFLAGS+="-O2 -fPIC $(pkg-config --cflags ompi-f77) " \
