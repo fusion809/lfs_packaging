@@ -26,7 +26,7 @@ fi
 rm -rf $direname
 tar xf $filename
 cd $direname
-gap_patches
+gap_patches "$name" || echo "Patching failed"
 sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
 sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
 make -f Makefile-libbz2_so
