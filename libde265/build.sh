@@ -7,7 +7,7 @@ depends=(cmake)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/strukturag/libde265/releases/download/v$version/$filename
+	wget -c --progress=bar:force https://github.com/strukturag/libde265/releases/download/v$version/$filename
 fi
 rm -rf $direname
 tar xf $filename

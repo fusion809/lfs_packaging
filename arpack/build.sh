@@ -11,7 +11,7 @@ filename="$_name-$version.tar.gz"
 direname=${filename/.tar.gz/}
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/opencollab/arpack-ng/archive/$version.tar.gz -O $filename
+	wget -c --progress=bar:force https://github.com/opencollab/arpack-ng/archive/$version.tar.gz -O $filename
 fi
 rm -rf $direname
 tar xf $filename

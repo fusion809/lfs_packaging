@@ -27,7 +27,7 @@ filename="$direname.tar.xz"
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then
-	wget -c http://people.freedesktop.org/~hughsient/appstream-glib/releases/$filename
+	wget -c --progress=bar:force http://people.freedesktop.org/~hughsient/appstream-glib/releases/$filename
 fi
 tar xvf $filename
 # Compile and install

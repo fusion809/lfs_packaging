@@ -8,11 +8,11 @@ lfs_depends=(acl attr bzip2 dbus e2fsprogs expat gcc glibc libelf libffi openssl
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://download.kde.org/stable/release-service/$version/src/$filename
+	wget -c --progress=bar:force https://download.kde.org/stable/release-service/$version/src/$filename
 fi
 
 if ! [[ -f "konsole-adjust_scrollbar-1.patch" ]]; then
-	wget -c https://www.linuxfromscratch.org/patches/blfs/svn/konsole-adjust_scrollbar-1.patch
+	wget -c --progress=bar:force https://www.linuxfromscratch.org/patches/blfs/svn/konsole-adjust_scrollbar-1.patch
 fi
 
 export KF6_PREFIX=/usr

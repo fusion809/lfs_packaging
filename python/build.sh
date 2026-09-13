@@ -23,10 +23,10 @@ direname="${filename/.tar.*/}"
 docs_filename="python-${version}-docs-html.tar.bz2"
 lfs_depends=(gcc glibc make ncurses tar wget xz)
 if ! [[ -f $filename ]]; then
-    wget -c https://www.python.org/ftp/python/$version/$filename
+    wget -c --progress=bar:force https://www.python.org/ftp/python/$version/$filename
 fi
 if ! [[ -f $docs_filename ]]; then
-    wget -c https://www.python.org/ftp/python/doc/$version/$docs_filename
+    wget -c --progress=bar:force https://www.python.org/ftp/python/doc/$version/$docs_filename
 fi
 sudo rm -rf $direname
 tar xf $filename

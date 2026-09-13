@@ -7,7 +7,7 @@ depends=(brotli bzip2 expat fontconfig freetype fribidi glib2 glibc graphite2 ha
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/$repo/releases/download/$version/$filename
+	wget -c --progress=bar:force https://github.com/$repo/releases/download/$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

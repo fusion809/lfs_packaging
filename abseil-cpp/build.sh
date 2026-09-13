@@ -6,7 +6,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(cmake gcc glibc)
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/abseil/abseil-cpp/releases/download/$version/$filename
+	wget -c --progress=bar:force https://github.com/abseil/abseil-cpp/releases/download/$version/$filename
 fi
 rm -rf $direname
 tar xf $filename

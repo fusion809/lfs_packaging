@@ -22,7 +22,7 @@ depends=(bzip2 glibc xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.kernel.org/pub/linux/utils/net/$name/$filename
+	wget -c --progress=bar:force https://www.kernel.org/pub/linux/utils/net/$name/$filename
 fi
 rm -rf $direname
 tar xf $filename

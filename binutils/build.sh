@@ -5,7 +5,7 @@ version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://sourceware.org/pub/$name/releases/$filename
+	wget -c --progress=bar:force https://sourceware.org/pub/$name/releases/$filename
 fi
 rm -rf $direname
 tar xf $filename

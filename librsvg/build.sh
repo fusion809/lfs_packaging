@@ -8,7 +8,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(cairo cargo-c pango gdk-pixbuf glib2 vala)
 if ! [[ -f $filename ]]; then
-	wget -c https://download.gnome.org/sources/librsvg/$majVer/$filename
+	wget -c --progress=bar:force https://download.gnome.org/sources/librsvg/$majVer/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

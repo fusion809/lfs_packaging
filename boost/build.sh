@@ -7,7 +7,7 @@ filename="$name-$version-b2-nodocs.tar.xz"
 direname="$name-$version"
 depends=(which)
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/$repo/releases/download/$direname/$filename
+	wget -c --progress=bar:force https://github.com/$repo/releases/download/$direname/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

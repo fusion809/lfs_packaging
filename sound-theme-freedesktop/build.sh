@@ -12,7 +12,7 @@ version=$(get_version)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://people.freedesktop.org/~mccann/dist/$filename
+	wget -c --progress=bar:force https://people.freedesktop.org/~mccann/dist/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

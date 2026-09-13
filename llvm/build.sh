@@ -7,7 +7,7 @@ depends=(gcc glibc icu libffi libxml2 zlib zstd)
 filename="$name-project-$version.src.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/$filename
+	wget -c --progress=bar:force https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

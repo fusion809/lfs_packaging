@@ -8,14 +8,14 @@ depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.lua.org/ftp/$filename
+	wget -c --progress=bar:force https://www.lua.org/ftp/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"
 cd "$direname"
 #gap_patches $name || echo "Continuing patching"
-wget -c https://gitlab.archlinux.org/archlinux/packaging/packages/lua/-/raw/main/liblua.so.patch
-wget -c https://gitlab.archlinux.org/archlinux/packaging/packages/lua/-/raw/main/paths.patch
+wget -c --progress=bar:force https://gitlab.archlinux.org/archlinux/packaging/packages/lua/-/raw/main/liblua.so.patch
+wget -c --progress=bar:force https://gitlab.archlinux.org/archlinux/packaging/packages/lua/-/raw/main/paths.patch
 patch -Np1 -i liblua.so.patch
 patch -Np1 -i paths.patch
 make clean

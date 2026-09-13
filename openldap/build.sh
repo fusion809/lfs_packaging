@@ -15,7 +15,7 @@ blfs_depends=(cyrus-sasl)
 lfs_depends=(glibc openssl util-linux)
 
 if ! [[ -f $filename ]]; then
-	wget -c https://www.openldap.org/software/download/OpenLDAP/openldap-release/$filename
+	wget -c --progress=bar:force https://www.openldap.org/software/download/OpenLDAP/openldap-release/$filename
 fi
 
 rm -rf $direname

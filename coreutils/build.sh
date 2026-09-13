@@ -9,7 +9,7 @@ depends=(openssl)
 gnu_download $name $filename
 patch_filename=$(wget -cqO- https://www.linuxfromscratch.org/lfs/view/systemd/chapter08/coreutils.html | grep "\.patch" | cut -d '/' -f 2 | sed 's/<//g')
 if [[ -n $patch_filename ]] && ( ! [[ -f $patch_filename ]] ); then
-    wget -c https://www.linuxfromscratch.org/patches/lfs/development/$patch_filename
+    wget -c --progress=bar:force https://www.linuxfromscratch.org/patches/lfs/development/$patch_filename
 fi
 rm -rf $direname
 tar xf $filename

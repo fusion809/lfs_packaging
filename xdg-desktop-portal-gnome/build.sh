@@ -7,7 +7,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(gnome-desktop gtk4 libadwaita xdg-desktop-portal xdg-desktop-gtk nautilus)
 if ! [[ -f $filename ]]; then
-	wget -c https://download.gnome.org/sources/xdg-desktop-portal-gnome/$majVer/$filename
+	wget -c --progress=bar:force https://download.gnome.org/sources/xdg-desktop-portal-gnome/$majVer/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

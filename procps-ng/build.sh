@@ -6,7 +6,7 @@ lfs_depends=(gcc glibc tar make coreutils wget xz)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://sourceforge.net/projects/procps-ng/files/Production/$filename
+	wget -c --progress=bar:force https://sourceforge.net/projects/procps-ng/files/Production/$filename
 fi
 rm -rf $direname
 tar xf $filename

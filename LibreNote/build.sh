@@ -9,7 +9,7 @@ blfs_depends=(brotli double-conversion fontconfig freetype git graphite2 harfbuz
 lfs_depends=(bzip2 cmake coreutils dbus expat gcc glibc libelf libffi make systemd xz zlib zstd tar)
 
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/$repo/archive/$version.tar.gz -O $filename
+	wget -c --progress=bar:force https://github.com/$repo/archive/$version.tar.gz -O $filename
 fi
 rm -rf $direname
 tar xf $filename

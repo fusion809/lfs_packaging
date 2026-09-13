@@ -8,7 +8,7 @@ direname="${filename/.tar.*/}"
 blfs_depends=(glib2 cryptsetup keyutils libatasmart libbytesize libnvme lvm2)
 depends=(e2fsprogs glib2 glibc gmp json-c keyutils kmod libatasmart libffi mpfr openssl pcre2 systemd util-linux xz zlib zstd)
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/storaged-project/libblockdev/releases/download/$version/$filename
+	wget -c --progress=bar:force https://github.com/storaged-project/libblockdev/releases/download/$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

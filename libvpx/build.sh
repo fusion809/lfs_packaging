@@ -7,7 +7,7 @@ blfs_depends=(yasm nasm which)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/$repo/archive/v$version/$filename
+	wget -c --progress=bar:force https://github.com/$repo/archive/v$version/$filename
 fi
 rm -rf $direname
 tar xf $filename

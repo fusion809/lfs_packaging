@@ -11,7 +11,7 @@ blfs_depends=(avahi curl e2fsprogs fuse glib gpgme gtk-doc libarchive libgpg-err
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/ostreedev/ostree/releases/download/v${version}/$filename
+	wget -c --progress=bar:force https://github.com/ostreedev/ostree/releases/download/v${version}/$filename
 fi
 tar xvf $filename
 # Compile and install

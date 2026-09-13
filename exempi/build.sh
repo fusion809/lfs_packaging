@@ -7,7 +7,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(boost)
 if ! [[ -f $filename ]]; then
-	wget -c https://libopenraw.freedesktop.org/download/$filename 
+	wget -c --progress=bar:force https://libopenraw.freedesktop.org/download/$filename 
 fi
 rm -rf "$direname"
 tar xf "$filename"

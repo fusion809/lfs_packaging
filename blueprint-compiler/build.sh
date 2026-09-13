@@ -7,7 +7,7 @@ depends=(pygobject)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://download.gnome.org/sources/blueprint-compiler/$majVer/$filename
+	wget -c --progress=bar:force https://download.gnome.org/sources/blueprint-compiler/$majVer/$filename
 fi
 rm -rf $direname
 tar xf $filename

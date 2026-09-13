@@ -20,7 +20,7 @@ lfs_depends=(glibc gcc make tar xz openssl zlib zstd coreutils bash)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/$filename
+	wget -c --progress=bar:force https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/$filename
 fi
 rm -rf $direname
 tar xf $filename

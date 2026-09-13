@@ -7,15 +7,15 @@ depends=(brotli curl cyrus-sasl expat glibc libidn2 libpsl libunistring nghttp2 
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.kernel.org/pub/software/scm/git/$filename
+	wget -c --progress=bar:force https://www.kernel.org/pub/software/scm/git/$filename
 fi
 man_filename="$name-manpages-$version.tar.xz"
 if ! [[ -f $man_filename ]]; then
-	wget -c https://www.kernel.org/pub/software/scm/git/$man_filename
+	wget -c --progress=bar:force https://www.kernel.org/pub/software/scm/git/$man_filename
 fi
 html_filename="$name-htmldocs-$version.tar.xz"
 if ! [[ -f $html_filename ]]; then
-	wget -c https://www.kernel.org/pub/software/scm/git/$html_filename
+	wget -c --progress=bar:force https://www.kernel.org/pub/software/scm/git/$html_filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

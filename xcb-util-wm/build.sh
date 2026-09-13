@@ -6,7 +6,7 @@ depends=(glibc libXau libXdmcp libxcb)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://xorg.freedesktop.org/archive/individual/lib/$filename
+	wget -c --progress=bar:force https://xorg.freedesktop.org/archive/individual/lib/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

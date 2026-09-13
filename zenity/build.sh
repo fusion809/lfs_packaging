@@ -12,7 +12,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
-	wget -c https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$filename
+	wget -c --progress=bar:force https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$filename
 fi
 tar xvf $filename
 # Compile and install

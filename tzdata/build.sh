@@ -19,7 +19,7 @@ version=$(get_version)
 filename="tzdata${version}.tar.gz"
 direname="tzdata${version}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.iana.org/time-zones/repository/releases/$filename
+	wget -c --progress=bar:force https://www.iana.org/time-zones/repository/releases/$filename
 fi
 rm -rf $direname
 mkdir $direname

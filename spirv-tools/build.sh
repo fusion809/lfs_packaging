@@ -21,7 +21,7 @@ depends=(gcc glibc)
 filename="SPIRV-Tools-vulkan-sdk-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/$repo/archive/vulkan-sdk-$version/$filename
+	wget -c --progress=bar:force https://github.com/$repo/archive/vulkan-sdk-$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

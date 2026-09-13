@@ -7,7 +7,7 @@ depends=(glibc)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://downloads.xiph.org/releases/ogg/$filename
+	wget -c --progress=bar:force https://downloads.xiph.org/releases/ogg/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

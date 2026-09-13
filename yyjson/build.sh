@@ -7,7 +7,7 @@ depends=()
 lfs_depends=(bash coreutils glibc gzip tar)
 blfs_depends=(cmake)
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/ibireme/yyjson/archive/$version.tar.gz -O $filename
+	wget -c --progress=bar:force https://github.com/ibireme/yyjson/archive/$version.tar.gz -O $filename
 fi
 rm -rf $direname
 tar xvf $filename

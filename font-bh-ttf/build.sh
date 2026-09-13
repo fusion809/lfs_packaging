@@ -19,7 +19,7 @@ version=$(get_version)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.x.org/pub/individual/font/$filename
+	wget -c --progress=bar:force https://www.x.org/pub/individual/font/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

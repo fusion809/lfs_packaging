@@ -19,7 +19,7 @@ depends=(glibc)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://downloads.sourceforge.net/libtirpc/$filename
+	wget -c --progress=bar:force https://downloads.sourceforge.net/libtirpc/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

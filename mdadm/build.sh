@@ -8,7 +8,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 # Kernel options required
 if ! [[ -f $filename ]]; then
-	wget -c https://git.kernel.org/pub/scm/utils/mdadm/mdadm.git/snapshot/$filename
+	wget -c --progress=bar:force https://git.kernel.org/pub/scm/utils/mdadm/mdadm.git/snapshot/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

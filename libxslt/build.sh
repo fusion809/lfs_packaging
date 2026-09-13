@@ -7,7 +7,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(libxml2 docbook-xml docbook-xsl-nons)
 if ! [[ -f $filename ]]; then
-	wget -c https://download.gnome.org/sources/libxslt/$majVer/$filename
+	wget -c --progress=bar:force https://download.gnome.org/sources/libxslt/$majVer/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

@@ -8,7 +8,7 @@ filename="$name-v$version.tar.bz2"
 direname="${filename/.tar.*/}"
 # Kernel options required
 if ! [[ -f $filename ]]; then
-	wget -c https://gitlab.freedesktop.org/upower/upower/-/archive/v$version/$filename
+	wget -c --progress=bar:force https://gitlab.freedesktop.org/upower/upower/-/archive/v$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

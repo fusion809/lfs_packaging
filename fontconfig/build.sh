@@ -7,7 +7,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(freetype)
 if ! [[ -f $filename ]]; then
-	wget -c https://gitlab.freedesktop.org/api/v4/projects/890/packages/generic/fontconfig/$version/$filename
+	wget -c --progress=bar:force https://gitlab.freedesktop.org/api/v4/projects/890/packages/generic/fontconfig/$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

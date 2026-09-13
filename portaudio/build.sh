@@ -10,7 +10,7 @@ lfs_depends=(autoconf bash coreutils gcc glibc gzip make sed tar)
 blfs_depends=(alsa-lib cmake opus wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/portaudio/portaudio/archive/v$version/$filename
+	wget -c --progress=bar:force https://github.com/portaudio/portaudio/archive/v$version/$filename
 fi
 rm -rf $direname
 tar xf $filename

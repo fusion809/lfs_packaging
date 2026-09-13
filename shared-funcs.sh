@@ -22,7 +22,7 @@ function get_ngnu {
 	local name=$3
 	local version=$4
 	if ! [[ -f $filename ]] && ! [[ -d $name ]] ; then
-	wget -c https://download.savannah.nongnu.org/releases/$name/$filename ||get_ngnu_git $name 
+	wget -c --progress=bar:force https://download.savannah.nongnu.org/releases/$name/$filename ||get_ngnu_git $name 
 	fi
 if [[ -f $filename ]]; then
 	rm -rf $direname && tar xf $filename && cd $direname

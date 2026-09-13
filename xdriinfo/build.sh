@@ -11,7 +11,7 @@ blfs_depends=(fontconfig libXau libXdmcp libdrm libpng libxcb libxml2 llvm lm-se
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then
-	wget -c https://xorg.freedesktop.org/archive/individual/app/$filename
+	wget -c --progress=bar:force https://xorg.freedesktop.org/archive/individual/app/$filename
 fi
 tar xvf $filename
 # Compile and install

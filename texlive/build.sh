@@ -28,15 +28,15 @@ blfs_depends=(cairo pixman)
 filename="$name-$version-source.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/$year/$filename
+	wget -c --progress=bar:force https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/$year/$filename
 fi
 mf_filename="$name-$version-texmf.tar.xz"
 if ! [[ -f $mf_filename ]]; then
-	wget -c https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/$year/$mf_filename
+	wget -c --progress=bar:force https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/$year/$mf_filename
 fi
 ex_filename="$name-$version-extra.tar.xz"
 if ! [[ -f $ex_filename ]]; then
-	wget -c https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/$year/$ex_filename
+	wget -c --progress=bar:force https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/$year/$ex_filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

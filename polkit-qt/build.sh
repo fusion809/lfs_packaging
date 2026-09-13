@@ -10,7 +10,7 @@ majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-1-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://download.kde.org/stable/$name-1/$filename
+	wget -c --progress=bar:force https://download.kde.org/stable/$name-1/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

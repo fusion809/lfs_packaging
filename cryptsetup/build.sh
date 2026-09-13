@@ -9,7 +9,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 # Kernel options required
 if ! [[ -f $filename ]]; then
-	wget -c https://www.kernel.org/pub/linux/utils/cryptsetup/v$majVer/$filename
+	wget -c --progress=bar:force https://www.kernel.org/pub/linux/utils/cryptsetup/v$majVer/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

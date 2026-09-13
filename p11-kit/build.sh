@@ -6,7 +6,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 blfs_depends=(make-ca libtasn1 nss)
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/p11-glue/p11-kit/releases/download/$version/$filename 
+	wget -c --progress=bar:force https://github.com/p11-glue/p11-kit/releases/download/$version/$filename 
 fi
 rm -rf $direname
 tar xf $filename

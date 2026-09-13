@@ -11,7 +11,7 @@ majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/ksnip/kColorPicker/archive/v$version/$filename
+	wget -c --progress=bar:force https://github.com/ksnip/kColorPicker/archive/v$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

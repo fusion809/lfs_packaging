@@ -7,7 +7,7 @@ depends=(gcc glibc lcms2 libjpeg-turbo zlib)
 filename="LibRaw-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.libraw.org/data/$filename
+	wget -c --progress=bar:force https://www.libraw.org/data/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

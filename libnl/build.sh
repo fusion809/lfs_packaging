@@ -8,7 +8,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 # Kernel config options required
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/$repo/releases/download/libnl${version/./_/}/$filename
+	wget -c --progress=bar:force https://github.com/$repo/releases/download/libnl${version/./_/}/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

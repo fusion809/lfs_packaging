@@ -7,7 +7,7 @@ depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://downloads.sourceforge.net/opencore-amr/$filename
+	wget -c --progress=bar:force https://downloads.sourceforge.net/opencore-amr/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

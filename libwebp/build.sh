@@ -23,7 +23,7 @@ blfs_depends=(libdrm llvm lm-sensors spirv-tools)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://storage.googleapis.com/downloads.webmproject.org/releases/webp/$filename
+	wget -c --progress=bar:force https://storage.googleapis.com/downloads.webmproject.org/releases/webp/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

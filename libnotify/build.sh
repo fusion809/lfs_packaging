@@ -10,7 +10,7 @@ lfs_depends=(bzip2 expat gcc glibc libffi util-linux zlib)
 depends=(glib2 pcre2)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
-	wget -c https://download.gnome.org/sources/libnotify/$(echo $version | sed 's/.[0-9]$//g')/$filename
+	wget -c --progress=bar:force https://download.gnome.org/sources/libnotify/$(echo $version | sed 's/.[0-9]$//g')/$filename
 fi
 rm -rf $direname
 tar xf $filename

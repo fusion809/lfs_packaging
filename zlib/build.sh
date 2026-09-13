@@ -21,7 +21,7 @@ lfs_depends=(gcc glibc tar make coreutils wget gzip)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://zlib.net/fossils/$filename
+	wget -c --progress=bar:force https://zlib.net/fossils/$filename
 fi
 rm -rf $direname
 tar xf $filename

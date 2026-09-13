@@ -19,7 +19,7 @@ depends=(brotli bzip2 glibc gpm libevent ncurses openssl xz zlib zstd)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c http://links.twibright.com/download/$filename
+	wget -c --progress=bar:force http://links.twibright.com/download/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

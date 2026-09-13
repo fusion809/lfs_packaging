@@ -8,7 +8,7 @@ blfs_depends=(libjpeg libjpeg-turbo)
 lfs_depends=(glibc)
 
 if ! [[ -f "$filename" ]]; then
-	wget -c https://github.com/tjko/jpegoptim/releases/download/v$version/$filename
+	wget -c --progress=bar:force https://github.com/tjko/jpegoptim/releases/download/v$version/$filename
 fi
 
 rm -rf $direname

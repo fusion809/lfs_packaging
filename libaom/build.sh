@@ -22,7 +22,7 @@ direname="${filename/.tar.*/}"
 blfs_depends=(yasm)
 depends=(gcc glibc)
 if ! [[ -f $filename ]]; then
-	wget -c https://storage.googleapis.com/aom-releases/$filename
+	wget -c --progress=bar:force https://storage.googleapis.com/aom-releases/$filename
 fi
 rm -rf $direname
 tar xf $filename

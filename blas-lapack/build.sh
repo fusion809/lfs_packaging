@@ -16,7 +16,7 @@ direname="lapack-$version"
 filename="$direname.tar.gz"
 rm -rf $direname
 if ! [[ -f $filename ]]; then
-        wget -c https://github.com/$repo/archive/$version.tar.gz -O $filename
+        wget -c --progress=bar:force https://github.com/$repo/archive/$version.tar.gz -O $filename
 fi
 tar xvf $filename
 cd $direname

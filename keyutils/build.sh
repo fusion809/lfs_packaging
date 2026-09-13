@@ -19,7 +19,7 @@ depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://git.kernel.org/pub/scm/linux/kernel/git/dhowells/keyutils.git/snapshot/$filename
+	wget -c --progress=bar:force https://git.kernel.org/pub/scm/linux/kernel/git/dhowells/keyutils.git/snapshot/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

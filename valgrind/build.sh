@@ -19,7 +19,7 @@ depends=(glibc hwloc libevent libfabric numactl openmpi systemd)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://sourceware.org/pub/valgrind/$filename
+	wget -c --progress=bar:force https://sourceware.org/pub/valgrind/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

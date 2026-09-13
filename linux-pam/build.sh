@@ -13,7 +13,7 @@ lfs_depends=(gdbm glibc libxcrypt systemd)
 blfs_depends=()
 
 if ! [ -f "$filename" ]; then
-    wget -c "https://github.com/linux-pam/linux-pam/releases/download/v$version/$filename"
+    wget -c --progress=bar:force "https://github.com/linux-pam/linux-pam/releases/download/v$version/$filename"
 fi
 rm -rf "$dirname"
 tar xf "$filename"

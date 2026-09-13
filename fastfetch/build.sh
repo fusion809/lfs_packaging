@@ -12,7 +12,7 @@ direname="${filename/.tar.gz/}"
 
 # Get the source
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/fastfetch-cli/fastfetch/archive/$version.tar.gz -O $filename
+	wget -c --progress=bar:force https://github.com/fastfetch-cli/fastfetch/archive/$version.tar.gz -O $filename
 fi
 rm -rf $direname
 tar xf $filename

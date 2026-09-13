@@ -7,10 +7,10 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 patch_filename="$name-$version-apng.patch.gz"
 if ! [[ -f $filename ]]; then
-	wget -c https://downloads.sourceforge.net/libpng/$filename
+	wget -c --progress=bar:force https://downloads.sourceforge.net/libpng/$filename
 fi
 if ! [[ -f $patch_filename ]]; then
-	wget -c https://downloads.sourceforge.net/sourceforge/libpng-apng/$patch_filename
+	wget -c --progress=bar:force https://downloads.sourceforge.net/sourceforge/libpng-apng/$patch_filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

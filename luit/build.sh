@@ -18,7 +18,7 @@ depends=(glibc zlib)
 filename="$name-$version.tgz"
 direname="${filename/.tgz/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://invisible-mirror.net/archives/luit/$filename
+	wget -c --progress=bar:force https://invisible-mirror.net/archives/luit/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

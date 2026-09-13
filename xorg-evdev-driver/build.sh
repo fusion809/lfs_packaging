@@ -6,7 +6,7 @@ depends=(glibc libevdev mtdev systemd)
 filename="xf86-input-evdev-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.x.org/pub/individual/driver/$filename
+	wget -c --progress=bar:force https://www.x.org/pub/individual/driver/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

@@ -6,7 +6,7 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.tortall.net/projects/yasm/releases/$filename
+	wget -c --progress=bar:force https://www.tortall.net/projects/yasm/releases/$filename
 fi
 rm -rf $direname
 tar xf $filename

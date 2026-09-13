@@ -10,7 +10,7 @@ depends=(glib2 gtk3 libX11 libXcomposite libXcursor libXdamage libXext libXfixes
 blfs_depends=(at-spi2-core brotli cairo dav1d dconf exempi fontconfig freetype fribidi gdk-pixbuf glib glycin gnome-desktop graphite2 gtk3 harfbuzz hicolor-icon-theme lcms lcms2 libXau libXdmcp libepoxy libexif libhandy libjpeg-turbo libpeas libpng libportal librsvg libseccomp libx11 libxcb libxkbcommon libxml2 meson pixman webkitgtk)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
-	wget -c https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$filename
+	wget -c --progress=bar:force https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$filename
 fi
 rm -rf $direname
 tar xf $filename

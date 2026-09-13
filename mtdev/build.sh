@@ -19,7 +19,7 @@ depends=(glibc)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://bitmath.org/code/mtdev/$filename
+	wget -c --progress=bar:force https://bitmath.org/code/mtdev/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

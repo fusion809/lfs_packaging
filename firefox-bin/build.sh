@@ -17,7 +17,7 @@ depends=(alsa-lib at-spi2-core brotli bzip2 cairo dbus expat fontconfig freetype
 filename="firefox-$version.tar.xz"
 direname="firefox"
 if ! [[ -f $filename ]]; then
-	wget -c https://ftp.mozilla.org/pub/firefox/releases/$version/linux-x86_64/en-GB/$filename
+	wget -c --progress=bar:force https://ftp.mozilla.org/pub/firefox/releases/$version/linux-x86_64/en-GB/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

@@ -9,7 +9,7 @@ direname="${filename/.tar.*/}"
 depends=(gdk-pixbuf graphene iso-codes libepoxy librsvg libxkbcommon pango pygobject wayland-protocols adwaita-icon-theme gst-plugins-bad glslc gst-plugins-good hicolor-icon-theme vulkan-loader xdg-desktop-portal xdg-desktop-portal-gnome)
 # Requires userspace dmabuf misc driver from kernel
 if ! [[ -f $filename ]]; then
-	wget -c https://download.gnome.org/sources/gtk/$majVer/$filename
+	wget -c --progress=bar:force https://download.gnome.org/sources/gtk/$majVer/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

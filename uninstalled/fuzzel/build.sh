@@ -8,7 +8,7 @@ filename="$direname.tar.gz"
 depends=(scdoc fcft)
 blfs_depends=(fontconfig libpng libxkbcommon pixman wayland meson wayland-protocols)
 if ! [[ -f "$filename" ]]; then
-	wget -c https://codeberg.org/$repo/archive/$version.tar.gz -O $filename
+	wget -c --progress=bar:force https://codeberg.org/$repo/archive/$version.tar.gz -O $filename
 fi
 rm -rf "$name"
 tar xf "$filename"

@@ -7,7 +7,7 @@ depends=(glibc lcms2 libjpeg-turbo zlib)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://downloads.sourceforge.net/libmng/$filename
+	wget -c --progress=bar:force https://downloads.sourceforge.net/libmng/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

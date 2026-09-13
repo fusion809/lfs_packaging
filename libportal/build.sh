@@ -7,7 +7,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(glib2 gtk3 gtk4 xdg-desktop-portal-gnome)
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/$repo/releases/download/$version/$filename
+	wget -c --progress=bar:force https://github.com/$repo/releases/download/$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

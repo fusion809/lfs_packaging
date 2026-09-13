@@ -11,7 +11,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 # Fetch source
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/$repo/archive/$version.tar.gz -O $filename
+	wget -c --progress=bar:force https://github.com/$repo/archive/$version.tar.gz -O $filename
 fi
 rm -rf $direname
 tar xf $filename

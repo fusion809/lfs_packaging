@@ -13,7 +13,7 @@ pip_depends=(gobject)
 # Fetch and unpack source
 sudo rm -rf $direname
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/flatpak/flatpak/releases/download/${version}/$filename
+	wget -c --progress=bar:force https://github.com/flatpak/flatpak/releases/download/${version}/$filename
 fi
 tar xvf $filename
 cd $direname

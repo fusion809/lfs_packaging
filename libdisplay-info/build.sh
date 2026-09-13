@@ -8,7 +8,7 @@ blfs_depends=(hwdata)
 lfs_depends=(glibc)
 
 if ! [[ -f $filename ]]; then
-	wget -c https://gitlab.freedesktop.org/emersion/libdisplay-info/-/releases/$version/downloads/$filename
+	wget -c --progress=bar:force https://gitlab.freedesktop.org/emersion/libdisplay-info/-/releases/$version/downloads/$filename
 fi
 rm -rf "$direname"
 tar xf $filename

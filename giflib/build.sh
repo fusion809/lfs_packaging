@@ -5,7 +5,7 @@ version=$(sf_ver giflib/code)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://sourceforge.net/projects/giflib/files/$filename
+	wget -c --progress=bar:force https://sourceforge.net/projects/giflib/files/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

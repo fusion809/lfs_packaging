@@ -22,7 +22,7 @@ blfs_depends=(cbindgen glslang libXau libXdmcp libclc libdrm libva libxcb libxml
 pip_depends=(pyyaml)
 
 if ! [[ -f $filename ]]; then
-	wget -c https://mesa.freedesktop.org/archive/$filename
+	wget -c --progress=bar:force https://mesa.freedesktop.org/archive/$filename
 fi
 rm -rf $direname
 tar xf $filename

@@ -11,7 +11,7 @@ blfs_depends=(glib gtk-doc vala)
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then
-	wget -c https://download.gnome.org/sources/gcab/$version/$filename
+	wget -c --progress=bar:force https://download.gnome.org/sources/gcab/$version/$filename
 fi
 tar xf $filename
 cd $direname

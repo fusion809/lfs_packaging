@@ -7,7 +7,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(gcc glibc icu ncurses readline)
 if ! [[ -f $filename ]]; then
-	wget -c https://download.gnome.org/sources/libxml2/$majVer/$filename
+	wget -c --progress=bar:force https://download.gnome.org/sources/libxml2/$majVer/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

@@ -8,10 +8,10 @@ version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://ftp.gnu.org/gnu/glpk/$filename
+	wget -c --progress=bar:force https://ftp.gnu.org/gnu/glpk/$filename
 fi
 if ! [[ -f gcc-15.patch ]]; then
-	wget -c "https://gitlab.archlinux.org/archlinux/packaging/packages/glpk/-/raw/main/gcc-15.patch?ref_type=heads&inline=false" -O gcc-15.patch
+	wget -c --progress=bar:force "https://gitlab.archlinux.org/archlinux/packaging/packages/glpk/-/raw/main/gcc-15.patch?ref_type=heads&inline=false" -O gcc-15.patch
 fi
 tar xf $filename
 rm -rf $direname

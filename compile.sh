@@ -174,8 +174,8 @@ function gap_patches {
     while IFS= read -r i; do
         echo "Getting and applying $i"
 
-        wget -c "https://www.linuxfromscratch.org/patches/lfs/development/$i" ||
-        wget -c "https://www.linuxfromscratch.org/patches/blfs/svn/$i"
+        wget -c --progress=bar:force "https://www.linuxfromscratch.org/patches/lfs/development/$i" ||
+        wget -c --progress=bar:force "https://www.linuxfromscratch.org/patches/blfs/svn/$i"
 
         patch -Np1 -i "$i"
     done <<< "$patches"

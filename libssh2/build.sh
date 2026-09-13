@@ -14,10 +14,10 @@ direname="${filename/.tar.gz/}"
 lfs_depends=(cmake gcc glibc openssl zlib)
 
 if ! [[ -f $filename ]]; then
-	wget -c https://www.libssh2.org/download/$filename
+	wget -c --progress=bar:force https://www.libssh2.org/download/$filename
 fi
 if ! [[ -f "libssh2-1.11.1-security_fixes-1.patch" ]]; then
-	wget -c https://www.linuxfromscratch.org/patches/blfs/svn/libssh2-1.11.1-security_fixes-1.patch
+	wget -c --progress=bar:force https://www.linuxfromscratch.org/patches/blfs/svn/libssh2-1.11.1-security_fixes-1.patch
 fi
 rm -rf $direname
 tar xf $filename

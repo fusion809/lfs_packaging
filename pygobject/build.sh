@@ -7,7 +7,7 @@ depends=(pycairo glib2)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://download.gnome.org/sources/pygobject/$majVer/$filename
+	wget -c --progress=bar:force https://download.gnome.org/sources/pygobject/$majVer/$filename
 fi
 
 rm -rf $direname

@@ -6,7 +6,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(gst-plugins-base libaom libdvdread libdvdnav libva svt-av1 soundtouch)
 if ! [[ -f $filename ]]; then
-	wget -c https://gstreamer.freedesktop.org/src/gst-plugins-good/$filename
+	wget -c --progress=bar:force https://gstreamer.freedesktop.org/src/gst-plugins-good/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

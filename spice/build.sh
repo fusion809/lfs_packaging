@@ -19,7 +19,7 @@ filename="$direname.tar.bz2"
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then
-	wget -c https://www.spice-space.org/download/releases/spice-server/$filename
+	wget -c --progress=bar:force https://www.spice-space.org/download/releases/spice-server/$filename
 fi
 tar xvf $filename
 # Compile and install

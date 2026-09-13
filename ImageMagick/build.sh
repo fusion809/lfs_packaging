@@ -12,7 +12,7 @@ filename="$version.tar.gz"
 # Fetch and unpack source
 sudo rm -rf $direname
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/ImageMagick/ImageMagick/archive/refs/tags/$filename
+	wget -c --progress=bar:force https://github.com/ImageMagick/ImageMagick/archive/refs/tags/$filename
 fi
 tar xvf $filename
 # Compile and install

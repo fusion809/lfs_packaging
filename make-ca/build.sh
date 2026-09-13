@@ -5,7 +5,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 
 if ! [[ -f "$filename" ]]; then
-	wget -c https://github.com/lfs-book/make-ca/archive/refs/tags/v$version.tar.gz -O "$filename"
+	wget -c --progress=bar:force https://github.com/lfs-book/make-ca/archive/refs/tags/v$version.tar.gz -O "$filename"
 fi
 
 tar xf "$filename"

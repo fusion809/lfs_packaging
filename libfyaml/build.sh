@@ -8,7 +8,7 @@ direname="${filename/.tar.*/}"
 depends=(gcc glibc icu libffi libxml2 libyaml zlib zstd)
 blfs_depends=(llvm)
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/pantoniou/libfyaml/releases/download/v$version/$filename
+	wget -c --progress=bar:force https://github.com/pantoniou/libfyaml/releases/download/v$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

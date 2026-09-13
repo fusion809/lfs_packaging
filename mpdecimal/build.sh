@@ -18,7 +18,7 @@ version=$(get_version)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.bytereef.org/software/mpdecimal/releases/$filename
+	wget -c --progress=bar:force https://www.bytereef.org/software/mpdecimal/releases/$filename
 fi
 rm -rf $direname
 tar xf $filename

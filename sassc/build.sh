@@ -11,10 +11,10 @@ libfilename="libsass-$libver.tar.gz"
 libdirename="${libfilename/.tar.*/}"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/$repo/archive/$version/$filename
+	wget -c --progress=bar:force https://github.com/$repo/archive/$version/$filename
 fi
 if ! [[ -f $libfilename ]]; then
-	wget -c https://github.com/$librepo/archive/$version/$libfilename
+	wget -c --progress=bar:force https://github.com/$librepo/archive/$version/$libfilename
 fi
 rm -rf "$libdirename"
 tar xf "$libfilename"

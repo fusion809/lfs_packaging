@@ -7,7 +7,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(glib2)
 if ! [[ -f $filename ]]; then
-	wget -c https://gitlab.freedesktop.org/$repo/-/archive/$version/$filename
+	wget -c --progress=bar:force https://gitlab.freedesktop.org/$repo/-/archive/$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

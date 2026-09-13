@@ -8,7 +8,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 # Kernel options are required, too
 if ! [[ -f $filename ]]; then
-	wget -c https://www.netfilter.org/projects/iptables/files/$filename
+	wget -c --progress=bar:force https://www.netfilter.org/projects/iptables/files/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

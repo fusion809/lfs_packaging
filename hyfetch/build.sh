@@ -10,7 +10,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/hykilpikonna/hyfetch/archive/$version.tar.gz -O $filename
+	wget -c --progress=bar:force https://github.com/hykilpikonna/hyfetch/archive/$version.tar.gz -O $filename
 fi
 # Compile and install
 rm -rf $direname

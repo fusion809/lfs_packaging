@@ -8,7 +8,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 lfs_depends=(glibc make gcc xz tar coreutils)
 if ! [[ -f $filename ]]; then
-    wget -c https://github.com/libexpat/libexpat/releases/download/R_${_version}/$filename
+    wget -c --progress=bar:force https://github.com/libexpat/libexpat/releases/download/R_${_version}/$filename
 fi
 rm -rf $direname
 tar xf $filename

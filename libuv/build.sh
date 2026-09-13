@@ -6,7 +6,7 @@ version=$(gh_ver $repo)
 filename="$name-v$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://dist.libuv.org/dist/v$version/$filename
+	wget -c --progress=bar:force https://dist.libuv.org/dist/v$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

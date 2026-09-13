@@ -13,7 +13,7 @@ lfs_depends=(bash coreutils dbus expat gcc glibc python systemd)
 blfs_depends=(alsa-lib dbus opus)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/$repo/archive/$version.tar.gz -O $filename
+	wget -c --progress=bar:force https://github.com/$repo/archive/$version.tar.gz -O $filename
 fi
 # Compile and install
 rm -rf $direname

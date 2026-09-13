@@ -6,7 +6,7 @@ depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://0pointer.de/lennart/projects/libdaemon/$filename
+	wget -c --progress=bar:force https://0pointer.de/lennart/projects/libdaemon/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

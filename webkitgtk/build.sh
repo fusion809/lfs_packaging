@@ -22,7 +22,7 @@ majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://webkitgtk.org/releases/$filename
+	wget -c --progress=bar:force https://webkitgtk.org/releases/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

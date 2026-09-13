@@ -8,7 +8,7 @@ blfs_depends=(alsa-lib dav1d fdk-aac lame libXau libXdmcp libass libdrm libogg l
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://ffmpeg.org/releases/$filename
+	wget -c --progress=bar:force https://ffmpeg.org/releases/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

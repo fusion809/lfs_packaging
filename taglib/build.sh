@@ -7,7 +7,7 @@ depends=(gcc glibc zlib)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://taglib.org/releases/$filename
+	wget -c --progress=bar:force https://taglib.org/releases/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

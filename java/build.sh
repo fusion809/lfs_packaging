@@ -15,7 +15,7 @@ blfs_depends=(alsa-lib
 	x7lib)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
-	wget -c https://download.java.net/java/early_access/jdk$majorver/$minorver/GPL/$filename
+	wget -c --progress=bar:force https://download.java.net/java/early_access/jdk$majorver/$minorver/GPL/$filename
 fi
 rm -rf $direname
 tar xf $filename

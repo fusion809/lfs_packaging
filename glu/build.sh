@@ -23,7 +23,7 @@ lfs_depends=(libelf)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://archive.mesa3d.org/glu/$filename
+	wget -c --progress=bar:force https://archive.mesa3d.org/glu/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

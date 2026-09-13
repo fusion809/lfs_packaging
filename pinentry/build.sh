@@ -8,7 +8,7 @@ blfs_depends=(llvm)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.gnupg.org/ftp/gcrypt/$name/$filename
+	wget -c --progress=bar:force https://www.gnupg.org/ftp/gcrypt/$name/$filename
 fi
 rm -rf $direname
 tar xf $filename

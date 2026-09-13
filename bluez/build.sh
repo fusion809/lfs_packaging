@@ -8,7 +8,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 # Kernel config options required
 if ! [[ -f $filename ]]; then
-	wget -c https://www.kernel.org/pub/linux/bluetooth/$filename
+	wget -c --progress=bar:force https://www.kernel.org/pub/linux/bluetooth/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

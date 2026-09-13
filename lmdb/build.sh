@@ -18,7 +18,7 @@ version=$(get_version)
 filename="openldap-LMDB_$version.tar.bz2"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://git.openldap.org/openldap/openldap/-/archive/LMDB_$version/$filename
+	wget -c --progress=bar:force https://git.openldap.org/openldap/openldap/-/archive/LMDB_$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

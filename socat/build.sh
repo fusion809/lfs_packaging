@@ -27,7 +27,7 @@ lfs_depends=(glibc ncurses openssl readline)
 
 rm -rf $direname
 if ! [[ -f $filename ]]; then
-	wget -c http://www.dest-unreach.org/socat/download/$filename
+	wget -c --progress=bar:force http://www.dest-unreach.org/socat/download/$filename
 fi
 
 tar xf "$filename"

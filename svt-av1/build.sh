@@ -7,7 +7,7 @@ depends=(gcc glibc)
 filename="SVT-AV1-v$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://gitlab.com/$repo/-/archive/v$version/$filename
+	wget -c --progress=bar:force https://gitlab.com/$repo/-/archive/v$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

@@ -8,7 +8,7 @@ direname="${filename/.tar.*/}"
 blfs_depends=(lua pipewire)
 depends=(glib2 systemd)
 if ! [[ -f $filename ]]; then
-	wget -c https://gitlab.freedesktop.org/pipewire/wireplumber/-/archive/$version/$filename
+	wget -c --progress=bar:force https://gitlab.freedesktop.org/pipewire/wireplumber/-/archive/$version/$filename
 fi
 rm -rf $direname
 tar xf $filename

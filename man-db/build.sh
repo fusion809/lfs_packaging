@@ -6,7 +6,7 @@ lfs_depends=(gcc make glibc tar xz coreutils bash)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://download.savannah.gnu.org/releases/$name/$filename
+	wget -c --progress=bar:force https://download.savannah.gnu.org/releases/$name/$filename
 fi
 rm -rf $direname
 tar xf $filename

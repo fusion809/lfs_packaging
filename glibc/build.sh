@@ -10,7 +10,7 @@ tar xf $filename
 cd $direname
 for i in $(pfile glibc | tr '\n' ' ')
 do
-	wget -c https://www.linuxfromscratch.org/patches/lfs/development/$i
+	wget -c --progress=bar:force https://www.linuxfromscratch.org/patches/lfs/development/$i
 	patch -Np1 -i "$i"
 done
 mkdir -v build

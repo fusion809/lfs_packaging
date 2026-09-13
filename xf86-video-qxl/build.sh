@@ -18,7 +18,7 @@ optional_depends=(libcacard) # Smartcard support
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then
-	wget -c https://xorg.freedesktop.org/releases/individual/driver/$filename
+	wget -c --progress=bar:force https://xorg.freedesktop.org/releases/individual/driver/$filename
 fi
 tar xvf $filename
 # Compile and install

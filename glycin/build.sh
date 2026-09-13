@@ -7,7 +7,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(bubblewrap fontconfig glib2 lcms2 libseccomp rustc libheif libjxl librsvg vala)
 if ! [[ -f $filename ]]; then
-	wget -c https://download.gnome.org/sources/glycin/$majVer/$filename
+	wget -c --progress=bar:force https://download.gnome.org/sources/glycin/$majVer/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

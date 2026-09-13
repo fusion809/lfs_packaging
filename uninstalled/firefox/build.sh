@@ -15,7 +15,7 @@ depends=(alsa-lib at-spi2-core brotli bzip2 cairo dav1d dbus expat fontconfig fr
 filename="$name-$version.source.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://archive.mozilla.org/pub/firefox/releases/$version/source/$filename
+	wget -c --progress=bar:force https://archive.mozilla.org/pub/firefox/releases/$version/source/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

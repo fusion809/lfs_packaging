@@ -20,7 +20,7 @@ lfs_depends=(e2fsprogs glibc openssl zlib)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.libssh.org/files/$maj_ver/$filename
+	wget -c --progress=bar:force https://www.libssh.org/files/$maj_ver/$filename
 fi
 
 rm -rf $direname

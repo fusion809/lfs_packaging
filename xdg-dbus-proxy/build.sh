@@ -8,7 +8,7 @@ depends=(glib2 pcre2)
 direname="$name-$version"
 filename="$direname.tar.xz"
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/flatpak/xdg-dbus-proxy/releases/download/$version/$filename
+	wget -c --progress=bar:force https://github.com/flatpak/xdg-dbus-proxy/releases/download/$version/$filename
 fi
 rm -rf $direname
 tar xf $filename

@@ -20,7 +20,7 @@ lfs_depends=(glibc libffi sqlite systemd util-linux zlib)
 depends=(glib2 pcre2 polkit)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
-	wget -c https://www.freedesktop.org/software/colord/releases/$filename
+	wget -c --progress=bar:force https://www.freedesktop.org/software/colord/releases/$filename
 fi
 rm -rf $direname
 tar xf $filename

@@ -6,7 +6,7 @@ version=$(gfd_ver $repo)
 filename="$name-v$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-        wget -c https://gitlab.freedesktop.org/$repo/-/archive/v$version/$filename
+        wget -c --progress=bar:force https://gitlab.freedesktop.org/$repo/-/archive/v$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

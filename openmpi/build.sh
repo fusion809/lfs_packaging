@@ -25,7 +25,7 @@ openucx)
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then
-	wget -c https://www.open-mpi.org/software/ompi/v${version%.*}/downloads/$filename
+	wget -c --progress=bar:force https://www.open-mpi.org/software/ompi/v${version%.*}/downloads/$filename
 fi
 tar xf $filename
 cd $direname

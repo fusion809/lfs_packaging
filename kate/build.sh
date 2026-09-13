@@ -6,7 +6,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 blfs_depends=(frameworks6)
 if ! [[ -f $filename ]]; then
-	wget -c https://download.kde.org/stable/release-service/$version/src/$filename
+	wget -c --progress=bar:force https://download.kde.org/stable/release-service/$version/src/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

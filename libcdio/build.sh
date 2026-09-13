@@ -10,7 +10,7 @@ pr_url=$(wget -cqO- https://www.linuxfromscratch.org/blfs/view/systemd/multimedi
 pr_filename=$(echo $pr_url | sed 's|.*libcdio/||g')
 pr_direname=$(echo $pr_filename | sed 's/.tar.*//g')
 if ! [[ -f $pr_filename ]]; then
-	wget -c $pr_url
+	wget -c --progress=bar:force $pr_url
 fi
 rm -rf "$direname"
 tar xf "$filename"

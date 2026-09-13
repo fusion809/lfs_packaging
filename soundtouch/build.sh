@@ -7,7 +7,7 @@ depends=(gcc glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.surina.net/soundtouch/$filename
+	wget -c --progress=bar:force https://www.surina.net/soundtouch/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

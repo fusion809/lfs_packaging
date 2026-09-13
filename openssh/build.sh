@@ -21,7 +21,7 @@ depends=(glibc libxcrypt openssl zlib)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/$filename
+	wget -c --progress=bar:force https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/$filename
 fi
 rm -rf $direname
 tar xf $filename
@@ -44,7 +44,7 @@ install -v -m644    INSTALL LICENCE OVERVIEW README* \
                     /usr/share/doc/$direname"
 cd ..
 URL=$(wget -cqO- https://www.linuxfromscratch.org/blfs/view/systemd/introduction/systemd-units.html | grep "blfs-systemd-units-[0-9]+.tar.xz" -E | cut -d '"' -f 2 | head -n 1)
-wget -c $URL
+wget -c --progress=bar:force $URL
 systemd_filename=$(echo $URL | sed 's|https.*/||g')
 tar xf $systemd_filename
 cd blfs-systemd-units*[0-9]

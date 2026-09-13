@@ -22,7 +22,7 @@ filename="$name.$version.tgz"
 direname="${filename/.tar.*/}"
 # Has kernel config deps, too
 if ! [[ -f $filename ]]; then
-	wget -c https://sourceware.org/ftp/lvm2/$filename
+	wget -c --progress=bar:force https://sourceware.org/ftp/lvm2/$filename
 fi
 export PATH+=:/usr/sbin
 rm -rf "$direname"

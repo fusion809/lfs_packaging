@@ -8,7 +8,7 @@ depends=(at-spi2-core brotli bzip2 cairo cracklib cyrus-sasl dbus e2fsprogs expa
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://download.gnome.org/sources/seahorse/$majVer/$filename
+	wget -c --progress=bar:force https://download.gnome.org/sources/seahorse/$majVer/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

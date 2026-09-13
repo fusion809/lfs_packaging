@@ -8,7 +8,7 @@ blfs_depends=(cairo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/pygobject/pycairo/releases/download/v$version/$filename
+	wget -c --progress=bar:force https://github.com/pygobject/pycairo/releases/download/v$version/$filename
 fi
 
 rm -rf $direname

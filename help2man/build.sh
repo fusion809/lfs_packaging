@@ -6,7 +6,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(wget tar xz make gcc coreutils)
 if ! [[ -f $filename ]]; then
-	wget -c https://ftp.gnu.org/gnu/$name/$filename
+	wget -c --progress=bar:force https://ftp.gnu.org/gnu/$name/$filename
 fi
 rm -rf $direname
 tar xf $filename

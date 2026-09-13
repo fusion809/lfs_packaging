@@ -22,7 +22,7 @@ lfs_depends=(zlib)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://astron.com/pub/$name/$filename
+	wget -c --progress=bar:force https://astron.com/pub/$name/$filename
 fi
 
 rm -rf $direname

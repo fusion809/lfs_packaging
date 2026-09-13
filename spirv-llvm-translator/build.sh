@@ -7,7 +7,7 @@ filename="SPIRV-LLVM-Translator-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/KhronosGroup/SPIRV-LLVM-Translator/archive/refs/tags/v$version.tar.gz -O $filename
+	wget -c --progress=bar:force https://github.com/KhronosGroup/SPIRV-LLVM-Translator/archive/refs/tags/v$version.tar.gz -O $filename
 fi
 
 rm -rf $direname

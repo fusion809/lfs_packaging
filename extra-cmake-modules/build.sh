@@ -8,7 +8,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(cmake qt6)
 if ! [[ -f $filename ]]; then
-	wget -c https://download.kde.org/stable/frameworks/$majVer/$filename
+	wget -c --progress=bar:force https://download.kde.org/stable/frameworks/$majVer/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

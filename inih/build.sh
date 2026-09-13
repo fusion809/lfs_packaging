@@ -6,7 +6,7 @@ version=$(gh_ver $repo | sed 's/^r//g')
 filename="$name-r$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/$repo/archive/r$version/$filename
+	wget -c --progress=bar:force https://github.com/$repo/archive/r$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

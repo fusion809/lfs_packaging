@@ -8,7 +8,7 @@ direname="${filename/.tar.*/}"
 blfs_depends=(glib2 gtk3)
 lfs_depends=(glibc)
 if ! [[ -f $filename ]]; then
-	wget -c https://download.gnome.org/sources/libpeas/$majVer/$filename
+	wget -c --progress=bar:force https://download.gnome.org/sources/libpeas/$majVer/$filename
 fi
 rm -rf $direname
 tar xf $filename

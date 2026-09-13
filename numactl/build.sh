@@ -10,7 +10,7 @@ lfs_depends=(autoconf bash coreutils gcc glibc gzip make sed tar)
 blfs_depends=(wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/numactl/numactl/archive/v$version.tar.gz -O $filename
+	wget -c --progress=bar:force https://github.com/numactl/numactl/archive/v$version.tar.gz -O $filename
 fi
 rm -rf $direname
 tar xf $filename

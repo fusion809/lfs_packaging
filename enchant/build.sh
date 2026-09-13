@@ -7,7 +7,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 blfs_depends=(aspell glib2 vala)
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/rrthomas/enchant/releases/download/v$version/$filename
+	wget -c --progress=bar:force https://github.com/rrthomas/enchant/releases/download/v$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

@@ -8,7 +8,7 @@ blfs_depends=(alsa-lib at-spi2-core avahi cairo dav1d flac lame lcms2 libXau lib
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://download.videolan.org/vlc/$version/$filename
+	wget -c --progress=bar:force https://download.videolan.org/vlc/$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

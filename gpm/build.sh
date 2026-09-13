@@ -18,7 +18,7 @@ depends=(glibc ncurses)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://anduin.linuxfromscratch.org/BLFS/gpm/$filename
+	wget -c --progress=bar:force https://anduin.linuxfromscratch.org/BLFS/gpm/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

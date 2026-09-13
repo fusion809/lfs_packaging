@@ -37,7 +37,7 @@ lfs_depends=(bash coreutils glibc gzip sed tar)
 blfs_depends=(cmake wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-	wget -c http://www.qhull.org/download/$filename
+	wget -c --progress=bar:force http://www.qhull.org/download/$filename
 fi
 rm -rf $direname
 tar xf $filename

@@ -7,7 +7,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(cmake gcc glib2 glibc icu libffi libxml2 pcre2 vala)
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/libical/libical/releases/download/v$version/$filename
+	wget -c --progress=bar:force https://github.com/libical/libical/releases/download/v$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

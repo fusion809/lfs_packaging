@@ -7,10 +7,10 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 doc_filename="$name-$version-xdoc.tar.xz"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.nasm.us/pub/nasm/releasebuilds/$version/$filename
+	wget -c --progress=bar:force https://www.nasm.us/pub/nasm/releasebuilds/$version/$filename
 fi
 if ! [[ -f $doc_filename ]]; then
-	wget -c https://www.nasm.us/pub/nasm/releasebuilds/$version/$doc_filename
+	wget -c --progress=bar:force https://www.nasm.us/pub/nasm/releasebuilds/$version/$doc_filename
 fi
 rm -rf $direname
 tar xf $filename

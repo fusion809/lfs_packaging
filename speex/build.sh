@@ -7,7 +7,7 @@ depends=(glibc libogg)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://downloads.xiph.org/releases/speex/$filename
+	wget -c --progress=bar:force https://downloads.xiph.org/releases/speex/$filename
 fi
 dsp_filename="speexdsp-$version.tar.gz"
 dsp_direname="${dsp_filename/.tar.*/}"

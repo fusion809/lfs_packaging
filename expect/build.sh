@@ -19,7 +19,7 @@ lfs_depends=(tcl)
 filename="${name}${version}.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://prdownloads.sourceforge.net/$name/$filename
+	wget -c --progress=bar:force https://prdownloads.sourceforge.net/$name/$filename
 fi
 rm -rf $direname
 tar xf $filename

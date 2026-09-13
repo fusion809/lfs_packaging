@@ -21,7 +21,7 @@ version=$(get_version)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.cpan.org/src/$(echo $version | sed 's/\..*/.0/g')/$filename
+	wget -c --progress=bar:force https://www.cpan.org/src/$(echo $version | sed 's/\..*/.0/g')/$filename
 fi
 rm -rf $direname
 tar xf $filename

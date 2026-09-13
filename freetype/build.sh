@@ -7,7 +7,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(brotli bzip2 gcc glibc harfbuzz hdf5 libaec libpng zlib)
 if ! [[ -f $filename ]]; then
-	wget -c https://downloads.sourceforge.net/freetype/$filename
+	wget -c --progress=bar:force https://downloads.sourceforge.net/freetype/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

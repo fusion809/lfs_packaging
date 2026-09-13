@@ -19,7 +19,7 @@ filename="File-ShareDir-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(perl-file-sharedir-install)
 if ! [[ -f $filename ]]; then
-	wget -c https://www.cpan.org/authors/id/R/RE/REHSACK/$filename
+	wget -c --progress=bar:force https://www.cpan.org/authors/id/R/RE/REHSACK/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

@@ -25,7 +25,7 @@ depends=(pcre2)
 lfs_depends=(glibc libcap ncurses pcre2 perl texinfo)
 blfs_depends=()
 if ! [[ -f $filename ]]; then
-	wget -c https://sourceforge.net/projects/zsh/files/zsh/$version/$filename
+	wget -c --progress=bar:force https://sourceforge.net/projects/zsh/files/zsh/$version/$filename
 fi
 rm -rf $direname
 tar xf $filename

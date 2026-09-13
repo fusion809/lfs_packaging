@@ -24,7 +24,7 @@ minVer=$(echo $version | cut -d '.' -f 2)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://archive.mozilla.org/pub/security/nss/releases/NSS_${majVer}_${minVer}_RTM/src/$filename
+	wget -c --progress=bar:force https://archive.mozilla.org/pub/security/nss/releases/NSS_${majVer}_${minVer}_RTM/src/$filename
 fi
 rm -rf $direname
 tar xf $filename

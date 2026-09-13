@@ -13,11 +13,11 @@ lfs_depends=(bzip2 dbus expat gcc glibc libffi systemd util-linux zlib)
 depends=(glib2 gtk3 libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXres pango pcre2 wayland)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
-	wget -c https://download.gnome.org/sources/dconf/$(echo "${version}" | sed 's/.[0-9]$//g')/$filename
+	wget -c --progress=bar:force https://download.gnome.org/sources/dconf/$(echo "${version}" | sed 's/.[0-9]$//g')/$filename
 fi
 
 if ! [[ -f $edFilename ]]; then
-	wget -c https://download.gnome.org/sources/dconf-editor/$(echo $edVersion | sed 's/.[0-9]$//g')/$edFilename
+	wget -c --progress=bar:force https://download.gnome.org/sources/dconf-editor/$(echo $edVersion | sed 's/.[0-9]$//g')/$edFilename
 fi
 rm -rf $direname
 tar xf $filename

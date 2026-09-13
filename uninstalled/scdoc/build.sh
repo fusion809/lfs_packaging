@@ -6,7 +6,7 @@ direname="$name-$version"
 filename="$direname.tar.gz"
 
 if ! [[ -f $filename ]]; then
-	wget -c https://git.sr.ht/~sircmpwn/scdoc/archive/$version.tar.gz -O "$filename"
+	wget -c --progress=bar:force https://git.sr.ht/~sircmpwn/scdoc/archive/$version.tar.gz -O "$filename"
 fi
 
 rm -rf $direname

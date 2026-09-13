@@ -22,7 +22,7 @@ depends=(gcc glib2 glibc icu libxml2 pcre2)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/$version/$filename
+	wget -c --progress=bar:force https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

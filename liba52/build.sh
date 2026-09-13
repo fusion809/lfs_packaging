@@ -22,7 +22,7 @@ majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="a52dec-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://distfiles.adelielinux.org/source/a52dec/$filename
+	wget -c --progress=bar:force https://distfiles.adelielinux.org/source/a52dec/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

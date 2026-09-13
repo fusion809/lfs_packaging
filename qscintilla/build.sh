@@ -23,7 +23,7 @@ blfs_depends=(brotli double-conversion fontconfig freetype graphite2 harfbuzz li
 pip_depends=(sip pyqt-builder)
 # Fetch and unpack source
 if ! [[ -f $archive.tar.gz ]]; then
-	wget -c https://www.riverbankcomputing.com/static/Downloads/QScintilla/$version/$archive.tar.gz
+	wget -c --progress=bar:force https://www.riverbankcomputing.com/static/Downloads/QScintilla/$version/$archive.tar.gz
 fi
 rm -rf $archive
 tar xf $archive.tar.gz

@@ -7,7 +7,7 @@ depends=(glibc)
 filename="SDL3-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.libsdl.org/release/$filename
+	wget -c --progress=bar:force https://www.libsdl.org/release/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

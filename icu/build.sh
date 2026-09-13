@@ -6,7 +6,7 @@ version=$(gh_ver $repo)
 filename="${name}4c-$version-sources.tgz"
 direname="${filename/.tgz/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/$repo/releases/download/release-$version/$filename
+	wget -c --progress=bar:force https://github.com/$repo/releases/download/release-$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

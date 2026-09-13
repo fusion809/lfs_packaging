@@ -10,7 +10,7 @@ blfs_depends=(fontconfig libXau libXdmcp libpng libxcb mesa xbitmaps xcb-util xo
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then
-	wget -c https://xorg.freedesktop.org/archive/individual/app/$filename
+	wget -c --progress=bar:force https://xorg.freedesktop.org/archive/individual/app/$filename
 fi
 tar xvf $filename
 # Compile and install

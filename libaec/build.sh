@@ -23,7 +23,7 @@ lfs_depends=(bash bzip2 coreutils glibc sed tar)
 blfs_depends=(cmake wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-	wget -c https://gitlab.dkrz.de/k202009/libaec/-/archive/v$version/$name-v$version.tar.bz2
+	wget -c --progress=bar:force https://gitlab.dkrz.de/k202009/libaec/-/archive/v$version/$name-v$version.tar.bz2
 fi
 rm -rf $direname
 tar xf $filename

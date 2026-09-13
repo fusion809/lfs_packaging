@@ -5,7 +5,7 @@ version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://mirror.freedif.org/pub/blfs/development/w/$filename
+	wget -c --progress=bar:force https://mirror.freedif.org/pub/blfs/development/w/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

@@ -6,7 +6,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/pkgconf/pkgconf/releases/download/$direname/$filename
+	wget -c --progress=bar:force https://github.com/pkgconf/pkgconf/releases/download/$direname/$filename
 fi
 
 tar xf $filename

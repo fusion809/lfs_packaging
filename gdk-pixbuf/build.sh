@@ -12,7 +12,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(glib2 shared-mime-info docutils glycin)
 if ! [[ -f $filename ]]; then
-	wget -c https://download.gnome.org/sources/gdk-pixbuf/$majVer/$filename
+	wget -c --progress=bar:force https://download.gnome.org/sources/gdk-pixbuf/$majVer/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

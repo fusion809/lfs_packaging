@@ -10,7 +10,7 @@ filename="$direname.tar.gz"
 depends=(acl bzip2 dbus expat gawk gcc glibc gpm libffi libgcrypt ncurses systemd util-linux zlib at-spi2-core brotli cairo fontconfig freetype fribidi gdk-pixbuf glycin gpm graphite2 harfbuzz lcms2 libXau libXdmcp libcanberra libepoxy libogg libpng libseccomp libvorbis libxcb libxkbcommon pixman webkitgtk glib2 gtk3 libICE libSM libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXres libXt pango pcre2 wayland)
 
 if ! [[ -f "$filename" ]]; then
-    wget -c https://github.com/vim/vim/archive/v$version.tar.gz -O $filename
+    wget -c --progress=bar:force https://github.com/vim/vim/archive/v$version.tar.gz -O $filename
 fi
 
 # Fixed extraction and build prefix issues

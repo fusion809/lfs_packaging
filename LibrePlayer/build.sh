@@ -10,7 +10,7 @@ lfs_depends=(bzip2 dbus e2fsprogs expat gcc glibc libelf libffi openssl systemd 
 depends=(glib2 libX11 libXext libXxf86vm libpciaccess libxshmfence mesa mitkrb pcre2 wayland)
 
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/$repo/archive/$version.tar.gz -O $filename
+	wget -c --progress=bar:force https://github.com/$repo/archive/$version.tar.gz -O $filename
 fi
 rm -rf $direname
 tar xf $filename

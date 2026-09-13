@@ -7,7 +7,7 @@ filename="Vulkan-Headers-vulkan-sdk-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(cmake)
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/$repo/archive/vulkan-sdk-$version/$filename
+	wget -c --progress=bar:force https://github.com/$repo/archive/vulkan-sdk-$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

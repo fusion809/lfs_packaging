@@ -7,7 +7,7 @@ depends=(acl glibc lz4 openssl popt zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.samba.org/ftp/rsync/src/$filename
+	wget -c --progress=bar:force https://www.samba.org/ftp/rsync/src/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

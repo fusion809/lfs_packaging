@@ -26,7 +26,7 @@ lfs_depends=(bash e2fsprogs glibc openssl)
 blfs_depends=(keyutils lmdb)
 
 if ! [ -f "$filename" ]; then
-    wget -c "https://kerberos.org/dist/krb5/$majVer/$filename"
+    wget -c --progress=bar:force "https://kerberos.org/dist/krb5/$majVer/$filename"
 fi
 rm -rf "$dirname"
 tar xf "$filename"

@@ -7,11 +7,11 @@ depends=(glibc zlib)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/$repo/releases/download/v$version/$filename
+	wget -c --progress=bar:force https://github.com/$repo/releases/download/v$version/$filename
 fi
 word_filename="$name-words-$version.xz"
 if ! [[ -f $word_filename ]]; then
-	wget -c https://github.com/cracklib/cracklib/releases/download/v$version/$word_filename
+	wget -c --progress=bar:force https://github.com/cracklib/cracklib/releases/download/v$version/$word_filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

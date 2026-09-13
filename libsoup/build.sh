@@ -7,7 +7,7 @@ depends=(brotli e2fsprogs glib2 glibc keyutils libffi libidn2 libpsl libunistrin
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://download.gnome.org/sources/libsoup/$majVer/$filename
+	wget -c --progress=bar:force https://download.gnome.org/sources/libsoup/$majVer/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

@@ -19,7 +19,7 @@ fi
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then
-	wget -c http://gstreamer.freedesktop.org/src/$name/$filename
+	wget -c --progress=bar:force http://gstreamer.freedesktop.org/src/$name/$filename
 fi
 tar xvf $filename
 # Compile and install

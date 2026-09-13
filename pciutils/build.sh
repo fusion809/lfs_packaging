@@ -7,7 +7,7 @@ depends=(glibc kmod openssl systemd xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://mj.ucw.cz/download/linux/pci/$filename
+	wget -c --progress=bar:force https://mj.ucw.cz/download/linux/pci/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

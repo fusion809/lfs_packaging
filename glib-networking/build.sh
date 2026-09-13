@@ -7,7 +7,7 @@ depends=(glib2 glibc gmp gnutls libffi libidn2 libtasn1 libunistring nettle p11-
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://download.gnome.org/sources/glib-networking/$majVer/$filename
+	wget -c --progress=bar:force https://download.gnome.org/sources/glib-networking/$majVer/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

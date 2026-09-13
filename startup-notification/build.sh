@@ -20,7 +20,7 @@ blfs_depends=(libXau libXdmcp libxcb xcb-util)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.freedesktop.org/software/startup-notification/releases/$filename
+	wget -c --progress=bar:force https://www.freedesktop.org/software/startup-notification/releases/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

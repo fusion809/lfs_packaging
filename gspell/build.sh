@@ -7,7 +7,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 blfs_depends=(enchant icu gtk3)
 if ! [[ -f $filename ]]; then
-	wget -c https://download.gnome.org/sources/gspell/$majVer/$filename
+	wget -c --progress=bar:force https://download.gnome.org/sources/gspell/$majVer/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

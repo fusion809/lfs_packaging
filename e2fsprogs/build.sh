@@ -5,7 +5,7 @@ lfs_depends=(gcc make glibc tar gzip coreutils bash wget)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://downloads.sourceforge.net/project/$name/$name/v$version/$filename
+	wget -c --progress=bar:force https://downloads.sourceforge.net/project/$name/$name/v$version/$filename
 fi
 rm -rf $direname
 tar xf $filename

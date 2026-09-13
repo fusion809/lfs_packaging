@@ -7,7 +7,7 @@ depends=(glibc libjpeg-turbo libwebp tiff xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/$repo/releases/download/${name/2/}$version/$filename
+	wget -c --progress=bar:force https://github.com/$repo/releases/download/${name/2/}$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

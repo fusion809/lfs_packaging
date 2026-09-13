@@ -10,7 +10,7 @@ gnu_download $name $filename
 dict_url=$(wget -T 5 -t 1 -cqO- https://www.linuxfromscratch.org/blfs/view/systemd/general/aspell.html | grep -oE "https:.*aspell.*.bz2" | head -n 1)
 dict_filename=$(echo $dict_url | sed -E 's|.*/||g')
 if ! [[ -f $dict_filename ]]; then
-	wget -c $dict_url
+	wget -c --progress=bar:force $dict_url
 fi
 rm -rf "$direname"
 tar xf "$filename"

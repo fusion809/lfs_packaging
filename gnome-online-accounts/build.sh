@@ -10,7 +10,7 @@ lfs_depends=(bzip2 e2fsprogs expat gcc gettext glibc libelf libffi openssl sqlit
 depends=(elfutils glib2 libX11 libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXxf86vm libadwaita libpciaccess libxshmfence mesa mitkrb openldap orc pango pcre2 wayland)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
-	wget -c https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$filename
+	wget -c --progress=bar:force https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$filename
 fi
 rm -rf $direname
 tar xf $filename

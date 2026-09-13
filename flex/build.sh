@@ -7,7 +7,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 lfs_depends=(glibc make gcc gzip tar coreutils)
 if ! [[ -f "${filename}" ]]; then
-    wget -c https://github.com/$repo/releases/download/v${version}/${filename} -O $filename
+    wget -c --progress=bar:force https://github.com/$repo/releases/download/v${version}/${filename} -O $filename
 fi
 rm -rf $direname
 tar xf $filename

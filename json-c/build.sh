@@ -6,7 +6,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(cmake)
 if ! [[ -f $filename ]]; then
-	wget -c https://s3.amazonaws.com/json-c_releases/releases/$filename
+	wget -c --progress=bar:force https://s3.amazonaws.com/json-c_releases/releases/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

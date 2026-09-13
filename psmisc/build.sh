@@ -6,7 +6,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 lfs_depends=(ncurses make gcc tar xz coreutils)
 if ! [[ -f $filename ]]; then
-	wget -c https://sourceforge.net/projects/psmisc/files/psmisc/$filename
+	wget -c --progress=bar:force https://sourceforge.net/projects/psmisc/files/psmisc/$filename
 fi
 rm -rf $direname
 tar xf $filename

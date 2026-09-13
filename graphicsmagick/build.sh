@@ -21,7 +21,7 @@ lfs_depends=(bash bzip2 coreutils gcc glibc libtool perl tar util-linux xz zlib 
 blfs_depends=(brotli freetype highway jasper lcms2 libXau libXdmcp libaom libde265 libheif libjpeg-turbo libjxl libpng libsm libtiff libwebp libwmf libxcb libxext libxml2 littlecms webkitgtk wget x264 x265)
 # Fetch and unpack source
 if ! [[ -f $_archive.tar.xz ]]; then
-	wget -c https://downloads.sourceforge.net/project/$name/$name/$version/$_archive.tar.xz
+	wget -c --progress=bar:force https://downloads.sourceforge.net/project/$name/$name/$version/$_archive.tar.xz
 fi
 sudo rm -rf $_archive
 tar xf $_archive.tar.xz

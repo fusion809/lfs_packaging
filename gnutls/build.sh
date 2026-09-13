@@ -8,7 +8,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(nettle make-ca libunistring libtasn1 p11-kit)
 if ! [[ -f $filename ]]; then
-	wget -c https://www.gnupg.org/ftp/gcrypt/$name/v$majVer/$filename
+	wget -c --progress=bar:force https://www.gnupg.org/ftp/gcrypt/$name/v$majVer/$filename
 fi
 rm -rf $direname
 tar xf $filename

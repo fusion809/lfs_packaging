@@ -11,10 +11,10 @@ blfs_depends=(wget)
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/PCRE2Project/pcre2/archive/$filename
+	wget -c --progress=bar:force https://github.com/PCRE2Project/pcre2/archive/$filename
 fi
 if ! [[ -f sljit-master.tar.gz ]]; then
-	wget -c https://github.com/zherczeg/sljit/archive/master.tar.gz -O sljit-master.tar.gz
+	wget -c --progress=bar:force https://github.com/zherczeg/sljit/archive/master.tar.gz -O sljit-master.tar.gz
 fi
 tar xf $filename
 cd $direname

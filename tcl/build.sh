@@ -8,10 +8,10 @@ filename="${name}${version}-src.tar.gz"
 docs_filename="${name}${version}-html.tar.gz"
 direname="${filename/-src.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://sourceforge.net/projects/tcl/files/Tcl/$version/$filename
+	wget -c --progress=bar:force https://sourceforge.net/projects/tcl/files/Tcl/$version/$filename
 fi
 if ! [[ -f $docs_filename ]]; then
-	wget -c https://sourceforge.net/projects/tcl/files/Tcl/$version/$docs_filename
+	wget -c --progress=bar:force https://sourceforge.net/projects/tcl/files/Tcl/$version/$docs_filename
 fi
 sudo rm -rf $direname
 tar xf $filename

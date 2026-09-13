@@ -10,7 +10,7 @@ lfs_depends=(autoconf bash bzip2 coreutils expat gcc glibc gzip libffi make sed 
 blfs_depends=(brotli fontconfig freetype gdk-pixbuf glycin lcms2 libXau libXdmcp libjpeg-turbo libpng libseccomp libx11 libxcb zlib)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/caolanm/libwmf/archive/refs/tags/v${version}.tar.gz -O $filename
+	wget -c --progress=bar:force https://github.com/caolanm/libwmf/archive/refs/tags/v${version}.tar.gz -O $filename
 fi
 rm -rf $direname
 tar xf $filename

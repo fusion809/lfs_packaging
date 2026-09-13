@@ -7,7 +7,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(glib2 glibc libffi pcre2 systemd util-linux xz zlib zstd)
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/hughsie/libxmlb/releases/download/$version/$filename
+	wget -c --progress=bar:force https://github.com/hughsie/libxmlb/releases/download/$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

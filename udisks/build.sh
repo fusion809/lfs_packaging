@@ -10,7 +10,7 @@ lfs_depends=(acl glibc kmod libffi openssl systemd util-linux xz zlib zstd)
 depends=(glib2 pcre2 polkit)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/storaged-project/udisks/releases/download/$direname/$filename
+	wget -c --progress=bar:force https://github.com/storaged-project/udisks/releases/download/$direname/$filename
 fi
 rm -rf $direname
 tar xf $filename

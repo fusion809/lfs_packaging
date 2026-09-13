@@ -20,7 +20,7 @@ blfs_depends=(llvm)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://downloads.sourceforge.net/xine/$filename
+	wget -c --progress=bar:force https://downloads.sourceforge.net/xine/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

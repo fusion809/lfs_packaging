@@ -11,7 +11,7 @@ lfs_depends=(bash coreutils gcc glib glibc gzip make sed tar zlib)
 blfs_depends=(cmake freetype gcc java wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/HDFGroup/hdf5/releases/download/$version/$filename
+	wget -c --progress=bar:force https://github.com/HDFGroup/hdf5/releases/download/$version/$filename
 fi
 rm -rf $direname
 tar xf $filename

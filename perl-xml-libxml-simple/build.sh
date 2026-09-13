@@ -18,7 +18,7 @@ version=$(get_version)
 filename="XML-LibXML-Simple-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.cpan.org/authors/id/M/MA/MARKOV/$filename
+	wget -c --progress=bar:force https://www.cpan.org/authors/id/M/MA/MARKOV/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

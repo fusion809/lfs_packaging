@@ -6,7 +6,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 lfs_depends=(gcc glibc make tar wget xz)
 if ! [[ -f $filename ]] && ! [[ -d $name ]] ; then
-	wget -c https://download.savannah.nongnu.org/releases/$name/$filename || ( git clone https://git.savannah.nongnu.org/git/$name.git )
+	wget -c --progress=bar:force https://download.savannah.nongnu.org/releases/$name/$filename || ( git clone https://git.savannah.nongnu.org/git/$name.git )
 fi
 if [[ -f $filename ]]; then
 	rm -rf $direname && tar xf $filename && cd $direname

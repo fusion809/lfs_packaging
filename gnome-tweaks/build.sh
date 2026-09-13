@@ -12,7 +12,7 @@ blfs_depends=(gtk4
 	pygobject sound-theme-freedesktop)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
-	wget -c https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$filename
+	wget -c --progress=bar:force https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$filename
 fi
 rm -rf $direname
 tar xf $filename

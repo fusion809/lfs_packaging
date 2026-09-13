@@ -9,7 +9,7 @@ depends=(acl gcc glibc make tar wget xz)
 gnu_download $name $filename
 
 if ! [[ -f $patch_filename ]]; then
-	wget -c https://www.linuxfromscratch.org/patches/lfs/development/$patch_filename
+	wget -c --progress=bar:force https://www.linuxfromscratch.org/patches/lfs/development/$patch_filename
 fi
 rm -rf $direname
 tar xf $filename

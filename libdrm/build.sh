@@ -7,7 +7,7 @@ depends=(glibc libpciaccess zlib)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://dri.freedesktop.org/libdrm/$filename
+	wget -c --progress=bar:force https://dri.freedesktop.org/libdrm/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

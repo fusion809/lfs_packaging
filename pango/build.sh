@@ -9,7 +9,7 @@ lfs_depends=(bzip2 expat glibc libffi util-linux zlib)
 depends=(glib2 libX11 libXext libXft libXrender pcre2 xorg-libs)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
-	wget -c https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$filename
+	wget -c --progress=bar:force https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$filename
 fi
 rm -rf "$direname"
 tar xf $filename

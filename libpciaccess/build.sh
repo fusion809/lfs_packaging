@@ -10,7 +10,7 @@ lfs_depends=(bash coreutils glibc make meson ninja sed tar xz zlib)
 blfs_depends=(util-macros wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-	wget -c https://xorg.freedesktop.org/releases/individual/lib/$filename
+	wget -c --progress=bar:force https://xorg.freedesktop.org/releases/individual/lib/$filename
 fi
 rm -rf $direname
 tar xf $filename

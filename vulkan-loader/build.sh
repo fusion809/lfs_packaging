@@ -7,7 +7,7 @@ filename="Vulkan-Loader-vulkan-sdk-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(cmake vulkan-headers xorg-libs wayland mesa)
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/KhronosGroup/Vulkan-Loader/archive/vulkan-sdk-$version/$filename
+	wget -c --progress=bar:force https://github.com/KhronosGroup/Vulkan-Loader/archive/vulkan-sdk-$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

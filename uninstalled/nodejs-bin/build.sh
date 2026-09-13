@@ -7,7 +7,7 @@ version=$(gh_ver $repo)
 filename="node-v$version-linux-x64.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://nodejs.org/dist/v$version/$filename
+	wget -c --progress=bar:force https://nodejs.org/dist/v$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

@@ -19,7 +19,7 @@ depends=(gcc glibc glslang spirv-tools)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.jedsoft.org/releases/slang/$filename
+	wget -c --progress=bar:force https://www.jedsoft.org/releases/slang/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

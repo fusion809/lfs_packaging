@@ -9,7 +9,7 @@ filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
 # Some kernel modules required see libusb @ BLFS for details
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/$repo/releases/download/v$version/$filename
+	wget -c --progress=bar:force https://github.com/$repo/releases/download/v$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

@@ -24,7 +24,7 @@ lfs_depends=(acl bzip2 gcc glibc libelf lz4 openssl sqlite xz zlib zstd)
 depends=(libarchive openldap)
 blfs_depends=(brotli curl cyrus-sasl json-c libarchive libidn2 libpsl libunistring libxml2 nghttp2)
 if ! [[ -f $filename ]]; then
-        wget -c https://sourceware.org/elfutils/ftp/$version/$filename
+        wget -c --progress=bar:force https://sourceware.org/elfutils/ftp/$version/$filename
 fi
 rm -rf $direname
 tar xf $filename

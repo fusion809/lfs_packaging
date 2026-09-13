@@ -21,7 +21,7 @@ lfs_depends=(gcc make tar coreutils gzip)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.sourceware.org/pub/$name/$filename
+	wget -c --progress=bar:force https://www.sourceware.org/pub/$name/$filename
 fi
 rm -rf $direname
 tar xf $filename

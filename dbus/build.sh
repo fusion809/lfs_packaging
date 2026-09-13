@@ -22,7 +22,7 @@ blfs_depends=(libXau libXdmcp libxcb)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://dbus.freedesktop.org/releases/dbus/$filename
+	wget -c --progress=bar:force https://dbus.freedesktop.org/releases/dbus/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

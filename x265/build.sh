@@ -19,7 +19,7 @@ filename="${name}_$version.tar.gz"
 direname="${filename/.tar.*/}"
 blfs_depends=(cmake nasm)
 if ! [[ -f $filename ]]; then
-	wget -c https://bitbucket.org/multicoreware/x265_git/downloads/$filename
+	wget -c --progress=bar:force https://bitbucket.org/multicoreware/x265_git/downloads/$filename
 fi
 rm -rf $direname
 tar xf $filename

@@ -18,7 +18,7 @@ version=$(get_version)
 filename="File-ShareDir-Install-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://cpan.metacpan.org/authors/id/E/ET/ETHER/$filename
+	wget -c --progress=bar:force https://cpan.metacpan.org/authors/id/E/ET/ETHER/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

@@ -10,7 +10,7 @@ _build=$(wget -cqO- "https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=ant
 filename="Antigravity IDE.tar.gz"
 direname="${filename/.tar.gz/}"
 if ! [[ -f $filename ]]; then
-	wget -c "https://edgedl.me.gvt1.com/edgedl/release2/j0qc3/antigravity/stable/$version-$_build/linux-x64/$filename"
+	wget -c --progress=bar:force "https://edgedl.me.gvt1.com/edgedl/release2/j0qc3/antigravity/stable/$version-$_build/linux-x64/$filename"
 fi
 rm -rf "$direname"
 tar xf "$filename"

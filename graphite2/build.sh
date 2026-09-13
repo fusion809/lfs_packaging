@@ -7,7 +7,7 @@ filename="$name-$version.tgz"
 direname="${filename/.tgz/}"
 depends=(cmake)
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/silnrsi/graphite/releases/download/$version/$filename
+	wget -c --progress=bar:force https://github.com/silnrsi/graphite/releases/download/$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

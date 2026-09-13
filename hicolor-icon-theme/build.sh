@@ -6,7 +6,7 @@ version=$(gfd_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://icon-theme.freedesktop.org/releases/$filename
+	wget -c --progress=bar:force https://icon-theme.freedesktop.org/releases/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

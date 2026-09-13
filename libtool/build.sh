@@ -6,7 +6,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 
 if ! [[ -f $filename ]]; then
-	wget -c https://ftp.gnu.org/gnu/libtool/$filename
+	wget -c --progress=bar:force https://ftp.gnu.org/gnu/libtool/$filename
 fi
 
 tar xf $filename

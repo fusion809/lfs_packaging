@@ -21,7 +21,7 @@ depends=(glibc libevdev lua mtdev systemd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c http://www.freedesktop.org/software/libinput/$filename
+	wget -c --progress=bar:force http://www.freedesktop.org/software/libinput/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

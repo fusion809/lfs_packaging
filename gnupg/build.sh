@@ -9,7 +9,7 @@ direname="${filename/.tar.*/}"
 depends=(bzip2 cyrus-sasl glibc gmp gnutls libassuan libffi libgcrypt libgpg-error libidn2 libksba libtasn1 libunistring make-ca ncurses nettle npth openldap openssl p11-kit readline sqlite systemd zlib)
 blfs_depends=(libusb)
 if ! [[ -f $filename ]]; then
-	wget -c https://www.gnupg.org/ftp/gcrypt/$name/$filename
+	wget -c --progress=bar:force https://www.gnupg.org/ftp/gcrypt/$name/$filename
 fi
 rm -rf $direname
 tar xf $filename

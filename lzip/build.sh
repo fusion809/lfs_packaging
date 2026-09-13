@@ -24,7 +24,7 @@ blfs_depends=(wget)
 src="https://download.savannah.gnu.org/releases/$name/$filename"
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-	wget -c $src
+	wget -c --progress=bar:force $src
 fi
 rm -rf $direname
 tar xf $filename

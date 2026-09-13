@@ -10,7 +10,7 @@ lfs_depends=(expat glibc libffi systemd util-linux zlib)
 depends=(glib2 linux-pam pcre2)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/polkit-org/polkit/archive/$version/$filename
+	wget -c --progress=bar:force https://github.com/polkit-org/polkit/archive/$version/$filename
 fi
 rm -rf $direname
 tar xf $filename

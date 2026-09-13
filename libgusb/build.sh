@@ -10,7 +10,7 @@ lfs_depends=(glibc libffi systemd util-linux zlib)
 depends=(glib2 pcre2)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/hughsie/libgusb/releases/download/$version/$filename
+	wget -c --progress=bar:force https://github.com/hughsie/libgusb/releases/download/$version/$filename
 fi
 rm -rf $direname
 tar xf $filename

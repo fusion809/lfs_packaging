@@ -7,7 +7,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(qt6)
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/danvratil/qcoro/archive/v$version/$filename
+	wget -c --progress=bar:force https://github.com/danvratil/qcoro/archive/v$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

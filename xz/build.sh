@@ -7,7 +7,7 @@ lfs_depends=(glibc gcc make xz gzip tar coreutils)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-    wget -c https://github.com/$repo/releases/download/v$version/$filename
+    wget -c --progress=bar:force https://github.com/$repo/releases/download/v$version/$filename
 fi
 rm -rf $direname
 tar xf $filename

@@ -6,7 +6,7 @@ depends=(glibc gcc make tar gzip coreutils wget)
 filename="$name-v${version}.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://gitlab.com/gnutls/libtasn1/-/archive/v${version}/$filename
+	wget -c --progress=bar:force https://gitlab.com/gnutls/libtasn1/-/archive/v${version}/$filename
 fi
 rm -rf $direname
 tar xf $filename

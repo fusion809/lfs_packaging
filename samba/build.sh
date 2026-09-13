@@ -12,7 +12,7 @@ version=$(get_version)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://download.samba.org/pub/samba/stable/$filename
+	wget -c --progress=bar:force https://download.samba.org/pub/samba/stable/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

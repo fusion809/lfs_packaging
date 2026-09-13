@@ -10,7 +10,7 @@ lfs_depends=(autoconf bash bzip2 coreutils dbus expat gcc glibc libelf libffi ma
 blfs_depends=(brotli double-conversion fontconfig freetype graphite2 harfbuzz libXau libXdmcp libdrm libpng libxcb libxkbcommon libxml2 llvm lm-sensors qt6 spirv-tools wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/ofiwg/libfabric/releases/download/v$version/$filename
+	wget -c --progress=bar:force https://github.com/ofiwg/libfabric/releases/download/v$version/$filename
 fi
 rm -rf $direname
 tar xf $filename

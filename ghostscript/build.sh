@@ -9,7 +9,7 @@ blfs_depends=(at-spi2-core avahi cairo cups lcms2 libXau libXdmcp libjpeg-turbo 
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/$repo/releases/download/gs$verd/$filename
+	wget -c --progress=bar:force https://github.com/$repo/releases/download/gs$verd/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

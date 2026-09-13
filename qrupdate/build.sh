@@ -8,7 +8,7 @@ direname="$name-ng-$version"
 depends=(blas-lapack bash coreutils gcc glibc gzip make sed tar cmake wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/mpimd-csc/qrupdate-ng/archive/v$version.tar.gz -O $filename
+	wget -c --progress=bar:force https://github.com/mpimd-csc/qrupdate-ng/archive/v$version.tar.gz -O $filename
 fi
 rm -rf $direname
 tar xf $filename

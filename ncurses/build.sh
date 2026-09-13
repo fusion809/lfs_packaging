@@ -21,7 +21,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 lfs_depends=(glibc gcc gzip tar sed make wget)
 if ! [[ -f $filename ]]; then
-    wget -c https://invisible-mirror.net/archives/$name/$filename
+    wget -c --progress=bar:force https://invisible-mirror.net/archives/$name/$filename
 fi
 rm -rf $direname
 tar xf $filename

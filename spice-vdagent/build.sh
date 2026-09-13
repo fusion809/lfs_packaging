@@ -12,7 +12,7 @@ blfs_depends=(alsa-lib at-spi2-core brotli cairo dbus fontconfig freetype fribid
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then
-	wget -c https://www.spice-space.org/download/releases/$filename
+	wget -c --progress=bar:force https://www.spice-space.org/download/releases/$filename
 fi
 tar xvf $filename
 # Compile and install

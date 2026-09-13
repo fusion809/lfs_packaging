@@ -10,10 +10,10 @@ direname="${filename/.tar.*/}"
 lfs_depends=(acl bash dbus hwdata glibc kbd kmod lz4 openssl pcre2 util-linux meson ninja wget xz gzip tar coreutils)
 
 if ! [[ -f $filename ]]; then
-    wget -c https://github.com/$repo/archive/v$version/$filename
+    wget -c --progress=bar:force https://github.com/$repo/archive/v$version/$filename
 fi
 if ! [[ -f $_filename ]]; then
-    wget -c https://anduin.linuxfromscratch.org/LFS/$_filename
+    wget -c --progress=bar:force https://anduin.linuxfromscratch.org/LFS/$_filename
 fi
 rm -rf $direname
 tar xf $filename

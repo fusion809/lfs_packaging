@@ -18,7 +18,7 @@ version=$(get_version)
 filename="URI-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.cpan.org/authors/id/O/OA/OALDERS/$filename
+	wget -c --progress=bar:force https://www.cpan.org/authors/id/O/OA/OALDERS/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

@@ -27,7 +27,7 @@ lfs_depends=(bash bzip2 coreutils expat gcc glibc gzip libelf libffi make sed ta
 blfs_depends=(cmake freeglut glu libXau libXdmcp libdrm libpng libxcb libxml2 llvm lm-sensors spirv-tools)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-	wget -c https://geuz.org/gl2ps/src/$filename
+	wget -c --progress=bar:force https://geuz.org/gl2ps/src/$filename
 fi
 rm -rf $direname
 tar xf $filename

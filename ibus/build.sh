@@ -9,10 +9,10 @@ blfs_depends=(at-spi2-core brotli cairo dconf fontconfig freetype fribidi gdk-pi
 depends=(elfutils glib2 gtk3 libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXres libXxf86vm libnotify libpciaccess libxshmfence mesa orc pango pcre2 wayland)
 lfs_depends=(bash bzip2 coreutils dbus expat gcc gettext glibc gzip libelf libffi python systemd tar util-linux wget xz zip zlib zstd)
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/ibus/ibus/archive/$version/$filename
+	wget -c --progress=bar:force https://github.com/ibus/ibus/archive/$version/$filename
 fi
 if ! [[ -f "UCD.zip" ]]; then
-	wget -c $(wget -cqO- https://www.linuxfromscratch.org/blfs/view/systemd/general/ibus.html | grep zip | cut -d '"' -f 2 | head -n 1)
+	wget -c --progress=bar:force $(wget -cqO- https://www.linuxfromscratch.org/blfs/view/systemd/general/ibus.html | grep zip | cut -d '"' -f 2 | head -n 1)
 fi
 sudo rm -rf "$direname"
 tar xf "$filename"

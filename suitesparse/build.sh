@@ -9,7 +9,7 @@ direname="${filename/.tar.gz/}"
 depends=(blas-lapack bash coreutils gcc glibc gmp make mpfr sed tar cmake gcc wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-    wget -c https://github.com/DrTimothyAldenDavis/SuiteSparse/archive/v$version.tar.gz -O $filename
+    wget -c --progress=bar:force https://github.com/DrTimothyAldenDavis/SuiteSparse/archive/v$version.tar.gz -O $filename
 fi
 rm -rf $direname
 tar xf $filename

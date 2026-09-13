@@ -7,7 +7,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(gtk3 gtk4 librsvg)
 if ! [[ -f $filename ]]; then
-	wget -c https://download.gnome.org/sources/adwaita-icon-theme/$majVer/$filename
+	wget -c --progress=bar:force https://download.gnome.org/sources/adwaita-icon-theme/$majVer/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

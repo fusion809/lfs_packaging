@@ -10,7 +10,7 @@ lfs_depends=(bash coreutils glibc gzip make perl sed systemd tar)
 blfs_depends=(libevent libnl wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/openpmix/prrte/releases/download/v$version/$name-$version.tar.gz
+	wget -c --progress=bar:force https://github.com/openpmix/prrte/releases/download/v$version/$name-$version.tar.gz
 fi
 rm -rf $direname
 tar xf $filename

@@ -11,7 +11,7 @@ filename="NetworkManager-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 
 if ! [[ -f "$filename" ]]; then
-	wget -c https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/releases/$version/downloads/$filename
+	wget -c --progress=bar:force https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/releases/$version/downloads/$filename
 fi
 
 # Unpack and build

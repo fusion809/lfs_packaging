@@ -8,7 +8,7 @@ blfs_depends=(libnl)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.tcpdump.org/release/$filename
+	wget -c --progress=bar:force https://www.tcpdump.org/release/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

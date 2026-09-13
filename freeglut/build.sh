@@ -9,7 +9,7 @@ lfs_depends=(libelf)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://downloads.sourceforge.net/freeglut/$filename
+	wget -c --progress=bar:force https://downloads.sourceforge.net/freeglut/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

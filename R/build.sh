@@ -35,7 +35,7 @@ depends=(blas-lapack pcre2 bash bzip2 coreutils glibc make readline sed tar xz z
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then
-	wget -c https://cran.r-project.org/src/base/$name-${version/.*/}/$filename
+	wget -c --progress=bar:force https://cran.r-project.org/src/base/$name-${version/.*/}/$filename
 fi
 tar xvf $filename
 # Compile and install

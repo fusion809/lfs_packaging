@@ -13,7 +13,7 @@ version=$(get_version)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/$repo/releases/download/release/$version/$filename
+	wget -c --progress=bar:force https://github.com/$repo/releases/download/release/$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

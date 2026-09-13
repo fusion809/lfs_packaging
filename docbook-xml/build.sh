@@ -18,7 +18,7 @@ version=$(get_version)
 filename="$name-$version.zip"
 direname="${filename/.zip/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://archive.docbook.org/xml/$version/$filename
+	wget -c --progress=bar:force https://archive.docbook.org/xml/$version/$filename
 fi
 rm -rf "$direname"
 mkdir $direname

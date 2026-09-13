@@ -9,7 +9,7 @@ filename="$name-$_version.tar.gz"
 direname="${filename/.tar.*/}"
 # Kernel config options required, too
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/$repo/archive/V${_version}/$filename
+	wget -c --progress=bar:force https://github.com/$repo/archive/V${_version}/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

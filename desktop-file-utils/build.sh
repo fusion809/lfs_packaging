@@ -7,7 +7,7 @@ depends=(glib2 glibc libffi pcre2 systemd util-linux zlib)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.freedesktop.org/software/desktop-file-utils/releases/$filename
+	wget -c --progress=bar:force https://www.freedesktop.org/software/desktop-file-utils/releases/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

@@ -35,7 +35,7 @@ remote_direname="${remote_filename/.tar.xz/}"
 direname="${filename/.tar.xz/}"
 
 #if ! [[ -f $filename ]]; then
-wget -c https://cdn.kernel.org/pub/linux/kernel/v$(echo ${base_version} | cut -d '.' -f 1).x/${remote_filename} -O $filename
+wget -c --progress=bar:force https://cdn.kernel.org/pub/linux/kernel/v$(echo ${base_version} | cut -d '.' -f 1).x/${remote_filename} -O $filename
 #fi
 
 sudo rm -rf $direname

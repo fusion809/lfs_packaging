@@ -19,7 +19,7 @@ depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://releases.pagure.org/libaio/$filename
+	wget -c --progress=bar:force https://releases.pagure.org/libaio/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

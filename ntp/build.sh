@@ -25,7 +25,7 @@ depends=(glibc libcap libevent ncurses openssl readline)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.eecis.udel.edu/~ntp/ntp_spool/ntp$majVer/ntp-$majmVer/$filename
+	wget -c --progress=bar:force https://www.eecis.udel.edu/~ntp/ntp_spool/ntp$majVer/ntp-$majmVer/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

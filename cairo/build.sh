@@ -8,7 +8,7 @@ blfs_depends=(pixman)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.cairographics.org/releases/$filename
+	wget -c --progress=bar:force https://www.cairographics.org/releases/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

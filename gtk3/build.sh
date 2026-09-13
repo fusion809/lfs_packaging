@@ -12,7 +12,7 @@ filename="$direname.tar.bz2"
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then
-	wget -c https://gitlab.gnome.org/GNOME/gtk/-/archive/$version/$filename
+	wget -c --progress=bar:force https://gitlab.gnome.org/GNOME/gtk/-/archive/$version/$filename
 fi
 tar xvf $filename
 # Compile and install

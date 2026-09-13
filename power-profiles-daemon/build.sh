@@ -23,7 +23,7 @@ blfs_depends=(libgudev polkit pygobject upower)
 lfs_depends=(glibc libffi systemd util-linux zlib)
 depends=(glib2 pcre2 polkit)
 if ! [[ -f $filename ]]; then
-	wget -c https://gitlab.freedesktop.org/upower/power-profiles-daemon/-/archive/$version/$filename
+	wget -c --progress=bar:force https://gitlab.freedesktop.org/upower/power-profiles-daemon/-/archive/$version/$filename
 fi
 
 rm -rf "$direname"

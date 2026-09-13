@@ -8,7 +8,7 @@ blfs_depends=(at-spi2-core cairo lcms2 libdrm libseccomp libunwind llvm lm-senso
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.freedesktop.org/software/colord/releases/$filename
+	wget -c --progress=bar:force https://www.freedesktop.org/software/colord/releases/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

@@ -8,7 +8,7 @@ direname="$name-$version"
 lfs_depends=(bash bzip2 coreutils glibc libelf ncurses python tar wget xz zip zlib zstd)
 depends=(elfutils)
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/$repo/releases/download/v$version/$filename
+	wget -c --progress=bar:force https://github.com/$repo/releases/download/v$version/$filename
 fi
 tar xf "$filename"
 cd "$direname"

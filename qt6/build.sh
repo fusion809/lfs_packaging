@@ -9,7 +9,7 @@ blfs_depends=(at-spi2-core avahi bluez cairo dav1d fdk-aac flac jasper lame lcms
 filename="qt-everywhere-src-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://download.qt.io/archive/qt/$majVer/$version/single/$filename
+	wget -c --progress=bar:force https://download.qt.io/archive/qt/$majVer/$version/single/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

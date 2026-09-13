@@ -23,7 +23,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 blfs_depends=(curl libarchive libuv nghttp2)
 if ! [[ -f $filename ]]; then
-	wget -c https://cmake.org/files/v$majVer/$filename
+	wget -c --progress=bar:force https://cmake.org/files/v$majVer/$filename
 fi
 rm -rf $direname
 tar xf $filename

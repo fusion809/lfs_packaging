@@ -7,7 +7,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 blfs_depends=(lmdb)
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/$repo/releases/download/$direname/$filename
+	wget -c --progress=bar:force https://github.com/$repo/releases/download/$direname/$filename
 fi
 rm -rf $direname
 tar xf $filename

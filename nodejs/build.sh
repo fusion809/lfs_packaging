@@ -7,7 +7,7 @@ filename="node-v$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(brotli c-ares gcc glibc icu libuv nghttp2 openssl simdutf which zlib)
 if ! [[ -f $filename ]]; then
-	wget -c https://nodejs.org/dist/v$version/$filename
+	wget -c --progress=bar:force https://nodejs.org/dist/v$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

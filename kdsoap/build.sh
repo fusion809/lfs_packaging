@@ -9,7 +9,7 @@ majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/KDAB/KDSoap/releases/download/$direname/$filename
+	wget -c --progress=bar:force https://github.com/KDAB/KDSoap/releases/download/$direname/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

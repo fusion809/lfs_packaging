@@ -7,7 +7,7 @@ depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://dotat.at/prog/unifdef/$filename
+	wget -c --progress=bar:force https://dotat.at/prog/unifdef/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

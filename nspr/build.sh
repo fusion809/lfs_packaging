@@ -21,7 +21,7 @@ depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="$name-$version"
 if ! [[ -f $filename ]]; then
-	wget -c https://archive.mozilla.org/pub/nspr/releases/v$version/src/$filename
+	wget -c --progress=bar:force https://archive.mozilla.org/pub/nspr/releases/v$version/src/$filename
 fi
 rm -rf $direname
 tar xf $filename

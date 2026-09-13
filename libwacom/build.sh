@@ -7,7 +7,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(glib2 glibc libevdev libffi libgudev libxml2 pcre2 systemd)
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/linuxwacom/libwacom/releases/download/$direname/$filename
+	wget -c --progress=bar:force https://github.com/linuxwacom/libwacom/releases/download/$direname/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

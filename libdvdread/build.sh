@@ -19,7 +19,7 @@ depends=(glibc)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://get.videolan.org/libdvdread/$version/$filename
+	wget -c --progress=bar:force https://get.videolan.org/libdvdread/$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

@@ -19,7 +19,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 # INPUT_EVDEV and INPUT_UINPUT kernel options required
 if ! [[ -f $filename ]]; then
-	wget -c https://www.freedesktop.org/software/libevdev/$filename
+	wget -c --progress=bar:force https://www.freedesktop.org/software/libevdev/$filename
 fi
 rm -rf $direname
 tar xf $filename

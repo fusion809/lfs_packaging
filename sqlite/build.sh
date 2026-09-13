@@ -29,10 +29,10 @@ filename="$name-autoconf-$version.tar.gz"
 direname="${filename/.tar.*/}"
 docs_filename="$name-doc-$version.zip"
 if ! [[ -f $filename ]]; then
-	wget -c https://sqlite.org/$(date +"%Y")/$filename
+	wget -c --progress=bar:force https://sqlite.org/$(date +"%Y")/$filename
 fi
 if ! [[ -f $docs_filename ]]; then
-	wget -c https://sqlite.org/$(date +"%Y")/$docs_filename
+	wget -c --progress=bar:force https://sqlite.org/$(date +"%Y")/$docs_filename
 fi
 rm -rf $direname
 tar xf $filename

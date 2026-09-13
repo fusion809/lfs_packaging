@@ -8,7 +8,7 @@ depends=(gcc glibc gmp libffi libxcrypt libyaml openssl zlib)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://cache.ruby-lang.org/pub/ruby/$majVer/$filename
+	wget -c --progress=bar:force https://cache.ruby-lang.org/pub/ruby/$majVer/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

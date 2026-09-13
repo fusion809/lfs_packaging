@@ -21,7 +21,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 lfs_depends=(glibc ncurses pcre2)
 if ! [[ -f $filename ]]; then
-	wget -c https://www.greenwoodsoftware.com/less/$filename
+	wget -c --progress=bar:force https://www.greenwoodsoftware.com/less/$filename
 fi
 rm -rf $direname
 tar xf $filename

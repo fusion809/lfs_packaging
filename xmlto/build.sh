@@ -29,7 +29,7 @@ lfs_depends=(glibc)
 xslver=$(cat /var/lib/custom-packages/docbook-xsl-nons | head -n 1)
 
 if ! [[ -f $filename ]]; then
-	wget -c https://pagure.io/xmlto/archive/$version/$filename
+	wget -c --progress=bar:force https://pagure.io/xmlto/archive/$version/$filename
 fi
 
 tar xf "$filename"

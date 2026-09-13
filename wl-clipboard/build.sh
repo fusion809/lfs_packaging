@@ -11,7 +11,7 @@ lfs_depends=(bash coreutils glibc libffi meson ninja)
 blfs_depends=(wayland wayland-protocols)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/$repo/archive/${version}.tar.gz -O $filename
+	wget -c --progress=bar:force https://github.com/$repo/archive/${version}.tar.gz -O $filename
 fi
 tar xvf $filename
 cd $direname

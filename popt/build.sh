@@ -7,7 +7,7 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://ftp.osuosl.org/pub/rpm/popt/releases/popt-$majVer.x/$filename
+	wget -c --progress=bar:force https://ftp.osuosl.org/pub/rpm/popt/releases/popt-$majVer.x/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

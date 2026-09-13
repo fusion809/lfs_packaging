@@ -8,7 +8,7 @@ blfs_depends=(libdrm libwebp llvm lm-sensors spirv-tools)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://download.osgeo.org/libtiff/$filename
+	wget -c --progress=bar:force https://download.osgeo.org/libtiff/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

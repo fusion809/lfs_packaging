@@ -6,7 +6,7 @@ version=$(sd_ver $repo)
 filename="$name-v$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://salsa.debian.org/iso-codes-team/iso-codes/-/archive/v$version/$filename
+	wget -c --progress=bar:force https://salsa.debian.org/iso-codes-team/iso-codes/-/archive/v$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

@@ -11,7 +11,7 @@ blfs_depends=(brotli cairo fontconfig freetype fribidi gd glib graphite2 gtk3 ha
 # libcaca, libcerf  and wxwidgets are listed for Arch, but seems to run for my uses without them
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-	wget -c https://sourceforge.net/projects/gnuplot/files/gnuplot/$version/$filename
+	wget -c --progress=bar:force https://sourceforge.net/projects/gnuplot/files/gnuplot/$version/$filename
 fi
 tar -zxvf $filename
 # Compile and install

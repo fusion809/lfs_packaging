@@ -10,7 +10,7 @@ lfs_depends=(acl bash bzip2 coreutils gcc glibc gzip lz4 make openssl tar xz zli
 blfs_depends=(brotli curl cyrus-sasl giflib icu libarchive libidn2 libjpeg-turbo libpng libpsl libtiff libunistring libwebp libxml2 nghttp2 openjpeg pango wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/tesseract-ocr/tesseract/archive/$version.tar.gz -O $filename
+	wget -c --progress=bar:force https://github.com/tesseract-ocr/tesseract/archive/$version.tar.gz -O $filename
 fi
 sudo rm -rf $direname
 tar xf $filename

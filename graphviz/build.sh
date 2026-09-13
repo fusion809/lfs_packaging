@@ -7,7 +7,7 @@ filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
 depends=(cmake pango cairo xorg-libs fontconfig libpng)
 if ! [[ -f $filename ]]; then
-	wget -c https://gitlab.com/graphviz/graphviz/-/archive/$version/$filename
+	wget -c --progress=bar:force https://gitlab.com/graphviz/graphviz/-/archive/$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

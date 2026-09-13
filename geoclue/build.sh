@@ -8,7 +8,7 @@ blfs_depends=(modemmanager)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://gitlab.freedesktop.org/geoclue/geoclue/-/archive/$version/$filename
+	wget -c --progress=bar:force https://gitlab.freedesktop.org/geoclue/geoclue/-/archive/$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

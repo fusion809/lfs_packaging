@@ -7,7 +7,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 blfs_depends=(glib2 graphviz)
 if ! [[ -f $filename ]]; then
-	wget -c https://download.gnome.org/sources/vala/$majVer/$filename
+	wget -c --progress=bar:force https://download.gnome.org/sources/vala/$majVer/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

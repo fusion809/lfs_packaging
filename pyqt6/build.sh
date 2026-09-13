@@ -23,7 +23,7 @@ blfs_depends=(brotli dbus double-conversion flac fontconfig freetype graphite2 h
 pip_depends=(pyopengl pyqt6-sip pyqt-builder sip)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-	wget -c https://pypi.python.org/packages/source/P/PyQt6/$filename
+	wget -c --progress=bar:force https://pypi.python.org/packages/source/P/PyQt6/$filename
 fi
 rm -rf $direname
 tar xf $filename

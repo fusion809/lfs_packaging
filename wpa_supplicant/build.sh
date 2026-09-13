@@ -7,7 +7,7 @@ depends=(dbus glibc libnl ncurses openssl readline systemd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://w1.fi/releases/$filename
+	wget -c --progress=bar:force https://w1.fi/releases/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

@@ -7,7 +7,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(perl-xml-parser)
 if ! [[ -f $filename ]]; then
-	wget -c http://launchpad.net/intltool/trunk/$version/+download/$filename
+	wget -c --progress=bar:force http://launchpad.net/intltool/trunk/$version/+download/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

@@ -9,7 +9,7 @@ blfs_depends=(dbus-python)
 filename="$_name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://download.gnome.org/sources/$_name/$majVer/$filename
+	wget -c --progress=bar:force https://download.gnome.org/sources/$_name/$majVer/$filename
 fi
 rm -rf $direname
 tar xf $filename

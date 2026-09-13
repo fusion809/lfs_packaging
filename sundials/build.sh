@@ -10,7 +10,7 @@ lfs_depends=(bash coreutils gcc glibc gzip make python sed systemd tar)
 blfs_depends=(cmake gcc libevent wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
-    wget -c https://github.com/llnl/sundials/archive/refs/tags/v$version.tar.gz -O $filename
+    wget -c --progress=bar:force https://github.com/llnl/sundials/archive/refs/tags/v$version.tar.gz -O $filename
 fi
 rm -rf $direname
 tar xf $filename

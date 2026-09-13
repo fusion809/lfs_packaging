@@ -9,7 +9,7 @@ direname="${filename/.src.tgz/}"
 echo "filename=$filename"
 echo "direname=$direname"
 if ! [[ -f $filename ]]; then
-	wget -c https://downloads.xiph.org/releases/cdparanoia/$filename
+	wget -c --progress=bar:force https://downloads.xiph.org/releases/cdparanoia/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

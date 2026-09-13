@@ -7,7 +7,7 @@ depends=(glibc ncurses)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://downloads.sourceforge.net/lame/$filename
+	wget -c --progress=bar:force https://downloads.sourceforge.net/lame/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

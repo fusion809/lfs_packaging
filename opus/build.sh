@@ -21,7 +21,7 @@ depends=(glibc libogg)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://downloads.xiph.org/releases/opus/$filename
+	wget -c --progress=bar:force https://downloads.xiph.org/releases/opus/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

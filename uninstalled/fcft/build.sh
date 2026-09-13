@@ -9,7 +9,7 @@ direname="$name-$version"
 filename="$name-$version.tar.gz"
 
 if ! [[ -f "$filename" ]]; then
-	wget -c https://codeberg.org/$repo/archive/$version.tar.gz -O $filename 
+	wget -c --progress=bar:force https://codeberg.org/$repo/archive/$version.tar.gz -O $filename 
 fi
 tar xf "$filename"
 cd "$name"

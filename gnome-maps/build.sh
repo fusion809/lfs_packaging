@@ -10,7 +10,7 @@ depends=(elfutils glib2 libX11 libXcursor libXdamage libXext libXfixes libXi lib
 blfs_depends=(blueprint-compiler brotli cairo dav1d desktop-file-utils fontconfig freetype fribidi gdk-pixbuf geoclue geocode-glib gjs glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer harfbuzz json-glib keyutils lcms2 libXau libXdmcp libadwaita libdrm libepoxy libgudev libgweather libidn2 libjpeg-turbo libpng libportal libpsl librest librsvg libseccomp libshumate libsoup libtiff libunistring libunwind libwebp libxcb libxkbcommon libxml2 llvm lm-sensors nghttp2 pixman protobuf-c spirv-tools vulkan-loader)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
-	wget -c https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$filename
+	wget -c --progress=bar:force https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$filename
 fi
 rm -rf $direname
 tar xf $filename

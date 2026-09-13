@@ -22,10 +22,10 @@ dversion=$(wget -cqO- https://poppler.freedesktop.org/ | grep "poppler-data-[0-9
 data_filename="$name-data-$dversion.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://poppler.freedesktop.org/$filename
+	wget -c --progress=bar:force https://poppler.freedesktop.org/$filename
 fi
 if ! [[ -f $data_filename ]]; then
-	wget -c https://poppler.freedesktop.org/$data_filename
+	wget -c --progress=bar:force https://poppler.freedesktop.org/$data_filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

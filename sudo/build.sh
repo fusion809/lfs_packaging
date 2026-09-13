@@ -21,7 +21,7 @@ depends=(glibc linux-pam openssl zlib)
 filename="$name-$version.tar.gz"
 direname="$name-$version"
 if ! [[ -f $filename ]]; then
-	wget -c https://www.sudo.ws/dist/$filename
+	wget -c --progress=bar:force https://www.sudo.ws/dist/$filename
 fi
 rm -rf $direname
 tar xf $filename

@@ -7,7 +7,7 @@ depends=(glibc)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c https://anduin.linuxfromscratch.org/BLFS/x264/$filename
+	wget -c --progress=bar:force https://anduin.linuxfromscratch.org/BLFS/x264/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

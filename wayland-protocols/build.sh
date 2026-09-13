@@ -7,7 +7,7 @@ filename="$name-$version.tar.xz"
 direname="$name-$version"
 URL="https://gitlab.freedesktop.org/wayland/$name/-/releases/$version/downloads/$filename"
 if ! [[ -f "$filename" ]]; then
-	wget -c $URL 
+	wget -c --progress=bar:force $URL 
 fi
 
 tar xf $filename

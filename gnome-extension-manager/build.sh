@@ -9,7 +9,7 @@ depends=(elfutils glib2 libX11 libXcursor libXdamage libXext libXfixes libXi lib
 blfs_depends=(blueprint brotli cairo curl cyrus-sasl fontconfig freetype fribidi gdk-pixbuf glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk4 harfbuzz json-glib keyutils lcms2 libXau libXdmcp libadwaita libdrm libepoxy libfyaml libgudev libidn2 libjpeg-turbo libjson-glib libpng libpsl libseccomp libsoup libtiff libunistring libunwind libwebp libxcb libxkbcommon libxml2 libxmlb llvm lm-sensors nghttp2 pixman spirv-tools vulkan-loader webkitgtk)
 
 if ! [[ -f $filename ]]; then
-	wget -c https://github.com/mjakeman/$_name/archive/refs/tags/v$version.tar.gz -O $filename
+	wget -c --progress=bar:force https://github.com/mjakeman/$_name/archive/refs/tags/v$version.tar.gz -O $filename
 fi
 
 rm -rf $direname

@@ -6,7 +6,7 @@ blfs_depends=(alsa-lib at-spi2-core avahi brotli cairo cups curl cyrus-sasl dav1
 lfs_depends=(bzip2 dbus e2fsprogs expat gcc glibc libelf libffi libxcrypt openssl sqlite systemd util-linux xz zlib zstd)
 filename="code_${version}_amd64.deb"
 if ! [[ -f $filename ]]; then
-	wget -c https://update.code.visualstudio.com/${version}/linux-deb-x64/stable -O "$filename"
+	wget -c --progress=bar:force https://update.code.visualstudio.com/${version}/linux-deb-x64/stable -O "$filename"
 fi
 
 mkdir -p $name
