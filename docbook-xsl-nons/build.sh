@@ -1,9 +1,10 @@
 #!/bin/bash
 set -e
 name=docbook-xsl-nons
+repo=docbook/"xslt10-stylesheets"
 get_version() {
 	local inst_ver=$(pkgver $name)
-	local git_ver=$(timeout 5 git ls-remote --tags --refs  https://github.com/docbook/xslt10-stylesheets.git | grep "refs/tags/release" | cut -d '/' -f 4 | tail -n 1)
+	local git_ver=$(timeout 5 git ls-remote --tags --refs  https://github.com/$repo.git | grep "refs/tags/release" | cut -d '/' -f 4 | tail -n 1)
 	ver_check "$git_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)
 	ver_check "$lfs_vers" "$inst_ver" && return
@@ -18,7 +19,7 @@ fi
 rm -rf "$direname"
 tar xf "$filename"
 cd "$direname"
-gap_patches "$name"
+gap_patches "$name" || echo "Applying patches failed... Continuing anyway"
 sudo su -c "install -v -m755 -d /usr/share/xml/docbook/xsl-stylesheets-nons-$version &&
 
 cp -v -R VERSION assembly common eclipse epub epub3 extensions fo        \
