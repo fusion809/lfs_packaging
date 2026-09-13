@@ -20,7 +20,7 @@ rm -rf $direname
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://xorg.freedesktop.org/releases/individual/driver/$filename
 fi
-tar xvf $filename
+tar xf $filename
 # Compile and install
 cd $direname
 patch -p1 < ../libdrm.patch

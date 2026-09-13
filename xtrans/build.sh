@@ -12,7 +12,7 @@ rm -rf $direname
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://xorg.freedesktop.org/archive/individual/lib/$filename
 fi
-tar xvf $filename
+tar xf $filename
 # Compile and install
 cd $direname
 XORG_CONFIG="--prefix=/usr"

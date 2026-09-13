@@ -13,7 +13,7 @@ rm -rf $direname
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/ostreedev/ostree/releases/download/v${version}/$filename
 fi
-tar xvf $filename
+tar xf $filename
 # Compile and install
 cd $direname
 CFLAGS="-O2 -fPIC"

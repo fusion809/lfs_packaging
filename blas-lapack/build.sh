@@ -18,7 +18,7 @@ rm -rf $direname
 if ! [[ -f $filename ]]; then
         wget -c --progress=bar:force https://github.com/$repo/archive/$version.tar.gz -O $filename
 fi
-tar xvf $filename
+tar xf $filename
 cd $direname
 
 # Avoid adding an RPATH entry to the shared lib.

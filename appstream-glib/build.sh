@@ -29,7 +29,7 @@ rm -rf $direname
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force http://people.freedesktop.org/~hughsient/appstream-glib/releases/$filename
 fi
-tar xvf $filename
+tar xf $filename
 # Compile and install
 cd $direname
 meson_options=(

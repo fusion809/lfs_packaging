@@ -14,7 +14,7 @@ direname="${filename/.tar.gz/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$filename
 fi
-tar xvf $filename
+tar xf $filename
 # Compile and install
 cd $direname
 meson_options=(

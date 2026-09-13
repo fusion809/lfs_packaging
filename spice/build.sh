@@ -21,7 +21,7 @@ rm -rf $direname
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.spice-space.org/download/releases/spice-server/$filename
 fi
-tar xvf $filename
+tar xf $filename
 # Compile and install
 cd $direname
 CFLAGS="-O2 -fPIC"

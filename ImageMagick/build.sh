@@ -14,7 +14,7 @@ sudo rm -rf $direname
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/ImageMagick/ImageMagick/archive/refs/tags/$filename
 fi
-tar xvf $filename
+tar xf $filename
 # Compile and install
 cd $direname
 sudo rm -f /usr/lib/libMagickCore-7.Q16HDRI.so* /usr/lib/libMagickWand-7.Q16HDRI.so* /usr/lib/libMagick++-7.Q16HDRI.so*

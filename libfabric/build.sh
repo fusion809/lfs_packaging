@@ -16,7 +16,8 @@ rm -rf $direname
 tar xf $filename
 # Compile and install
 cd $direname
-autoreconf -fvi
+sudo autoreconf -fvi
+sudo chown $USER -R .
 CLFAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 ./configure --prefix=/usr

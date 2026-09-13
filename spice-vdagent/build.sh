@@ -14,7 +14,7 @@ rm -rf $direname
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.spice-space.org/download/releases/$filename
 fi
-tar xvf $filename
+tar xf $filename
 # Compile and install
 cd $direname
   # Set proper paths
@@ -22,7 +22,8 @@ cd $direname
 ' data/spice-vdagentd.service
   sed -i 's|/etc/sysconfig/spice-vdagentd|/etc/conf.d/spice-vdagentd|' data/spice-vdagentd.1.in
   sed -i 's/strstr(addr, "\/pci");/(char *)strstr(addr, "\/pci");/' src/vdagent/device-info.c
-autoreconf -fi
+sudo autoreconf -fi
+sudo chown $USER -R .
 export CFLAGS="-O2 -fPIC -Wno-error"
 export CXXFLAGS="-O2 -fPIC -Wno-error"
 configure_options=(

@@ -21,7 +21,7 @@ rm -rf $direname
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force http://gstreamer.freedesktop.org/src/$name/$filename
 fi
-tar xvf $filename
+tar xf $filename
 # Compile and install
 cd $direname
 mni --prefix=/usr --buildtype=release .. &&

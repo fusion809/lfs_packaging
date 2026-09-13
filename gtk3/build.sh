@@ -14,7 +14,7 @@ rm -rf $direname
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://gitlab.gnome.org/GNOME/gtk/-/archive/$version/$filename
 fi
-tar xvf $filename
+tar xf $filename
 # Compile and install
 cd $direname
 mkdir build &&

@@ -13,7 +13,7 @@ blfs_depends=(wayland wayland-protocols)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/archive/${version}.tar.gz -O $filename
 fi
-tar xvf $filename
+tar xf $filename
 cd $direname
 # Compile and install
 meson_options=(

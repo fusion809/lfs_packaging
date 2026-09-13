@@ -19,7 +19,8 @@ cd $direname
 # Compile and install
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
-autoreconf
+sudo autoreconf -fiv
+sudo chown $USER -R .
 cmi --prefix=/usr
 sudo make install.man
 cd ..

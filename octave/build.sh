@@ -10,11 +10,11 @@ direname="$name-$version"
 filename="$direname.tar.lz"
 export CXXFLAGS="-O2 -fPIC -std=gnu++17"
 CFLAGS="-O2 -fPIC"
-source deps-check.sh
+#source deps-check.sh
 # Fetch and unpack source
 gnu_download $name $filename
 rm -rf ${direname}
-tar xvf $filename
+tar xf $filename
 # Compile and install
 cd $direname
 find . -name stamp-vti -exec touch {} +

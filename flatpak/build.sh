@@ -15,7 +15,7 @@ sudo rm -rf $direname
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/flatpak/flatpak/releases/download/${version}/$filename
 fi
-tar xvf $filename
+tar xf $filename
 cd $direname
 # Compile and install
 meson_options=(

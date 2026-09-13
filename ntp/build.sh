@@ -32,7 +32,8 @@ tar xf "$filename"
 cd "$direname"
 sed -i 's/getclock/getclock memchr/'               sntp/m4/ntp_libntp.m4 &&
 sed -i 's/pthread_detach(NULL)/pthread_detach(0)/' sntp/m4/openldap-thread-check.m4 &&
-autoreconf -fiv
+sudo autoreconf -fiv
+sudo chown $USER -R .
 sed -i "/ep.*FAILED/,+4s/ep/ep2/" ntpd/ntp_io.c
 gap_patches $name
 options=(--prefix=/usr      \

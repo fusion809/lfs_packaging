@@ -15,7 +15,8 @@ fi
 
 tar xf $filename
 cd $direname
-autoreconf -vi
+sudo autoreconf -vi
+sudo chown $USER -R .
 cmi --prefix=/usr
 cd ..
 sudo rm -rf $filename $direname

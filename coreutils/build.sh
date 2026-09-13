@@ -17,7 +17,8 @@ cd $direname
 if [[ -n $patch_filename ]]; then
     patch -Np1 -i ../$patch_filename
 fi
-autoreconf -fv
+sudo autoreconf -fv
+sudo chown $USER -R .
 automake -af
 FORCE_UNSAFE_CONFIGURE=1 cmi --prefix=/usr
 sudo su -c "mv -v /usr/bin/chroot /usr/sbin

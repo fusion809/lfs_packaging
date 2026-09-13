@@ -20,7 +20,8 @@ cd $direname
 patch -Np1 -i ../gcc-15.patch
 CLFAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
-autoreconf -fiv
+sudo autoreconf -fiv
+sudo chown $USER -R .
 configure_options=(
 	--prefix=/usr 
 	--with-gmp
