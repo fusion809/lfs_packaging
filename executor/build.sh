@@ -12,4 +12,4 @@ fi
 sudo chmod 777 -R /usr/share/gnome-shell/extensions/executor@raujonas.github.io
 glib-compile-schemas /usr/share/gnome-shell/extensions/executor@raujonas.github.io/schemas
 dconf load /org/gnome/shell/extensions/executor/ < /usr/share/gnome-shell/extensions/executor@raujonas.github.io/executor-settings.dconf
-echo "$version" sudo tee /var/lib/custom-packages/$name
+echo "$version" | sudo tee /var/lib/custom-packages/$name

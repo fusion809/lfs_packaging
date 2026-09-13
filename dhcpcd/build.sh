@@ -33,4 +33,4 @@ cd ..
 sudo install -Dm644 "$name.service" "/usr/lib/systemd/system"
 sudo install -Dm644 "${name}_.service" "/usr/lib/systemd/system/${name}@.service"
 rm -rf "$direname" "$filename"
-echo "$version" sudo tee /var/lib/custom-packages/$name
+echo "$version" | sudo tee /var/lib/custom-packages/$name

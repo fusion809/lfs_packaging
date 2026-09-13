@@ -41,4 +41,4 @@ sudo chown $USER -R .
 LINKS="/usr/bin/links" cmi --prefix=/usr
 cd ..
 rm -rf "$direname"
-echo "$version" sudo tee /var/lib/custom-packages/$name
+echo "$version" | sudo tee /var/lib/custom-packages/$name

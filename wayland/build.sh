@@ -28,4 +28,4 @@ for link in /usr/lib/libwayland*.so.[01]; do
 
     find "$dir" -maxdepth 1 -type f -name "${stem}.*" ! -name "$file" -delete
 done
-echo "$version" sudo tee /var/lib/custom-packages/$name
+echo "$version" | sudo tee /var/lib/custom-packages/$name

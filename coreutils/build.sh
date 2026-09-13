@@ -26,4 +26,4 @@ mv -v /usr/share/man/man1/chroot.1 /usr/share/man/man8/chroot.8
 sed -i 's/"1"/"8"/' /usr/share/man/man8/chroot.8"
 cd ..
 rm -rf $filename $patch_filename $direname
-echo "$version" sudo tee /var/lib/custom-packages/$name
+echo "$version" | sudo tee /var/lib/custom-packages/$name

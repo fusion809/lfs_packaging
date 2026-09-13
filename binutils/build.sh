@@ -27,4 +27,4 @@ sudo make tooldir=/usr install
 sudo rm -rfv /usr/lib/lib{bfd,ctf,ctf-nobfd,gprofng,opcodes,sframe}.a  /usr/share/doc/gprofng/
 cd ../..
 rm -rf $direname $filename
-echo "$version" sudo tee /var/lib/custom-packages/$name
+echo "$version" | sudo tee /var/lib/custom-packages/$name

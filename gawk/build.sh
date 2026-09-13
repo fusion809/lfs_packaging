@@ -13,4 +13,4 @@ sed -i 's/extras//' Makefile.in
 cmi --prefix=/usr
 cd ..
 rm -rf $filename $direname
-echo "$version" sudo tee /var/lib/custom-packages/$name
+echo "$version" | sudo tee /var/lib/custom-packages/$name

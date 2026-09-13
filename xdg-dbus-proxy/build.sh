@@ -16,4 +16,4 @@ cd $direname
 mni --prefix=/usr --buildtype=release -D man=disabled
 cd ../..
 rm -rf $direname $filename
-echo "$version" sudo tee /var/lib/custom-packages/$name
+echo "$version" | sudo tee /var/lib/custom-packages/$name

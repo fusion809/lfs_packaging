@@ -24,4 +24,4 @@ mni "--prefix=/usr"
 cd ..
 rm -rf build
 cd ..
-echo "$version" sudo tee /var/lib/custom-packages/$name
+echo "$version" | sudo tee /var/lib/custom-packages/$name

@@ -15,4 +15,4 @@ cd "$direname"
 cmi --prefix=/usr --enable-mpers=no
 cd ..
 sudo rm -rf "$direname" "$filename" "UCD.zip"
-echo "$version" sudo tee /var/lib/custom-packages/$name
+echo "$version" | sudo tee /var/lib/custom-packages/$name

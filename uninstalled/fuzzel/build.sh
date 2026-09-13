@@ -17,5 +17,5 @@ sed -i -e "691s|*ret|*ret=NULL|g" shm.c
 mni --buildtype=release --prefix=/usr
 cd ../..
 rm -rf "$name" "$filename"
-echo "$version" sudo tee /var/lib/custom-packages/$name
+echo "$version" | sudo tee /var/lib/custom-packages/$name
 

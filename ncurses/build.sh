@@ -45,3 +45,4 @@ for lib in ncurses form panel menu ; do
 done
 sudo ln -sfv libncursesw.so /usr/lib/libcurses.so
 sudo cp -v -R doc -T /usr/share/doc/$direname
+echo "$version" | sudo tee /var/lib/custom-packages/$name

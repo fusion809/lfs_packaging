@@ -12,4 +12,4 @@ cd $direname
 cmi --prefix=/usr --localstatedir=/var/lib/locate
 cd ..
 rm -rf $filename $direname
-echo "$version" sudo tee /var/lib/custom-packages/$name
+echo "$version" | sudo tee /var/lib/custom-packages/$name

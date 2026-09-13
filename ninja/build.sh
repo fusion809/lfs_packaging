@@ -25,4 +25,4 @@ install -vDm644 misc/bash-completion /usr/share/bash-completion/completions/ninj
 install -vDm644 misc/zsh-completion  /usr/share/zsh/site-functions/_ninja"
 cd ..
 rm -rf $filename $direname
-echo "$version" sudo tee /var/lib/custom-packages/$name
+echo "$version" | sudo tee /var/lib/custom-packages/$name

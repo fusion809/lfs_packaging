@@ -18,4 +18,4 @@ cmi --prefix=/usr --disable-static
 sudo install -Dm755 ../unzip /usr/bin/
 cd ..
 rm -rf $direname $filename
-echo "$version" sudo tee /var/lib/custom-packages/$name
+echo "$version" | sudo tee /var/lib/custom-packages/$name

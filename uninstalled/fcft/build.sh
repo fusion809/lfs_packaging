@@ -16,4 +16,4 @@ cd "$name"
 mni --buildtype=release --prefix=/usr
 cd ../..
 rm -rf "$name" "$filename"
-echo "$version" sudo tee /var/lib/custom-packages/$name
+echo "$version" | sudo tee /var/lib/custom-packages/$name

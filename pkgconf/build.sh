@@ -21,4 +21,4 @@ if ! [[ -f /usr/share/man/man1/pkg-config.1 ]]; then
 fi
 cd ../..
 rm -rf $filename $direname $mfilename
-echo "$version" sudo tee /var/lib/custom-packages/$name
+echo "$version" | sudo tee /var/lib/custom-packages/$name

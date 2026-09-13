@@ -15,4 +15,4 @@ cd $direname
 sudo cp -v services protocols /etc
 cd ..
 rm -rf $filename $direname
-echo "$version" sudo tee /var/lib/custom-packages/$name
+echo "$version" | sudo tee /var/lib/custom-packages/$name

@@ -49,6 +49,5 @@ configure_options=(
 cmi "${configure_options[@]}"
 sudo cp -vfr ../doc -T /usr/share/doc/$dirname
 export CP="/var/lib/custom-packages"
-echo "$version" > "$CP/$name"
-sudo chmod 777 "$CP/$name"
+echo "$version" | sudo tee "$CP/$name"
 rm -rf $dirname $filename

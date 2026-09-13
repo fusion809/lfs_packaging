@@ -23,4 +23,4 @@ common_cmake_args=(
 cmaki "${common_cmake_args[@]}"
 cd ../..
 rm -rf $filename $direname
-echo "$version" sudo tee /var/lib/custom-packages/$name
+echo "$version" | sudo tee /var/lib/custom-packages/$name

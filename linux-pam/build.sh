@@ -75,6 +75,5 @@ PAMEOF
 
 # Record package metadata
 export CP="/var/lib/custom-packages"
-echo "$version" > "$CP/$name"
-sudo chmod 777 "$CP/$name"
+echo "$version" | sudo tee "$CP/$name"
 rm -rf $dirname $filename
