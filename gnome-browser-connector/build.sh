@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 name=gnome-browser-connector
 version=$(gn_ver $name)
 lfs_depends=(python meson)

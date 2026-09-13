@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 name=mesa
 get_version() {
   local inst_ver=$(pkgver $name)

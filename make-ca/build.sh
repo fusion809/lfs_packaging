@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 name=make-ca
 version=$(gh_ver "lfs-book/make-ca")
 filename="$name-$version.tar.gz"

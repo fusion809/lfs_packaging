@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e 
 name=dhcpcd
 repo="NetworkConfiguration/dhcpcd"
 version=$(gh_ver "$repo")

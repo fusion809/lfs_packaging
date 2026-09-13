@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 name=libssh
 maj_ver=$(wget -cqO- https://www.libssh.org/files/ | grep -E "[0-9.]+/" | cut -d '"' -f 8 | cut -d '/' -f 1 | sort -V | tail -n 1)
 get_version() {

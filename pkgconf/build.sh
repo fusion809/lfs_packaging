@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 name=pkgconf
 version=$(gh_ver pkgconf/pkgconf)
 lfs_depends=(bash coreutils glibc meson ninja tar xz)

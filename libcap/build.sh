@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 name=libcap
 get_version() {
 	local inst_ver=$(pkgver $name)

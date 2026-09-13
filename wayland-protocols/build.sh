@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 name=wayland-protocols
 version=$(way_ver $name)
 blfs_depends=(wayland)

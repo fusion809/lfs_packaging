@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 name=vscode
 version=$(git ls-remote --tags https://github.com/microsoft/vscode.git | grep -oP 'refs/tags/\K[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -n 1)
 depends=(elfutils glib2 gtk3 libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXres libxkbfile mesa mitkrb openldap orc pango pcre2 wayland)

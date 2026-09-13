@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 name=executor
 version=$(wget -cqO- https://raw.githubusercontent.com/fusion809/executor-raujonas.github.io/refs/heads/master/metadata.json | grep '"version"' | sed 's/.*://g')
 lfs_depends=(wget)

@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 name=e2fsprogs
 version=$(sf_ver $name/$name)
 lfs_depends=(gcc make glibc tar gzip coreutils bash wget)

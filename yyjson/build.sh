@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 name=yyjson
 version=$(gh_ver ibireme/yyjson)
 filename="$name-$version.tar.gz"

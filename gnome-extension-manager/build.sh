@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 name=gnome-extension-manager
 _name=extension-manager
 version=$(gh_ver mjakeman/$_name)

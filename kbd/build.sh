@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 name=kbd
 get_version() {
 	local inst_ver=$(pkgver $name)
