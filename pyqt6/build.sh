@@ -44,4 +44,4 @@ sudo python3 -O -m compileall -d / /usr/lib
 # Cleanup and add to database
 cd ../..
 sudo rm -rf $direname $filename
-echo $version sudo tee /var/lib/custom-packages/$name
+echo $version | sudo tee /var/lib/custom-packages/$name

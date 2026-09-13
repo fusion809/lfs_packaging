@@ -29,4 +29,4 @@ sed -i '/install -m.*STA/d' libcap/Makefile
 make prefix=/usr lib=lib -j$(nproc)
 sudo make prefix=/usr lib=lib install
 cd ..
-echo $version sudo tee /var/lib/custom-packages/$name
+echo $version | sudo tee /var/lib/custom-packages/$name

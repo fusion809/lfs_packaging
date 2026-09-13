@@ -28,4 +28,4 @@ cd $direname
 rm -v man3/crypt*
 sudo make -R GIT=false prefix=/usr install
 cd ../..
-echo $version sudo tee /var/lib/custom-packages/$name
+echo $version | sudo tee /var/lib/custom-packages/$name

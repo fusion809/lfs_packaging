@@ -21,4 +21,4 @@ sudo cp -r "$direname"/* /usr/share/antigravity
 sudo cp $name.desktop /usr/share/applications/
 sudo cp $name.png /usr/share/pixmaps/
 sudo rm -rf "$direname" "$filename"
-echo $version sudo tee /var/lib/custom-packages/$name
+echo $version | sudo tee /var/lib/custom-packages/$name

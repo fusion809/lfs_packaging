@@ -28,4 +28,4 @@ sudo make install
 # Cleanup and add to database
 cd ..
 sudo rm -rf $filename $direname
-echo $version sudo tee /var/lib/custom-packages/$name
+echo $version | sudo tee /var/lib/custom-packages/$name

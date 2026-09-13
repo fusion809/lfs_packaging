@@ -35,4 +35,4 @@ cmi "${configure_options[@]}"
 sudo ln -svf expect${version}/libexpect${version}.so /usr/lib
 cd ..
 rm -rf $filename $direname
-echo $version sudo tee /var/lib/custom-packages/$name
+echo $version | sudo tee /var/lib/custom-packages/$name

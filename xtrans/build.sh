@@ -21,4 +21,4 @@ cmi $XORG_CONFIG $docdir
 cd ..
 sudo rm -rf $direname $filename
 sudo /sbin/ldconfig
-echo $version sudo tee /var/lib/custom-packages/$name
+echo $version | sudo tee /var/lib/custom-packages/$name

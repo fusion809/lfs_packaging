@@ -33,4 +33,4 @@ sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in
 cmi --prefix=/usr --disable-vlock
 sudo cp -R -v docs/doc -T /usr/share/doc/$direname
 cd ..
-echo $version sudo tee /var/lib/custom-packages/$name
+echo $version | sudo tee /var/lib/custom-packages/$name

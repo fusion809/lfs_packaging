@@ -51,4 +51,4 @@ sudo make install
 sudo cp -v -R $name-doc-$version -T /usr/share/doc/$name-$(ghl_ver sqlite/sqlite)
 cd ..
 rm -rf $filename $direname $docs_filename
-echo $version sudo tee /var/lib/custom-packages/$name
+echo $version | sudo tee /var/lib/custom-packages/$name

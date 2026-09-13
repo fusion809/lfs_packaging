@@ -59,4 +59,4 @@ export PATH="$MOCK_GCC_DIR:$PATH"
 cmi --prefix=/usr --sysconfdir=/etc --program-prefix="eu-"
 cd ..
 sudo rm -rf $name-$version*
-echo $version sudo tee /var/lib/custom-packages/$name
+echo $version | sudo tee /var/lib/custom-packages/$name
