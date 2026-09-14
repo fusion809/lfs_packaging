@@ -12,8 +12,14 @@ function maki {
 }
 
 function cmaki {
-	cmake -S . -B build "$@"
-	cd build
+	if [[ -d build ]]; then
+		mkdir build2
+		cmake -S . -B build2 "$@"
+		cd build2
+	else
+		cmake -S . -B build "$@"
+		cd build
+	fi
 	generator=
 for arg in "$@"; do
     if [[ "$generator" == "-G" ]]; then
@@ -154,6 +160,7 @@ function pfile {
         "https://www.linuxfromscratch.org/lfs/view/systemd/chapter08/$1.html" \
 	"https://www.linuxfromscratch.org/blfs/view/systemd/general/$1.html" \
 	"https://www.linuxfromscratch.org/blfs/view/systemd/basicnet/$1.html" \
+	"https://www.linuxfromscratch.org/blfs/view/systemd/pst/$1.html" \
         "https://www.linuxfromscratch.org/blfs/view/systemd/postlfs/$1.html" |
     grep '\.patch' |
     cut -d '/' -f 2 |

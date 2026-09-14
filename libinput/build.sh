@@ -18,15 +18,15 @@ get_version() {
 }
 version=$(get_version)
 depends=(glibc libevdev lua mtdev systemd)
-filename="$name-$version.tar.xz"
+filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force http://www.freedesktop.org/software/libinput/$filename
+	wget -c --progress=bar:force https://gitlab.freedesktop.org/libinput/libinput/-/archive/$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"
 cd "$direname"
-cmi --prefix=/usr --disable-static
-cd ../
+mni --prefix=/usr --buildtype=release
+cd ../..
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"

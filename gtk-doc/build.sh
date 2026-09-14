@@ -2,10 +2,11 @@
 set -e
 name=gtk-doc
 version=$(gn_ver $name)
+majVer=$(echo $version | cut -d '.' -f1-2)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/$direname/$filename
+	wget -c --progress=bar:force https://download.gnome.org/sources/$name/$majVer/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"
