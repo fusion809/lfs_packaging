@@ -6,7 +6,7 @@ version=$(gh_ver $repo)
 depends=(brotli bzip2 dbus elfutils expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glu glycin graphite2 gtk3 harfbuzz icu libICE libSM libX11 libXau libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXft libXi libXinerama libXrandr libXrender libXres libXxf86vm libepoxy libffi libjpeg-turbo libpciaccess libpng libxcb libxkbcommon libxml2 libxshmfence mesa pango pcre2 systemd util-linux wayland xz zlib zstd)
 blfs_depends=(alsa-lib at-spi2-core cairo lcms2 libdrm libseccomp llvm lm-sensors pixman spirv-tools)
 filename="$name-$version-source.tar.gz"
-direname="${filename/.tar.*/}"
+direname="${filename/-source.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/releases/download/release-$version/$filename
 fi
