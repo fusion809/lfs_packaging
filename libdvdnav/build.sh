@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-name=libdvdread
+name=libdvdnav
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local git_ver=$(timeout 5 git ls-remote --tags --refs https://code.videolan.org/videolan/$name.git | cut -d '/' -f 3 | sort -V | tail -n 1)
