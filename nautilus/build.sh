@@ -10,7 +10,7 @@ majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/$name/$majVer/$filename
+	wget -c --progress=bar:force https://download.gnome.org/sources/$name/$majVer/$filename || wget -c --progress=bar:force https://github.com/$repo/archive/$version.tar.gz -O $filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

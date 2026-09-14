@@ -1,4 +1,5 @@
 #!/bin/bash
+# Build currently fails due to tcl9.0.4 issues
 set -e
 name=expect
 get_version() {
@@ -18,11 +19,13 @@ version=$(get_version)
 lfs_depends=(tcl)
 filename="${name}${version}.tar.gz"
 direname="${filename/.tar.*/}"
+#direname=expect-tcl9
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://prdownloads.sourceforge.net/$name/$filename
 fi
 rm -rf $direname
 tar xf $filename
+#git clone https://github.com/xry111/expect-tcl9
 cd $direname
 gap_patches $name
 configure_options=(--prefix=/usr           \
