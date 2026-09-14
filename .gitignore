@@ -52,3 +52,4 @@ icu/icu
 inih/inih-r[0-9]*
 nodejs/node-*
 .*swp
+iso-codes/iso-codes-v*
