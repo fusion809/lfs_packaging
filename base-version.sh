@@ -347,6 +347,11 @@ function lfs_ver {
 	echo "$ver"
 }
 
+function nixver {
+	local name=$(echo $1 | tr '[:upper:]' '[:lower:]')	
+	wget -cqO- -T 5 -t 1 "https://search.nixos.org/packages?channel=unstable&query=$name#show=$name"
+}
+
 function vatver {
 	export VAT_URL="https://raw.githubusercontent.com/tox-wtf/vat/refs/heads/master/p/"
 	wget -cqO- -T 5 -t 1 "$VAT_URL/$1/v.tsv" | grep -F release | cut -f3
