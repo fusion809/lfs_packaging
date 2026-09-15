@@ -33,6 +33,7 @@ options=(-DCMAKE_INSTALL_PREFIX=/usr \
     -DNUM_THREADS=64 \
     -DDYNAMIC_ARCH=ON)
 cmaki "${options[@]}"
+# Following sed lines stop OpenCV build failures related to OpenMP
 sudo sed -i \
     's/;OpenMP::OpenMP_Fortran//' \
     "/usr/lib/cmake/OpenBLAS/OpenBLASTargets.cmake"
