@@ -6,7 +6,7 @@ if [[ -z ${version// /} ]]; then
 	echo "Version is empty."
 	exit 1
 fi
-dirname="Linux-PAM-$version"
+direname="Linux-PAM-$version"
 filename="$dirname.tar.xz"
 depends=()
 lfs_depends=(gdbm glibc libxcrypt systemd)
@@ -83,4 +83,4 @@ PAMEOF
 # Record package metadata
 export CP="/var/lib/custom-packages"
 echo "$version" | sudo tee "$CP/$name"
-rm -rf $dirname $filename
+rm -rf $direname $filename
