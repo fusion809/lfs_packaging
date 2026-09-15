@@ -20,6 +20,7 @@ options=(-D CMAKE_INSTALL_PREFIX=/usr      \
       -D BUILD_PERF_TESTS=OFF           \
       -D WITH_XINE=ON                   \
       -D BUILD_TESTS=OFF                \
+      -D USE_OPENMP=OFF                 \
       -D ENABLE_PRECOMPILED_HEADERS=OFF \
       -D CMAKE_SKIP_INSTALL_RPATH=ON    \
       -D BUILD_WITH_DEBUG_INFO=OFF      \

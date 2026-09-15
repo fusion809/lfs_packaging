@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 # Variable declarations
+name=libXvMC
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"

@@ -33,6 +33,14 @@ options=(-DCMAKE_INSTALL_PREFIX=/usr \
     -DNUM_THREADS=64 \
     -DDYNAMIC_ARCH=ON)
 cmaki "${options[@]}"
+sudo sed -i \
+    's/;OpenMP::OpenMP_Fortran//' \
+    "/usr/lib/cmake/OpenBLAS/OpenBLASTargets.cmake"
+sudo sed -i \
+    '/^[[:space:]]*include("${CMAKE_CURRENT_LIST_DIR}\/${PN}Targets.cmake")/i\
+    include(CMakeFindDependencyMacro)\
+    find_dependency(OpenMP)' \
+    /usr/lib/cmake/OpenBLAS/OpenBLASConfig.cmake
 cd ../..
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
