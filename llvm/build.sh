@@ -7,17 +7,17 @@ depends=(gcc glibc icu libffi libxml2 zlib zstd)
 filename="$name-project-$version.src.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/llvm/llvm-project/releases/download/llvmorg-$version/$filename
+	wget -c --progress=bar:force https://github.com/$repo/releases/download/llvmorg-$version/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"
 cd "$direname"
 grep -rl '#!.*python$' | xargs sed -i '1s/python$/python3/'
 sed 's/utility/tool/' -i llvm/utils/FileCheck/CMakeLists.txt
-mkdir -pv /etc/clang &&
+sudo su -c "mkdir -pv /etc/clang &&
 for i in clang clang++; do
   echo -fstack-protector-strong > /etc/clang/$i.cfg
-done
+done"
 options=(-D CMAKE_INSTALL_PREFIX=/usr           \
       -D CMAKE_SKIP_INSTALL_RPATH=ON         \
       -D LLVM_ENABLE_FFI=ON                  \
@@ -33,7 +33,8 @@ options=(-D CMAKE_INSTALL_PREFIX=/usr           \
       -D CLANG_DEFAULT_PIE_ON_LINUX=ON       \
       -D CLANG_CONFIG_FILE_SYSTEM_DIR=/etc/clang \
       -W no-author -G Ninja)
+cd llvm
 CC=gcc CXX=g++ cmaki "${options[@]}"
-cd ../
+cd ../../..
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
