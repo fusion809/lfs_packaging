@@ -1,13 +1,13 @@
 #!/bin/bash
 set -e
-name=modemmanger
+name=modemmanager
 repo=linux-mobile-broadband/ModemManager
 version=$(gh_ver $repo)
 depends=(glib2 glibc libffi libgudev libmbim libqmi pcre2 polkit systemd util-linux zlib)
 filename="ModemManager-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/$direname/$filename
+	wget -c --progress=bar:force https://github.com/$repo/archive/$version.tar.gz -O $filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

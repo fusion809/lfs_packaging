@@ -12,7 +12,7 @@ depends=()
 lfs_depends=(gdbm glibc libxcrypt systemd)
 blfs_depends=()
 
-if ! [ -f "$filename" ]; then
+if ! [[ -f "$filename" ]]; then
     wget -c --progress=bar:force "https://github.com/linux-pam/linux-pam/releases/download/v$version/$filename"
 fi
 rm -rf "$dirname"
@@ -23,8 +23,6 @@ sed -e "s/'elinks'/'lynx'/"                       \
     -e "s/'-no-numbering', '-no-references'/      \
           '-force-html', '-nonumbers', '-stdin'/" \
     -i meson.build
-mkdir build
-cd build
 meson_options=(
   --prefix=/usr       \
   --buildtype=release \

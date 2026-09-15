@@ -18,8 +18,8 @@ get_version() {
 }
 version=$(get_version)
 depends=(glibc json-c keyutils libaio libnvme ncurses openssl readline systemd util-linux)
-filename="$name.$version.tgz"
-direname="${filename/.tar.*/}"
+filename="LVM2.$version.tgz"
+direname="${filename/.tgz/}"
 # Has kernel config deps, too
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://sourceware.org/ftp/lvm2/$filename
