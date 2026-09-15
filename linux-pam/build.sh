@@ -71,6 +71,15 @@ session   required    pam_deny.so
 # End /etc/pam.d/other
 PAMEOF
 
+sudo tee /etc/pam.d/su > /dev/null << 'PAMEOF'
+# Begin /etc/pam.d/su
+auth      sufficient  pam_rootok.so
+auth      include     system-auth
+account   include     system-account
+session   required    pam_env.so
+session   include     system-session
+# End /etc/pam.d/su
+PAMEOF
 # Record package metadata
 export CP="/var/lib/custom-packages"
 echo "$version" | sudo tee "$CP/$name"
