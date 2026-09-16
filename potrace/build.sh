@@ -19,7 +19,7 @@ depends=(glibc zlib)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/$direname/$filename
+	wget -c --progress=bar:force https://downloads.sourceforge.net/potrace/$filename
 fi
 rm -rf "$direname"
 tar xf "$filename"

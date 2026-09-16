@@ -18,7 +18,8 @@ tar xf $filename
 cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
-./autogen.sh --prefix=/usr
+sudo ./autogen.sh --prefix=/usr
+sudo chown $USER -R .
 cmi --prefix=/usr
 # Cleanup and add to database
 cd ..

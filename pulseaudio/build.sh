@@ -3,9 +3,7 @@ set -e
 name=pulseaudio
 repo=$name/$name
 version=$(gh_ver $repo)
-depends=(bzip2 dbus elfutils gcc gdbm glib2 glibc gst-plugins-base gstreamer jack libICE libSM libX11 libXext libXi libXtst libcap libffi openssl orc pcre2 systemd util-linux webkitgtk xz zlib zstd)
-blfs_depends=(alsa-lib avahi flac lame libXau libXdmcp libogg libsndfile libunwind libvorbis libxcb mpg123 opus)
-lfs_depends=(libelf)
+depends=(bzip2 dbus elfutils gcc gdbm glib2 glibc gst-plugins-base gstreamer jack libICE libSM libX11 libXext libXi libXtst libcap libffi openssl orc pcre2 systemd util-linux webkitgtk xz zlib zstd alsa-lib avahi flac lame libXau libXdmcp libogg libsndfile libunwind libvorbis libxcb mpg123 opus speed libelf)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

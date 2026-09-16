@@ -4,6 +4,7 @@ name=gpgme
 repo="gpg/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.bz2"
+direname="${filename/.tar.bz2/}"
 blfs_depends=(gnupg libassuan libgpg-error)
 depends=(glibc)
 if ! [[ -f $filename ]]; then

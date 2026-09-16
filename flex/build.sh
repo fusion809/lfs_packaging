@@ -13,8 +13,8 @@ rm -rf $direname
 tar xf $filename
 cd $direname
 cmi --prefix=/usr --disable-static --docdir=/usr/share/doc/$direname
-sudo su -c "ln -sv flex   /usr/bin/lex
-ln -sv flex.1 /usr/share/man/man1/lex.1"
+sudo su -c "ln -sf flex   /usr/bin/lex
+ln -sf flex.1 /usr/share/man/man1/lex.1"
 cd ..
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee /var/lib/custom-packages/$name

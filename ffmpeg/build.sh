@@ -13,7 +13,7 @@ fi
 rm -rf "$direname"
 tar xf "$filename"
 cd "$direname"
-gap_patches $name
+gap_patches $name || echo "Patching failed."
 options=(--prefix=/usr \
 	--enable-gpl         \
             --enable-version3    \

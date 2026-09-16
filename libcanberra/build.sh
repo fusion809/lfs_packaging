@@ -13,7 +13,7 @@ fi
 rm -rf "$direname"
 tar xf "$filename"
 cd "$direname"
-gap_patches "$name"
+gap_patches "$name" || echo "Applying patch failed."
 ./configure --prefix=/usr --disable-oss
 make -j$(nproc)
 sudo make docdir=/usr/share/doc/$direname install

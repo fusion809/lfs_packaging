@@ -28,7 +28,7 @@ fi
 rm -rf "$direname"
 tar xf "$filename"
 cd "$direname"
-meson_options=(--prefix=/usr                   --buildtype=release 	    -D tests=false)
+meson_options=(--prefix=/usr --buildtype=release)
 mni "${meson_options[@]}"
 cd ../..
 rm -rf "$filename" "$direname"

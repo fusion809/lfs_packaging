@@ -2,7 +2,7 @@
 set -e
 name=popt
 repo=rpm-software-management/$name
-majVer=$(echo $version | sed -E 's/.[0-9]+$//g')
+majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"

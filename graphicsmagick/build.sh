@@ -47,5 +47,5 @@ sed -i -e "s/LDLOADLIBS =/LDLOADLIBS = -lGraphicsMagick/" Makefile
 maki
 # Cleanup and add to database
 cd ..
-sudo rm -rf $_archive*
+sudo rm -rf $_archive $_archive.tar.xz
 echo $version | sudo tee /var/lib/custom-packages/$name

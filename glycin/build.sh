@@ -18,13 +18,17 @@ meson_options=(--prefix=/usr           \
             --buildtype=release     \
             -D libglycin-gtk4=false \
 	    -D tests=false)
-export PATH=$PATH:/opt/rustc/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rustc/lib
+export PATH=/opt/rustc/bin:$PATH
+export LD_LIBRARY_PATH=/opt/rustc/lib:$LD_LIBRARY_PATH
 for pkg in rustc cargo rustdoc
 do
 	sudo ln -sf /opt/rustc/bin/$pkg /usr/bin/
 done
-mni "${meson_options[@]}"
+command -v rustc
+rustc --version
+command -v cargo
+cargo --version
+PATH=/opt/rustc/bin:$PATH mni "${meson_options[@]}"
 cd ../..
 rm -rf "$direname"
 tar xf $filename

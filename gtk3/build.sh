@@ -17,8 +17,6 @@ fi
 tar xf $filename
 # Compile and install
 cd $direname
-mkdir build &&
-cd    build &&
 
 meson_options=(
       --prefix=/usr       \

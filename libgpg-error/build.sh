@@ -4,6 +4,7 @@ name=libgpg-error
 repo="gpg/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.bz2"
+direname="${filename/.tar.bz2/}"
 depends=(glibc)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.gnupg.org/ftp/gcrypt/$name/$filename
@@ -12,8 +13,7 @@ rm -rf $direname
 tar xf $filename
 cd $direname
 cmi --prefix=/usr --sysconfdir=/etc
-sudo su -c "install -v -m644 -D README /usr/share/doc/$direname/README
-"
+sudo su -c "install -v -m644 -D README /usr/share/doc/$direname/README"
 cd ..
 rm -rf $filename $direname
 echo $version | sudo tee /var/lib/custom-packages/$name

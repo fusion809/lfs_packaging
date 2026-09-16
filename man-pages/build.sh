@@ -23,10 +23,11 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.kernel.org/pub/linux/docs/$name/$filename
 fi
-rm -rf $direname
+sudo rm -rf $direname
 tar xf $filename
 cd $direname
 rm -v man3/crypt*
 sudo make -R GIT=false prefix=/usr install
 cd ../..
+sudo rm -rf $filename $direname
 echo $version | sudo tee /var/lib/custom-packages/$name

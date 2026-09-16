@@ -39,8 +39,8 @@ sip-build \
   --pep484-pyi
 cd build
 maki
-sudo python3 -m compileall -d / /usr/lib
-sudo python3 -O -m compileall -d / /usr/lib
+#sudo python3 -m compileall -d / /usr/lib
+#sudo python3 -O -m compileall -d / /usr/lib
 # Cleanup and add to database
 cd ../..
 sudo rm -rf $direname $filename

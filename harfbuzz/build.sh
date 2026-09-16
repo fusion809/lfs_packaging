@@ -10,7 +10,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/releases/download/$version/$filename
 fi
-rm -rf $direname
+sudo rm -rf $direname
 tar xf $filename
 cd $direname
 meson_options=(--prefix=/usr        \
@@ -18,5 +18,5 @@ meson_options=(--prefix=/usr        \
       -D graphite2=enabled)
 mni "${meson_options[@]}"
 cd ../..
-rm -rf $filename $direname
+sudo rm -rf $filename $direname
 echo $version | sudo tee /var/lib/custom-packages/$name

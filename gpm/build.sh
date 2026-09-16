@@ -24,7 +24,8 @@ rm -rf "$direname"
 tar xf "$filename"
 cd "$direname"
 gap_patches $name
-./autogen.sh
+sudo ./autogen.sh
+sudo chown $USER -R .
 cmi --prefix=/usr --sysconfdir=/etc ac_cv_path_emacs=no
 sudo su -c "install-info --dir-file=/usr/share/info/dir           \
              /usr/share/info/gpm.info                 &&

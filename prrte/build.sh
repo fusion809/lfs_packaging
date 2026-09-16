@@ -16,7 +16,8 @@ rm -rf $direname
 tar xf $filename
 # Compile and install
 cd $direname
-./autogen.pl
+sudo ./autogen.pl
+sudo chown $USER -R .
 configure_options=(
     --prefix=/usr
     --sysconfdir=/etc/$name
