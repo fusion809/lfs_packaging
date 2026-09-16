@@ -2,18 +2,16 @@
 set -e
 # Variable declarations
 name=openpmix
-__name=pmix
+_name=pmix
 version=$(gh_ver $name/$name)
-filename="$__name-$version.tar.gz"
+filename="$_name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
-depends=(bash bzip2 coreutils glibc libevent make perl python sed systemd tar zlib)
-  hwloc
-)
+depends=(bash bzip2 coreutils glibc libevent make perl python sed systemd tar zlib hwloc)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/openpmix/openpmix/releases/download/v$version/$filename
 fi
-rm -rf $direname
+sudo rm -rf $direname
 tar xf $filename
 # Compile and install
 cd $direname
