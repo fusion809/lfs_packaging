@@ -13,7 +13,7 @@ rm -rf "$direname"
 tar xf "$filename"
 cd "$direname"
 gap_patches $name
-CXXFLAGS="${CXXFLAGS:--O2 -g} -std=c++20"
+CXXFLAGS="${CXXFLAGS:--O2 -g} -std=c++20" \
 cmi --prefix=/usr --disable-static
 cd ../
 rm -rf "$filename" "$direname"

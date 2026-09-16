@@ -54,3 +54,4 @@ nodejs/node-*
 .*swp
 iso-codes/iso-codes-v*
 expect/expect*
+libglvnd/libglvnd-*

@@ -160,6 +160,7 @@ function pfile {
         "https://www.linuxfromscratch.org/lfs/view/systemd/chapter08/$1.html" \
 	"https://www.linuxfromscratch.org/blfs/view/systemd/general/$1.html" \
 	"https://www.linuxfromscratch.org/blfs/view/systemd/basicnet/$1.html" \
+	"https://www.linuxfromscratch.org/glfs/view/dev/core/$1.html" \
 	"https://www.linuxfromscratch.org/blfs/view/systemd/multimedia/$1.html" \
 	"https://www.linuxfromscratch.org/blfs/view/systemd/pst/$1.html" \
         "https://www.linuxfromscratch.org/blfs/view/systemd/postlfs/$1.html" |
@@ -183,7 +184,7 @@ function gap_patches {
         echo "Getting and applying $i"
 
         wget -c --progress=bar:force "https://www.linuxfromscratch.org/patches/lfs/development/$i" ||
-        wget -c --progress=bar:force "https://www.linuxfromscratch.org/patches/blfs/svn/$i"
+        wget -c --progress=bar:force "https://www.linuxfromscratch.org/patches/blfs/svn/$i" || wget -c --progress=bar:force "https://www.linuxfromscratch.org/glfs/view/dev/download/$1/$i"
 
         patch -Np1 -i "$i"
     done <<< "$patches"
