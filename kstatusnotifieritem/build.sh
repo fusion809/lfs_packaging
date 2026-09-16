@@ -3,9 +3,7 @@ set -e
 name=kstatusnotifieritem
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(brotli bzip2 double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu keyutils kwindowsystem libX11 libXext libXfixes libXxf86vm libffi libpciaccess libpng libxkbcommon libxml2 libxshmfence mesa mitkrb openssl pcre2 systemd wayland xz zlib zstd)
-lfs_depends=(dbus libelf)
-blfs_depends=(libXau libXdmcp libdrm libxcb llvm lm-sensors qt6 spirv-tools xcb-util-keysyms)
+depends=(brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu keyutils kwindowsystem libdrm libelf libffi libpciaccess libpng libX11 libXau libxcb libXdmcp libXext libXfixes libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qt6 spirv-tools systemd wayland xcb-util-keysyms xz zlib zstd)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

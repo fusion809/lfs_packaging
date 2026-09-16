@@ -4,7 +4,7 @@ name=gst-plugins-base
 version=$(gfd_ver gstreamer/gstreamer)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(gstreamer alsa-lib cdparanoia glib2 iso-codes libgudev libjpeg-turbo libogg libpng libvorbis mesa pango wayland-protocols xorg-libs)
+depends=(alsa-lib cdparanoia glib2 gstreamer iso-codes libgudev libjpeg-turbo libogg libpng libvorbis mesa pango wayland-protocols xorg-libs)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://gstreamer.freedesktop.org/src/$name/$filename
 fi

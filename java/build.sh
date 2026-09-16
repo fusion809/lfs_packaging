@@ -8,7 +8,7 @@ version="$majorver+$minorver"
 filename="openjdk-$majorver-ea+${minorver}_linux-x64_bin.tar.gz"
 direname="jdk-$majorver"
 instdir="jdk-$version"
-blfs_depends=(alsa-lib
+depends=()
 	cups
 	giflib
 	lcms

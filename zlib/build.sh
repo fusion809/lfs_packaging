@@ -17,7 +17,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }	
 version=$(get_version)
-lfs_depends=(gcc glibc tar make coreutils wget gzip)
+depends=(coreutils gcc glibc gzip make tar wget)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

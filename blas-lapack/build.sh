@@ -1,8 +1,7 @@
 #!/bin/bash
 set -e
 # Combine lapack and blas
-depends=()
-depends=(bash coreutils gcc glibc gzip make python sed tar cmake gcc wget)
+depends=(bash cmake coreutils gcc gcc glibc gzip make python sed tar wget)
 name=blas-lapack
 repo="Reference-LAPACK/lapack"
 version=$(gh_com $repo)

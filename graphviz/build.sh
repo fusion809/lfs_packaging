@@ -5,7 +5,7 @@ repo=$name/$name
 version=$(gl_ver $repo)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
-depends=(cmake pango cairo xorg-libs fontconfig libpng)
+depends=(cairo cmake fontconfig libpng pango xorg-libs)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://gitlab.com/graphviz/graphviz/-/archive/$version/$filename
 fi

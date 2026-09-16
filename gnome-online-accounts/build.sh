@@ -5,9 +5,7 @@ name=gnome-online-accounts
 version=$(gn_ver $name)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
-blfs_depends=(brotli cairo curl cyrus-sasl dconf fontconfig freetype fribidi gcr4 gdk-pixbuf glycin gnome-shell graphene graphite2 gsettings-desktop-schemas gst-plugins-bad gst-plugins-base gstreamer harfbuzz itstool json-glib keyutils lcms2 libXau libXdmcp libdrm libepoxy libfyaml libgcrypt libgpg-error libgudev libhandy libidn2 libjpeg-turbo libpng libpsl librest libseccomp libsecret libsoup libtiff libunistring libunwind libwebp libxcb libxkbcommon libxml2 libxmlb llvm lm-sensors nautilus nghttp2 p11-kit pixman spirv-tools vte vulkan-loader webkitgtk)
-lfs_depends=(bzip2 e2fsprogs expat gcc gettext glibc libelf libffi openssl sqlite systemd util-linux xz zlib zstd)
-depends=(elfutils glib2 libX11 libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXxf86vm libadwaita libpciaccess libxshmfence mesa mitkrb openldap orc pango pcre2 wayland)
+depends=(brotli bzip2 cairo curl cyrus-sasl dconf e2fsprogs elfutils expat fontconfig freetype fribidi gcc gcr4 gdk-pixbuf gettext glib2 glibc glycin gnome-shell graphene graphite2 gsettings-desktop-schemas gst-plugins-bad gst-plugins-base gstreamer harfbuzz itstool json-glib keyutils lcms2 libadwaita libdrm libelf libepoxy libffi libfyaml libgcrypt libgpg-error libgudev libhandy libidn2 libjpeg-turbo libpciaccess libpng libpsl librest libseccomp libsecret libsoup libtiff libunistring libunwind libwebp libX11 libXau libxcb libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libxml2 libxmlb libXrandr libXrender libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb nautilus nghttp2 openldap openssl orc p11-kit pango pcre2 pixman spirv-tools sqlite systemd util-linux vte vulkan-loader wayland webkitgtk xz zlib zstd)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$filename

@@ -6,7 +6,7 @@ version=$(gh_ver $repo)
 _version=$(echo $version | sed 's/\./_/g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
-lfs_depends=(glibc make gcc xz tar coreutils)
+depends=(coreutils gcc glibc make tar xz)
 if ! [[ -f $filename ]]; then
     wget -c --progress=bar:force https://github.com/libexpat/libexpat/releases/download/R_${_version}/$filename
 fi

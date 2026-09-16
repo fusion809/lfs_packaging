@@ -3,9 +3,7 @@ set -e
 name=kwallet
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(brotli bzip2 double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc gpgme gpgmepp graphite2 harfbuzz icu kcolorscheme kconfig kcoreaddons kcrash kdbusaddons keyutils kguiaddons ki18n knotifications kwidgetsaddons kwindowsystem libX11 libXext libXfixes libXxf86vm libassuan libffi libgcrypt libgpg-error libpciaccess libpng libxkbcommon libxml2 libxshmfence mesa mitkrb openssl pcre2 qca systemd util-linux wayland xz zlib zstd)
-lfs_depends=(dbus libelf)
-blfs_depends=(libXau libXdmcp libcanberra libdrm libogg libsecret libvorbis libxcb llvm lm-sensors qt6 spirv-tools webkitgtk xcb-util-keysyms)
+depends=(brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc gpgme gpgmepp graphite2 harfbuzz icu kcolorscheme kconfig kcoreaddons kcrash kdbusaddons keyutils kguiaddons ki18n knotifications kwidgetsaddons kwindowsystem libassuan libcanberra libdrm libelf libffi libgcrypt libgpg-error libogg libpciaccess libpng libsecret libvorbis libX11 libXau libxcb libXdmcp libXext libXfixes libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qca qt6 spirv-tools systemd util-linux wayland webkitgtk xcb-util-keysyms xz zlib zstd)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

@@ -3,8 +3,7 @@ set -e
 name=pipewire
 repo=$name/$name
 version=$(gfd_ver $repo)
-depends=(bluez dbus flac gcc glib2 glibc jack libX11 libXau libXdmcp libXfixes libffi libtool libusb libxcb ncurses openssl pcre2 pulseaudio readline sbc systemd util-linux zlib)
-blfs_depends=(alsa-lib avahi fdk-aac lame libcanberra libogg libsndfile libvorbis mpg123 opus)
+depends=(alsa-lib avahi bluez dbus fdk-aac flac gcc glib2 glibc jack lame libcanberra libffi libogg libsndfile libtool libusb libvorbis libX11 libXau libxcb libXdmcp libXfixes mpg123 ncurses openssl opus pcre2 pulseaudio readline sbc systemd util-linux zlib)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

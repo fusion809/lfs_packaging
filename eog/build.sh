@@ -5,9 +5,7 @@ name=eog
 version=$(gn_ver $name)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
-lfs_depends=(bzip2 dbus expat gcc glibc libffi systemd util-linux zlib)
-depends=(glib2 gtk3 libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXres pango pcre2 wayland)
-blfs_depends=(at-spi2-core brotli cairo dav1d dconf exempi fontconfig freetype fribidi gdk-pixbuf glib glycin gnome-desktop graphite2 gtk3 harfbuzz hicolor-icon-theme lcms lcms2 libXau libXdmcp libepoxy libexif libhandy libjpeg-turbo libpeas libpng libportal librsvg libseccomp libx11 libxcb libxkbcommon libxml2 meson pixman webkitgtk)
+depends=(at-spi2-core brotli bzip2 cairo dav1d dbus dconf exempi expat fontconfig freetype fribidi gcc gdk-pixbuf glib glib2 glibc glycin gnome-desktop graphite2 gtk3 gtk3 harfbuzz hicolor-icon-theme lcms lcms2 libepoxy libexif libffi libhandy libjpeg-turbo libpeas libpng libportal librsvg libseccomp libx11 libX11 libXau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libxml2 libXrandr libXrender libXres meson pango pcre2 pixman systemd util-linux wayland webkitgtk zlib)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$filename

@@ -5,8 +5,7 @@ repo="$name/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"
 direname="$name-$version"
-lfs_depends=(bash bzip2 coreutils glibc libelf ncurses python tar wget xz zip zlib zstd)
-depends=(elfutils)
+depends=(bash bzip2 coreutils elfutils glibc libelf ncurses python tar wget xz zip zlib zstd)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/releases/download/v$version/$filename
 fi

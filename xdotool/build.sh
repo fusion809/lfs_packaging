@@ -3,7 +3,7 @@ set -e
 name=xdotool
 repo=jordansissel/$name
 version=$(gh_ver $repo)
-depends=(glibc libX11 libXau libXdmcp libXext libXi libXinerama libXtst libxcb libxkbcommon)
+depends=(glibc libX11 libXau libxcb libXdmcp libXext libXi libXinerama libxkbcommon libXtst)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

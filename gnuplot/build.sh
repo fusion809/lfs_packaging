@@ -5,9 +5,7 @@ name=gnuplot
 version=$(sf_ver "gnuplot/gnuplot-main")
 direname="$name-$version"
 filename="$direname.tar.gz"
-depends=(glib2 libX11 libXext libXrender pango pcre2)
-lfs_depends=(bash bzip2 coreutils expat gcc glibc gzip libffi make ncurses readline tar util-linux zlib)
-blfs_depends=(brotli cairo fontconfig freetype fribidi gd glib graphite2 gtk3 harfbuzz libXau libXdmcp libpng libwebp libx11 libxcb lua pango pixman qt6)
+depends=(bash brotli bzip2 cairo coreutils expat fontconfig freetype fribidi gcc gd glib glib2 glibc graphite2 gtk3 gzip harfbuzz libffi libpng libwebp libx11 libX11 libXau libxcb libXdmcp libXext libXrender lua make ncurses pango pango pcre2 pixman qt6 readline tar util-linux zlib)
 # libcaca, libcerf  and wxwidgets are listed for Arch, but seems to run for my uses without them
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then

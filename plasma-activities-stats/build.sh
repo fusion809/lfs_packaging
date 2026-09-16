@@ -3,9 +3,7 @@ set -e
 name=plasma-activities-stats
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(double-conversion gcc glib2 glibc icu pcre2 plasma-activities systemd zlib zstd)
-blfs_depends=(kconfig qt6)
-lfs_depends=(dbus)
+depends=(dbus double-conversion gcc glib2 glibc icu kconfig pcre2 plasma-activities qt6 systemd zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

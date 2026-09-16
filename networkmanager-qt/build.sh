@@ -3,9 +3,7 @@ set -e
 name=networkmanager-qt
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(brotli double-conversion e2fsprogs gcc glib2 glibc icu keyutils libffi mitkrb networkmanager nspr nss openssl pcre2 systemd util-linux zlib zstd)
-lfs_depends=(dbus)
-blfs_depends=(qt6)
+depends=(brotli dbus double-conversion e2fsprogs gcc glib2 glibc icu keyutils libffi mitkrb networkmanager nspr nss openssl pcre2 qt6 systemd util-linux zlib zstd)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

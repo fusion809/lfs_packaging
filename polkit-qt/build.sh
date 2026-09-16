@@ -3,9 +3,7 @@ set -e
 name=polkit-qt
 repo=KDE/$name-1
 version=$(gh_ver $repo)
-depends=(brotli bzip2 dbus double-conversion expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu libX11 libXext libXxf86vm libffi libpciaccess libpng libxkbcommon libxml2 libxshmfence mesa pcre2 polkit systemd util-linux wayland xz zlib zstd)
-blfs_depends=(libXau libXdmcp libdrm libxcb llvm lm-sensors qt6 spirv-tools)
-lfs_depends=(libelf)
+depends=(brotli bzip2 dbus double-conversion expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu libdrm libelf libffi libpciaccess libpng libX11 libXau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa pcre2 polkit qt6 spirv-tools systemd util-linux wayland xz zlib zstd)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-1-$version.tar.xz"
 direname="${filename/.tar.*/}"

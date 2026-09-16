@@ -11,7 +11,7 @@ name=libssh2
 version=$(gh_ver "$name/$name")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
-lfs_depends=(cmake gcc glibc openssl zlib)
+depends=(cmake gcc glibc openssl zlib)
 
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.libssh2.org/download/$filename

@@ -12,8 +12,7 @@ get_version() {
 version=$(get_version)
 direname="$name-$version"
 filename="$direname.tgz"
-blfs_depends=(cyrus-sasl)
-lfs_depends=(glibc openssl util-linux)
+depends=(cyrus-sasl glibc openssl util-linux)
 
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.openldap.org/software/download/OpenLDAP/openldap-release/$filename

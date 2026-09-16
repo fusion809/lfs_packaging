@@ -5,8 +5,7 @@ repo=dnkl/$name
 version=$(cb_ver $repo)
 direname="$name-$version"
 filename="$direname.tar.gz"
-depends=(scdoc fcft)
-blfs_depends=(fontconfig libpng libxkbcommon pixman wayland meson wayland-protocols)
+depends=(fcft fontconfig libpng libxkbcommon meson pixman scdoc wayland wayland-protocols)
 if ! [[ -f "$filename" ]]; then
 	wget -c --progress=bar:force https://codeberg.org/$repo/archive/$version.tar.gz -O $filename
 fi

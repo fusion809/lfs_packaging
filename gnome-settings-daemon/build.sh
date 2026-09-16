@@ -3,9 +3,7 @@ set -e
 name=gnome-settings-daemon
 repo=GNOME/$name
 version=$(gh_ver $repo)
-depends=(brotli bzip2 colord e2fsprogs expat fontconfig freetype gcc gdk-pixbuf glib2 glibc glycin icu json-glib keyutils libX11 libXfixes libffi libgcrypt libgpg-error libgudev libidn2 libnotify libpng libpsl libunistring libxcrypt libxkbcommon libxml2 mitkrb networkmanager nghttp2 nspr nss openssl p11-kit pcre2 polkit sqlite systemd util-linux zlib)
-blfs_depends=(alsa-lib avahi cups flac gcr4 geoclue geocode-glib gnome-desktop gnome-settings lame lcms2 libXau libXdmcp libcanberra libgweather libogg libseccomp libsndfile libsoup libvorbis libxcb modemmanager mpg123 opus pulseaudio upower webkitgtk)
-lfs_depends=(dbus)
+depends=(alsa-lib avahi brotli bzip2 colord cups dbus e2fsprogs expat flac fontconfig freetype gcc gcr4 gdk-pixbuf geoclue geocode-glib glib2 glibc glycin gnome-desktop gnome-settings icu json-glib keyutils lame lcms2 libcanberra libffi libgcrypt libgpg-error libgudev libgweather libidn2 libnotify libogg libpng libpsl libseccomp libsndfile libsoup libunistring libvorbis libX11 libXau libxcb libxcrypt libXdmcp libXfixes libxkbcommon libxml2 mitkrb modemmanager mpg123 networkmanager nghttp2 nspr nss openssl opus p11-kit pcre2 polkit pulseaudio sqlite systemd upower util-linux webkitgtk zlib)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

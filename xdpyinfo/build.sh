@@ -5,9 +5,7 @@ name=xdpyinfo
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"
-lfs_depends=(bash coreutils glibc make sed systemd tar util-linux xz zlib)
-depends=(libX11 libXcomposite libXext libXfixes libXi libXinerama libXpresent libXrandr libXrender libXtst libXxf86dga libXxf86vm)
-blfs_depends=(fontconfig libXau libXdmcp libpng libxcb mesa xbitmaps xcb-util xorg-libs)
+depends=(bash coreutils fontconfig glibc libpng libX11 libXau libxcb libXcomposite libXdmcp libXext libXfixes libXi libXinerama libXpresent libXrandr libXrender libXtst libXxf86dga libXxf86vm make mesa sed systemd tar util-linux xbitmaps xcb-util xorg-libs xz zlib)
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then

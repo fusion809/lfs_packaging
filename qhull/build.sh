@@ -32,9 +32,7 @@ version=$(get_version)
 _version=$(get_alt_version)
 filename="$name-${version%.*}-src-$_version.tgz"
 direname="$name-$version"
-depends=()
-lfs_depends=(bash coreutils glibc gzip sed tar)
-blfs_depends=(cmake wget)
+depends=(bash cmake coreutils glibc gzip sed tar wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force http://www.qhull.org/download/$filename

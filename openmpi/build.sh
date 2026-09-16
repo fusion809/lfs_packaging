@@ -12,9 +12,7 @@ get_version() {
 version=$(get_version)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
-depends=(hwloc libfabric numactl openpmix prrte)
-lfs_depends=(bash bzip2 coreutils gcc glibc make sed systemd tar)
-blfs_depends=(gcc libevent valgrind)
+depends=(bash bzip2 coreutils gcc gcc glibc hwloc libevent libfabric make numactl openpmix prrte sed systemd tar valgrind)
 # Dependencies useful depending on your hardware include:
 hardware_depends=(cuda
 nvidia #libcuda.so needed

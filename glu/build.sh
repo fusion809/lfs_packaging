@@ -17,9 +17,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-depends=(bzip2 expat gcc glibc libglvnd icu libX11 libXext libXxf86vm libffi libpciaccess libxml2 libxshmfence mesa xz zlib zstd)
-blfs_depends=(libXau libXdmcp libdrm libxcb llvm lm-sensors spirv-tools)
-lfs_depends=(libelf)
+depends=(bzip2 expat gcc glibc icu libdrm libelf libffi libglvnd libpciaccess libX11 libXau libxcb libXdmcp libXext libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa spirv-tools xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

@@ -8,9 +8,7 @@ repo=jackaudio/$reponame
 version=$(gh_com $repo)
 filename="$reponame-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(portaudio)
-lfs_depends=(bash coreutils dbus expat gcc glibc python systemd)
-blfs_depends=(alsa-lib dbus opus)
+depends=(alsa-lib bash coreutils dbus dbus expat gcc glibc opus portaudio python systemd)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/archive/$version.tar.gz -O $filename

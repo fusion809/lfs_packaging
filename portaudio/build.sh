@@ -5,9 +5,7 @@ name=portaudio
 version=$(gh_ver "$name/$name")
 filename="$name-v$version.tar.gz"
 direname=$(echo "${filename/.tar.gz/}" | sed 's/v//g')
-depends=(jack)
-lfs_depends=(autoconf bash coreutils gcc glibc gzip make sed tar)
-blfs_depends=(alsa-lib cmake opus wget)
+depends=(alsa-lib autoconf bash cmake coreutils gcc glibc gzip jack make opus sed tar wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/portaudio/portaudio/archive/v$version/$filename

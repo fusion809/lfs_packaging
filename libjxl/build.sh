@@ -3,8 +3,7 @@ set -e
 name=libjxl
 repo=$name/$name
 version=$(gh_ver $repo)
-depends=(acl at-spi2-core brotli bzip2 cairo dbus expat fontconfig freetype fribidi gcc gdk-pixbuf giflib glib2 glibc glycin gpm graphite2 gtk3 harfbuzz highway lcms2 libICE libSM libX11 libXau libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libXrandr libXrender libXres libXt libaom libavif libcanberra libepoxy libffi libjpeg-turbo libogg libpng libseccomp libtool libvorbis libwebp libxcb libxkbcommon ncurses pango pcre2 pixman systemd util-linux wayland zlib)
-blfs_depends=(dav1d svt-av1)
+depends=(acl at-spi2-core brotli bzip2 cairo dav1d dbus expat fontconfig freetype fribidi gcc gdk-pixbuf giflib glib2 glibc glycin gpm graphite2 gtk3 harfbuzz highway lcms2 libaom libavif libcanberra libepoxy libffi libICE libjpeg-turbo libogg libpng libseccomp libSM libtool libvorbis libwebp libX11 libXau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libXrandr libXrender libXres libXt ncurses pango pcre2 pixman svt-av1 systemd util-linux wayland zlib)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

@@ -16,9 +16,7 @@ get_version() {
 }
 version=$(get_version)
 _archive="GraphicsMagick-$version"
-depends=(libICE libSM libX11 libXext libwmf numactl)
-lfs_depends=(bash bzip2 coreutils gcc glibc libtool perl tar util-linux xz zlib zstd)
-blfs_depends=(brotli freetype highway jasper lcms2 libXau libXdmcp libaom libde265 libheif libjpeg-turbo libjxl libpng libsm libtiff libwebp libwmf libxcb libxext libxml2 littlecms webkitgtk wget x264 x265)
+depends=(bash brotli bzip2 coreutils freetype gcc glibc highway jasper lcms2 libaom libde265 libheif libICE libjpeg-turbo libjxl libpng libsm libSM libtiff libtool libwebp libwmf libwmf libX11 libXau libxcb libXdmcp libxext libXext libxml2 littlecms numactl perl tar util-linux webkitgtk wget x264 x265 xz zlib zstd)
 # Fetch and unpack source
 if ! [[ -f $_archive.tar.xz ]]; then
 	wget -c --progress=bar:force https://downloads.sourceforge.net/project/$name/$name/$version/$_archive.tar.xz

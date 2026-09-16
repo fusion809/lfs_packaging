@@ -5,9 +5,7 @@ name=numactl
 version=$(gh_ver "numactl/numactl")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
-depends=()
-lfs_depends=(autoconf bash coreutils gcc glibc gzip make sed tar)
-blfs_depends=(wget)
+depends=(autoconf bash coreutils gcc glibc gzip make sed tar wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/numactl/numactl/archive/v$version.tar.gz -O $filename

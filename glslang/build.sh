@@ -3,8 +3,7 @@ set -e
 name=glslang
 repo=KhronosGroup/$name
 version=$(gh_ver $repo)
-depends=(gcc glibc)
-blfs_depends=(spirv-tools)
+depends=(gcc glibc spirv-tools)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

@@ -5,9 +5,7 @@ name="leptonica"
 version=$(gh_ver "DanBloomberg/leptonica")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
-depends=()
-lfs_depends=(bash coreutils glibc gzip make sed tar xz zlib zstd)
-blfs_depends=(giflib libjpeg-turbo libpng libtiff libwebp openjpeg wget)
+depends=(bash coreutils giflib glibc gzip libjpeg-turbo libpng libtiff libwebp make openjpeg sed tar wget xz zlib zstd)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/DanBloomberg/leptonica/archive/${version}.tar.gz -O $filename

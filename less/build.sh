@@ -19,7 +19,7 @@ get_version() {
 version=$(get_version)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-lfs_depends=(glibc ncurses pcre2)
+depends=(glibc ncurses pcre2)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.greenwoodsoftware.com/less/$filename
 fi

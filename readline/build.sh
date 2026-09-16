@@ -4,7 +4,7 @@ name=readline
 version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(gcc glibc make ncurses tar wget gzip)
+depends=(gcc glibc gzip make ncurses tar wget)
 gnu_download $name $filename
 rm -rf $direname
 tar xf $filename

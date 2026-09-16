@@ -3,8 +3,7 @@ set -e
 name=libgtop
 repo=GNOME/$name
 version=$(gh_ver $repo)
-depends=(glib2 glibc libffi pcre2)
-blfs_depends=(libXau)
+depends=(glib2 glibc libffi libXau pcre2)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

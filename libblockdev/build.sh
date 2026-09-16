@@ -5,8 +5,7 @@ repo="storaged-project/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-blfs_depends=(glib2 cryptsetup keyutils libatasmart libbytesize libnvme lvm2)
-depends=(e2fsprogs glib2 glibc gmp json-c keyutils kmod libatasmart libffi mpfr openssl pcre2 systemd util-linux xz zlib zstd)
+depends=(cryptsetup e2fsprogs glib2 glib2 glibc gmp json-c keyutils keyutils kmod libatasmart libatasmart libbytesize libffi libnvme lvm2 mpfr openssl pcre2 systemd util-linux xz zlib zstd)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/storaged-project/libblockdev/releases/download/$version/$filename
 fi

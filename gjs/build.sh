@@ -3,8 +3,7 @@ set -e
 name=gjs
 repo=GNOME/$name
 version=$(gh_ver $repo)
-depends=(brotli bzip2 expat fontconfig freetype gcc glib2 glibc icu libX11 libXext libXrender libffi libpng ncurses pcre2 readline systemd util-linux zlib)
-blfs_depends=(cairo libXau libXdmcp libxcb pixman)
+depends=(brotli bzip2 cairo expat fontconfig freetype gcc glib2 glibc icu libffi libpng libX11 libXau libxcb libXdmcp libXext libXrender ncurses pcre2 pixman readline systemd util-linux zlib)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

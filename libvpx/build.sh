@@ -3,7 +3,7 @@ set -e
 name=libvpx
 repo="webmproject/$name"
 version=$(gh_ver $repo)
-blfs_depends=(yasm nasm which)
+depends=(nasm which yasm)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

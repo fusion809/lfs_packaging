@@ -3,7 +3,7 @@ set -e
 name=libxcrypt
 repo=besser82/$name
 version=$(gh_ver $repo)
-lfs_depends=(glibc gcc make gzip sed tar coreutils)
+depends=(coreutils gcc glibc gzip make sed tar)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

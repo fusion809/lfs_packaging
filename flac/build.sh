@@ -3,8 +3,7 @@ set -e
 name=flac
 repo=xiph/$name
 version=$(gh_ver $repo)
-depends=(gcc glibc)
-blfs_depends=(libogg)
+depends=(gcc glibc libogg)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

@@ -3,9 +3,7 @@ set -e
 name=mutter
 repo=GNOME/$name
 version=$(gh_ver $repo)
-depends=(brotli bzip2 colord curl cyrus-sasl elfutils expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk4 harfbuzz icu libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXxf86vm libadwaita libdisplay-info libepoxy libevdev libffi libfyaml libgudev libidn2 libpciaccess libpng libpsl libunistring libwacom libxkbcommon libxml2 libxmlb libxshmfence mesa mtdev nghttp2 openldap openssl orc pango pcre2 systemd util-linux vulkan-loader wayland xz zlib zstd)
-blfs_depends=(at-spi2-core cairo gnome-desktop lcms2 libXau libXdmcp libcanberra libdrm libei libinput libjpeg-turbo libogg libseccomp libtiff libunwind libvorbis libwebp libxcb llvm lm-sensors lua pipewire pixman spirv-tools startup-notification webkitgtk xcb-util)
-lfs_depends=(libelf)
+depends=(at-spi2-core brotli bzip2 cairo colord curl cyrus-sasl elfutils expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin gnome-desktop graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk4 harfbuzz icu lcms2 libadwaita libcanberra libdisplay-info libdrm libei libelf libepoxy libevdev libffi libfyaml libgudev libidn2 libinput libjpeg-turbo libogg libpciaccess libpng libpsl libseccomp libtiff libunistring libunwind libvorbis libwacom libwebp libX11 libXau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libxml2 libxmlb libXrandr libXrender libxshmfence libXxf86vm llvm lm-sensors lua mesa mtdev nghttp2 openldap openssl orc pango pcre2 pipewire pixman spirv-tools startup-notification systemd util-linux vulkan-loader wayland webkitgtk xcb-util xz zlib zstd)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

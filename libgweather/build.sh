@@ -3,8 +3,7 @@ set -e
 name=libgweather
 repo=GNOME/$name
 version=$(gh_ver $repo)
-depends=(brotli e2fsprogs gcc glib2 glibc icu json-glib keyutils libffi libidn2 libpsl libunistring libxml2 mitkrb nghttp2 pcre2 sqlite systemd util-linux zlib)
-blfs_depends=(geocode-glib libsoup)
+depends=(brotli e2fsprogs gcc geocode-glib glib2 glibc icu json-glib keyutils libffi libidn2 libpsl libsoup libunistring libxml2 mitkrb nghttp2 pcre2 sqlite systemd util-linux zlib)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

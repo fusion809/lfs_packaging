@@ -2,7 +2,7 @@
 set -e
 name=man-db
 version=$(gl_ver $name/$name)
-lfs_depends=(gcc make glibc tar xz coreutils bash)
+depends=(bash coreutils gcc glibc make tar xz)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

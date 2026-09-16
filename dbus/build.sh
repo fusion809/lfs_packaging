@@ -17,8 +17,7 @@ get_version() {
 	fver "$name" "$inst_ver"	
 }
 version=$(get_version)
-depends=(expat glibc libX11 systemd)
-blfs_depends=(libXau libXdmcp libxcb)
+depends=(expat glibc libX11 libXau libxcb libXdmcp systemd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

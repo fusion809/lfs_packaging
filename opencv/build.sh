@@ -3,8 +3,7 @@ set -e
 name=opencv
 repo=$name/$name
 version=$(gh_ver $repo)
-depends=(brotli bzip2 dbus elfutils expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gst-plugins-base gstreamer gtk3 harfbuzz libX11 libXau libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libXrandr libXrender libXres libaom libepoxy libffi libpng libxcb libxkbcommon orc pango pcre2 systemd util-linux wayland xz zlib zstd)
-blfs_depends=(at-spi2-core cairo dav1d lcms2 libavif libdrm libjpeg-turbo libseccomp libtiff libunwind libwebp openjpeg pixman svt-av1 xine-lib)
+depends=(at-spi2-core brotli bzip2 cairo dav1d dbus elfutils expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gst-plugins-base gstreamer gtk3 harfbuzz lcms2 libaom libavif libdrm libepoxy libffi libjpeg-turbo libpng libseccomp libtiff libunwind libwebp libX11 libXau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libXrandr libXrender libXres openjpeg orc pango pcre2 pixman svt-av1 systemd util-linux wayland xine-lib xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

@@ -21,9 +21,7 @@ get_version() {
 version=$(get_version)
 direname="$name-$version"
 filename="$direname.tar.xz"
-depends=(pcre2)
-lfs_depends=(glibc libcap ncurses pcre2 perl texinfo)
-blfs_depends=()
+depends=(glibc libcap ncurses pcre2 pcre2 perl texinfo)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://sourceforge.net/projects/zsh/files/zsh/$version/$filename
 fi

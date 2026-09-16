@@ -20,9 +20,7 @@ get_version() {
 version=$(get_version)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
-lfs_depends=(acl bzip2 gcc glibc libelf lz4 openssl sqlite xz zlib zstd)
-depends=(libarchive openldap)
-blfs_depends=(brotli curl cyrus-sasl json-c libarchive libidn2 libpsl libunistring libxml2 nghttp2)
+depends=(acl brotli bzip2 curl cyrus-sasl gcc glibc json-c libarchive libarchive libelf libidn2 libpsl libunistring libxml2 lz4 nghttp2 openldap openssl sqlite xz zlib zstd)
 if ! [[ -f $filename ]]; then
         wget -c --progress=bar:force https://sourceware.org/elfutils/ftp/$version/$filename
 fi

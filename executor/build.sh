@@ -2,8 +2,7 @@
 set -e
 name=executor
 version=$(wget -cqO- https://raw.githubusercontent.com/fusion809/executor-raujonas.github.io/refs/heads/master/metadata.json | grep '"version"' | sed 's/.*://g')
-lfs_depends=(wget)
-blfs_depends=(gnome-shell gnome-shell-extensions glib2 git)
+depends=(git glib2 gnome-shell gnome-shell-extensions wget)
 
 if ! [[ -d /usr/share/gnome-shell/extensions/executor@raujonas.github.io ]]; then
 	sudo git -C /usr/share/gnome-shell/extensions clone https://github.com/fusion809/executor-raujonas.github.io executor@raujonas.github.io

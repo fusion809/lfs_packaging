@@ -5,9 +5,7 @@ name=gcab
 version=$(gn_ver $name)
 direname="$name-$version"
 filename="$direname.tar.xz"
-depends=(glib2 pcre2)
-lfs_depends=(bash coreutils gcc glibc libffi meson ninja sed tar util-linux xz zlib)
-blfs_depends=(glib gtk-doc vala)
+depends=(bash coreutils gcc glib glib2 glibc gtk-doc libffi meson ninja pcre2 sed tar util-linux vala xz zlib)
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then

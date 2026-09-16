@@ -3,7 +3,7 @@ set -e
 name=lz4
 repo=$name/$name
 version=$(gh_ver $repo)
-lfs_depends=(glibc gcc make gzip tar coreutils)
+depends=(coreutils gcc glibc gzip make tar)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

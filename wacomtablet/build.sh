@@ -3,9 +3,7 @@ set -e
 name=wacomtablet
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(acl attr brotli bzip2 double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu keyutils libICE libSM libX11 libXext libXfixes libXi libXxf86vm libevdev libffi libgudev libpciaccess libplasma libpng libwacom libxkbcommon libxml2 libxshmfence mesa mitkrb openssl pcre2 plasma-activities plasma5support systemd util-linux wayland xz zlib zstd)
-blfs_depends=(breeze-icons karchive kcmutils kcodecs kcolorscheme kconfig kconfigwidgets kcoreaddons kcrash kdbusaddons kglobalaccel kguiaddons ki18n kiconthemes kio kirigami kitemviews knotifications kpackage kservice ksvg kwidgetsaddons kwindowsystem kxmlgui libXau libXdmcp libcanberra libdrm libogg libvorbis libxcb llvm lm-sensors qt6 solid spirv-tools webkitgtk xcb-util-keysyms)
-lfs_depends=(dbus libelf)
+depends=(acl attr breeze-icons brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kcmutils kcodecs kcolorscheme kconfig kconfigwidgets kcoreaddons kcrash kdbusaddons keyutils kglobalaccel kguiaddons ki18n kiconthemes kio kirigami kitemviews knotifications kpackage kservice ksvg kwidgetsaddons kwindowsystem kxmlgui libcanberra libdrm libelf libevdev libffi libgudev libICE libogg libpciaccess libplasma libpng libSM libvorbis libwacom libX11 libXau libxcb libXdmcp libXext libXfixes libXi libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 plasma5support plasma-activities qt6 solid spirv-tools systemd util-linux wayland webkitgtk xcb-util-keysyms xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

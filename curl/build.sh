@@ -10,8 +10,7 @@ get_version() {
 version=$(get_version)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-blfs_depends=(brotli cyrus-sasl libpsl libunistring make-ca nghttp2)
-depends=(glibc libidn2 libpsl libunistring nghttp2 openldap openssl zlib zstd)
+depends=(brotli cyrus-sasl glibc libidn2 libpsl libpsl libunistring libunistring make-ca nghttp2 nghttp2 openldap openssl zlib zstd)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://curl.se/download/$filename
 fi

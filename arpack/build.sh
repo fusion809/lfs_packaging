@@ -4,9 +4,7 @@ set -e
 name="arpack"
 _name="arpack-ng"
 version=$(gh_ver "opencollab/arpack-ng")
-depends=(hwloc lapack libfabric numactl openmpi openpmix)
-lfs_depends=(bash coreutils gcc glibc gzip make sed systemd tar)
-blfs_depends=(gcc libevent wget)
+depends=(bash coreutils gcc gcc glibc gzip hwloc lapack libevent libfabric make numactl openmpi openpmix sed systemd tar wget)
 filename="$_name-$version.tar.gz"
 direname=${filename/.tar.gz/}
 # Fetch and unpack source

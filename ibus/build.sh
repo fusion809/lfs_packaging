@@ -5,9 +5,7 @@ name=ibus
 version=$(gh_ver "ibus/ibus")
 filename="$name-$version.tar.gz"
 direname="$name-$version"
-blfs_depends=(at-spi2-core brotli cairo dconf fontconfig freetype fribidi gdk-pixbuf glib2 glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk3 gtk4 harfbuzz iso-codes lcms2 libXau libXdmcp libdrm libepoxy libgudev libjpeg-turbo libnotify libpng libseccomp libsoup libtiff libunwind libwebp libxcb libxkbcommon libxml2 llvm lm-sensors pixman spirv-tools vala vulkan-loader)
-depends=(elfutils glib2 gtk3 libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXres libXxf86vm libnotify libpciaccess libxshmfence mesa orc pango pcre2 wayland)
-lfs_depends=(bash bzip2 coreutils dbus expat gcc gettext glibc gzip libelf libffi python systemd tar util-linux wget xz zip zlib zstd)
+depends=(at-spi2-core bash brotli bzip2 cairo coreutils dbus dconf elfutils expat fontconfig freetype fribidi gcc gdk-pixbuf gettext glib2 glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk3 gtk3 gtk4 gzip harfbuzz iso-codes lcms2 libdrm libelf libepoxy libffi libgudev libjpeg-turbo libnotify libnotify libpciaccess libpng libseccomp libsoup libtiff libunwind libwebp libX11 libXau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libxml2 libXrandr libXrender libXres libxshmfence libXxf86vm llvm lm-sensors mesa orc pango pcre2 pixman python spirv-tools systemd tar util-linux vala vulkan-loader wayland wget xz zip zlib zstd)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/ibus/ibus/archive/$version/$filename
 fi

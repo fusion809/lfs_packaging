@@ -4,7 +4,7 @@ name=automake
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(glibc gcc tar xz wget make)
+depends=(gcc glibc make tar wget xz)
 gnu_download $name $filename
 rm -rf $direname
 tar xf $filename

@@ -5,10 +5,8 @@ name=hdf5
 version=$(gh_ver "HDFGroup/hdf5")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
-depends=(libaec
+depends=(bash cmake coreutils freetype gcc gcc glib glibc gzip java make sed tar wget zlib)
 openmpi)
-lfs_depends=(bash coreutils gcc glib glibc gzip make sed tar zlib)
-blfs_depends=(cmake freetype gcc java wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/HDFGroup/hdf5/releases/download/$version/$filename

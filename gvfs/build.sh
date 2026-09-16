@@ -3,8 +3,7 @@ set -e
 name=gvfs
 repo=GNOME/$name
 version=$(gh_ver $repo)
-depends=(brotli e2fsprogs gcc gcr4 glib2 glibc icu keyutils libffi libgcrypt libgpg-error libgudev libidn2 libpsl libsecret libunistring libxml2 mitkrb nghttp2 p11-kit pcre2 polkit sqlite systemd udisks util-linux zlib)
-blfs_depends=(libcdio libsoup)
+depends=(brotli e2fsprogs gcc gcr4 glib2 glibc icu keyutils libcdio libffi libgcrypt libgpg-error libgudev libidn2 libpsl libsecret libsoup libunistring libxml2 mitkrb nghttp2 p11-kit pcre2 polkit sqlite systemd udisks util-linux zlib)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

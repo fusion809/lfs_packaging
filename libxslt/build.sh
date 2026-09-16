@@ -5,7 +5,7 @@ version=$(gn_ver $name)
 majVer=$(echo $version | sed -E 's/.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(libxml2 docbook-xml docbook-xsl-nons)
+depends=(docbook-xml docbook-xsl-nons libxml2)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://download.gnome.org/sources/libxslt/$majVer/$filename
 fi

@@ -3,7 +3,7 @@ set -e
 name=xz
 repo=tukaani-project/$name
 version=$(gh_ver $repo)
-lfs_depends=(glibc gcc make xz gzip tar coreutils)
+depends=(coreutils gcc glibc gzip make tar xz)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

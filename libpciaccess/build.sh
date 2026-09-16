@@ -5,9 +5,7 @@ name=libpciaccess
 version=$(xfd_ver $name)
 filename="$name-$version.tar.xz"
 direname=${filename/.tar.xz/}
-depends=()
-lfs_depends=(bash coreutils glibc make meson ninja sed tar xz zlib)
-blfs_depends=(util-macros wget)
+depends=(bash coreutils glibc make meson ninja sed tar util-macros wget xz zlib)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://xorg.freedesktop.org/releases/individual/lib/$filename

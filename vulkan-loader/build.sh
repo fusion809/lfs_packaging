@@ -5,7 +5,7 @@ repo=KhronosGroup/Vulkan-Loader
 version=$(gh_ver $repo)
 filename="Vulkan-Loader-vulkan-sdk-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(cmake vulkan-headers xorg-libs wayland mesa)
+depends=(cmake mesa vulkan-headers wayland xorg-libs)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/KhronosGroup/Vulkan-Loader/archive/vulkan-sdk-$version/$filename
 fi

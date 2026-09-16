@@ -15,9 +15,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-depends=(brotli bzip2 curl cyrus-sasl e2fsprogs elfutils enchant expat fontconfig freetype fribidi gcc gcr4 gdk-pixbuf glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk3 gtk4 harfbuzz highway icu json-glib keyutils lapack libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXres libXxf86vm libadwaita libaom libepoxy libffi libfyaml libgcrypt libgpg-error libgudev libidn2 libpciaccess libpng libpsl librest libsecret libtasn1 libunistring libxkbcommon libxml2 libxmlb libxshmfence libxslt mesa mitkrb nghttp2 openldap openssl orc p11-kit pango pcre2 sqlite systemd util-linux vulkan-loader wayland xz zlib zstd)
-blfs_depends=(at-spi2-core cairo dav1d lcms2 libXau libXdmcp libavif libdrm libjpeg-turbo libjxl libseccomp libsoup libtiff libunwind libwebp libxcb llvm lm-sensors pixman spirv-tools svt-av1)
-lfs_depends=(dbus libelf)
+depends=(at-spi2-core brotli bzip2 cairo curl cyrus-sasl dav1d dbus e2fsprogs elfutils enchant expat fontconfig freetype fribidi gcc gcr4 gdk-pixbuf glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk3 gtk4 harfbuzz highway icu json-glib keyutils lapack lcms2 libadwaita libaom libavif libdrm libelf libepoxy libffi libfyaml libgcrypt libgpg-error libgudev libidn2 libjpeg-turbo libjxl libpciaccess libpng libpsl librest libseccomp libsecret libsoup libtasn1 libtiff libunistring libunwind libwebp libX11 libXau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libxml2 libxmlb libXrandr libXrender libXres libxshmfence libxslt libXxf86vm llvm lm-sensors mesa mitkrb nghttp2 openldap openssl orc p11-kit pango pcre2 pixman spirv-tools sqlite svt-av1 systemd util-linux vulkan-loader wayland xz zlib zstd)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"

@@ -5,9 +5,7 @@ name=tesseract
 version=$(gh_ver "tesseract-ocr/tesseract")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
-depends=(leptonica libarchive openldap)
-lfs_depends=(acl bash bzip2 coreutils gcc glibc gzip lz4 make openssl tar xz zlib zstd)
-blfs_depends=(brotli curl cyrus-sasl giflib icu libarchive libidn2 libjpeg-turbo libpng libpsl libtiff libunistring libwebp libxml2 nghttp2 openjpeg pango wget)
+depends=(acl bash brotli bzip2 coreutils curl cyrus-sasl gcc giflib glibc gzip icu leptonica libarchive libarchive libidn2 libjpeg-turbo libpng libpsl libtiff libunistring libwebp libxml2 lz4 make nghttp2 openjpeg openldap openssl pango tar wget xz zlib zstd)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/tesseract-ocr/tesseract/archive/$version.tar.gz -O $filename

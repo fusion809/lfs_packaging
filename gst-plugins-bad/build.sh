@@ -4,7 +4,7 @@ name=gst-plugins-bad
 version=$(gfd_ver gstreamer/gstreamer)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(gst-plugins-base libaom libdvdread libdvdnav libva svt-av1 soundtouch)
+depends=(gst-plugins-base libaom libdvdnav libdvdread libva soundtouch svt-av1)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://gstreamer.freedesktop.org/src/gst-plugins-bad/$filename
 fi

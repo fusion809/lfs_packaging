@@ -5,7 +5,7 @@ repo="westes/flex"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-lfs_depends=(glibc make gcc gzip tar coreutils)
+depends=(coreutils gcc glibc gzip make tar)
 if ! [[ -f "${filename}" ]]; then
     wget -c --progress=bar:force https://github.com/$repo/releases/download/v${version}/${filename} -O $filename
 fi

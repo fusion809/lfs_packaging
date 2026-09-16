@@ -3,8 +3,7 @@ set -e
 name=gnome-keyring
 repo=GNOME/$name
 version=$(gh_ver $repo)
-depends=(glib2 glibc libffi libgcrypt libgpg-error linux-pam p11-kit pcre2 systemd util-linux zlib)
-blfs_depends=(gcr)
+depends=(gcr glib2 glibc libffi libgcrypt libgpg-error linux-pam p11-kit pcre2 systemd util-linux zlib)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

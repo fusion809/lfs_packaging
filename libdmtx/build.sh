@@ -5,9 +5,7 @@ name=libdmtx
 version=$(gh_ver "dmtx/libdmtx")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
-depends=()
-lfs_depends=(glibc)
-blfs_depends=()
+depends=(glibc)
 
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/dmtx/libdmtx/archive/refs/tags/v${version}.tar.gz -O $filename

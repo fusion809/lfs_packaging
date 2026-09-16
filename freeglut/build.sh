@@ -3,9 +3,7 @@ set -e
 name=freeglut
 repo=$name/$name
 version=$(gh_ver $repo)
-depends=(bzip2 expat gcc glibc icu libX11 libXext libXi libXrandr libXrender libXxf86vm libffi libpciaccess libxml2 libxshmfence mesa xz zlib zstd)
-blfs_depends=(libXau libXdmcp libdrm libxcb llvm lm-sensors spirv-tools)
-lfs_depends=(libelf)
+depends=(bzip2 expat gcc glibc icu libdrm libelf libffi libpciaccess libX11 libXau libxcb libXdmcp libXext libXi libxml2 libXrandr libXrender libxshmfence libXxf86vm llvm lm-sensors mesa spirv-tools xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

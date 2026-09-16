@@ -5,8 +5,7 @@ repo="Procurador1337/$name"
 version=$(gh_com "$repo")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-blfs_depends=(brotli double-conversion fontconfig freetype git graphite2 harfbuzz libXau libXdmcp libdrm libpng libxcb libxkbcommon libxml2 llvm lm-sensors qt6 spirv-tools glib2 libX11 libXext libXxf86vm libpciaccess libxshmfence mesa pcre2 wayland)
-lfs_depends=(bzip2 cmake coreutils dbus expat gcc glibc libelf libffi make systemd xz zlib zstd tar)
+depends=(brotli bzip2 cmake coreutils dbus double-conversion expat fontconfig freetype gcc git glib2 glibc graphite2 harfbuzz libdrm libelf libffi libpciaccess libpng libX11 libXau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors make mesa pcre2 qt6 spirv-tools systemd tar wayland xz zlib zstd)
 
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/archive/$version.tar.gz -O $filename

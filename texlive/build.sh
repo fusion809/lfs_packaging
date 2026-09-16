@@ -23,8 +23,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-depends=(brotli bzip2 expat fontconfig freetype gcc glib2 glibc gmp graphite2 harfbuzz icu libICE libSM libX11 libXau libXaw libXdmcp libXext libXi libXmu libXpm libXrender libXt libpaper libpng libxcb mpfr pcre2 util-linux zlib)
-blfs_depends=(cairo pixman)
+depends=(brotli bzip2 cairo expat fontconfig freetype gcc glib2 glibc gmp graphite2 harfbuzz icu libICE libpaper libpng libSM libX11 libXau libXaw libxcb libXdmcp libXext libXi libXmu libXpm libXrender libXt mpfr pcre2 pixman util-linux zlib)
 filename="$name-$version-source.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

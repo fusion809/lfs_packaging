@@ -4,7 +4,7 @@ name=groff
 version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(gcc glibc gzip make tar util-linux wget libXau libXdmcp libxcb libICE libSM libX11 libXaw libXext libXmu libXpm libXt)
+depends=(gcc glibc gzip libICE libSM libX11 libXau libXaw libxcb libXdmcp libXext libXmu libXpm libXt make tar util-linux wget)
 gnu_download $name $filename
 rm -rf $direname
 tar xf $filename

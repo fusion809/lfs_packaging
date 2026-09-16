@@ -5,9 +5,7 @@ name=libXvMC
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"
-lfs_depends=(bash coreutils glibc make sed systemd tar util-linux xz zlib)
-depends=(libX11 libXext libXv)
-blfs_depends=(fontconfig libXau libXdmcp libxcb xorg-libs)
+depends=(bash coreutils fontconfig glibc libX11 libXau libxcb libXdmcp libXext libXv make sed systemd tar util-linux xorg-libs xz zlib)
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then

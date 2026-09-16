@@ -3,9 +3,7 @@ set -e
 name=kpipewire
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(brotli bzip2 double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu keyutils libX11 libXext libXxf86vm libepoxy libffi libpciaccess libpng libxkbcommon libxml2 libxshmfence mesa mitkrb openssl pcre2 systemd util-linux wayland xz zlib zstd)
-blfs_depends=(kcoreaddons ki18n libXau libXdmcp libdrm libva libxcb llvm lm-sensors pipewire qt6 spirv-tools)
-lfs_depends=(dbus libelf)
+depends=(brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu kcoreaddons keyutils ki18n libdrm libelf libepoxy libffi libpciaccess libpng libva libX11 libXau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 pipewire qt6 spirv-tools systemd util-linux wayland xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

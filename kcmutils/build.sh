@@ -3,9 +3,7 @@ set -e
 name=kcmutils
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(acl attr brotli bzip2 double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kcodecs kcolorscheme kconfig kconfigwidgets kcoreaddons kcrash keyutils kglobalaccel kguiaddons ki18n kiconthemes kio kitemviews kservice kwidgetsaddons kwindowsystem kxmlgui libX11 libXext libXfixes libXxf86vm libffi libpciaccess libpng libxkbcommon libxml2 libxshmfence mesa mitkrb openssl pcre2 solid systemd util-linux wayland xz zlib zstd)
-lfs_depends=(dbus libelf)
-blfs_depends=(breeze-icons libXau libXdmcp libdrm libxcb llvm lm-sensors qt6 spirv-tools xcb-util-keysyms)
+depends=(acl attr breeze-icons brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kcodecs kcolorscheme kconfig kconfigwidgets kcoreaddons kcrash keyutils kglobalaccel kguiaddons ki18n kiconthemes kio kitemviews kservice kwidgetsaddons kwindowsystem kxmlgui libdrm libelf libffi libpciaccess libpng libX11 libXau libxcb libXdmcp libXext libXfixes libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qt6 solid spirv-tools systemd util-linux wayland xcb-util-keysyms xz zlib zstd)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

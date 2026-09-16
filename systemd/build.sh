@@ -7,7 +7,7 @@ filename="$name-$version.tar.gz"
 _version=$(lfs_ver $name)
 _filename="$name-man-pages-$_version.tar.xz"
 direname="${filename/.tar.*/}"
-lfs_depends=(acl bash dbus hwdata glibc kbd kmod lz4 openssl pcre2 util-linux meson ninja wget xz gzip tar coreutils)
+depends=(acl bash coreutils dbus glibc gzip hwdata kbd kmod lz4 meson ninja openssl pcre2 tar util-linux wget xz)
 
 if ! [[ -f $filename ]]; then
     wget -c --progress=bar:force https://github.com/$repo/archive/v$version/$filename

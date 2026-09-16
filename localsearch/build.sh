@@ -3,9 +3,7 @@ set -e
 name=localsearch
 repo=GNOME/$name
 version=$(gh_ver $repo)
-depends=(acl brotli bzip2 curl cyrus-sasl elfutils exempi expat fontconfig freetype gcc giflib glib2 glibc gpgme gpgmepp gst-plugins-base gstreamer icu inih jansson json-glib libX11 libXext libXrender libarchive libassuan libffi libgcrypt libgpg-error libidn2 libpng libpsl libunistring libxml2 lz4 nghttp2 nspr nss openldap openssl pcre2 sqlite systemd tinysparql util-linux xz zlib zstd)
-blfs_depends=(cairo gexiv2 lcms2 libXau libXdmcp libgxps libjpeg-turbo libseccomp libtiff libunwind libwebp libxcb openjpeg pixman poppler totem-pl-parser upower)
-lfs_depends=(libelf)
+depends=(acl brotli bzip2 cairo curl cyrus-sasl elfutils exempi expat fontconfig freetype gcc gexiv2 giflib glib2 glibc gpgme gpgmepp gst-plugins-base gstreamer icu inih jansson json-glib lcms2 libarchive libassuan libelf libffi libgcrypt libgpg-error libgxps libidn2 libjpeg-turbo libpng libpsl libseccomp libtiff libunistring libunwind libwebp libX11 libXau libxcb libXdmcp libXext libxml2 libXrender lz4 nghttp2 nspr nss openjpeg openldap openssl pcre2 pixman poppler sqlite systemd tinysparql totem-pl-parser upower util-linux xz zlib zstd)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

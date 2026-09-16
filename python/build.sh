@@ -21,7 +21,7 @@ version=$(get_version)
 filename="Python-$version.tar.xz"
 direname="${filename/.tar.*/}"
 docs_filename="python-${version}-docs-html.tar.bz2"
-lfs_depends=(gcc glibc make ncurses tar wget xz)
+depends=(gcc glibc make ncurses tar wget xz)
 if ! [[ -f $filename ]]; then
     wget -c --progress=bar:force https://www.python.org/ftp/python/$version/$filename
 fi

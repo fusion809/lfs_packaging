@@ -3,8 +3,7 @@ set -e
 name=cairo
 repo=$name/$name
 version=$(gfd_ver $repo)
-depends=(brotli bzip2 expat fontconfig freetype glib2 glibc libX11 libXau libXdmcp libXext libXrender libffi libpng libxcb pcre2 zlib)
-blfs_depends=(pixman)
+depends=(brotli bzip2 expat fontconfig freetype glib2 glibc libffi libpng libX11 libXau libxcb libXdmcp libXext libXrender pcre2 pixman zlib)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

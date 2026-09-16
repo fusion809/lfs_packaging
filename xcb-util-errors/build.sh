@@ -2,7 +2,7 @@
 set -e
 name=xcb-util-errors
 version=$(xcb_ver $name)
-depends=(glibc libXau libXdmcp libxcb)
+depends=(glibc libXau libxcb libXdmcp)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

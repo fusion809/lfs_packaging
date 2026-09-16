@@ -5,9 +5,7 @@ name=pcre2
 version=$(gh_ver PCRE2Project/pcre2)
 filename="$name-$version.tar.gz"
 direname="$name-$name-$version"
-depends=()
-lfs_depends=(bash bzip2 coreutils glibc gzip make ncurses readline sed tar zlib)
-blfs_depends=(wget)
+depends=(bash bzip2 coreutils glibc gzip make ncurses readline sed tar wget zlib)
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then

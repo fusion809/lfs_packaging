@@ -3,8 +3,7 @@ set -e
 name=libsndfile
 repo=$name/$name
 version=$(gh_ver $repo)
-depends=(alsa-lib brotli bzip2 dbus double-conversion elfutils expat flac fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu lame libX11 libXau libXdmcp libXext libXxf86vm libffi libogg libpciaccess libpng libxcb libxkbcommon libxml2 libxshmfence lm-sensors mesa mpg123 pcre2 qt6 systemd wayland xz zlib zstd)
-blfs_depends=(libdrm libvorbis llvm opus spirv-tools)
+depends=(alsa-lib brotli bzip2 dbus double-conversion elfutils expat flac fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu lame libdrm libffi libogg libpciaccess libpng libvorbis libX11 libXau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mpg123 opus pcre2 qt6 spirv-tools systemd wayland xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

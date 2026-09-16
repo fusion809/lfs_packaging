@@ -5,7 +5,7 @@ repo=flatpak/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(fuse gdk-pixbuf json-glib pipewire dbus xdg-desktop-portal-gnome bubblewrap docutils)
+depends=(bubblewrap dbus docutils fuse gdk-pixbuf json-glib pipewire xdg-desktop-portal-gnome)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/releases/download/$version/$filename
 fi

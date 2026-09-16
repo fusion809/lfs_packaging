@@ -5,9 +5,7 @@ name=libXaw
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"
-lfs_depends=(bash coreutils glibc make sed systemd tar util-linux xz zlib)
-depends=(libICE libSM libX11 libXext libXmu libXpm libXt)
-blfs_depends=(fontconfig libXau libXdmcp libxcb xorg-libs)
+depends=(bash coreutils fontconfig glibc libICE libSM libX11 libXau libxcb libXdmcp libXext libXmu libXpm libXt make sed systemd tar util-linux xorg-libs xz zlib)
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then

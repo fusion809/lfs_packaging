@@ -18,9 +18,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-depends=(brotli bzip2 expat freetype gcc glibc icu libX11 libXext libXfont2 libXxf86vm libepoxy libffi libfontenc libpciaccess libpng libxml2 libxshmfence mesa nettle systemd xz zlib zstd)
-blfs_depends=(libXau libXdmcp libdrm libtirpc libxcb libxcvt llvm lm-sensors pixman spirv-tools)
-lfs_depends=(dbus libelf)
+depends=(brotli bzip2 dbus expat freetype gcc glibc icu libdrm libelf libepoxy libffi libfontenc libpciaccess libpng libtirpc libX11 libXau libxcb libxcvt libXdmcp libXext libXfont2 libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa nettle pixman spirv-tools systemd xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 # Kernel config options required

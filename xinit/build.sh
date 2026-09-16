@@ -2,7 +2,7 @@
 set -e
 name=xinit
 version=$(xfd_ver $name)
-depends=(glibc libX11 libXau libXdmcp libxcb)
+depends=(glibc libX11 libXau libxcb libXdmcp)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

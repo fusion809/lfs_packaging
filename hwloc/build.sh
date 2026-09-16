@@ -5,9 +5,7 @@ name=hwloc
 version=$(gh_ver "open-mpi/hwloc")
 filename="$name-$version.tar.bz2"
 direname=${filename/.tar.bz2/}
-depends=(libICE libSM libX11 libXext libXrender libpciaccess)
-lfs_depends=(bash bzip2 coreutils expat gcc glibc libtool make ncurses sed systemd tar util-linux zlib)
-blfs_depends=(brotli cairo fontconfig freetype libXau libXdmcp libpng libxcb libxml2 pixman wget)
+depends=(bash brotli bzip2 cairo coreutils expat fontconfig freetype gcc glibc libICE libpciaccess libpng libSM libtool libX11 libXau libxcb libXdmcp libXext libxml2 libXrender make ncurses pixman sed systemd tar util-linux wget zlib)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/open-mpi/hwloc/releases/download/hwloc-$version/$filename

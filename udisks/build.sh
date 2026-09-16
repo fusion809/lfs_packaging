@@ -5,9 +5,7 @@ name=udisks
 version=$(gh_ver "storaged-project/udisks")
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
-blfs_depends=(libatasmart libblockdev libgudev polkit elogind glib2)
-lfs_depends=(acl glibc kmod libffi openssl systemd util-linux xz zlib zstd)
-depends=(glib2 pcre2 polkit)
+depends=(acl elogind glib2 glib2 glibc kmod libatasmart libblockdev libffi libgudev openssl pcre2 polkit polkit systemd util-linux xz zlib zstd)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/storaged-project/udisks/releases/download/$direname/$filename

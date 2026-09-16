@@ -17,7 +17,7 @@ get_version() {
 version=$(get_version)
 filename="${name}_$version.tar.gz"
 direname="${filename/.tar.*/}"
-blfs_depends=(cmake nasm)
+depends=(cmake nasm)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://bitbucket.org/multicoreware/x265_git/downloads/$filename
 fi

@@ -3,8 +3,7 @@ set -e
 name=karchive
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(brotli bzip2 double-conversion e2fsprogs gcc glib2 glibc icu keyutils mitkrb openssl pcre2 systemd xz zlib zstd)
-blfs_depends=(qt6)
+depends=(brotli bzip2 double-conversion e2fsprogs gcc glib2 glibc icu keyutils mitkrb openssl pcre2 qt6 systemd xz zlib zstd)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

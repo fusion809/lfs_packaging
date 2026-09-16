@@ -5,9 +5,7 @@ name=orc
 version=$(gfd_ver "gstreamer/orc")
 direname="$name-$version"
 filename="$direname.tar.xz"
-depends=()
-lfs_depends=(bash coreutils meson ninja pkgconf sed tar xz)
-blfs_depends=(wget)
+depends=(bash coreutils meson ninja pkgconf sed tar wget xz)
 optional_depends=(libcacard) # Provides smartcard support
 docs="CONTRIBUTING.md COPYING README RELEASE ROADMAP.md"
 # check if libcacard is there

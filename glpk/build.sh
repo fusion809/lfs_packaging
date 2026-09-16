@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
-depends=()
-lfs_depends=(bash coreutils gcc glibc gmp gzip make sed tar)
-blfs_depends=()
+depends=(bash coreutils gcc glibc gmp gzip make sed tar)
 name=glpk
 version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"

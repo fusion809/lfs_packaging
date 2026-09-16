@@ -7,7 +7,7 @@ minver=$(echo $version | cut -d . -f 2)
 vimdir=$(echo "${name}${majver}${minver}")
 direname="$name-$version"
 filename="$direname.tar.gz"
-depends=(acl bzip2 dbus expat gawk gcc glibc gpm libffi libgcrypt ncurses systemd util-linux zlib at-spi2-core brotli cairo fontconfig freetype fribidi gdk-pixbuf glycin gpm graphite2 harfbuzz lcms2 libXau libXdmcp libcanberra libepoxy libogg libpng libseccomp libvorbis libxcb libxkbcommon pixman webkitgtk glib2 gtk3 libICE libSM libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXres libXt pango pcre2 wayland)
+depends=(acl at-spi2-core brotli bzip2 cairo dbus expat fontconfig freetype fribidi gawk gcc gdk-pixbuf glib2 glibc glycin gpm gpm graphite2 gtk3 harfbuzz lcms2 libcanberra libepoxy libffi libgcrypt libICE libogg libpng libseccomp libSM libvorbis libX11 libXau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libXrandr libXrender libXres libXt ncurses pango pcre2 pixman systemd util-linux wayland webkitgtk zlib)
 
 if ! [[ -f "$filename" ]]; then
     wget -c --progress=bar:force https://github.com/vim/vim/archive/v$version.tar.gz -O $filename

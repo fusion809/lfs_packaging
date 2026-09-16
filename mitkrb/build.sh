@@ -21,9 +21,7 @@ version=$(get_version)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 dirname="krb5-$version"
 filename="$dirname.tar.gz"
-depends=()
-lfs_depends=(bash e2fsprogs glibc openssl)
-blfs_depends=(keyutils lmdb)
+depends=(bash e2fsprogs glibc keyutils lmdb openssl)
 
 if ! [ -f "$filename" ]; then
     wget -c --progress=bar:force "https://kerberos.org/dist/krb5/$majVer/$filename"

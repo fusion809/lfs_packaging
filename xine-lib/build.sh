@@ -15,8 +15,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-depends=(ImageMagick alsa-lib brotli bzip2 dav1d dbus elfutils expat flac fontconfig freetype gcc gdk-pixbuf glib2 glibc glu glycin gmp gnutls icu jack lame lcms2 libICE libSM libX11 libXau libXdmcp libXext libXfixes libXinerama libXt libXv libXxf86vm liba52 libaom libdrm libdvdnav libdvdread libffi libgcrypt libgpg-error libidn2 libjpeg-turbo libmng libogg libpciaccess libpng libseccomp libsndfile libssh2 libtasn1 libtool libunistring libva libvorbis libvpx libxcb libxml2 libxshmfence lm-sensors mesa mpg123 nettle openssl opus p11-kit pcre2 pulseaudio speex spirv-tools systemd util-linux v4l-utils wayland xz zlib zstd)
-blfs_depends=(llvm)
+depends=(alsa-lib brotli bzip2 dav1d dbus elfutils expat flac fontconfig freetype gcc gdk-pixbuf glib2 glibc glu glycin gmp gnutls icu ImageMagick jack lame lcms2 liba52 libaom libdrm libdvdnav libdvdread libffi libgcrypt libgpg-error libICE libidn2 libjpeg-turbo libmng libogg libpciaccess libpng libseccomp libSM libsndfile libssh2 libtasn1 libtool libunistring libva libvorbis libvpx libX11 libXau libxcb libXdmcp libXext libXfixes libXinerama libxml2 libxshmfence libXt libXv libXxf86vm llvm lm-sensors mesa mpg123 nettle openssl opus p11-kit pcre2 pulseaudio speex spirv-tools systemd util-linux v4l-utils wayland xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

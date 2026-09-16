@@ -5,9 +5,7 @@ name=libSM
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"
-lfs_depends=(bash coreutils glibc make sed systemd tar util-linux xz zlib)
-depends=(libICE)
-blfs_depends=(libxcb fontconfig xorg-libs)
+depends=(bash coreutils fontconfig glibc libICE libxcb make sed systemd tar util-linux xorg-libs xz zlib)
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then

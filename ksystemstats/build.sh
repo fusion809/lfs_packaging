@@ -3,9 +3,7 @@ set -e
 name=ksystemstats
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(acl attr brotli bzip2 double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu keyutils libX11 libXext libXxf86vm libffi libksysguard libpciaccess libpng libxkbcommon libxml2 libxshmfence mesa mitkrb networkmanager nspr nss openssl pcre2 systemd util-linux wayland xz zlib zstd)
-blfs_depends=(kauth kconfig kcoreaddons kcrash ki18n kio kservice libXau libXdmcp libdrm libnl libxcb llvm lm-sensors networkmanager-qt qt6 solid spirv-tools)
-lfs_depends=(dbus libelf)
+depends=(acl attr brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu kauth kconfig kcoreaddons kcrash keyutils ki18n kio kservice libdrm libelf libffi libksysguard libnl libpciaccess libpng libX11 libXau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb networkmanager networkmanager-qt nspr nss openssl pcre2 qt6 solid spirv-tools systemd util-linux wayland xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

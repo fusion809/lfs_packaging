@@ -4,7 +4,7 @@ name=inetutils
 version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(gcc glibc gzip make ncurses readline tar wget libxcrypt pcre2)
+depends=(gcc glibc gzip libxcrypt make ncurses pcre2 readline tar wget)
 gnu_download $name $filename
 rm -rf $direname
 tar xf $filename

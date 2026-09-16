@@ -3,8 +3,7 @@ set -e
 name=libpcap
 repo=the-tcpdump-group/$name
 version=$(gh_ver $repo)
-depends=(dbus glibc systemd)
-blfs_depends=(libnl)
+depends=(dbus glibc libnl systemd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

@@ -6,7 +6,7 @@ _name=SuiteSparse
 version=$(gh_ver "DrTimothyAldenDavis/SuiteSparse")
 filename="$_name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
-depends=(blas-lapack bash coreutils gcc glibc gmp make mpfr sed tar cmake gcc wget)
+depends=(bash blas-lapack cmake coreutils gcc gcc glibc gmp make mpfr sed tar wget)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
     wget -c --progress=bar:force https://github.com/DrTimothyAldenDavis/SuiteSparse/archive/v$version.tar.gz -O $filename

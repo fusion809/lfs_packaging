@@ -6,7 +6,7 @@ version=$(gh_ver $repo)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(nettle make-ca libunistring libtasn1 p11-kit)
+depends=(libtasn1 libunistring make-ca nettle p11-kit)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.gnupg.org/ftp/gcrypt/$name/v$majVer/$filename
 fi

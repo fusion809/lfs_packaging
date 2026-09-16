@@ -3,8 +3,7 @@ set -e
 name=ffmpeg
 repo=$name/$name
 version=$(gh_ver $repo)
-depends=(brotli bzip2 expat fontconfig freetype fribidi gcc glib2 glibc graphite2 harfbuzz libX11 libXext libXfixes libXv libaom libpng libvpx numactl openssl pcre2 sdl2-compat x265 xz zlib)
-blfs_depends=(alsa-lib dav1d fdk-aac lame libXau libXdmcp libass libdrm libogg libva libvorbis libxcb opus svt-av1 x264)
+depends=(alsa-lib brotli bzip2 dav1d expat fdk-aac fontconfig freetype fribidi gcc glib2 glibc graphite2 harfbuzz lame libaom libass libdrm libogg libpng libva libvorbis libvpx libX11 libXau libxcb libXdmcp libXext libXfixes libXv numactl openssl opus pcre2 sdl2-compat svt-av1 x264 x265 xz zlib)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

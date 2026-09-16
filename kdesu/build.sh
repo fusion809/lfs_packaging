@@ -3,9 +3,7 @@ set -e
 name=kdesu
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(brotli double-conversion e2fsprogs gcc glib2 glibc icu kconfig kcoreaddons keyutils ki18n kpty libICE libSM libX11 libXext mitkrb openssl pcre2 systemd util-linux zlib zstd)
-lfs_depends=(dbus)
-blfs_depends=(libXau libXdmcp libxcb qt6)
+depends=(brotli dbus double-conversion e2fsprogs gcc glib2 glibc icu kconfig kcoreaddons keyutils ki18n kpty libICE libSM libX11 libXau libxcb libXdmcp libXext mitkrb openssl pcre2 qt6 systemd util-linux zlib zstd)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

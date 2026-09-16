@@ -2,9 +2,7 @@
 set -e
 # Variable declarations
 name=fastfetch
-depends=(yyjson)
-lfs_depends=(bash coreutils gcc glibc zlib)
-blfs_depends=(cmake dbus dconf ImageMagick 
+depends=(bash coreutils gcc glibc yyjson zlib)
 pulseaudio libxcb libxrandr sqlite)
 version=$(gh_ver "fastfetch-cli/fastfetch")
 filename="$name-$version.tar.gz"

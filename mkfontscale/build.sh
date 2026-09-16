@@ -5,9 +5,7 @@ name=mkfontscale
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"
-lfs_depends=(bash bzip2 coreutils glibc make sed systemd tar util-linux xz zlib)
-depends=(libfontenc)
-blfs_depends=(brotli fontconfig freetype libpng libxcb mesa xbitmaps xcb-util xorg-libs)
+depends=(bash brotli bzip2 coreutils fontconfig freetype glibc libfontenc libpng libxcb make mesa sed systemd tar util-linux xbitmaps xcb-util xorg-libs xz zlib)
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then

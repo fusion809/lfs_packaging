@@ -3,9 +3,7 @@ set -e
 name=kwin
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(acl attr brotli bzip2 double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu kdecoration keyutils kglobalacceld knighttime kscreenlocker libICE libSM libX11 libXext libXfixes libXi libXxf86vm libdisplay-info libepoxy libevdev libffi libpciaccess libpng libxkbcommon libxml2 libxshmfence mesa mitkrb mtdev openssl pcre2 plasma-activities systemd util-linux vulkan-loader wayland xz zlib zstd)
-blfs_depends=(attica breeze-icons karchive kauth kcmutils kcodecs kcolorscheme kconfig kconfigwidgets kcoreaddons kcrash kdbusaddons kglobalaccel kguiaddons kholidays ki18n kiconthemes kidletime kio kitemviews kjobwidgets knewstuff knotifications kpackage kservice ksvg kwidgetsaddons kwindowsystem kxmlgui lcms2 libXau libXdmcp libcanberra libdrm libei libinput libogg libvorbis libxcb libxcvt llvm lm-sensors lua pipewire qt6 solid spirv-tools syndication webkitgtk xcb-util-keysyms xcb-util-wm)
-lfs_depends=(dbus libelf)
+depends=(acl attica attr breeze-icons brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kauth kcmutils kcodecs kcolorscheme kconfig kconfigwidgets kcoreaddons kcrash kdbusaddons kdecoration keyutils kglobalaccel kglobalacceld kguiaddons kholidays ki18n kiconthemes kidletime kio kitemviews kjobwidgets knewstuff knighttime knotifications kpackage kscreenlocker kservice ksvg kwidgetsaddons kwindowsystem kxmlgui lcms2 libcanberra libdisplay-info libdrm libei libelf libepoxy libevdev libffi libICE libinput libogg libpciaccess libpng libSM libvorbis libX11 libXau libxcb libxcvt libXdmcp libXext libXfixes libXi libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors lua mesa mitkrb mtdev openssl pcre2 pipewire plasma-activities qt6 solid spirv-tools syndication systemd util-linux vulkan-loader wayland webkitgtk xcb-util-keysyms xcb-util-wm xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

@@ -3,7 +3,7 @@ set -e
 name=ninja
 repo=${name}-build/$name
 version=$(gh_ver $repo)
-lfs_depends=(bash python gzip sed tar coreutils)
+depends=(bash coreutils gzip python sed tar)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

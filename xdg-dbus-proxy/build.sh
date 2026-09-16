@@ -2,9 +2,7 @@
 set -e
 name=xdg-dbus-proxy
 version=$(gh_ver flatpak/$name)
-blfs_depends=(glib2)
-lfs_depends=(glibc libffi util-linux zlib)
-depends=(glib2 pcre2)
+depends=(glib2 glib2 glibc libffi pcre2 util-linux zlib)
 direname="$name-$version"
 filename="$direname.tar.xz"
 if ! [[ -f $filename ]]; then

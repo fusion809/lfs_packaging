@@ -2,7 +2,7 @@
 set -e
 name=procps-ng
 version=$(gl_ver $name/procps $name)
-lfs_depends=(gcc glibc tar make coreutils wget xz)
+depends=(coreutils gcc glibc make tar wget xz)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

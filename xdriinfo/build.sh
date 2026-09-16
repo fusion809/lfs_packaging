@@ -5,9 +5,7 @@ name=xdriinfo
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"
-lfs_depends=(bash bzip2 coreutils expat gcc glibc libelf libffi make sed systemd tar util-linux xz zlib zstd)
-depends=(libX11 libXext libXxf86vm libpciaccess libxshmfence mesa)
-blfs_depends=(fontconfig libXau libXdmcp libdrm libpng libxcb libxml2 llvm lm-sensors mesa spirv-tools xbitmaps xcb-util xorg-libs)
+depends=(bash bzip2 coreutils expat fontconfig gcc glibc libdrm libelf libffi libpciaccess libpng libX11 libXau libxcb libXdmcp libXext libxml2 libxshmfence libXxf86vm llvm lm-sensors make mesa mesa sed spirv-tools systemd tar util-linux xbitmaps xcb-util xorg-libs xz zlib zstd)
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then

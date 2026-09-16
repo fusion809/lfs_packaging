@@ -3,9 +3,7 @@ set -e
 name=evolution-data-server
 repo=GNOME/$name
 version=$(gh_ver $repo)
-depends=(brotli bzip2 e2fsprogs elfutils enchant expat fontconfig freetype fribidi gcc gdk-pixbuf geocode-glib glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk3 gtk4 harfbuzz highway icu json-glib keyutils libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXres libXxf86vm libaom libepoxy libffi libgcrypt libgpg-error libgudev libgweather libical libidn2 libpciaccess libpng libpsl libtasn1 libunistring libxkbcommon libxml2 libxshmfence libxslt mesa mitkrb nghttp2 nspr nss orc pango pcre2 sqlite systemd util-linux vulkan-loader wayland xz zlib zstd)
-blfs_depends=(at-spi2-core cairo dav1d lcms2 libXau libXdmcp libavif libcanberra libdrm libjpeg-turbo libjxl libogg libseccomp libsecret libsoup libtiff libunwind libvorbis libwebp libxcb llvm lm-sensors pixman spirv-tools svt-av1 webkitgtk)
-lfs_depends=(dbus libelf)
+depends=(at-spi2-core brotli bzip2 cairo dav1d dbus e2fsprogs elfutils enchant expat fontconfig freetype fribidi gcc gdk-pixbuf geocode-glib glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk3 gtk4 harfbuzz highway icu json-glib keyutils lcms2 libaom libavif libcanberra libdrm libelf libepoxy libffi libgcrypt libgpg-error libgudev libgweather libical libidn2 libjpeg-turbo libjxl libogg libpciaccess libpng libpsl libseccomp libsecret libsoup libtasn1 libtiff libunistring libunwind libvorbis libwebp libX11 libXau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libxml2 libXrandr libXrender libXres libxshmfence libxslt libXxf86vm llvm lm-sensors mesa mitkrb nghttp2 nspr nss orc pango pcre2 pixman spirv-tools sqlite svt-av1 systemd util-linux vulkan-loader wayland webkitgtk xz zlib zstd)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

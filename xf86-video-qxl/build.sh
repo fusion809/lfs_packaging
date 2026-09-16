@@ -10,9 +10,7 @@ else
 fi
 direname="$name-$version"
 filename="$direname.tar.xz"
-depends=(spice spice-protocol)
-lfs_depends=(bash coreutils glibc make sed systemd tar xz)
-blfs_depends=(libxfont2 # Xorg library
+depends=(bash coreutils glibc make sed spice spice-protocol systemd tar xz)
 wget xorgproto xorg-server)
 optional_depends=(libcacard) # Smartcard support
 # Fetch and unpack source

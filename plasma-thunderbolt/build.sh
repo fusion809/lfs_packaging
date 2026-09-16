@@ -3,9 +3,7 @@ set -e
 name=plasma-thunderbolt
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(brotli bzip2 double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu keyutils libX11 libXext libXxf86vm libffi libpciaccess libpng libxkbcommon libxml2 libxshmfence mesa mitkrb openssl pcre2 systemd util-linux wayland xz zlib zstd)
-blfs_depends=(kcmutils kconfig kcoreaddons kdbusaddons ki18n kitemviews knotifications libXau libXdmcp libcanberra libdrm libogg libvorbis libxcb llvm lm-sensors qt6 spirv-tools webkitgtk)
-lfs_depends=(dbus libelf)
+depends=(brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu kcmutils kconfig kcoreaddons kdbusaddons keyutils ki18n kitemviews knotifications libcanberra libdrm libelf libffi libogg libpciaccess libpng libvorbis libX11 libXau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qt6 spirv-tools systemd util-linux wayland webkitgtk xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

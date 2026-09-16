@@ -5,9 +5,7 @@ name=libXft
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"
-lfs_depends=(bash bzip2 coreutils expat glibc make sed systemd tar util-linux xz zlib)
-depends=(libX11 libXrender)
-blfs_depends=(brotli fontconfig freetype libXau libXdmcp libpng libxcb xorg-libs)
+depends=(bash brotli bzip2 coreutils expat fontconfig freetype glibc libpng libX11 libXau libxcb libXdmcp libXrender make sed systemd tar util-linux xorg-libs xz zlib)
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then

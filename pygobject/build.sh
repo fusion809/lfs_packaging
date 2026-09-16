@@ -3,7 +3,7 @@ set -e
 name=pygobject
 version=$(gn_ver pygobject)
 majVer=$(echo $version | sed 's/.[0-9]$//g')
-depends=(pycairo glib2)
+depends=(glib2 pycairo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

@@ -3,8 +3,7 @@ set -e
 name=mpg123
 repo=libsdl-org/$name
 version=$(gh_ver $repo)
-depends=(alsa-lib dbus flac gcc glibc jack lame libXau libXdmcp libxcb portaudio pulseaudio sdl2-compat systemd)
-blfs_depends=(libogg libsndfile libvorbis opus)
+depends=(alsa-lib dbus flac gcc glibc jack lame libogg libsndfile libvorbis libXau libxcb libXdmcp opus portaudio pulseaudio sdl2-compat systemd)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

@@ -5,9 +5,7 @@ name=flatpak
 version=$(gh_ver $name/$name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
-depends=(gcab glib2 libarchive mitkrb openldap ostree pcre2 polkit socat wayland)
-lfs_depends=(acl bash bzip2 coreutils dbus e2fsprogs expat gcc glibc libcap libffi lz4 meson ninja openssl python sqlite systemd tar util-linux xz zlib zstd)
-blfs_depends=(appstream avahi brotli bubblewrap curl cyrus-sasl dbus dconf fontconfig freetype fuse gdk-pixbuf glib glycin gpgme json-glib keyutils lcms2 libXau libarchive libassuan libfyaml libgpg-error libidn2 libpng libpsl libseccomp libsoup libunistring libxau libxml2 libxmlb llvm nghttp2 polkit wayland webkitgtk xdg-dbus-proxy xdg-utils)
+depends=(acl appstream avahi bash brotli bubblewrap bzip2 coreutils curl cyrus-sasl dbus dbus dconf e2fsprogs expat fontconfig freetype fuse gcab gcc gdk-pixbuf glib glib2 glibc glycin gpgme json-glib keyutils lcms2 libarchive libarchive libassuan libcap libffi libfyaml libgpg-error libidn2 libpng libpsl libseccomp libsoup libunistring libxau libXau libxml2 libxmlb llvm lz4 meson mitkrb nghttp2 ninja openldap openssl ostree pcre2 polkit polkit python socat sqlite systemd tar util-linux wayland wayland webkitgtk xdg-dbus-proxy xdg-utils xz zlib zstd)
 pip_depends=(gobject)
 # libmalcontent is listed for Arch, but seems to run for my uses without it
 # Fetch and unpack source

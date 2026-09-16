@@ -3,9 +3,7 @@ set -e
 name=kimageformats
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(brotli bzip2 double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz highway icu karchive keyutils libX11 libXext libXxf86vm libaom libffi libpciaccess libpng libxkbcommon libxml2 libxshmfence mesa mitkrb openssl pcre2 systemd wayland xz zlib zstd)
-lfs_depends=(dbus libelf)
-blfs_depends=(dav1d lcms2 libXau libXdmcp libavif libdrm libjpeg-turbo libjxl libraw libxcb llvm lm-sensors openjpeg qt6 spirv-tools svt-av1)
+depends=(brotli bzip2 dav1d dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz highway icu karchive keyutils lcms2 libaom libavif libdrm libelf libffi libjpeg-turbo libjxl libpciaccess libpng libraw libX11 libXau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openjpeg openssl pcre2 qt6 spirv-tools svt-av1 systemd wayland xz zlib zstd)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

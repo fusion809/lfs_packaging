@@ -17,9 +17,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-lfs_depends=(bash coreutils gcc glibc libcap libelf make tar xz)
-blfs_depends=(iptables libtirpc)
-depends=(bzip2 glibc xz zlib zstd)
+depends=(bash bzip2 coreutils gcc glibc glibc iptables libcap libelf libtirpc make tar xz xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

@@ -5,7 +5,7 @@ name=gnome-tweaks
 version=$(gn_ver $name)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
-blfs_depends=(gtk4
+depends=()
 	gsettings-desktop-schemas
 	libadwaita
 	libgudev

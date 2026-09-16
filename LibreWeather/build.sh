@@ -2,9 +2,7 @@
 set -e
 name=LibreWeather
 version=$(gh_com "Procurador1337/$name")
-depends=(glib2 mitkrb pcre2)
-blfs_depends=(brotli double-conversion keyutils qt6)
-lfs_depends=(cmake coreutils dbus e2fsprogs expat gcc glibc libelf libffi make openssl systemd zlib zstd)
+depends=(brotli cmake coreutils dbus double-conversion e2fsprogs expat gcc glib2 glibc keyutils libelf libffi make mitkrb openssl pcre2 qt6 systemd zlib zstd)
 direname=$name
 
 if ! [[ -d $direname/.git ]]; then

@@ -3,7 +3,7 @@ set -e
 name=openssl
 repo=${name}/$name
 version=$(gh_ver $repo)
-lfs_depends=(bash brotli glibc zlib zstd gzip tar coreutils)
+depends=(bash brotli coreutils glibc gzip tar zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

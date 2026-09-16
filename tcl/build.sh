@@ -3,7 +3,7 @@ set -e
 name=tcl
 repo=tcltk/tcl
 version=$(gh_ver $repo)
-lfs_depends=(zlib gcc make tar gzip coreutils bash)
+depends=(bash coreutils gcc gzip make tar zlib)
 filename="${name}${version}-src.tar.gz"
 docs_filename="${name}${version}-html.tar.gz"
 direname="${filename/-src.tar.*/}"

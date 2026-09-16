@@ -5,9 +5,7 @@ name=gnome-terminal
 version=$(gn_ver $name)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
-blfs_depends=(at-spi2-core brotli cairo dconf fontconfig freetype fribidi gdk-pixbuf glycin gnome-shell gnutls graphite2 gsettings-desktop-schemas harfbuzz itstool lcms2 libXau libXdmcp libepoxy libhandy libidn2 libpng libseccomp libtasn1 libunistring libxcb libxkbcommon nautilus nettle p11-kit pixman simdutf vte webkitgtk)
-lfs_depends=(bzip2 dbus expat gcc glibc gmp libffi lz4 systemd util-linux zlib)
-depends=(glib2 gtk3 libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXres pango pcre2 wayland)
+depends=(at-spi2-core brotli bzip2 cairo dbus dconf expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin gmp gnome-shell gnutls graphite2 gsettings-desktop-schemas gtk3 harfbuzz itstool lcms2 libepoxy libffi libhandy libidn2 libpng libseccomp libtasn1 libunistring libX11 libXau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libXrandr libXrender libXres lz4 nautilus nettle p11-kit pango pcre2 pixman simdutf systemd util-linux vte wayland webkitgtk zlib)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$filename

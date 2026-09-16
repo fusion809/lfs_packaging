@@ -5,9 +5,7 @@ name=ostree
 version=$(gh_ver ostreedev/ostree)
 direname="lib${name}-$version"
 filename="$direname.tar.xz"
-depends=(gcab)
-lfs_depends=(bash coreutils glibc make python sed systemd tar util-linux xz zlib)
-blfs_depends=(avahi curl e2fsprogs fuse glib gpgme gtk-doc libarchive libgpg-error libsoup libxslt openssl wget which)
+depends=(avahi bash coreutils curl e2fsprogs fuse gcab glib glibc gpgme gtk-doc libarchive libgpg-error libsoup libxslt make openssl python sed systemd tar util-linux wget which xz zlib)
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then

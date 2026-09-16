@@ -5,7 +5,7 @@ repo="gavinhoward/bc"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
-lfs_depends=(coreutils gcc glibc make ncurses readline tar xz)
+depends=(coreutils gcc glibc make ncurses readline tar xz)
 if ! [[ -f $filename ]]; then
     wget -c --progress=bar:force https://github.com/$repo/releases/download/$version/$filename
 fi

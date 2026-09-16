@@ -15,9 +15,7 @@ get_version() {
 version=$(get_version)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
-blfs_depends=(dbus glib2 json-glib lcms2 libgudev libgusb libusb polkit systemd vala webkitgtk)
-lfs_depends=(glibc libffi sqlite systemd util-linux zlib)
-depends=(glib2 pcre2 polkit)
+depends=(dbus glib2 glib2 glibc json-glib lcms2 libffi libgudev libgusb libusb pcre2 polkit polkit sqlite systemd systemd util-linux vala webkitgtk zlib)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.freedesktop.org/software/colord/releases/$filename

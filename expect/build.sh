@@ -16,7 +16,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-lfs_depends=(tcl)
+depends=(tcl)
 filename="${name}${version}.tar.gz"
 direname="${filename/.tar.*/}"
 #direname=expect-tcl9

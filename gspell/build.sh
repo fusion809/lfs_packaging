@@ -5,7 +5,7 @@ version=$(gn_ver gspell)
 majVer=$(echo $version | sed -E 's/.[0-9]+//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-blfs_depends=(enchant icu gtk3)
+depends=(enchant gtk3 icu)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://download.gnome.org/sources/gspell/$majVer/$filename
 fi

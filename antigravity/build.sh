@@ -1,9 +1,7 @@
 #!/bin/bash
 set -e
 name=antigravity
-depends=(elfutils glib2 gtk3 libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXres libxkbfile mesa mitkrb openldap orc pango pcre2 wayland)
-lfs_depends=(bash bzip2 coreutils dbus e2fsprogs expat gcc glibc libelf libffi libxcrypt openssl sed sqlite systemd tar util-linux xz zlib zstd)
-blfs_depends=(alsa-lib at-spi2-core avahi brotli cairo cups curl cyrus-sasl dav1d enchant fontconfig freetype fribidi gdk-pixbuf glycin graphite2 gst-plugins-base gstreamer harfbuzz highway keyutils lcms2 libXau libXdmcp libaom libarchive libavif libdrm libepoxy libgcrypt libgpg-error libidn2 libjpeg-turbo libjxl libpng libpsl libseccomp libsecret libsoup libtasn1 libunistring libunwind libwebp libx11 libxcb libxkbcommon libxkbfile libxml2 libxslt nghttp2 nspr nss pixman svt-av1 webkitgtk wget)
+depends=(alsa-lib at-spi2-core avahi bash brotli bzip2 cairo coreutils cups curl cyrus-sasl dav1d dbus e2fsprogs elfutils enchant expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gst-plugins-base gstreamer gtk3 harfbuzz highway keyutils lcms2 libaom libarchive libavif libdrm libelf libepoxy libffi libgcrypt libgpg-error libidn2 libjpeg-turbo libjxl libpng libpsl libseccomp libsecret libsoup libtasn1 libunistring libunwind libwebp libx11 libX11 libXau libxcb libXcomposite libxcrypt libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libxkbfile libxkbfile libxml2 libXrandr libXrender libXres libxslt mesa mitkrb nghttp2 nspr nss openldap openssl orc pango pcre2 pixman sed sqlite svt-av1 systemd tar util-linux wayland webkitgtk wget xz zlib zstd)
 version=$(wget -cqO- "https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=antigravity-ide" | grep "^pkgver=" | sed 's/^pkgver=//g')
 _build=$(wget -cqO- "https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=antigravity-ide" | grep "^_build=" | sed 's/^_build=//g')
 

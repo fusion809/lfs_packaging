@@ -6,9 +6,7 @@ set -e
 name=rapidjson
 repo="Tencent/$name"
 version=$(gh_com $repo)
-depends=()
-lfs_depends=(bash coreutils make sed)
-blfs_depends=(cmake git)
+depends=(bash cmake coreutils git make sed)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 # Fetch and unpack source

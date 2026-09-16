@@ -5,9 +5,7 @@ name=zenity
 version=$(gn_ver zenity)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
-lfs_depends=(expat gcc gettext glibc libelf libffi openssl systemd tar util-linux gzip zlib zstd)
-depends=(elfutils glib2 libX11 libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXxf86vm libadwaita libpciaccess libxshmfence mesa openldap orc pango pcre2 wayland)
-blfs_depends=(brotli cairo curl cyrus-sasl fontconfig freetype fribidi gdk-pixbuf glib2 glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk4 harfbuzz hicolor-icon-theme lcms2 libXau libXdmcp libadwaita libdrm libepoxy libfyaml libgudev libidn2 libjpeg-turbo libpng libpsl libseccomp libtiff libunistring libunwind libwebp libxcb libxkbcommon libxml2 libxmlb llvm lm-sensors meson nghttp2 pango pixman spirv-tools vulkan-loader webkitgtk)
+depends=(brotli cairo curl cyrus-sasl elfutils expat fontconfig freetype fribidi gcc gdk-pixbuf gettext glib2 glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk4 gzip harfbuzz hicolor-icon-theme lcms2 libadwaita libadwaita libdrm libelf libepoxy libffi libfyaml libgudev libidn2 libjpeg-turbo libpciaccess libpng libpsl libseccomp libtiff libunistring libunwind libwebp libX11 libXau libxcb libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libxml2 libxmlb libXrandr libXrender libxshmfence libXxf86vm llvm lm-sensors mesa meson nghttp2 openldap openssl orc pango pango pcre2 pixman spirv-tools systemd tar util-linux vulkan-loader wayland webkitgtk zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 # Fetch source and unpack it

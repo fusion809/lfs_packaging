@@ -3,8 +3,7 @@ set -e
 name=cups
 repo=OpenPrinting/$name
 version=$(gh_ver $repo)
-depends=(dbus gcc glibc lapack libxcrypt linux-pam openssl systemd zlib)
-blfs_depends=(avahi xdg-utils)
+depends=(avahi dbus gcc glibc lapack libxcrypt linux-pam openssl systemd xdg-utils zlib)
 filename="$name-$version-source.tar.gz"
 direname="${filename/-source.tar.*/}"
 # Kernel options required

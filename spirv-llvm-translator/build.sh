@@ -2,7 +2,7 @@
 set -e
 name=spirv-llvm-translator
 version=$(gh_ver KhronosGroup/SPIRV-LLVM-Translator)
-blfs_depends=(llvm spirv-tools libxml2)
+depends=(libxml2 llvm spirv-tools)
 filename="SPIRV-LLVM-Translator-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 

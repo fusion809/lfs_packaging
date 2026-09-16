@@ -4,9 +4,7 @@ set -e
 name=appstream
 version=$(gh_ver "ximion/appstream")
 docs="AUTHORS CHANGELOG.md COPYING README"
-depends=(glib2 openldap pcre2)
-lfs_depends=(freetype2 gcc glibc libffi openssl systemd util-linux xz zlib zstd)
-blfs_depends=(brotli curl cyrus-sasl docbook-xsl-nons itstool libfyaml libidn2 libpsl libunistring libxml2 libxmlb libxslt llvm nghttp2 qt6 webkitgtk)
+depends=(brotli curl cyrus-sasl docbook-xsl-nons freetype2 gcc glib2 glibc itstool libffi libfyaml libidn2 libpsl libunistring libxml2 libxmlb libxslt llvm nghttp2 openldap openssl pcre2 qt6 systemd util-linux webkitgtk xz zlib zstd)
 pip_depends=()
 upName=AppStream;
 direname="$upName-$version"

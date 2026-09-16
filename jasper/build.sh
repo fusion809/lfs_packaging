@@ -3,8 +3,7 @@ set -e
 name=jasper
 repo=$name-software/$name
 version=$(gh_ver $repo)
-depends=(gcc glibc libaom libde265 libheif libjpeg-turbo libwebp numactl x265)
-blfs_depends=(x264)
+depends=(gcc glibc libaom libde265 libheif libjpeg-turbo libwebp numactl x264 x265)
 filename="$name-version-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

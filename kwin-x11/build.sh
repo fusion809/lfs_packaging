@@ -3,9 +3,7 @@ set -e
 name=kwin-x11
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(acl attr brotli bzip2 double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu kdecoration keyutils kglobalacceld knighttime kscreenlocker libICE libSM libX11 libXext libXfixes libXi libXxf86vm libdisplay-info libepoxy libffi libpciaccess libpng libxkbcommon libxml2 libxshmfence mesa mitkrb openssl pcre2 plasma-activities systemd util-linux wayland xz zlib zstd)
-blfs_depends=(attica breeze-icons karchive kauth kcmutils kcodecs kcolorscheme kconfig kconfigwidgets kcoreaddons kcrash kglobalaccel kguiaddons kholidays ki18n kiconthemes kidletime kio kitemviews kjobwidgets knewstuff knotifications kpackage kservice ksvg kwidgetsaddons kwindowsystem kxmlgui lcms2 libXau libXdmcp libcanberra libdrm libogg libvorbis libxcb llvm lm-sensors qt6 solid spirv-tools syndication webkitgtk xcb-util xcb-util-cursor xcb-util-image xcb-util-keysyms xcb-util-renderutil xcb-util-wm)
-lfs_depends=(dbus libelf)
+depends=(acl attica attr breeze-icons brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kauth kcmutils kcodecs kcolorscheme kconfig kconfigwidgets kcoreaddons kcrash kdecoration keyutils kglobalaccel kglobalacceld kguiaddons kholidays ki18n kiconthemes kidletime kio kitemviews kjobwidgets knewstuff knighttime knotifications kpackage kscreenlocker kservice ksvg kwidgetsaddons kwindowsystem kxmlgui lcms2 libcanberra libdisplay-info libdrm libelf libepoxy libffi libICE libogg libpciaccess libpng libSM libvorbis libX11 libXau libxcb libXdmcp libXext libXfixes libXi libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 plasma-activities qt6 solid spirv-tools syndication systemd util-linux wayland webkitgtk xcb-util xcb-util-cursor xcb-util-image xcb-util-keysyms xcb-util-renderutil xcb-util-wm xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

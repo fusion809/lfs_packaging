@@ -2,9 +2,7 @@
 set -e
 name=konsole
 version=$(curl -sL https://download.kde.org/stable/release-service/ | perl -nle 'while (m{href="\K[0-9]+\.[0-9]+\.[0-9]+}g) { print $& }' | sort -V | tail -n 1)
-depends=(glib2 libX11 libXext libXfixes libXxf86vm libpciaccess libssh libxshmfence mitkrb pcre2 wayland)
-blfs_depends=(attica breeze-icons brotli double-conversion flac fontconfig freetype graphite2 harfbuzz karchive kbookmarks kcodecs kcolorscheme kcompletion kconfig kconfigwidgets kcoreaddons kcrash kdbusaddons keyutils kglobalaccel kguiaddons ki18n kiconthemes kio kitemviews kjobwidgets knewstuff knotifications knotifyconfig kpackage kparts kpty kservice ktextwidgets kwidgetsaddons kwindowsystem kxmlgui lame libXau libXdmcp libcanberra libdrm libogg libpng libsndfile libvorbis libxcb libxkbcommon libxml2 llvm lm-sensors mpg123 opus pulseaudio qt6 solid sonnet spirv-tools syndication webkitgtk xcb-util-keysyms)
-lfs_depends=(acl attr bzip2 dbus e2fsprogs expat gcc glibc libelf libffi openssl systemd util-linux xz zlib zstd)
+depends=(acl attica attr breeze-icons brotli bzip2 dbus double-conversion e2fsprogs expat flac fontconfig freetype gcc glib2 glibc graphite2 harfbuzz karchive kbookmarks kcodecs kcolorscheme kcompletion kconfig kconfigwidgets kcoreaddons kcrash kdbusaddons keyutils kglobalaccel kguiaddons ki18n kiconthemes kio kitemviews kjobwidgets knewstuff knotifications knotifyconfig kpackage kparts kpty kservice ktextwidgets kwidgetsaddons kwindowsystem kxmlgui lame libcanberra libdrm libelf libffi libogg libpciaccess libpng libsndfile libssh libvorbis libX11 libXau libxcb libXdmcp libXext libXfixes libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mitkrb mpg123 openssl opus pcre2 pulseaudio qt6 solid sonnet spirv-tools syndication systemd util-linux wayland webkitgtk xcb-util-keysyms xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 if ! [[ -f $filename ]]; then

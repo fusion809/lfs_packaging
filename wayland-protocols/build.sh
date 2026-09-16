@@ -2,8 +2,7 @@
 set -e
 name=wayland-protocols
 version=$(way_ver $name)
-blfs_depends=(wayland)
-lfs_depends=(coreutils meson ninja tar wget xz)
+depends=(coreutils meson ninja tar wayland wget xz)
 filename="$name-$version.tar.xz"
 direname="$name-$version"
 URL="https://gitlab.freedesktop.org/wayland/$name/-/releases/$version/downloads/$filename"

@@ -4,7 +4,7 @@ name=sed
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(acl attr gcc glibc make tar wget xz pcre2)
+depends=(acl attr gcc glibc make pcre2 tar wget xz)
 gnu_download "$name" "$filename"
 rm -rf $direname
 tar xf $filename

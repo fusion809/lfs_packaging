@@ -3,8 +3,7 @@ set -e
 name=libcanberra
 repo=Distrotech/$name
 version=$(gh_ver $repo)
-depends=(alsa-lib at-spi2-core brotli bzip2 cairo dbus elfutils expat flac fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gstreamer gtk3 harfbuzz lame lcms2 libX11 libXau libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libXrandr libXrender libXres libepoxy libffi libpng libseccomp libtool libunwind libxcb libxkbcommon mpg123 pango pcre2 pixman pulseaudio systemd util-linux wayland xz zlib zstd)
-blfs_depends=(libogg libsndfile libvorbis opus)
+depends=(alsa-lib at-spi2-core brotli bzip2 cairo dbus elfutils expat flac fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gstreamer gtk3 harfbuzz lame lcms2 libepoxy libffi libogg libpng libseccomp libsndfile libtool libunwind libvorbis libX11 libXau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libXrandr libXrender libXres mpg123 opus pango pcre2 pixman pulseaudio systemd util-linux wayland xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

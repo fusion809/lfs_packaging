@@ -4,7 +4,7 @@ name=kate
 version=$(kap_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-blfs_depends=(frameworks6)
+depends=(frameworks6)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://download.kde.org/stable/release-service/$version/src/$filename
 fi

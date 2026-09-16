@@ -3,8 +3,7 @@ set -e
 name=openjpeg
 repo=uclouvain/$name
 version=$(gh_ver $repo)
-depends=(glibc libpng xz zlib zstd cmake)
-blfs_depends=(lcms2 libjpeg-turbo libtiff libwebp)
+depends=(cmake glibc lcms2 libjpeg-turbo libpng libtiff libwebp xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

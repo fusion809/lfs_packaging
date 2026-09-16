@@ -5,7 +5,7 @@ repo=lfs-book/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(xkeyboard-config libxcb wayland wayland-protocols)
+depends=(libxcb wayland wayland-protocols xkeyboard-config)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/lfs-book/libxkbcommon/archive/v$version/$filename
 fi

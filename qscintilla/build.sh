@@ -17,9 +17,7 @@ get_version() {
 }
 version=$(get_version)
 archive=QScintilla_src-$version
-depends=(glib2 libX11 libXext libXxf86vm libpciaccess libxshmfence mesa pcre2 pyqt6 wayland)
-lfs_depends=(bash bzip2 coreutils dbus expat gcc glibc libelf libffi make sed systemd tar xz zlib zstd)
-blfs_depends=(brotli double-conversion fontconfig freetype graphite2 harfbuzz libXau libXdmcp libdrm libpng libxcb libxkbcommon libxml2 llvm lm-sensors qt6 spirv-tools wget)
+depends=(bash brotli bzip2 coreutils dbus double-conversion expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz libdrm libelf libffi libpciaccess libpng libX11 libXau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors make mesa pcre2 pyqt6 qt6 sed spirv-tools systemd tar wayland wget xz zlib zstd)
 pip_depends=(sip pyqt-builder)
 # Fetch and unpack source
 if ! [[ -f $archive.tar.gz ]]; then

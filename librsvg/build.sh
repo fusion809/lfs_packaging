@@ -6,7 +6,7 @@ version=$(gh_ver $repo)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(cairo cargo-c pango gdk-pixbuf glib2 vala)
+depends=(cairo cargo-c gdk-pixbuf glib2 pango vala)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://download.gnome.org/sources/librsvg/$majVer/$filename
 fi

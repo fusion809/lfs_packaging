@@ -17,8 +17,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-depends=(glibc nspr sqlite zlib)
-blfs_depends=(libtasn1)
+depends=(glibc libtasn1 nspr sqlite zlib)
 majVer=$(echo $version | cut -d '.' -f 1)
 minVer=$(echo $version | cut -d '.' -f 2)
 filename="$name-$version.tar.gz"

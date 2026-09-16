@@ -3,9 +3,7 @@ set -e
 name=knewstuff
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(attica brotli bzip2 double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kcodecs kconfig kcoreaddons keyutils ki18n kpackage kwidgetsaddons libX11 libXext libXxf86vm libffi libpciaccess libpng libxkbcommon libxml2 libxshmfence mesa mitkrb openssl pcre2 syndication systemd util-linux wayland xz zlib zstd)
-lfs_depends=(dbus libelf)
-blfs_depends=(libXau libXdmcp libdrm libxcb llvm lm-sensors qt6 spirv-tools)
+depends=(attica brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kcodecs kconfig kcoreaddons keyutils ki18n kpackage kwidgetsaddons libdrm libelf libffi libpciaccess libpng libX11 libXau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qt6 spirv-tools syndication systemd util-linux wayland xz zlib zstd)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

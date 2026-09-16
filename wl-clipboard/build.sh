@@ -6,9 +6,7 @@ repo="bugaevc/wl-clipboard"
 version=$(git ls-remote https://github.com/$repo.git HEAD | awk '{print $1}')
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
-depends=(wayland)
-lfs_depends=(bash coreutils glibc libffi meson ninja)
-blfs_depends=(wayland wayland-protocols)
+depends=(bash coreutils glibc libffi meson ninja wayland wayland wayland-protocols)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/archive/${version}.tar.gz -O $filename

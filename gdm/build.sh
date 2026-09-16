@@ -4,7 +4,7 @@ set -e
 name=gdm
 repo=GNOME/$name
 version=$(gh_ver $repo)
-depends=(accountsservice glib2 glibc json-glib keyutils libXau libffi libgudev libxcrypt linux-pam pcre2 polkit systemd util-linux zlib)
+depends=(accountsservice glib2 glibc json-glib keyutils libffi libgudev libXau libxcrypt linux-pam pcre2 polkit systemd util-linux zlib)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

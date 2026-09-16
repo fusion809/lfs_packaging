@@ -3,9 +3,7 @@ set -e
 name=kde-gtk-config
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(brotli bzip2 double-conversion expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz icu kdecoration libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXres libXxf86vm libepoxy libffi libpciaccess libpng libxkbcommon libxml2 libxshmfence mesa pango pcre2 systemd util-linux wayland xz zlib zstd)
-blfs_depends=(at-spi2-core cairo kcolorscheme kconfig kcoreaddons kdbusaddons kguiaddons ki18n kwindowsystem lcms2 libXau libXdmcp libdrm libseccomp libxcb llvm lm-sensors pixman qt6 spirv-tools xcb-util-keysyms)
-lfs_depends=(dbus libelf)
+depends=(at-spi2-core brotli bzip2 cairo dbus double-conversion expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz icu kcolorscheme kconfig kcoreaddons kdbusaddons kdecoration kguiaddons ki18n kwindowsystem lcms2 libdrm libelf libepoxy libffi libpciaccess libpng libseccomp libX11 libXau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libxml2 libXrandr libXrender libXres libxshmfence libXxf86vm llvm lm-sensors mesa pango pcre2 pixman qt6 spirv-tools systemd util-linux wayland xcb-util-keysyms xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

@@ -23,7 +23,7 @@ get_version() {
 version=$(get_version)
 filename="$name-$version.tar.gz"
 direname="$name-$version"
-lfs_depends=(glibc ncurses openssl readline)
+depends=(glibc ncurses openssl readline)
 
 rm -rf $direname
 if ! [[ -f $filename ]]; then

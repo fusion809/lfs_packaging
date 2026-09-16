@@ -3,9 +3,7 @@ set -e
 name=plasma-keyboard
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(acl attr brotli bzip2 double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu keyutils libICE libSM libX11 libXext libXfixes libXxf86vm libffi libpciaccess libplasma libpng libxkbcommon libxml2 libxshmfence mesa mitkrb openssl pcre2 plasma-activities systemd util-linux wayland xz zlib zstd)
-blfs_depends=(breeze-icons karchive kcmutils kcodecs kcolorscheme kcompletion kconfig kcoreaddons kcrash kglobalaccel kguiaddons ki18n kiconthemes kio kirigami kitemviews kjobwidgets knotifications kpackage kservice ksvg kwidgetsaddons kwindowsystem libXau libXdmcp libcanberra libdrm libogg libvorbis libxcb llvm lm-sensors qt6 solid spirv-tools webkitgtk xcb-util-keysyms)
-lfs_depends=(dbus libelf)
+depends=(acl attr breeze-icons brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kcmutils kcodecs kcolorscheme kcompletion kconfig kcoreaddons kcrash keyutils kglobalaccel kguiaddons ki18n kiconthemes kio kirigami kitemviews kjobwidgets knotifications kpackage kservice ksvg kwidgetsaddons kwindowsystem libcanberra libdrm libelf libffi libICE libogg libpciaccess libplasma libpng libSM libvorbis libX11 libXau libxcb libXdmcp libXext libXfixes libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 plasma-activities qt6 solid spirv-tools systemd util-linux wayland webkitgtk xcb-util-keysyms xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

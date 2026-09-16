@@ -4,7 +4,7 @@ name=attr
 version=$(ngnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-lfs_depends=(gcc glibc make tar wget xz)
+depends=(gcc glibc make tar wget xz)
 if ! [[ -f $filename ]] && ! [[ -d $name ]] ; then
 	wget -c --progress=bar:force https://download.savannah.nongnu.org/releases/$name/$filename || ( git clone https://git.savannah.nongnu.org/git/$name.git )
 fi

@@ -5,7 +5,7 @@ repo="NetworkConfiguration/dhcpcd"
 version=$(gh_ver "$repo")
 direname="$name-$version"
 filename="$direname.tar.xz"
-lfs_depends=(glibc openssl bash systemd)
+depends=(bash glibc openssl systemd)
 
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/releases/download/v$version/$filename

@@ -5,7 +5,7 @@ version=$(gn_ver $name)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(bubblewrap fontconfig glib2 lcms2 libseccomp rustc libheif libjxl librsvg vala)
+depends=(bubblewrap fontconfig glib2 lcms2 libheif libjxl librsvg libseccomp rustc vala)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://download.gnome.org/sources/glycin/$majVer/$filename
 fi

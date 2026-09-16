@@ -4,8 +4,7 @@ name=libdisplay-info
 version=$(gfd_ver "emersion/libdisplay-info")
 direname="$name-$version"
 filename="$direname.tar.xz"
-blfs_depends=(hwdata)
-lfs_depends=(glibc)
+depends=(glibc hwdata)
 
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://gitlab.freedesktop.org/emersion/libdisplay-info/-/releases/$version/downloads/$filename

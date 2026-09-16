@@ -5,9 +5,7 @@ name=libadwaita
 version=$(gn_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
-lfs_depends=(bzip2 expat gcc gettext glibc libelf libffi openssl systemd util-linux xz zlib zstd)
-blfs_depends=(brotli cairo curl cyrus-sasl fontconfig freetype fribidi gdk-pixbuf glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk4 harfbuzz lcms2 libXau libXdmcp libdrm libepoxy libfyaml libgudev libidn2 libjpeg-turbo libpng libpsl libseccomp libtiff libunistring libunwind libwebp libxcb libxkbcommon libxml2 libxmlb llvm lm-sensors nghttp2 pixman sassc spirv-tools vala vulkan-loader webkitgtk)
-depends=(appstream elfutils glib2 libX11 libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXxf86vm libpciaccess libxshmfence mesa openldap orc pango pcre2 wayland)
+depends=(appstream brotli bzip2 cairo curl cyrus-sasl elfutils expat fontconfig freetype fribidi gcc gdk-pixbuf gettext glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk4 harfbuzz lcms2 libdrm libelf libepoxy libffi libfyaml libgudev libidn2 libjpeg-turbo libpciaccess libpng libpsl libseccomp libtiff libunistring libunwind libwebp libX11 libXau libxcb libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libxml2 libxmlb libXrandr libXrender libxshmfence libXxf86vm llvm lm-sensors mesa nghttp2 openldap openssl orc pango pcre2 pixman sassc spirv-tools systemd util-linux vala vulkan-loader wayland webkitgtk xz zlib zstd)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://download.gnome.org/sources/libadwaita/$(echo $version | sed 's/.[0-9]$//g')/$filename

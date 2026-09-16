@@ -3,9 +3,7 @@ set -e
 name=gcr
 repo=GNOME/${name}3
 version=$(gh_ver $repo gcr)
-depends=(brotli bzip2 expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXres libepoxy libffi libgcrypt libgpg-error libpng libxkbcommon p11-kit pango pcre2 systemd util-linux wayland zlib)
-blfs_depends=(at-spi2-core cairo lcms2 libXau libXdmcp libseccomp libxcb pixman)
-lfs_depends=(dbus)
+depends=(at-spi2-core brotli bzip2 cairo dbus expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz lcms2 libepoxy libffi libgcrypt libgpg-error libpng libseccomp libX11 libXau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libXrandr libXrender libXres p11-kit pango pcre2 pixman systemd util-linux wayland zlib)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

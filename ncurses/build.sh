@@ -19,7 +19,7 @@ get_version() {
 version=$(get_version)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-lfs_depends=(glibc gcc gzip tar sed make wget)
+depends=(gcc glibc gzip make sed tar wget)
 if ! [[ -f $filename ]]; then
     wget -c --progress=bar:force https://invisible-mirror.net/archives/$name/$filename
 fi

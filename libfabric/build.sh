@@ -5,9 +5,7 @@ name=libfabric
 version=$(gh_ver "ofiwg/libfabric")
 filename="$name-$version.tar.bz2"
 direname=${filename/.tar.bz2/}
-depends=(glib2 libX11 libXext libXxf86vm libpciaccess libxshmfence mesa numactl pcre2 wayland)
-lfs_depends=(autoconf bash bzip2 coreutils dbus expat gcc glibc libelf libffi make sed systemd tar util-linux xz zlib zstd)
-blfs_depends=(brotli double-conversion fontconfig freetype graphite2 harfbuzz libXau libXdmcp libdrm libpng libxcb libxkbcommon libxml2 llvm lm-sensors qt6 spirv-tools wget)
+depends=(autoconf bash brotli bzip2 coreutils dbus double-conversion expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz libdrm libelf libffi libpciaccess libpng libX11 libXau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors make mesa numactl pcre2 qt6 sed spirv-tools systemd tar util-linux wayland wget xz zlib zstd)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/ofiwg/libfabric/releases/download/v$version/$filename

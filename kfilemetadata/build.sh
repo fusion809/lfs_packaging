@@ -3,9 +3,7 @@ set -e
 name=kfilemetadata
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(brotli bzip2 curl cyrus-sasl double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc gpgme gpgmepp graphite2 harfbuzz icu inih jansson karchive kcodecs kcoreaddons keyutils ki18n libX11 libXext libXfixes libXxf86vm libaom libassuan libffi libgpg-error libidn2 libpciaccess libpng libpsl libunistring libvpx libxkbcommon libxml2 libxshmfence mesa mitkrb nghttp2 nspr nss numactl openldap openssl pcre2 systemd util-linux wayland x265 xz zlib zstd)
-lfs_depends=(dbus libelf)
-blfs_depends=(dav1d fdk-aac ffmpeg lame lcms2 libXau libXdmcp libdrm libjpeg-turbo libogg libtiff libva libvorbis libwebp libxcb llvm lm-sensors openjpeg opus poppler qt6 spirv-tools svt-av1 taglib x264)
+depends=(brotli bzip2 curl cyrus-sasl dav1d dbus double-conversion e2fsprogs expat fdk-aac ffmpeg fontconfig freetype gcc glib2 glibc gpgme gpgmepp graphite2 harfbuzz icu inih jansson karchive kcodecs kcoreaddons keyutils ki18n lame lcms2 libaom libassuan libdrm libelf libffi libgpg-error libidn2 libjpeg-turbo libogg libpciaccess libpng libpsl libtiff libunistring libva libvorbis libvpx libwebp libX11 libXau libxcb libXdmcp libXext libXfixes libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb nghttp2 nspr nss numactl openjpeg openldap openssl opus pcre2 poppler qt6 spirv-tools svt-av1 systemd taglib util-linux wayland x264 x265 xz zlib zstd)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

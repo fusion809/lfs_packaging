@@ -5,7 +5,7 @@ repo="rrthomas/enchant"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-blfs_depends=(aspell glib2 vala)
+depends=(aspell glib2 vala)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/rrthomas/enchant/releases/download/v$version/$filename
 fi

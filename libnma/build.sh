@@ -3,8 +3,7 @@ set -e
 name=libnma
 repo=GNOME/$name
 version=$(gh_ver $repo)
-depends=(at-spi2-core brotli bzip2 cairo dbus elfutils expat fontconfig freetype fribidi gcc gcr4 gdk-pixbuf glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk3 gtk4 harfbuzz icu lcms2 libX11 libXau libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libXrandr libXrender libXres libXxf86vm libdrm libepoxy libffi libgcrypt libgpg-error libgudev libjpeg-turbo libpciaccess libpng libseccomp libunwind libwebp libxcb libxkbcommon libxml2 libxshmfence lm-sensors mesa networkmanager nspr nss orc p11-kit pango pcre2 pixman spirv-tools systemd tiff util-linux vulkan-loader wayland xz zlib zstd)
-blfs_depends=(llvm)
+depends=(at-spi2-core brotli bzip2 cairo dbus elfutils expat fontconfig freetype fribidi gcc gcr4 gdk-pixbuf glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk3 gtk4 harfbuzz icu lcms2 libdrm libepoxy libffi libgcrypt libgpg-error libgudev libjpeg-turbo libpciaccess libpng libseccomp libunwind libwebp libX11 libXau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libxml2 libXrandr libXrender libXres libxshmfence libXxf86vm llvm lm-sensors mesa networkmanager nspr nss orc p11-kit pango pcre2 pixman spirv-tools systemd tiff util-linux vulkan-loader wayland xz zlib zstd)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

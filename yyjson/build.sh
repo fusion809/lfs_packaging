@@ -4,9 +4,7 @@ name=yyjson
 version=$(gh_ver ibireme/yyjson)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
-depends=()
-lfs_depends=(bash coreutils glibc gzip tar)
-blfs_depends=(cmake)
+depends=(bash cmake coreutils glibc gzip tar)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/ibireme/yyjson/archive/$version.tar.gz -O $filename
 fi

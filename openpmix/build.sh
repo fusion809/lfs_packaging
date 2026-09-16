@@ -6,11 +6,9 @@ __name=pmix
 version=$(gh_ver $name/$name)
 filename="$__name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
-depends=(
+depends=(bash bzip2 coreutils glibc libevent make perl python sed systemd tar zlib)
   hwloc
 )
-lfs_depends=(bash bzip2 coreutils glibc make perl python sed systemd tar zlib)
-blfs_depends=(libevent)
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/openpmix/openpmix/releases/download/v$version/$filename

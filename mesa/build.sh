@@ -17,9 +17,7 @@ get_version() {
 version=$(get_version)
 direname="$name-$version"
 filename="$direname.tar.xz"
-depends=(coreutils libX11 libXext libXxf86vm libdisplay-info libpciaccess libxshmfence meson ninja tar wayland wayland-protocols xorg-libs xz)
-lfs_depends=(bzip2 expat gcc glibc libelf libffi linux systemd xz zlib zstd)
-blfs_depends=(cbindgen glslang libXau libXdmcp libclc libdrm libva libxcb libxml2 llvm lm-sensors make-ca mako rust-bindgen spirv-tools vulkan-loader xcb-util-keysyms rustc spirv-llvm-translator)
+depends=(bzip2 cbindgen coreutils expat gcc glibc glslang libclc libdisplay-info libdrm libelf libffi libpciaccess libva libX11 libXau libxcb libXdmcp libXext libxml2 libxshmfence libXxf86vm linux llvm lm-sensors make-ca mako meson ninja rust-bindgen rustc spirv-llvm-translator spirv-tools systemd tar vulkan-loader wayland wayland-protocols xcb-util-keysyms xorg-libs xz xz zlib zstd)
 pip_depends=(pyyaml)
 
 if ! [[ -f $filename ]]; then

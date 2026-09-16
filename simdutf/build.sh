@@ -3,8 +3,7 @@ set -e
 name=simdutf
 repo="$name/$name"
 version=$(gh_ver $repo)
-blfs_depends=(cmake)
-depends=(gcc glibc)
+depends=(cmake gcc glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

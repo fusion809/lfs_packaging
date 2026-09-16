@@ -3,7 +3,7 @@ set -e
 name=meson
 repo=${name}build/$name
 version=$(gh_ver $repo)
-lfs_depends=(bash python ninja gzip tar coreutils)
+depends=(bash coreutils gzip ninja python tar)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

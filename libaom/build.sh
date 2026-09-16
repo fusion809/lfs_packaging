@@ -19,8 +19,7 @@ get_version() {
 version=$(get_version)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-blfs_depends=(yasm)
-depends=(gcc glibc)
+depends=(gcc glibc yasm)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://storage.googleapis.com/aom-releases/$filename
 fi

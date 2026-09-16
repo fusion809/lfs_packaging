@@ -2,9 +2,7 @@
 set -e
 # Variable declarations
 name=hyfetch
-depends=(fastfetch)
-lfs_depends=(bash coreutils gcc glibc)
-blfs_depends=(rustc)
+depends=(bash coreutils fastfetch gcc glibc rustc)
 version=$(gh_ver hykilpikonna/hyfetch)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"

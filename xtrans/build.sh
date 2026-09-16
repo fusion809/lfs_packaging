@@ -5,8 +5,7 @@ name=xtrans
 version=$(xfd_ver $name)
 direname="lib$name-$version"
 filename="$direname.tar.xz"
-lfs_depends=(bash coreutils glibc make sed systemd tar util-linux xz zlib)
-blfs_depends=(libxcb fontconfig xorg-libs)
+depends=(bash coreutils fontconfig glibc libxcb make sed systemd tar util-linux xorg-libs xz zlib)
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then

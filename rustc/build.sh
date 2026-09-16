@@ -15,9 +15,7 @@ get_version() {
 version=$(get_version)
 filename="$name-$version-src.tar.xz"
 direname="${filename/.tar.xz/}"
-depends=(openldap)
-lfs_depends=(coreutils gcc glibc libffi openssl python zlib zstd)
-blfs_depends=(brotli cmake curl cyrus-sasl libidn2 libpsl libunistring libxml2 llvm nghttp2)
+depends=(brotli cmake coreutils curl cyrus-sasl gcc glibc libffi libidn2 libpsl libunistring libxml2 llvm nghttp2 openldap openssl python zlib zstd)
 if [[ $(free -h | tail -n 2 | head -n 1 | sed 's/Mem:\s*//g' | cut -d ' ' -f 1 | sed 's/Gi//g') -lt 15 ]]; then
 	echo "You need to increase the RAM allocated to this VM to at least 16GB otherwise the build will fail." && exit 1
 fi

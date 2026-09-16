@@ -5,7 +5,7 @@ version=$(gh_ver GNOME/vala)
 majVer=$(echo $version | sed -E 's/.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-blfs_depends=(glib2 graphviz)
+depends=(glib2 graphviz)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://download.gnome.org/sources/vala/$majVer/$filename
 fi

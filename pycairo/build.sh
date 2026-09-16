@@ -4,7 +4,7 @@ name=pycairo
 repo="pygobject/$name"
 version=$(gh_ver $repo)
 majVer=$(echo $version | sed 's/.[0-9]$//g')
-blfs_depends=(cairo)
+depends=(cairo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

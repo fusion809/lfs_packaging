@@ -3,9 +3,7 @@ set -e
 name=ksshaskpass
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(brotli bzip2 double-conversion expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu libX11 libXext libXxf86vm libffi libgcrypt libgpg-error libpciaccess libpng libxkbcommon libxml2 libxshmfence mesa pcre2 systemd util-linux wayland xz zlib zstd)
-blfs_depends=(kcoreaddons ki18n kwidgetsaddons libXau libXdmcp libdrm libsecret libxcb llvm lm-sensors qt6 qtkeychain spirv-tools)
-lfs_depends=(dbus libelf)
+depends=(brotli bzip2 dbus double-conversion expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu kcoreaddons ki18n kwidgetsaddons libdrm libelf libffi libgcrypt libgpg-error libpciaccess libpng libsecret libX11 libXau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa pcre2 qt6 qtkeychain spirv-tools systemd util-linux wayland xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

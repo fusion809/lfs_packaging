@@ -21,7 +21,7 @@ version=$(get_version)
 majVer=$(echo $version | sed -E 's/.[0-9]+$//g')
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-blfs_depends=(curl libarchive libuv nghttp2)
+depends=(curl libarchive libuv nghttp2)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://cmake.org/files/v$majVer/$filename
 fi

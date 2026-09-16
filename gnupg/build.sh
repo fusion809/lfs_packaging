@@ -6,8 +6,7 @@ version=$(gh_ver $repo)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
-depends=(bzip2 cyrus-sasl glibc gmp gnutls libassuan libffi libgcrypt libgpg-error libidn2 libksba libtasn1 libunistring make-ca ncurses nettle npth openldap openssl p11-kit readline sqlite systemd zlib)
-blfs_depends=(libusb)
+depends=(bzip2 cyrus-sasl glibc gmp gnutls libassuan libffi libgcrypt libgpg-error libidn2 libksba libtasn1 libunistring libusb make-ca ncurses nettle npth openldap openssl p11-kit readline sqlite systemd zlib)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.gnupg.org/ftp/gcrypt/$name/$filename
 fi

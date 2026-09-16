@@ -3,7 +3,7 @@ set -e
 name=libheif
 repo="strukturag/$name"
 version=$(gh_ver $repo)
-blfs_depends=(libaom libde265 x265)
+depends=(libaom libde265 x265)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

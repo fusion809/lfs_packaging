@@ -4,7 +4,7 @@ name=p11-kit
 version=$(gh_ver p11-glue/p11-kit)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-blfs_depends=(make-ca libtasn1 nss)
+depends=(libtasn1 make-ca nss)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/p11-glue/p11-kit/releases/download/$version/$filename 
 fi

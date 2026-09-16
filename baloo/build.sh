@@ -3,9 +3,7 @@ set -e
 name=baloo
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(acl attr brotli bzip2 double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu kconfig kcoreaddons kcrash kdbusaddons keyutils kfilemetadata ki18n kidletime kio kservice libX11 libXext libXxf86vm libffi libpciaccess libpng libxkbcommon libxml2 libxshmfence lmdb mesa mitkrb openssl pcre2 solid systemd util-linux wayland xz zlib zstd)
-lfs_depends=(dbus libelf)
-blfs_depends=(libXau libXdmcp libdrm libxcb llvm lm-sensors qt6 spirv-tools)
+depends=(acl attr brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu kconfig kcoreaddons kcrash kdbusaddons keyutils kfilemetadata ki18n kidletime kio kservice libdrm libelf libffi libpciaccess libpng libX11 libXau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lmdb lm-sensors mesa mitkrb openssl pcre2 qt6 solid spirv-tools systemd util-linux wayland xz zlib zstd)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

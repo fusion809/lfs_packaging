@@ -18,9 +18,7 @@ get_version() {
 version=$(get_version)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
-depends=()
-lfs_depends=(bash coreutils glibc gcc gzip make sed tar)
-blfs_depends=(wget)
+depends=(bash coreutils gcc glibc gzip make sed tar wget)
 src="https://download.savannah.gnu.org/releases/$name/$filename"
 # Fetch and unpack source
 if ! [[ -f $filename ]]; then

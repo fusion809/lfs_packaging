@@ -4,9 +4,7 @@ set -e
 # Variable declarations
 name=ImageMagick
 version=$(gh_ver "$name/$name" | sed 's/\.\([0-9]*\)$/-\1/')
-lfs_depends=(bzip2 expat fftw fontconfig freetype gcc glibc libffi libpng util-linux xz zlib zstd)
-depends=(glib2 libICE libSM libX11 libXext libXrender libXt libwmf numactl pango pcre2)
-blfs_depends=(brotli cairo fontconfig freetype fribidi graphite2 graphviz harfbuzz highway lcms2 libXau libXdmcp libaom libde265 libheif libjpeg-turbo libjxl libpng libraw libtiff libwebp libxcb libxml2 openjpeg pixman webkitgtk x264 x265 xorg-lib)
+depends=(brotli bzip2 cairo expat fftw fontconfig fontconfig freetype freetype fribidi gcc glib2 glibc graphite2 graphviz harfbuzz highway lcms2 libaom libde265 libffi libheif libICE libjpeg-turbo libjxl libpng libpng libraw libSM libtiff libwebp libwmf libX11 libXau libxcb libXdmcp libXext libxml2 libXrender libXt numactl openjpeg pango pcre2 pixman util-linux webkitgtk x264 x265 xorg-lib xz zlib zstd)
 direname="$name-$version"
 filename="$version.tar.gz"
 # Fetch and unpack source

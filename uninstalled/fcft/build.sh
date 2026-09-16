@@ -3,8 +3,7 @@ set -e
 name=fcft
 repo=dnkl/$name
 version=$(cb_ver $repo)
-lfs_depends=(meson pixman ninja)
-blfs_depends=(freetype2 fontconfig)
+depends=(fontconfig freetype2 meson ninja pixman)
 direname="$name-$version"
 filename="$name-$version.tar.gz"
 

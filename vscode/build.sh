@@ -2,9 +2,7 @@
 set -e
 name=vscode
 version=$(git ls-remote --tags https://github.com/microsoft/vscode.git | grep -oP 'refs/tags/\K[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -n 1)
-depends=(elfutils glib2 gtk3 libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXinerama libXrandr libXrender libXres libxkbfile mesa mitkrb openldap orc pango pcre2 wayland)
-blfs_depends=(alsa-lib at-spi2-core avahi brotli cairo cups curl cyrus-sasl dav1d enchant fontconfig freetype fribidi gdk-pixbuf glycin graphite2 gst-plugins-base gstreamer harfbuzz highway keyutils lcms2 libXau libXdmcp libaom libavif libdrm libepoxy libgcrypt libgpg-error libidn2 libjpeg-turbo libjxl libpng libpsl libseccomp libsecret libsoup libtasn1 libunistring libunwind libwebp libxcb libxkbcommon libxml2 libxslt nghttp2 nspr nss pixman svt-av1 webkitgtk)
-lfs_depends=(bzip2 dbus e2fsprogs expat gcc glibc libelf libffi libxcrypt openssl sqlite systemd util-linux xz zlib zstd)
+depends=(alsa-lib at-spi2-core avahi brotli bzip2 cairo cups curl cyrus-sasl dav1d dbus e2fsprogs elfutils enchant expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gst-plugins-base gstreamer gtk3 harfbuzz highway keyutils lcms2 libaom libavif libdrm libelf libepoxy libffi libgcrypt libgpg-error libidn2 libjpeg-turbo libjxl libpng libpsl libseccomp libsecret libsoup libtasn1 libunistring libunwind libwebp libX11 libXau libxcb libXcomposite libxcrypt libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libxkbfile libxml2 libXrandr libXrender libXres libxslt mesa mitkrb nghttp2 nspr nss openldap openssl orc pango pcre2 pixman sqlite svt-av1 systemd util-linux wayland webkitgtk xz zlib zstd)
 filename="code_${version}_amd64.deb"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://update.code.visualstudio.com/${version}/linux-deb-x64/stable -O "$filename"

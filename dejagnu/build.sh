@@ -4,7 +4,7 @@ name=dejagnu
 version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(glibc gcc make tar wget gzip)
+depends=(gcc glibc gzip make tar wget)
 gnu_download $name $filename
 rm -rf $direname
 tar xf $filename

@@ -4,8 +4,7 @@ name=jpegoptim
 version=$(gh_ver "tjko/jpegoptim")
 filename="$name-$version.tar.gz"
 direname="$name-$version"
-blfs_depends=(libjpeg libjpeg-turbo)
-lfs_depends=(glibc)
+depends=(glibc libjpeg libjpeg-turbo)
 
 if ! [[ -f "$filename" ]]; then
 	wget -c --progress=bar:force https://github.com/tjko/jpegoptim/releases/download/v$version/$filename

@@ -5,8 +5,7 @@ repo="Exiv2/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-blfs_depends=(brotli cmake curl cyrus-sasl inih)
-depends=(curl expat gcc glibc libidn2 libpsl libunistring nghttp2 openldap openssl zlib zstd)
+depends=(brotli cmake curl curl cyrus-sasl expat gcc glibc inih libidn2 libpsl libunistring nghttp2 openldap openssl zlib zstd)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/Exiv2/exiv2/archive/v$version/$filename
 fi

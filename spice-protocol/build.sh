@@ -6,9 +6,7 @@ version=$(spice_ver $name)
 docs="COPYING *.md"
 direname="$name-$version"
 filename="$direname.tar.xz"
-depends=()
-lfs_depends=(bash coreutils meson ninja sed tar)
-blfs_depends=(wget)
+depends=(bash coreutils meson ninja sed tar wget)
 # Fetch and unpack source
 rm -rf $direname
 if ! [[ -f $filename ]]; then

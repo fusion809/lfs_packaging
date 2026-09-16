@@ -15,8 +15,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-depends=(brotli bzip2 curl cyrus-sasl dbus double-conversion elfutils expat fontconfig freetype gcc glib2 glibc gpgme gpgmepp graphite2 harfbuzz icu libX11 libXau libXdmcp libXext libXrender libXxf86vm libassuan libffi libgpg-error libidn2 libpciaccess libpng libpsl libunistring libxcb libxkbcommon libxml2 libxshmfence mesa nghttp2 nspr nss openldap openssl pcre2 qt6 systemd util-linux wayland xz zlib zstd)
-blfs_depends=(cairo lcms2 libdrm libjpeg-turbo libtiff libwebp llvm lm-sensors openjpeg pixman spirv-tools)
+depends=(brotli bzip2 cairo curl cyrus-sasl dbus double-conversion elfutils expat fontconfig freetype gcc glib2 glibc gpgme gpgmepp graphite2 harfbuzz icu lcms2 libassuan libdrm libffi libgpg-error libidn2 libjpeg-turbo libpciaccess libpng libpsl libtiff libunistring libwebp libX11 libXau libxcb libXdmcp libXext libxkbcommon libxml2 libXrender libxshmfence libXxf86vm llvm lm-sensors mesa nghttp2 nspr nss openjpeg openldap openssl pcre2 pixman qt6 spirv-tools systemd util-linux wayland xz zlib zstd)
 filename="$name-$version.tar.xz"
 dversion=$(wget -cqO- https://poppler.freedesktop.org/ | grep "poppler-data-[0-9]+\.[0-9]+\.[0-9]+" -oE | cut -d '-' -f 3 | sort -V | tail -n 1)
 data_filename="$name-data-$dversion.tar.gz"

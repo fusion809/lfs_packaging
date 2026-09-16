@@ -15,9 +15,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }	
 version=$(get_version)
-depends=(mitkrb)
-blfs_depends=(keyutils)
-lfs_depends=(e2fsprogs glibc openssl zlib)
+depends=(e2fsprogs glibc keyutils mitkrb openssl zlib)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 if ! [[ -f $filename ]]; then

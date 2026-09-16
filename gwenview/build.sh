@@ -3,9 +3,7 @@ set -e
 name=gwenview
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(acl attr baloo brotli bzip2 curl cyrus-sasl dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu inih jansson karchive kbookmarks kcodecs kcolorpicker kcolorscheme kcompletion kconfig kconfigwidgets kcoreaddons kcrash keyutils kfilemetadata kglobalaccel kguiaddons ki18n kiconthemes kimageannotator kio kitemmodels kitemviews kjobwidgets knotifications kparts kservice kwidgetsaddons kwindowsystem kxmlgui libX11 libXext libXfixes libXxf86vm libffi libidn2 libpciaccess libpng libpsl libunistring libxkbcommon libxml2 libxshmfence lmdb mesa mitkrb nghttp2 openldap openssl pcre2 plasma-activities purpose solid systemd util-linux wayland webkitgtk xz zlib zstd)
-blfs_depends=(breeze-icons flac lame lcms2 libXau libXdmcp libcanberra libdrm libjpeg-turbo libkdcraw libogg libraw libsndfile libtiff libvorbis libwebp libxcb llvm lm-sensors mpg123 opus pulseaudio qt6 spirv-tools xcb-util-keysyms)
-lfs_depends=(libelf)
+depends=(acl attr baloo breeze-icons brotli bzip2 curl cyrus-sasl dbus double-conversion e2fsprogs expat flac fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu inih jansson karchive kbookmarks kcodecs kcolorpicker kcolorscheme kcompletion kconfig kconfigwidgets kcoreaddons kcrash keyutils kfilemetadata kglobalaccel kguiaddons ki18n kiconthemes kimageannotator kio kitemmodels kitemviews kjobwidgets knotifications kparts kservice kwidgetsaddons kwindowsystem kxmlgui lame lcms2 libcanberra libdrm libelf libffi libidn2 libjpeg-turbo libkdcraw libogg libpciaccess libpng libpsl libraw libsndfile libtiff libunistring libvorbis libwebp libX11 libXau libxcb libXdmcp libXext libXfixes libxkbcommon libxml2 libxshmfence libXxf86vm llvm lmdb lm-sensors mesa mitkrb mpg123 nghttp2 openldap openssl opus pcre2 plasma-activities pulseaudio purpose qt6 solid spirv-tools systemd util-linux wayland webkitgtk xcb-util-keysyms xz zlib zstd)
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

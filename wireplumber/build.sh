@@ -5,8 +5,7 @@ repo="pipewire/wireplumber"
 version=$(gfd_ver $repo)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
-blfs_depends=(lua pipewire)
-depends=(glib2 systemd)
+depends=(glib2 lua pipewire systemd)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://gitlab.freedesktop.org/pipewire/wireplumber/-/archive/$version/$filename
 fi

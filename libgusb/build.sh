@@ -5,9 +5,7 @@ name=libgusb
 version=$(gh_ver "hughsie/libgusb")
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
-blfs_depends=(glib2 hwdata json-glib libusb vala webkitgtk)
-lfs_depends=(glibc libffi systemd util-linux zlib)
-depends=(glib2 pcre2)
+depends=(glib2 glib2 glibc hwdata json-glib libffi libusb pcre2 systemd util-linux vala webkitgtk zlib)
 # Fetch source and unpack it
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/hughsie/libgusb/releases/download/$version/$filename

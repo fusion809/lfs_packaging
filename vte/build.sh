@@ -4,7 +4,7 @@ name=vte
 version=$(gn_ver vte)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(libxml2 fast_float fmt icu gnutls glib2 gtk3 gtk4 simdutf vala)
+depends=(fast_float fmt glib2 gnutls gtk3 gtk4 icu libxml2 simdutf vala)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://gitlab.gnome.org/GNOME/vte/-/archive/$version/$filename
 fi

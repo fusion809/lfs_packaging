@@ -3,8 +3,7 @@ set -e
 name=libavif
 repo=AOMediaCodec/$name
 version=$(gh_ver $repo)
-depends=(glibc libaom)
-blfs_depends=(dav1d svt-av1)
+depends=(dav1d glibc libaom svt-av1)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

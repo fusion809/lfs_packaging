@@ -6,8 +6,7 @@ version=$(gh_ver $repo)
 majVer=$(echo $version | sed 's/.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-blfs_depends=(libxml2)
-depends=(gcc glibc hdf5 libaec zlib)
+depends=(gcc glibc hdf5 libaec libxml2 zlib)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/releases/download/v$version/$filename
 fi
