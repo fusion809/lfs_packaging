@@ -13,9 +13,16 @@ fi
 rm -rf "$direname"
 tar xf "$filename"
 cd "$direname"
-sed -i 's:"/desktop:"/org:' schema/*.xml &&
-options=(--prefix=/usr --buildtype=release)
-mni "${options[@]}"
+sed -i 's:"/desktop:"/org:' schema/*.xml || echo "sed failed"
+meson_options=(
+    --prefix=/usr
+    --buildtype=release
+)
+
+printf '%s\n' "before mni:"
+printf '<%s>\n' "${meson_options[@]}"
+
+mni "${meson_options[@]}"
 cd ../..
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"

@@ -7,15 +7,15 @@ if [[ -z ${version// /} ]]; then
 	exit 1
 fi
 direname="Linux-PAM-$version"
-filename="$dirname.tar.xz"
+filename="$direname.tar.xz"
 depends=(gdbm glibc libxcrypt systemd)
 
 if ! [[ -f "$filename" ]]; then
     wget -c --progress=bar:force "https://github.com/linux-pam/linux-pam/releases/download/v$version/$filename"
 fi
-rm -rf "$dirname"
+rm -rf "$direname"
 tar xf "$filename"
-cd "$dirname"
+cd "$direname"
 
 sed -e "s/'elinks'/'lynx'/"                       \
     -e "s/'-no-numbering', '-no-references'/      \
@@ -24,7 +24,8 @@ sed -e "s/'elinks'/'lynx'/"                       \
 meson_options=(
   --prefix=/usr       \
   --buildtype=release \
-  -D docdir=/usr/share/doc/$dirname
+  -D docdir=/usr/share/doc/$direname \
+  -D selinux=enabled
 )
 mni "${meson_options[@]}"
 sudo chmod -v 4755 /usr/sbin/unix_chkpwd

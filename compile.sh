@@ -111,7 +111,14 @@ echo "source_dir=$source_dir"
 		echo "Optional 2 build, should be generally applicable"
 		mkdir build
 		cd build
-		meson setup "${meson_args[@]}" "$source_dir" || exit 1
+		#meson setup "${meson_args[@]}" "$source_dir" || exit 1
+		printf 'meson_args: <%s>\n' "${meson_args[@]}"
+printf 'source_dir: <%s>\n' "$source_dir"
+printf 'command: meson setup'
+printf ' <%s>' "${meson_args[@]}"
+printf ' <%s>\n' "$source_dir"
+
+meson setup "${meson_args[@]}" "$source_dir" || exit 1
 		docbookver=$(head -n 1 /var/lib/custom-packages/docbook-xsl-nons)
 		files=()
 
