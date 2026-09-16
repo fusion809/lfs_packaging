@@ -9,7 +9,7 @@ depends=(which)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/releases/download/$direname/$filename
 fi
-rm -rf "$direname"
+sudo rm -rf "$direname"
 tar xf "$filename"
 cd "$direname"
 ./bootstrap.sh --prefix=/usr --with-python=python3 &&

@@ -11,6 +11,9 @@ if ! [[ -f $filename ]]; then
 fi
 dsp_filename="speexdsp-$version.tar.gz"
 dsp_direname="${dsp_filename/.tar.*/}"
+if ! [[ -f $dsp_filename ]]; then
+	wget -c --progress=bar:force https://downloads.xiph.org/releases/speex/$dsp_filename
+fi
 rm -rf "$direname"
 tar xf "$filename"
 cd "$direname"
