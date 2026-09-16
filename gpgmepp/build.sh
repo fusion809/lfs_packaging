@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-name=gpgme
+name=gpgmepp
 repo="gpg/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.bz2"

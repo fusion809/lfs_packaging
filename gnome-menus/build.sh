@@ -14,7 +14,7 @@ rm -rf "$direname"
 tar xf "$filename"
 cd "$direname"
 options=(--prefix=/usr --sysconfdir=/etc --disable-static)
-mni "${options[@]}"
-cd ../..
+cmi "${options[@]}"
+cd ..
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
