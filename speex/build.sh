@@ -26,5 +26,5 @@ options=(--prefix=/usr    \
 	    --docdir=/usr/share/doc/$dsp_direname)
 cmi "${options[@]}"
 cd ..
-rm -rf "$filename" "$direname"
+rm -rf "$filename" "$direname" "$dsp_filename" "$dsp_direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
