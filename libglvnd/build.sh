@@ -8,11 +8,11 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c https://gitlab.freedesktop.org/$repo/-/archive/v$version/$filename
 fi
-rm -rf "$direname"
+sudo rm -rf "$direname"
 tar xf "$filename"
 cd "$direname"
 gap_patches "$name"
 mni --prefix=/usr --buildtype=release -D hgl=false
 cd ../
-rm -rf "$filename" "$direname"
+sudo rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
