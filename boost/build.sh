@@ -16,5 +16,5 @@ cd "$direname"
 ./b2 stage -j$(nproc) threading=multi link=shared
 sudo ./b2 install threading=multi link=shared
 cd ..
-rm -rf "$filename" "$direname"
+sudo rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
