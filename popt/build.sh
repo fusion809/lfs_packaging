@@ -2,8 +2,8 @@
 set -e
 name=popt
 repo=rpm-software-management/$name
-majVer=$(echo $version | cut -d '.' -f 1)
 version=$(gh_ver $repo)
+majVer=$(echo $version | cut -d '.' -f 1)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
