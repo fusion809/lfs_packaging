@@ -3,8 +3,8 @@ set -e
 name=gpgmepp
 repo="gpg/$name"
 version=$(gh_ver $repo)
-filename="$name-$version.tar.bz2"
-direname="${filename/.tar.bz2/}"
+filename="$name-$version.tar.xz"
+direname="${filename/.tar.xz/}"
 depends=(gcc glibc gnupg gpgme libassuan libgpg-error)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.gnupg.org/ftp/gcrypt/$name/$filename
