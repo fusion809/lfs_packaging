@@ -3,6 +3,7 @@ set -e
 name=libglvnd
 repo=glvnd/libglvnd
 version=$(gfd_ver $repo)
+depends=(glibc libX11 libXau libXdmcp libxcb)
 filename="$name-v$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
