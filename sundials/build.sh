@@ -30,7 +30,7 @@ cmake_options=(
     -DCMAKE_C_FLAGS="$CFLAGS" \
     -DCMAKE_CXX_FLAGS="$CXXFLAGS"
 )
-cmaki "$cmake_options[@]"
+cmaki "${cmake_options[@]}"
 # Cleanup and add to database
 cd ..
 sudo rm -rf $filename $direname

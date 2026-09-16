@@ -12,7 +12,9 @@ fi
 rm -rf "$direname"
 tar xf "$filename"
 cd "$direname"
-mni --prefix=/usr --buildtype=release
+options=(--prefix=/usr \
+	--buildtype=release)
+mni "${options[@]}"
 cd ../..
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
