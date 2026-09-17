@@ -11,12 +11,8 @@ get_version() {
 version=$(get_version)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://people.freedesktop.org/~mccann/dist/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://people.freedesktop.org/~mccann/dist/$filename"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr
 cd ../
 rm -rf "$filename" "$direname"

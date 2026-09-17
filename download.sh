@@ -86,6 +86,15 @@ function gnu_download {
 	download_src "https://ftpmirror.gnu.org/$name/$filename" || download_src "https://ftp.gnu.org/gnu/$name/$filename" || download_src "https://ftpmirror.gnu.org/$name/$direname/$filename"
 }
 
+function kde_download {
+	local type=$1
+	local version=$2
+	local majVer=$(echo $version | cut -d '.' -f1-2)
+	local filename=$3
+	if ! [[ -f $filename ]]; then
+		wget -c --progress=bar:force https://download.kde.org/stable/$type/$majVer/$filename
+	fi
+}
 function sf_download {
 	local name=$1
 	local direname=$2

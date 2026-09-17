@@ -6,12 +6,8 @@ version=$(gh_ver $repo)
 depends=(gcc glibc systemd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://downloads.sourceforge.net/smartmontools/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+sf_download "$name" "$version" "$filename"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --sysconfdir=/etc --docdir=/usr/share/doc/$direname
 cd ../
 rm -rf "$filename" "$direname"

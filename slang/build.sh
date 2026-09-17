@@ -18,15 +18,13 @@ version=$(get_version)
 depends=(gcc glibc glslang spirv-tools)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.jedsoft.org/releases/slang/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
-options=(--prefix=/usr       \
-            --sysconfdir=/etc   \
-	    --with-readline=gnu)
+download_src "https://www.jedsoft.org/releases/slang/$filename"
+unpk_enter "$filename" "$direname"
+options=(
+	--prefix=/usr       \
+    --sysconfdir=/etc   \
+	--with-readline=gnu
+)
 cmi "${options[@]}"
 make -j1 RPATH=
 sudo su -c "make install_doc_dir=/usr/share/doc/$direname   \
