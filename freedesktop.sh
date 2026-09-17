@@ -2,12 +2,21 @@
 # gitlab.freedesktop.org version fetcher
 function gfd_ver {
 	local repo=$1
-	local name=$(echo $repo | cut -d '/' -f 2 | tr '[:upper:]' '[:lower:]')
+	if [[ -n "$2" ]]; then
+		local name=$2
+	else
+		local name=$(echo $repo | cut -d '/' -f 2 | tr '[:upper:]' '[:lower:]')
+		local namef=$(echo $repo | cut -d '/' -f 1 | tr '[:upper:]' '[:lower:]')
+		local name2=$(echo "${namef}-${name/x/}")
+		if ! [[ -f $LFP/$name/build.sh ]] && [[ -f $LFP/$name2/build.sh ]]; then
+			name="$name2"
+		fi
+	fi
 	local up_ver=$(fdt_ver $repo)
 	local inst_ver=$(pkgver $name)
 	ver_check "$up_ver" "$inst_ver" && return
 
-	local git_ver=$(gfl_ver $repo)
+	local git_ver=$(gfl_ver $repo $name)
 	ver_check "$git_ver" "$inst_ver" && return
 
 	local vat_ver=$(vatver $name)

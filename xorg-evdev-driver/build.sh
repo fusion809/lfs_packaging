@@ -5,12 +5,8 @@ version=$(xfd_ver xf86-input-evdev)
 depends=(glibc libevdev mtdev systemd)
 filename="xf86-input-evdev-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.x.org/pub/individual/driver/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+xfd_download "$name" "$filename"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr
 cd ../
 rm -rf "$filename" "$direname"

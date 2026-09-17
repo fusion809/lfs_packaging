@@ -1,35 +1,21 @@
 #!/bin/bash
 set -e
 name=xorg-server
-repo=$name/$name
-get_version() {
-	local inst_ver=$(pkgver $name)
-	local up_ver=$(wget -T 5 -t 1 -cqO- https://www.x.org/pub/individual/xserver/ | grep "xorg-server-[0-9]+\.[0-9]+\.[0-9]+" -oE | grep -v "\.99" | sed 's/xorg-server-//g' | sort -V | tail -n 1)
-	ver_check "$up_ver" "$inst_ver" && return
-	local git_ver=$(timeout 5 git ls-remote --tags --refs https://gitlab.freedesktop.org/xorg/xserver.git | grep "refs/tags/xorg-server-[0-9]+\.[0-9]+\.[0-9]+" -oE | sed 's/.*-//g' | grep -v ".99" | sort -V | tail -n 1)
-	ver_check "$git_ver" "$inst_ver" && return
-	local vat_ver=$(vatver $name)
-	ver_check "$vat_ver" "$inst_ver" && return
-
-	local arch_ver=$(aver $name)
-	ver_check "$arch_ver" "$inst_ver" && return
-	local lfs_vers=$(lfs_ver $name)
-	ver_check "$lfs_vers" "$inst_ver" && return
-	fver "$name" "$inst_ver"
-}
-version=$(get_version)
+repo=xorg/xserver
+version=$(gfd_ver $repo $name)
 depends=(brotli bzip2 dbus expat freetype gcc glibc icu libdrm libelf libepoxy libffi libfontenc libpciaccess libpng libtirpc libX11 libXau libxcb libxcvt libXdmcp libXext libXfont2 libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa nettle pixman spirv-tools systemd xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 # Kernel config options required
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.x.org/pub/individual/xserver/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://www.x.org/pub/individual/xserver/$filename"
+unpk_enter "$filename" "$direname"
 gap_patches $name
-meson_options=(--prefix=/usr --localstatedir=/var -D glamor=true -D xkb_output_dir=/var/lib/xkb)
+meson_options=(
+	--prefix=/usr \
+	--localstatedir=/var \
+	-D glamor=true \
+	-D xkb_output_dir=/var/lib/xkb
+)
 mni "${meson_options[@]}"
 sudo mkdir -pv /etc/X11/xorg.conf.d
 cd ../..

@@ -26,13 +26,8 @@ direname="$name-$version"
 filename="$direname.tar.gz"
 depends=(docbook-xml docbook-xsl-nons glibc libxslt)
 xslver=$(cat /var/lib/custom-packages/docbook-xsl-nons | head -n 1)
-
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://pagure.io/xmlto/archive/$version/$filename
-fi
-
-tar xf "$filename"
-cd "$direname"
+download_src "https://pagure.io/xmlto/archive/$version/$filename"
+unpk_enter "$filename" "$direname"
 docbook_ver=$(pkgver docbook-xsl-nons)
 sed -i -e "s|http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl|/usr/share/xml/docbook/xsl-stylesheets-nons-$docbook_ver/manpages/docbook.xsl|g" format/docbook/man
 sudo autoreconf -fiv                                  &&
