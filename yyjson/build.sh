@@ -1,17 +1,13 @@
 #!/bin/bash
 set -e
 name=yyjson
-version=$(gh_ver ibireme/yyjson)
+repo=ibireme/$name
+version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=(bash cmake coreutils glibc gzip tar)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/ibireme/yyjson/archive/$version.tar.gz -O $filename
-fi
-rm -rf $direname
-tar xf $filename
-# Compile and install
-cd $direname
+gha_download "$repo" "$version" "$filename"
+unpk_enter "$filename" "$direname"
 cmake_options=(
 	-DCMAKE_BUILD_TYPE='None' \
 	-DCMAKE_INSTALL_PREFIX='/usr' \

@@ -33,6 +33,18 @@ function ghr_download {
 	download_src "https://github.com/$repo/releases/download/$direname/$filename"
 }
 
+function gn_download {
+	local name="$1"
+	local version="$2"
+	local majVer=$(echo $version | cut -d '.' -f 1)
+	if [[ -n "$3" ]]; then
+		local filename="$3"
+	else
+		local filename="$name-$version.tar.xz"
+	fi
+	download_src "https://download.gnome.org/sources/$name/$majVer/$filename"
+}
+
 function gnu_download {
 	local name="$1"
 	local filename="$2"
@@ -45,4 +57,10 @@ function sf_download {
 	local direname=$2
 	local filename=$3
 	download_src "https://sourceforge.net/projects/$name/files/$name/$direname/$filename"
+}
+
+function xfd_download {
+	local type=$(get_xfd_type $1)
+	local filename=$2
+	download_src "https://xorg.freedesktop.org/archive/individual/$type/$filename"
 }

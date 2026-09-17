@@ -9,12 +9,8 @@ depends=(brotli cairo curl cyrus-sasl elfutils expat fontconfig freetype fribidi
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 # Fetch source and unpack it
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$filename
-fi
-tar xf $filename
-# Compile and install
-cd $direname
+download_src "https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$filename"
+unpk_enter "$filename" "$direname"
 meson_options=(
 	--prefix=/usr \
 	--buildtype=release \

@@ -7,13 +7,9 @@ direname="lib$name-$version"
 filename="$direname.tar.xz"
 depends=(bash coreutils fontconfig glibc libxcb make sed systemd tar util-linux xorg-libs xz zlib)
 # Fetch and unpack source
-rm -rf $direname
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://xorg.freedesktop.org/archive/individual/lib/$filename
-fi
-tar xf $filename
+xfd_download "$name" "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 XORG_CONFIG="--prefix=/usr"
 docdir="--docdir=/usr/share/doc/$packagedir"
 cmi $XORG_CONFIG $docdir
