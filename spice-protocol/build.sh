@@ -8,12 +8,12 @@ direname="$name-$version"
 filename="$direname.tar.xz"
 depends=(bash coreutils meson ninja sed tar wget)
 # Fetch and unpack source
-spice_download "$name" "$filename"
+spice_download "$filename"
 unpk_enter "$filename" "$direname"
 # Compile and install
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
-meson_option=(
+meson_options=(
   --prefix=/usr \
   --libdir=lib \
   --libexecdir=/usr/libexec \
@@ -24,7 +24,7 @@ meson_option=(
   --mandir=/usr/man \
   --sysconfdir=/etc \
   --localstatedir=/var \
-  --buildtype=release \
+  --buildtype=release
 )
 mni "${meson_options[@]}"
 cd ..
