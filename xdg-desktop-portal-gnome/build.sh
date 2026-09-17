@@ -2,16 +2,11 @@
 set -e
 name=xdg-desktop-portal-gnome
 version=$(gn_ver $name)
-majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(gnome-desktop gtk4 libadwaita nautilus xdg-desktop-gtk xdg-desktop-portal)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/xdg-desktop-portal-gnome/$majVer/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+gn_download "$name" "$version" "$filename"
+unpk_enter "$filename" "$direname"
 mni --prefix=/usr --buildtype=release
 cd ../..
 rm -rf "$filename" "$direname"
