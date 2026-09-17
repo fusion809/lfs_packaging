@@ -3,16 +3,13 @@ set -e
 # Variable declarations
 name="wl-clipboard"
 repo="bugaevc/wl-clipboard"
-version=$(git ls-remote https://github.com/$repo.git HEAD | awk '{print $1}')
+version=$(gh_com $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=(bash coreutils glibc libffi meson ninja wayland wayland wayland-protocols)
 # Fetch and unpack source
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/archive/${version}.tar.gz -O $filename
-fi
-tar xf $filename
-cd $direname
+gha_download "$repo" "${version}" "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
 meson_options=(
 	--prefix=/usr       \

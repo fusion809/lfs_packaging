@@ -4,12 +4,8 @@ name=which
 version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://mirror.freedif.org/pub/blfs/development/w/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://mirror.freedif.org/pub/blfs/development/w/$filename"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr
 cd ..
 rm -rf "$filename" "$direname"

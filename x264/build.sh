@@ -6,12 +6,8 @@ version=$(gh_ver $repo)
 depends=(glibc)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://anduin.linuxfromscratch.org/BLFS/x264/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://anduin.linuxfromscratch.org/BLFS/x264/$filename"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --enable-shared --disable-cli
 cd ../
 rm -rf "$filename" "$direname"

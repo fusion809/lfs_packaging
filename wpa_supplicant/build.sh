@@ -6,12 +6,8 @@ version=$(gh_ver $repo)
 depends=(dbus glibc libnl ncurses openssl readline systemd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://w1.fi/releases/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://w1.fi/releases/$filename"
+unpk_enter "$filename" "$direname"
 cat > wpa_supplicant/.config << "EOF"
 CONFIG_BACKEND=file
 CONFIG_CTRL_IFACE=y

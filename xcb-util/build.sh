@@ -18,12 +18,8 @@ version=$(get_version)
 depends=(glibc libXau libxcb libXdmcp)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://xcb.freedesktop.org/dist/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://xcb.freedesktop.org/dist/$filename"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr
 cd ../
 rm -rf "$filename" "$direname"

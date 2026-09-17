@@ -8,12 +8,8 @@ version=$(gh_com $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 # Fetch source
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/archive/$version.tar.gz -O $filename
-fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+gha_download "$repo" "v$version" "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"

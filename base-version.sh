@@ -27,6 +27,7 @@ function aver {
 
 function fdt_ver {
     local repo=$1
+	local name=$2
     if [[ $repo != "gstreamer/gstreamer" ]]; then
     	wget --timeout=5 -t 1 -cqO- "https://gitlab.freedesktop.org/$repo/-/tags" | grep -oE 'tags/(v[0-9.][^"]*|'"$name"'-[0-9]+\.[0-9]+\.[0-9]+)' | grep -v "\.99" | sed "s|$name-||g" | grep -vE "dev|rc|alpha|beta" | sed 's|tags/||; s/^v//' | sort -V | tail -n 1
     else
@@ -42,6 +43,12 @@ function fver {
 		echo "$(date +"%r %d/%m/%Y"), $1" >> ~/logs/failed_versioning.log
 	fi
 	echo "$2"
+}
+
+function gbb_ver {
+	local repo=$1
+	local name=$2
+	timeout 5 git ls-remote --tags --refs https://bitbucket.org/$repo.git | grep -oE 'tags/([v]*[0-9.][^"]*|'"$name"'-[0-9]+\.[0-9]+\.[0-9]+)' | grep -vi "alpha\|beta\|rc" | sed -E 's|tags/[a-z-]*||g' | sort -V | tail -n 1
 }
 
 function gent_ver {

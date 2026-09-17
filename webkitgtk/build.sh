@@ -19,12 +19,8 @@ depends=(at-spi2-core brotli bzip2 cairo curl cyrus-sasl dav1d dbus e2fsprogs el
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://webkitgtk.org/releases/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://webkitgtk.org/releases/$filename"
+unpk_enter "$filename" "$direname"
 echo "Compiling with GTK+3 support"
 options1=(-D CMAKE_BUILD_TYPE=Release     \
       -D CMAKE_INSTALL_PREFIX=/usr    \

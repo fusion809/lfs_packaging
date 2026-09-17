@@ -15,11 +15,26 @@ function download_src {
 	fi
 }
 
+function bb_download {
+	local repo=$1
+	local filename=$2
+	if ! [[ -f $filename ]]; then
+		wget -c --progress=bar:force https://bitbucket.org/$repo/downloads/$filename
+	fi
+}
+
 function gfd_download {
 	local repo="$1"
 	local tag="$2"
 	local filename="$3"
 	download_src "https://gitlab.freedesktop.org/$repo/-/archive/$tag/$filename"
+}
+
+function gfdr_download {
+	local repo="$1"
+	local tag="$2"
+	local filename="$3"
+	download_src "https://gitlab.freedesktop.org/$repo/-/releases/$tag/download/$filename"
 }
 
 function gha_download {

@@ -6,12 +6,8 @@ version=$(gfd_ver $repo)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
 depends=(glib2 lua pipewire systemd)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://gitlab.freedesktop.org/pipewire/wireplumber/-/archive/$version/$filename
-fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+gfd_download "$repo" "$version" "$filename"
+unpk_enter "$filename" "$direname"
 mni --prefix=/usr --buildtype=release -D system-lua=true
 sudo su -c "mv -v /usr/share/doc/wireplumber{,-$version}"
 cd ../..

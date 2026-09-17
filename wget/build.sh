@@ -6,9 +6,7 @@ depends=(glibc libidn2 libpsl libunistring openssl pcre2 util-linux zlib)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gnu_download $name $filename
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 NEW_LINE='#if !defined OPENSSL_NO_SSL3_METHOD '
 NEW_LINE+='&& OPENSSL_VERSION_NUMBER < 0x40000000L'
 

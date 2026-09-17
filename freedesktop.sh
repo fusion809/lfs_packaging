@@ -12,7 +12,7 @@ function gfd_ver {
 			name="$name2"
 		fi
 	fi
-	local up_ver=$(fdt_ver $repo)
+	local up_ver=$(fdt_ver $repo $name)
 	local inst_ver=$(pkgver $name)
 	ver_check "$up_ver" "$inst_ver" && return
 

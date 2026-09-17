@@ -1,17 +1,13 @@
 #!/bin/bash
 set -e
 name=wayland-protocols
+repo=wayland/$name
 version=$(way_ver $name)
 depends=(coreutils meson ninja tar wayland wget xz)
 filename="$name-$version.tar.xz"
 direname="$name-$version"
-URL="https://gitlab.freedesktop.org/wayland/$name/-/releases/$version/downloads/$filename"
-if ! [[ -f "$filename" ]]; then
-	wget -c --progress=bar:force $URL 
-fi
-
-tar xf $filename
-cd $direname
+ghr_download "$repo" "$version" "$filename"
+unpk_enter "$filename" "$direname"
 meson_options=(
       --prefix=/usr       \
       --buildtype=release
