@@ -1,33 +1,13 @@
 #!/bin/bash
 set -e
 name=zsh
-get_version() {
-    local inst_ver=$(pkgver $name)
-    local up_ver=$(git ls-remote --tags --refs git://git.code.sf.net/p/zsh/code.git | grep "refs/tags/zsh-[0-9.]*$" | cut -d '-' -f 2 | sort -V | tail -n 1)
-    ver_check "$up_ver" "$inst_ver" && return
-    local git_ver=$(git ls-remote --tags --refs git://git.code.sf.net/p/zsh/code.git | grep "refs/tags/zsh-[0-9.]*$" | cut -d '-' -f 2 | sort -V | tail -n 1)
-    ver_check "$git_ver" "$inst_ver" && return
-
-    local vat_ver=$(vatver $name)
-    ver_check "$vat_ver" "$inst_ver" && return
-
-    local arch_ver=$(aver $name)
-    ver_check "$arch_ver" "$inst_ver" && return
-
-    local lfs_ver=$(lfs_ver $name)
-    ver-check "$lfs_ver" "$inst_ver" && return
-    fver "$name" "$inst_ver"
-}
-version=$(get_version)
+repo=$name/code
+version=$(sf_ver $repo)
 direname="$name-$version"
 filename="$direname.tar.xz"
 depends=(glibc libcap ncurses pcre2 pcre2 perl texinfo)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://sourceforge.net/projects/zsh/files/zsh/$version/$filename
-fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+sf_download $name $version $filename
+unpk_enter "$filename" "$direname"
 ./Util/preconfig
 configure_options=(
     --prefix=/usr \
@@ -47,4 +27,4 @@ if [[ "$old_version" != "$version" ]]; then
 fi
 echo "$version" | sudo tee /var/lib/custom-packages/$name
 cd ..
-rm -rf $filename $direname
+sudo rm -rf $filename $direname

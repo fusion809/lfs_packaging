@@ -295,11 +295,12 @@ function goct_ver {
 
 function gsf_ver {
 	if [[ "$1" == "e2fsprogs/e2fsprogs" ]]; then
-		URL="https://git.kernel.org/pub/scm/fs/ext2/e2fsprogs.git"
+		local URL="https://git.kernel.org/pub/scm/fs/ext2/e2fsprogs.git"
 	else
-		URL="https://git.code.sf.net/p/$1.git"
+		local URL="https://git.code.sf.net/p/$1.git"
 	fi
-    timeout 5 git ls-remote --tags --refs $URL 2>/dev/null | grep -E "tags/[v0-9.]+" | cut -d '/' -f 3 | sed 's/^v//g' | sort -V | tail -n 1
+	local name=$(echo $1 | cut -d '/' -f 1)
+    timeout 5 git ls-remote --tags --refs $URL 2>/dev/null | grep -E "tags/(v?[0-9.]+|${name}-[0-9.]+)" | sed "s/$name-//g" | cut -d '/' -f 3 | sed 's/^v//g' | sort -V | tail -n 1
 }
 
 function gsp_ver {
