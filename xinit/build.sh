@@ -5,12 +5,9 @@ version=$(xfd_ver $name)
 depends=(glibc libX11 libXau libxcb libXdmcp)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.x.org/pub/individual/app/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+xfd_download "$name" "$filename"
+unpk_enter "$filename" "$direname"
+# Compile and install
 cmi --prefix=/usr --with-xinitdir=/etc/X11/app-defaults
 cd ../
 sudo ldconfig

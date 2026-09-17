@@ -6,7 +6,7 @@ version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"
 depends=(bash coreutils fontconfig glibc libpng libX11 libXau libxcb libXdmcp make mesa sed systemd tar util-linux xbitmaps xcb-util xorg-libs xz zlib)
-# Fetch and unpack source
+# Fetch and unpack sources
 xfd_download "$name" "$filename"
 unpk_enter "$filename" "$direname"
 # Compile and install

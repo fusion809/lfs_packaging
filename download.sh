@@ -14,6 +14,14 @@ function download_src {
 		printf '%s\n' "$filename already present."
 	fi
 }
+
+function gfd_download {
+	local repo="$1"
+	local tag="$2"
+	local filename="$3"
+	download_src "https://gitlab.freedesktop.org/$repo/-/archive/$tag/$filename"
+}
+
 function gha_download {
 	local repo=$1
 	local tag=$2

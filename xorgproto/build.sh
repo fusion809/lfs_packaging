@@ -1,8 +1,7 @@
 #!/bin/bash
 set -e
 name=xorgproto
-type=$(get_xfd_type $name)
-version=$(xfd_ver $type $name)
+version=$(xfd_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 xfd_download "$name" "$filename"

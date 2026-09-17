@@ -10,19 +10,13 @@ else
 fi
 direname="$name-$version"
 filename="$direname.tar.xz"
-depends=(bash coreutils glibc make sed spice spice-protocol systemd tar xz)
-wget xorgproto xorg-server)
+depends=(bash coreutils glibc make sed spice spice-protocol systemd tar wget xorgproto xorg-server xz)
 optional_depends=(libcacard) # Smartcard support
 # Fetch and unpack source
-rm -rf $direname
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://xorg.freedesktop.org/releases/individual/driver/$filename
-fi
-tar xf $filename
+xfd_download "$name" "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 patch -p1 < ../libdrm.patch
-
 # autogen.sh can be used in place of configure
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
