@@ -30,7 +30,7 @@ options=(--prefix=/usr                          \
     --disable-rpath-install                \
     --systemd-install-services)
 #PYTHON=$PWD/pyvenv/bin/python3             \
-export XSLTPROC=true
+export XSLTPROC=false
 ./configure "${options[@]}"
 make -j$(nproc)
 sed '1s@^.*$@#!/usr/bin/python3@' \

@@ -7,9 +7,13 @@ librepo=sass/libsass
 libver=$(gh_ver $librepo)
 depends=(gcc glibc)
 filename="$name-$version.tar.gz"
+echo "filename=$filename"
 libfilename="libsass-$libver.tar.gz"
 libdirename="${libfilename/.tar.*/}"
+echo "libfilename=$libfilename"
+echo "libdirename=$libdirename"
 direname="${filename/.tar.*/}"
+echo "direname=$direname"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/archive/$version/$filename
 fi
@@ -21,7 +25,7 @@ tar xf "$libfilename"
 cd "$libdirename"
 sudo autoreconf -fi
 sudo chown $USER -R .
-cmi --prefix --disable-static
+cmi --prefix=/usr --disable-static
 cd ..
 rm -rf "$direname"
 tar xf "$filename"

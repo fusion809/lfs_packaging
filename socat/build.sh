@@ -29,11 +29,19 @@ download_src "https://repo.or.cz/socat.git/snapshot/refs/tags/tag-$version.tar.g
 unpk_enter "$filename" "$direname"
 sed -i -e "s|pName->d.iPAddress->data|ASN1_STRING_get0_data(pName->d.iPAddress)|g" \
 	-e "s|pName->d.iPAddress->length|ASN1_STRING_length(pName->d.iPAddress)|g" xio-openssl.c
+#sudo autoreconf -fiv
+#sudo chown $USER -R .
 configure_options=(
     --prefix=/usr \
     --mandir=/usr/share/man
 )
-cmi "${configure_options[@]}"
+./configure ${configure_options[@]}
+# Documentation doesn't build due to docbook issues
+sed -i -e "s|doc/$name.1||g" Makefile
+sed -i -e '133s|$(srcdir)/||g' Makefile
+sed -i '141,144d' Makefile
+make -j$(nproc) V=1
+sudo make install
 cd ..
 rm -rf "$direname" "$filename"
 echo "$version" | sudo tee /var/lib/custom-packages/$name
