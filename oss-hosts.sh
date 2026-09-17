@@ -169,7 +169,28 @@ function sf_ver {
 	ver_check "$up_ver" "$inst_ver" && return
     local git_ver=$(gsf_ver $repo)
 	ver_check "$git_ver" "$inst_ver" && return
-	local name=$(echo $1 | cut -d '/' -f 1)
+    local vat_ver=$(vatver $name)
+    ver_check "$vat_ver" "$inst_ver" && return
+
+    local arch_ver=$(aver $name)
+	ver_check "$arch_ver" "$inst_ver" && return
+	local lfs_vers=$(lfs_ver $name)
+	ver_check "$lfs_vers" "$inst_ver" && return
+	fver "$name" "$inst_ver"
+}
+
+function sw_ver {
+	local repo=$1
+	if [[ -n $2 ]]; then
+		local name=$2
+	else
+		local name=$(echo $repo | cut -d '/' -f 1)
+    fi
+	local inst_ver=$(pkgver $name)
+    local up_ver=$(wsw_ver $repo)
+	ver_check "$up_ver" "$inst_ver" && return
+    local git_ver=$(gsw_ver $repo)
+	ver_check "$git_ver" "$inst_ver" && return
     local vat_ver=$(vatver $name)
     ver_check "$vat_ver" "$inst_ver" && return
 

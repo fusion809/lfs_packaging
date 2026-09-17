@@ -6,12 +6,8 @@ version=$(gh_ver $repo)
 filename="Vulkan-Headers-vulkan-sdk-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(cmake)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/archive/vulkan-sdk-$version/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+gha_download "$repo" "vulkan-sdk-$version" "$filename"
+unpk_enter "$filename" "$direname"
 cmaki -D CMAKE_INSTALL_PREFIX=/usr -G Ninja
 cd ../..
 rm -rf "$filename" "$direname"

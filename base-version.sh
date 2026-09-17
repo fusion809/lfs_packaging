@@ -319,6 +319,10 @@ function gsp_ver {
     timeout 5 git ls-remote --tags --refs https://gitlab.freedesktop.org/$1.git 2>/dev/null | cut -d '/' -f 3 | grep "[0-9]" | grep -v "server\|common\|client" | sed -E 's|[a-z_-]+||g' | sort -V | tail -n 1
 }
 
+function gsw_ver {
+	timeout 5 git ls-remote --tags --refs https://sourceware.org/git/$1.git | grep -oEi "$1_[0-9_]+" | sed -E 's/[A-Za-z]+_//g' | tr '_' '.' | sort -V | tail -n 1
+}
+
 function gver {
 	local repo=$1
 	wget -T 5 -t 1 -cqO- https://gitweb.gentoo.org/repo/gentoo.git/tree/$repo | grep "\-[0-9]+\.[0-9.]+[_p0-9]*" -oE | grep -v "9999" | grep -vE "[prc][0-9]+" | sed 's/^-//g' | sed 's/\.$//g' | sort -V | tail -n 1
@@ -423,6 +427,10 @@ function wsf_ver {
 function wsp_ver {
 	local repo_url=$(echo $1 | sed "s|/|%2F|g")
     wget --timeout=5 -t 1 -cqO- "https://gitlab.freedesktop.org/api/v4/projects/${repo_url}/releases?per_page=1" | grep -o '"tag_name":"[^"]*"' | grep -v "server" | sed -E 's|[a-z_-]+||g' | head -n 1 | cut -d'"' -f4
+}
+
+function wsw_ver {
+	local ver=$(wget -cqO- -T 5 -t 1 "https://sourceware.org/pub/$1/" | grep "$1-[0-9]+\.[0-9]+\.[0-9]+" -oE | sed "s/$1-//g" | sort -V | tail -n 1)	
 }
 
 function wxfd_ver {

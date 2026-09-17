@@ -56,6 +56,17 @@ function ghr_download {
 	download_src "https://github.com/$repo/releases/download/$direname/$filename"
 }
 
+function gng_download {
+	local name="$1"
+	local version="$2"
+	if [[ -n "$3" ]]; then
+		local filename="$3"
+	else
+		local filename="$name-$version.tar.xz"
+	fi
+	download_src "https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$filename"
+}
+
 function gn_download {
 	local name="$1"
 	local version="$2"
