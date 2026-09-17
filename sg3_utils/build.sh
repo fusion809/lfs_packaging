@@ -6,12 +6,8 @@ version=$(gh_ver $repo)
 depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://sg.danny.cz/sg/p/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://sg.danny.cz/sg/p/$filename"
+unpk_enter "$filename" "$direname"
 sudo autoreconf -fiv
 sudo chown $USER -R .
 cmi --prefix=/usr --disable-static

@@ -6,9 +6,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(acl attr gcc glibc make pcre2 tar wget xz)
 gnu_download "$name" "$filename"
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr html
 sudo install -vDm644 doc/sed.html -t /usr/share/doc/$direname
 cd ..
