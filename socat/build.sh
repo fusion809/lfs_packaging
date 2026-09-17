@@ -25,13 +25,8 @@ filename="$name-$version.tar.gz"
 direname="$name-$version"
 depends=(glibc ncurses openssl readline)
 
-rm -rf $direname
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force http://www.dest-unreach.org/socat/download/$filename
-fi
-
-tar xf "$filename"
-cd "$direname"
+download_src "https://repo.or.cz/socat.git/snapshot/refs/tags/tag-$version.tar.gz" "$filename"
+unpk_enter "$filename" "$direname"
 sed -i -e "s|pName->d.iPAddress->data|ASN1_STRING_get0_data(pName->d.iPAddress)|g" \
 	-e "s|pName->d.iPAddress->length|ASN1_STRING_length(pName->d.iPAddress)|g" xio-openssl.c
 configure_options=(

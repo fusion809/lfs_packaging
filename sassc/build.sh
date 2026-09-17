@@ -14,7 +14,7 @@ if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/archive/$version/$filename
 fi
 if ! [[ -f $libfilename ]]; then
-	wget -c --progress=bar:force https://github.com/$librepo/archive/$version/$libfilename
+	wget -c --progress=bar:force https://github.com/$librepo/archive/$libver/$libfilename
 fi
 rm -rf "$libdirename"
 tar xf "$libfilename"

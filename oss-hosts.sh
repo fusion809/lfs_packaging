@@ -180,16 +180,11 @@ function sf_ver {
 }
 
 function sw_ver {
-	local repo=$1
-	if [[ -n $2 ]]; then
-		local name=$2
-	else
-		local name=$(echo $repo | cut -d '/' -f 1)
-    fi
+	local name=$1
 	local inst_ver=$(pkgver $name)
-    local up_ver=$(wsw_ver $repo)
+    local up_ver=$(wsw_ver $name)
 	ver_check "$up_ver" "$inst_ver" && return
-    local git_ver=$(gsw_ver $repo)
+    local git_ver=$(gsw_ver $name)
 	ver_check "$git_ver" "$inst_ver" && return
     local vat_ver=$(vatver $name)
     ver_check "$vat_ver" "$inst_ver" && return

@@ -93,6 +93,12 @@ function sf_download {
 	download_src "https://sourceforge.net/projects/$name/files/$name/$direname/$filename"
 }
 
+function sw_download {
+	local name=$1
+	local filename=$2
+	download_src "https://sourceware.org/pub/$name/$filename"
+}
+
 function xfd_download {
 	local type=$(get_xfd_type $1)
 	local filename=$2

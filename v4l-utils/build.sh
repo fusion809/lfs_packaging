@@ -18,12 +18,8 @@ version=$(get_version)
 depends=(alsa-lib brotli bzip2 dbus double-conversion elfutils expat fontconfig freetype gcc glib2 glibc glu graphite2 harfbuzz icu json-c libdrm libffi libjpeg-turbo libpciaccess libpng libX11 libXau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa pcre2 qt6 spirv-tools systemd wayland xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.linuxtv.org/downloads/v4l-utils/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://www.linuxtv.org/downloads/v4l-utils/$filename"
+unpk_enter "$filename" "$direname"
 options=(--prefix=/usr       \
       --buildtype=release \
       -D gconv=disabled   \

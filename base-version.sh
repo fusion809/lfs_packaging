@@ -430,7 +430,7 @@ function wsp_ver {
 }
 
 function wsw_ver {
-	local ver=$(wget -cqO- -T 5 -t 1 "https://sourceware.org/pub/$1/" | grep "$1-[0-9]+\.[0-9]+\.[0-9]+" -oE | sed "s/$1-//g" | sort -V | tail -n 1)	
+	wget -cqO- -T 5 -t 1 "https://sourceware.org/pub/$1/" | grep "$1-[0-9]+\.[0-9]+\.[0-9]+" -oE | sed "s/$1-//g" | sort -V | tail -n 1
 }
 
 function wxfd_ver {
