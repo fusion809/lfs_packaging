@@ -18,12 +18,8 @@ version=$(get_version)
 depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/$direname/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+sf_download "$name" "$direname" "$filename"
+unpk_enter "$filename" "$direname"
 make -j$(nproc)
 sudo su -c "make prefix=/usr install                                 &&
 ln -sv -f traceroute /usr/bin/traceroute6                &&

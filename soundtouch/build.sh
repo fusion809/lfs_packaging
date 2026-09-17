@@ -7,7 +7,7 @@ depends=(gcc glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 download_src "https://www.surina.net/soundtouch/$filename"
-unpk_enter "$filename" "$direname"
+unpk_enter "$filename" "$name"
 unset ACLOCAL
 ./bootstrap
 cmi --prefix=/usr --docdir=/usr/share/doc/$direname

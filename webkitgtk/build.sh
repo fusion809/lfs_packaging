@@ -40,6 +40,7 @@ options1=(-D CMAKE_BUILD_TYPE=Release     \
       -D ENABLE_SPEECH_SYNTHESIS=OFF  \
       -W no-author -G Ninja)
 cmaki "${options1[@]}"
+cd ..
 echo "Compiling with GTK+4 support"
 options2=(-D CMAKE_BUILD_TYPE=Release         \
       -D CMAKE_INSTALL_PREFIX=/usr        \
@@ -57,7 +58,6 @@ options2=(-D CMAKE_BUILD_TYPE=Release         \
       -D USE_SYSPROF_CAPTURE=NO           \
       -D ENABLE_SPEECH_SYNTHESIS=OFF      \
       -W no-author -G Ninja)
-rm -rf * .[^.]* &&
 cmaki "${options2[@]}"
 cd ../..
 rm -rf "$filename" "$direname"
