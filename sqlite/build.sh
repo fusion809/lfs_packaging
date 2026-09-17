@@ -28,15 +28,9 @@ version=$(get_version)
 filename="$name-autoconf-$version.tar.gz"
 direname="${filename/.tar.*/}"
 docs_filename="$name-doc-$version.zip"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://sqlite.org/$(date +"%Y")/$filename
-fi
-if ! [[ -f $docs_filename ]]; then
-	wget -c --progress=bar:force https://sqlite.org/$(date +"%Y")/$docs_filename
-fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+download_src "https://sqlite.org/$(date +"%Y")/$filename"
+download_src "https://sqlite.org/$(date +"%Y")/$docs_filename"
+unpk_enter "$filename" "$direname"
 python3 -m zipfile -e ../$docs_filename .
 configure_options=(--prefix=/usr     \
             --disable-static  \

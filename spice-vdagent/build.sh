@@ -8,18 +8,14 @@ direname="$name-$version"
 filename="$direname.tar.bz2"
 depends=(alsa-lib at-spi2-core bash brotli bzip2 cairo coreutils dbus dbus expat fontconfig freetype fribidi gcc gdk-pixbuf glib glib2 glibc glycin graphite2 gtk3 gtk3 harfbuzz lcms2 libdrm libepoxy libffi libpciaccess libpng libseccomp libx11 libX11 libXau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libxinerama libXinerama libxkbcommon libxrandr libXrandr libXrender libXres make pango pcre2 pixman sed spice-protocol systemd tar util-linux wayland wget zlib)
 # Fetch and unpack source
-rm -rf $direname
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.spice-space.org/download/releases/$filename
-fi
-tar xf $filename
+spice_download "$name" "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
-  # Set proper paths
-  sed -i 's|/etc/sysconfig/spice-vdagentd|/etc/conf.d/spice-vdagentd|
+# Set proper paths
+sed -i 's|/etc/sysconfig/spice-vdagentd|/etc/conf.d/spice-vdagentd|
 ' data/spice-vdagentd.service
-  sed -i 's|/etc/sysconfig/spice-vdagentd|/etc/conf.d/spice-vdagentd|' data/spice-vdagentd.1.in
-  sed -i 's/strstr(addr, "\/pci");/(char *)strstr(addr, "\/pci");/' src/vdagent/device-info.c
+sed -i 's|/etc/sysconfig/spice-vdagentd|/etc/conf.d/spice-vdagentd|' data/spice-vdagentd.1.in
+sed -i 's/strstr(addr, "\/pci");/(char *)strstr(addr, "\/pci");/' src/vdagent/device-info.c
 sudo autoreconf -fi
 sudo chown $USER -R .
 export CFLAGS="-O2 -fPIC -Wno-error"

@@ -15,13 +15,9 @@ fi
 direname="$name-$version"
 filename="$direname.tar.bz2"
 # Fetch and unpack source
-rm -rf $direname
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.spice-space.org/download/releases/spice-server/$filename
-fi
-tar xf $filename
+spice_download "$name" "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 configure_options=(

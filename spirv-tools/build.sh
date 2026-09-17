@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=spirv-tools
+repo=KhronosGroup/SPIRV-Tools
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local up_ver=$(wget -cqO- -T 5 -t 1 https://github.com/KhronosGroup/SPIRV-Tools/tags | grep "vulkan-sdk-[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+" -oE | sed 's/vulkan-sdk-//g' | sort -V | tail -n 1)
@@ -18,21 +19,20 @@ get_version() {
 }
 version=$(get_version)
 depends=(gcc glibc)
-filename="SPIRV-Tools-vulkan-sdk-$version.tar.gz"
+tag="vulkan-sdk-$version"
+filename="SPIRV-Tools-$tag.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/archive/vulkan-sdk-$version/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
-options=(-D CMAKE_INSTALL_PREFIX=/usr     \
-      -D CMAKE_BUILD_TYPE=Release      \
-      -D SPIRV_WERROR=OFF              \
-      -D BUILD_SHARED_LIBS=ON          \
-      -D SPIRV_TOOLS_BUILD_STATIC=OFF  \
-      -D SPIRV-Headers_SOURCE_DIR=/usr \
-      -G Ninja)
+gha_download "$repo" "$tag" "$filename"
+unpk_enter "$filename" "$direname"
+options=(
+	-D CMAKE_INSTALL_PREFIX=/usr     \
+    -D CMAKE_BUILD_TYPE=Release      \
+    -D SPIRV_WERROR=OFF              \
+    -D BUILD_SHARED_LIBS=ON          \
+    -D SPIRV_TOOLS_BUILD_STATIC=OFF  \
+    -D SPIRV-Headers_SOURCE_DIR=/usr \
+    -G Ninja
+)
 cmaki "${options[@]}"
 cd ../..
 rm -rf "$filename" "$direname"

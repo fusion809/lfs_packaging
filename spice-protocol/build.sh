@@ -8,13 +8,9 @@ direname="$name-$version"
 filename="$direname.tar.xz"
 depends=(bash coreutils meson ninja sed tar wget)
 # Fetch and unpack source
-rm -rf $direname
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.spice-space.org/download/releases/$filename
-fi
-tar xf $filename
+spice_download "$name" "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 meson_option=(

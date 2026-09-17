@@ -102,6 +102,14 @@ function sf_download {
 	download_src "https://sourceforge.net/projects/$name/files/$name/$direname/$filename"
 }
 
+function spice_download {
+	local name=$1
+	local filename=$2
+	if ! [[ -f $filename ]]; then
+		wget -c --progress=bar:force https://www.spice-space.org/download/releases/$name/$filename
+	fi
+}
+
 function sw_download {
 	local name=$1
 	local filename=$2

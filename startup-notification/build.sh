@@ -18,12 +18,8 @@ version=$(get_version)
 depends=(glibc libX11 libXau libxcb libXdmcp xcb-util)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.freedesktop.org/software/startup-notification/releases/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://www.freedesktop.org/software/startup-notification/releases/$filename"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static
 sudo install -v -m644 -D doc/startup-notification.txt \
     /usr/share/doc/$direname/startup-notification.txt
