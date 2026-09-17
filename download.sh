@@ -70,7 +70,12 @@ function gng_download {
 function gn_download {
 	local name="$1"
 	local version="$2"
-	local majVer=$(echo $version | cut -d '.' -f 1)
+	if [[ $version =~ ^0.[0-9.]+$ ]]; then
+		echo "Matched version"
+		local majVer=$(echo $version | cut -d '.' -f1-2)
+	else
+		local majVer=$(echo $version | cut -d '.' -f 1)
+	fi
 	if [[ -n "$3" ]]; then
 		local filename="$3"
 	else
@@ -103,13 +108,27 @@ function sf_download {
 }
 
 function spice_download {
-	local name=$1
-	local filename=$2
+	local filename=$1
+	local name=$(echo $filename | sed -E 's/-v[0-9.]+.tar.*//g')
+	local version=$(echo $filename | grep -oE "[0-9]+\.[0-9]+[\.]*[0-9]*")
+	local repo=$(spice_repo $name)
+	#if ! [[ -f $filename ]]; then
+	#	wget -c --progress=bar:force https://gitlab.freedesktop.org/$repo/-/archive/v$version/$filename
+	#fi
 	if ! [[ -f $filename ]]; then
-		wget -c --progress=bar:force https://www.spice-space.org/download/releases/$name/$filename
+		wget -c --progress=bar:force https://www.spice-space.org/download/releases/$filename
 	fi
 }
 
+function spice_git {
+	local name=$(echo $repo | rev | cut -d '/' -f 1 | rev)
+	local version=$(gfd_ver $repo)
+	if ! [[ -d $name/.git ]]; then
+		git clone --recursive https://gitlab.freedesktop.org/$repo.git
+	fi
+	cd $name
+	git checkout v$version
+}
 function sw_download {
 	local name=$1
 	local filename=$2

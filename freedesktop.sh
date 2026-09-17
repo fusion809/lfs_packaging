@@ -32,11 +32,7 @@ function gfd_ver {
 
 function spice_ver {
 	local name=$1
-	if [[ "$name" == "spice-vdagent" ]]; then
-		local repo="spice/linux/vd_agent"
-	else
-		local repo="spice/$name"
-	fi
+	local repo=$(spice_repo $name)
 	local up_ver=$(wsp_ver $repo)
 	local inst_ver=$(pkgver $name)
 	ver_check "$up_ver" "$inst_ver" && return

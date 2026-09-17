@@ -15,7 +15,8 @@ fi
 direname="$name-$version"
 filename="$direname.tar.bz2"
 # Fetch and unpack source
-spice_download "$name" "$filename"
+spice_download "$filename"
+#spice_git spice/spice
 unpk_enter "$filename" "$direname"
 # Compile and install
 CFLAGS="-O2 -fPIC"

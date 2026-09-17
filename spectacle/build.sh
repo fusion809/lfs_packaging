@@ -8,6 +8,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
+sed -e 's|OpenCV 4.7|OpenCV 5|' -i CMakeLists.txt
 cmaki -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_LIBEXECDIR=libexec -D BUILD_QT5=OFF -D BUILD_TESTING=OFF
 cd ../..
 rm -rf "$filename" "$direname"

@@ -6,7 +6,7 @@ version=$(way_ver $name)
 depends=(coreutils expat gcc glibc libffi libxml2 meson ninja tar wget xz)
 filename="$name-$version.tar.xz"
 direname="$name-$version"
-ghr_download "$repo" "$version" "$filename"
+gfd_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 meson_options=(
     --prefix=/usr       \

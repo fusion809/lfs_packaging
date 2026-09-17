@@ -16,6 +16,7 @@ options=(-D CMAKE_INSTALL_PREFIX=/usr \
       -D CMAKE_BUILD_TYPE=Release  \
       -W no-author -G Ninja)
 cmaki "${options[@]}"
+sudo rm -rf /usr/share/doc/$direname
 sudo mv -v /usr/share/doc/tiff{,-$version}
 cd ../..
 rm -rf "$filename" "$direname"

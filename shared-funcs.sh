@@ -1,4 +1,5 @@
 #!/bin/bash
+source ~/lfs_packaging/base-funcs.sh
 source ~/lfs_packaging/base-version.sh
 source ~/lfs_packaging/version-checks.sh
 source ~/lfs_packaging/freedesktop.sh
