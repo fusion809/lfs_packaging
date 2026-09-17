@@ -18,12 +18,8 @@ version=$(get_version)
 depends=(glibc)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.kernel.org/pub/linux/bluetooth/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://www.kernel.org/pub/linux/bluetooth/$filename"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static --disable-tester
 cd ../
 rm -rf "$filename" "$direname"

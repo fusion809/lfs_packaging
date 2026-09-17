@@ -14,22 +14,13 @@ echo "libfilename=$libfilename"
 echo "libdirename=$libdirename"
 direname="${filename/.tar.*/}"
 echo "direname=$direname"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/archive/$version/$filename
-fi
-if ! [[ -f $libfilename ]]; then
-	wget -c --progress=bar:force https://github.com/$librepo/archive/$libver/$libfilename
-fi
-rm -rf "$libdirename"
-tar xf "$libfilename"
-cd "$libdirename"
+gha_download "$repo" "$version" "$filename"
+gha_download "$librepo" "$libver" "$libfilename"
+unpk_enter "$libfilename" "$libdirename"
 sudo autoreconf -fi
 sudo chown $USER -R .
 cmi --prefix=/usr --disable-static
-cd ..
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 sudo autoreconf -fi
 sudo chown $USER -R .
 cmi --prefix=/usr

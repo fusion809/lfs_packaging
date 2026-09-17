@@ -11,12 +11,8 @@ get_version() {
 version=$(get_version)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.samba.org/pub/samba/stable/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://download.samba.org/pub/samba/stable/$filename"
+unpk_enter "$filename" "$direname"
 options=(--prefix=/usr                          \
     --sysconfdir=/etc                      \
     --localstatedir=/var                   \
@@ -30,7 +26,7 @@ options=(--prefix=/usr                          \
     --disable-rpath-install                \
     --systemd-install-services)
 #PYTHON=$PWD/pyvenv/bin/python3             \
-export XSLTPROC=false
+export XSLTPROC=false # Required to prevent documentation build failure errors
 ./configure "${options[@]}"
 make -j$(nproc)
 sed '1s@^.*$@#!/usr/bin/python3@' \

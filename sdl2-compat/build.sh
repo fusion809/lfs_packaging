@@ -18,16 +18,14 @@ version=$(get_version)
 depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.libsdl.org/release/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
-cmake_options=(-D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release -D CMAKE_SKIP_INSTALL_RPATH=ON \
-      -D SDL2COMPAT_STATIC=OFF       \
-      -D SDL2COMPAT_TESTS=OFF        \
-      -W no-author -G Ninja)
+download_src "https://www.libsdl.org/release/$filename"
+unpk_enter "$filename" "$direname"
+cmake_options=(
+	-D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release -D CMAKE_SKIP_INSTALL_RPATH=ON \
+    -D SDL2COMPAT_STATIC=OFF       \
+    -D SDL2COMPAT_TESTS=OFF        \
+    -W no-author -G Ninja
+)
 cmaki "${cmake_options[@]}"
 sudo rm -vf /usr/lib/libSDL2_test.a
 cd ../..

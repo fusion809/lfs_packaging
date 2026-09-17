@@ -7,20 +7,18 @@ depends=(brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/archive/v$version/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
-options=(-D CMAKE_INSTALL_PREFIX=/usr        \
+gha_download "$repo" "v$version" "$filename"
+unpk_enter "$filename" "$direname"
+options=(
+      -D CMAKE_INSTALL_PREFIX=/usr        \
       -D CMAKE_BUILD_TYPE=Release         \
       -D CMAKE_POLICY_VERSION_MINIMUM=3.5 \
       -D RUNTIME_DIR=/run/sddm            \
       -D BUILD_MAN_PAGES=ON               \
       -D BUILD_WITH_QT6=ON                \
       -D DATA_INSTALL_DIR=/usr/share/sddm \
-      -D DBUS_CONFIG_FILENAME=sddm_org.freedesktop.DisplayManager.conf)
+      -D DBUS_CONFIG_FILENAME=sddm_org.freedesktop.DisplayManager.conf
+)
 cmaki "${options[@]}"
 sudo tee /etc/pam.d/sddm > /dev/null << 'PAMEOF'
 # Begin /etc/pam.d/sddm
