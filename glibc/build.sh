@@ -5,14 +5,8 @@ version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 gnu_download $name $filename
-rm -rf $direname
-tar xf $filename
-cd $direname
-for i in $(pfile glibc | tr '\n' ' ')
-do
-	wget -c --progress=bar:force https://www.linuxfromscratch.org/patches/lfs/development/$i
-	patch -Np1 -i "$i"
-done
+unpk_enter "$filename" "$direname"
+gap_patches "$name"
 mkdir -v build
 cd       build
 [ -f ../configure ] || (cd .. && autoreconf -fiv)

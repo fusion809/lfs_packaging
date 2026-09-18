@@ -5,16 +5,9 @@ name=glpk
 version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://ftp.gnu.org/gnu/glpk/$filename
-fi
-if ! [[ -f gcc-15.patch ]]; then
-	wget -c --progress=bar:force "https://gitlab.archlinux.org/archlinux/packaging/packages/glpk/-/raw/main/gcc-15.patch?ref_type=heads&inline=false" -O gcc-15.patch
-fi
-tar xf $filename
-rm -rf $direname
-tar xf $filename
-cd $direname
+gnu_download "$name" "$filename"
+download_src "https://gitlab.archlinux.org/archlinux/packaging/packages/glpk/-/raw/main/gcc-15.patch?ref_type=heads&inline=false" "gcc-15.patch"
+unpk_enter "$filename" "$direname"
 patch -Np1 -i ../gcc-15.patch
 CLFAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
