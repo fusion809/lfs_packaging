@@ -6,12 +6,8 @@ version=$(gh_ver $repo)
 depends=(avahi brotli bzip2 cups dbus expat fontconfig freetype gcc ghostscript glibc lcms2 libICE libjpeg-turbo libpaper libpng libSM libwebp libX11 libXau libxcb libxcrypt libXdmcp libXext libXt openjpeg openssl potrace systemd texlive tiff util-linux woff2 xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/$version/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+ghr_download "$repo" "$version" "$filename"
+unpk_enter "$filename" "$direname"
 TEXARCH=$(uname -m | sed -e 's/i.86/i386/' -e 's/$/-linux/') &&
 
 sed -i 's/python/&3/' tests/Makefile.in

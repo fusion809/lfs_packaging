@@ -5,12 +5,8 @@ repo="svaarala/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://duktape.org/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://duktape.org/$filename"
+unpk_enter "$filename" "$direname"
 sed -i 's/-Os/-O2/' Makefile.sharedlibrary
 maki -f Makefile.sharedlibrary INSTALL_PREFIX=/usr
 cd ..

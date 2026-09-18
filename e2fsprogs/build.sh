@@ -5,12 +5,8 @@ version=$(sf_ver $name/$name)
 depends=(bash coreutils gcc glibc gzip make tar wget)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://downloads.sourceforge.net/project/$name/$name/v$version/$filename
-fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+sf_download "$name" "v$version" "$filename"
+unpk_enter "$filename" "$direname"
 mkdir -v build
 cd       build
 ../configure --prefix=/usr       \
