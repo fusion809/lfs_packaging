@@ -8,7 +8,7 @@ version=$(gh_com $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 # Fetch source
-gha_download "$repo" "v$version" "$filename"
+gha_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 # Compile and install
 CFLAGS="-O2 -fPIC"

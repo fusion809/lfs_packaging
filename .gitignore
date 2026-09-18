@@ -56,3 +56,4 @@ iso-codes/iso-codes-v*
 expect/expect*
 libglvnd/libglvnd-*
 soundtouch/soundtouch
+x265/x265_[0-9.]*

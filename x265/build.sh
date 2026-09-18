@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=x265
-repo=multicoreware/$name
+repo=multicoreware/$name"_git"
 version=$(bb_ver $repo $name)
 filename="${name}_$version.tar.gz"
 direname="${filename/.tar.*/}"
