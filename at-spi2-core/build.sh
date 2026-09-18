@@ -7,7 +7,7 @@ depends=(dbus glib2 glibc libffi libX11 libXau libxcb libXdmcp libXext libXi lib
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-gn_download "$name" "$version" "$filename"
+gn_download "$filename"
 unpk_enter "$filename" "$direname"
 options=(
 	--prefix=/usr \

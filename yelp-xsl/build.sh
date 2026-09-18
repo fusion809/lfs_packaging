@@ -5,7 +5,7 @@ repo=GNOME/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-gn_download "$name" "$version" "$filename"
+gn_download "$filename"
 unpk_enter "$filename" "$direname"
 options=(
 	--prefix=/usr \

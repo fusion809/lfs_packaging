@@ -5,7 +5,7 @@ version=$(gn_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(gtk3 gtk4 librsvg)
-gn_download "$name" "$version" "$filename"
+gn_download "$filename"
 unpk_enter "$filename" "$direname"
 mni --prefix=/usr
 cd ../..
