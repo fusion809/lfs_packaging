@@ -11,13 +11,9 @@ depends=()
 	libgudev
 	pygobject sound-theme-freedesktop)
 # Fetch source and unpack it
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$filename
-fi
-rm -rf $direname
-tar xf $filename
+ggn_download "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 meson_options=(
 	--prefix=/usr       \
     --buildtype=release

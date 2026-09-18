@@ -8,15 +8,11 @@ filename="$direname.tar.gz"
 depends=(bash brotli bzip2 cairo coreutils expat fontconfig freetype fribidi gcc gd glib glib2 glibc graphite2 gtk3 gzip harfbuzz libffi libpng libwebp libx11 libX11 libXau libxcb libXdmcp libXext libXrender lua make ncurses pango pango pcre2 pixman qt6 readline tar util-linux zlib)
 # libcaca, libcerf  and wxwidgets are listed for Arch, but seems to run for my uses without them
 # Fetch and unpack source
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://sourceforge.net/projects/gnuplot/files/gnuplot/$version/$filename
-fi
-tar -zxvf $filename
+sf_download "$name" "$version" "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
-
 ./configure --prefix=/usr \
             --sysconfdir=/etc \
             --mandir=/usr/man \
