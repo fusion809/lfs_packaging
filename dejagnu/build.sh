@@ -6,9 +6,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(gcc glibc gzip make tar wget)
 gnu_download $name $filename
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 mkdir -v build
 cd       build
 ../configure --prefix=/usr

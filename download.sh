@@ -113,7 +113,11 @@ function kde_download {
 	local version=$2
 	local majVer=$(echo $version | cut -d '.' -f1-2)
 	local filename=$3
-	download_src "https://download.kde.org/stable/$type/$majVer/$filename"
+	if [[ "$type" == "frameworks" ]]; then
+		download_src "https://download.kde.org/stable/$type/$majVer/$filename"
+	elif [[ "$type" == "app" ]]; then
+		download_src "https://download.kde.org/stable/release-service/$version/src/$filename"
+	fi
 }
 
 function ngnu_download {

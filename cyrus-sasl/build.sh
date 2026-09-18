@@ -6,12 +6,8 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(lmdb)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/$direname/$filename
-fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+ghr_download "$repo" "$direname" "$filename"
+unpk_enter "$filename" "$direname"
 gap_patches $name || echo "Applying patches failed... Continuing anyway."
 sudo autoreconf -fiv
 sudo chown $USER -R .

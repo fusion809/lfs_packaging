@@ -17,13 +17,8 @@ get_version() {
 version=$(get_version)
 filename="$name-$version.zip"
 direname="${filename/.zip/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://archive.docbook.org/xml/$version/$filename
-fi
-rm -rf "$direname"
-mkdir $direname
-cd "$direname"
-unzip ../$filename
+download_src "https://archive.docbook.org/xml/$version/$filename"
+unpk_enter "$filename" "$direname"
 sudo su -c "install -v -d -m755 /usr/share/xml/docbook/xml-dtd-$version &&
 install -v -d -m755 /etc/xml                           &&
 cp -v -af --no-preserve=ownership                      \

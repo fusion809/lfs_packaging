@@ -20,13 +20,13 @@ version=$(get_version)
 depends=(expat glibc libX11 libXau libxcb libXdmcp systemd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://dbus.freedesktop.org/releases/dbus/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
-meson_options=(--prefix=/usr --buildtype=release --wrap-mode=nofallback)
+download_src "https://dbus.freedesktop.org/releases/dbus/$filename"
+unpk_enter "$filename" "$direname"
+meson_options=(
+	--prefix=/usr \
+	--buildtype=release \
+	--wrap-mode=nofallback
+)
 mni "${meson_options[@]}"
 if [ -e /usr/share/doc/dbus ]; then
   sudo rm -rf /usr/share/doc/$direname    &&

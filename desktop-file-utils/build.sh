@@ -6,12 +6,8 @@ version=$(gh_ver $repo)
 depends=(glib2 glibc libffi pcre2 systemd util-linux zlib)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.freedesktop.org/software/desktop-file-utils/releases/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+fd_download "$name" "$filename"
+unpk_enter "$filename" "$direname"
 mni --prefix=/usr --buildtype=release
 cd ../..
 rm -rf "$filename" "$direname"

@@ -7,17 +7,15 @@ depends=(avahi dbus gcc glibc lapack libxcrypt linux-pam openssl systemd xdg-uti
 filename="$name-$version-source.tar.gz"
 direname="${filename/-source.tar.*/}"
 # Kernel options required
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/v$version/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+ghr_download "$repo" "v$version" "$filename"
+unpk_enter "$filename" "$direname"
 sed -i '/& ipp->prev)/s/prev/& \&\& ipp->prev->next == *attr/' cups/ipp.c
-options=(--libdir=/usr/lib            \
-            --with-rundir=/run/cups      \
-            --with-system-groups=lpadmin \
-	    --with-docdir=/usr/share/cups/doc-$version)
+options=(
+    --libdir=/usr/lib            
+    --with-rundir=/run/cups      
+    --with-system-groups=lpadmin 
+	--with-docdir=/usr/share/cups/doc-$version
+)
 cmi "${options[@]}"
 sudo su -c "ln -svnf ../cups/doc-$version /usr/share/doc/$direname
 echo 'ServerName /run/cups/cups.sock' > /etc/cups/client.conf"

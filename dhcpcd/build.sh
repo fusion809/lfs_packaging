@@ -6,17 +6,10 @@ version=$(gh_ver "$repo")
 direname="$name-$version"
 filename="$direname.tar.xz"
 depends=(bash glibc openssl systemd)
-
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/v$version/$filename
-fi
-if ! [[ -f "dhcpcd.service" ]]; then
-	wget -c --progress=bar:force "https://gitlab.archlinux.org/archlinux/packaging/packages/dhcpcd/-/raw/main/dhcpcd.service?ref_type=heads" -O "dhcpcd.service"
-	wget -c --progress=bar:force "https://gitlab.archlinux.org/archlinux/packaging/packages/dhcpcd/-/raw/main/dhcpcd_.service?ref_type=heads" -O "dhcpcd_.service"
-fi
-
-tar xf "$filename"
-cd "$direname"
+ghr_download "$repo" "v$version" "$filename"
+download_src "https://gitlab.archlinux.org/archlinux/packaging/packages/dhcpcd/-/raw/main/dhcpcd.service?ref_type=heads" "dhcpcd.service"
+download_src "https://gitlab.archlinux.org/archlinux/packaging/packages/dhcpcd/-/raw/main/dhcpcd_.service?ref_type=heads" "dhcpcd_.service"
+unpk_enter "$filename" "$direname"
 configure_options=(
 	--dbdir=/var/lib/$name
 	--libexecdir=/usr/lib/$name

@@ -8,15 +8,13 @@ depends=(glibc json-c lvm2 openssl popt systemd util-linux)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 # Kernel options required
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.kernel.org/pub/linux/utils/cryptsetup/v$majVer/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
-options=(--prefix=/usr       \
-            --disable-ssh-token \
-	    --disable-asciidoc)
+download_src "https://www.kernel.org/pub/linux/utils/cryptsetup/v$majVer/$filename"
+unpk_enter "$filename" "$direname"
+options=(
+    --prefix=/usr       
+    --disable-ssh-token 
+	--disable-asciidoc
+)
 cmi "${options[@]}"
 cd ../
 rm -rf "$filename" "$direname"

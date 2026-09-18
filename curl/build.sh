@@ -11,12 +11,8 @@ version=$(get_version)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(brotli cyrus-sasl glibc libidn2 libpsl libpsl libunistring libunistring make-ca nghttp2 nghttp2 openldap openssl zlib zstd)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://curl.se/download/$filename
-fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+download_src "https://curl.se/download/$filename"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static --with-openssl --with-ca-path=/etc/ssl/certs
 sudo su -c "rm -rf docs/examples/.deps &&
 

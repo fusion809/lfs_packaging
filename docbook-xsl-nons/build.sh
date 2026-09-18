@@ -13,12 +13,8 @@ get_version() {
 version=$(get_version)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/release/$version/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+ghr_download "$repo" "release/$version" "$filename"
+unpk_enter "$filename" "$direname"
 gap_patches "$name" || echo "Applying patches failed... Continuing anyway"
 sudo su -c "install -v -m755 -d /usr/share/xml/docbook/xsl-stylesheets-nons-$version &&
 
