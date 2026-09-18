@@ -7,12 +7,8 @@ depends=(at-spi2-core brotli bzip2 cairo dav1d dbus e2fsprogs elfutils enchant e
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/$name/$majVer/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+gn_download "$filename"
+unpk_enter "$filename" "$direname"
 options=(-D CMAKE_INSTALL_PREFIX=/usr \
       -D SYSCONF_INSTALL_DIR=/etc  \
       -D ENABLE_VALA_BINDINGS=ON   \

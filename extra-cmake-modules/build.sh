@@ -7,12 +7,8 @@ majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(cmake qt6)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.kde.org/stable/frameworks/$majVer/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+kde_download "frameworks" "$version" "$filename"
+unpk_enter "$filename" "$direname"
 sed -i '/"lib64"/s/64//' kde-modules/KDEInstallDirsCommon.cmake &&
 
 sed -e '/PACKAGE_INIT/i set(SAVE_PACKAGE_PREFIX_DIR "${PACKAGE_PREFIX_DIR}")' \

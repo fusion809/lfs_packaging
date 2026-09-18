@@ -7,12 +7,8 @@ _version=$(echo $version | sed 's/\./_/g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 depends=(coreutils gcc glibc make tar xz)
-if ! [[ -f $filename ]]; then
-    wget -c --progress=bar:force https://github.com/libexpat/libexpat/releases/download/R_${_version}/$filename
-fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+gha_download $repo "R_${_version}" "$filename"
+unpk_enter "$filename" "$direname"
 options=(--prefix=/usr \
 	--disable-static \
 	--docdir=/usr/share/doc/$direname)

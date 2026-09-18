@@ -2,19 +2,16 @@
 set -e
 # Variable declarations
 name=fastfetch
+repo=fastfetch-cli/$name
 depends=(bash coreutils gcc glibc yyjson zlib
 pulseaudio libxcb libxrandr sqlite)
-version=$(gh_ver "fastfetch-cli/fastfetch")
+version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 
 # Get the source
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/fastfetch-cli/fastfetch/archive/$version.tar.gz -O $filename
-fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+gha_download "$repo" "$version" "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
 mkdir -p build
 cd build

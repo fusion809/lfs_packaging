@@ -19,21 +19,16 @@ version=$(get_version)
 depends=(tcl)
 filename="${name}${version}.tar.gz"
 direname="${filename/.tar.*/}"
-#direname=expect-tcl9
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://prdownloads.sourceforge.net/$name/$filename
-fi
-rm -rf $direname
-tar xf $filename
-#git clone https://github.com/xry111/expect-tcl9
-cd $direname
+download_src "https://prdownloads.sourceforge.net/$name/$filename"
+unpk_enter "$filename" "$direname"
 gap_patches $name
-configure_options=(--prefix=/usr           \
-            --with-tcl=/usr/lib     \
-            --enable-shared         \
-            --disable-rpath         \
-            --mandir=/usr/share/man \
-	    --with-tclinclude=/usr/include)
+configure_options=(
+	--prefix=/usr           \
+    --with-tcl=/usr/lib     \
+    --enable-shared         \
+    --disable-rpath         \
+    --mandir=/usr/share/man \
+	--with-tclinclude=/usr/include)
 cmi "${configure_options[@]}"
 sudo ln -svf expect${version}/libexpect${version}.so /usr/lib
 cd ..

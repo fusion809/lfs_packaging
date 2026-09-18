@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=executor
-version=$(wget -cqO- https://raw.githubusercontent.com/fusion809/executor-raujonas.github.io/refs/heads/master/metadata.json | grep '"version"' | sed 's/.*://g')
+version=$(wget -T 5 -t 1 -cqO- https://raw.githubusercontent.com/fusion809/executor-raujonas.github.io/refs/heads/master/metadata.json | grep '"version"' | sed 's/.*://g')
 depends=(git glib2 gnome-shell gnome-shell-extensions wget)
 
 if ! [[ -d /usr/share/gnome-shell/extensions/executor@raujonas.github.io ]]; then

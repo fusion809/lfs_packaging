@@ -6,12 +6,8 @@ version=$(gfd_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(boost)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://libopenraw.freedesktop.org/download/$filename 
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://libopenraw.freedesktop.org/download/$filename"
+unpk_enter "$filename" "$direname"
 sed -i -r '/^\s?testadobesdk/d' exempi/Makefile.am &&
 sudo autoreconf -fiv
 sudo chown $USER -R .
