@@ -93,8 +93,9 @@ function gng_download {
 
 function gn_download {
 	local filename=$1
-	local version=$(echo $1 | sed -E 's/\.tar\.[a-z0-9]+//g' | rev | cut -d '-' -f 1 | rev)
-	local name=$(echo $1 | sed "s/-$version.tar.*//g")
+	local version=$(echo $filename | sed -E 's/\.tar\.[a-z0-9]+//g' | rev | cut -d '-' -f 1 | rev)
+	local majVer=$(echo $version | cut -d '.' -f1-2)
+	local name=$(echo $filename | sed "s/-$version.tar.*//g")
 	download_src "https://download.gnome.org/sources/$name/$majVer/$filename"
 }
 
