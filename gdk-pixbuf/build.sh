@@ -7,7 +7,6 @@ else
 	version=2.44.7 
 fi
 # 2.44.8 and later require 2.2.x versions of glycin which are pre-release
-majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(docutils glib2 glycin shared-mime-info)

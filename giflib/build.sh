@@ -4,12 +4,8 @@ name=giflib
 version=$(sf_ver giflib/code)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://sourceforge.net/projects/giflib/files/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://sourceforge.net/projects/giflib/files/$filename"
+unpk_enter "$filename" "$direname"
 maki PREFIX=/usr DOCDIR=/usr/share/doc/$direname
 sudo rm -fv /usr/lib/libgif.a
 cd ..

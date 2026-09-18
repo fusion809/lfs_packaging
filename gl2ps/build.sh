@@ -24,25 +24,19 @@ filename="$name-$version.tgz"
 direname=${filename/.tgz/}
 depends=(bash bzip2 cmake coreutils expat freeglut gcc glibc glu gzip libdrm libelf libffi libICE libpciaccess libpng libSM libX11 libXau libxcb libXdmcp libXext libXi libxml2 libXmu libXrandr libXrender libxshmfence libXt libXxf86vm llvm lm-sensors make mesa sed spirv-tools tar util-linux xz zlib zstd)
 # Fetch and unpack source
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://geuz.org/gl2ps/src/$filename
-fi
-rm -rf $direname
-tar xf $filename
+download_src "https://geuz.org/gl2ps/src/$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
-mkdir build
-cd build
 CLFAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 export FORCE_SOURCE_DATE=1 # make pdftex adhere to SOURCE_DATE_EPOCH
-cmake .. \
-  -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_INSTALL_PREFIX=/usr \
-  -DCMAKE_EXE_LINKER_FLAGS=-lm \
-  -DCMAKE_POLICY_VERSION_MINIMUM=3.5
-make -j$(nproc)
-sudo make install
+options=(
+	-DCMAKE_BUILD_TYPE=Release \
+	-DCMAKE_INSTALL_PREFIX=/usr \
+	-DCMAKE_EXE_LINKER_FLAGS=-lm \
+	-DCMAKE_POLICY_VERSION_MINIMUM=3.5
+)
+cmaki "${options[@]}"
 # Cleanup and add to database
 cd ../..
 sudo rm -rf $filename $direname

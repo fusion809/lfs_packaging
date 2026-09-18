@@ -2,16 +2,11 @@
 set -e
 name=glib-networking
 version=$(gn_ver $name)
-majVer=$(echo $version | sed -E "s/\.[0-9]+$//g")
 depends=(glib2 glibc gmp gnutls libffi libidn2 libtasn1 libunistring nettle p11-kit pcre2 systemd util-linux zlib)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/glib-networking/$majVer/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+gn_download "$filename"
+unpk_enter "$filename" "$direname"
 options=(--prefix=/usr        \
    --buildtype=release  \
    -D libproxy=disabled)

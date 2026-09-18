@@ -9,24 +9,10 @@ filename="$_name-$version.tar.xz"
 direname="$_name-$version"
 gobj_filename="gobject-introspection-$gobj_ver.tar.xz"
 gobj_direname="${gobj_filename/.tar.xz/}"
-
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/glib/$(echo $version | sed 's/.[0-9]$//g')/$filename
-fi
-
-if ! [[ -f $gobj_filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/gobject-introspection/$(echo $gobj_ver | sed 's/.[0-9]$//g')/$gobj_filename
-fi
-
-if ! [[ -f glib-skip_warnings-1.patch ]]; then
-	wget -c --progress=bar:force https://www.linuxfromscratch.org/patches/blfs/svn/glib-skip_warnings-1.patch
-fi
-
-rm -rf $direname
-tar xf $filename
-cd $direname
-echo "Patching to remove warnings"
-patch -Np1 -i ../glib-skip_warnings-1.patch
+gn_download "$filename"
+gn_download "$gobj_filename"
+unpk_enter "$filename" "$direname"
+gap_patches "$name"
 echo "Initial build of GLIB2..."
 meson_options=(
       --prefix=/usr             \

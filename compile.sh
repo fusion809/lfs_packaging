@@ -174,7 +174,8 @@ function pfile {
     grep '\.patch' |
     cut -d '/' -f 2 |
     grep -oE '[^[:space:]<"]+\.patch' |
-    grep -v '^[[:space:]]*$'
+    grep -v '^[[:space:]]*$' |
+    uniq
 }
 
 function gap_patches {

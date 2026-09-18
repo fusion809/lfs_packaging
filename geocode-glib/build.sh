@@ -4,7 +4,6 @@ name=geocode-glib
 repo=GNOME/$name
 version=$(gh_ver $repo)
 depends=(brotli e2fsprogs glib2 glibc json-glib keyutils libffi libidn2 libpsl libsoup libunistring mitkrb nghttp2 pcre2 sqlite systemd util-linux zlib)
-majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 gn_download "$filename"

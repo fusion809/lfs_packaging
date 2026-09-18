@@ -6,20 +6,12 @@ version=$(gh_ver $repo)
 depends=(brotli curl cyrus-sasl expat glibc libidn2 libpsl libunistring nghttp2 openldap openssl pcre2 zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.kernel.org/pub/software/scm/git/$filename
-fi
+download_src "https://www.kernel.org/pub/software/scm/git/$filename"
 man_filename="$name-manpages-$version.tar.xz"
-if ! [[ -f $man_filename ]]; then
-	wget -c --progress=bar:force https://www.kernel.org/pub/software/scm/git/$man_filename
-fi
+download_src "https://www.kernel.org/pub/software/scm/git/$man_filename"
 html_filename="$name-htmldocs-$version.tar.xz"
-if ! [[ -f $html_filename ]]; then
-	wget -c --progress=bar:force https://www.kernel.org/pub/software/scm/git/$html_filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://www.kernel.org/pub/software/scm/git/$html_filename"
+unpk_enter "$filename" "$direname"
 ./configure --prefix=/usr --with-gitconfig=/etc/gitconfig --with-python=python3 --with-libpcre2
 make -j$(nproc)
 perl_version=$(pkgver perl)
