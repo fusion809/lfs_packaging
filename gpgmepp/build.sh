@@ -6,12 +6,8 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 depends=(gcc glibc gnupg gpgme libassuan libgpg-error)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.gnupg.org/ftp/gcrypt/$name/$filename
-fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+download_src "https://www.gnupg.org/ftp/gcrypt/$name/$filename"
+unpk_enter "$filename" "$direname"
 cmaki -D CMAKE_INSTALL_PREFIX=/usr
 cd ../..
 rm -rf $filename $direname

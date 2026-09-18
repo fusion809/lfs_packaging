@@ -6,12 +6,8 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
 depends=(glibc gnupg libassuan libgpg-error)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.gnupg.org/ftp/gcrypt/$name/$filename
-fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+download_src "https://www.gnupg.org/ftp/gcrypt/$name/$filename"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static
 cd ..
 rm -rf $filename $direname
