@@ -7,16 +7,14 @@ depends=(brotli bzip2 dbus double-conversion elfutils expat fontconfig freetype 
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.kde.org/stable/frameworks/$majVer/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
-options=(-D CMAKE_INSTALL_PREFIX=/usr \
+kde_download "frameworks" "$version" "$filename"
+unpk_enter "$filename" "$direname"
+options=(
+      -D CMAKE_INSTALL_PREFIX=/usr \
       -D BUILD_TESTING=OFF         \
       -D WITH_ICON_GENERATION=OFF  \
-      -W no-author)
+      -W no-author
+)
 cmaki "${options[@]}"
 cd ../..
 rm -rf "$filename" "$direname"

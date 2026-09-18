@@ -320,7 +320,7 @@ function gsp_ver {
 }
 
 function gsw_ver {
-	timeout 5 git ls-remote --tags --refs https://sourceware.org/git/$1.git | grep -oEi "$1_[0-9_]+" | sed -E 's/[A-Za-z]+_//g' | tr '_' '.' | sort -V | tail -n 1
+	timeout 5 git ls-remote --tags --refs https://sourceware.org/git/$1.git | grep -oEi "$1[_-]*[0-9_.]+" | sed -E 's/^[A-Za-z0-9]+[_-]//g' | tr '_' '.' | sort -V | tail -n 1
 }
 
 function gver {

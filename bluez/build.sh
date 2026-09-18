@@ -7,16 +7,14 @@ depends=(dbus gcc glib2 glibc icu libical ncurses pcre2 readline systemd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 # Kernel config options required
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.kernel.org/pub/linux/bluetooth/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
-options=(--prefix=/usr         \
-            --sysconfdir=/etc     \
-            --localstatedir=/var  \
-	    --enable-library)
+download_src "https://www.kernel.org/pub/linux/bluetooth/$filename"
+unpk_enter "$filename" "$direname"
+options=(
+    --prefix=/usr         \
+    --sysconfdir=/etc     \
+    --localstatedir=/var  \
+    --enable-library
+)
 cmi "${options[@]}"
 sudo su -c "ln -svf ../libexec/bluetooth/bluetoothd /usr/sbin
 install -v -dm555 /etc/bluetooth &&

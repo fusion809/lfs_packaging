@@ -6,12 +6,8 @@ version=$(gh_ver $repo)
 filename="$name-$version-b2-nodocs.tar.xz"
 direname="$name-$version"
 depends=(which)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/$direname/$filename
-fi
-sudo rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+gha_download "$repo" "$direname" "$filename"
+unpk_enter "$filename" "$direname"
 ./bootstrap.sh --prefix=/usr --with-python=python3 &&
 ./b2 stage -j$(nproc) threading=multi link=shared
 sudo ./b2 install threading=multi link=shared

@@ -7,12 +7,8 @@ depends=(glibc libcap)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 # User namespace support is required in the kernel
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/containers/bubblewrap/releases/download/v$version/$filename
-fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+ghr_download "$repo" "v$version" "$filename"
+unpk_enter "$filename" "$direname"
 mni --prefix=/usr --buildtype=release
 cd ../..
 rm -rf $filename $direname

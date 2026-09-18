@@ -6,15 +6,13 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(cmake)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/archive/v$version/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
-cmake_options=(-D CMAKE_INSTALL_PREFIX=/usr        \
+gha_download "$repo" "v$version" "$filename"
+unpk_enter "$filename" "$direname"
+cmake_options=(
+    -D CMAKE_INSTALL_PREFIX=/usr        \
 	-D CMAKE_BUILD_TYPE=Release  \
-	-G Ninja)
+	-G Ninja
+)
 cmaki "${cmake_options[@]}"
 cd ..
 
