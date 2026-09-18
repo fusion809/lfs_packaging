@@ -21,12 +21,8 @@ version=$(get_version)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
 depends=(acl brotli bzip2 curl cyrus-sasl gcc glibc json-c libarchive libarchive libelf libidn2 libpsl libunistring libxml2 lz4 nghttp2 openldap openssl sqlite xz zlib zstd)
-if ! [[ -f $filename ]]; then
-        wget -c --progress=bar:force https://sourceware.org/elfutils/ftp/$version/$filename
-fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+download_src "https://sourceware.org/elfutils/ftp/$version/$filename"
+unpk_enter "$filename" "$direname"
 ./configure --prefix=/usr        \
             --disable-debuginfod \
             --enable-libdebuginfod=dummy
