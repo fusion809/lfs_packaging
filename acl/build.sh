@@ -6,11 +6,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(gcc glibc make tar wget xz)
 download_src https://download.savannah.nongnu.org/releases/$name/$filename || download_git https://git.savannah.nongnu.org/git/$name.git
-if [[ -f $filename ]]; then
-	rm -rf $direname && tar xf $filename && cd $direname
-elif [[ -d $name ]]; then
-	cd $name && git checkout v$version
-fi
+unpk_enter "$name" "$version"
 cmi --prefix=/usr --disable-static --sysconfdir=/etc --docdir=/usr/share/doc/$direname
 cd ..
 rm -rf $filename $direname $name

@@ -23,13 +23,9 @@ pip_depends=()
 direname="$name-$version"
 filename="$direname.tar.xz"
 # Fetch and unpack source
-rm -rf $direname
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force http://people.freedesktop.org/~hughsient/appstream-glib/releases/$filename
-fi
-tar xf $filename
+download_src "http://people.freedesktop.org/~hughsient/appstream-glib/releases/$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 meson_options=(
 	--prefix=/usr            \
     --buildtype=release      \
@@ -39,6 +35,6 @@ meson_options=(
 # sed no longer needed for 1.1.4+ (xsl-ns -> xsl change was for older versions)
 mni "${meson_options[@]}"
 # Cleanup and add to database
-cd ..
+cd ../..
 rm -rf $filename $direname
 echo $version | sudo tee /var/lib/custom-packages/$name

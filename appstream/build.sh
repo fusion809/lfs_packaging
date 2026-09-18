@@ -10,30 +10,26 @@ upName=AppStream;
 direname="$upName-$version"
 filename="$direname.tar.xz"
 # Fetch and unpack source
-rm -rf $direname
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.freedesktop.org/software/appstream/releases/$filename
-fi
-tar xf $filename
+download_src "https://www.freedesktop.org/software/appstream/releases/$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 # sed no longer needed for 1.1.4+ (xsl-ns -> xsl change was for older versions)
 # qt=true needed for plasma-workspace to build
 meson_options=(
-            --prefix=/usr            \
-            --buildtype=release      \
-            -D apidocs=false         \
+        --prefix=/usr            \
+        --buildtype=release      \
+        -D apidocs=false         \
 	    -D qt=true               \
-            -D bash-completion=false \
-            -D stemming=false        \
-            -D man=false
+        -D bash-completion=false \
+        -D stemming=false        \
+        -D man=false
 )
 mni "${meson_options[@]}"
 sudo rm -rf /usr/share/doc/appstream-$version
 sudo mv -v /usr/share/doc/appstream{,-$version}
 # Cleanup and add to database
-cd ..
+cd ../..
 rm -rf $filename $direname
 echo $version | sudo tee /var/lib/custom-packages/$name

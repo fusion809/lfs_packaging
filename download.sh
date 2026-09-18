@@ -31,9 +31,7 @@ function download_src {
 function bb_download {
 	local repo=$1
 	local filename=$2
-	if ! [[ -f $filename ]]; then
-		wget -c --progress=bar:force https://bitbucket.org/$repo/downloads/$filename
-	fi
+	download_src "https://bitbucket.org/$repo/downloads/$filename"
 }
 
 function gfd_download {
@@ -109,10 +107,15 @@ function kde_download {
 	local version=$2
 	local majVer=$(echo $version | cut -d '.' -f1-2)
 	local filename=$3
-	if ! [[ -f $filename ]]; then
-		wget -c --progress=bar:force https://download.kde.org/stable/$type/$majVer/$filename
-	fi
+	download_src "https://download.kde.org/stable/$type/$majVer/$filename"
 }
+
+function ngnu_download {
+	local name=$1
+	local filename=$2
+	download_src "https://download.savannah.nongnu.org/releases/$name/$filename"
+}
+
 function sf_download {
 	local name=$1
 	local direname=$2
@@ -125,12 +128,7 @@ function spice_download {
 	local name=$(echo $filename | sed -E 's/-v[0-9.]+.tar.*//g')
 	local version=$(echo $filename | grep -oE "[0-9]+\.[0-9]+[\.]*[0-9]*")
 	local repo=$(spice_repo $name)
-	#if ! [[ -f $filename ]]; then
-	#	wget -c --progress=bar:force https://gitlab.freedesktop.org/$repo/-/archive/v$version/$filename
-	#fi
-	if ! [[ -f $filename ]]; then
-		wget -c --progress=bar:force https://www.spice-space.org/download/releases/$filename
-	fi
+	download_src "https://www.spice-space.org/download/releases/$filename"
 }
 
 function spice_git {
@@ -139,8 +137,7 @@ function spice_git {
 	if ! [[ -d $name/.git ]]; then
 		git clone --recursive https://gitlab.freedesktop.org/$repo.git
 	fi
-	cd $name
-	git checkout v$version
+	git -C $name checkout v$version
 }
 function sw_download {
 	local name=$1

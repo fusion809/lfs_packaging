@@ -3,18 +3,15 @@ set -e
 # Variable declarations
 name="arpack"
 _name="arpack-ng"
-version=$(gh_ver "opencollab/arpack-ng")
+repo="opencollab/arpack-ng"
+version=$(gh_ver $repo)
 depends=(bash coreutils gcc gcc glibc gzip hwloc lapack libevent libfabric make numactl openmpi openpmix sed systemd tar wget)
 filename="$_name-$version.tar.gz"
 direname=${filename/.tar.gz/}
 # Fetch and unpack source
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/opencollab/arpack-ng/archive/$version.tar.gz -O $filename
-fi
-rm -rf $direname
-tar xf $filename
+gha_download "$repo" "$version" "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 sudo ./bootstrap

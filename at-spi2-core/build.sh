@@ -7,13 +7,13 @@ depends=(dbus glib2 glibc libffi libX11 libXau libxcb libXdmcp libXext libXi lib
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/$name/$majVer/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
-options=(--prefix=/usr --buildtype=release -D gtk2_atk_adaptor=false)
+gn_download "$name" "$version" "$filename"
+unpk_enter "$filename" "$direname"
+options=(
+	--prefix=/usr \
+	--buildtype=release \
+	-D gtk2_atk_adaptor=false
+)
 mni "${options[@]}"
 cd ../..
 rm -rf "$filename" "$direname"
