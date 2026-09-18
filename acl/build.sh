@@ -5,9 +5,7 @@ version=$(ngnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(gcc glibc make tar wget xz)
-if ! [[ -f $filename ]] && ! [[ -d $name ]] ; then
-	wget -c --progress=bar:force https://download.savannah.nongnu.org/releases/$name/$filename || ( git clone https://git.savannah.nongnu.org/git/$name.git )
-fi
+download_src https://download.savannah.nongnu.org/releases/$name/$filename || download_git https://git.savannah.nongnu.org/git/$name.git
 if [[ -f $filename ]]; then
 	rm -rf $direname && tar xf $filename && cd $direname
 elif [[ -d $name ]]; then

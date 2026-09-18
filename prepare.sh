@@ -76,25 +76,31 @@ function file_ext {
 }
 
 function unpk_enter {
-    local filename=$1
-    if [[ -n $2 ]]; then
-        local direname=$2
+    if ! [[ -d $1/.git ]]; then
+    	local filename=$1
+   	if [[ -n $2 ]]; then
+        	local direname=$2
+	    else
+        	local direname=$(strip_file_ext $filename)
+	    fi
+	    sudo rm -rf $direname
+	    case $(file_ext $filename) in
+			tar.*|tgz) tar xf $filename ;;
+			zip) unzip $filename ;;
+			gz) gunzip $filename ;;
+			lz) lzip -d $filename ;;
+			lzma) lzma -d $filename ;;
+			bz2) bunzip2 $filename ;;
+			xz) xz -d $filename ;;
+			zst) zstd -d $filename ;;
+			*)
+				printf '%s\n' "Didn't decompress $filename"
+				;;
+		esac
+    	cd $direname
     else
-        local direname=$(strip_file_ext $filename)
+	    local name=$1
+	    local version=$2
+	    cd $name && git checkout v$version
     fi
-    sudo rm -rf $direname
-    case $(file_ext $filename) in
-		tar.*|tgz) tar xf $filename ;;
-		zip) unzip $filename ;;
-		gz) gunzip $filename ;;
-		lz) lzip -d $filename ;;
-		lzma) lzma -d $filename ;;
-		bz2) bunzip2 $filename ;;
-		xz) xz -d $filename ;;
-		zst) zstd -d $filename ;;
-		*)
-			printf '%s\n' "Didn't decompress $filename"
-			;;
-	esac
-    cd $direname
 }

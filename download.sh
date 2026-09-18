@@ -1,4 +1,17 @@
 #!/bin/bash
+function download_git {
+	if [[ -n $2 ]]; then
+		local name=$2
+	else
+		local name=$(echo $1 | rev | cut -d '/' -f 1 | rev | sed 's/.git//g')
+	fi
+	local URL=$1
+	if ! [[ -d $name/.git ]]; then
+		git clone $URL $name
+	else
+		git -C $name fetch --tags origin
+	fi
+}
 function download_src {
 	local URL=$1
 	if [[ -n $2 ]]; then
