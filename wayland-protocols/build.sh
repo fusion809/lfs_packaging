@@ -4,7 +4,7 @@ name=wayland-protocols
 repo=wayland/$name
 version=$(way_ver $name)
 depends=(coreutils meson ninja tar wayland wget xz)
-filename="$name-$version.tar.xz"
+filename="$name-$version.tar.gz"
 direname="$name-$version"
 gfd_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"

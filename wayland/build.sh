@@ -4,7 +4,7 @@ name=wayland
 repo=$name/$name
 version=$(way_ver $name)
 depends=(coreutils expat gcc glibc libffi libxml2 meson ninja tar wget xz)
-filename="$name-$version.tar.xz"
+filename="$name-$version.tar.gz"
 direname="$name-$version"
 gfd_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
