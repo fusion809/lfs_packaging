@@ -8,13 +8,10 @@ depends=(accountsservice glib2 glibc json-glib keyutils libffi libgudev libXau l
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/$name/$majVer/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
-options=(--prefix=/usr        \
+gn_download "$filename"
+unpk_enter "$filename" "$direname"
+options=(
+      --prefix=/usr        \
       --buildtype=release  \
       -D gdm-xsession=true \
       -D run-dir=/run/gdm)

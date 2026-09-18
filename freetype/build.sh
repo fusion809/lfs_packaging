@@ -6,12 +6,8 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(brotli bzip2 gcc glibc harfbuzz hdf5 libaec libpng zlib)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://downloads.sourceforge.net/freetype/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://downloads.sourceforge.net/freetype/$filename"
+unpk_enter "$filename" "$direname"
 sed -ri "s:.*(AUX_MODULES.*valid):\1:" modules.cfg &&
 
 sed -r "s:.*(#.*SUBPIXEL_RENDERING) .*:\1:" \

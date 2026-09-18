@@ -6,13 +6,12 @@ version=$(gh_ver $repo)
 depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/$direname/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
-meson_options=(--prefix=/usr                   --buildtype=release)
+ghr_download "$repo" "$direname" "$filename"
+unpk_enter "$filename" "$direname"
+meson_options=(
+    --prefix=/usr \
+    --buildtype=release
+)
 mni "${meson_options[@]}"
 sudo su -c "chmod u+s /usr/bin/fusermount3 &&
 

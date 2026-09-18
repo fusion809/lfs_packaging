@@ -7,12 +7,8 @@ direname="$name-$version"
 filename="$direname.tar.xz"
 depends=(bash coreutils gcc glib glib2 glibc gtk-doc libffi meson ninja pcre2 sed tar util-linux vala xz zlib)
 # Fetch and unpack source
-rm -rf $direname
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/gcab/$version/$filename
-fi
-tar xf $filename
-cd $direname
+gn_download "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
 meson_options=(
   --buildtype=release \
@@ -26,9 +22,7 @@ meson_options=(
 )
 mni "${meson_options[@]}"
 cd ..
-
 sudo rm -f /usr/lib*/*.la
-
 sudo mkdir -p /usr/share/doc/$direname
 sudo cp -a \
    COPYING NEWS README.md RELEASE \

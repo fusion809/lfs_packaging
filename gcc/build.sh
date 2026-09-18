@@ -6,9 +6,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(gcc glibc make ncurses tar wget xz)
 gnu_download $name $filename
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 sed -e '/m64=/s/lib64/lib/' \
         -i.orig gcc/config/i386/t-linux64
 mkdir -v build

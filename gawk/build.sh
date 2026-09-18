@@ -6,9 +6,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(gcc glibc gmp make mpfr ncurses readline tar wget xz)
 gnu_download $name $filename
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 sed -i 's/extras//' Makefile.in
 cmi --prefix=/usr
 cd ..

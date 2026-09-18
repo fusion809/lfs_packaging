@@ -20,8 +20,6 @@ git -C "$name" submodule update --init --recursive --depth=1
 # Compile and install
 cd "$name"
 sudo rm -rf build
-mkdir build
-cd build
 meson_options=(
     --prefix=/usr       \
     --buildtype=release \
@@ -29,5 +27,5 @@ meson_options=(
 )
 mni "${meson_options[@]}"
 # Cleanup and add to database
-cd ..
+cd ../..
 echo $version | sudo tee /var/lib/custom-packages/$name

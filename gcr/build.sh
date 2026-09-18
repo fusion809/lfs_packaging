@@ -7,15 +7,15 @@ depends=(at-spi2-core brotli bzip2 cairo dbus expat fontconfig freetype fribidi 
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/$name/$majVer/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+gn_download "$filename"
+unpk_enter "$filename" "$direname"
 sed -i 's:"/desktop:"/org:' schema/*.xml
-options=(--prefix=/usr --buildtype=release -D gtk_doc=false    \
-            -D ssh_agent=false)
+options=(
+    --prefix=/usr \
+    --buildtype=release \
+    -D gtk_doc=false \
+    -D ssh_agent=false
+)
 mni "${options[@]}"
 cd ../..
 rm -rf "$filename" "$direname"

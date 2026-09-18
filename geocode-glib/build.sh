@@ -7,14 +7,14 @@ depends=(brotli e2fsprogs glib2 glibc json-glib keyutils libffi libidn2 libpsl l
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/$name/$majVer/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
-options=(--prefix=/usr --buildtype=release -D enable-gtk-doc=false \
-            -D soup2=false)
+gn_download "$filename"
+unpk_enter "$filename" "$direname"
+options=(
+	--prefix=/usr 
+	--buildtype=release 
+	-D enable-gtk-doc=false 
+	-D soup2=false
+)
 mni "${options[@]}"
 cd ../..
 rm -rf "$filename" "$direname"

@@ -8,13 +8,12 @@ depends=(brotli bzip2 cairo elfutils expat fontconfig freetype fribidi gcc gdk-p
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$_name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/$_name/$majVer/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
-options=(--prefix=/usr --buildtype=release -D gtk_doc=false)
+gn_download "$filename"
+unpk_enter "$filename" "$direname"
+options=(
+	--prefix=/usr \
+	--buildtype=release \
+	-D gtk_doc=false)
 mni "${options[@]}"
 cd ../..
 rm -rf "$filename" "$direname"
