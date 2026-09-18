@@ -6,9 +6,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(gcc glibc make ncurses readline tar wget xz)
 gnu_download $name $filename
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static --docdir=/usr/share/doc/$direname
 sudo chmod -v 0755 /usr/lib/preloadable_libintl.so
 cd ..

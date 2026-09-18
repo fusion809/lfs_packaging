@@ -7,12 +7,9 @@ verd=$(echo $version | sed 's/\.//g')
 depends=(at-spi2-core avahi brotli bzip2 cairo cups dbus expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz lcms2 libepoxy libffi libICE libjpeg-turbo libpaper libpng libseccomp libSM libtiff libwebp libX11 libXau libxcb libXcomposite libxcrypt libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libXrandr libXrender libXres libXt openjpeg openssl pango pcre2 pixman systemd util-linux wayland xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/gs$verd/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+ghr_download "$repo" "gs$verd" "$filename"
+unpk_enter "$filename" "$direname"
+# Remove system-wide installed dependencies
 rm -rf freetype lcms2mt jpeg libpng openjpeg zlib
 ./configure --prefix=/usr --disable-compile-inits --with-system-libtiff CFLAGS="${CFLAGS:--g -O3} -fPIC"
 make -j$(nproc)
