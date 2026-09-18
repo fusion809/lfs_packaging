@@ -25,7 +25,7 @@ function gn_ver {
 		local up_ver=$(wgn_ver "glib")
 		ver_check "$up_ver" "$inst_ver" && return
 
-		local git_ver=$(gglib2_ver)
+		local git_ver=$(ggn_ver "glib2" "glib")
 		ver_check "$git_ver" "$inst_ver" && return
 
 		local arch_ver=$(aver "glib2")
