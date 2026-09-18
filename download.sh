@@ -34,6 +34,12 @@ function bb_download {
 	download_src "https://bitbucket.org/$repo/downloads/$filename"
 }
 
+function fd_download {
+	local name=$1
+	local filename=$2
+	download_src "https://www.freedesktop.org/software/$name/releases/$filename"
+}
+
 function gfd_download {
 	local repo="$1"
 	local tag="$2"

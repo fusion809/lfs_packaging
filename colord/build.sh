@@ -17,13 +17,9 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 depends=(dbus glib2 glib2 glibc json-glib lcms2 libffi libgudev libgusb libusb pcre2 polkit polkit sqlite systemd systemd util-linux vala webkitgtk zlib)
 # Fetch source and unpack it
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.freedesktop.org/software/colord/releases/$filename
-fi
-rm -rf $direname
-tar xf $filename
+fd_download "$name" "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 sudo groupadd -g 71 colord &&
 sudo useradd -c "Color Daemon Owner" -d /var/lib/colord -u 71 \
         -g colord -s /bin/false colord

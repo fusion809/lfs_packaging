@@ -6,16 +6,8 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(acl attr autoconf automake gcc glibc gmp libcap m4 make openssl patch tar wget xz)
 gnu_download $name $filename
-patch_filename=$(wget -cqO- https://www.linuxfromscratch.org/lfs/view/systemd/chapter08/coreutils.html | grep "\.patch" | cut -d '/' -f 2 | sed 's/<//g')
-if [[ -n $patch_filename ]] && ( ! [[ -f $patch_filename ]] ); then
-    wget -c --progress=bar:force https://www.linuxfromscratch.org/patches/lfs/development/$patch_filename
-fi
-rm -rf $direname
-tar xf $filename
-cd $direname
-if [[ -n $patch_filename ]]; then
-    patch -Np1 -i ../$patch_filename
-fi
+unpk_enter "$filename" "$direname"
+gap_patches "$name"
 sudo autoreconf -fv
 sudo chown $USER -R .
 automake -af

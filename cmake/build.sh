@@ -22,12 +22,8 @@ majVer=$(echo $version | sed -E 's/.[0-9]+$//g')
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(curl libarchive libuv nghttp2)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://cmake.org/files/v$majVer/$filename
-fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+download_src "https://cmake.org/files/v$majVer/$filename"
+unpk_enter "$filename" "$direname"
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake &&
 
 ./bootstrap --prefix=/usr        \
@@ -37,8 +33,7 @@ sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake &&
             --no-system-cppdap   \
             --no-system-librhash \
             --docdir=/share/doc/$direname &&
-make -j$(nproc)
-sudo make install
+maki
 cd ..
 rm -rf $filename $direname
 echo $version | sudo tee /var/lib/custom-packages/$name

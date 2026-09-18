@@ -6,14 +6,8 @@ version=$(gh_ver $repo)
 depends=(glibc)
 filename="$name-III-$version.src.tgz"
 direname="${filename/.src.tgz/}"
-echo "filename=$filename"
-echo "direname=$direname"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://downloads.xiph.org/releases/cdparanoia/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://downloads.xiph.org/releases/cdparanoia/$filename"
+unpk_enter "$filename" "$direname"
 gap_patches "$name" || echo "Apply patches failed... Continuing"
 ./configure --prefix=/usr --mandir=/usr/share/man
 make -j1

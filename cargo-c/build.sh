@@ -6,13 +6,9 @@ version=$(gh_ver $repo)
 depends=(brotli curl cyrus-sasl gcc glibc libidn2 libpsl libssh2 libunistring nghttp2 openldap openssl sqlite zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/archive/v$version/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
-curl -fLO https://github.com/lu-zero/cargo-c/releases/download/v$version/Cargo.lock
+gha_download "$repo" "v$version" "$filename"
+unpk_enter "$filename" "$direname"
+ghr_download "$repo" "v$version" "Cargo.lock"
 export LIBSSH2_SYS_USE_PKG_CONFIG=1    &&
 export LIBSQLITE3_SYS_USE_PKG_CONFIG=1 &&
 
