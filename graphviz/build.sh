@@ -6,12 +6,8 @@ version=$(gl_ver $repo)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
 depends=(cairo cmake fontconfig libpng pango xorg-libs)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://gitlab.com/graphviz/graphviz/-/archive/$version/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+gla_download "$repo" "$version" "$filename"
+unpk_enter "$filename" "$direname"
 sed '/ORIGIN/d' -i lib/CMakeLists.txt
 mkdir -p build &&
 cd    build &&

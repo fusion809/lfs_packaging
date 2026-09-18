@@ -18,13 +18,9 @@ version=$(get_version)
 _archive="GraphicsMagick-$version"
 depends=(bash brotli bzip2 coreutils freetype gcc glibc highway jasper lcms2 libaom libde265 libheif libICE libjpeg-turbo libjxl libpng libsm libSM libtiff libtool libwebp libwmf libwmf libX11 libXau libxcb libXdmcp libxext libXext libxml2 littlecms numactl perl tar util-linux webkitgtk wget x264 x265 xz zlib zstd)
 # Fetch and unpack source
-if ! [[ -f $_archive.tar.xz ]]; then
-	wget -c --progress=bar:force https://downloads.sourceforge.net/project/$name/$name/$version/$_archive.tar.xz
-fi
-sudo rm -rf $_archive
-tar xf $_archive.tar.xz
+sf_download "$name" "$version" "$_archive.tar.xz"
+unpk_enter "$_archive.tar.xz" "$_archive"
 # Compile and install
-cd $_archive
 CLFAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 sed -e "s:freetype_config='':freetype_config='/usr/bin/pkg-config freetype2':g" -i configure

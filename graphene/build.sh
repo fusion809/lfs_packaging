@@ -7,12 +7,8 @@ majVer=$(echo $version | sed -E 's/.[0-9]+//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(glib2)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/graphene/$majver/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+gn_download "$filename"
+unpk_enter "$filename" "$direname"
 mni --prefix=/usr --buildtype=release
 cd ../..
 rm -rf "$filename" "$direname"

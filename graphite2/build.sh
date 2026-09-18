@@ -6,12 +6,8 @@ version=$(gh_ver $repo)
 filename="$name-$version.tgz"
 direname="${filename/.tgz/}"
 depends=(cmake)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/silnrsi/graphite/releases/download/$version/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+ghr_download "$repo" "$version" "$filename"
+unpk_enter "$filename" "$direname"
 sed -i '/cmake_policy(SET CMP0012 NEW)/d' CMakeLists.txt &&
 sed -i 's/PythonInterp/Python3/' CMakeLists.txt          &&
 find . -name CMakeLists.txt | xargs sed -i 's/VERSION 2.8.0 FATAL_ERROR/VERSION 4.0.0/'

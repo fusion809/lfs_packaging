@@ -80,6 +80,15 @@ function ghr_download {
 	download_src "https://github.com/$repo/releases/download/$direname/$filename"
 }
 
+function gla_download {
+	local repo=$1
+	local tag=$2
+	local filename=$3
+	if ! [[ -f $filename ]]; then
+		wget -c --progress=bar:force https://gitlab.com/$repo/-/archive/$tag/$filename
+	fi
+}
+
 function gng_download {
 	local name="$1"
 	local version="$2"

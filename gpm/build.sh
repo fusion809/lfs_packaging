@@ -17,12 +17,8 @@ version=$(get_version)
 depends=(glibc ncurses)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://anduin.linuxfromscratch.org/BLFS/gpm/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://anduin.linuxfromscratch.org/BLFS/gpm/$filename"
+unpk_enter "$filename" "$direname"
 gap_patches $name
 sudo ./autogen.sh
 sudo chown $USER -R .
