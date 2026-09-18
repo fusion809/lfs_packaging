@@ -6,12 +6,8 @@ version=$(gh_ver $repo)
 depends=(alsa-lib brotli bzip2 dav1d expat fdk-aac fontconfig freetype fribidi gcc glib2 glibc graphite2 harfbuzz lame libaom libass libdrm libogg libpng libva libvorbis libvpx libX11 libXau libxcb libXdmcp libXext libXfixes libXv numactl openssl opus pcre2 sdl2-compat svt-av1 x264 x265 xz zlib)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://ffmpeg.org/releases/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://ffmpeg.org/releases/$filename"
+unpk_enter "$filename" "$direname"
 gap_patches $name || echo "Patching failed."
 options=(--prefix=/usr \
 	--enable-gpl         \

@@ -6,12 +6,8 @@ version=$(gfd_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(freetype)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://gitlab.freedesktop.org/api/v4/projects/890/packages/generic/fontconfig/$version/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://gitlab.freedesktop.org/api/v4/projects/890/packages/generic/fontconfig/$version/$filename"
+unpk_enter "$filename" "$direname"
 configure_options=(--prefix=/usr        \
             --sysconfdir=/etc    \
             --localstatedir=/var \

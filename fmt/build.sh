@@ -6,13 +6,10 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(cmake gcc glibc)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/fmtlib/fmt/archive/$version/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
-cmake_options=(-D CMAKE_INSTALL_PREFIX=/usr     \
+ghr_download "$repo" "$version" "$filename"
+unpk_enter "$filename" "$direname"
+cmake_options=(
+      -D CMAKE_INSTALL_PREFIX=/usr     \
       -D CMAKE_INSTALL_LIBDIR=/usr/lib \
       -D BUILD_SHARED_LIBS=ON          \
       -D FMT_TEST=OFF                  \

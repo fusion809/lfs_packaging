@@ -20,12 +20,8 @@ version=$(get_version)
 depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.fftw.org/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://www.fftw.org/$filename"
+unpk_enter "$filename" "$direname"
 configure_options1=(--prefix=/usr    \
             --enable-shared  \
             --disable-static \

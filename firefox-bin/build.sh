@@ -16,14 +16,11 @@ version=$(get_version)
 depends=(alsa-lib at-spi2-core brotli bzip2 cairo dbus expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz libepoxy libffi libpng libseccomp libX11 libXau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libXrandr libXrender libXres nspr nss pango pcre2 pixman systemd util-linux wayland zlib)
 filename="firefox-$version.tar.xz"
 direname="firefox"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://ftp.mozilla.org/pub/firefox/releases/$version/linux-x86_64/en-GB/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
+download_src "https://ftp.mozilla.org/pub/firefox/releases/$version/linux-x86_64/en-GB/$filename"
+unpk_enter "$filename" "$direname"
 sudo mkdir -p /usr/lib/firefox
-sudo cp -r $direname/* /usr/lib/firefox
-sudo cp -r $direname/browser/chrome/icons/default/default128.png /usr/share/pixmaps/firefox.png
+sudo cp -r * /usr/lib/firefox
+sudo cp -r browser/chrome/icons/default/default128.png /usr/share/pixmaps/firefox.png
 cat > /usr/share/applications/firefox.desktop << EOF &&
 [Desktop Entry]
 Encoding=UTF-8
@@ -40,5 +37,6 @@ StartupNotify=true
 StartupWMClass=firefox
 EOF
 sudo ln -sf /usr/lib/firefox/firefox /usr/bin/
+cd ..
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"

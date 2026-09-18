@@ -18,12 +18,8 @@ get_version() {
 version=$(get_version)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.x.org/pub/individual/font/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://www.x.org/pub/individual/font/$filename"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr
 cd ../
 rm -rf "$filename" "$direname"

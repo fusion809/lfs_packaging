@@ -6,12 +6,8 @@ version=$(gh_ver $repo)
 depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://downloads.sourceforge.net/opencore-amr/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://downloads.sourceforge.net/opencore-amr/$filename"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static
 cd ../
 rm -rf "$filename" "$direname"

@@ -6,15 +6,12 @@ version=$(gh_ver $repo)
 depends=(gcc glibc libogg)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/$version/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
-options=(--prefix=/usr            \
-            --disable-thorough-tests \
-	    --docdir=/usr/share/doc/$direname)
+ghr_download "$repo" "$version" "$filename"
+unpk_enter "$filename" "$direname"
+options=(
+	--prefix=/usr            \
+    --disable-thorough-tests \
+	--docdir=/usr/share/doc/$direname)
 cmi "${options[@]}"
 cd ../
 rm -rf "$filename" "$direname"

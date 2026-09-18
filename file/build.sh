@@ -20,13 +20,8 @@ version=$(get_version)
 depends=(bzip2 glibc libseccomp xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://astron.com/pub/$name/$filename
-fi
-
-rm -rf $direname
-tar xf $filename
-cd $direname
+download_src "https://astron.com/pub/$name/$filename"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr
 cd ..
 echo "$version" | sudo tee /var/lib/custom-packages/$name
