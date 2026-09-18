@@ -4,17 +4,16 @@ name=gnome-session
 repo=GNOME/$name
 version=$(gh_ver $repo)
 depends=(brotli bzip2 expat fontconfig freetype gcc gdk-pixbuf glib2 glibc glycin gnome-desktop icu lcms2 libffi libpng libseccomp libxkbcommon libxml2 pcre2 systemd util-linux zlib)
-majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/$name/$majVer/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
-options=(--prefix=/usr --buildtype=release -D man=false        \
-            -D docbook=false)
+gn_download "$filename"
+unpk_enter "$filename" "$direname"
+options=(
+    --prefix=/usr 
+    --buildtype=release 
+    -D man=false 
+    -D docbook=false
+)
 mni "${options[@]}"
 cat >> gnome-session-sddm-wrapper << EOF
 #!/bin/bash
