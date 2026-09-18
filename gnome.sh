@@ -22,7 +22,7 @@ function gn_ver {
 		local arch_ver=$(aver "gtk4")
 		ver_check "$arch_ver" "$inst_ver" && return
 	elif [[ "$1" == "glib" || "$1" == "glib2" ]]; then
-		local up_ver=$(wgn_ver "glib")
+		local up_ver=$(wgn_ver "glib2")
 		ver_check "$up_ver" "$inst_ver" && return
 
 		local git_ver=$(ggn_ver "glib2" "glib")
