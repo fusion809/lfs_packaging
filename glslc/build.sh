@@ -6,12 +6,8 @@ version=$(gh_ver $repo)
 filename="shaderc-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(cmake glslang spirv-tools)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/google/shaderc/archive/v$version/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+gha_download "$repo" "v$version" "$filename"
+unpk_enter "$filename" "$direname"
 sed '/build-version/d'   -i glslc/CMakeLists.txt            &&
 sed '/third_party/d'     -i CMakeLists.txt                  &&
 sed 's|SPIRV|glslang/&|' -i libshaderc_util/src/compiler.cc &&

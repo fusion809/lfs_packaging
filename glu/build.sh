@@ -20,13 +20,11 @@ version=$(get_version)
 depends=(bzip2 expat gcc glibc icu libdrm libelf libffi libglvnd libpciaccess libX11 libXau libxcb libXdmcp libXext libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa spirv-tools xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://archive.mesa3d.org/glu/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
-meson_options=(--prefix=/usr --buildtype=release)
+download_src "https://archive.mesa3d.org/glu/$filename"
+unpk_enter "$filename" "$direname"
+meson_options=(
+	--prefix=/usr \
+	--buildtype=release)
 mni "${meson_options[@]}"
 cd ../..
 rm -rf "$filename" "$direname"
