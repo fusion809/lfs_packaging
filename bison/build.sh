@@ -6,9 +6,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(gcc gettext glibc make ncurses tar wget xz)
 gnu_download $name $filename
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --docdir=/usr/share/doc/"$direname"
 cd ..
 rm -rf $filename $direname

@@ -6,12 +6,8 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 depends=(coreutils gcc glibc make ncurses readline tar xz)
-if ! [[ -f $filename ]]; then
-    wget -c --progress=bar:force https://github.com/$repo/releases/download/$version/$filename
-fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+ghr_download "$repo" "$version" "$filename"
+unpk_enter "$filename" "$direname"
 CC='gcc -std=c99' cmi --prefix=/usr -G -O3 -r
 cd ..
 rm -rf $filename $direname

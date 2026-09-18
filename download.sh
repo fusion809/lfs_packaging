@@ -142,7 +142,7 @@ function spice_git {
 function sw_download {
 	local name=$1
 	local filename=$2
-	download_src "https://sourceware.org/pub/$name/$filename"
+	download_src "https://sourceware.org/pub/$name/$filename" || download_src "https://sourceware.org/pub/$name/releases/$filename"
 }
 
 function xfd_download {

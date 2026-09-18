@@ -13,12 +13,8 @@ if ! which gfortran &> /dev/null; then
 fi
 direname="lapack-$version"
 filename="$direname.tar.gz"
-rm -rf $direname
-if ! [[ -f $filename ]]; then
-        wget -c --progress=bar:force https://github.com/$repo/archive/$version.tar.gz -O $filename
-fi
-tar xf $filename
-cd $direname
+gha_download "$repo" "$version" "$filename"
+unpk_enter "$filename" "$direname"
 
 # Avoid adding an RPATH entry to the shared lib.
 mkdir -p shared

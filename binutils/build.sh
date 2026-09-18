@@ -4,12 +4,8 @@ name=binutils
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://sourceware.org/pub/$name/releases/$filename
-fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+sw_download "$name" "$filename"
+unpk_enter "$filename" "$direname"
 mkdir -v build
 cd       build
 [ -f ../configure ] || (cd .. && autoreconf -fiv)
