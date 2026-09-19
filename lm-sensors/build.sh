@@ -8,9 +8,7 @@ depends=(glibc)
 filename="$name-$_version.tar.gz"
 direname="${filename/.tar.*/}"
 # Kernel config options required, too
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/archive/V${_version}/$filename
-fi
+gha_download "$repo" "V${_version}" "$filename"
 unpk_enter "$filename" "$direname"
 make -j$(nproc) PREFIX=/usr        \
      BUILD_STATIC_LIB=0 \

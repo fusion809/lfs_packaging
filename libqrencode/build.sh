@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(glibc libpng zlib)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/archive/v$version/$filename
-fi
+gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 cmi --prefix=/usr
 cd ../

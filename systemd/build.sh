@@ -41,9 +41,7 @@ _filename="$name-man-pages-$_version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(acl bash coreutils dbus glibc gzip hwdata kbd kmod lz4 meson ninja openssl pcre2 tar util-linux wget xz)
 
-if ! [[ -f $filename ]]; then
-    wget -c --progress=bar:force https://github.com/$repo/archive/v$version/$filename
-fi
+gha_download "$repo" "v$version" "$filename"
 if ! [[ -f $_filename ]]; then
     wget -c --progress=bar:force https://anduin.linuxfromscratch.org/LFS/$_filename
 fi

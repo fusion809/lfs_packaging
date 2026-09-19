@@ -22,9 +22,7 @@ version=$(get_version)
 depends=(gcc glibc llvm)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/archive/refs/tags/v$version/$filename
-fi
+gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 cargo build --release
 sudo su -c "install -v -m755 target/release/bindgen /usr/bin

@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(acl at-spi2-core brotli bzip2 cairo dav1d dbus expat fontconfig freetype fribidi gcc gdk-pixbuf giflib glib2 glibc glycin gpm graphite2 gtk3 harfbuzz highway lcms2 libaom libavif libcanberra libepoxy libffi libICE libjpeg-turbo libogg libpng libseccomp libSM libtool libvorbis libwebp libX11 libXau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libXrandr libXrender libXres libXt ncurses pango pcre2 pixman svt-av1 systemd util-linux wayland zlib)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/archive/v$version/$filename
-fi
+gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 options=(-D CMAKE_INSTALL_PREFIX=/usr             \
       -D CMAKE_BUILD_TYPE=Release              \

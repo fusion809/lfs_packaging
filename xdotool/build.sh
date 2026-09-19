@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(glibc libX11 libXau libxcb libXdmcp libXext libXi libXinerama libxkbcommon libXtst)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/archive/v$version/$filename
-fi
+gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 make WITHOUT_RPATH_FIX=1 -j$(nproc)
 sudo make PREFIX=/usr INSTALLMAN=/usr/share/man install
