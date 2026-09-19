@@ -3,7 +3,7 @@ set -e
 # Variable declarations
 name=xtrans
 version=$(xfd_ver $name)
-direname="lib$name-$version"
+direname="$name-$version"
 filename="$direname.tar.xz"
 depends=(bash coreutils fontconfig glibc libxcb make sed systemd tar util-linux xorg-libs xz zlib)
 # Fetch and unpack source

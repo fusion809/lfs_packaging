@@ -71,7 +71,7 @@ function get_xfd_type {
 	local type="";
 	if echo $name | grep "^lib" &> /dev/null || [[ "$name" == "xtrans" ]] || echo $name | grep "xcb-util-" &> /dev/null; then
 		type+="lib"
-	elif echo $name | grep "xf86" &> /dev/null; then
+	elif echo $name | grep "xf86\|driver" &> /dev/null; then
 		type+="driver"
 	elif echo $name | grep "proto" &> /dev/null; then
 		type+="proto"
