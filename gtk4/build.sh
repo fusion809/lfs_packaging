@@ -3,17 +3,12 @@ set -e
 name=gtk4
 _name=gtk
 version=$(gn_ver $_name $name)
-majVer=$(echo $version | sed -E 's/.[0-9]+$//g')
 filename="$_name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(adwaita-icon-theme gdk-pixbuf glslc graphene gst-plugins-bad gst-plugins-good hicolor-icon-theme iso-codes libepoxy librsvg libxkbcommon pango pygobject vulkan-loader wayland-protocols xdg-desktop-portal xdg-desktop-portal-gnome)
 # Requires userspace dmabuf misc driver from kernel
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/gtk/$majVer/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+gn_download "$filename"
+unpk_enter "$filename" "$direname"
 meson_options=(--prefix=/usr            \
             --buildtype=release      \
             -D broadway-backend=true \

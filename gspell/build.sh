@@ -2,7 +2,6 @@
 set -e
 name=gspell
 version=$(gn_ver gspell)
-majVer=$(echo $version | sed -E 's/.[0-9]+//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(enchant gtk3 icu)

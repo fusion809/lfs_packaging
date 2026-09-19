@@ -4,16 +4,14 @@ name=gvfs
 repo=GNOME/$name
 version=$(gh_ver $repo)
 depends=(brotli e2fsprogs gcc gcr4 glib2 glibc icu keyutils libcdio libffi libgcrypt libgpg-error libgudev libidn2 libpsl libsecret libsoup libunistring libxml2 mitkrb nghttp2 p11-kit pcre2 polkit sqlite systemd udisks util-linux zlib)
-majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/$name/$majVer/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
-options=(--prefix=/usr --buildtype=release -D onedrive=false   \
+gn_download "$filename"
+unpk_enter "$filename" "$direname"
+options=(
+      --prefix=/usr \
+      --buildtype=release \
+      -D onedrive=false   \
       -D fuse=false       \
       -D gphoto2=false    \
       -D afc=false        \

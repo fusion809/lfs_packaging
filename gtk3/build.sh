@@ -8,14 +8,9 @@ depends=(at-spi2-core avahi bash brotli bzip2 cairo colord coreutils cups dbus e
 direname="gtk-$version"
 filename="$direname.tar.bz2"
 # Fetch and unpack source
-rm -rf $direname
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://gitlab.gnome.org/GNOME/gtk/-/archive/$version/$filename
-fi
-tar xf $filename
+ggn_download "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
-
 meson_options=(
       --prefix=/usr       \
       --buildtype=release \
@@ -23,6 +18,6 @@ meson_options=(
       -D broadway_backend=true
 )
 mni "${meson_options[@]}"
-cd ..
+cd ../..
 rm -rf $filename $direname
 echo $version | sudo tee /var/lib/custom-packages/$name

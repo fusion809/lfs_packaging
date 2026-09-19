@@ -5,12 +5,8 @@ version=$(gfd_ver gstreamer/gstreamer)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(glib2)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://gstreamer.freedesktop.org/src/$name/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://gstreamer.freedesktop.org/src/$name/$filename"
+unpk_enter "$filename" "$direname"
 meson_options=(--prefix=/usr       \
       --buildtype=release \
       -D gst_debug=false)
