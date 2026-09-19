@@ -7,9 +7,7 @@ depends=(glib2 glibc libffi libgcrypt libgpg-error pcre2 systemd util-linux zlib
 majVer=$(echo $version | cut -d '.' -f1-2)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/$name/$majVer/$filename
-fi
+gn_download "$filename"
 unpk_enter "$filename" "$direname"
 options=(--prefix=/usr --buildtype=release -D gtk_doc=false)
 mni "${options[@]}"

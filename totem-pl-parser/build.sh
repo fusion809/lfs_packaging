@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(acl bzip2 gcc glib2 glibc icu libarchive libffi libgcrypt libgpg-error libxml2 lz4 openssl pcre2 systemd util-linux xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/$name/$majVer/$filename
-fi
+gn_download "$filename"
 unpk_enter "$filename" "$direname"
 options=(--prefix=/usr --buildtype=release)
 mni "${options[@]}"

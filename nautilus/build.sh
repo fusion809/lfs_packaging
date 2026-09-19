@@ -7,9 +7,7 @@ depends=(acl brotli bzip2 cairo curl cyrus-sasl elfutils expat fontconfig freety
 majVer=$(echo $version | cut -d '.' -f 1)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/$name/$majVer/$filename
-fi
+gn_download "$filename"
 unpk_enter "$filename" "$direname"
 options=(--prefix=/usr --buildtype=release -D selinux=disabled)
 mni "${options[@]}"

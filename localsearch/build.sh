@@ -7,9 +7,7 @@ depends=(acl brotli bzip2 cairo curl cyrus-sasl elfutils exempi expat fontconfig
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 # Requires some security options kernel options
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/$name/$majVer/$filename
-fi
+gn_download "$filename"
 unpk_enter "$filename" "$direname"
 options=(--prefix=/usr --buildtype=release -D man=false              \
             -D functional_tests=false)

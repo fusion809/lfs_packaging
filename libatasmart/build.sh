@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(glibc systemd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://0pointer.de/public/$filename
-fi
+download_src "https://0pointer.de/public/$filename"
 unpk_enter "$filename" "$direname"
 ./configure --prefix=/usr --disable-static
 make -j$(nproc)
