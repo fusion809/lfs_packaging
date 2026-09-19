@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
 depends=(glibc libgpg-error)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.gnupg.org/ftp/gcrypt/$name/$filename
-fi
+download_src "https://www.gnupg.org/ftp/gcrypt/$name/$filename"
 unpk_enter "$filename" "$direname"
 cmi --prefix=/usr
 make -C doc html                                                       &&

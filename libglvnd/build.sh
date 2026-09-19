@@ -6,12 +6,8 @@ version=$(gfd_ver $repo)
 depends=(glibc libX11 libXau libxcb libXdmcp)
 filename="$name-v$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c https://gitlab.freedesktop.org/$repo/-/archive/v$version/$filename
-fi
-sudo rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+gfd_download "$repo" "v$version" "$filename"
+unpk_enter "$filename" "$direname"
 gap_patches "$name"
 mni --prefix=/usr --buildtype=release -D hgl=false
 cd ../
