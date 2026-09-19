@@ -159,14 +159,9 @@ function gng_download {
 function gn_download {
 	local filename=$1
 	local version=$(echo $filename | sed -E 's/\.tar\.[a-z0-9]+//g' | rev | cut -d '-' -f 1 | rev)
-	local majVer=$(echo $version | cut -d '.' -f 1)
-	local majMinVer=$(echo $version | cut -d '.' -f1-2)
+	local truncVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 	local name=$(echo $filename | sed "s/-$version.tar.*//g")
-	if [[ "$name" == "graphene" || $name == "gspell" || "$name" == "blueprint-compiler" || "$name" == "gsound" ]]; then
-		download_src "https://download.gnome.org/sources/$name/$majMinVer/$filename"
-	else
-		download_src "https://download.gnome.org/sources/$name/$majVer/$filename"
-	fi
+	download_src "https://download.gnome.org/sources/$name/$truncVer/$filename"
 }
 
 function gnu_download {

@@ -6,7 +6,6 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(gcc glibc make tar wget xz)
 download_src "https://download.savannah.nongnu.org/releases/$name/$filename" || download_git "https://git.savannah.nongnu.org/git/$name.git"
-fi
 if [[ -f $filename ]]; then
 	unpk_enter "$filename" "$direname"
 elif [[ -d $name ]]; then
