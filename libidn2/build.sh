@@ -6,9 +6,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(libunistring)
 gnu_download libidn $filename
-sudo rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 sudo chown $USER -R .
 make distclean 2>/dev/null || true
 cmi --prefix=/usr --disable-static

@@ -2,16 +2,15 @@
 set -e
 # Variable declarations
 name=ostree
-version=$(gh_ver ostreedev/ostree)
+repo=ostreedev/ostree
+version=$(gh_ver $repo)
 direname="lib${name}-$version"
 filename="$direname.tar.xz"
 depends=(avahi bash coreutils curl e2fsprogs fuse gcab glib glibc gpgme gtk-doc libarchive libgpg-error libsoup libxslt make openssl python sed systemd tar util-linux wget which xz zlib)
 # Fetch and unpack source
-rm -rf $direname
-ghr_download "ostreedev/ostree" "v${version}" "$filename"
-tar xf $filename
+ghr_download "$repo" "v${version}" "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 configure_options=(

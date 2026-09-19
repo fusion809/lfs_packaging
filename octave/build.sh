@@ -13,10 +13,8 @@ CFLAGS="-O2 -fPIC"
 #source deps-check.sh
 # Fetch and unpack source
 gnu_download $name $filename
-rm -rf ${direname}
-tar xf $filename
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 find . -name stamp-vti -exec touch {} +
 export JAVA_HOME=/opt/jdk
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/qt6/lib:$JAVA_HOME/lib

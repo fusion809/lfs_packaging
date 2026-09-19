@@ -7,9 +7,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 
 ghr_download "pkgconf/pkgconf" "$direname" "$filename"
-
-tar xf $filename
-cd "$direname"
+unpk_enter "$filename" "$direname"
 mni --prefix=/usr --buildtype=release
 sudo mv /usr/share/doc/pkgconf{,-$version}
 if ! [[ -f /usr/bin/pkg-config ]]; then

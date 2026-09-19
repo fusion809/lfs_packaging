@@ -2,16 +2,15 @@
 set -e
 # Variable declarations
 name=pcre2
-version=$(gh_ver PCRE2Project/pcre2)
+repo=PCRE2Project/pcre2
+version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="$name-$name-$version"
 depends=(bash bzip2 coreutils glibc gzip make ncurses readline sed tar wget zlib)
 # Fetch and unpack source
-rm -rf $direname
-gha_download "PCRE2Project/pcre2" "$filename" "$filename"
+gha_download "$repo" "$filename" "$filename"
 gha_download "zherczeg/sljit" "master" "sljit-master.tar.gz"
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 rm -rf deps/sljit
 tar xf ../sljit-master.tar.gz
 mv sljit-master sljit 
