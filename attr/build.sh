@@ -5,13 +5,12 @@ version=$(ngnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(gcc glibc make tar wget xz)
-if ! [[ -f $filename ]] && ! [[ -d $name ]] ; then
-	wget -c --progress=bar:force https://download.savannah.nongnu.org/releases/$name/$filename || ( git clone https://git.savannah.nongnu.org/git/$name.git )
+download_src "https://download.savannah.nongnu.org/releases/$name/$filename" || download_git "https://git.savannah.nongnu.org/git/$name.git"
 fi
 if [[ -f $filename ]]; then
-	rm -rf $direname && tar xf $filename && cd $direname
+	unpk_enter "$filename" "$direname"
 elif [[ -d $name ]]; then
-	cd $name && git checkout v$version
+	unpk_enter "$name" "$version"
 fi
 
 cmi --prefix=/usr --disable-static --sysconfdir=/etc --docdir=/usr/share/doc/$direname

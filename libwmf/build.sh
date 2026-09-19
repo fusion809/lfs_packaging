@@ -2,18 +2,15 @@
 set -e
 # Variable declarations
 name=libwmf
-version=$(gh_ver "caolanm/libwmf")
+repo=caolanm/libwmf
+version=$(gh_ver "$repo")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=(autoconf bash brotli bzip2 coreutils expat fontconfig freetype gcc gdk-pixbuf glib2 glibc glycin gzip lcms2 libffi libjpeg-turbo libpng libseccomp libx11 libX11 libXau libxcb libXdmcp make pcre2 sed tar util-linux zlib zlib)
 # Fetch and unpack source
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/caolanm/libwmf/archive/refs/tags/v${version}.tar.gz -O $filename
-fi
-rm -rf $direname
-tar xf $filename
+gha_download "$repo" "v${version}" "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 sudo autoreconf -fi
 sudo chmod 777 -R *
 ./configure --prefix=/usr \

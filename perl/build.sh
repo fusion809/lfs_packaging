@@ -20,9 +20,7 @@ get_version() {
 version=$(get_version)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.cpan.org/src/$(echo $version | sed 's/\..*/.0/g')/$filename
-fi
+download_src "https://www.cpan.org/src/$(echo $version | sed 's/\..*/.0/g')/$filename"
 unpk_enter "$filename" "$direname"
 export BUILD_ZLIB=False
 export BUILD_BZIP2=0

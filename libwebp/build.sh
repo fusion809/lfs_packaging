@@ -21,9 +21,7 @@ version=$(get_version)
 depends=(bzip2 elfutils expat freeglut gcc giflib glibc icu libdrm libffi libjpeg-turbo libpciaccess libpng libX11 libXau libxcb libXdmcp libXext libXi libxml2 libXrandr libXrender libxshmfence libXxf86vm llvm lm-sensors mesa spirv-tools tiff xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://storage.googleapis.com/downloads.webmproject.org/releases/webp/$filename
-fi
+download_src "https://storage.googleapis.com/downloads.webmproject.org/releases/webp/$filename"
 unpk_enter "$filename" "$direname"
 options=(--prefix=/usr           \
             --enable-libwebpmux     \

@@ -6,20 +6,14 @@ depends=(acl attica attr breeze-icons brotli bzip2 dbus double-conversion e2fspr
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 kde_download "app" "$filename"
-
-if ! [[ -f "konsole-adjust_scrollbar-1.patch" ]]; then
-	wget -c --progress=bar:force https://www.linuxfromscratch.org/patches/blfs/svn/konsole-adjust_scrollbar-1.patch
-fi
-
 export KF6_PREFIX=/usr
 export QT6DIR=/opt/qt6
 export QT6PREFIX=/opt/qt6
 export PATH=$PATH:$QT6DIR/bin
 export CMAKE_PREFIX_PATH=$QT6PREFIX:$KF6_PREFIX:$CMAKE_PREFIX_PATH
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$QT6DIR/lib
-tar xf $filename
-cd $direname
-( patch -N -f  -Np1 -i ../konsole-adjust_scrollbar-1.patch ) || echo "[WARNING] Patch application failed, continuing build..."
+unpk_enter "$filename" "$direname"
+gap_patches "$name"
 cmake_options=(
 	-D CMAKE_INSTALL_LIBDIR=lib
 	-D CMAKE_INSTALL_PREFIX=$KF6_PREFIX  

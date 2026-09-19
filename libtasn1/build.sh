@@ -5,9 +5,7 @@ version=$(gnu_ver libtasn1)
 depends=(coreutils gcc glibc gzip make tar wget)
 filename="$name-v${version}.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://gitlab.com/gnutls/libtasn1/-/archive/v${version}/$filename
-fi
+download_src "https://gitlab.com/gnutls/libtasn1/-/archive/v${version}/$filename"
 unpk_enter "$filename" "$direname"
 if [[ -f /var/lib/custom-packages/help2man ]]; then
 	cmi --prefix=/usr --disable-static

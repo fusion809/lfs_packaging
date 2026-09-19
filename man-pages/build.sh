@@ -20,12 +20,8 @@ version=$(get_version)
 depends=(bash coreutils gcc glibc make tar xz)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.kernel.org/pub/linux/docs/$name/$filename
-fi
-sudo rm -rf $direname
-tar xf $filename
-cd $direname
+download_src "https://www.kernel.org/pub/linux/docs/$name/$filename"
+unpk_enter "$filename"
 rm -v man3/crypt*
 sudo make -R GIT=false prefix=/usr install
 cd ../..

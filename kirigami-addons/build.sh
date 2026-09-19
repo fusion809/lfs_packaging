@@ -7,9 +7,7 @@ depends=(breeze-icons brotli bzip2 dbus double-conversion e2fsprogs expat fontco
 #filename="$name-$version.tar.xz"
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-#if ! [[ -f $filename ]]; then
-#	wget -c --progress=bar:force https://download.kde.org/stable/$name/$filename
-#fi
+#kde_download "$filename"
 gha_download $repo v$version $filename
 unpk_enter "$filename" "$direname"
 options=(

@@ -5,9 +5,7 @@ version=$(xfd_ver $name)
 depends=(glibc)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.x.org/pub/individual/lib/$filename
-fi
+xfd_download "$filename"
 unpk_enter "$filename" "$direname"
 options=(--prefix=/usr --buildtype=release)
 mni "${options[@]}"

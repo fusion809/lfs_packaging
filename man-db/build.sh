@@ -5,9 +5,7 @@ version=$(gl_ver $name/$name)
 depends=(bash coreutils gcc glibc make tar xz)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.savannah.gnu.org/releases/$name/$filename
-fi
+download_src "https://download.savannah.gnu.org/releases/$name/$filename"
 unpk_enter "$filename" "$direname"
 configure_options=(--prefix=/usr                         \
             --docdir=/usr/share/doc/$direname \

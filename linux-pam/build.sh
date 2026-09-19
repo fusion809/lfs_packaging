@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 name=linux-pam
-version=$(gh_ver "linux-pam/linux-pam")
+repo=linux-pam/linux-pam
+version=$(gh_ver "$repo")
 if [[ -z ${version// /} ]]; then
 	echo "Version is empty."
 	exit 1
@@ -10,9 +11,7 @@ direname="Linux-PAM-$version"
 filename="$direname.tar.xz"
 depends=(gdbm glibc libxcrypt systemd)
 
-if ! [[ -f "$filename" ]]; then
-    wget -c --progress=bar:force "https://github.com/linux-pam/linux-pam/releases/download/v$version/$filename"
-fi
+ghr_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 
 sed -e "s/'elinks'/'lynx'/"                       \

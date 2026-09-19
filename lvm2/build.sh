@@ -21,9 +21,7 @@ depends=(glibc json-c keyutils libaio libnvme ncurses openssl readline systemd u
 filename="LVM2.$version.tgz"
 direname="${filename/.tgz/}"
 # Has kernel config deps, too
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://sourceware.org/ftp/lvm2/$filename
-fi
+sw_download "$name" "$filename"
 export PATH+=:/usr/sbin
 unpk_enter "$filename" "$direname"
 ./configure --prefix=/usr       \

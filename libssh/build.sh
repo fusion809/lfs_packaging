@@ -18,12 +18,9 @@ version=$(get_version)
 depends=(e2fsprogs glibc keyutils mitkrb openssl zlib)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.libssh.org/files/$maj_ver/$filename
-fi
-
+download_src "https://www.libssh.org/files/$maj_ver/$filename"
 unpk_enter "$filename" "$direname"
 cmaki -D CMAKE_INSTALL_PREFIX=/usr
-cd ..
+cd ../..
 #rm -rf $direname $filename
 echo "$version" | sudo tee /var/lib/custom-packages/$name

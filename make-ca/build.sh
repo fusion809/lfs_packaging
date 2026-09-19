@@ -1,16 +1,12 @@
 #!/bin/bash
 set -e
 name=make-ca
-version=$(gh_ver "lfs-book/make-ca")
+repo=lfs-book/make-ca
+version=$(gh_ver "$repo")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
-
-if ! [[ -f "$filename" ]]; then
-	wget -c --progress=bar:force https://github.com/lfs-book/make-ca/archive/refs/tags/v$version.tar.gz -O "$filename"
-fi
-
-tar xf "$filename"
-cd "$direname"
+gha_download "$repo" "v$version" "$filename"
+unpk_enter "$filename" "$direname"
 sed '/mktemp/s/-t //' -i make-ca
 sudo make install
 sudo install -vdm755 /etc/ssl/local

@@ -6,7 +6,7 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(glib2 glibc libevdev libffi libgudev libxml2 pcre2 systemd)
-ghr_download "linuxwacom/libwacom" "$direname" "$filename"
+ghr_download "$repo" "$direname" "$filename"
 unpk_enter "$filename" "$direname"
 sudo rm -rf /usr/share/libwacom
 meson_options=(--prefix=/usr       \

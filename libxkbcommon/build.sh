@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(libxcb wayland wayland-protocols xkeyboard-config)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/lfs-book/libxkbcommon/archive/v$version/$filename
-fi
+gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 gap_patches $name
 meson_options=(--prefix=/usr        \

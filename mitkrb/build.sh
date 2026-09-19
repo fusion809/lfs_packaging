@@ -1,9 +1,9 @@
 #!/bin/bash
 set -e
-name=mitkrb 
+name=mitkrb
+majVer=$(wget -T 5 -cqO- https://kerberos.org/dist/krb5/ | grep "/</a>" | tail -n 1 | cut -d '"' -f 8 | sed 's|/||g')
 get_version() {
   local inst_ver=$(pkgver $name)
-  local majVer=$(wget -T 5 -cqO- https://kerberos.org/dist/krb5/ | grep "/</a>" | tail -n 1 | cut -d '"' -f 8 | sed 's|/||g')
   if echo "$majVer" | grep -q "[0-9]"; then
     local version=$(wget -T 5 -cqO- https://kerberos.org/dist/krb5/$majVer/ | cut -d '"' -f 8 | grep "^krb5" | grep -v "asc" | cut -d '-' -f 2 | sed 's/.tar.gz//g' | sort | uniq | tail -n 1)
     ver_check "$version" "$inst_ver" && return

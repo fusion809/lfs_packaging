@@ -33,17 +33,11 @@ remote_filename="$name-${base_version}.tar.xz"
 filename="$name-$version.tar.xz"
 remote_direname="${remote_filename/.tar.xz/}"
 direname="${filename/.tar.xz/}"
-
-#if ! [[ -f $filename ]]; then
-wget -c --progress=bar:force https://cdn.kernel.org/pub/linux/kernel/v$(echo ${base_version} | cut -d '.' -f 1).x/${remote_filename} -O $filename
-#fi
-
-sudo rm -rf $direname
-tar xf $filename
+download_src "https://cdn.kernel.org/pub/linux/kernel/v$(echo ${base_version} | cut -d '.' -f 1).x/${remote_filename}" "$filename"
 if [[ $remote_direname != $direname ]]; then
 	mv $remote_direname $direname
 fi
-cd $direname
+unpk_enter "$filename" "$direname"
 make mrproper
 sudo cp ../config .config
 make -j$(nproc)

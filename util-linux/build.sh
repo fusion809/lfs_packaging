@@ -21,9 +21,7 @@ get_version() {
 version=$(get_version)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.kernel.org/pub/linux/utils/util-linux/v$(echo $version | sed -E 's/.[0-9]+$//g')/$filename
-fi
+download_src "https://www.kernel.org/pub/linux/utils/util-linux/v$(echo $version | sed -E 's/.[0-9]+$//g')/$filename"
 unpk_enter "$filename" "$direname"
 configure_options=(--bindir=/usr/bin     \
             --libdir=/usr/lib     \

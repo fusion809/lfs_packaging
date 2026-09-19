@@ -5,13 +5,8 @@ version=$(gnu_ver $name)
 depends=(glibc)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
-
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://ftp.gnu.org/gnu/libtool/$filename
-fi
-
-tar xf $filename
-cd "$direname"
+gnu_download "$name" "$filename"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr
 sudo rm -fv /usr/lib/libltdl.a
 cd ..

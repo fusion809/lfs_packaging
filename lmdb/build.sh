@@ -17,9 +17,7 @@ get_version() {
 version=$(get_version)
 filename="openldap-LMDB_$version.tar.bz2"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://git.openldap.org/openldap/openldap/-/archive/LMDB_$version/$filename
-fi
+download_src "https://git.openldap.org/openldap/openldap/-/archive/LMDB_$version/$filename"
 unpk_enter "$filename" "$direname"
 cd libraries/liblmdb
 make -j$(nproc)

@@ -18,9 +18,7 @@ version=$(get_version)
 depends=(brotli bzip2 glibc gpm libevent ncurses openssl xz zlib zstd)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force http://links.twibright.com/download/$filename
-fi
+download_src "http://links.twibright.com/download/$filename"
 unpk_enter "$filename" "$direname"
 sed '/*strchr/s/cast_const_char //g' -i ftp.c
 cmi --prefix=/usr --mandir=/usr/share/man

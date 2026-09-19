@@ -3,12 +3,11 @@ set -e
 name=qt6
 repo=qt/qtbase
 version=$(gh_ver $repo)
+majMinVer=$(echo $version | cut -d '.' -f1-2)
 depends=(at-spi2-core avahi bluez brotli bzip2 cairo cups dav1d dbus double-conversion e2fsprogs elfutils expat fdk-aac ffmpeg flac fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz icu jasper keyutils lame lcms2 libaom libde265 libdrm libepoxy libevdev libffi libheif libICE libinput libjpeg-turbo libmng libogg libpciaccess libpng libseccomp libSM libsndfile libtiff libva libvorbis libvpx libwebp libX11 libXau libxcb libXcomposite libxcrypt libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libxml2 libXrandr libXrender libXres libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb mpg123 mtdev numactl openssl opus pango pcre2 pixman pulseaudio spirv-tools sqlite svt-av1 systemd util-linux wayland x264 x265 xcb-util xcb-util-cursor xcb-util-image xcb-util-keysyms xcb-util-renderutil xcb-util-wm xz zlib zstd)
 filename="qt-everywhere-src-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.qt.io/archive/qt/$majVer/$version/single/$filename
-fi
+download_src "https://download.qt.io/archive/qt/$majMinVer/$version/single/$filename"
 unpk_enter "$filename" "$direname"
 export QT6PREFIX=/opt/qt6
 rm -rf qtwebengine qt3d qtquick3dphysics qtopcua

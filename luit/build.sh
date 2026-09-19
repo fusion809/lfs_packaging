@@ -17,9 +17,7 @@ version=$(get_version)
 depends=(glibc zlib)
 filename="$name-$version.tgz"
 direname="${filename/.tgz/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://invisible-mirror.net/archives/luit/$filename
-fi
+download_src "https://invisible-mirror.net/archives/luit/$filename"
 unpk_enter "$filename" "$direname"
 cmi --prefix=/usr
 cd ../

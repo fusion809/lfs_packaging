@@ -3,16 +3,15 @@ set -e
 name=lua
 repo=$name/$name
 version=$(gh_ver $repo)
+majMinVer=$(echo $version | cut -d '.' -f1-2)
 depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.lua.org/ftp/$filename
-fi
+download_src "https://www.lua.org/ftp/$filename"
 unpk_enter "$filename" "$direname"
 #gap_patches $name || echo "Continuing patching"
-wget -c --progress=bar:force https://gitlab.archlinux.org/archlinux/packaging/packages/lua/-/raw/main/liblua.so.patch
-wget -c --progress=bar:force https://gitlab.archlinux.org/archlinux/packaging/packages/lua/-/raw/main/paths.patch
+download_src "https://gitlab.archlinux.org/archlinux/packaging/packages/lua/-/raw/main/liblua.so.patch"
+download_src "https://gitlab.archlinux.org/archlinux/packaging/packages/lua/-/raw/main/paths.patch"
 patch -Np1 -i liblua.so.patch
 patch -Np1 -i paths.patch
 make clean
@@ -38,12 +37,12 @@ Requires:
 Libs: -L${libdir} -llua -lm -ldl
 Cflags: -I${includedir}
 EOF
-sed -i -e "s|5.4.8|$version|g" -e "s|5.4|$majVer|g" lua.pc
+sed -i -e "s|5.4.8|$version|g" -e "s|5.4|$majMinVer|g" lua.pc
 make linux -j$(nproc) CFLAGS="-O2 -fPIC"
 sudo su -c "make INSTALL_TOP=/usr                \
      INSTALL_DATA=\"cp -d\"            \
      INSTALL_MAN=/usr/share/man/man1 \
-     TO_LIB=\"liblua.so liblua.so.$majVer liblua.so.$version\" \
+     TO_LIB=\"liblua.so liblua.so.$majMinVer liblua.so.$version\" \
      install &&
 
 mkdir -pv                      /usr/share/doc/$direname &&

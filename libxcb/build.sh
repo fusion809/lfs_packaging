@@ -5,9 +5,7 @@ version=$(xfd_ver $name)
 depends=(glibc libXau libXdmcp xcb-proto)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://xorg.freedesktop.org/archive/individual/lib/$filename
-fi
+xfd_download "$filename"
 unpk_enter "$filename" "$direname"
 ./configure --prefix=/usr --without-doxygen --docdir=/usr/share/doc/$direname
 LC_ALL=en_US.UTF-8 maki

@@ -18,9 +18,7 @@ version=$(get_version)
 depends=(glibc)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://downloads.sourceforge.net/libtirpc/$filename
-fi
+sf_download "$name" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static --disable-gssapi --sysconfdir=/etc
 cd ../

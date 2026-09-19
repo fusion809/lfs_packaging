@@ -21,13 +21,9 @@ direname="${filename/.tar.gz/}"
 depends=(bash coreutils gcc glibc gzip make sed tar wget)
 src="https://download.savannah.gnu.org/releases/$name/$filename"
 # Fetch and unpack source
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force $src
-fi
-rm -rf $direname
-tar xf $filename
+download_src "$src"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 CLFAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 cmi --prefix=/usr

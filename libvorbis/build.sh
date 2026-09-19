@@ -20,9 +20,7 @@ version=$(get_version)
 depends=(glibc libogg)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://downloads.xiph.org/releases/vorbis/$filename
-fi
+download_src "https://downloads.xiph.org/releases/vorbis/$filename"
 unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static
 sudo install -v -m644 doc/Vorbis* /usr/share/doc/$direname

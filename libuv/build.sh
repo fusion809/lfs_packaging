@@ -5,9 +5,7 @@ repo=$name/$name
 version=$(gh_ver $repo)
 filename="$name-v$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://dist.libuv.org/dist/v$version/$filename
-fi
+download_src "https://dist.libuv.org/dist/v$version/$filename"
 unpk_enter "$filename" "$direname"
 sudo ./autogen.sh
 sudo chown $USER -R .
