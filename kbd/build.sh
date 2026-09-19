@@ -20,12 +20,8 @@ version=$(get_version)
 depends=(bash coreutils gcc glibc glibc libxkbcommon make tar xz)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.kernel.org/pub/linux/utils/$name/$filename
-fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+download_src "https://www.kernel.org/pub/linux/utils/$name/$filename"
+unpk_enter "$filename" "$direname"
 gap_patches $name
 sed -i '/RESIZECONS_PROGS=/s/yes/no/' configure
 sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in
