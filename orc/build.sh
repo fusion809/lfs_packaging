@@ -15,15 +15,11 @@ else
   with_cacard="--disable-smartcard"
 fi
 # Fetch and unpack source
-rm -rf $direname
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force http://gstreamer.freedesktop.org/src/$name/$filename
-fi
-tar xf $filename
+download_src "http://gstreamer.freedesktop.org/src/$name/$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 mni --prefix=/usr --buildtype=release .. &&
-cd ..
+cd ../
 sudo mkdir -p /usr/share/doc/$direname
 for i in $docs
 do

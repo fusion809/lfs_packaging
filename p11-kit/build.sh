@@ -1,13 +1,12 @@
 #!/bin/bash
 set -e
 name=p11-kit
-version=$(gh_ver p11-glue/p11-kit)
+repo=p11-glue/p11-kit
+version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(libtasn1 make-ca nss)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/p11-glue/p11-kit/releases/download/$version/$filename 
-fi
+ghr_download "$repo" "$version" "$filename" 
 unpk_enter "$filename" "$direname"
 sed '20,$ d' -i trust/trust-extract-compat &&
 

@@ -138,6 +138,25 @@ function ngnu_ver {
 	fver "$name" "$inst_ver"
 }
 
+function perl_ver {
+	local name=$1
+	local _name=$2
+	local code=$3
+	local twocode="${3:0:2}"
+	local onecode="${3:0:1}"
+	local inst_ver=$(pkgver $name)
+	local up_ver=$(wget -cqO- -T 5 -t 1 https://www.cpan.org/authors/id/$onecode/$twocode/$code | grep "$_name-[0-9]+\.[0-9]+" -oE | cut -d '-' -f 2 | sort -V | tail -n 1)
+	ver_check "$up_ver" "$inst_ver" && return
+	local vat_ver=$(vatver $name)
+	ver_check "$vat_ver" "$inst_ver" && return
+
+	local arch_ver=$(aver $name)
+	ver_check "$arch_ver" "$inst_ver" && return
+	local lfs_vers=$(lfs_ver $name)
+	ver_check "$lfs_vers" "$inst_ver" && return
+	fver "$name" "$inst_ver"
+}
+
 function sd_ver {
 	local repo=$1
 	if [[ -n $2 ]]; then

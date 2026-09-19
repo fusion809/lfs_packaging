@@ -185,6 +185,14 @@ function ngnu_download {
 	download_src "https://download.savannah.nongnu.org/releases/$name/$filename"
 }
 
+function perl_download {
+	local code=$1
+	local twocode="${1:0:2}"
+	local onecode="${1:0:1}"
+	local filename=$2
+	download_src "https://www.cpan.org/authors/id/$onecode/$twocode/$code/$filename"
+}
+
 function sf_download {
 	local name=$1
 	local direname=$2

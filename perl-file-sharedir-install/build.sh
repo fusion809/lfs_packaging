@@ -1,25 +1,12 @@
 #!/bin/bash
 set -e
 name=perl-file-sharedir-install
-get_version() {
-	local inst_ver=$(pkgver $name)
-	local up_ver=$(wget -cqO- -T 5 -t 1 https://www.cpan.org/authors/id/E/ET/ETHER | grep "File-ShareDir-Install-[0-9]+\.[0-9]+" -oE | cut -d '-' -f 2 | sort -V | tail -n 1)
-	ver_check "$up_ver" "$inst_ver" && return
-	local vat_ver=$(vatver $name)
-	ver_check "$vat_ver" "$inst_ver" && return
-
-	local arch_ver=$(aver $name)
-	ver_check "$arch_ver" "$inst_ver" && return
-	local lfs_vers=$(lfs_ver $name)
-	ver_check "$lfs_vers" "$inst_ver" && return
-	fver "$name" "$inst_ver"
-}
-version=$(get_version)
-filename="File-ShareDir-Install-$version.tar.gz"
+_name=File-ShareDir-Install
+code=ETHER
+version=$(perl_ver $name $_name $code)
+filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://cpan.metacpan.org/authors/id/E/ET/ETHER/$filename
-fi
+perl_download "$code" "$filename"
 unpk_enter "$filename" "$direname"
 perl Makefile.PL &&
 maki

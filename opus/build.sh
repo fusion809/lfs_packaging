@@ -20,9 +20,7 @@ version=$(get_version)
 depends=(glibc libogg)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://downloads.xiph.org/releases/opus/$filename
-fi
+download_src "https://downloads.xiph.org/releases/opus/$filename"
 unpk_enter "$filename" "$direname"
 options=(--prefix=/usr        \
             --buildtype=release  \

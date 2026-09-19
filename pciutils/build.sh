@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(glibc kmod openssl systemd xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://mj.ucw.cz/download/linux/pci/$filename
-fi
+download_src "https://mj.ucw.cz/download/linux/pci/$filename"
 unpk_enter "$filename" "$direname"
 sed -r '/INSTALL/{/PCI_IDS|update-pciids /d; s/update-pciids.8//}' \
     -i Makefile
