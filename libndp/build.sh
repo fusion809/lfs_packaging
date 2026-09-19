@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force http://libndp.org/files/$filename
-fi
+download_src "http://libndp.org/files/$filename"
 unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static --sysconfdir=/etc --localstatedir=/var
 cd ../

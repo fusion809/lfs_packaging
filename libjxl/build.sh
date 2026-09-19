@@ -8,7 +8,8 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
-options=(-D CMAKE_INSTALL_PREFIX=/usr             \
+options=(
+      -D CMAKE_INSTALL_PREFIX=/usr             \
       -D CMAKE_BUILD_TYPE=Release              \
       -D BUILD_TESTING=OFF                     \
       -D BUILD_SHARED_LIBS=ON                  \

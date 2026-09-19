@@ -8,10 +8,8 @@ direname="${filename/.tar.xz/}"
 depends=(brotli bzip2 expat fontconfig freetype gcc gdk-pixbuf glib2 glib2 glibc glycin lcms2 libffi libpng libseccomp pcre2 util-linux zlib)
 # Fetch source and unpack it
 gn_download "$filename"
-rm -rf $direname
-tar xf $filename
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 docbook_ver=$(pkgver docbook-xsl-nons)
 sed -i -e "s|http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl|/usr/share/xml/docbook/xsl-stylesheets-nons-$docbook_ver/manpages/docbook.xsl|g" meson.build
 meson_options=(

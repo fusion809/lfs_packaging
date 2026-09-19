@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(glibc lcms2 libjpeg-turbo zlib)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://downloads.sourceforge.net/libmng/$filename
-fi
+download_src "https://downloads.sourceforge.net/libmng/$filename"
 unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static
 sudo su -c "install -v -m755 -d        /usr/share/doc/$direname &&

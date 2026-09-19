@@ -6,11 +6,10 @@ version=$(gh_ver $repo)
 depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/$version/$filename
-fi
+ghr_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
-options=(-D CMAKE_INSTALL_PREFIX=/usr        \
+options=(
+      -D CMAKE_INSTALL_PREFIX=/usr        \
       -D CMAKE_BUILD_TYPE=RELEASE         \
       -D ENABLE_STATIC=FALSE              \
       -D CMAKE_INSTALL_DEFAULT_LIBDIR=lib \

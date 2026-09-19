@@ -7,9 +7,7 @@ depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 # Kernel config options required
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/libnl$(echo $version | sed -E 's/\./_/g')/$filename
-fi
+ghr_download "$repo" "libnl$(echo $version | sed -E 's/\./_/g')" "$filename"
 unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --sysconfdir=/etc --disable-static
 cd ../
