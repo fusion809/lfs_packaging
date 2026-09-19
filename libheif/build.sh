@@ -6,11 +6,10 @@ version=$(gh_ver $repo)
 depends=(libaom libde265 x265)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/strukturag/libheif/releases/download/v$version/$filename
-fi
+ghr_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
-cmake_options=(-D CMAKE_INSTALL_PREFIX=/usr \
+cmake_options=(
+      -D CMAKE_INSTALL_PREFIX=/usr \
       -D CMAKE_BUILD_TYPE=Release  \
       -D WITH_GDK_PIXBUF=OFF       \
       -D WITH_OpenH264_DECODER=OFF \

@@ -6,11 +6,10 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(cmake gcc glib2 glibc icu libffi libxml2 pcre2 vala)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/libical/libical/releases/download/v$version/$filename
-fi
+ghr_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
-cmake_options=(-D CMAKE_INSTALL_PREFIX=/usr  \
+cmake_options=(
+      -D CMAKE_INSTALL_PREFIX=/usr  \
       -D CMAKE_BUILD_TYPE=Release   \
       -D LIBICAL_STATIC=NO          \
       -D LIBICAL_BUILD_DOCS=false   \
