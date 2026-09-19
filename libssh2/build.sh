@@ -16,9 +16,8 @@ download_src "https://www.libssh2.org/download/$filename"
 unpk_enter "$filename" "$direname"
 gap_patches "$name"
 cmake_options=(
-	-DCMAKE_INSTALL_PREFIX=/usr
-	-DCMAKE_RUN_DOCKER_TESTS=false
-	-DBUILD_STATIC_LIBS=OFF
+	-DCMAKE_INSTALL_PREFIX=/usr \
+	-DBUILD_STATIC_LIBS=OFF \
 	-DHIDE_SYMBOLS=OFF
 )
 cmaki "${cmake_options[@]}" 
