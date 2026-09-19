@@ -441,5 +441,5 @@ function wxcb_ver {
 	wget -T 5 -t 1 -cqO- https://xorg.freedesktop.org/archive/individual/lib/ | grep "$1-[0-9]+\.[0-9]+\.[0-9]+" -oE | sed "s/$1-//g" | sort -V | tail -n 1
 }
 
-unset lfs_ver
-alias lfs_ver=artver
+#unset lfs_ver
+#alias lfs_ver=artver
