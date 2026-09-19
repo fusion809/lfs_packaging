@@ -7,9 +7,9 @@ get_version() {
 	ver_check "$up_ver" "$inst_ver" && return
 	local vat_ver=$(vatver $name)
 	ver_check "$vat_ver" "$inst_ver" && return
-	local arch_ver=$(aver $name)
+	local arch_ver=$(aver $name | sed 's/_[0-9]//g')
 	ver_check "$arch_ver" "$inst_ver" && return
-	local artix_ver=$(artver $name)
+	local artix_ver=$(artver $name | sed 's/_[0-9]//g')
 	ver_check "$arch_ver" "$inst_ver" && return
 	fver "$name" "$version"
 }
