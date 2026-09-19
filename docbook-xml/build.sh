@@ -19,60 +19,68 @@ filename="$name-$version.zip"
 direname="${filename/.zip/}"
 download_src "https://archive.docbook.org/xml/$version/$filename"
 unpk_enter "$filename" "$direname"
-sudo su -c "install -v -d -m755 /usr/share/xml/docbook/xml-dtd-$version &&
-install -v -d -m755 /etc/xml                           &&
-cp -v -af --no-preserve=ownership                      \
-    catalog.xml docbook.cat *.dtd ent/ *.mod           \
-    /usr/share/xml/docbook/xml-dtd-$version
-xmlcatalog --noout --add \"rewriteSystem\"        \
-    \"http://www.oasis-open.org/docbook/xml/$version\" \
-    \"file:///usr/share/xml/docbook/xml-dtd-$version\" \
-    /usr/share/xml/docbook/xml-dtd-$version/catalog.xml &&
+sudo su -c "
+	install -v -d -m755 /usr/share/xml/docbook/xml-dtd-$version
+	install -v -d -m755 /etc/xml
 
-xmlcatalog --noout --add \"rewriteURI\"           \
-    \"http://www.oasis-open.org/docbook/xml/$version\" \
-    \"file:///usr/share/xml/docbook/xml-dtd-$version\" \
-    /usr/share/xml/docbook/xml-dtd-$version/catalog.xml
-if [ ! -e /etc/xml/catalog ]; then
-    xmlcatalog --noout --create /etc/xml/catalog
-fi &&
+	cp -v -af --no-preserve=ownership \
+		catalog.xml docbook.cat *.dtd ent/ *.mod \
+		/usr/share/xml/docbook/xml-dtd-$version
 
-xmlcatalog --noout --add \"delegatePublic\"                   \
-    \"-//OASIS//ENTITIES DocBook XML\"                        \
-    \"file:///usr/share/xml/docbook/xml-dtd-$version/catalog.xml\" \
-    /etc/xml/catalog                                        &&
+	# Register the package's native 4.5 catalog.
+	xmlcatalog --noout --add 'rewriteSystem' \
+		'http://www.oasis-open.org/docbook/xml/$version' \
+		'file:///usr/share/xml/docbook/xml-dtd-$version' \
+		/usr/share/xml/docbook/xml-dtd-$version/catalog.xml
 
-xmlcatalog --noout --add \"delegatePublic\"                   \
-    \"-//OASIS//DTD DocBook XML\"                             \
-    \"file:///usr/share/xml/docbook/xml-dtd-$version/catalog.xml\" \
-    /etc/xml/catalog                                        &&
+	xmlcatalog --noout --add 'rewriteURI' \
+		'http://www.oasis-open.org/docbook/xml/$version' \
+		'file:///usr/share/xml/docbook/xml-dtd-$version' \
+		/usr/share/xml/docbook/xml-dtd-$version/catalog.xml
 
-xmlcatalog --noout --add \"delegateSystem\"                   \
-    \"http://www.oasis-open.org/docbook/\"                    \
-    \"file:///usr/share/xml/docbook/xml-dtd-$version/catalog.xml\" \
-    /etc/xml/catalog                                        &&
+	if [ ! -e /etc/xml/catalog ]; then
+		xmlcatalog --noout --create /etc/xml/catalog
+	fi
 
-xmlcatalog --noout --add \"delegateURI\"                      \
-    \"http://www.oasis-open.org/docbook/\"                    \
-    \"file:///usr/share/xml/docbook/xml-dtd-$version/catalog.xml\" \
-    /etc/xml/catalog
-for DTDVERSION in 4.1.2 4.2 4.3 4.4
-do
-  xmlcatalog --noout --add \"public\"                                  \
-    \"-//OASIS//DTD DocBook XML V$DTDVERSION//EN\"                     \
-    \"http://www.oasis-open.org/docbook/xml/$DTDVERSION/docbookx.dtd\" \
-    /usr/share/xml/docbook/xml-dtd-$version/catalog.xml
+	xmlcatalog --noout --add 'delegatePublic' \
+		'-//OASIS//ENTITIES DocBook XML' \
+		'file:///usr/share/xml/docbook/xml-dtd-$version/catalog.xml' \
+		/etc/xml/catalog
 
-  xmlcatalog --noout --add \"rewriteSystem\"              \
-    \"http://www.oasis-open.org/docbook/xml/$DTDVERSION\" \
-    \"file:///usr/share/xml/docbook/xml-dtd-$version\"         \
-    /usr/share/xml/docbook/xml-dtd-$version/catalog.xml
-  
-  xmlcatalog --noout --add \"rewriteURI\"                 \
-    \"http://www.oasis-open.org/docbook/xml/$DTDVERSION\" \
-    \"file:///usr/share/xml/docbook/xml-dtd-$version\"         \
-    /usr/share/xml/docbook/xml-dtd-$version/catalog.xml
-done"
+	xmlcatalog --noout --add 'delegatePublic' \
+		'-//OASIS//DTD DocBook XML' \
+		'file:///usr/share/xml/docbook/xml-dtd-$version/catalog.xml' \
+		/etc/xml/catalog
+
+	xmlcatalog --noout --add 'delegateSystem' \
+		'http://www.oasis-open.org/docbook/' \
+		'file:///usr/share/xml/docbook/xml-dtd-$version/catalog.xml' \
+		/etc/xml/catalog
+
+	xmlcatalog --noout --add 'delegateURI' \
+		'http://www.oasis-open.org/docbook/' \
+		'file:///usr/share/xml/docbook/xml-dtd-$version/catalog.xml' \
+		/etc/xml/catalog
+
+	for DTDVERSION in 4.1.2 4.2 4.3 4.4
+	do
+		xmlcatalog --noout --add 'public' \
+			'-//OASIS//DTD DocBook XML V$DTDVERSION//EN' \
+			'file:///usr/share/xml/docbook/xml-dtd-$version/docbookx.dtd' \
+			/usr/share/xml/docbook/xml-dtd-$version/catalog.xml
+
+		xmlcatalog --noout --add 'system' \
+			'http://www.oasis-open.org/docbook/xml/$DTDVERSION/docbookx.dtd' \
+			'file:///usr/share/xml/docbook/xml-dtd-$version/docbookx.dtd' \
+			/usr/share/xml/docbook/xml-dtd-$version/catalog.xml
+
+		xmlcatalog --noout --add 'uri' \
+			'http://www.oasis-open.org/docbook/xml/$DTDVERSION/docbookx.dtd' \
+			'file:///usr/share/xml/docbook/xml-dtd-$version/docbookx.dtd' \
+			/usr/share/xml/docbook/xml-dtd-$version/catalog.xml
+	done
+"
 cd ../
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
+
