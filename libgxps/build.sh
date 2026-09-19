@@ -8,7 +8,9 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 gn_download "$filename"
 unpk_enter "$filename" "$direname"
-options=(--prefix=/usr --buildtype=release)
+options=(
+    --prefix=/usr \
+    --buildtype=release)
 mni "${options[@]}"
 cd ../..
 rm -rf "$filename" "$direname"

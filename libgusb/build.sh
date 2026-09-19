@@ -2,18 +2,15 @@
 set -e
 # Variable declaration
 name=libgusb
-version=$(gh_ver "hughsie/libgusb")
+repo=hughsie/libgusb
+version=$(gh_ver "$repo")
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 depends=(glib2 glib2 glibc hwdata json-glib libffi libusb pcre2 systemd util-linux vala webkitgtk zlib)
 # Fetch source and unpack it
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/hughsie/libgusb/releases/download/$version/$filename
-fi
-rm -rf $direname
-tar xf $filename
+ghr_download "$repo" "$version" "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 meson_options=(
 	--prefix=/usr       \
     --buildtype=release \
