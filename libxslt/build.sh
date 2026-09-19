@@ -6,9 +6,7 @@ majVer=$(echo $version | sed -E 's/.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(docbook-xml docbook-xsl-nons libxml2)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/libxslt/$majVer/$filename
-fi
+gn_download "$filename"
 unpk_enter "$filename" "$direname"
 configure_options=(--prefix=/usr    \
             --disable-static \

@@ -6,9 +6,7 @@ majVer=$(echo $version | sed 's/.[0-9]$//g')
 depends=(glib2 pycairo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/pygobject/$majVer/$filename
-fi
+gn_download "$filename"
 
 unpk_enter "$filename" "$direname"
 options=(--prefix=/usr \

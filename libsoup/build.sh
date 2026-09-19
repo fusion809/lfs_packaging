@@ -5,9 +5,7 @@ version=$(gn_ver $name)
 depends=(brotli e2fsprogs glib2 glibc keyutils libffi libidn2 libpsl libunistring mitkrb nghttp2 pcre2 sqlite systemd util-linux zlib)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/libsoup/$majVer/$filename
-fi
+gn_download "$filename"
 unpk_enter "$filename" "$direname"
 gap_patches libsoup3
 options=(--prefix=/usr          \

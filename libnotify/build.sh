@@ -7,9 +7,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 depends=(brotli bzip2 expat fontconfig freetype gcc gdk-pixbuf glib2 glib2 glibc glycin lcms2 libffi libpng libseccomp pcre2 util-linux zlib)
 # Fetch source and unpack it
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/libnotify/$(echo $version | sed 's/.[0-9]$//g')/$filename
-fi
+gn_download "$filename"
 rm -rf $direname
 tar xf $filename
 # Compile and install

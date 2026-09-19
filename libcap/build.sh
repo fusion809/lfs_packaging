@@ -20,9 +20,7 @@ version=$(get_version)
 depends=(bash coreutils gcc glibc make openssl tar xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/$filename
-fi
+download_src "https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/$filename"
 unpk_enter "$filename" "$direname"
 sed -i '/install -m.*STA/d' libcap/Makefile
 make prefix=/usr lib=lib -j$(nproc)

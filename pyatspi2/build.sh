@@ -6,9 +6,7 @@ version=$(gn_ver $name)
 depends=(dbus-python pygobject)
 filename="$_name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/$_name/$majVer/$filename
-fi
+gn_download "$filename"
 unpk_enter "$filename" "$direname"
 mni --prefix=/usr --buildtype=release
 cd ../..

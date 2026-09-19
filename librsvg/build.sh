@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(cairo cargo-c gdk-pixbuf glib2 pango vala)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/librsvg/$majVer/$filename
-fi
+gn_download "$filename"
 unpk_enter "$filename" "$direname"
 sed -e "/OUTDIR/s|,| / 'librsvg-2.62.3', '--no-namespace-dir',|" \
     -e '/output/s|Rsvg-2.0|librsvg-2.62.3|'                      \

@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(alsa-lib at-spi2-core brotli bzip2 cairo dbus elfutils expat flac fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gstreamer gtk3 harfbuzz lame lcms2 libepoxy libffi libogg libpng libseccomp libsndfile libtool libunwind libvorbis libX11 libXau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libXrandr libXrender libXres mpg123 opus pango pcre2 pixman pulseaudio systemd util-linux wayland xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://0pointer.de/lennart/projects/libcanberra/$filename
-fi
+download_src "https://0pointer.de/lennart/projects/libcanberra/$filename"
 unpk_enter "$filename" "$direname"
 gap_patches "$name" || echo "Applying patch failed."
 ./configure --prefix=/usr --disable-oss

@@ -6,9 +6,7 @@ majVer=$(echo $version | sed -E 's/.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(gcc glibc icu ncurses readline)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/libxml2/$majVer/$filename
-fi
+gn_download "$filename"
 unpk_enter "$filename" "$direname"
 sed -i "/'git'/,+3d" meson.build
 meson_options=(--prefix=/usr       \

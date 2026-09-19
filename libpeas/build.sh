@@ -5,9 +5,7 @@ version=$(gn_ver libpeas)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(glib2 glibc gtk3)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/libpeas/$majVer/$filename
-fi
+gn_download "$filename"
 unpk_enter "$filename" "$direname"
 meson_options=(--prefix=/usr          \
             --buildtype=release    \
