@@ -17,7 +17,7 @@ cmake_options=(
     -D CMAKE_BUILD_TYPE=Release         \
     -D BUILD_TESTING=OFF                \
     -D BUILD_PYTHON_BINDINGS=OFF        \
-	-W no-author)
+    -W no-author)
 cmaki "${cmake_options[@]}"
 cd ../..
 rm -rf "$filename" "$direname"
