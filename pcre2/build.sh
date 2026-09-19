@@ -8,12 +8,8 @@ direname="$name-$name-$version"
 depends=(bash bzip2 coreutils glibc gzip make ncurses readline sed tar wget zlib)
 # Fetch and unpack source
 rm -rf $direname
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/PCRE2Project/pcre2/archive/$filename
-fi
-if ! [[ -f sljit-master.tar.gz ]]; then
-	wget -c --progress=bar:force https://github.com/zherczeg/sljit/archive/master.tar.gz -O sljit-master.tar.gz
-fi
+gha_download "PCRE2Project/pcre2" "$filename" "$filename"
+gha_download "zherczeg/sljit" "master" "sljit-master.tar.gz"
 tar xf $filename
 cd $direname
 rm -rf deps/sljit
