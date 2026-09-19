@@ -10,13 +10,9 @@ filename="$reponame-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(alsa-lib bash coreutils dbus dbus expat gcc glibc opus portaudio python systemd)
 # Fetch and unpack source
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/archive/$version.tar.gz -O $filename
-fi
+gha_download "$repo" "$version" "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-rm -rf $direname
-tar xf $filename
-cd $direname
 sed -i -e "s|python$|python3|g" waf
 CLFAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"

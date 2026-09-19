@@ -7,12 +7,8 @@ depends=(glibc)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 # Kernel options are required, too
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.netfilter.org/projects/iptables/files/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://www.netfilter.org/projects/iptables/files/$filename"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-nftables --enable-libipq
 cd ../
 rm -rf "$filename" "$direname"

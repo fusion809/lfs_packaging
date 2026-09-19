@@ -20,12 +20,8 @@ version=$(get_version)
 depends=(bash bzip2 coreutils gcc glibc glibc iptables libcap libelf libtirpc make tar xz xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.kernel.org/pub/linux/utils/net/$name/$filename
-fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+download_src "https://www.kernel.org/pub/linux/utils/net/$name/$filename"
+unpK_enter "$filename" "$direname"
 sed -i /ARPD/d Makefile
 rm -fv man/man8/arpd.8
 make NETNS_RUN_DIR=/run/netns
