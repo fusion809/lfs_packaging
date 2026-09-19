@@ -6,12 +6,8 @@ majVer=$(echo $version | sed -E 's/.[0-9]+//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(enchant gtk3 icu)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.gnome.org/sources/gspell/$majVer/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+gn_download "$filename"
+unpk_enter "$filename" "$direname"
 mni --prefix=/usr --buildtype=release -D gtk_doc=false
 cd ../..
 rm -rf "$filename" "$direname"

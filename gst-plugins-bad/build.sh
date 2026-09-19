@@ -5,12 +5,8 @@ version=$(gfd_ver gstreamer/gstreamer)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(gst-plugins-base libaom libdvdnav libdvdread libva soundtouch svt-av1)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://gstreamer.freedesktop.org/src/gst-plugins-bad/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://gstreamer.freedesktop.org/src/gst-plugins-bad/$filename"
+unpk_enter "$filename" "$direname"
 meson_options=(--prefix=/usr       \
       --buildtype=release \
       -D gpl=enabled)

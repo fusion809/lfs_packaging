@@ -14,17 +14,62 @@ function download_git {
 }
 function download_src {
 	local URL=$1
-	if [[ -n $2 ]]; then
+	if [[ -n $2 ]]
+	then
 		local filename=$2
 	else
-		local filename=$(echo $URL | rev | cut -d '/' -f 1 | rev)
-	fi	
-	if ! [[ -f $filename ]] && [[ -n $2 ]]; then
-		wget -c --progress=bar:force $URL -O $filename
-	elif ! [[ -f $filename ]]; then
-		wget -c --progress=bar:force $URL
+		local filename=$(echo "$URL" | rev | cut -d '/' -f 1 | rev)
+	fi
+
+	if [[ -f $filename ]]
+	then
+		local valid=1
+
+		case "$filename" in
+			*.tar.gz|*.tgz)
+				file -b "$filename" | grep -qE 'gzip compressed data' &&
+					tar -tzf "$filename" >/dev/null 2>&1 || valid=0
+				;;
+			*.tar.xz|*.txz)
+				file -b "$filename" | grep -qE 'XZ compressed data' &&
+					tar -tJf "$filename" >/dev/null 2>&1 || valid=0
+				;;
+			*.tar.bz2|*.tbz2)
+				file -b "$filename" | grep -qE 'bzip2 compressed data' &&
+					tar -tjf "$filename" >/dev/null 2>&1 || valid=0
+				;;
+			*.tar.zst|*.tzst)
+				file -b "$filename" | grep -qE 'Zstandard compressed data' &&
+					tar --zstd -tf "$filename" >/dev/null 2>&1 || valid=0
+				;;
+			*.zip)
+				file -b "$filename" | grep -qE 'Zip archive data' &&
+					bsdtar -tf "$filename" >/dev/null 2>&1 || valid=0
+				;;
+			*.rpm|*.deb)
+				bsdtar -tf "$filename" >/dev/null 2>&1 || valid=0
+				;;
+			*)
+				# Unknown format: at least make sure it isn't empty.
+				[[ -s "$filename" ]] || valid=0
+				;;
+		esac
+
+		if (( valid ))
+		then
+			printf '%s\n' "$filename already present and appears valid."
+			return 0
+		fi
+
+		printf '%s\n' "$filename is invalid or incomplete; removing it."
+		rm -f "$filename"
+	fi
+
+	if [[ -n $2 ]]
+	then
+		wget -c --progress=bar:force "$URL" -O "$filename"
 	else
-		printf '%s\n' "$filename already present."
+		wget -c --progress=bar:force "$URL"
 	fi
 }
 
