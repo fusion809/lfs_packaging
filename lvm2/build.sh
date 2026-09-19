@@ -25,9 +25,7 @@ if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://sourceware.org/ftp/lvm2/$filename
 fi
 export PATH+=:/usr/sbin
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 ./configure --prefix=/usr       \
             --enable-cmdlib     \
             --enable-pkgconfig  \

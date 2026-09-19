@@ -9,9 +9,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://downloads.sourceforge.net/mpg123/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr
 cd ../
 rm -rf "$filename" "$direname"

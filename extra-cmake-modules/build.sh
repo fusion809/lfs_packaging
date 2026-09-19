@@ -3,7 +3,6 @@ set -e
 name=extra-cmake-modules
 repo=KDE/$name
 version=$(gh_ver $repo)
-majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(cmake qt6)

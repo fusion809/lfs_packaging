@@ -9,9 +9,7 @@ depends=(brotli c-ares gcc glibc icu libuv nghttp2 openssl simdutf which zlib)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://nodejs.org/dist/v$version/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 configure_options=(--prefix=/usr          \
             --shared-brotli        \
             --shared-cares         \

@@ -18,7 +18,6 @@ get_version() {
   fver "$name" "$inst_ver"
 }
 version=$(get_version)
-majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 dirname="krb5-$version"
 filename="$dirname.tar.gz"
 depends=(bash e2fsprogs glibc keyutils lmdb openssl)

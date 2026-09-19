@@ -9,9 +9,7 @@ depends=(gcc glibc icu ncurses readline)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://download.gnome.org/sources/libxml2/$majVer/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 sed -i "/'git'/,+3d" meson.build
 meson_options=(--prefix=/usr       \
       --buildtype=release \

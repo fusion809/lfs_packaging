@@ -9,9 +9,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/releases/download/v$version/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 sed -i '/func.s/s/s//' tests/Gtest-nomalloc.c
 cmi --prefix=/usr --disable-static
 cd ../

@@ -9,9 +9,7 @@ depends=(glib2 libgudev libmbim)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://gitlab.freedesktop.org/$repo/-/archive/$version/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 meson_options=(--prefix=/usr            \
       --buildtype=release      \
       -D bash_completion=false \

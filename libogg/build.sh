@@ -9,9 +9,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://downloads.xiph.org/releases/ogg/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static --docdir=/usr/share/doc/$direname
 cd ../
 rm -rf "$filename" "$direname"

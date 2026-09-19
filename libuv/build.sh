@@ -8,9 +8,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://dist.libuv.org/dist/v$version/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 sudo ./autogen.sh
 sudo chown $USER -R .
 cmi --prefix=/usr --disable-static

@@ -9,9 +9,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/releases/download/$version/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 sed -i '/typedef enum/,/bool ;/d' src/ALAC/alac_{en,de}coder.c
 cmi --prefix=/usr -docdir=/usr/share/doc/$direname
 cd ../

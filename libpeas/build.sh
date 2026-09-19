@@ -2,7 +2,6 @@
 set -e 
 name=libpeas
 version=$(gn_ver libpeas)
-majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(glib2 glibc gtk3)

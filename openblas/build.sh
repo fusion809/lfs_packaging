@@ -10,9 +10,7 @@ depends=(cmake gcc glibc gzip tar)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/releases/download/v$version/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 #options=(-DCMAKE_INSTALL_PREFIX=/usr \
 #    -DBUILD_SHARED_LIBS=ON \
 #    -DBUILD_TESTING=OFF \

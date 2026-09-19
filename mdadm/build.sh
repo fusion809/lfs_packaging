@@ -10,9 +10,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://git.kernel.org/pub/scm/utils/mdadm/mdadm.git/snapshot/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 make -j$(nproc)
 sudo make BINDIR=/usr/sbin install
 cd ../

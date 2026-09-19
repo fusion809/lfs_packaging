@@ -21,9 +21,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://get.videolan.org/$name/$version/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 sed -i "/get_option/s/$name/&-$version/" meson.build
 options=(--prefix=/usr       \
             --buildtype=release \

@@ -9,9 +9,7 @@ depends=(libxcb wayland wayland-protocols xkeyboard-config)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/lfs-book/libxkbcommon/archive/v$version/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 gap_patches $name
 meson_options=(--prefix=/usr        \
       --buildtype=release  \

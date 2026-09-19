@@ -21,9 +21,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://releases.pagure.org/libaio/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 sed -i '/install.*libaio.a/s/^/#/' src/Makefile
 maki
 cd ..

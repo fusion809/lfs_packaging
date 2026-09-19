@@ -21,9 +21,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://releases.pagure.org/newt/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 sed -e '/install -m 644 $(LIBNEWT)/ s/^/#/' \
     -e '/$(LIBNEWT):/,/rv/ s/^/#/'          \
     -e 's/$(LIBNEWT)/$(LIBNEWTSH)/g'        \

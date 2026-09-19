@@ -9,9 +9,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/archive/$version/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 export QT6DIR=/opt/qt6
 options=(-D CMAKE_INSTALL_PREFIX=$QT6DIR \
       -D CMAKE_BUILD_TYPE=Release     \

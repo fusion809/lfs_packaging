@@ -10,9 +10,7 @@ depends=(mesa)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://download.gnome.org/sources/libepoxy/$majVer/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 mni --prefix=/usr --buildtype=release
 cd ../..
 rm -rf "$filename" "$direname"

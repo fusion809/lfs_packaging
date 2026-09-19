@@ -3,7 +3,6 @@ set -e
 name=cryptsetup
 repo=mbroz/$name
 version=$(gh_ver $repo)
-majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 depends=(glibc json-c lvm2 openssl popt systemd util-linux)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"

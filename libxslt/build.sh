@@ -9,9 +9,7 @@ depends=(docbook-xml docbook-xsl-nons libxml2)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://download.gnome.org/sources/libxslt/$majVer/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 configure_options=(--prefix=/usr    \
             --disable-static \
             --without-python \

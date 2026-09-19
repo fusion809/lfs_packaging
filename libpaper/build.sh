@@ -8,9 +8,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/rrthomas/libpaper/releases/download/v$version/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 configure_options=(--prefix=/usr     \
             --sysconfdir=/etc \
             --disable-static  \

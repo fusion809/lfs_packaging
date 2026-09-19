@@ -9,9 +9,7 @@ depends=(qt6)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/danvratil/qcoro/archive/v$version/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 cmake_options=(-D CMAKE_INSTALL_PREFIX=/opt/qt6 \
       -D CMAKE_BUILD_TYPE=Release     \
       -D BUILD_TESTING=OFF            \

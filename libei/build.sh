@@ -9,9 +9,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://gitlab.freedesktop.org/$repo/-/archive/$version/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 mni --prefix=/usr --buildtype=release -D tests=disabled
 cd ../..
 rm -rf "$filename" "$direname"

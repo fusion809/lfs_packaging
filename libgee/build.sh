@@ -4,15 +4,12 @@ name=libgee
 repo=GNOME/$name
 version=$(gh_ver $repo)
 depends=(glib2 glibc libffi pcre2 systemd util-linux zlib)
-majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://download.gnome.org/sources/$name/$majVer/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 options=(--prefix=/usr --enable-vala)
 cmi "${options[@]}"
 cd .. 

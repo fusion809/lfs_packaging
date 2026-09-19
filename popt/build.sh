@@ -9,9 +9,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://ftp.osuosl.org/pub/rpm/popt/releases/popt-$majVer.x/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static
 cd ..
 rm -rf "$filename" "$direname"

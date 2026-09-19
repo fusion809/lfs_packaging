@@ -3,16 +3,13 @@ set -e
 name=librsvg
 repo=GNOME/$name
 version=$(gh_ver $repo)
-majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(cairo cargo-c gdk-pixbuf glib2 pango vala)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://download.gnome.org/sources/librsvg/$majVer/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 sed -e "/OUTDIR/s|,| / 'librsvg-2.62.3', '--no-namespace-dir',|" \
     -e '/output/s|Rsvg-2.0|librsvg-2.62.3|'                      \
     -i doc/meson.build

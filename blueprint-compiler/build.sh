@@ -2,7 +2,6 @@
 set -e
 name=blueprint-compiler
 version=$(gn_ver $name)
-majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 depends=(pygobject)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

@@ -21,9 +21,7 @@ depends=(perl-file-sharedir)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.cpan.org/authors/id/P/PL/PLICEASE/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 perl Makefile.PL &&
 maki
 cd ../

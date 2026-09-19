@@ -9,9 +9,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/releases/download/$direname/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static --with-securedir=/usr/lib/security --disable-python-bindings
 pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD/python
 sudo pip3 install --no-index --find-links dist --no-user pwquality

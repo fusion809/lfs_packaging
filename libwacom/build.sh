@@ -9,9 +9,7 @@ depends=(glib2 glibc libevdev libffi libgudev libxml2 pcre2 systemd)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/linuxwacom/libwacom/releases/download/$direname/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 sudo rm -rf /usr/share/libwacom
 meson_options=(--prefix=/usr       \
       --buildtype=release \

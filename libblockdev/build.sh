@@ -9,9 +9,7 @@ depends=(cryptsetup e2fsprogs glib2 glib2 glibc gmp json-c keyutils keyutils kmo
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/storaged-project/libblockdev/releases/download/$version/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 configure_options=(--prefix=/usr      \
             --sysconfdir=/etc  \
             --with-python3     \

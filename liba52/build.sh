@@ -18,15 +18,12 @@ get_version() {
 }
 version=$(get_version)
 depends=(glibc)
-majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="a52dec-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://distfiles.adelielinux.org/source/a52dec/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 options=(--prefix=/usr           \
             --mandir=/usr/share/man \
             --enable-shared         \

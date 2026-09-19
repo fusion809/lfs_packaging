@@ -9,9 +9,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.libraw.org/data/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --enable-jpeg --enable-jasper --enable-lcms --disable-static --docdir=/usr/share/doc/libraw-$version
 cd ../
 rm -rf "$filename" "$direname"

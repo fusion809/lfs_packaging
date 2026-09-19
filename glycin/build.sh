@@ -2,7 +2,6 @@
 set -e
 name=glycin
 version=$(gn_ver $name)
-majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(bubblewrap fontconfig glib2 lcms2 libheif libjxl librsvg libseccomp rustc vala)

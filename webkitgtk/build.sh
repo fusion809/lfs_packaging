@@ -16,7 +16,6 @@ get_version() {
 }
 version=$(get_version)
 depends=(at-spi2-core brotli bzip2 cairo curl cyrus-sasl dav1d dbus e2fsprogs elfutils enchant expat fontconfig freetype fribidi gcc gcr4 gdk-pixbuf glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk3 gtk4 harfbuzz highway icu json-glib keyutils lapack lcms2 libadwaita libaom libavif libdrm libelf libepoxy libffi libfyaml libgcrypt libgpg-error libgudev libidn2 libjpeg-turbo libjxl libpciaccess libpng libpsl librest libseccomp libsecret libsoup libtasn1 libtiff libunistring libunwind libwebp libX11 libXau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libxml2 libxmlb libXrandr libXrender libXres libxshmfence libxslt libXxf86vm llvm lm-sensors mesa mitkrb nghttp2 openldap openssl orc p11-kit pango pcre2 pixman spirv-tools sqlite svt-av1 systemd util-linux vulkan-loader wayland xz zlib zstd)
-majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 download_src "https://webkitgtk.org/releases/$filename"

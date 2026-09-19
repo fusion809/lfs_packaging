@@ -4,15 +4,10 @@ name=kwallet
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc gpgme gpgmepp graphite2 harfbuzz icu kcolorscheme kconfig kcoreaddons kcrash kdbusaddons keyutils kguiaddons ki18n knotifications kwidgetsaddons kwindowsystem libassuan libcanberra libdrm libelf libffi libgcrypt libgpg-error libogg libpciaccess libpng libsecret libvorbis libX11 libXau libxcb libXdmcp libXext libXfixes libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qca qt6 spirv-tools systemd util-linux wayland webkitgtk xcb-util-keysyms xz zlib zstd)
-majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.kde.org/stable/frameworks/$majVer/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+kde_download "frameworks" "$filename"
+unpk_enter "$filename" "$direname"
 cmake_options=(-D CMAKE_INSTALL_PREFIX=/usr \
             -D CMAKE_INSTALL_LIBEXECDIR=libexec \
             -D CMAKE_PREFIX_PATH=/opt/qt6        \

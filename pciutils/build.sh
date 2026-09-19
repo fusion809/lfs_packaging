@@ -9,9 +9,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://mj.ucw.cz/download/linux/pci/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 sed -r '/INSTALL/{/PCI_IDS|update-pciids /d; s/update-pciids.8//}' \
     -i Makefile
 make -j$(nproc) PREFIX=/usr                \

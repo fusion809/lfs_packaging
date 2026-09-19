@@ -24,9 +24,7 @@ if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://gitlab.freedesktop.org/upower/power-profiles-daemon/-/archive/$version/$filename
 fi
 
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 meson_options=(
       --prefix=/usr        \
       --buildtype=release  \

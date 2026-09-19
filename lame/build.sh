@@ -9,9 +9,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://downloads.sourceforge.net/lame/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 sed -i -e 's/^\(\s*hardcode_libdir_flag_spec\s*=\).*/\1/' configure
 ./configure --prefix=/usr --disable-static --enable-mp3rtp
 # Fix: set_id3v2tag in parse.c incorrectly called utf8/ucs2 functions with

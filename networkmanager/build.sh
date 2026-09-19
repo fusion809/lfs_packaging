@@ -13,9 +13,7 @@ if ! [[ -f "$filename" ]]; then
 fi
 
 # Unpack and build
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 grep -rl '^#!.*python$' | xargs sed -i '1s/python/&3/'
 
 meson_options=(

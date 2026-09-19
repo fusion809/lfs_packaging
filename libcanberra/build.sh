@@ -9,9 +9,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://0pointer.de/lennart/projects/libcanberra/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 gap_patches "$name" || echo "Applying patch failed."
 ./configure --prefix=/usr --disable-oss
 make -j$(nproc)

@@ -13,9 +13,7 @@ depends=(gdbm glibc libxcrypt systemd)
 if ! [[ -f "$filename" ]]; then
     wget -c --progress=bar:force "https://github.com/linux-pam/linux-pam/releases/download/v$version/$filename"
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 
 sed -e "s/'elinks'/'lynx'/"                       \
     -e "s/'-no-numbering', '-no-references'/      \

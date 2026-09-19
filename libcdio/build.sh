@@ -12,9 +12,7 @@ pr_direname=$(echo $pr_filename | sed 's/.tar.*//g')
 if ! [[ -f $pr_filename ]]; then
 	wget -c --progress=bar:force $pr_url
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static
 tar -xf ../$pr_filename &&
 cd $pr_direname &&

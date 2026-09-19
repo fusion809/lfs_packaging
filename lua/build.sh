@@ -3,16 +3,13 @@ set -e
 name=lua
 repo=$name/$name
 version=$(gh_ver $repo)
-majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.lua.org/ftp/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 #gap_patches $name || echo "Continuing patching"
 wget -c --progress=bar:force https://gitlab.archlinux.org/archlinux/packaging/packages/lua/-/raw/main/liblua.so.patch
 wget -c --progress=bar:force https://gitlab.archlinux.org/archlinux/packaging/packages/lua/-/raw/main/paths.patch

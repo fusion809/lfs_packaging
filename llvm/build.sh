@@ -9,9 +9,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/releases/download/llvmorg-$version/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 grep -rl '#!.*python$' | xargs sed -i '1s/python$/python3/'
 sed 's/utility/tool/' -i llvm/utils/FileCheck/CMakeLists.txt
 sudo su -c "mkdir -pv /etc/clang &&

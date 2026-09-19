@@ -10,9 +10,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://download.gnome.org/sources/$name/$majVer/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 options=(--prefix=/usr --buildtype=release -D gtk_doc=false)
 mni "${options[@]}"
 cd ../..

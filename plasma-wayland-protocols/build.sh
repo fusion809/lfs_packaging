@@ -3,7 +3,6 @@ set -e
 name=plasma-wayland-protocols
 repo=KDE/$name
 version=$(gh_ver $repo)
-majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

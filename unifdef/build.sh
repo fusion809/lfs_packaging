@@ -9,9 +9,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://dotat.at/prog/unifdef/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 sed -i 's/constexpr/unifdef_&/g' unifdef.c
 sed -i 's/ln -s/ln -sf/' Makefile
 make -j$(nproc)

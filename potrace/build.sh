@@ -21,9 +21,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://downloads.sourceforge.net/potrace/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 options=(--prefix=/usr                        \
             --disable-static                     \
             --docdir=/usr/share/doc/$direname \

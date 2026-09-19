@@ -9,9 +9,7 @@ depends=(cmake make-ca qt6 which)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://download.kde.org/stable/$name/$version/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 sed -i 's@cert.pem@certs/ca-bundle.crt@' CMakeLists.txt
 cmake_options=(-D CMAKE_INSTALL_PREFIX=/opt/qt6            \
       -D CMAKE_BUILD_TYPE=Release                \

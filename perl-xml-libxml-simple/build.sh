@@ -20,9 +20,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.cpan.org/authors/id/M/MA/MARKOV/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 perl Makefile.PL &&
 maki
 cd ../

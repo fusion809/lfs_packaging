@@ -9,9 +9,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/archive/v$version/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 make WITHOUT_RPATH_FIX=1 -j$(nproc)
 sudo make PREFIX=/usr INSTALLMAN=/usr/share/man install
 cd ../

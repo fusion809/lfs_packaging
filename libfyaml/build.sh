@@ -9,9 +9,7 @@ depends=(gcc glibc icu libffi libxml2 libyaml llvm zlib zstd)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/pantoniou/libfyaml/releases/download/v$version/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static --without-libclang
 cd ..
 rm -rf "$filename" "$direname"

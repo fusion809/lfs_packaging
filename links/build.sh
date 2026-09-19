@@ -21,9 +21,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force http://links.twibright.com/download/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 sed '/*strchr/s/cast_const_char //g' -i ftp.c
 cmi --prefix=/usr --mandir=/usr/share/man
 sudo su -c "install -v -d -m755 /usr/share/doc/$direname &&

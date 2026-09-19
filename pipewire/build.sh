@@ -9,9 +9,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://gitlab.freedesktop.org/pipewire/pipewire/-/archive/$version/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 meson_options=(--prefix=/usr                   --buildtype=release 	    -D session-managers="[]")
 mni "${meson_options[@]}"
 cd ../..

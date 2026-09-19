@@ -20,9 +20,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://git.openldap.org/openldap/openldap/-/archive/LMDB_$version/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 cd libraries/liblmdb
 make -j$(nproc)
 sed -i 's| liblmdb.a||' Makefile

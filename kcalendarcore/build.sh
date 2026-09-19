@@ -17,9 +17,7 @@ cmake_options=(
     -D BUILD_TESTING=OFF                \
     -D BUILD_PYTHON_BINDINGS=OFF        \
 	-W no-author)
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 cmake_options=(-D CMAKE_INSTALL_PREFIX=/usr \
             -D CMAKE_INSTALL_LIBEXECDIR=libexec \
             -D CMAKE_PREFIX_PATH=/opt/qt6        \

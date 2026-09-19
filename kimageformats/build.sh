@@ -4,15 +4,10 @@ name=kimageformats
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(brotli bzip2 dav1d dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz highway icu karchive keyutils lcms2 libaom libavif libdrm libelf libffi libjpeg-turbo libjxl libpciaccess libpng libraw libX11 libXau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openjpeg openssl pcre2 qt6 spirv-tools svt-av1 systemd wayland xz zlib zstd)
-majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.kde.org/stable/frameworks/$majVer/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+kde_download "frameworks" "$filename"
+unpk_enter "$filename" "$direname"
 cmake_options=(-D CMAKE_INSTALL_PREFIX=/usr \
             -D CMAKE_INSTALL_LIBEXECDIR=libexec \
             -D CMAKE_PREFIX_PATH=/opt/qt6        \

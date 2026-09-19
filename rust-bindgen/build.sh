@@ -25,9 +25,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/archive/refs/tags/v$version/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 cargo build --release
 sudo su -c "install -v -m755 target/release/bindgen /usr/bin
 bindgen --generate-shell-completions bash \

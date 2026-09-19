@@ -17,9 +17,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://archive.mozilla.org/pub/firefox/releases/$version/source/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 cat > mozconfig << "EOF"
 # If you have a multicore machine, all cores will be used by default.
 

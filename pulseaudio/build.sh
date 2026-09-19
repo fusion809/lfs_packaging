@@ -9,9 +9,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.freedesktop.org/software/pulseaudio/releases/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 meson_options=(--prefix=/usr --buildtype=release -D database=gdbm    \
             -D doxygen=false    \
             -D bluez5=disabled  \

@@ -9,9 +9,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://downloads.sourceforge.net/libmng/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static
 sudo su -c "install -v -m755 -d        /usr/share/doc/$direname &&
 install -v -m644 doc/*.txt /usr/share/doc/$direname"

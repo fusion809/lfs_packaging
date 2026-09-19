@@ -4,15 +4,12 @@ name=polkit-qt
 repo=KDE/$name-1
 version=$(gh_ver $repo)
 depends=(brotli bzip2 dbus double-conversion expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu libdrm libelf libffi libpciaccess libpng libX11 libXau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa pcre2 polkit qt6 spirv-tools systemd util-linux wayland xz zlib zstd)
-majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-1-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://download.kde.org/stable/$name-1/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 options=(-D CMAKE_INSTALL_PREFIX=/usr       -D CMAKE_BUILD_TYPE=Release               -D QT_MAJOR_VERSION=6 -W no-author)
 cmaki "${options[@]}"
 cd ../..

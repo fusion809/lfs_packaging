@@ -26,9 +26,7 @@ fi
 if ! [[ -f $data_filename ]]; then
 	wget -c --progress=bar:force https://poppler.freedesktop.org/$data_filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 options=(-D CMAKE_BUILD_TYPE=Release   \
       -D CMAKE_INSTALL_PREFIX=/usr  \
       -D TESTDATADIR=$PWD/testfiles \

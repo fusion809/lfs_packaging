@@ -37,9 +37,7 @@ ex_filename="$name-$version-extra.tar.xz"
 if ! [[ -f $ex_filename ]]; then
 	wget -c --progress=bar:force https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/$year/$ex_filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 export TEXARCH=$(uname -m | sed -e 's/i.86/i386/' -e 's/$/-linux/') &&
 TEXLIVE_PREFIX=/opt/texlive/$year
 options=(CXX="g++ -std=gnu++17" -C            \

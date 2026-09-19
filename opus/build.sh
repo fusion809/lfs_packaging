@@ -23,9 +23,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://downloads.xiph.org/releases/opus/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 options=(--prefix=/usr        \
             --buildtype=release  \
 	    -D docdir=/usr/share/doc/$direname)

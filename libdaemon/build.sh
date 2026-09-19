@@ -8,9 +8,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://0pointer.de/lennart/projects/libdaemon/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 ./configure --prefix=/usr --disable-static
 make -j$(nproc)
 sudo make docdir=/usr/share/doc/$direname install

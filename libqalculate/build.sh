@@ -9,9 +9,7 @@ depends=(curl icu libxml2)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/Qalculate/libqalculate/releases/download/v$version/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 configure_options=(--prefix=/usr    \
             --disable-static \
 	    --docdir=/usr/share/doc/$direname)

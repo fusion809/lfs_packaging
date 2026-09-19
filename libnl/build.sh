@@ -10,9 +10,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/releases/download/libnl$(echo $version | sed -E 's/\./_/g')/$filename
 fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --sysconfdir=/etc --disable-static
 cd ../
 rm -rf "$filename" "$direname"
