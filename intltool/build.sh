@@ -6,7 +6,7 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(perl-xml-parser)
-download_src "http://launchpad.net/intltool/trunk/$version/+download/$filename"
+download_src "http://launchpad.net/intltool/trunk/$version/+download/$filename" || download_src "https://ftp.lfs-matrix.net/pub/blfs/development/i/$filename"
 unpk_enter "$filename" "$direname"
 sed -i 's:\\\${:\\\$\\{:' intltool-update.in
 cmi --prefix=/usr

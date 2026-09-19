@@ -20,6 +20,7 @@ unpk_enter "$libfilename" "$libdirename"
 sudo autoreconf -fi
 sudo chown $USER -R .
 cmi --prefix=/usr --disable-static
+cd ..
 unpk_enter "$filename" "$direname"
 sudo autoreconf -fi
 sudo chown $USER -R .

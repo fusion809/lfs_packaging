@@ -2,6 +2,7 @@
 set -e
 # Variable declarations
 name=libaec
+repo=Deutsches-Klimarechenzentrum/$name
 get_version() {
     local up_ver=$(wget -T 5 -t 1 -cqO- "https://gitlab.dkrz.de/api/v4/projects/dkrz-sw%2Flibaec/repository/tags" | perl -nle 'while (m{"name":"v?([0-9.]+)"}g) { print $1 }' | sort -V | tail -n 1)
     local inst_ver=$(pkgver $name)
@@ -16,11 +17,11 @@ get_version() {
     fver "$name" "$inst_ver"
 }
 version=$(get_version)
-filename="$name-v$version.tar.bz2"
-direname=${filename/.tar.bz2/}
+filename="$name-$version.tar.gz"
+direname=${filename/.tar.*/}
 depends=(bash bzip2 cmake coreutils glibc sed tar wget)
 # Fetch and unpack source
-download_src "https://gitlab.dkrz.de/k202009/libaec/-/archive/v$version/$filename"
+ghr_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 # Compile and install
 CLFAGS="-O2 -fPIC"

@@ -6,7 +6,7 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(cmake gcc glibc)
-ghr_download "$repo" "$version" "$filename"
+gha_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 cmake_options=(
       -D CMAKE_INSTALL_PREFIX=/usr     \

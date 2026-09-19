@@ -18,7 +18,8 @@ version=$(get_version)
 depends=(glibc)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-download_src "https://get.videolan.org/$name/$version/$filename"
+#download_src "https://get.videolan.org/$name/$version/$filename"
+download_src "https://mirror.aarnet.edu.au/pub/videolan/$name/$version/$filename"
 unpk_enter "$filename" "$direname"
 sed -i "/get_option/s/$name/&-$version/" meson.build
 options=(--prefix=/usr       \

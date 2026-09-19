@@ -24,8 +24,7 @@ version=$(get_version)
 filename="$name-$version.tar.gz"
 direname="$name-$version"
 depends=(glibc ncurses openssl readline)
-
-download_src "https://repo.or.cz/socat.git/snapshot/refs/tags/tag-$version.tar.gz" "$filename"
+download_src "http://www.dest-unreach.org/socat/download/$filename"
 unpk_enter "$filename" "$direname"
 sed -i -e "s|pName->d.iPAddress->data|ASN1_STRING_get0_data(pName->d.iPAddress)|g" \
 	-e "s|pName->d.iPAddress->length|ASN1_STRING_length(pName->d.iPAddress)|g" xio-openssl.c

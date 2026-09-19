@@ -85,7 +85,7 @@ function fd_download {
 	if [[ $name == "colord-gtk" ]]; then
 		name="colord"
 	fi
-	download_src "https://www.freedesktop.org/software/$name/releases/$filename"
+	download_src "https://www.freedesktop.org/software/$name/releases/$filename" || download_src "https://www.freedesktop.org/software/$name/$filename"
 }
 
 function gfd_download {
@@ -159,10 +159,14 @@ function gng_download {
 function gn_download {
 	local filename=$1
 	local version=$(echo $filename | sed -E 's/\.tar\.[a-z0-9]+//g' | rev | cut -d '-' -f 1 | rev)
-	#local majVer=$(echo $version | cut -d '.' -f1-2)
 	local majVer=$(echo $version | cut -d '.' -f 1)
+	local majMinVer=$(echo $version | cut -d '.' -f1-2)
 	local name=$(echo $filename | sed "s/-$version.tar.*//g")
-	download_src "https://download.gnome.org/sources/$name/$majVer/$filename"
+	if [[ "$name" == "graphene" || $name == "gspell" || "$name" == "blueprint-compiler" || "$name" == "gsound" ]]; then
+		download_src "https://download.gnome.org/sources/$name/$majMinVer/$filename"
+	else
+		download_src "https://download.gnome.org/sources/$name/$majVer/$filename"
+	fi
 }
 
 function gnu_download {

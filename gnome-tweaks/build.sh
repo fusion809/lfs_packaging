@@ -5,8 +5,7 @@ name=gnome-tweaks
 version=$(gn_ver $name)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
-depends=()
-	gsettings-desktop-schemas
+depends=(gsettings-desktop-schemas
 	libadwaita
 	libgudev
 	pygobject sound-theme-freedesktop)
