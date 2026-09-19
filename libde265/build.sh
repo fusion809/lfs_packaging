@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(cmake)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/strukturag/libde265/releases/download/v$version/$filename
-fi
+gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 cmake_options=(-D CMAKE_INSTALL_PREFIX=/usr \
 	-D CMAKE_BUILD_TYPE=Release)

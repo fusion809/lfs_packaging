@@ -6,7 +6,7 @@ version=$(gh_ver $repo)
 depends=(glib2 glibc libffi pcre2 systemd util-linux zlib)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-fd_download "$name" "$filename"
+fd_download "$filename"
 unpk_enter "$filename" "$direname"
 mni --prefix=/usr --buildtype=release
 cd ../..

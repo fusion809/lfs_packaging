@@ -18,14 +18,13 @@ version=$(get_version)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 # INPUT_EVDEV and INPUT_UINPUT kernel options required
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.freedesktop.org/software/libevdev/$filename
-fi
+fd_download "$filename"
 unpk_enter "$filename" "$direname"
-meson_options=(--prefix=$XORG_PREFIX     \
-      --buildtype=release       \
-      -D documentation=disabled \
-      -D tests=disabled)
+meson_options=(
+	--prefix=$XORG_PREFIX     \
+    --buildtype=release       \
+    -D documentation=disabled \
+    -D tests=disabled)
 mni "${meson_options[@]}"
 cd ../..
 rm -rf $filename $direname

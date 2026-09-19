@@ -18,9 +18,7 @@ version=$(get_version)
 depends=(glibc)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://get.videolan.org/$name/$version/$filename
-fi
+download_src "https://get.videolan.org/$name/$version/$filename"
 unpk_enter "$filename" "$direname"
 sed -i "/get_option/s/$name/&-$version/" meson.build
 options=(--prefix=/usr       \

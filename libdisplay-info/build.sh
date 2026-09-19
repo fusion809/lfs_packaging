@@ -1,17 +1,13 @@
 #!/bin/bash
 set -e
 name=libdisplay-info
-version=$(gfd_ver "emersion/libdisplay-info")
+repo=emersion/$name
+version=$(gfd_ver "$repo")
 direname="$name-$version"
 filename="$direname.tar.xz"
 depends=(glibc hwdata)
-
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://gitlab.freedesktop.org/emersion/libdisplay-info/-/releases/$version/downloads/$filename
-fi
-rm -rf "$direname"
-tar xf $filename
-cd $direname
+gfdr_download "$repo" "$version" "$filename"
+unpk_enter "$filename" "$direname"
 mni --prefix=/usr --buildtype=release
 cd ../..
 rm -rf $direname $filename

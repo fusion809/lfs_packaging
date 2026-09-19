@@ -2,18 +2,15 @@
 set -e
 # Variable declarations
 name=libfabric
-version=$(gh_ver "ofiwg/libfabric")
+repo="ofiwg/libfabric"
+version=$(gh_ver $repo)
 filename="$name-$version.tar.bz2"
 direname=${filename/.tar.bz2/}
 depends=(autoconf bash brotli bzip2 coreutils dbus double-conversion expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz libdrm libelf libffi libpciaccess libpng libX11 libXau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors make mesa numactl pcre2 qt6 sed spirv-tools systemd tar util-linux wayland wget xz zlib zstd)
 # Fetch and unpack source
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/ofiwg/libfabric/releases/download/v$version/$filename
-fi
-rm -rf $direname
-tar xf $filename
+ghr_download "ofiwg/libfabric" "v$version" "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 sudo autoreconf -fvi
 sudo chown $USER -R .
 CLFAGS="-O2 -fPIC"

@@ -80,8 +80,11 @@ function bb_download {
 }
 
 function fd_download {
-	local name=$1
-	local filename=$2
+	local filename=$1
+	local name=$(echo $filename | sed -E 's/-[0-9.]+.tar.*//g')
+	if [[ $name == "colord-gtk" ]]; then
+		name="colord"
+	fi
 	download_src "https://www.freedesktop.org/software/$name/releases/$filename"
 }
 
@@ -96,7 +99,7 @@ function gfdr_download {
 	local repo="$1"
 	local tag="$2"
 	local filename="$3"
-	download_src "https://gitlab.freedesktop.org/$repo/-/releases/$tag/download/$filename"
+	download_src "https://gitlab.freedesktop.org/$repo/-/releases/$tag/downloads/$filename"
 }
 
 function ggn_download {

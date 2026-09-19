@@ -5,9 +5,7 @@ version=$(gh_ver Distrotech/libdaemon)
 depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://0pointer.de/lennart/projects/libdaemon/$filename
-fi
+download_src "https://0pointer.de/lennart/projects/libdaemon/$filename"
 unpk_enter "$filename" "$direname"
 ./configure --prefix=/usr --disable-static
 make -j$(nproc)

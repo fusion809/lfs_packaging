@@ -6,9 +6,7 @@ version=$(gfd_ver $repo)
 depends=(glibc libevdev libxkbcommon systemd)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://gitlab.freedesktop.org/$repo/-/archive/$version/$filename
-fi
+gfd_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 mni --prefix=/usr --buildtype=release -D tests=disabled
 cd ../..

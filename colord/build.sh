@@ -17,7 +17,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 depends=(dbus glib2 glib2 glibc json-glib lcms2 libffi libgudev libgusb libusb pcre2 polkit polkit sqlite systemd systemd util-linux vala webkitgtk zlib)
 # Fetch source and unpack it
-fd_download "$name" "$filename"
+fd_download "$filename"
 unpk_enter "$filename" "$direname"
 # Compile and install
 sudo groupadd -g 71 colord &&
