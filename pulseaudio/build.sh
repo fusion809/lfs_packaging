@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(alsa-lib avahi bzip2 dbus elfutils flac gcc gdbm glib2 glibc gst-plugins-base gstreamer jack lame libcap libelf libffi libICE libogg libSM libsndfile libunwind libvorbis libX11 libXau libxcb libXdmcp libXext libXi libXtst mpg123 openssl opus orc pcre2 speed systemd util-linux webkitgtk xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.freedesktop.org/software/pulseaudio/releases/$filename
-fi
+fd_download "$filename"
 unpk_enter "$filename" "$direname"
 meson_options=(--prefix=/usr --buildtype=release -D database=gdbm    \
             -D doxygen=false    \

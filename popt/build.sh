@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 majVer=$(echo $version | cut -d '.' -f 1)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://ftp.osuosl.org/pub/rpm/popt/releases/popt-$majVer.x/$filename
-fi
+download_src "https://ftp.osuosl.org/pub/rpm/popt/releases/popt-$majVer.x/$filename"
 unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static
 cd ..

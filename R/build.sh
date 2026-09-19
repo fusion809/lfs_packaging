@@ -33,13 +33,9 @@ direname="$name-$version"
 filename="$direname.tar.xz"
 depends=(bash blas-lapack bzip2 cairo coreutils curl gcc glib glibc icu java libjpeg-turbo libpng libtiff libtirpc libx11 libxmu libxt make pango pcre2 readline sed tar tk which xz zip zlib zstd)
 # Fetch and unpack source
-rm -rf $direname
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://cran.r-project.org/src/base/$name-${version/.*/}/$filename
-fi
-tar xf $filename
+download_src "https://cran.r-project.org/src/base/$name-${version/.*/}/$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 configure_options=(

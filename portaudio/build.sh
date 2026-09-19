@@ -2,24 +2,21 @@
 set -e
 # Variable declarations
 name=portaudio
-version=$(gh_ver "$name/$name")
+repo=$name/$name
+version=$(gh_ver "$repo")
 filename="$name-v$version.tar.gz"
 direname=$(echo "${filename/.tar.gz/}" | sed 's/v//g')
 depends=(alsa-lib autoconf bash cmake coreutils gcc glibc gzip jack make opus sed tar wget)
 # Fetch and unpack source
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/portaudio/portaudio/archive/v$version/$filename
-fi
-rm -rf $direname
-tar xf $filename
+gha_download "$repo" "v$version" "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 configure_options=(
-    --prefix=/usr
-    --enable-cxx
-  )
+	--prefix=/usr \
+	--enable-cxx
+)
 ./configure "${configure_options[@]}"
 make -j1
 sudo make install

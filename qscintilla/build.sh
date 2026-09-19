@@ -20,13 +20,9 @@ archive=QScintilla_src-$version
 depends=(bash brotli bzip2 coreutils dbus double-conversion expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz libdrm libelf libffi libpciaccess libpng libX11 libXau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors make mesa pcre2 pyqt6 qt6 sed spirv-tools systemd tar wayland wget xz zlib zstd)
 pip_depends=(sip pyqt-builder)
 # Fetch and unpack source
-if ! [[ -f $archive.tar.gz ]]; then
-	wget -c --progress=bar:force https://www.riverbankcomputing.com/static/Downloads/QScintilla/$version/$archive.tar.gz
-fi
-rm -rf $archive
-tar xf $archive.tar.gz
+download_src "https://www.riverbankcomputing.com/static/Downloads/QScintilla/$version/$archive.tar.gz"
+unpk_enter "$archive.tar.gz" "$archive" "src"
 # Compile and install
-cd $archive/src
 export QMAKEFEATURES=$PWD/features/
 export QT6DIR=/opt/qt6
 export PATH=$PATH:$QT6DIR/bin

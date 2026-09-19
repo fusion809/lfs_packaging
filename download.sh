@@ -174,8 +174,10 @@ function kde_download {
 		download_src "https://download.kde.org/stable/$type/$majVer/$filename"
 	elif [[ "$type" == "app" ]]; then
 		download_src "https://download.kde.org/stable/release-service/$version/src/$filename"
+	elif [[ "$name" == "phonon-backend-vlc" ]]; then
+		download_src "https://download.kde.org/stable/phonon/$name/$version/$filename"
 	else
-		download_src "https://download.kde.org/stable/$name/$filename"
+		download_src "https://download.kde.org/stable/$name/$filename" || download_src "https://download.kde.org/stable/$name/$version/$filename"
 	fi
 }
 

@@ -18,9 +18,7 @@ version=$(get_version)
 depends=(glibc zlib)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://downloads.sourceforge.net/potrace/$filename
-fi
+sf_download "$name" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 options=(--prefix=/usr                        \
             --disable-static                     \

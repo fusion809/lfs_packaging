@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.cairographics.org/releases/$filename
-fi
+download_src "https://www.cairographics.org/releases/$filename"
 unpk_enter "$filename" "$direname"
 mni --prefix=/usr --buildtype=release
 cd ../..

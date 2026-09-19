@@ -34,13 +34,9 @@ filename="$name-${version%.*}-src-$_version.tgz"
 direname="$name-$version"
 depends=(bash cmake coreutils glibc gzip sed tar wget)
 # Fetch and unpack source
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force http://www.qhull.org/download/$filename
-fi
-rm -rf $direname
-tar xf $filename
+download_src "http://www.qhull.org/download/$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 cmake_options=(

@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(cmake make-ca qt6 which)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.kde.org/stable/$name/$version/$filename
-fi
+kde_download "$filename"
 unpk_enter "$filename" "$direname"
 sed -i 's@cert.pem@certs/ca-bundle.crt@' CMakeLists.txt
 cmake_options=(-D CMAKE_INSTALL_PREFIX=/opt/qt6            \

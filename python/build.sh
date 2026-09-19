@@ -22,15 +22,9 @@ filename="Python-$version.tar.xz"
 direname="${filename/.tar.*/}"
 docs_filename="python-${version}-docs-html.tar.bz2"
 depends=(gcc glibc make ncurses tar wget xz)
-if ! [[ -f $filename ]]; then
-    wget -c --progress=bar:force https://www.python.org/ftp/python/$version/$filename
-fi
-if ! [[ -f $docs_filename ]]; then
-    wget -c --progress=bar:force https://www.python.org/ftp/python/doc/$version/$docs_filename
-fi
-sudo rm -rf $direname
-tar xf $filename
-cd $direname
+download_src "https://www.python.org/ftp/python/$version/$filename"
+download_src "https://www.python.org/ftp/python/doc/$version/$docs_filename"
+unpk_enter "$filename" "$direname"
 gap_patches Python
 configure_options=(--prefix=/usr          \
     --enable-shared        \

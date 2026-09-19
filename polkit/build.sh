@@ -2,18 +2,15 @@
 set -e
 # Variable declaration
 name=polkit
-version=$(gh_ver "$name-org/$name")
+repo="$name-org/$name"
+version=$(gh_ver "$repo")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=(duktape expat glib2 glib2 glibc libffi libxslt linux-pam linux-pam pcre2 systemd systemd util-linux zlib)
-# Fetch source and unpack it
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/polkit-org/polkit/archive/$version/$filename
-fi
-rm -rf $direname
-tar xf $filename
+# Download source, unpack and enter it
+gha_download "$repo" "v$version" "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 #sudo groupadd -fg 27 polkitd &&
 #sudo useradd -c "PolicyKit Daemon Owner" -d /etc/polkit-1 -u 27 \
 #        -g polkitd -s /bin/false polkitd

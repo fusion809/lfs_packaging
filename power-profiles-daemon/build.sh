@@ -1,11 +1,12 @@
 #!/bin/bash
 set -e
 name=power-profiles-daemon
+repo=upower/power-profiles-daemon
 get_ver() {
       local inst_ver=$(pkgver $name)
-      local up_ver=$(wget --timeout=5 -cqO- https://gitlab.freedesktop.org/upower/power-profiles-daemon/-/tags | grep "/tags/" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 6)
+      local up_ver=$(wget --timeout=5 -cqO- https://gitlab.freedesktop.org/$repo/-/tags | grep "/tags/" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 6)
       ver_check "$up_ver" "$inst_ver" && return
-      local git_ver=$(timeout 5 git ls-remote --tags --refs https://gitlab.freedesktop.org/upower/power-profiles-daemon.git | cut -d '/' -f 3 | sort -V | tail -n 1)
+      local git_ver=$(timeout 5 git ls-remote --tags --refs https://gitlab.freedesktop.org/$repo.git | cut -d '/' -f 3 | sort -V | tail -n 1)
       ver_check "$git_ver" "$inst_ver" && return
       local vat_ver=$(vatver $name)
       ver_check "$vat_ver" "$inst_ver" && return
@@ -20,10 +21,7 @@ version=$(get_ver)
 filename="$name-$version.tar.gz"
 direname="$name-$version"
 depends=(glib2 glibc libffi libgudev pcre2 polkit polkit pygobject systemd upower util-linux zlib)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://gitlab.freedesktop.org/upower/power-profiles-daemon/-/archive/$version/$filename
-fi
-
+gfd_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 meson_options=(
       --prefix=/usr        \

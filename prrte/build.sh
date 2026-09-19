@@ -2,18 +2,15 @@
 set -e
 # Variable declarations
 name=prrte
-version=$(gh_ver "openpmix/prrte")
+repo=openpmix/prrte
+version=$(gh_ver "$repo")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=(bash coreutils glibc gzip hwloc libevent libnl make openpmix perl sed systemd tar wget)
 # Fetch and unpack source
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/openpmix/prrte/releases/download/v$version/$name-$version.tar.gz
-fi
-rm -rf $direname
-tar xf $filename
+ghr_download "$repo" "v$version" "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 sudo ./autogen.pl
 sudo chown $USER -R .
 configure_options=(
