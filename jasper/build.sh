@@ -6,13 +6,10 @@ version=$(gh_ver $repo)
 depends=(gcc glibc libaom libde265 libheif libjpeg-turbo libwebp numactl x264 x265)
 filename="$name-version-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/archive/version-$version/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
-options=(-D CMAKE_INSTALL_PREFIX=/usr    \
+gha_download "$repo" "version-$version" "$filename"
+unpk_enter "$filename" "$direname"
+options=(
+      -D CMAKE_INSTALL_PREFIX=/usr    \
       -D CMAKE_BUILD_TYPE=Release     \
       -D CMAKE_SKIP_INSTALL_RPATH=ON  \
       -D JAS_ENABLE_DOC=NO            \

@@ -1,18 +1,13 @@
 #!/bin/bash
 set -e
 name=jpegoptim
-version=$(gh_ver "tjko/jpegoptim")
+repo="tjko/jpegoptim"
+version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="$name-$version"
 depends=(glibc libjpeg libjpeg-turbo)
-
-if ! [[ -f "$filename" ]]; then
-	wget -c --progress=bar:force https://github.com/tjko/jpegoptim/releases/download/v$version/$filename
-fi
-
-rm -rf $direname
-tar xf $filename
-cd $direname
+ghr_download "$repo" "v$version" "$filename"
+unpk_enter "$filename" "$direname"
 ./configure --prefix=/usr
 make -j$(nproc)
 make strip -j$(nproc)

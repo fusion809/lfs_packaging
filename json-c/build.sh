@@ -5,13 +5,10 @@ version=$(gh_ver $name/$name | sed -E 's/[.-][0-9]+$//g')
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(cmake)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://s3.amazonaws.com/json-c_releases/releases/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
-cmake_options=(-D CMAKE_INSTALL_PREFIX=/usr \
+download_src "https://s3.amazonaws.com/json-c_releases/releases/$filename"
+unpk_enter "$filename" "$direname"
+cmake_options=(
+      -D CMAKE_INSTALL_PREFIX=/usr \
       -D CMAKE_BUILD_TYPE=Release  \
       -D BUILD_STATIC_LIBS=OFF)
 cmaki "${cmake_options[@]}"

@@ -5,12 +5,8 @@ repo="akheron/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/v$version/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+ghr_download "$repo" "v$version" "$filename"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static
 cd ..
 rm -rf "$filename" "$direname"
