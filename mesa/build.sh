@@ -19,10 +19,7 @@ direname="$name-$version"
 filename="$direname.tar.xz"
 depends=(bzip2 cbindgen coreutils expat gcc glibc glslang libclc libdisplay-info libdrm libelf libffi libglvnd libpciaccess libva libX11 libXau libxcb libXdmcp libXext libxml2 libxshmfence libXxf86vm linux llvm lm-sensors make-ca mako meson ninja rust-bindgen rustc spirv-llvm-translator spirv-tools systemd tar vulkan-loader wayland wayland-protocols xcb-util-keysyms xorg-libs xz xz zlib zstd)
 pip_depends=(pyyaml)
-
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://mesa.freedesktop.org/archive/$filename
-fi
+download_src "https://mesa.freedesktop.org/archive/$filename"
 unpk_enter "$filename" "$direname"
 export PATH=$PATH:/opt/rustc/bin
 XORG_PREFIX=/usr

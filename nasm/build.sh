@@ -6,12 +6,8 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 doc_filename="$name-$version-xdoc.tar.xz"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.nasm.us/pub/nasm/releasebuilds/$version/$filename
-fi
-if ! [[ -f $doc_filename ]]; then
-	wget -c --progress=bar:force https://www.nasm.us/pub/nasm/releasebuilds/$version/$doc_filename
-fi
+download_src "https://www.nasm.us/pub/nasm/releasebuilds/$version/$filename"
+download_src "https://www.nasm.us/pub/nasm/releasebuilds/$version/$doc_filename"
 unpk_enter "$filename" "$direname"
 tar -xf ../$doc_filename --strip-components=1
 cmi --prefix=/usr

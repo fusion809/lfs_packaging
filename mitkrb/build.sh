@@ -1,11 +1,11 @@
 #!/bin/bash
 set -e
 name=mitkrb
-majVer=$(wget -T 5 -cqO- https://kerberos.org/dist/krb5/ | grep "/</a>" | tail -n 1 | cut -d '"' -f 8 | sed 's|/||g')
+majMinVer=$(wget -T 5 -cqO- https://kerberos.org/dist/krb5/ | grep "/</a>" | tail -n 1 | cut -d '"' -f 8 | sed 's|/||g')
 get_version() {
   local inst_ver=$(pkgver $name)
   if echo "$majVer" | grep -q "[0-9]"; then
-    local version=$(wget -T 5 -cqO- https://kerberos.org/dist/krb5/$majVer/ | cut -d '"' -f 8 | grep "^krb5" | grep -v "asc" | cut -d '-' -f 2 | sed 's/.tar.gz//g' | sort | uniq | tail -n 1)
+    local version=$(wget -T 5 -cqO- https://kerberos.org/dist/krb5/$majMinVer/ | cut -d '"' -f 8 | grep "^krb5" | grep -v "asc" | cut -d '-' -f 2 | sed 's/.tar.gz//g' | sort | uniq | tail -n 1)
     ver_check "$version" "$inst_ver" && return
   fi
   local vat_ver=$(vatver $name)
@@ -21,13 +21,8 @@ version=$(get_version)
 dirname="krb5-$version"
 filename="$dirname.tar.gz"
 depends=(bash e2fsprogs glibc keyutils lmdb openssl)
-
-if ! [ -f "$filename" ]; then
-    wget -c --progress=bar:force "https://kerberos.org/dist/krb5/$majVer/$filename"
-fi
-rm -rf "$dirname"
-tar xf "$filename"
-cd "$dirname"
+download_src "https://kerberos.org/dist/krb5/$majMinVer/$filename"
+unpk_enter "$filename" "$direname"
 gap_patches $name
 cd src &&
 sed -i -e '/eq 0/{N;s/12 //}' plugins/kdb/db2/libdb2/test/run.test &&

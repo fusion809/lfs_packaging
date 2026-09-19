@@ -22,9 +22,7 @@ majVer=$(echo $version | cut -d '.' -f 1)
 minVer=$(echo $version | cut -d '.' -f 2)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://archive.mozilla.org/pub/security/nss/releases/NSS_${majVer}_${minVer}_RTM/src/$filename
-fi
+download_src "https://archive.mozilla.org/pub/security/nss/releases/NSS_${majVer}_${minVer}_RTM/src/$filename"
 unpk_enter "$filename" "$direname"
 gap_patches $name
 cd nss &&

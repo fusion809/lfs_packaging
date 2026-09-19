@@ -20,9 +20,7 @@ version=$(get_version)
 depends=(glibc libxcrypt openssl zlib)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/$filename
-fi
+download_src "https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/$filename"
 unpk_enter "$filename" "$direname"
 #sudo su -c "install -v -g sys -m700 -d /var/lib/sshd &&
 #
@@ -42,10 +40,9 @@ install -v -m644    INSTALL LICENCE OVERVIEW README* \
                     /usr/share/doc/$direname"
 cd ..
 URL=$(wget -cqO- https://www.linuxfromscratch.org/blfs/view/systemd/introduction/systemd-units.html | grep "blfs-systemd-units-[0-9]+.tar.xz" -E | cut -d '"' -f 2 | head -n 1)
-wget -c --progress=bar:force $URL
+download_src "$URL"
 systemd_filename=$(echo $URL | sed 's|https.*/||g')
-tar xf $systemd_filename
-cd blfs-systemd-units*[0-9]
+unpk_enter "$systemd_filename"
 sudo make install-sshd
 cd ..
 rm -rf $filename $direname $systemd_filename

@@ -24,9 +24,7 @@ majVer=$(echo $version | cut -d '.' -f 1)
 depends=(glibc libcap libevent ncurses openssl readline)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.eecis.udel.edu/~ntp/ntp_spool/ntp$majVer/ntp-$majmVer/$filename
-fi
+download_src "https://www.eecis.udel.edu/~ntp/ntp_spool/ntp$majVer/ntp-$majmVer/$filename"
 unpk_enter "$filename" "$direname"
 sed -i 's/getclock/getclock memchr/'               sntp/m4/ntp_libntp.m4 &&
 sed -i 's/pthread_detach(NULL)/pthread_detach(0)/' sntp/m4/openldap-thread-check.m4 &&

@@ -9,10 +9,8 @@ direname="${filename/.tar.gz/}"
 depends=(bash bzip2 coreutils glibc libevent make perl python sed systemd tar zlib hwloc)
 # Fetch and unpack source
 ghr_download "openpmix/openpmix" "v$version" "$filename"
-sudo rm -rf $direname
-tar xf $filename
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 sudo ./autogen.pl
 configure_options=(
     --prefix=/usr

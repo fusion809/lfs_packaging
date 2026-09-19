@@ -1,17 +1,14 @@
 #!/bin/bash
 set -e
 name=networkmanager
-version=$(gfd_ver "NetworkManager/NetworkManager")
+repo=$name/$name
+version=$(gfd_ver "$repo")
 # Deps
 depends=(brotli curl cyrus-sasl glib2 glib2 glibc iptables libffi libidn2 libndp libpsl libunistring ncurses newt nghttp2 nspr nss openldap openssl pcre2 polkit pygobject readline systemd systemd util-linux vala wpa_supplicant zlib zstd)
 # Source file/dir
 filename="NetworkManager-$version.tar.xz"
 direname="${filename/.tar.xz/}"
-
-if ! [[ -f "$filename" ]]; then
-	wget -c --progress=bar:force https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/releases/$version/downloads/$filename
-fi
-
+gfdr_download "$repo" "$version" "$filename"
 # Unpack and build
 unpk_enter "$filename" "$direname"
 grep -rl '^#!.*python$' | xargs sed -i '1s/python/&3/'

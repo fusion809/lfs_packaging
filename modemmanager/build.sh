@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(glib2 glibc libffi libgudev libmbim libqmi pcre2 polkit systemd util-linux zlib)
 filename="ModemManager-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/archive/$version.tar.gz -O $filename
-fi
+gha_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 options=(--prefix=/usr            \
       --buildtype=release      \

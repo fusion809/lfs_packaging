@@ -2,18 +2,15 @@
 set -e
 # Variable declarations
 name=numactl
-version=$(gh_ver "numactl/numactl")
+repo=numactl/numactl
+version=$(gh_ver "$repo")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=(autoconf bash coreutils gcc glibc gzip make sed tar wget)
 # Fetch and unpack source
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/numactl/numactl/archive/v$version.tar.gz -O $filename
-fi
-rm -rf $direname
-tar xf $filename
+gha_download "$repo" "v$version" "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 sudo autoreconf -fiv
 sudo chown $USER -R .
 CLFAGS="-O2 -fPIC"

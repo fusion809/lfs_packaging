@@ -20,9 +20,7 @@ version=$(get_version)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(gcc glibc gzip make sed tar wget)
-if ! [[ -f $filename ]]; then
-    wget -c --progress=bar:force https://invisible-mirror.net/archives/$name/$filename
-fi
+download_src "https://invisible-mirror.net/archives/$name/$filename"
 unpk_enter "$filename" "$direname"
 ./configure --prefix=/usr           \
             --mandir=/usr/share/man \

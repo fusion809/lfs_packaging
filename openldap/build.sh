@@ -13,11 +13,7 @@ version=$(get_version)
 direname="$name-$version"
 filename="$direname.tgz"
 depends=(cyrus-sasl glibc openssl util-linux)
-
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.openldap.org/software/download/OpenLDAP/openldap-release/$filename
-fi
-
+download_src "https://www.openldap.org/software/download/OpenLDAP/openldap-release/$filename"
 unpk_enter "$filename" "$direname"
 ./configure --prefix=/usr     \
             --sysconfdir=/etc \

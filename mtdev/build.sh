@@ -18,9 +18,7 @@ version=$(get_version)
 depends=(glibc)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://bitmath.org/code/mtdev/$filename
-fi
+download_src "https://bitmath.org/code/mtdev/$filename"
 unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static
 cd ..

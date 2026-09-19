@@ -21,12 +21,8 @@ hip-runtime-amd)
 optional_depends=(openucc
 openucx)
 # Fetch and unpack source
-rm -rf $direname
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.open-mpi.org/software/ompi/v${version%.*}/downloads/$filename
-fi
-tar xf $filename
-cd $direname
+download_src "https://www.open-mpi.org/software/ompi/v${version%.*}/downloads/$filename"
+unpk_enter "$filename" "$direname"
 sed -i 's|WRAPPER__FCFLAGS|WRAPPER_FCFLAGS|g' configure
   sed -i 's|WRAPPER_EXTRA_FCFLAGS|WRAPPER_FCFLAGS|g' configure
   sed -i 's|"-I/usr/include",||' opal/tools/wrappers/opal_wrapper.c

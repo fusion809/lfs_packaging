@@ -17,9 +17,7 @@ get_version() {
 version=$(get_version)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.bytereef.org/software/mpdecimal/releases/$filename
-fi
+download_src "https://www.bytereef.org/software/mpdecimal/releases/$filename"
 unpk_enter "$filename" "$direname"
 configure_options=(--prefix=/usr    \
             --disable-static \

@@ -20,12 +20,8 @@ version=$(get_version)
 depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="$name-$version"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://archive.mozilla.org/pub/nspr/releases/v$version/src/$filename
-fi
-rm -rf $direname
-tar xf $filename
-cd $direname/nspr
+download_src "https://archive.mozilla.org/pub/nspr/releases/v$version/src/$filename"
+unpk_enter "$filename" "$direname" "nspr"
 sed -i '/^RELEASE/s|^|#|' pr/src/misc/Makefile.in &&
 sed -i 's|$(LIBRARY) ||'  config/rules.mk         &&
 configure_options=(--prefix=/usr   \

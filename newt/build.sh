@@ -18,9 +18,7 @@ version=$(get_version)
 depends=(glibc popt python tcl zlib)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://releases.pagure.org/newt/$filename
-fi
+download_src "https://releases.pagure.org/newt/$filename"
 unpk_enter "$filename" "$direname"
 sed -e '/install -m 644 $(LIBNEWT)/ s/^/#/' \
     -e '/$(LIBNEWT):/,/rv/ s/^/#/'          \

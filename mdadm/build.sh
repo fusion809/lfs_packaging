@@ -7,9 +7,7 @@ depends=(glibc systemd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 # Kernel options required
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://git.kernel.org/pub/scm/utils/mdadm/mdadm.git/snapshot/$filename
-fi
+download_src "https://git.kernel.org/pub/scm/utils/mdadm/mdadm.git/snapshot/$filename"
 unpk_enter "$filename" "$direname"
 make -j$(nproc)
 sudo make BINDIR=/usr/sbin install
