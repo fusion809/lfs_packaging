@@ -6,9 +6,7 @@ version=$(gfd_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(glib2 libgudev libmbim)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://gitlab.freedesktop.org/$repo/-/archive/$version/$filename
-fi
+gfd_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 meson_options=(--prefix=/usr            \
       --buildtype=release      \

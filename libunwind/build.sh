@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(gcc glibc xz zlib)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/v$version/$filename
-fi
+ghr_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 sed -i '/func.s/s/s//' tests/Gtest-nomalloc.c
 cmi --prefix=/usr --disable-static

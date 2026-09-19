@@ -7,9 +7,7 @@ filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
 depends=(acl elogind glib2 glib2 glibc kmod libatasmart libblockdev libffi libgudev openssl pcre2 polkit polkit systemd util-linux xz zlib zstd)
 # Fetch source and unpack it
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/storaged-project/udisks/releases/download/$direname/$filename
-fi
+ghr_download "storaged-project/udisks" "$direname" "$filename"
 rm -rf $direname
 tar xf $filename
 # Compile and install

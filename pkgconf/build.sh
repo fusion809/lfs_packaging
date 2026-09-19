@@ -6,9 +6,7 @@ depends=(bash coreutils glibc meson ninja tar xz)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
 
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/pkgconf/pkgconf/releases/download/$direname/$filename
-fi
+ghr_download "pkgconf/pkgconf" "$direname" "$filename"
 
 tar xf $filename
 cd "$direname"

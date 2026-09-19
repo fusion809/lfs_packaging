@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(bash brotli coreutils glibc gzip tar zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-    wget -c --progress=bar:force https://github.com/$repo/releases/download/$direname/$filename
-fi
+ghr_download "$repo" "$direname" "$filename"
 unpk_enter "$filename" "$direname"
 ./config --prefix=/usr         \
          --openssldir=/etc/ssl \

@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(gcc glibc lcms2 libjpeg-turbo zlib)
 filename="LibRaw-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.libraw.org/data/$filename
-fi
+download_src "https://www.libraw.org/data/$filename"
 unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --enable-jpeg --enable-jasper --enable-lcms --disable-static --docdir=/usr/share/doc/libraw-$version
 cd ../

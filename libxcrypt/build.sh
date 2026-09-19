@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(coreutils gcc glibc gzip make sed tar)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-    wget -c --progress=bar:force https://github.com/$repo/releases/download/v$version/$filename
-fi
+ghr_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 sed -i '/strchr/s/const//' lib/crypt-{sm3,gost}-yescrypt.c
 configure_options=(

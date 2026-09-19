@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(glib2 glibc libffi pcre2 systemd util-linux xz zlib zstd)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/hughsie/libxmlb/releases/download/$version/$filename
-fi
+ghr_download "hughsie/libxmlb" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 mni --prefix=/usr --buildtype=release -D gtkdoc=false
 cd ../..

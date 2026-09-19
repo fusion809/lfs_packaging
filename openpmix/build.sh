@@ -8,9 +8,7 @@ filename="$_name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=(bash bzip2 coreutils glibc libevent make perl python sed systemd tar zlib hwloc)
 # Fetch and unpack source
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/openpmix/openpmix/releases/download/v$version/$filename
-fi
+ghr_download "openpmix/openpmix" "v$version" "$filename"
 sudo rm -rf $direname
 tar xf $filename
 # Compile and install

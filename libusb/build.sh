@@ -7,9 +7,7 @@ depends=(glibc systemd)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
 # Some kernel modules required see libusb @ BLFS for details
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/v$version/$filename
-fi
+ghr_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 options=(--prefix=/usr --disable-static)
 cmi "${options[@]}"

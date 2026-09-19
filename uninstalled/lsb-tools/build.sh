@@ -5,9 +5,7 @@ repo=lfs-book/LSB-Tools
 version=$(gh_ver $repo)
 filename="LSB-Tools-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/v$version/$filename
-fi
+ghr_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 maki
 sudo rm /usr/sbin/lsbinstall

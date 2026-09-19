@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(curl icu libxml2)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/Qalculate/libqalculate/releases/download/v$version/$filename
-fi
+ghr_download "Qalculate/libqalculate" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 configure_options=(--prefix=/usr    \
             --disable-static \

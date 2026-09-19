@@ -8,9 +8,7 @@ filename="$direname.tar.xz"
 depends=(avahi bash coreutils curl e2fsprogs fuse gcab glib glibc gpgme gtk-doc libarchive libgpg-error libsoup libxslt make openssl python sed systemd tar util-linux wget which xz zlib)
 # Fetch and unpack source
 rm -rf $direname
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/ostreedev/ostree/releases/download/v${version}/$filename
-fi
+ghr_download "ostreedev/ostree" "v${version}" "$filename"
 tar xf $filename
 # Compile and install
 cd $direname

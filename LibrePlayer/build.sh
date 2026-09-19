@@ -7,9 +7,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(brotli bzip2 cmake dbus double-conversion e2fsprogs expat flac fontconfig freetype gcc glib2 glibc graphite2 harfbuzz keyutils lame libdrm libelf libffi libogg libpciaccess libpng libsndfile libvorbis libX11 libXau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb mpg123 openssl opus pcre2 pulseaudio qt6 spirv-tools systemd wayland xz zlib zstd)
 
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/archive/$version.tar.gz -O $filename
-fi
+gha_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 common_cmake_args=(
   -DCMAKE_BUILD_TYPE=None

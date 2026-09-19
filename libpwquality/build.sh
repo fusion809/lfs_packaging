@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(cracklib glibc linux-pam zlib)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/$direname/$filename
-fi
+ghr_download "$repo" "$direname" "$filename"
 unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static --with-securedir=/usr/lib/security --disable-python-bindings
 pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD/python

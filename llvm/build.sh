@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(gcc glibc icu libffi libxml2 zlib zstd)
 filename="$name-project-$version.src.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/llvmorg-$version/$filename
-fi
+ghr_download "$repo" "llvmorg-$version" "$filename"
 unpk_enter "$filename" "$direname"
 grep -rl '#!.*python$' | xargs sed -i '1s/python$/python3/'
 sed 's/utility/tool/' -i llvm/utils/FileCheck/CMakeLists.txt

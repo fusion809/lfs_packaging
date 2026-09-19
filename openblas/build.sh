@@ -7,9 +7,7 @@ filename="OpenBLAS-$version.tar.gz"
 direname="${filename/.tar.*/}"
 # gcc needs Fortran
 depends=(cmake gcc glibc gzip tar)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/v$version/$filename
-fi
+ghr_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 #options=(-DCMAKE_INSTALL_PREFIX=/usr \
 #    -DBUILD_SHARED_LIBS=ON \

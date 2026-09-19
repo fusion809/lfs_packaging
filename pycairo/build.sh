@@ -7,9 +7,7 @@ majVer=$(echo $version | sed 's/.[0-9]$//g')
 depends=(cairo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/pygobject/pycairo/releases/download/v$version/$filename
-fi
+ghr_download "pygobject/pycairo" "v$version" "$filename"
 
 unpk_enter "$filename" "$direname"
 options=(--prefix=/usr \
