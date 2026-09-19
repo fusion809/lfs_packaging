@@ -7,12 +7,8 @@ majVer=$(echo $version | cut -d '.' -f1-2)
 depends=(gcc glibc gmp libffi libxcrypt libyaml openssl zlib)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://cache.ruby-lang.org/pub/ruby/$majVer/$filename
-fi
-sudo rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://cache.ruby-lang.org/pub/ruby/$majVer/$filename"
+unpk_enter "$filename" "$direname"
 ./configure --prefix=/usr --disable-rpath       \
             --enable-shared       \
             --without-valgrind    \

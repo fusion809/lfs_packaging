@@ -17,9 +17,7 @@ get_version() {
 version=$(get_version)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.x.org/pub/individual/util/$filename
-fi
+xfd_download "$filename"
 unpk_enter "$filename" "$direname"
 cmi --prefix=/usr
 cd ../

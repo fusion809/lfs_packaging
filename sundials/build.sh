@@ -2,18 +2,15 @@
 set -e
 # Variable declarations
 name=sundials
-version=$(gh_ver "llnl/sundials")
+repo="llnl/sundials"
+version=$(gh_ver $repo)
 filename=$name-$version.tar.gz
 direname="${filename/.tar.gz/}"
 depends=(bash cmake coreutils gcc gcc glibc gzip hwloc lapack libevent libfabric make numactl openmpi openpmix python sed suitesparse systemd tar wget)
 # Fetch and unpack source
-if ! [[ -f $filename ]]; then
-    wget -c --progress=bar:force https://github.com/llnl/sundials/archive/refs/tags/v$version.tar.gz -O $filename
-fi
-rm -rf $direname
-tar xf $filename
+gha_download "$repo" "v$version" "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 cmake_options=(

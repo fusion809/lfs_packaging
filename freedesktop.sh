@@ -75,6 +75,8 @@ function get_xfd_type {
 		type+="driver"
 	elif echo $name | grep "proto" &> /dev/null; then
 		type+="proto"
+	elif [[ "$name" == "util-macros" ]]; then
+		type="util"
 	else
 		type+="app"
 	fi

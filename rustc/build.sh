@@ -19,13 +19,8 @@ depends=(brotli cmake coreutils curl cyrus-sasl gcc glibc libffi libidn2 libpsl 
 if [[ $(free -h | tail -n 2 | head -n 1 | sed 's/Mem:\s*//g' | cut -d ' ' -f 1 | sed 's/Gi//g') -lt 15 ]]; then
 	echo "You need to increase the RAM allocated to this VM to at least 16GB otherwise the build will fail." && exit 1
 fi
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://static.rust-lang.org/dist/$filename
-	#wget -c --progress=bar:force $ssl_src
-fi
-
-tar xf $filename
-cd $direname
+download_src "https://static.rust-lang.org/dist/$filename"
+unpk_enter "$filename" "$direname"
 sudo mkdir -pv /opt/$name-$version      &&
 sudo ln -svfn $name-$version /opt/$name
 change_id=$(cat src/bootstrap/src/utils/change_tracker.rs | grep "change_id" | sed 's/^\s*change_id:\s//g' | cut -d ',' -f 1 | grep -E "^[0-9]+$" | sort -V | tail -n 1)

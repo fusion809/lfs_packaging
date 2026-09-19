@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(gcc glibc pcre2 zlib)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://downloads.sourceforge.net/swig/$filename
-fi
+sf_download "$name" "$direnaem" "$filename"
 unpk_enter "$filename" "$direname"
 cmi --prefix=/usr
 sudo cp -v -R Doc -T /usr/share/doc/$direname

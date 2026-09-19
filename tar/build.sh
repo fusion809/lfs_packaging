@@ -7,10 +7,7 @@ direname="${filename/.tar.*/}"
 patch_filename=$(pfile $name)
 depends=(acl gcc glibc make tar wget xz)
 gnu_download $name $filename
-
-if ! [[ -f $patch_filename ]]; then
-	wget -c --progress=bar:force https://www.linuxfromscratch.org/patches/lfs/development/$patch_filename
-fi
+download_src "https://www.linuxfromscratch.org/patches/lfs/development/$patch_filename"
 unpk_enter "$filename" "$direname"
 patch -Np1 -i ../$patch_filename
 FORCE_UNSAFE_CONFIGURE=1  \

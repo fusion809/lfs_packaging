@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://dotat.at/prog/unifdef/$filename
-fi
+download_src "https://dotat.at/prog/unifdef/$filename"
 unpk_enter "$filename" "$direname"
 sed -i 's/constexpr/unifdef_&/g' unifdef.c
 sed -i 's/ln -s/ln -sf/' Makefile

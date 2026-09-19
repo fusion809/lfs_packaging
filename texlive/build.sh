@@ -26,17 +26,11 @@ version=$(get_version)
 depends=(brotli bzip2 cairo expat fontconfig freetype gcc glib2 glibc gmp graphite2 harfbuzz icu libICE libpaper libpng libSM libX11 libXau libXaw libxcb libXdmcp libXext libXi libXmu libXpm libXrender libXt mpfr pcre2 pixman util-linux zlib)
 filename="$name-$version-source.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/$year/$filename
-fi
+download_src "https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/$year/$filename"
 mf_filename="$name-$version-texmf.tar.xz"
-if ! [[ -f $mf_filename ]]; then
-	wget -c --progress=bar:force https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/$year/$mf_filename
-fi
+download_src "https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/$year/$mf_filename"
 ex_filename="$name-$version-extra.tar.xz"
-if ! [[ -f $ex_filename ]]; then
-	wget -c --progress=bar:force https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/$year/$ex_filename
-fi
+download_src "https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/$year/$ex_filename"
 unpk_enter "$filename" "$direname"
 export TEXARCH=$(uname -m | sed -e 's/i.86/i386/' -e 's/$/-linux/') &&
 TEXLIVE_PREFIX=/opt/texlive/$year

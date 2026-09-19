@@ -20,9 +20,7 @@ version=$(get_version)
 depends=(glibc linux-pam openssl zlib)
 filename="$name-$version.tar.gz"
 direname="$name-$version"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.sudo.ws/dist/$filename
-fi
+download_src "https://www.sudo.ws/dist/$filename"
 unpk_enter "$filename" "$direname"
 sed -e 's/\([->.a-zA-Z_]*\)->length/ASN1_STRING_length(\1)/' \
     -i lib/iolog/hostcheck.c

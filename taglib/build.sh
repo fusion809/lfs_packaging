@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(gcc glibc zlib)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://taglib.org/releases/$filename
-fi
+download_src "https://taglib.org/releases/$filename"
 unpk_enter "$filename" "$direname"
 options=(-D CMAKE_INSTALL_PREFIX=/usr \
       -D CMAKE_BUILD_TYPE=Release  \

@@ -7,15 +7,9 @@ depends=(bash coreutils gcc gzip make tar zlib)
 filename="${name}${version}-src.tar.gz"
 docs_filename="${name}${version}-html.tar.gz"
 direname="${filename/-src.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://sourceforge.net/projects/tcl/files/Tcl/$version/$filename
-fi
-if ! [[ -f $docs_filename ]]; then
-	wget -c --progress=bar:force https://sourceforge.net/projects/tcl/files/Tcl/$version/$docs_filename
-fi
-sudo rm -rf $direname
-tar xf $filename
-cd $direname
+download_src "https://sourceforge.net/projects/tcl/files/Tcl/$version/$filename"
+download_src "https://sourceforge.net/projects/tcl/files/Tcl/$version/$docs_filename"
+unpk_enter "$filename" "$direname"
 SRCDIR=$(pwd)
 cd unix
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD

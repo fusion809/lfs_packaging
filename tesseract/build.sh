@@ -2,18 +2,15 @@
 set -e
 # Variable declarations
 name=tesseract
-version=$(gh_ver "tesseract-ocr/tesseract")
+repo="tesseract-ocr/tesseract"
+version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=(acl bash brotli bzip2 coreutils curl cyrus-sasl gcc giflib glibc gzip icu leptonica libarchive libarchive libidn2 libjpeg-turbo libpng libpsl libtiff libunistring libwebp libxml2 lz4 make nghttp2 openjpeg openldap openssl pango tar wget xz zlib zstd)
 # Fetch and unpack source
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/tesseract-ocr/tesseract/archive/$version.tar.gz -O $filename
-fi
-sudo rm -rf $direname
-tar xf $filename
+gha_download "$repo" "$version" "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 sudo ./autogen.sh

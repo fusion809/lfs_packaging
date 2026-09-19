@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(acl glibc lz4 openssl popt zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.samba.org/ftp/rsync/src/$filename
-fi
+download_src "https://www.samba.org/ftp/rsync/src/$filename"
 unpk_enter "$filename" "$direname"
 cmi --prefix=/usr    \
             --disable-xxhash \

@@ -14,9 +14,7 @@ version=$(get_version)
 depends=(alsa-lib at-spi2-core brotli bzip2 cairo dav1d dbus expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz icu lcms2 libaom libepoxy libevent libffi libjpeg-turbo libpng libseccomp libvpx libwebp libX11 libXau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libXrandr libXrender libXres nspr nss pango pcre2 pixman sqlite systemd util-linux wayland zlib)
 filename="$name-$version.source.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://archive.mozilla.org/pub/firefox/releases/$version/source/$filename
-fi
+download_src "https://archive.mozilla.org/pub/firefox/releases/$version/source/$filename"
 unpk_enter "$filename" "$direname"
 cat > mozconfig << "EOF"
 # If you have a multicore machine, all cores will be used by default.

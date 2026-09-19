@@ -109,6 +109,14 @@ function ggn_download {
 	download_src "https://gitlab.gnome.org/GNOME/$name/-/archive/$version/$filename"
 }
 
+function gla_download {
+	local repo=$1
+	local tag=$2
+	local filename=$3
+	if ! [[ -f $filename ]]; then
+		wget -c --progress=bar:force https://gitlab.com/$repo/-/archive/$tag/$filename
+	fi
+}
 function gha_download {
 	local repo=$1
 	local tag=$2

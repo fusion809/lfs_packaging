@@ -10,9 +10,7 @@ depends=(bash cmake coreutils git make sed)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 # Fetch and unpack source
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force "https://github.com/$repo/archive/$version.tar.gz" -O $filename
-fi
+gha_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 # Compile and install
 find . -name CMakeLists.txt | xargs sed -e 's|-Werror||' -i # Don't use -Werror

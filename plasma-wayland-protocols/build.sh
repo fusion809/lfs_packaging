@@ -6,11 +6,9 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 kde_download "other" "$filename"
-rm -rf "$direname"
-tar xf "$filename"
+unpk_enter "$filename" "$direname"
 export PATH=$PATH:/opt/qt6/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/qt6/lib
-cd "$direname"
 options=(-D CMAKE_INSTALL_PREFIX=/usr)
 cmaki "${options[@]}"
 cd ../..
