@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(alsa-lib brotli bzip2 dbus double-conversion elfutils expat flac fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu lame libdrm libffi libogg libpciaccess libpng libvorbis libX11 libXau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mpg123 opus pcre2 qt6 spirv-tools systemd wayland xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/$version/$filename
-fi
+ghr_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 sed -i '/typedef enum/,/bool ;/d' src/ALAC/alac_{en,de}coder.c
 cmi --prefix=/usr -docdir=/usr/share/doc/$direname

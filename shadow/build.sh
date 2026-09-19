@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(acl glibc libxcrypt linux-pam systemd)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/$version/$filename
-fi
+ghr_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 find man -name Makefile.in -exec sed -i 's/getspnam\.3 / /' {} \; &&
 find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \; &&

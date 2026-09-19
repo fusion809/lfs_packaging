@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(bash coreutils gzip ninja python tar)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-    wget -c --progress=bar:force https://github.com/$repo/releases/download/$version/$filename
-fi
+ghr_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 pip3 wheel -w dist --no-cache-dir --no-build-isolation --no-deps $PWD
 sudo su -c "pip3 install --no-index --find-links dist meson

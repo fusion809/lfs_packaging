@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(glib2 gtk3 gtk4 xdg-desktop-portal-gnome)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/$version/$filename
-fi
+ghr_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 #gap_patches $name
 sed -i "s/requires: \[qt6_dep/requires: ['Qt6Core', 'Qt6Gui', 'Qt6Widgets'/" libportal/meson.build

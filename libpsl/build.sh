@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(glibc libidn2 libidn2 libunistring libunistring)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/$version/$filename
-fi
+ghr_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 mni --prefix=/usr --buildtype=release
 cd ../..

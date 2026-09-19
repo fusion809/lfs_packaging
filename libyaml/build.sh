@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(glibc)
 filename="yaml-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/$version/$filename
-fi
+ghr_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static
 cd ..
