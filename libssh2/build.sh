@@ -15,7 +15,13 @@ depends=(cmake gcc glibc openssl zlib)
 download_src "https://www.libssh2.org/download/$filename"
 unpk_enter "$filename" "$direname"
 gap_patches "$name"
-cmi --prefix=/usr --disable-docker-tests
-cd ..
-#rm -rf $filename $direname
+cmake_options=(
+	-DCMAKE_INSTALL_PREFIX=/usr
+	-DCMAKE_RUN_DOCKER_TESTS=false
+	-DBUILD_STATIC_LIBS=OFF
+	-DHIDE_SYMBOLS=OFF
+)
+cmaki "${cmake_options[@]}" 
+cd ../..
+rm -rf $filename $direname
 echo "$version" | sudo tee /var/lib/custom-packages/$name
