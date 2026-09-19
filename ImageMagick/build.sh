@@ -3,18 +3,15 @@
 set -e
 # Variable declarations
 name=ImageMagick
-version=$(gh_ver "$name/$name" | sed 's/\.\([0-9]*\)$/-\1/')
+repo=$name/$name
+version=$(gh_ver $repo | sed 's/\.\([0-9]*\)$/-\1/')
 depends=(brotli bzip2 cairo expat fftw fontconfig fontconfig freetype freetype fribidi gcc glib2 glibc graphite2 graphviz harfbuzz highway lcms2 libaom libde265 libffi libheif libICE libjpeg-turbo libjxl libpng libpng libraw libSM libtiff libwebp libwmf libX11 libXau libxcb libXdmcp libXext libxml2 libXrender libXt numactl openjpeg pango pcre2 pixman util-linux webkitgtk x264 x265 xorg-lib xz zlib zstd)
 direname="$name-$version"
-filename="$version.tar.gz"
+filename="$version.tar.xz"
 # Fetch and unpack source
-sudo rm -rf $direname
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/ImageMagick/ImageMagick/archive/refs/tags/$filename
-fi
-tar xf $filename
+ghr_download "$repo" "$version" "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 sudo rm -f /usr/lib/libMagickCore-7.Q16HDRI.so* /usr/lib/libMagickWand-7.Q16HDRI.so* /usr/lib/libMagick++-7.Q16HDRI.so*
 configure_options=(
     --prefix=/usr     \

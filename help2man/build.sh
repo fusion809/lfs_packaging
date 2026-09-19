@@ -5,12 +5,8 @@ version=$(gnu_ver help2man)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(coreutils gcc make tar wget xz)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://ftp.gnu.org/gnu/$name/$filename
-fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+gnu_download "$name" "$filename"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --libdir=/usr/lib
 cd ..
 rm -rf $filename $direname

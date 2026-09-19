@@ -6,16 +6,15 @@ version=$(gh_ver "ibus/ibus")
 filename="$name-$version.tar.gz"
 direname="$name-$version"
 depends=(at-spi2-core bash brotli bzip2 cairo coreutils dbus dconf elfutils expat fontconfig freetype fribidi gcc gdk-pixbuf gettext glib2 glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk3 gtk3 gtk4 gzip harfbuzz iso-codes lcms2 libdrm libelf libepoxy libffi libgudev libjpeg-turbo libnotify libnotify libpciaccess libpng libseccomp libsoup libtiff libunwind libwebp libX11 libXau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libxml2 libXrandr libXrender libXres libxshmfence libXxf86vm llvm lm-sensors mesa orc pango pcre2 pixman python spirv-tools systemd tar util-linux vala vulkan-loader wayland wget xz zip zlib zstd)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/ibus/ibus/archive/$version/$filename
-fi
-if ! [[ -f "UCD.zip" ]]; then
-	wget -c --progress=bar:force $(wget -cqO- https://www.linuxfromscratch.org/blfs/view/systemd/general/ibus.html | grep zip | cut -d '"' -f 2 | head -n 1)
-fi
-sudo rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
-sudo python3 -m zipfile -e ../UCD.zip /usr/share/unicode/ucd
+gha_download "$repo" "$version" "$filename"
+LFS_URL="https://www.linuxfromscratch.org/blfs/view/systemd/general/ibus.html"
+UCD_URL=$(wget -T 5 -t 1 -cqO- $LFS_URL \
+| grep zip \
+| cut -d '"' -f 2 \
+| head -n 1)
+download_src "$UCD_URL"
+unpk_enter "$filename" "$direname"
+python3 -m zipfile -e ../UCD.zip /usr/share/unicode/ucd
 sed -e 's@/desktop/ibus@/org/freedesktop/ibus@g' \
     -i data/dconf/org.freedesktop.ibus.gschema.xml
 export SAVE_DIST_FILES=1

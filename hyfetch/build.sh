@@ -2,18 +2,15 @@
 set -e
 # Variable declarations
 name=hyfetch
+repo=hykilpikonna/hyfetch
 depends=(bash coreutils fastfetch gcc glibc rustc)
-version=$(gh_ver hykilpikonna/hyfetch)
+version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 # Fetch and unpack source
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/hykilpikonna/hyfetch/archive/$version.tar.gz -O $filename
-fi
+gha_download "$repo" "$version" "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-rm -rf $direname
-tar xf $filename
-cd $direname
 export PATH=$PATH:/opt/rustc/bin
 cargo fetch --locked --target "$(rustc --print host-tuple)"
 cargo build --frozen --release --all-features

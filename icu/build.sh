@@ -5,12 +5,8 @@ repo="unicode-org/$name"
 version=$(gh_ver $repo)
 filename="${name}4c-$version-sources.tgz"
 direname="${filename/.tgz/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/release-$version/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "icu/source"
+ghr_download "$repo" "release-$version" "$filename"
+unpk_enter "$filename" "$name" "source"
 cmi --prefix=/usr
 cd ../..
 rm -rf "$filename" "$direname"

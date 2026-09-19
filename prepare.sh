@@ -96,7 +96,11 @@ function unpk_enter {
 				printf '%s\n' "Didn't decompress $filename"
 				;;
 		esac
-    		cd $direname
+		if [[ -n $3 ]]; then
+    			cd $direname/$3
+		else
+			cd $direname
+		fi
 	elif (echo $1 | grep "\.zip" &> /dev/null) ; then
     		local filename=$1
    		if [[ -n $2 ]]; then

@@ -2,22 +2,19 @@
 set -e
 # Variable declarations
 name=hdf5
-version=$(gh_ver "HDFGroup/hdf5")
+repo="HDFGroup/hdf5"
+version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=(bash cmake coreutils freetype gcc gcc glib glibc gzip java make sed tar wget zlib)
 openmpi)
 # Fetch and unpack source
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/HDFGroup/hdf5/releases/download/$version/$filename
-fi
-rm -rf $direname
-tar xf $filename
+ghr_download "$repo" "$version" "$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
 export PATH=$PATH:/opt/jdk/bin/
 CLFAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
-cd $direname
 common_cmake_args=(
   -DCMAKE_BUILD_TYPE=None
   -DCMAKE_INSTALL_PREFIX=/usr

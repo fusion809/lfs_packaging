@@ -6,9 +6,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(gcc glibc gzip libxcrypt make ncurses pcre2 readline tar wget)
 gnu_download $name $filename
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 sed -i 's/def HAVE_TERMCAP_TGETENT/ 1/' telnet/telnet.c
 configure_options=(--prefix=/usr        \
         --bindir=/usr/bin    \
