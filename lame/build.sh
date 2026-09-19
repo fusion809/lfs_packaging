@@ -6,7 +6,7 @@ version=$(gh_ver $repo)
 depends=(glibc ncurses)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-download_src "https://downloads.sourceforge.net/lame/$filename"
+sf_download "$name" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 sed -i -e 's/^\(\s*hardcode_libdir_flag_spec\s*=\).*/\1/' configure
 ./configure --prefix=/usr --disable-static --enable-mp3rtp

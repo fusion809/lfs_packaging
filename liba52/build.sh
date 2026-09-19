@@ -20,9 +20,7 @@ version=$(get_version)
 depends=(glibc)
 filename="a52dec-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://distfiles.adelielinux.org/source/a52dec/$filename
-fi
+download_src "https://distfiles.adelielinux.org/source/a52dec/$filename"
 unpk_enter "$filename" "$direname"
 options=(--prefix=/usr           \
             --mandir=/usr/share/man \

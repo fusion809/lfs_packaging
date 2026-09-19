@@ -20,16 +20,15 @@ version=$(get_version)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(gcc glibc yasm)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://storage.googleapis.com/aom-releases/$filename
-fi
+download_src "https://storage.googleapis.com/aom-releases/$filename"
 unpk_enter "$filename" "$direname"
 sed -i 's/aom aom_static/aom/' cmake/aom_install.cmake
-cmake_options=(-D CMAKE_INSTALL_PREFIX=/usr \
-      -D CMAKE_BUILD_TYPE=Release  \
-      -D BUILD_SHARED_LIBS=1       \
-      -D ENABLE_DOCS=no            \
-      -G Ninja)
+cmake_options=(
+	-D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_BUILD_TYPE=Release  \
+    -D BUILD_SHARED_LIBS=1       \
+    -D ENABLE_DOCS=no            \
+    -G Ninja)
 cmaki "${cmake_options[@]}"
 cd ../..
 rm -rf $filename $direname

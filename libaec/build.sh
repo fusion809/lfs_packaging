@@ -20,13 +20,9 @@ filename="$name-v$version.tar.bz2"
 direname=${filename/.tar.bz2/}
 depends=(bash bzip2 cmake coreutils glibc sed tar wget)
 # Fetch and unpack source
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://gitlab.dkrz.de/k202009/libaec/-/archive/v$version/$name-v$version.tar.bz2
-fi
-rm -rf $direname
-tar xf $filename
+download_src "https://gitlab.dkrz.de/k202009/libaec/-/archive/v$version/$filename"
+unpk_enter "$filename" "$direname"
 # Compile and install
-cd $direname
 CLFAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 cmake_options=(
