@@ -13,7 +13,7 @@ filename="$direname.tar.xz"
 depends=(bash coreutils glibc make sed spice spice-protocol systemd tar wget xorgproto xorg-server xz)
 optional_depends=(libcacard) # Smartcard support
 # Fetch and unpack source
-xfd_download "$name" "$filename"
+xfd_download "$filename"
 unpk_enter "$filename" "$direname"
 # Compile and install
 patch -p1 < ../libdrm.patch

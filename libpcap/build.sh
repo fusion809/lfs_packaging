@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(dbus glibc libnl systemd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.tcpdump.org/release/$filename
-fi
+download_src "https://www.tcpdump.org/release/$filename"
 unpk_enter "$filename" "$direname"
 ./configure --prefix=/usr
 make -j$(nproc)

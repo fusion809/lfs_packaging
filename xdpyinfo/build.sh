@@ -7,7 +7,7 @@ direname="${name}-$version"
 filename="$direname.tar.xz"
 depends=(bash coreutils fontconfig glibc libpng libX11 libXau libxcb libXcomposite libXdmcp libXext libXfixes libXi libXinerama libXpresent libXrandr libXrender libXtst libXxf86dga libXxf86vm make mesa sed systemd tar util-linux xbitmaps xcb-util xorg-libs xz zlib)
 # Fetch and unpack source
-xfd_download "$name" "$filename"
+xfd_download "$filename"
 unpk_enter "$filename" "$direname"
 # Compile and install
 CFLAGS="-O2 -fPIC"

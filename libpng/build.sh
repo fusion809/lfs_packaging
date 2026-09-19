@@ -6,12 +6,8 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 patch_filename="$name-$version-apng.patch.gz"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://downloads.sourceforge.net/libpng/$filename
-fi
-if ! [[ -f $patch_filename ]]; then
-	wget -c --progress=bar:force https://downloads.sourceforge.net/sourceforge/libpng-apng/$patch_filename
-fi
+download_src "https://downloads.sourceforge.net/libpng/$filename"
+download_src "https://downloads.sourceforge.net/sourceforge/libpng-apng/$patch_filename"
 unpk_enter "$filename" "$direname"
 zcat ../$patch_filename | patch -p1
 cmi --prefix=/usr --disable-static

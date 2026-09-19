@@ -5,7 +5,7 @@ repo=xorg/proto/xcbproto
 version=$(gfd_ver $repo $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-xfd_download "$name" "$filename"
+xfd_download "$filename"
 unpk_enter "$filename" "$direname"
 PYTHON=python3 cmi --prefix=/usr
 cd ../

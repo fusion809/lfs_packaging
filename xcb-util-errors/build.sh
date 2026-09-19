@@ -5,7 +5,7 @@ version=$(xcb_ver $name)
 depends=(glibc libXau libxcb libXdmcp)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-xfd_download "$name" "$filename"
+xfd_download "$filename"
 unpk_enter "$filename" "$direname"
 cmi --prefix=/usr
 cd ../

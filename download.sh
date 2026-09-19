@@ -215,7 +215,13 @@ function sw_download {
 }
 
 function xfd_download {
-	local type=$(get_xfd_type $1)
-	local filename=$2
+	if [[ -n $2 ]]; then
+		local name=$1
+		local filename=$2
+	else
+		local filename=$1
+		local name=$(echo $filename | sed -E 's/-[0-9.]+.tar.*//g')
+	fi
+	local type=$(get_xfd_type $name)
 	download_src "https://xorg.freedesktop.org/archive/individual/$type/$filename"
 }

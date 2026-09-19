@@ -7,7 +7,7 @@ direname="$name-$version"
 filename="$direname.tar.xz"
 depends=(bash coreutils fontconfig glibc libxcb make sed systemd tar util-linux xorg-libs xz zlib)
 # Fetch and unpack source
-xfd_download "$name" "$filename"
+xfd_download "$filename"
 unpk_enter "$filename" "$direname"
 # Compile and install
 XORG_CONFIG="--prefix=/usr"

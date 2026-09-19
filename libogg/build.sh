@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(glibc)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://downloads.xiph.org/releases/ogg/$filename
-fi
+download_src "https://downloads.xiph.org/releases/ogg/$filename"
 unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static --docdir=/usr/share/doc/$direname
 cd ../

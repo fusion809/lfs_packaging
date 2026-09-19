@@ -5,7 +5,7 @@ version=$(xfd_ver $name)
 depends=(glibc libX11 libXau libxcb libXdmcp)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-xfd_download "$name" "$filename"
+xfd_download "$filename"
 unpk_enter "$filename" "$direname"
 # Compile and install
 cmi --prefix=/usr --with-xinitdir=/etc/X11/app-defaults

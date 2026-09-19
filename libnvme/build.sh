@@ -5,9 +5,7 @@ repo=linux-nvme/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/linux-nvme/libnvme/archive/v$version/$filename
-fi
+gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 mni --prefix=/usr --buildtype=release -D libdbus=auto
 cd ../..

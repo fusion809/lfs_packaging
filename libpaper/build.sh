@@ -5,9 +5,7 @@ repo=rrthomas/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/rrthomas/libpaper/releases/download/v$version/$filename
-fi
+ghr_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 configure_options=(--prefix=/usr     \
             --sysconfdir=/etc \

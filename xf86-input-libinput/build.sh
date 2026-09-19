@@ -5,7 +5,7 @@ version=$(xfd_ver $name)
 depends=(glibc libevdev libinput lua mtdev systemd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-xfd_download "$name" "$filename"
+xfd_download "$filename"
 unpk_enter "$filename" "$direname"
 cmi --prefix=/usr
 cd ../
