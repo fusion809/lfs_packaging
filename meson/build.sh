@@ -9,9 +9,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
     wget -c --progress=bar:force https://github.com/$repo/releases/download/$version/$filename
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 pip3 wheel -w dist --no-cache-dir --no-build-isolation --no-deps $PWD
 sudo su -c "pip3 install --no-index --find-links dist meson
 install -vDm644 data/shell-completions/bash/meson /usr/share/bash-completion/completions/meson

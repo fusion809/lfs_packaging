@@ -8,9 +8,7 @@ depends=(coreutils gcc make ncurses tar xz)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://sourceforge.net/projects/psmisc/files/psmisc/$filename
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr
 cd ..
 echo $version | sudo tee /var/lib/custom-packages/$name

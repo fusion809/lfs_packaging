@@ -20,12 +20,8 @@ version=$(get_version)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(glibc ncurses pcre2)
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.greenwoodsoftware.com/less/$filename
-fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+download_src "https://www.greenwoodsoftware.com/less/$filename"
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --sysconfdir=/etc
 cd ..
 rm -rf $direname $filename

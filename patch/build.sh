@@ -6,9 +6,7 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(attr gcc glibc make tar wget xz)
 gnu_download $name $filename
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr
 cd ..
 rm -rf $filename $direname

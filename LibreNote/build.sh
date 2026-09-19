@@ -10,9 +10,7 @@ depends=(brotli bzip2 cmake coreutils dbus double-conversion expat fontconfig fr
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/archive/$version.tar.gz -O $filename
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 common_cmake_args=(
   -DCMAKE_BUILD_TYPE=Release
   -DCMAKE_INSTALL_PREFIX=/usr

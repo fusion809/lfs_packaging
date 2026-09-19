@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(glibc libjpeg-turbo libwebp tiff xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/releases/download/${name/2/}$version/$filename
-fi
+ghr_download "$repo" "${name/2/}$version" "$filename"
 unpk_enter "$filename" "$direname"
 mni --prefix=/usr --buildtype=release
 cd ../..

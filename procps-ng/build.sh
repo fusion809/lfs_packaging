@@ -8,9 +8,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://sourceforge.net/projects/procps-ng/files/Production/$filename
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 configure_options=(--prefix=/usr                           \
             --docdir=/usr/share/doc/$direname \
             --disable-static                        \

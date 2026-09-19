@@ -5,9 +5,7 @@ version=$(gnu_ver nettle)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gnu_download $name $filename
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 if ! [[ -f configure ]]; then
 	autoreconf
 fi

@@ -5,9 +5,7 @@ repo=KDE/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.kde.org/stable/$name/$filename
-fi
+kde_download "other" "$filename"
 rm -rf "$direname"
 tar xf "$filename"
 export PATH=$PATH:/opt/qt6/bin

@@ -20,15 +20,12 @@ version=$(get_version)
 depends=(bash coreutils gcc glibc make openssl tar xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://www.kernel.org/pub/linux/utils/kernel/$name/$filename
-fi
-rm -rf $direname
-tar xf $filename
-cd $direname
-meson_options=(--prefix=/usr    \
-            --buildtype=release \
-	    -D manpages=false)
+download_src "https://www.kernel.org/pub/linux/utils/kernel/$name/$filename"
+unpk_enter "$filename" "$direname"
+meson_options=(
+	--prefix=/usr    \
+    --buildtype=release \
+	-D manpages=false)
 mni "${meson_options[@]}"
 cd ../..
 echo $version | sudo tee /var/lib/custom-packages/$name

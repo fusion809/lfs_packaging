@@ -6,9 +6,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(gcc glibc gzip libICE libSM libX11 libXau libXaw libxcb libXdmcp libXext libXmu libXpm libXt make tar util-linux wget)
 gnu_download $name $filename
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 PAGE=A4 cmi --prefix=/usr
 cd ..
 rm -rf $filename $direname

@@ -8,9 +8,7 @@ depends=(glib2 glibc gtk3)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://download.gnome.org/sources/libpeas/$majVer/$filename
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 meson_options=(--prefix=/usr          \
             --buildtype=release    \
             --wrap-mode=nofallback \

@@ -24,9 +24,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.kernel.org/pub/linux/utils/util-linux/v$(echo $version | sed -E 's/.[0-9]+$//g')/$filename
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 configure_options=(--bindir=/usr/bin     \
             --libdir=/usr/lib     \
             --runstatedir=/run    \

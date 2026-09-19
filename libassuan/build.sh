@@ -9,9 +9,7 @@ depends=(glibc libgpg-error)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.gnupg.org/ftp/gcrypt/$name/$filename
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr
 make -C doc html
 makeinfo --html --no-split -o doc/assuan_nochunks.html doc/assuan.texi &&

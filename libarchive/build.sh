@@ -10,9 +10,7 @@ if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/libarchive/libarchive/releases/download/v$version/$filename
 fi
 
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static
 sudo install -Dm755 ../unzip /usr/bin/
 cd ..

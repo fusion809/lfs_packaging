@@ -8,9 +8,7 @@ depends=(libtasn1 make-ca nss)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/p11-glue/p11-kit/releases/download/$version/$filename 
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 sed '20,$ d' -i trust/trust-extract-compat &&
 
 cat >> trust/trust-extract-compat << "EOF"

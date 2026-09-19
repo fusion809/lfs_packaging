@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(acl attica attr avahi baloo breeze-icons brotli bzip2 curl cyrus-sasl dbus double-conversion e2fsprogs expat flatpak fontconfig freetype gcc glib2 glibc gpgme graphite2 harfbuzz ibus icu json-glib karchive kauth kbookmarks kcmutils kcodecs kcolorscheme kcompletion kconfig kconfigwidgets kcoreaddons kcrash kdbusaddons keyutils kfilemetadata kglobalaccel kguiaddons ki18n kiconthemes kio kirigami kitemmodels kitemviews kjobwidgets knewstuff knotifications knotifyconfig kpackage krunner kservice ksvg kwidgetsaddons kwindowsystem kxmlgui libarchive libassuan libcanberra libdrm libelf libevdev libffi libgpg-error libgudev libICE libidn2 libksysguard libogg libpciaccess libplasma libpng libpsl libseccomp libSM libsndfile libsoup libunistring libvorbis libwacom libX11 libXau libxcb libXcursor libXdmcp libXext libXfixes libXi libxkbcommon libxkbfile libxml2 libXrender libxshmfence libXxf86vm llvm lmdb lm-sensors lz4 mesa mitkrb nghttp2 openldap openssl ostree pcre2 plasma-activities plasma-activities-stats plasma-workspace polkit qt6 sdl2-compat solid sonnet spirv-tools sqlite syndication systemd util-linux wayland webkitgtk xcb-util xcb-util-cursor xcb-util-image xcb-util-keysyms xcb-util-renderutil xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/archive/refs/tags/v$version.tar.gz -O $filename
-fi
+gha_download "$repo" "v$version" "$filename"
 rm -rf "$direname"
 tar xf "$filename"
 export PATH=$PATH:/opt/qt6/bin

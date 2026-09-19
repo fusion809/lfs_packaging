@@ -23,9 +23,7 @@ pip_depends=(pyyaml)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://mesa.freedesktop.org/archive/$filename
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 export PATH=$PATH:/opt/rustc/bin
 XORG_PREFIX=/usr
 meson_options=(

@@ -22,9 +22,7 @@ if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.libssh.org/files/$maj_ver/$filename
 fi
 
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 cmaki -D CMAKE_INSTALL_PREFIX=/usr
 cd ..
 #rm -rf $direname $filename

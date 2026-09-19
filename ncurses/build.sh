@@ -23,9 +23,7 @@ depends=(gcc glibc gzip make sed tar wget)
 if ! [[ -f $filename ]]; then
     wget -c --progress=bar:force https://invisible-mirror.net/archives/$name/$filename
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 ./configure --prefix=/usr           \
             --mandir=/usr/share/man \
             --with-shared           \

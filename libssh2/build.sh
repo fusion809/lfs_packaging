@@ -19,9 +19,7 @@ fi
 if ! [[ -f "libssh2-1.11.1-security_fixes-1.patch" ]]; then
 	wget -c --progress=bar:force https://www.linuxfromscratch.org/patches/blfs/svn/libssh2-1.11.1-security_fixes-1.patch
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 patch -Np1 -i ../libssh2-1.11.1-security_fixes-1.patch
 #cmi --prefix=/usr --disable-docker-tests
 cmake_options=(

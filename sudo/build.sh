@@ -23,9 +23,7 @@ direname="$name-$version"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.sudo.ws/dist/$filename
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 sed -e 's/\([->.a-zA-Z_]*\)->length/ASN1_STRING_length(\1)/' \
     -i lib/iolog/hostcheck.c
 configure_options=(--prefix=/usr         \

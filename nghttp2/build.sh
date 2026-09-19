@@ -10,9 +10,7 @@ depends=(gcc glibc hdf5 libaec libxml2 zlib)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/releases/download/v$version/$filename
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static --enable-lib-only --docdir=/usr/share/doc/$direname
 rm -rf $filename $direname
 echo $version | sudo tee /var/lib/custom-packages/$name

@@ -9,9 +9,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/archive/v$version/$filename
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 find -type f | xargs touch
 sed -i 's/cp -p/cp/' build/make/Makefile &&
 cmi --prefix=/usr --enable-shared --disable-static

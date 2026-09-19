@@ -23,9 +23,7 @@ depends=(gcc glibc yasm)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://storage.googleapis.com/aom-releases/$filename
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 sed -i 's/aom aom_static/aom/' cmake/aom_install.cmake
 cmake_options=(-D CMAKE_INSTALL_PREFIX=/usr \
       -D CMAKE_BUILD_TYPE=Release  \

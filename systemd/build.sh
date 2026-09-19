@@ -47,9 +47,7 @@ fi
 if ! [[ -f $_filename ]]; then
     wget -c --progress=bar:force https://anduin.linuxfromscratch.org/LFS/$_filename
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 sed -e 's/GROUP="render"/GROUP="video"/' \
     -e 's/GROUP="sgx", //'               \
     -i rules.d/50-udev-default.rules.in

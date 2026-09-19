@@ -32,9 +32,7 @@ sudo su -c "make -C libelf install
 install -vm644 config/libelf.pc /usr/lib/pkgconfig
 rm /usr/lib/libelf.a"
 cd ..
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 MOCK_GCC_DIR="/tmp/mock_gcc_elfutils"
 mkdir -p "$MOCK_GCC_DIR"
 cat > "$MOCK_GCC_DIR/gcc" <<\GCCEOF

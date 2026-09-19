@@ -12,9 +12,7 @@ fi
 if ! [[ -f $doc_filename ]]; then
 	wget -c --progress=bar:force https://www.nasm.us/pub/nasm/releasebuilds/$version/$doc_filename
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 tar -xf ../$doc_filename --strip-components=1
 cmi --prefix=/usr
 sudo su -c "install -m755 -d         /usr/share/doc/$direname/html  &&

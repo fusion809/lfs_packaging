@@ -9,9 +9,7 @@ depends=(acl glibc libxcrypt linux-pam systemd)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/releases/download/$version/$filename
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 find man -name Makefile.in -exec sed -i 's/getspnam\.3 / /' {} \; &&
 find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \; &&
 

@@ -8,9 +8,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://gitlab.com/gnutls/libtasn1/-/archive/v${version}/$filename
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 if [[ -f /var/lib/custom-packages/help2man ]]; then
 	cmi --prefix=/usr --disable-static
 else

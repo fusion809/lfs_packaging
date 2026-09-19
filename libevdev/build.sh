@@ -21,9 +21,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.freedesktop.org/software/libevdev/$filename
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 meson_options=(--prefix=$XORG_PREFIX     \
       --buildtype=release       \
       -D documentation=disabled \

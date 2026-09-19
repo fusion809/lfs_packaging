@@ -23,9 +23,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/$filename
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 sed -i '/install -m.*STA/d' libcap/Makefile
 make prefix=/usr lib=lib -j$(nproc)
 sudo make prefix=/usr lib=lib install

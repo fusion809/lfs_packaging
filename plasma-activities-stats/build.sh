@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(dbus double-conversion gcc glib2 glibc icu kconfig pcre2 plasma-activities qt6 systemd zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/archive/refs/tags/v$version.tar.gz -O $filename
-fi
+gha_download "$repo" "v$version" "$filename"
 rm -rf "$direname"
 tar xf "$filename"
 export PATH=$PATH:/opt/qt6/bin

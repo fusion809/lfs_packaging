@@ -9,9 +9,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://github.com/$repo/releases/download/v$version/$filename
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 cmake_options=(-D CMAKE_INSTALL_PREFIX=/usr      \
       -D CMAKE_BUILD_TYPE=Release       \
       -D CMAKE_SKIP_INSTALL_RPATH=ON    \

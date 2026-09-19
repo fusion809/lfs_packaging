@@ -18,9 +18,7 @@ if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.openldap.org/software/download/OpenLDAP/openldap-release/$filename
 fi
 
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 ./configure --prefix=/usr     \
             --sysconfdir=/etc \
             --disable-static  \

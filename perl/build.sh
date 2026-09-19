@@ -23,9 +23,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.cpan.org/src/$(echo $version | sed 's/\..*/.0/g')/$filename
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 export BUILD_ZLIB=False
 export BUILD_BZIP2=0
 majmin=$(echo $version | sed -E 's/\.[0-9]+$//g')

@@ -9,9 +9,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.gnupg.org/ftp/gcrypt/$name/$filename
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --enable-pinentry-tty
 cd ..
 rm -rf $filename $direname

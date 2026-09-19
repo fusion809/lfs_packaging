@@ -9,9 +9,7 @@ depends=(glibc)
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://www.gnupg.org/ftp/gcrypt/$name/$filename
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --sysconfdir=/etc
 sudo su -c "install -v -m644 -D README /usr/share/doc/$direname/README"
 cd ..

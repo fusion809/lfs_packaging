@@ -13,9 +13,7 @@ direname="${filename/.tar.gz/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force "https://github.com/$repo/archive/$version.tar.gz" -O $filename
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 # Compile and install
 find . -name CMakeLists.txt | xargs sed -e 's|-Werror||' -i # Don't use -Werror
 CXXFLAGS="-O2 -fPIC"

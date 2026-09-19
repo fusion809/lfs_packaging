@@ -6,9 +6,7 @@ version=$(gh_ver $repo)
 depends=(acl attr breeze-icons brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kcmutils kcodecs kcolorscheme kcompletion kconfig kconfigwidgets kcoreaddons kcrash kdbusaddons keyutils kglobalaccel kguiaddons ki18n kiconthemes kio kirigami kitemviews kjobwidgets knotifications kpackage kservice ksvg kwidgetsaddons kwindowsystem kxmlgui libcanberra libdrm libelf libffi libgcrypt libgpg-error libogg libpciaccess libplasma libpng libsecret libvorbis libX11 libXau libxcb libXdmcp libXext libXfixes libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb modemmanager-qt networkmanager networkmanager-qt nspr nss openssl pcre2 plasma-activities qcoro qt6 qtkeychain solid spirv-tools systemd util-linux wayland webkitgtk xcb-util-keysyms xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://github.com/$repo/archive/refs/tags/v$version.tar.gz -O $filename
-fi
+gha_download "$repo" "v$version" "$filename"
 rm -rf "$direname"
 tar xf "$filename"
 export PATH=$PATH:/opt/qt6/bin

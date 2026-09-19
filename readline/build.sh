@@ -6,9 +6,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(gcc glibc gzip make ncurses tar wget)
 gnu_download $name $filename
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 sed -i '/MV.*old/d' Makefile.in
 sed -i '/{OLDSUFF}/c:' support/shlib-install
 sed -i 's/-Wl,-rpath,[^ ]*//' support/shobj-conf

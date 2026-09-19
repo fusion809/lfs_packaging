@@ -23,9 +23,7 @@ direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then
 	wget -c --progress=bar:force https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/$filename
 fi
-rm -rf $direname
-tar xf $filename
-cd $direname
+unpk_enter "$filename" "$direname"
 #sudo su -c "install -v -g sys -m700 -d /var/lib/sshd &&
 #
 #groupadd -g 50 sshd        &&
