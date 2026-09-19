@@ -1,11 +1,12 @@
 #!/bin/bash
 set -e
 name=libinput
+repo=$name/$name
 get_version() {
 	local inst_ver=$(pkgver $name)
-	local up_ver=$(wget -cqO- -T 5 -t 1 https://gitlab.freedesktop.org/libinput/libinput/-/tags | grep "[0-9]+\.[0-9]+\.[0-8][0-9]*" -oE | cut -d '/' -f 3 | sort -V | tail -n 1)
+	local up_ver=$(wget -cqO- -T 5 -t 1 https://gitlab.freedesktop.org/$repo/-/tags | grep "[0-9]+\.[0-9]+\.[0-8][0-9]*" -oE | cut -d '/' -f 3 | sort -V | tail -n 1)
 	ver_check "$up_ver" "$inst_ver" && return
-	local git_ver=$(timeout 5 git ls-remote --tags --refs https://gitlab.freedesktop.org/libinput/libinput.git | grep "refs/tags/[0-9]+\.[0-9]+\.[0-8][0-9]*" -oE | cut -d '/' -f 3 | sort -V | tail -n 1)
+	local git_ver=$(timeout 5 git ls-remote --tags --refs https://gitlab.freedesktop.org/$repo.git | grep "refs/tags/[0-9]+\.[0-9]+\.[0-8][0-9]*" -oE | cut -d '/' -f 3 | sort -V | tail -n 1)
 	ver_check "$git_ver" "$inst_ver" && return
 	local vat_ver=$(vatver $name)
 	ver_check "$vat_ver" "$inst_ver" && return
@@ -20,9 +21,7 @@ version=$(get_version)
 depends=(glibc libevdev lua mtdev systemd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://gitlab.freedesktop.org/libinput/libinput/-/archive/$version/$filename
-fi
+gfd_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 mni --prefix=/usr --buildtype=release
 cd ../..
