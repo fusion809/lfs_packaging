@@ -7,7 +7,7 @@ majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(cmake qt6)
-kde_download "frameworks" "$version" "$filename"
+kde_download "frameworks" "$filename"
 unpk_enter "$filename" "$direname"
 sed -i '/"lib64"/s/64//' kde-modules/KDEInstallDirsCommon.cmake &&
 

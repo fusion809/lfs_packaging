@@ -163,13 +163,16 @@ function gnu_download {
 
 function kde_download {
 	local type=$1
-	local version=$2
+	local filename=$2
+	local name=$(echo $filename | sed -E 's/-[0-9.]+.tar.*//g')
+	local version=$(echo $filename | sed "s/$name-//g" | sed "s/.tar.*//g")
 	local majVer=$(echo $version | cut -d '.' -f1-2)
-	local filename=$3
 	if [[ "$type" == "frameworks" ]]; then
 		download_src "https://download.kde.org/stable/$type/$majVer/$filename"
 	elif [[ "$type" == "app" ]]; then
 		download_src "https://download.kde.org/stable/release-service/$version/src/$filename"
+	else
+		download_src "https://download.kde.org/stable/$name/$filename"
 	fi
 }
 

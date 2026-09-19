@@ -7,13 +7,12 @@ depends=(brotli double-conversion e2fsprogs gcc glib2 glibc icu kdsoap keyutils 
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://download.kde.org/stable/$name/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
-options=(-D CMAKE_INSTALL_PREFIX=/usr       -D CMAKE_BUILD_TYPE=Release -D CMAKE_SKIP_INSTALL_RPATH=ON  \
+kde_download "other" "$filename"
+unpk_enter "$filename" "$direname"
+options=(
+      -D CMAKE_INSTALL_PREFIX=/usr \
+      -D CMAKE_BUILD_TYPE=Release \
+      -D CMAKE_SKIP_INSTALL_RPATH=ON  \
       -D QT_MAJOR_VERSION=6           \
       -W no-author)
 cmaki "${options[@]}"

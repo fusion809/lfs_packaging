@@ -6,7 +6,7 @@ version=$(gh_ver $repo)
 depends=(brotli bzip2 double-conversion e2fsprogs gcc glib2 glibc icu karchive keyutils libxml2 libxslt mitkrb openssl pcre2 qt6 systemd xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-kde_download "frameworks" "$version" "$filename"
+kde_download "frameworks" "$filename"
 unpk_enter "$filename" "$direname"
 cmake_options=(
     -D CMAKE_INSTALL_PREFIX=/usr \

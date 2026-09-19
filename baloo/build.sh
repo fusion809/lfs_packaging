@@ -7,7 +7,7 @@ depends=(acl attr brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig
 majVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-kde_download "frameworks" "$version" "$filename"
+kde_download "frameworks" "$filename"
 unpk_enter "$filename" "$direname"
 cmake_options=(
     -D CMAKE_INSTALL_PREFIX=/usr \

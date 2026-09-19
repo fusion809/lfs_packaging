@@ -18,12 +18,8 @@ version=$(get_version)
 depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-if ! [[ -f $filename ]]; then
-	wget -c --progress=bar:force https://git.kernel.org/pub/scm/linux/kernel/git/dhowells/keyutils.git/snapshot/$filename
-fi
-rm -rf "$direname"
-tar xf "$filename"
-cd "$direname"
+download_src "https://git.kernel.org/pub/scm/linux/kernel/git/dhowells/keyutils.git/snapshot/$filename"
+unpk_enter "$filename" "$direname"
 make -j$(nproc)
 sudo make NO_ARLIB=1 LIBDIR=/usr/lib BINDIR=/usr/bin SBINDIR=/usr/sbin install
 cd ..

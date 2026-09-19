@@ -5,7 +5,7 @@ version=$(kap_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(frameworks6)
-kde_download "app" "$version" "$filename"
+kde_download "app" "$filename"
 unpk_enter "$filename" "$direname"
 cmake_options=(
       -D CMAKE_INSTALL_PREFIX=/usr  \
