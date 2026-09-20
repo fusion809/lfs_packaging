@@ -2,7 +2,7 @@
 set -e
 name=x265
 repo=Multicorewareinc/$name
-version=$(bb_ver $repo $name)
+version=$(gh_ver $repo)
 filename="${name}_$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(cmake nasm)
