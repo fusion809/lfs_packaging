@@ -3,20 +3,18 @@ set -e
 name=xmlto
 get_version() {
 	local inst_ver=$(pkgver $name)
+	local lfs_vers=$(lfs_ver $name)
 	local up_ver=$(wget -T 5 -cqO- https://pagure.io/xmlto/releases | grep "/xmlto/archive/.*tar.gz" | cut -d '"' -f 2 | cut -d '/' -f 4)
-	ver_check "$up_ver" "$inst_ver" && return
+	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
 
 	local git_ver=$(git ls-remote --tags --refs https://pagure.io/xmlto.git | grep "refs/tags/" | cut -d '/' -f 3)
-	ver_check "$git_ver" "$inst_ver" && return
+	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
 
 	local vat_ver=$(vatver $name)
-	ver_check "$vat_ver" "$inst_ver" && return
+	ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
 
 	local arch_ver=$(aver $name)
-	ver_check "$arch_ver" "$inst_ver" && return
-
-	local lfs_vers=$(lfs_ver $name)
-	ver_check "$lfs_vers" "$inst_ver" && return
+	ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
 
 	fver "$name" "$inst_ver"
 }

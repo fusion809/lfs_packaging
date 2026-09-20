@@ -3,17 +3,16 @@ set -e
 name=nss
 get_version() {
 	local inst_ver=$(pkgver $name)
+	local lfs_vers=$(lfs_ver $name)
 	local up_ver=$(wget -T 5 -t 1 -cqO- https://archive.mozilla.org/pub/security/nss/releases/ | grep -oE "NSS_[0-9]+_[0-9]+" | sed 's/NSS_//g' | sed 's/_/./g' | sort -V | tail -n 1)
-	ver_check "$up_ver" "$inst_ver" && return
+	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
 	local git_ver=$(timeout 5 git ls-remote --tags --refs https://github.com/mozilla/nss.git | grep -oE 'NSS_[0-9_]+RTM' | sed 's/NSS_//g' | sed 's/_RTM//g' | tr '_' '.' | sort -V | tail -n 1)
-	ver_check "$git_ver" "$inst_ver" && return
+	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
 	local vat_ver=$(vatver $name)
-	ver_check "$vat_ver" "$inst_ver" && return
+	ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
 
 	local arch_ver=$(aver $name)
-	ver_check "$arch_ver" "$inst_ver" && return
-	local lfs_vers=$(lfs_ver $name)
-	ver_check "$lfs_vers" "$inst_ver" && return
+	ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)

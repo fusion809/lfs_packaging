@@ -4,11 +4,12 @@ name=rustc
 # Takes about 3hrs 10 mins to compile, roughly
 get_version() {
     local inst_ver=$(pkgver $name)
+    local lfs_vers=$(lfs_ver $name)
     local up_ver=$(wget -T 5 -cqO- https://blog.rust-lang.org/releases/latest | grep "\-[0-9]\." | head -n 1 | cut -d '/' -f 5 | cut -d '-' -f 2)
-    ver_check "$up_ver" "$inst_ver" && return
+    ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
 
     local ghub_ver=$(gh_ver rust-lang/rust)
-    ver_check "$ghub_ver" "$inst_ver" && return
+    ver_check "$ghub_ver" "$inst_ver" "$lfs_vers" && return
 
     fver "$name" "$inst_ver"
 }

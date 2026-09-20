@@ -4,17 +4,16 @@ name=ntp
 repo=$name-project/$name
 get_version() {
 	local inst_ver=$(pkgver $name)
+	local lfs_vers=$(lfs_ver $name)
 	local up_ver=$(wget -cqO- -T 5 -t 1 https://github.com/$repo/tags | grep "NTP_[0-9_P]+" -oE | sed 's/NTP_//g' | grep "P" | tr 'P' 'p' | tr '_' '.' | sed 's/\.$//g' | sort -V | tail -n 1)
-	ver_check "$up_ver" "$inst_ver" && return
+	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
 	local git_ver=$(timeout 5 git ls-remote --tags --refs https://github.com/$repo.git | grep "refs/tags/NTP_[0-9P_]+" -oE | sed 's/.*NTP_//g' | tr 'P' 'p' | tr '_' '.' | grep "p" | sed 's/\.$//g' | sort -V | tail -n 1)
-	ver_check "$git_ver" "$inst_ver" && return
+	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
 	local vat_ver=$(vatver $name)
-	ver_check "$vat_ver" "$inst_ver" && return
+	ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
 
 	local arch_ver=$(aver $name)
-	ver_check "$arch_ver" "$inst_ver" && return
-	local lfs_vers=$(lfs_ver $name)
-	ver_check "$lfs_vers" "$inst_ver" && return
+	ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
 	fver "$name" "$inst_ver"
 }
 # gh_ver sort of works but sometimes errors

@@ -3,15 +3,16 @@ set -e
 name=mesa
 get_version() {
   local inst_ver=$(pkgver $name)
+  local lfs_vers=$(lfs_ver $name)
   local up_ver=$(wget -T 5 -cqO- https://mesa3d.org/ | grep "relnotes" | head -n 1 | cut -d '/' -f 5 | sed 's/.html.*//g')
-  ver_check "$up_ver" "$inst_ver" && return
+  ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
   local git_ver=$(git ls-remote --tags --refs https://gitlab.freedesktop.org/mesa/mesa.git | grep -E "refs/tags/mesa-[0-9.]+$" | cut -d '-' -f 2 | sort -V | tail -n 1)
-  ver_check "$git_ver" "$inst_ver" && return
+  ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
   local vat_ver=$(vatver $name)
-  ver_check "$vat_ver" "$inst_ver" && return
+  ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
 
   local arch_ver=$(aver $name)
-  ver_check "$arch_ver" "$inst_ver" && return
+  ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
   fver "$name" "$inst_ver"
 }
 version=$(get_version)

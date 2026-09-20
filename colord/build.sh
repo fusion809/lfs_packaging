@@ -4,11 +4,12 @@ set -e
 name=colord
 get_version() {
       local inst_ver=$(pkgver $name)
-      local up_ver=$(wget --timeout=5 -t 1 -cqO- https://www.freedesktop.org/software/colord/releases/ | grep "colord-[0-9.]*.tar.xz\"" | tail -n 1 | cut -d '"' -f 2 | sed 's/.tar.xz//g' | sed 's/colord-//g')
-      ver_check "$up_ver" "$inst_ver" && return
+	local lfs_vers=$(lfs_ver $name)
+	local up_ver=$(wget --timeout=5 -t 1 -cqO- https://www.freedesktop.org/software/colord/releases/ | grep "colord-[0-9.]*.tar.xz\"" | tail -n 1 | cut -d '"' -f 2 | sed 's/.tar.xz//g' | sed 's/colord-//g')
+      ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
 
       local ghub_ver=$(gh_ver hughsie/colord)
-      ver_check "$ghub_ver" "$inst_ver" && return
+      ver_check "$ghub_ver" "$inst_ver" "$lfs_vers" && return
 
       fver "$name" "$inst_ver"
 }

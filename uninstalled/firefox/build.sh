@@ -3,12 +3,12 @@ set -e
 name=firefox
 get_version() {
 	local inst_ver=$(pkgver $name)
-	local up_ver=$(wget -cqO- -T 5 -t 1 https://archive.mozilla.org/pub/firefox/releases/ | grep "[0-9]+\.[0-9]+\.[0-9]+esr" -oE | sort -V | tail -n 1)
-	ver_check "$up_ver" "$inst_ver" && return
-	local git_ver=$(timeout 5 git ls-remote --tags --refs https://github.com/mozilla-firefox/firefox.git | grep "esr_RELEASE" | sed 's/.*FIREFOX_//g' | sed 's/_RELEASE//g' | tr '_' '.' | sort -V | tail -n 1)
-	ver_check "$git_ver" "$inst_ver" && return
 	local lfs_vers=$(lfs_ver $name)
-	ver_check "$lfs_vers" "$inst_ver" && return
+	local up_ver=$(wget -cqO- -T 5 -t 1 https://archive.mozilla.org/pub/firefox/releases/ | grep "[0-9]+\.[0-9]+\.[0-9]+esr" -oE | sort -V | tail -n 1)
+	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
+	local git_ver=$(timeout 5 git ls-remote --tags --refs https://github.com/mozilla-firefox/firefox.git | grep "esr_RELEASE" | sed 's/.*FIREFOX_//g' | sed 's/_RELEASE//g' | tr '_' '.' | sort -V | tail -n 1)
+	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
+	ver_check "$lfs_vers" "$inst_ver" "$lfs_vers" && return
 }
 version=$(get_version)
 depends=(alsa-lib at-spi2-core brotli bzip2 cairo dav1d dbus expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz icu lcms2 libaom libepoxy libevent libffi libjpeg-turbo libpng libseccomp libvpx libwebp libX11 libXau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libXrandr libXrender libXres nspr nss pango pcre2 pixman sqlite systemd util-linux wayland zlib)

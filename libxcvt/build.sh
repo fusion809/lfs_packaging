@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=libxcvt
-version=$(xfd_ver $name)
+version=$(xfd_ver $name | grep -oE "[0-9.]+")
 depends=(glibc)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

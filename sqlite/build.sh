@@ -3,25 +3,24 @@ set -e
 name=sqlite
 get_version() {
 	local inst_ver=$(pkgver $name)
+	local lfs_vers=$(lfs_ver $name)
 	local up_ver=$(wget -qO- https://sqlite.org/download.html |
-    grep -o 'sqlite-autoconf-[0-9]*\.tar\.gz' |
-    head -n1 |
-    grep -o '[0-9]*' |
-    head -n1)
-	ver_check "$up_ver" "$inst_ver" && return
+		grep -o 'sqlite-autoconf-[0-9]*\.tar\.gz' |
+		head -n1 |
+		grep -o '[0-9]*' |
+		head -n1)
+	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
 	local base_ver=$(ghl_ver $name/$name)
 	local majVer=$(echo $base_ver | cut -d '.' -f 1)
 	local minVer=$(echo $base_ver | cut -d '.' -f 2)
 	local patchVer=$(echo $base_ver | cut -d '.' -f 3)
 	local git_ver=$(echo "${majVer}${minVer}0${patchVer}00")
-	ver_check "$git_ver" "$inst_ver" && return
+	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
 	local vat_ver=$(vatver $name)
-	ver_check "$vat_ver" "$inst_ver" && return
+	ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
 
 	local arch_ver=$(aver $name)
-	ver_check "$arch_ver" "$inst_ver" && return
-	local lfs_vers=$(lfs_ver $name)
-	ver_check "$lfs_vers" "$inst_ver" && return
+	ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)

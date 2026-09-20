@@ -4,17 +4,16 @@ name=mitkrb
 majMinVer=$(wget -T 5 -cqO- https://kerberos.org/dist/krb5/ | grep "/</a>" | tail -n 1 | cut -d '"' -f 8 | sed 's|/||g')
 get_version() {
   local inst_ver=$(pkgver $name)
+  local lfs_vers=$(lfs_ver $name)
   if echo "$majVer" | grep -q "[0-9]"; then
     local version=$(wget -T 5 -cqO- https://kerberos.org/dist/krb5/$majMinVer/ | cut -d '"' -f 8 | grep "^krb5" | grep -v "asc" | cut -d '-' -f 2 | sed 's/.tar.gz//g' | sort | uniq | tail -n 1)
-    ver_check "$version" "$inst_ver" && return
+    ver_check "$version" "$inst_ver" "$lfs_vers" && return
   fi
   local vat_ver=$(vatver $name)
-  ver_check "$vat_ver" "$inst_ver" && return
+  ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
 
   local arch_ver=$(aver $name)
-  ver_check "$arch_ver" "$inst_ver" && return
-  local lfs_vers=$(lfs_ver $name)
-  ver_check "$lfs_vers" "$inst_ver" && return
+  ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
   fver "$name" "$inst_ver"
 }
 version=$(get_version)

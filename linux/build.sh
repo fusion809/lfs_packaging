@@ -11,18 +11,17 @@ get_base_version() {
 get_version() {
 	local base_ver=$(get_base_version)
 	local inst_ver=$(pkgver $name)
+	local lfs_vers=$(lfs_ver $name)
 	if [[ $base_ver =~ ^[0-9]+\.[0-9]+$ ]]; then
-		ver_check "${base_ver}.0" "$inst_ver" && return
+		ver_check "${base_ver}.0" "$inst_ver" "$lfs_vers" && return
 	elif [[ "$base_ver" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-		ver_check "$base_ver" "$inst_ver" && return
+		ver_check "$base_ver" "$inst_ver" "$lfs_vers" && return
 	else
 		local vat_ver=$(vatver $name)
-		ver_check "$vat_ver" "$inst_ver" && return
+		ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
 
 		local arch_ver=$(aver $name)
-		ver_check "$arch_ver" "$inst_ver" && return
-		local lfs_ver=$(lfs_ver $name)
-		ver_check "$lfs_ver" "$inst_ver" && return
+		ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
 		fver "$name" "$inst_ver"
 	fi
 }

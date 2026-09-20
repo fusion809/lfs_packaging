@@ -2,7 +2,7 @@
 set -e
 # Variable declarations
 name=libXpresent
-version=$(xfd_ver $name)
+version=$(xfd_ver $name | grep -oE "[0-9.]+")
 direname="${name}-$version"
 filename="$direname.tar.xz"
 depends=(bash coreutils fontconfig glibc libX11 libXau libxcb libXdmcp libXext libXfixes libXrandr libXrender make sed systemd tar util-linux xorg-libs xz zlib)

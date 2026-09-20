@@ -2,7 +2,7 @@
 GIT_TERMINAL_PROMPT=0
 function artver {
 	local name=$(echo $1 | tr '[:upper:]' '[:lower:]')
-	local ver=$(wget -T 5 -t 1 -cqO- https://packages.artixlinux.org/packages/{world,system,galaxy}/{x86_64,any}/$name/ | grep "$name [0-9.]+" -oE | head -n 1 | cut -d ' ' -f 2)
+	local ver=$(wget -T 5 -t 1 -cqO- https://packages.artixlinux.org/packages/{world,system,galaxy}/{x86_64,any}/$name/ | grep "$name [0-9.a-z]+" -oE | head -n 1 | cut -d ' ' -f 2)
 	if [[ "$name" == "gcc" ]]; then
 		echo $ver | sed -E 's/\.1$/\.0/g'
 	else
@@ -100,7 +100,7 @@ function ggn_ver {
 		timeout 15 git ls-remote --tags --refs "$URL.git" 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init|\.9[0-9]" | grep -E "^[0-9]+\.[0-9]+\.[0-9]+$" | grep -vE "[0-9]+\.[0-9]+\.9[0-9]$" | sort -V | tail -n 1
 	elif [[ "$1" == "libsoup" ]]; then
 		timeout 15 git ls-remote --tags --refs "$URL.git" 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init|\.9[0-9]" | grep -E "^[0-9]+\.[02468]+\.[0-9]+$" | grep -vE "[0-9]+\.[0-9]+\.9[0-9]$" | sort -V | tail -n 1
-	elif [[ "$1" == "glib2" ]]; then
+	elif [[ "$1" == "glib2"  || "$1" == "glib-networking" ]]; then
 		timeout 5 git ls-remote --tags --refs "$URL.git" 2> /dev/null | cut -d '/' -f 3 | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv} -viE "alpha|beta|rc|dev|snapshot|init" | grep -E "^[0-9.]+$" | sort -V | tail -n 1
 	else		
     		timeout 5 git ls-remote --tags --refs "$URL.git" 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init|\.9[0-9]" | sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' | grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^${2:-[0-9]}" | sort -V | tail -n 1
@@ -326,7 +326,7 @@ function gver {
 	wget -T 5 -t 1 -cqO- https://gitweb.gentoo.org/repo/gentoo.git/tree/$repo | grep "\-[0-9]+\.[0-9.]+[_p0-9]*" -oE | grep -v "9999" | grep -vE "[prc][0-9]+" | sed 's/^-//g' | sed 's/\.$//g' | sort -V | tail -n 1
 }
 function gxfd_ver {
-    timeout 5 git ls-remote --tags --refs https://gitlab.freedesktop.org/xorg/$1/$2.git 2>/dev/null | grep "$2-" -i | cut -d '/' -f 3 | cut -d '-' -f 2 | tr '_' '.' | sort -V | tail -n 1
+    timeout 5 git ls-remote --tags --refs https://gitlab.freedesktop.org/xorg/$1/$2.git 2>/dev/null | grep "$2-" -i | sed -E "s/.*$2[-_]+//g" | tr '_' '.' | sort -V | tail -n 1
 }
 
 function lfs_ver {
@@ -335,8 +335,8 @@ function lfs_ver {
 	# version doesn't appear in the index pages (e.g. listed by display name, not tarball).
 	local search_name fallback_page
 	case "$1" in
-		mitkrb) search_name="krb5"; fallback_page="postlfs/mitkrb.html" ;;
-		vte) search_name="vte" ; fallback_page="gnome/vte.html";;
+		mitkrb) search_name="krb5"; fallback_page="blfs-mitkrb.html" ;;
+		vte) search_name="vte" ; fallback_page="blfs-vte.html";;
 		*)       search_name="$1";  fallback_page="" ;;
 	esac
 
@@ -345,13 +345,14 @@ function lfs_ver {
 	ver=$(cat $HOME/.cache/*lfs*index.html \
 		| grep -iE ">$search_name-[0-9.]+" \
 		| grep -vE "vte-2\.[0-9]+" \
+		| grep -v "\.so" \
+		| grep -v "emu/dolphin" \
 		| sed -E "s/.*$search_name-([0-9.]+).*/\1/I" \
 		| grep -E "^[0-9.]+$" | sort -V | tail -n 1)
 
 	# If not found and a fallback page is defined, scrape the individual BLFS page.
 	if [[ -z "$ver" && -n "$fallback_page" ]]; then
-		ver=$(wget --timeout=5 -t 1 -cqO- \
-			"https://www.linuxfromscratch.org/blfs/view/systemd/$fallback_page" \
+		ver=$(cat $HOME/.cache/$fallback_page \
 			| grep -iE "$search_name-[0-9]+\.[0-9]" \
 			| sed -E "s/.*$search_name-([0-9]+\.[0-9]+(\.[0-9]+)?).*/\1/I" \
 			| grep -E "^[0-9.]+$" | sort -V | tail -n 1)
@@ -389,7 +390,7 @@ function wgn_ver {
 	    wget --timeout=10 -t 1 -cqO- "$URL/-/tags" | grep -oE "tags/[^\"]+" | sed 's|tags/||' | grep -viE "alpha|beta|\.rc|rc[0-9]|\.9[0-9]" | sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' | grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^[0-9]+\.[0-9]+\.[0-9]+$" | grep -vE "[0-9]+\.[0-9]+\.9[0-9]" | sort -V | tail -n 1
     elif [[ "$1" == "libsoup" ]]; then
 	    wget --timeout=10 -t 1 -cqO- "$URL/-/tags" | grep -oE "tags/[^\"]+" | sed 's|tags/||' | grep -viE "alpha|beta|\.rc|rc[0-9]|\.9[0-9]" | sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' | grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^[0-9]+\.[02468]+\.[0-9]+$" | grep -vE "[0-9]+\.[0-9]+\.9[0-9]" | sort -V | tail -n 1
-    elif [[ "$1" == "glib2" ]]; then
+    elif [[ "$1" == "glib2" || "$1" == "glib-networking" ]]; then
 	    wget --timeout=10 -t 1 -cqO- "$URL/-/tags" | grep -oE "tags/[^\"]+" | sed 's|tags/||' | grep -viE "alpha|beta|\.rc|rc" | sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' | grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^${2:-[0-9]}" | sort -V | tail -n 1
     else
 	    wget --timeout=10 -t 1 -cqO- "$URL/-/tags" | grep -oE "tags/[^\"]+" | sed 's|tags/||' | grep -viE "alpha|beta|\.rc|rc[0-9]|\.9[0-9]" | sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' | grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^${2:-[0-9]}" | sort -V | tail -n 1

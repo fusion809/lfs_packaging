@@ -2,7 +2,7 @@
 set -e
 # Variable declarations
 name=xwud
-version=$(xfd_ver $name)
+version=$(xfd_ver $name | grep -oE "[0-9.]+")
 direname="${name}-$version"
 filename="$direname.tar.xz"
 depends=(bash coreutils fontconfig glibc libpng libX11 libXau libxcb libXdmcp make mesa sed systemd tar util-linux xbitmaps xcb-util xorg-libs xz zlib)

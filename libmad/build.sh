@@ -3,12 +3,13 @@ set -e
 name=libmad
 get_version() {
 	local inst_ver=$(pkgver $name)
+	local lfs_vers=$(lfs_ver $name)
 	local up_ver=$(wget -T 5 -t 1 -cqO- https://sourceforge.net/projects/mad/files/libmad | grep "libmad/[0-9.]+b/" -oE | cut -d '/' -f 2 | sort -V | tail -n 1)
-	ver_check "$up_ver" "$inst_ver" && return
+	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
 	local arch_ver=$(aver $name)
-	ver_check "$arch_ver" "$inst_ver" && return
+	ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
 	local artix_ver=$(artver $name)
-	ver_check "$artix_ver" "$inst_ver" && return
+	ver_check "$artix_ver" "$inst_ver" "$lfs_vers" && return
 	fver "$name" "$inst_ver"
 }
 repo=sezero/$name

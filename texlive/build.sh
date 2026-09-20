@@ -6,20 +6,19 @@ get_version() {
 	if [[ -n "$year" ]]; then
 		year=$(date +"%Y")
 	fi
+	local lfs_vers=$(lfs_ver $name)
 	if wget -T 5 -t 1 -cqO- https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/ | grep "$year/" &> /dev/null; then
 		local up_ver=$(wget -T 5 -t 1 -cqO- https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/$year/ | grep "texlive-$year.*-source.tar.xz" | grep -v "sha512" | cut -d '-' -f 2)
 	else
 		year=$(($year-1))
 	fi
 	local inst_ver=$(pkgver $name)
-	ver_check "$up_ver" "$inst_ver" && return
+	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
 	local vat_ver=$(vatver $name)
-	ver_check "$vat_ver" "$inst_ver" && return
+	ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
 
 	local arch_ver=$(aver $name)
-	ver_check "$arch_ver" "$inst_ver" && return
-	local lfs_vers=$(lfs_ver $name)
-	ver_check "$lfs_vers" "$inst_ver" && return
+	ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
