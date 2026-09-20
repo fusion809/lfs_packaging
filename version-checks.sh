@@ -20,9 +20,11 @@ function pkgver {
 
 # Echoes $1 and returns 0 if it looks like a valid version string, otherwise returns 1.
 function ver_check {
-	if [[ $1 =~ ^[0-9.+a-z-]+ ]] &&  [[ "$(printf '%s\n%s\n%s\n' "$3" "$2" "$1" | sort -V | head -n1)" == "$2" ]]; then
+	if [[ $1 =~ ^[0-9.+a-z-]+ ]] && [[ "$(printf '%s\n%s\n%s\n' "${3:-$2}" "$2" "$1" | sort -V | tail -n1)" == "$1" ]]; then
 		echo "$1"
 		return 0
+    elif [[ $3 =~ ^[0-9.a-z-]+ ]] && [[ "$(printf '%s\n%s\n%s\n' "${3:-$2}" "$2" "$1" | sort -V | tail -n1)" == "$3" ]]; then
+        echo "$3"
 	fi
 	return 1
 }
