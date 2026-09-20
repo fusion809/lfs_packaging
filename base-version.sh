@@ -2,7 +2,7 @@
 GIT_TERMINAL_PROMPT=0
 function artver {
 	local name=$(echo $1 | tr '[:upper:]' '[:lower:]')
-	local ver=$(wget -T 5 -t 1 -cqO- https://packages.artixlinux.org/packages/{world,system,galaxy}/{x86_64,any}/$name/ | grep "$name [0-9.a-z]+" -oE | head -n 1 | cut -d ' ' -f 2)
+	local ver=$(wget -T 5 -t 1 -cqO- https://packages.artixlinux.org/packages/{world,system,galaxy}/{x86_64,any}/$name/ | grep "$name [0-9]+[a-z]*" -oE | head -n 1 | cut -d ' ' -f 2)
 	if [[ "$name" == "gcc" ]]; then
 		echo $ver | sed -E 's/\.1$/\.0/g'
 	else
@@ -18,10 +18,11 @@ function aver {
 	else
 		local no=1
 	fi
+	eval "$(wget -cqO- "$URL" | sed -n '1,/^pkgver=/p')"
 	if [[ "$name" == "gcc" ]]; then
-		wget -T 5 -t 1 -cqO- "$URL" | grep -E "^[_]*pkgver=" | cut -d '=' -f 2 | head -n "$no" | sed 's/1+r.*/0/g' | tail -n 1
+		echo "$pkgver" | sed 's/\.1+r.*/\.0/g'
 	else
-	    wget -T 5 -t 1 -cqO- "$URL" | grep -E "^[_]*pkgver=" | cut -d '=' -f 2 | head -n "$no" | sed 's/+r.*//g' | tail -n 1
+		echo "$pkgver"
 	fi
 }
 
@@ -344,6 +345,7 @@ function lfs_ver {
 	local ver
 	ver=$(cat $HOME/.cache/*lfs*index.html \
 		| grep -iE ">$search_name-[0-9.]+" \
+		| grep -v "docbook5.html" \
 		| grep -vE "vte-2\.[0-9]+" \
 		| grep -v "\.so" \
 		| grep -v "emu/dolphin" \
