@@ -342,10 +342,7 @@ function lfs_ver {
 
 	# Try the index pages first.
 	local ver
-	ver=$(wget --timeout=5 -t 1 -cqO- \
-		https://www.linuxfromscratch.org/{b,}lfs/view/systemd/index.html \
-		https://www.linuxfromscratch.org/blfs/view/systemd/longindex.html \
-		https://www.linuxfromscratch.org/slfs/view/stable/ \
+	ver=$(cat $HOME/.cache/*lfs*index.html \
 		| grep -iE ">$search_name-[0-9.]+" \
 		| grep -vE "vte-2\.[0-9]+" \
 		| sed -E "s/.*$search_name-([0-9.]+).*/\1/I" \

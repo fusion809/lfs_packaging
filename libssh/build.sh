@@ -5,7 +5,7 @@ maj_ver=$(wget -cqO- https://www.libssh.org/files/ | grep -E "[0-9.]+/" | cut -d
 get_version() {
 	local up_ver=$(wget -cqO- https://www.libssh.org/files/$maj_ver/ | grep -E "[0-9.]+.tar.xz\"" | cut -d '-' -f 2 | sed 's/.tar.xz.*//g' | sort -V | tail -n 1)
 	local inst_ver=$(pkgver $name)
-	ver_check $up_ver $inst_ver && return
+	ver_check "$up_ver" "$inst_ver" && return
 	echo "$up_ver"
 	local vat_ver=$(vatver $name)
 	ver_check "$vat_ver" "$inst_ver" && return
