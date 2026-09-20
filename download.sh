@@ -160,6 +160,9 @@ function gn_download {
 	local filename=$1
 	local version=$(echo $filename | sed -E 's/\.tar\.[a-z0-9]+//g' | rev | cut -d '-' -f 1 | rev)
 	local truncVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
+	if [[ $(tr -cd '.' <<< $truncVer | wc -c) -ge 2 ]]; then
+		truncVer=$(echo $truncVer | cut -d '.' -f1-2)
+	fi
 	local name=$(echo $filename | sed "s/-$version.tar.*//g")
 	download_src "https://download.gnome.org/sources/$name/$truncVer/$filename"
 }

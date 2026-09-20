@@ -1,12 +1,12 @@
 #!/bin/bash
 set -e
 name=x265
-repo=multicoreware/$name"_git"
+repo=Multicorewareinc/$name
 version=$(bb_ver $repo $name)
 filename="${name}_$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(cmake nasm)
-bb_download "$repo" "$filename"
+ghr_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 sed -i 's/FORMAT_ELF/UNIX64 \&\& FORMAT_ELF/' source/common/x86/cpu-a.asm
 mkdir bld &&
