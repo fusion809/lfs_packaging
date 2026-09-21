@@ -2,7 +2,7 @@
 GIT_TERMINAL_PROMPT=0
 function artver {
 	local name=$(echo $1 | tr '[:upper:]' '[:lower:]')
-	local ver=$(wget -T 5 -t 1 -cqO- https://packages.artixlinux.org/packages/{world,system,galaxy}/{x86_64,any}/$name/ | grep "$name [0-9]+[a-z]*" -oE | head -n 1 | cut -d ' ' -f 2)
+	local ver=$(wget -T 5 -t 1 -cqO- https://packages.artixlinux.org/packages/{world,system,galaxy}/{x86_64,any}/$name/ | grep "$name [0-9.]+[a-z0-9]*" -oE | head -n 1 | cut -d ' ' -f 2)
 	if [[ "$name" == "gcc" ]]; then
 		echo $ver | sed -E 's/\.1$/\.0/g'
 	else
@@ -440,6 +440,3 @@ function wxfd_ver {
 function wxcb_ver {
 	wget -T 5 -t 1 -cqO- https://xorg.freedesktop.org/archive/individual/lib/ | grep "$1-[0-9]+\.[0-9]+\.[0-9]+" -oE | sed "s/$1-//g" | sort -V | tail -n 1
 }
-
-#unset lfs_ver
-#alias lfs_ver=artver
