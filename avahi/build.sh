@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=avahi
-repo=lathiat/$name
+repo=$name/$name
 version=$(gh_ver $repo | sed -E 's/^version=([0-9.]+)(rc[0-9]+)$/version=\1-\2/')
 depends=(at-spi2-core brotli bzip2 cairo dbus expat fontconfig freetype fribidi gcc gdbm gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz lcms2 libcap libdaemon libepoxy libffi libpng libseccomp libX11 libXau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libXrandr libXrender libXres pango pcre2 pixman systemd util-linux wayland zlib)
 filename="$name-$version.tar.gz"

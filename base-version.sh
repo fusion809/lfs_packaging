@@ -149,7 +149,9 @@ function ggnu_ver {
 }
 
 function ghl_ver {
-	if [[ "$1" == "openpmix/prrte" ]]; then
+	if [[ "$1" == "avahi/avahi" ]]; then
+		timeout 5 git ls-remote --tags --refs https://github.com/avahi/avahi.git | grep "tags/v[0-9.]+[-rc]*[0-9]*" -E | sed 's|.*tags/v||g' | sort -V | tail -n 1
+	elif [[ "$1" == "openpmix/prrte" ]]; then
 		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep "^3" | sort -V | tail -n 1
 	elif [[ "$1" == "openpmix/openpmix" ]]; then
 		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep "^5" | sort -V | tail -n 1
@@ -177,6 +179,10 @@ function ghl_ver {
 }
 
 function ght_ver {
+	if [[ "$1" == "avahi/avahi" ]]; then
+		wget -T 5 -t 1 -cqO- https://github.com/avahi/avahi/tags | grep -E "tags/v[0-9.]+[-rc]*[0-9]*.tar.gz" | sed 's|.*tags/v||g' | sed 's/.tar.gz.*//g' | sort -V | tail -n 1
+		return
+	fi
 	if [[ "$1" == "GNOME/gcr3" ]]; then
 		local repo="GNOME/gcr"
 	else
@@ -349,15 +355,15 @@ function lfs_ver {
 		| grep -vE "vte-2\.[0-9]+" \
 		| grep -v "\.so" \
 		| grep -v "emu/dolphin" \
-		| sed -E "s/.*$search_name-([0-9.]+).*/\1/I" \
-		| grep -E "^[0-9.]+$" | sort -V | tail -n 1)
+		| sed -E "s/.*$search_name-([0-9.]+[-rc0-9]*).*/\1/I" \
+		| grep -E "^[0-9.]+[-rc0-9]*$" | sort -V | tail -n 1)
 
 	# If not found and a fallback page is defined, scrape the individual BLFS page.
 	if [[ -z "$ver" && -n "$fallback_page" ]]; then
 		ver=$(cat $HOME/.cache/$fallback_page \
 			| grep -iE "$search_name-[0-9]+\.[0-9]" \
 			| sed -E "s/.*$search_name-([0-9]+\.[0-9]+(\.[0-9]+)?).*/\1/I" \
-			| grep -E "^[0-9.]+$" | sort -V | tail -n 1)
+			| grep -E "^[0-9.]+[-rc0-9]*$" | sort -V | tail -n 1)
 	fi
 	echo "$ver"
 }
