@@ -45,6 +45,8 @@ function gn_ver {
 	fi
 	local arch_ver=$(aver "$pkg_name")
 	ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
+	local art_ver=$(artver $pkg_name)
+	ver_check "$art_ver" "$inst_ver" "$lfs_vers" && return
 
 	fver "$pkg_name" "$inst_ver"
 }
@@ -61,5 +63,7 @@ function lgd_ver {
 	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
 	local arch_ver=$(aver "$name")
 	ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
+	local art_ver=$(artver $name)
+	ver_check "$art_ver" "$inst_ver" "$lfs_vers" && return
 	fver "$name" "$inst_ver"
 }
