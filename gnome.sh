@@ -43,6 +43,9 @@ function gn_ver {
 		local git_ver=$(ggn_ver "$1")
 		ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
 	fi
+	if [[ $pkg_name == "vte" ]]; then
+		pkg_name="vte3"
+	fi
 	local arch_ver=$(aver "$pkg_name")
 	ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
 	local art_ver=$(artver $pkg_name)
