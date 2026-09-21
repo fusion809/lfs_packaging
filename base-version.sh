@@ -356,7 +356,7 @@ function lfs_ver {
 		| grep -v "\.so" \
 		| grep -v "emu/dolphin" \
 		| sed -E "s/.*$search_name-([0-9.]+[-rc0-9]*).*/\1/I" \
-		| grep -E "^[0-9.]+[-rc0-9]*$" | sort -V | tail -n 1)
+		| grep -E "^[0-9.]+[-rc0-9]*$" | sed 's|-$||g' | sort -V | tail -n 1)
 
 	# If not found and a fallback page is defined, scrape the individual BLFS page.
 	if [[ -z "$ver" && -n "$fallback_page" ]]; then
