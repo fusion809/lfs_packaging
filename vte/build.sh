@@ -6,6 +6,7 @@ get_version() {
 	if [[ $ver == "2.91" ]]; then
 		ver=$(pkgver $name)
 	fi
+	echo "$ver"
 }
 version=$(get_version)
 filename="$name-$version.tar.gz"
