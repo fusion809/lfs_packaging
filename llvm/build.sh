@@ -30,6 +30,11 @@ options=(-D CMAKE_INSTALL_PREFIX=/usr           \
       -D CLANG_CONFIG_FILE_SYSTEM_DIR=/etc/clang \
       -W no-author -G Ninja)
 cd llvm
+oldVer=$(pkgver $name)
+oldMajVer=$(echo $oldVer | cut -d '.' -f 1)
+if [[ $oldVer != $version ]]; then
+	sudo rm -rf /usr/lib/clang/$oldMajVer
+fi
 CC=gcc CXX=g++ cmaki "${options[@]}"
 cd ../../..
 rm -rf "$filename" "$direname"

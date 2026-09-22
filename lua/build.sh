@@ -39,6 +39,11 @@ Cflags: -I${includedir}
 EOF
 sed -i -e "s|5.4.8|$version|g" -e "s|5.4|$majMinVer|g" lua.pc
 make linux -j$(nproc) CFLAGS="-O2 -fPIC"
+oldVer=$(pkgver $name)
+oldMajMinVer=$(echo $oldVer | cut -d '.' -f1-2)
+if ! [[ $oldVer != $version ]]; then
+	sudo rm -rf /usr/lib/lua/$oldMajMinVer
+fi
 sudo su -c "make INSTALL_TOP=/usr                \
      INSTALL_DATA=\"cp -d\"            \
      INSTALL_MAN=/usr/share/man/man1 \

@@ -16,6 +16,12 @@ unpk_enter "$filename" "$direname"
             ac_cv_func_qsort_r=no \
             --docdir=/usr/share/doc/$direname
 make -j$(nproc)
+oldVer=$(pkgver $name)
+oldMajMinVer=$(echo $oldVer | cut -d '.' -f1-2)
+if [[ $oldVer != $version ]]; then
+	sudo rm -rf /usr/lib/ruby/$oldVer /usr/lib/ruby/gems/$oldVer
+	sudo rm -rf /usr/lib/libruby.so.$oldMajMinVer
+fi
 sudo su -c "XDG_DATA_HOME=/tmp make install"
 cd ../
 sudo rm -rf "$filename" "$direname"

@@ -38,6 +38,10 @@ cd PerlMagick
 sed -i -e "s:'LDDLFLAGS'  => \"\(.*\)\":'LDDLFLAGS'  => \"-L${pkgdir}/usr/lib \1\":" Makefile.PL
 perl Makefile.PL INSTALLDIRS=vendor PREFIX=/usr DESTDIR="${pkgdir}"
 sed -i -e "s/LDLOADLIBS =/LDLOADLIBS = -lGraphicsMagick/" Makefile
+oldVer=$(pkgver $name)
+if [[ $oldVer != $version ]]; then
+	sudo rm -rf /usr/{lib,share}/GraphicsMagick-$oldVer
+fi
 maki
 # Cleanup and add to database
 cd ..

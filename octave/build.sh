@@ -36,6 +36,10 @@ export PKG_CONFIG_PATH=/opt/qt6/lib/pkgconfig:$PKG_CONFIG_PATH
   CXXFLAGS="$CXXFLAGS" \
   FFLAGS="$CFLAGS"
 make -j$(nproc)
+oldVer=$(pkgver $name)
+if [[ $oldVer != $version ]]; then
+	sudo rm -rf /usr/lib/octave/$oldVer /usr/include/octave-$oldVer /usr/share/doc/octave-$oldVer /usr/share/octave/$oldVer
+fi
 sudo make install-strip DESTDIR=/
 sudo mkdir -p /usr/share/doc/$direname
 sudo cp -a $docs /usr/share/doc/$direname

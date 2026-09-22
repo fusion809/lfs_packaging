@@ -21,9 +21,9 @@ configure_options=(
 )
 cmi "${configure_options[@]}"
 sudo make infodir=/usr/share/info install.info
-old_version=$(cat /var/lib/custom-packages/$name | head -n 1)
-if [[ "$old_version" != "$version" ]]; then
-	sudo rm -rf /usr/share/zsh/$old_version
+oldVer=$(pkgver $name)
+if [[ "$oldVer" != "$version" ]]; then
+	sudo rm -rf /usr/share/zsh/$oldVer /usr/lib/zsh/$oldVer /usr/bin/zsh-$oldVer
 fi
 echo "$version" | sudo tee /var/lib/custom-packages/$name
 cd ..

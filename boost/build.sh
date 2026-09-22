@@ -10,6 +10,10 @@ gha_download "$repo" "$direname" "$filename"
 unpk_enter "$filename" "$direname"
 ./bootstrap.sh --prefix=/usr --with-python=python3 &&
 ./b2 stage -j$(nproc) threading=multi link=shared
+oldVer=$(pkgver $name)
+if [[ $oldVer != $version ]]; then
+	sudo rm -rf /usr/lib/cmake/boost_*-$oldVer /usr/lib/cmake/Boost-$oldVer
+fi
 sudo ./b2 install threading=multi link=shared
 cd ..
 sudo rm -rf "$filename" "$direname"

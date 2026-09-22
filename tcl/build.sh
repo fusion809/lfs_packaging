@@ -35,6 +35,15 @@ sed -e "s|$SRCDIR/unix/pkgs/itcl|/usr/lib/itcl|" \
     -i pkgs/itcl*/itclConfig.sh
 
 unset SRCDIR
+oldVer=$(pkgver $name)
+if [[ $version != $oldVer ]]; then
+	old_libs=$(cat tcl | grep "/usr/lib/[lib]*t[a-z]+[0-9.]+" -E)
+	while read -r lib
+	do
+		sudo rm -rf "$lib"
+	done <<< $old_libs
+	sudo rm -rf /usr/share/doc/tcl-$oldVer
+fi
 sudo su -c "make install 
 chmod 644 /usr/lib/libtclstub$basever.a
 chmod -v u+w /usr/lib/libtcl$basever.so

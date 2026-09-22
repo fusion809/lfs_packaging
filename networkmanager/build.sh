@@ -29,7 +29,10 @@ meson_options=(
     -D modem_manager=false
 )
 mni "${meson_options[@]}"
-
+oldVer=$(pkgver $name)
+if [[ $oldVer != $version ]]; then 
+	sudo rm -rf /usr/lib/NetworkManager/$oldVer
+fi
 sudo rm -rf /usr/share/doc/NetworkManager-$version &&
 sudo mv -v /usr/share/doc/NetworkManager{,-$version}
 for file in $(echo ../man/*.[1578]); do
