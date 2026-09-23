@@ -12,8 +12,7 @@ tar xf data.tar.xz
 cd usr/share
 sudo rm -rf /usr/share/code
 sudo cp -r code /usr/share/
-sudo cp -r appdata/code.appdata.xml /usr/share/appdata
-sudo cp -r applications/code*.desktop /usr/share/applications
+sudo cp -r applications/*.desktop /usr/share/applications
 sudo cp -r pixmaps/*.png /usr/share/pixmaps
 sudo cp -r bash-completion/completions/code /usr/share/bash-completion/completions
 sudo cp -r mime/packages/code-workspace.xml /usr/share/mime/packages/
