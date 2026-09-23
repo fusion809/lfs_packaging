@@ -34,6 +34,8 @@ meson_options=(
       -D ukify=disabled       \
       -D docdir=/usr/share/doc/$direname
 )
+echo "Rm systemd-udev-control.socket as it causes build failure"
+sudo rm -rf /usr/lib/systemd/system/systemd-udev-control.socket
 mni "${meson_options[@]}"
 sudo tar -xf ../../$_filename \
     --no-same-owner --strip-components=1 \
