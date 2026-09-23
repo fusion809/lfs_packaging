@@ -39,17 +39,18 @@ sh Configure -des                                          \
              -D useshrplib                                 \
              -D usethreads
 make -j$(nproc)
+sudo su -c "make install
+unset BUILD_ZLIB BUILD_BZIP2"
 # Remove old install's library/binary
 oldVer=$(pkgver $name)
 oldMajMinVer=$(echo $oldVer | cut -d '.' -f1-2)
-if echo $oldVer | grep "^5\." &> /dev/null; then
+majVer=$(echo $version | cut -d '.' -f1-2)
+if ( echo $oldVer | grep "^5\." &> /dev/null ) && [[ $oldMajVer != $majVer ]]; then
 	sudo rm -rf /usr/lib/perl5/$oldMajVer
-	sudo rm /usr/bin/perl$oldVer
-else
-	echo "Automatic removing of old libraries/binaries failed. You may wish to do it manually"
 fi
-sudo su -c "make install
-unset BUILD_ZLIB BUILD_BZIP2"
+if [[ $oldVer != $version ]]; then
+	sudo rm /usr/bin/perl$oldVer
+fi
 cd ..
 rm -rf $filename $direname
 echo $version | sudo tee /var/lib/custom-packages/$name

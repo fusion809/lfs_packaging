@@ -11,14 +11,17 @@ unpk_enter "$filename" "$direname"
 options=(-D CMAKE_BUILD_TYPE=Release  \
       -D CMAKE_INSTALL_PREFIX=/usr \
       -D BUILD_STATIC_LIBS=OFF)
+cmaki "${options[@]}"
 oldVer=$(pkgver $name)
 oldMajMinVer=$(echo $oldVer | cut -d '.' -f1-2)
+majMinVer=$(echo $version | cut -d '.' f1-2)
 oldDir=$name-$oldMajMinVer
 if [[ $oldVer != $version ]]; then
 	sudo rm -rf /usr/lib/libopenjp2.so.$oldVer
+fi
+if [[ $majMinVer != $oldMajMinVer ]]; then
 	sudo rm -rf /usr/include/$oldDir /usr/lib/cmake/$oldDir
 fi
-cmaki "${options[@]}"
 sudo cp -rv ../doc/man -T /usr/share/man
 cd ../..
 rm -rf "$filename" "$direname"
