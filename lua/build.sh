@@ -41,9 +41,7 @@ sed -i -e "s|5.4.8|$version|g" -e "s|5.4|$majMinVer|g" lua.pc
 make linux -j$(nproc) CFLAGS="-O2 -fPIC"
 oldVer=$(pkgver $name)
 oldMajMinVer=$(echo $oldVer | cut -d '.' -f1-2)
-if ! [[ $oldVer != $version ]]; then
-	sudo rm -rf /usr/lib/lua/$oldMajMinVer
-fi
+majMinVer=$(echo $version | cut -d '.' -f1-2)
 sudo su -c "make INSTALL_TOP=/usr                \
      INSTALL_DATA=\"cp -d\"            \
      INSTALL_MAN=/usr/share/man/man1 \
@@ -54,6 +52,9 @@ mkdir -pv                      /usr/share/doc/$direname &&
 cp -v doc/*.{html,css,png} /usr/share/doc/$direname &&
 
 install -v -m644 -D lua.pc /usr/lib/pkgconfig/lua.pc"
+if ! [[ $oldMajMinVer != $majMinVer ]]; then
+	sudo rm -rf /usr/lib/lua/$oldMajMinVer
+fi
 cd ../
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"

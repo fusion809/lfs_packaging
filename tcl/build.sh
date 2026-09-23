@@ -37,12 +37,26 @@ sed -e "s|$SRCDIR/unix/pkgs/itcl|/usr/lib/itcl|" \
 unset SRCDIR
 oldVer=$(pkgver $name)
 if [[ $version != $oldVer ]]; then
-	old_libs=$(cat tcl | grep "/usr/lib/[lib]*t[a-z]+[0-9.]+" -E)
-	while read -r lib
-	do
-		sudo rm -rf "$lib"
-	done <<< $old_libs
-	sudo rm -rf /usr/share/doc/tcl-$oldVer
+	grep -E '^/usr/lib/[a-z]+[0-9.]+$' /var/lib/custom-packages/tcl |
+awk -F/ '
+{
+    dir = $NF
+    prefix = dir
+    sub(/[0-9].*$/, "", prefix)
+    old[dir] = 1
+    prefixes[dir] = prefix
+}
+END {
+    for (dir in old) {
+        prefix = prefixes[dir]
+        cmd = "find /usr/lib -maxdepth 1 -type d -name \"" prefix "[0-9]*\" -printf \"%f\\n\" | sort -V | tail -n1"
+        cmd | getline latest
+        close(cmd)
+
+        if (latest != dir)
+            system("sudo rm -rvf -- /usr/lib/" dir)
+    }
+}'
 fi
 sudo su -c "make install 
 chmod 644 /usr/lib/libtclstub$basever.a
@@ -53,6 +67,9 @@ cd ..
 sudo su -c "tar -xf ../$docs_filename --strip-components=1
 mkdir -v -p /usr/share/doc/$name-$version
 cp -v -r  ./html/* /usr/share/doc/$name-$version"
+if [[ $version != $oldVer ]]; then
+	sudo rm -rf /usr/share/doc/tcl-$oldVer
+fi
 cd ..
 sudo rm -rf $filename $direname $docs_filename
 echo "$version" | sudo tee /var/lib/custom-packages/$name
