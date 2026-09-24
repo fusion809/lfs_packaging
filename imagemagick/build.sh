@@ -2,11 +2,12 @@
 # Originally a book package; script written to overcome download failure
 set -e
 # Variable declarations
-name=ImageMagick
-repo=$name/$name
+name=imagemagick
+_name=ImageMagick
+repo=$_name/$_name
 version=$(gh_ver $repo | sed 's/\.\([0-9]*\)$/-\1/')
 depends=(brotli bzip2 cairo expat fftw fontconfig fontconfig freetype freetype fribidi gcc glib2 glibc graphite2 graphviz harfbuzz highway lcms2 libaom libde265 libffi libheif libICE libjpeg-turbo libjxl libpng libpng libraw libSM libtiff libwebp libwmf libX11 libXau libxcb libXdmcp libXext libxml2 libXrender libXt numactl openjpeg pango pcre2 pixman util-linux webkitgtk x264 x265 xorg-lib xz zlib zstd)
-direname="$name-$version"
+direname="$_name-$version"
 filename="$version.tar.xz"
 # Fetch and unpack source
 ghr_download "$repo" "$version" "$filename"
