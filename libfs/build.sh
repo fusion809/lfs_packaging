@@ -14,7 +14,7 @@ unpk_enter "$filename" "$direname"
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 XORG_CONFIG="--prefix=/usr"
-docdir="--docdir=/usr/share/doc/$packagedir"
+docdir="--docdir=/usr/share/doc/$direname"
 cmi $XORG_CONFIG $docdir
 cd ..
 sudo rm -rf $direname $filename
