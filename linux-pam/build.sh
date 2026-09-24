@@ -9,7 +9,7 @@ if [[ -z ${version// /} ]]; then
 fi
 direname="Linux-PAM-$version"
 filename="$direname.tar.xz"
-depends=(gdbm glibc libxcrypt systemd)
+depends=(gcc gdbm glibc libselinux libxcrypt pcre2 systemd)
 
 ghr_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"

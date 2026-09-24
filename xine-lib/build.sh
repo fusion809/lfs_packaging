@@ -4,7 +4,7 @@ name=xine-lib
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)
-	local up_ver=$(wget -T 5 -t 1 -cqO- https://sourceforge.net/projects/xine/files/xine-lib/ | grep "[0-9]+\.[0-9]+\.[0-9]+" -oE | sort -V | tail -n 1)
+	local up_ver=$(wget -T 5 -t 1 -cqO- https://sourceforge.net/projects/xine/files/xine-lib/ | grep "xine-lib/[0-9]+\.[0-9]+\.[0-9]+" -oE | cut -d '/' -f 2 | sort -V | tail -n 1)
 	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
 	local vat_ver=$(vatver $name)
 	ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return

@@ -427,7 +427,7 @@ function wngnu_ver {
 
 function wsf_ver {
     #wget --timeout=5 -t 1 -cqO- https://sourceforge.net/p/$1/ref/master/tags/ | grep "/tree" | grep -v "alpha\|beta\|rc" | grep -v "git-conv" | tail -n 1 | cut -d '/' -f 6
-    wget --timeout=5 -t 1 -cqO- https://sourceforge.net/p/$1/ref/master/tags/ | grep -oE "[0-9]+\.[0-9]+\.[0-9]+" | tail -n 1
+    wget --timeout=5 -t 1 -cqO- https://sourceforge.net/p/$1/ref/master/tags/ | grep -oE "ci/[v]*[0-9]+\.[0-9]+\.[0-9]+" | cut -d '/' -f 2 | sed 's/v//g' | tail -n 1
 }
 
 function wsp_ver {
