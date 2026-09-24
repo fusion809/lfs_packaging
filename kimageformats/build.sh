@@ -3,7 +3,7 @@ set -e
 name=kimageformats
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(brotli bzip2 dav1d dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz highway icu karchive keyutils lcms2 libaom libavif libdrm libelf libffi libjpeg-turbo libjxl libpciaccess libpng libraw libx11 libxau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openjpeg openssl pcre2 qt6 spirv-tools svt-av1 systemd wayland xz zlib zstd)
+depends=(brotli bzip2 dav1d dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz highway icu karchive keyutils lcms2 libaom libavif libdrm libelf libffi libjpeg-turbo libjxl libpciaccess libpng libraw libx11 libxau libxcb libxdmcp libxext libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb openjpeg openssl pcre2 qt6 spirv-tools svt-av1 systemd wayland xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 kde_download "frameworks" "$filename"

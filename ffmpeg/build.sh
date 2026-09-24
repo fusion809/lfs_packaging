@@ -3,7 +3,7 @@ set -e
 name=ffmpeg
 repo=$name/$name
 version=$(gh_ver $repo)
-depends=(alsa-lib brotli bzip2 dav1d expat fdk-aac fontconfig freetype fribidi gcc glib2 glibc graphite2 harfbuzz lame libaom libass libdrm libogg libpng libva libvorbis libvpx libx11 libxau libxcb libXdmcp libXext libXfixes libXv numactl openssl opus pcre2 sdl2-compat svt-av1 x264 x265 xz zlib)
+depends=(alsa-lib brotli bzip2 dav1d expat fdk-aac fontconfig freetype fribidi gcc glib2 glibc graphite2 harfbuzz lame libaom libass libdrm libogg libpng libva libvorbis libvpx libx11 libxau libxcb libxdmcp libxext libxfixes libxv numactl openssl opus pcre2 sdl2-compat svt-av1 x264 x265 xz zlib)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 download_src "https://ffmpeg.org/releases/$filename"

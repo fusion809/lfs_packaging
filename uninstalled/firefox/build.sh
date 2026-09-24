@@ -11,7 +11,7 @@ get_version() {
 	ver_check "$lfs_vers" "$inst_ver" "$lfs_vers" && return
 }
 version=$(get_version)
-depends=(alsa-lib at-spi2-core brotli bzip2 cairo dav1d dbus expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz icu lcms2 libaom libepoxy libevent libffi libjpeg-turbo libpng libseccomp libvpx libwebp libx11 libxau libxcb libxcomposite libxcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libXrandr libXrender libXres nspr nss pango pcre2 pixman sqlite systemd util-linux wayland zlib)
+depends=(alsa-lib at-spi2-core brotli bzip2 cairo dav1d dbus expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz icu lcms2 libaom libepoxy libevent libffi libjpeg-turbo libpng libseccomp libvpx libwebp libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxrandr libxrender libxres nspr nss pango pcre2 pixman sqlite systemd util-linux wayland zlib)
 filename="$name-$version.source.tar.xz"
 direname="${filename/.tar.*/}"
 download_src "https://archive.mozilla.org/pub/firefox/releases/$version/source/$filename"

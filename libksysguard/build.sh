@@ -3,7 +3,7 @@ set -e
 name=libksysguard
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kauth kconfig kcoreaddons keyutils ki18n kpackage kservice libdrm libelf libffi libnl libpcap libpciaccess libpng libx11 libxau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qt6 solid spirv-tools systemd util-linux wayland xz zlib zstd)
+depends=(brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kauth kconfig kcoreaddons keyutils ki18n kpackage kservice libdrm libelf libffi libnl libpcap libpciaccess libpng libx11 libxau libxcb libxdmcp libxext libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qt6 solid spirv-tools systemd util-linux wayland xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"

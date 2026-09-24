@@ -5,7 +5,7 @@ name=libadwaita
 version=$(gn_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
-depends=(appstream brotli bzip2 cairo curl cyrus-sasl elfutils expat fontconfig freetype fribidi gcc gdk-pixbuf gettext glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk4 harfbuzz lcms2 libdrm libelf libepoxy libffi libfyaml libgudev libidn2 libjpeg-turbo libpciaccess libpng libpsl libseccomp libtiff libunistring libunwind libwebp libx11 libxau libxcb libxcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libxml2 libxmlb libXrandr libXrender libxshmfence libXxf86vm llvm lm-sensors mesa nghttp2 openldap openssl orc pango pcre2 pixman sassc spirv-tools systemd util-linux vala vulkan-loader wayland webkitgtk xz zlib zstd)
+depends=(appstream brotli bzip2 cairo curl cyrus-sasl elfutils expat fontconfig freetype fribidi gcc gdk-pixbuf gettext glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk4 harfbuzz lcms2 libdrm libelf libepoxy libffi libfyaml libgudev libidn2 libjpeg-turbo libpciaccess libpng libpsl libseccomp libtiff libunistring libunwind libwebp libx11 libxau libxcb libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxml2 libxmlb libxrandr libxrender libxshmfence libxxf86vm llvm lm-sensors mesa nghttp2 openldap openssl orc pango pcre2 pixman sassc spirv-tools systemd util-linux vala vulkan-loader wayland webkitgtk xz zlib zstd)
 # Fetch source and unpack it
 gn_download "$filename"
 unpk_enter "$filename" "$direname"

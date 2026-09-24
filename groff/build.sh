@@ -4,7 +4,7 @@ name=groff
 version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(gcc glibc gzip libice libSM libx11 libxau libxaw libxcb libXdmcp libXext libXmu libXpm libxt make tar util-linux wget)
+depends=(gcc glibc gzip libice libSM libx11 libxau libxaw libxcb libxdmcp libxext libxmu libxpm libxt make tar util-linux wget)
 gnu_download $name $filename
 unpk_enter "$filename" "$direname"
 PAGE=A4 cmi --prefix=/usr

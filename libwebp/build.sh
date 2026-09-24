@@ -17,7 +17,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-depends=(bzip2 elfutils expat freeglut gcc giflib glibc icu libdrm libffi libjpeg-turbo libpciaccess libpng libx11 libxau libxcb libXdmcp libXext libXi libxml2 libXrandr libXrender libxshmfence libXxf86vm llvm lm-sensors mesa spirv-tools tiff xz zlib zstd)
+depends=(bzip2 elfutils expat freeglut gcc giflib glibc icu libdrm libffi libjpeg-turbo libpciaccess libpng libx11 libxau libxcb libxdmcp libxext libxi libxml2 libxrandr libxrender libxshmfence libxxf86vm llvm lm-sensors mesa spirv-tools tiff xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 download_src "https://storage.googleapis.com/downloads.webmproject.org/releases/webp/$filename"

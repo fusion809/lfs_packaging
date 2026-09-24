@@ -5,7 +5,7 @@ repo="Procurador1337/$name"
 version=$(gh_com "$repo")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(brotli bzip2 cmake dbus double-conversion e2fsprogs expat flac fontconfig freetype gcc glib2 glibc graphite2 harfbuzz keyutils lame libdrm libelf libffi libogg libpciaccess libpng libsndfile libvorbis libx11 libxau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb mpg123 openssl opus pcre2 pulseaudio qt6 spirv-tools systemd wayland xz zlib zstd)
+depends=(brotli bzip2 cmake dbus double-conversion e2fsprogs expat flac fontconfig freetype gcc glib2 glibc graphite2 harfbuzz keyutils lame libdrm libelf libffi libogg libpciaccess libpng libsndfile libvorbis libx11 libxau libxcb libxdmcp libxext libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb mpg123 openssl opus pcre2 pulseaudio qt6 spirv-tools systemd wayland xz zlib zstd)
 
 gha_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"

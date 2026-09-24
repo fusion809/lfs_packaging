@@ -18,7 +18,7 @@ get_version() {
 version=$(get_version)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
-depends=(bash brotli bzip2 coreutils dbus dbus double-conversion e2fsprogs expat flac fontconfig freetype gcc glib2 glibc graphite2 harfbuzz keyutils lame libdrm libelf libffi libogg libpciaccess libpng libsndfile libvorbis libx11 libxau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors make mesa mitkrb mpg123 openssl opus pcre2 pulseaudio python qt6 sed spirv-tools systemd tar wayland wget xz zlib zstd)
+depends=(bash brotli bzip2 coreutils dbus dbus double-conversion e2fsprogs expat flac fontconfig freetype gcc glib2 glibc graphite2 harfbuzz keyutils lame libdrm libelf libffi libogg libpciaccess libpng libsndfile libvorbis libx11 libxau libxcb libxdmcp libxext libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors make mesa mitkrb mpg123 openssl opus pcre2 pulseaudio python qt6 sed spirv-tools systemd tar wayland wget xz zlib zstd)
 pip_depends=(pyopengl pyqt6-sip pyqt-builder sip)
 # Fetch and unpack source
 download_src "https://pypi.python.org/packages/source/P/PyQt6/$filename"

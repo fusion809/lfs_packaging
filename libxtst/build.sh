@@ -6,7 +6,7 @@ name=$(echo $_name | tr '[:upper:]' '[:lower:]')
 version=$(xfd_ver $_name)
 direname="${_name}-$version"
 filename="$direname.tar.xz"
-depends=(bash coreutils fontconfig glibc libx11 libxau libxcb libXdmcp libXext libXi make sed systemd tar util-linux xorg-libs xz zlib)
+depends=(bash coreutils fontconfig glibc libx11 libxau libxcb libxdmcp libxext libxi make sed systemd tar util-linux xorg-libs xz zlib)
 # Fetch and unpack source
 xfd_download "$filename"
 unpk_enter "$filename" "$direname"

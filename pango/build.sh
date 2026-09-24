@@ -4,7 +4,7 @@ name=pango
 version=$(gn_ver pango)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
-depends=(brotli bzip2 cairo expat fontconfig freetype fribidi glib2 glib2 glibc graphite2 harfbuzz libffi libpng libx11 libxau libxcb libXdmcp libXext libXft libXrender pcre2 pixman util-linux xorg-libs zlib)
+depends=(brotli bzip2 cairo expat fontconfig freetype fribidi glib2 glib2 glibc graphite2 harfbuzz libffi libpng libx11 libxau libxcb libxdmcp libxext libxft libxrender pcre2 pixman util-linux xorg-libs zlib)
 # Fetch source and unpack it
 ggn_download "$filename"
 unpk_enter "$filename" "$direname"

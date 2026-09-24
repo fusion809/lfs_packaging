@@ -8,7 +8,7 @@ filename="$name-$version.tar.xz"
 edFilename="$name-editor-$edVersion.tar.xz"
 direname="${filename/.tar.xz/}"
 edDirename="${edFilename/.tar.xz/}"
-depends=(at-spi2-core brotli bzip2 cairo dbus dconf expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin gnome-shell graphite2 gsettings-desktop-schemas gtk3 harfbuzz itstool lcms2 libepoxy libffi libhandy libpng libseccomp libsoup libx11 libxau libxcb libxcomposite libxcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libXrandr libXrender libXres nautilus pango pcre2 pixman systemd util-linux vte wayland webkitgtk zlib)
+depends=(at-spi2-core brotli bzip2 cairo dbus dconf expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin gnome-shell graphite2 gsettings-desktop-schemas gtk3 harfbuzz itstool lcms2 libepoxy libffi libhandy libpng libseccomp libsoup libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxrandr libxrender libxres nautilus pango pcre2 pixman systemd util-linux vte wayland webkitgtk zlib)
 # Fetch source and unpack it
 gn_download "$filename"
 gn_download "$edFilename"

@@ -8,7 +8,7 @@ minver=$(echo $version | cut -d . -f 2)
 vimdir=$(echo "${name}${majver}${minver}")
 direname="$name-$version"
 filename="$direname.tar.gz"
-depends=(acl at-spi2-core brotli bzip2 cairo dbus expat fontconfig freetype fribidi gawk gcc gdk-pixbuf glib2 glibc glycin gpm gpm graphite2 gtk3 harfbuzz lcms2 libcanberra libepoxy libffi libgcrypt libice libogg libpng libseccomp libSM libvorbis libx11 libxau libxcb libxcomposite libxcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libXrandr libXrender libXres libxt ncurses pango pcre2 pixman systemd util-linux wayland webkitgtk zlib)
+depends=(acl at-spi2-core brotli bzip2 cairo dbus expat fontconfig freetype fribidi gawk gcc gdk-pixbuf glib2 glibc glycin gpm gpm graphite2 gtk3 harfbuzz lcms2 libcanberra libepoxy libffi libgcrypt libice libogg libpng libseccomp libSM libvorbis libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxrandr libxrender libxres libxt ncurses pango pcre2 pixman systemd util-linux wayland webkitgtk zlib)
 
 gha_download "$repo" "v$version" "$filename"
 # Fixed extraction and build prefix issues

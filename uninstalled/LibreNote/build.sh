@@ -5,7 +5,7 @@ repo="Procurador1337/$name"
 version=$(gh_com "$repo")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(brotli bzip2 cmake coreutils dbus double-conversion expat fontconfig freetype gcc git glib2 glibc graphite2 harfbuzz libdrm libelf libffi libpciaccess libpng libx11 libxau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors make mesa pcre2 qt6 spirv-tools systemd tar wayland xz zlib zstd)
+depends=(brotli bzip2 cmake coreutils dbus double-conversion expat fontconfig freetype gcc git glib2 glibc graphite2 harfbuzz libdrm libelf libffi libpciaccess libpng libx11 libxau libxcb libxdmcp libxext libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors make mesa pcre2 qt6 spirv-tools systemd tar wayland xz zlib zstd)
 
 gha_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"

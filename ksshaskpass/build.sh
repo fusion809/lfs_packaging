@@ -3,7 +3,7 @@ set -e
 name=ksshaskpass
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(brotli bzip2 dbus double-conversion expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu kcoreaddons ki18n kwidgetsaddons libdrm libelf libffi libgcrypt libgpg-error libpciaccess libpng libsecret libx11 libxau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa pcre2 qt6 qtkeychain spirv-tools systemd util-linux wayland xz zlib zstd)
+depends=(brotli bzip2 dbus double-conversion expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu kcoreaddons ki18n kwidgetsaddons libdrm libelf libffi libgcrypt libgpg-error libpciaccess libpng libsecret libx11 libxau libxcb libxdmcp libxext libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa pcre2 qt6 qtkeychain spirv-tools systemd util-linux wayland xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"

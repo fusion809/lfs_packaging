@@ -3,7 +3,7 @@ set -e
 name=xdotool
 repo=jordansissel/$name
 version=$(gh_ver $repo)
-depends=(glibc libx11 libxau libxcb libXdmcp libXext libXi libXinerama libxkbcommon libxtst)
+depends=(glibc libx11 libxau libxcb libxdmcp libxext libxi libxinerama libxkbcommon libxtst)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"

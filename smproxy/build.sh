@@ -5,7 +5,7 @@ name=smproxy
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"
-depends=(bash coreutils fontconfig glibc libice libpng libSM libx11 libxau libxcb libXdmcp libXmu libxt make mesa sed systemd tar util-linux xbitmaps xcb-util xorg-libs xz zlib)
+depends=(bash coreutils fontconfig glibc libice libpng libSM libx11 libxau libxcb libxdmcp libxmu libxt make mesa sed systemd tar util-linux xbitmaps xcb-util xorg-libs xz zlib)
 # Fetch and unpack source
 xfd_download "$filename"
 unpk_enter "$filename" "$direname"
