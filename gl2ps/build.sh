@@ -21,7 +21,7 @@ get_version() {
 version=$(get_version)
 filename="$name-$version.tgz"
 direname=${filename/.tgz/}
-depends=(bash bzip2 cmake coreutils expat freeglut gcc glibc glu gzip libdrm libelf libffi libICE libpciaccess libpng libSM libX11 libXau libxcb libXdmcp libXext libXi libxml2 libXmu libXrandr libXrender libxshmfence libXt libXxf86vm llvm lm-sensors make mesa sed spirv-tools tar util-linux xz zlib zstd)
+depends=(bash bzip2 cmake coreutils expat freeglut gcc glibc glu gzip libdrm libelf libffi libice libpciaccess libpng libSM libX11 libXau libxcb libXdmcp libXext libXi libxml2 libXmu libXrandr libXrender libxshmfence libXt libXxf86vm llvm lm-sensors make mesa sed spirv-tools tar util-linux xz zlib zstd)
 # Fetch and unpack source
 download_src "https://geuz.org/gl2ps/src/$filename"
 unpk_enter "$filename" "$direname"

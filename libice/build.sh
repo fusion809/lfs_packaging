@@ -1,9 +1,10 @@
 #!/bin/bash
 set -e
 # Variable declarations
-name=libICE
-version=$(xfd_ver $name)
-direname="${name}-$version"
+_name=libice
+name=$(echo $name | tr '[:upper:]' '[:lower:]')
+version=$(xfd_ver $_name)
+direname="${_name}-$version"
 filename="$direname.tar.xz"
 depends=(bash coreutils fontconfig glibc libxcb make sed systemd tar util-linux xorg-libs xz zlib)
 # Fetch and unpack source
