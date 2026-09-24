@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 # Variable declarations
-_name=libxt
+_name=libXt
 name=$(echo $version | tr '[:upper:]' '[:lower:]')
 version=$(xfd_ver $_name)
 direname="${_name}-$version"
