@@ -3,7 +3,7 @@ set -e
 name=gnome-autoar
 repo=GNOME/$name
 version=$(gh_ver $repo)
-depends=(acl at-spi2-core brotli bzip2 cairo dbus expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz icu lcms2 libarchive libepoxy libffi libpng libseccomp libX11 libxau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libxml2 libXrandr libXrender libXres lz4 openssl pango pcre2 pixman systemd util-linux wayland xz zlib zstd)
+depends=(acl at-spi2-core brotli bzip2 cairo dbus expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz icu lcms2 libarchive libepoxy libffi libpng libseccomp libx11 libxau libxcb libxcomposite libxcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libxml2 libXrandr libXrender libXres lz4 openssl pango pcre2 pixman systemd util-linux wayland xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 gn_download "$filename"

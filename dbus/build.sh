@@ -16,7 +16,7 @@ get_version() {
 	fver "$name" "$inst_ver"	
 }
 version=$(get_version)
-depends=(expat glibc libX11 libxau libxcb libXdmcp systemd)
+depends=(expat glibc libx11 libxau libxcb libXdmcp systemd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 download_src "https://dbus.freedesktop.org/releases/dbus/$filename"

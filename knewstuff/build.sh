@@ -3,7 +3,7 @@ set -e
 name=knewstuff
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(attica brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kcodecs kconfig kcoreaddons keyutils ki18n kpackage kwidgetsaddons libdrm libelf libffi libpciaccess libpng libX11 libxau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qt6 spirv-tools syndication systemd util-linux wayland xz zlib zstd)
+depends=(attica brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kcodecs kconfig kcoreaddons keyutils ki18n kpackage kwidgetsaddons libdrm libelf libffi libpciaccess libpng libx11 libxau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qt6 spirv-tools syndication systemd util-linux wayland xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 kde_download "frameworks" "$filename"

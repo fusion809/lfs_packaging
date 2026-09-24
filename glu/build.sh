@@ -16,7 +16,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-depends=(bzip2 expat gcc glibc icu libdrm libelf libffi libglvnd libpciaccess libX11 libxau libxcb libXdmcp libXext libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa spirv-tools xz zlib zstd)
+depends=(bzip2 expat gcc glibc icu libdrm libelf libffi libglvnd libpciaccess libx11 libxau libxcb libXdmcp libXext libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa spirv-tools xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 download_src "https://archive.mesa3d.org/glu/$filename"

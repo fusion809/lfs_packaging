@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 # Variable declarations
-name=libx11
-_name=libX11
+name=libX11
+_name=libx11
 version=$(xfd_ver $_name)
 direname="${_name}-$version"
 filename="$direname.tar.xz"

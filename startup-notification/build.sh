@@ -14,7 +14,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-depends=(glibc libX11 libxau libxcb libXdmcp xcb-util)
+depends=(glibc libx11 libxau libxcb libXdmcp xcb-util)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 download_src "https://www.freedesktop.org/software/startup-notification/releases/$filename"

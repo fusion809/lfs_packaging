@@ -3,7 +3,7 @@ set -e
 name=kpipewire
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu kcoreaddons keyutils ki18n libdrm libelf libepoxy libffi libpciaccess libpng libva libX11 libxau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 pipewire qt6 spirv-tools systemd util-linux wayland xz zlib zstd)
+depends=(brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu kcoreaddons keyutils ki18n libdrm libelf libepoxy libffi libpciaccess libpng libva libx11 libxau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 pipewire qt6 spirv-tools systemd util-linux wayland xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"

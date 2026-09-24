@@ -4,7 +4,7 @@ set -e
 # Variable declarations
 name=gtk3
 version=$(gn_ver $name)
-depends=(at-spi2-core avahi bash brotli bzip2 cairo colord coreutils cups dbus expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 harfbuzz lcms2 libepoxy libeproxy libffi libpng libseccomp libX11 libxau libxcb libXcomposite libxcrypt libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libXrandr libXrender libXres make meson openssl pango pango pcre2 pixman sed systemd tar util-linux wayland zlib)
+depends=(at-spi2-core avahi bash brotli bzip2 cairo colord coreutils cups dbus expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 harfbuzz lcms2 libepoxy libeproxy libffi libpng libseccomp libx11 libxau libxcb libxcomposite libxcrypt libxcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libXrandr libXrender libXres make meson openssl pango pango pcre2 pixman sed systemd tar util-linux wayland zlib)
 direname="gtk-$version"
 filename="$direname.tar.bz2"
 # Fetch and unpack source

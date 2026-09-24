@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-_name=libxau
+_name=libXau
 name=$(echo $_name | tr '[:upper:]' '[:lower:]')
 version=$(xfd_ver $_name)
 depends=(glibc)

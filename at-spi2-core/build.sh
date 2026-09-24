@@ -3,7 +3,7 @@ set -e
 name=at-spi2-core
 repo=GNOME/$name
 version=$(gh_ver $repo)
-depends=(dbus glib2 glibc libffi libX11 libxau libxcb libXdmcp libXext libXi libXres libxtst pcre2 systemd util-linux zlib)
+depends=(dbus glib2 glibc libffi libx11 libxau libxcb libXdmcp libXext libXi libXres libxtst pcre2 systemd util-linux zlib)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 gn_download "$filename"

@@ -3,7 +3,7 @@ set -e
 name=kdesu
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(brotli dbus double-conversion e2fsprogs gcc glib2 glibc icu kconfig kcoreaddons keyutils ki18n kpty libice libSM libX11 libxau libxcb libXdmcp libXext mitkrb openssl pcre2 qt6 systemd util-linux zlib zstd)
+depends=(brotli dbus double-conversion e2fsprogs gcc glib2 glibc icu kconfig kcoreaddons keyutils ki18n kpty libice libSM libx11 libxau libxcb libXdmcp libXext mitkrb openssl pcre2 qt6 systemd util-linux zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 kde_download "frameworks" "$filename"

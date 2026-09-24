@@ -3,7 +3,7 @@ set -e
 name=polkit-qt
 repo=KDE/$name-1
 version=$(gh_ver $repo)
-depends=(brotli bzip2 dbus double-conversion expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu libdrm libelf libffi libpciaccess libpng libX11 libxau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa pcre2 polkit qt6 spirv-tools systemd util-linux wayland xz zlib zstd)
+depends=(brotli bzip2 dbus double-conversion expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu libdrm libelf libffi libpciaccess libpng libx11 libxau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa pcre2 polkit qt6 spirv-tools systemd util-linux wayland xz zlib zstd)
 filename="$name-1-$version.tar.xz"
 direname="${filename/.tar.*/}"
 kde_download "$filename"

@@ -6,7 +6,7 @@ repo=caolanm/libwmf
 version=$(gh_ver "$repo")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
-depends=(autoconf bash brotli bzip2 coreutils expat fontconfig freetype gcc gdk-pixbuf glib2 glibc glycin gzip lcms2 libffi libjpeg-turbo libpng libseccomp libx11 libX11 libxau libxcb libXdmcp make pcre2 sed tar util-linux zlib zlib)
+depends=(autoconf bash brotli bzip2 coreutils expat fontconfig freetype gcc gdk-pixbuf glib2 glibc glycin gzip lcms2 libffi libjpeg-turbo libpng libseccomp libx11 libx11 libxau libxcb libXdmcp make pcre2 sed tar util-linux zlib zlib)
 # Fetch and unpack source
 gha_download "$repo" "v${version}" "$filename"
 unpk_enter "$filename" "$direname"
