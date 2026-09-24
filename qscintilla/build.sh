@@ -18,7 +18,7 @@ get_version() {
 }
 version=$(get_version)
 archive=QScintilla_src-$version
-depends=(bash brotli bzip2 coreutils dbus double-conversion expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz libdrm libelf libffi libpciaccess libpng libX11 libXau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors make mesa pcre2 pyqt6 qt6 sed spirv-tools systemd tar wayland wget xz zlib zstd)
+depends=(bash brotli bzip2 coreutils dbus double-conversion expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz libdrm libelf libffi libpciaccess libpng libX11 libxau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors make mesa pcre2 pyqt6 qt6 sed spirv-tools systemd tar wayland wget xz zlib zstd)
 pip_depends=(sip pyqt-builder)
 # Fetch and unpack source
 download_src "https://www.riverbankcomputing.com/static/Downloads/QScintilla/$version/$archive.tar.gz"

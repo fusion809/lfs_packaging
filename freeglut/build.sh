@@ -3,7 +3,7 @@ set -e
 name=freeglut
 repo=$name/$name
 version=$(gh_ver $repo)
-depends=(bzip2 expat gcc glibc icu libdrm libelf libffi libpciaccess libX11 libXau libxcb libXdmcp libXext libXi libxml2 libXrandr libXrender libxshmfence libXxf86vm llvm lm-sensors mesa spirv-tools xz zlib zstd)
+depends=(bzip2 expat gcc glibc icu libdrm libelf libffi libpciaccess libX11 libxau libxcb libXdmcp libXext libXi libxml2 libXrandr libXrender libxshmfence libXxf86vm llvm lm-sensors mesa spirv-tools xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 download_src "https://downloads.sourceforge.net/freeglut/$filename"

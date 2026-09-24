@@ -1,11 +1,12 @@
 #!/bin/bash
 set -e
 # Variable declarations
-name=libX11
-version=$(xfd_ver $name)
-direname="${name}-$version"
+_name=libXtst
+name=$(echo $_name | tr '[:upper:]' '[:lower:]')
+version=$(xfd_ver $_name)
+direname="${_name}-$version"
 filename="$direname.tar.xz"
-depends=(bash coreutils fontconfig glibc libXau libxcb libXdmcp make sed systemd tar util-linux xorg-libs xz zlib)
+depends=(bash coreutils fontconfig glibc libX11 libxau libxcb libXdmcp libXext libXi make sed systemd tar util-linux xorg-libs xz zlib)
 # Fetch and unpack source
 xfd_download "$filename"
 unpk_enter "$filename" "$direname"
@@ -13,7 +14,7 @@ unpk_enter "$filename" "$direname"
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"
 XORG_CONFIG="--prefix=/usr"
-docdir="--docdir=/usr/share/doc/$packagedir"
+docdir="--docdir=/usr/share/doc/$direname"
 cmi $XORG_CONFIG $docdir
 cd ..
 sudo rm -rf $direname $filename

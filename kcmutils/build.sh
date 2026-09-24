@@ -3,7 +3,7 @@ set -e
 name=kcmutils
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(acl attr breeze-icons brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kcodecs kcolorscheme kconfig kconfigwidgets kcoreaddons kcrash keyutils kglobalaccel kguiaddons ki18n kiconthemes kio kitemviews kservice kwidgetsaddons kwindowsystem kxmlgui libdrm libelf libffi libpciaccess libpng libX11 libXau libxcb libXdmcp libXext libXfixes libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qt6 solid spirv-tools systemd util-linux wayland xcb-util-keysyms xz zlib zstd)
+depends=(acl attr breeze-icons brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kcodecs kcolorscheme kconfig kconfigwidgets kcoreaddons kcrash keyutils kglobalaccel kguiaddons ki18n kiconthemes kio kitemviews kservice kwidgetsaddons kwindowsystem kxmlgui libdrm libelf libffi libpciaccess libpng libX11 libxau libxcb libXdmcp libXext libXfixes libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qt6 solid spirv-tools systemd util-linux wayland xcb-util-keysyms xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 kde_download "frameworks" "$filename"

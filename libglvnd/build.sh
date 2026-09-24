@@ -3,7 +3,7 @@ set -e
 name=libglvnd
 repo=glvnd/libglvnd
 version=$(gfd_ver $repo)
-depends=(glibc libX11 libXau libxcb libXdmcp)
+depends=(glibc libX11 libxau libxcb libXdmcp)
 filename="$name-v$version.tar.gz"
 direname="${filename/.tar.*/}"
 gfd_download "$repo" "v$version" "$filename"

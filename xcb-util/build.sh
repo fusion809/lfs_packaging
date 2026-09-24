@@ -14,7 +14,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-depends=(glibc libXau libxcb libXdmcp)
+depends=(glibc libxau libxcb libXdmcp)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 download_src "https://xcb.freedesktop.org/dist/$filename"

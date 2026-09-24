@@ -2,7 +2,7 @@
 set -e
 name=libxcb
 version=$(xfd_ver $name | grep -oE "[0-9.]+")
-depends=(glibc libXau libXdmcp xcb-proto)
+depends=(glibc libxau libXdmcp xcb-proto)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 xfd_download "$filename"

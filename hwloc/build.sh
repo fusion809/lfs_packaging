@@ -6,7 +6,7 @@ repo="open-mpi/hwloc"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.bz2"
 direname=${filename/.tar.bz2/}
-depends=(bash brotli bzip2 cairo coreutils expat fontconfig freetype gcc glibc libice libpciaccess libpng libSM libtool libX11 libXau libxcb libXdmcp libXext libxml2 libXrender make ncurses pixman sed systemd tar util-linux wget zlib)
+depends=(bash brotli bzip2 cairo coreutils expat fontconfig freetype gcc glibc libice libpciaccess libpng libSM libtool libX11 libxau libxcb libXdmcp libXext libxml2 libXrender make ncurses pixman sed systemd tar util-linux wget zlib)
 # Fetch and unpack source
 ghr_download "$repo" "hwloc-$version" "$filename"
 unpk_enter "$filename" "$direname"

@@ -3,7 +3,7 @@ set -e
 name=ksystemstats
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(acl attr brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu kauth kconfig kcoreaddons kcrash keyutils ki18n kio kservice libdrm libelf libffi libksysguard libnl libpciaccess libpng libX11 libXau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb networkmanager networkmanager-qt nspr nss openssl pcre2 qt6 solid spirv-tools systemd util-linux wayland xz zlib zstd)
+depends=(acl attr brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu kauth kconfig kcoreaddons kcrash keyutils ki18n kio kservice libdrm libelf libffi libksysguard libnl libpciaccess libpng libX11 libxau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb networkmanager networkmanager-qt nspr nss openssl pcre2 qt6 solid spirv-tools systemd util-linux wayland xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"

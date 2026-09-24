@@ -3,7 +3,7 @@ set -e
 name=print-manager
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(acl attr avahi breeze-icons brotli bzip2 cups dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kcmutils kcodecs kcolorscheme kcompletion kconfig kconfigwidgets kcoreaddons kcrash kdbusaddons keyutils kglobalaccel kguiaddons ki18n kiconthemes kio kirigami kirigami-addons kitemviews kjobwidgets knotifications kpackage kservice ksvg kwidgetsaddons kwindowsystem libcanberra libdrm libelf libffi libogg libpciaccess libplasma libpng libvorbis libX11 libXau libxcb libxcrypt libXdmcp libXext libXfixes libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 plasma-activities qt6 solid spirv-tools systemd util-linux wayland webkitgtk xcb-util-keysyms xz zlib zstd)
+depends=(acl attr avahi breeze-icons brotli bzip2 cups dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kcmutils kcodecs kcolorscheme kcompletion kconfig kconfigwidgets kcoreaddons kcrash kdbusaddons keyutils kglobalaccel kguiaddons ki18n kiconthemes kio kirigami kirigami-addons kitemviews kjobwidgets knotifications kpackage kservice ksvg kwidgetsaddons kwindowsystem libcanberra libdrm libelf libffi libogg libpciaccess libplasma libpng libvorbis libX11 libxau libxcb libxcrypt libXdmcp libXext libXfixes libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 plasma-activities qt6 solid spirv-tools systemd util-linux wayland webkitgtk xcb-util-keysyms xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"

@@ -3,7 +3,7 @@ set -e
 name=ktextwidgets
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(brotli bzip2 dbus double-conversion e2fsprogs expat flac fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu kcodecs kcompletion kconfig keyutils ki18n kwidgetsaddons lame libdrm libelf libffi libogg libpciaccess libpng libsndfile libvorbis libX11 libXau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb mpg123 openssl opus pcre2 pulseaudio qt6 sonnet spirv-tools systemd wayland xz zlib zstd)
+depends=(brotli bzip2 dbus double-conversion e2fsprogs expat flac fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu kcodecs kcompletion kconfig keyutils ki18n kwidgetsaddons lame libdrm libelf libffi libogg libpciaccess libpng libsndfile libvorbis libX11 libxau libxcb libXdmcp libXext libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb mpg123 openssl opus pcre2 pulseaudio qt6 sonnet spirv-tools systemd wayland xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 kde_download "frameworks" "$filename"

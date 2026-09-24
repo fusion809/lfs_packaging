@@ -3,7 +3,7 @@ set -e
 name=pulseaudio
 repo=$name/$name
 version=$(gh_ver $repo)
-depends=(alsa-lib avahi bzip2 dbus elfutils flac gcc gdbm glib2 glibc gst-plugins-base gstreamer jack lame libcap libelf libffi libice libogg libSM libsndfile libunwind libvorbis libX11 libXau libxcb libXdmcp libXext libXi libxtst mpg123 openssl opus orc pcre2 speed systemd util-linux webkitgtk xz zlib zstd)
+depends=(alsa-lib avahi bzip2 dbus elfutils flac gcc gdbm glib2 glibc gst-plugins-base gstreamer jack lame libcap libelf libffi libice libogg libSM libsndfile libunwind libvorbis libX11 libxau libxcb libXdmcp libXext libXi libxtst mpg123 openssl opus orc pcre2 speed systemd util-linux webkitgtk xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 fd_download "$filename"

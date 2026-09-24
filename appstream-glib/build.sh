@@ -16,7 +16,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-depends=(acl brotli bzip2 cairo curl cyrus-sasl expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 gtk3 gtk-doc harfbuzz json-glib lcms2 libarchive libarchive libepoxy libffi libidn2 libpng libpsl libseccomp libunistring libX11 libXau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libxml2 libXrandr libXrender libyaml lz4 nghttp2 openldap openssl pango pcre2 pixman util-linux wayland xz zlib zstd)
+depends=(acl brotli bzip2 cairo curl cyrus-sasl expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 gtk3 gtk-doc harfbuzz json-glib lcms2 libarchive libarchive libepoxy libffi libidn2 libpng libpsl libseccomp libunistring libX11 libxau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libxml2 libXrandr libXrender libyaml lz4 nghttp2 openldap openssl pango pcre2 pixman util-linux wayland xz zlib zstd)
 pip_depends=()
 direname="$name-$version"
 filename="$direname.tar.xz"

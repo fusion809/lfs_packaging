@@ -16,7 +16,7 @@ get_version() {
 }
 version=$(get_version)
 _archive="GraphicsMagick-$version"
-depends=(bash brotli bzip2 coreutils freetype gcc glibc highway jasper lcms2 libaom libde265 libheif libice libjpeg-turbo libjxl libpng libsm libSM libtiff libtool libwebp libwmf libwmf libX11 libXau libxcb libXdmcp libxext libXext libxml2 littlecms numactl perl tar util-linux webkitgtk wget x264 x265 xz zlib zstd)
+depends=(bash brotli bzip2 coreutils freetype gcc glibc highway jasper lcms2 libaom libde265 libheif libice libjpeg-turbo libjxl libpng libsm libSM libtiff libtool libwebp libwmf libwmf libX11 libxau libxcb libXdmcp libxext libXext libxml2 littlecms numactl perl tar util-linux webkitgtk wget x264 x265 xz zlib zstd)
 # Fetch and unpack source
 sf_download "$name" "$version" "$_archive.tar.xz"
 unpk_enter "$_archive.tar.xz" "$_archive"

@@ -6,7 +6,7 @@ repo=$name/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
-depends=(acl appstream avahi bash brotli bubblewrap bzip2 coreutils curl cyrus-sasl dbus dbus dconf e2fsprogs expat fontconfig freetype fuse gcab gcc gdk-pixbuf glib glib2 glibc glycin gpgme json-glib keyutils lcms2 libarchive libarchive libassuan libcap libffi libfyaml libgpg-error libidn2 libpng libpsl libseccomp libsoup libunistring libxau libXau libxml2 libxmlb llvm lz4 meson mitkrb nghttp2 ninja openldap openssl ostree pcre2 polkit polkit python socat sqlite systemd tar util-linux wayland wayland webkitgtk xdg-dbus-proxy xdg-utils xz zlib zstd)
+depends=(acl appstream avahi bash brotli bubblewrap bzip2 coreutils curl cyrus-sasl dbus dbus dconf e2fsprogs expat fontconfig freetype fuse gcab gcc gdk-pixbuf glib glib2 glibc glycin gpgme json-glib keyutils lcms2 libarchive libarchive libassuan libcap libffi libfyaml libgpg-error libidn2 libpng libpsl libseccomp libsoup libunistring libxau libxau libxml2 libxmlb llvm lz4 meson mitkrb nghttp2 ninja openldap openssl ostree pcre2 polkit polkit python socat sqlite systemd tar util-linux wayland wayland webkitgtk xdg-dbus-proxy xdg-utils xz zlib zstd)
 pip_depends=(gobject)
 # libmalcontent is listed for Arch, but seems to run for my uses without it
 # Fetch and unpack source

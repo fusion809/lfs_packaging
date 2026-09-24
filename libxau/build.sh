@@ -1,9 +1,10 @@
 #!/bin/bash
 set -e
-name=libXau
-version=$(xfd_ver $name)
+_name=libxau
+name=$(echo $_name | tr '[:upper:]' '[:lower:]')
+version=$(xfd_ver $_name)
 depends=(glibc)
-filename="$name-$version.tar.xz"
+filename="$_name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 xfd_download "$filename"
 unpk_enter "$filename" "$direname"

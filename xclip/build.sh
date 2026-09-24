@@ -2,7 +2,7 @@
 set -e
 # Variable declarations
 name=xclip
-depends=(autoconf bash coreutils git glibc libice libSM libX11 libXau libxcb libXdmcp libXext libxmu libxt make util-linux)
+depends=(autoconf bash coreutils git glibc libice libSM libX11 libxau libxcb libXdmcp libXext libxmu libxt make util-linux)
 repo="astrand/xclip"
 version=$(gh_com $repo)
 filename="$name-$version.tar.gz"

@@ -3,7 +3,7 @@ set -e
 name=xorg-server
 repo=xorg/xserver
 version=$(gfd_ver $repo $name)
-depends=(brotli bzip2 dbus expat freetype gcc glibc icu libdrm libelf libepoxy libffi libfontenc libpciaccess libpng libtirpc libX11 libXau libxcb libxcvt libXdmcp libXext libXfont2 libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa nettle pixman spirv-tools systemd xz zlib zstd)
+depends=(brotli bzip2 dbus expat freetype gcc glibc icu libdrm libelf libepoxy libffi libfontenc libpciaccess libpng libtirpc libX11 libxau libxcb libxcvt libXdmcp libXext libXfont2 libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa nettle pixman spirv-tools systemd xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 # Kernel config options required

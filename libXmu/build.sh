@@ -5,7 +5,7 @@ name=libXmu
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"
-depends=(bash coreutils fontconfig glibc libice libSM libX11 libXau libxcb libXdmcp libXext libxt make sed systemd tar util-linux xorg-libs xz zlib)
+depends=(bash coreutils fontconfig glibc libice libSM libX11 libxau libxcb libXdmcp libXext libxt make sed systemd tar util-linux xorg-libs xz zlib)
 # Fetch and unpack source
 xfd_download "$filename"
 unpk_enter "$filename" "$direname"

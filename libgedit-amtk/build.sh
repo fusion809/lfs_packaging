@@ -3,7 +3,7 @@ set -e
 # Variable declaration
 name=libgedit-amtk
 version=$(lgd_ver $name)
-depends=(at-spi2-core brotli bzip2 cairo dbus exempi expat fontconfig freetype fribidi gcc gdk-pixbuf glib glib2 glibc glycin gnome-desktop graphite2 gtk3 gtk3 harfbuzz hicolor-icon-theme lcms lcms2 libepoxy libffi libhandy libpng libseccomp libx11 libX11 libXau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libXrandr libXrender libXres meson pango pcre2 pixman systemd util-linux wayland zlib)
+depends=(at-spi2-core brotli bzip2 cairo dbus exempi expat fontconfig freetype fribidi gcc gdk-pixbuf glib glib2 glibc glycin gnome-desktop graphite2 gtk3 gtk3 harfbuzz hicolor-icon-theme lcms lcms2 libepoxy libffi libhandy libpng libseccomp libx11 libX11 libxau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libXrandr libXrender libXres meson pango pcre2 pixman systemd util-linux wayland zlib)
 # Fetch source and unpack it
 repo_url="https://gitlab.gnome.org/World/gedit/$name.git"
 if [[ ! -d "$name/.git" ]]; then

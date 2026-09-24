@@ -13,7 +13,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-depends=(alsa-lib at-spi2-core brotli bzip2 cairo dbus expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz libepoxy libffi libpng libseccomp libX11 libXau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libXrandr libXrender libXres nspr nss pango pcre2 pixman systemd util-linux wayland zlib)
+depends=(alsa-lib at-spi2-core brotli bzip2 cairo dbus expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz libepoxy libffi libpng libseccomp libX11 libxau libxcb libXcomposite libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libXrandr libXrender libXres nspr nss pango pcre2 pixman systemd util-linux wayland zlib)
 filename="firefox-$version.tar.xz"
 direname="firefox"
 download_src "https://ftp.mozilla.org/pub/firefox/releases/$version/linux-x86_64/en-GB/$filename"

@@ -3,7 +3,7 @@ set -e
 name=libgtop
 repo=GNOME/$name
 version=$(gh_ver $repo)
-depends=(glib2 glibc libffi libXau pcre2)
+depends=(glib2 glibc libffi libxau pcre2)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 gn_download "$filename"

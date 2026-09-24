@@ -3,7 +3,7 @@ set -e
 name=plasma-systemmonitor
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(acl attica attr brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kauth kcodecs kconfig kcoreaddons kcrash kdbusaddons keyutils kglobalaccel ki18n kio kitemmodels knewstuff kpackage kservice kwindowsystem libdrm libelf libffi libksysguard libpciaccess libpng libX11 libXau libxcb libXdmcp libXext libXfixes libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qt6 solid spirv-tools syndication systemd util-linux wayland xcb-util-keysyms xz zlib zstd)
+depends=(acl attica attr brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kauth kcodecs kconfig kcoreaddons kcrash kdbusaddons keyutils kglobalaccel ki18n kio kitemmodels knewstuff kpackage kservice kwindowsystem libdrm libelf libffi libksysguard libpciaccess libpng libX11 libxau libxcb libXdmcp libXext libXfixes libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qt6 solid spirv-tools syndication systemd util-linux wayland xcb-util-keysyms xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"

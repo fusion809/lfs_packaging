@@ -3,7 +3,7 @@ set -e
 name=cairo
 repo=$name/$name
 version=$(gfd_ver $repo)
-depends=(brotli bzip2 expat fontconfig freetype glib2 glibc libffi libpng libX11 libXau libxcb libXdmcp libXext libXrender pcre2 pixman zlib)
+depends=(brotli bzip2 expat fontconfig freetype glib2 glibc libffi libpng libX11 libxau libxcb libXdmcp libXext libXrender pcre2 pixman zlib)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 download_src "https://www.cairographics.org/releases/$filename"

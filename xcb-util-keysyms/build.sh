@@ -2,7 +2,7 @@
 set -e
 name=xcb-util-keysyms
 version=$(xcb_ver $name)
-depends=(glibc libXau libxcb libXdmcp)
+depends=(glibc libxau libxcb libXdmcp)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 xfd_download "$filename"

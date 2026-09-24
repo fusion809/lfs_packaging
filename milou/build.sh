@@ -3,7 +3,7 @@ set -e
 name=milou
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(breeze-icons brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kcolorscheme kconfig kcoreaddons keyutils kglobalaccel kguiaddons ki18n kiconthemes kirigami kitemmodels knotifications kpackage krunner ksvg kwindowsystem libcanberra libdrm libelf libffi libogg libpciaccess libplasma libpng libvorbis libX11 libXau libxcb libXdmcp libXext libXfixes libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 plasma-activities qt6 spirv-tools systemd util-linux wayland webkitgtk xcb-util-keysyms xz zlib zstd)
+depends=(breeze-icons brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kcolorscheme kconfig kcoreaddons keyutils kglobalaccel kguiaddons ki18n kiconthemes kirigami kitemmodels knotifications kpackage krunner ksvg kwindowsystem libcanberra libdrm libelf libffi libogg libpciaccess libplasma libpng libvorbis libX11 libxau libxcb libXdmcp libXext libXfixes libxkbcommon libxml2 libxshmfence libXxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 plasma-activities qt6 spirv-tools systemd util-linux wayland webkitgtk xcb-util-keysyms xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"
