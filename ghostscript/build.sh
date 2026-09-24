@@ -4,7 +4,7 @@ name=ghostscript
 repo=ArtifexSoftware/ghostpdl-downloads
 version=$(gh_ver $repo | sed -E 's/(..)(..)/\1.\2./')
 verd=$(echo $version | sed 's/\.//g')
-depends=(at-spi2-core avahi brotli bzip2 cairo cups dbus expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz lcms2 libepoxy libffi libice libjpeg-turbo libpaper libpng libseccomp libSM libtiff libwebp libX11 libXau libxcb libXcomposite libxcrypt libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libXrandr libXrender libXres libXt openjpeg openssl pango pcre2 pixman systemd util-linux wayland xz zlib zstd)
+depends=(at-spi2-core avahi brotli bzip2 cairo cups dbus expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz lcms2 libepoxy libffi libice libjpeg-turbo libpaper libpng libseccomp libSM libtiff libwebp libX11 libXau libxcb libXcomposite libxcrypt libXcursor libXdamage libXdmcp libXext libXfixes libXi libXinerama libxkbcommon libXrandr libXrender libXres libxt openjpeg openssl pango pcre2 pixman systemd util-linux wayland xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 ghr_download "$repo" "gs$verd" "$filename"

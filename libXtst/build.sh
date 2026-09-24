@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 # Variable declarations
-name=libXtst
+name=libxtst
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"
