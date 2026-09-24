@@ -10,6 +10,16 @@ function artver {
 	fi
 }
 
+function aurver {
+	local name="$1"
+	if [[ -n $2 ]]; then
+		local var="$2"
+	else
+		local var="pkgver"
+	fi
+	wget -T 5 -t 1 -cqO- "https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=$name" | grep "^$var=" | sed "s/^$var=//g"
+}
+
 function aver {
 	local name=$(echo $1 | tr '[:upper:]' '[:lower:]')
 	local URL="https://gitlab.archlinux.org/archlinux/packaging/packages/$name/-/raw/main/PKGBUILD"
