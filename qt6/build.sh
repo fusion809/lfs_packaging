@@ -23,7 +23,7 @@ rm -rf qtwebengine qt3d qtquick3dphysics qtopcua
             -journald            &&
 	    ninja -j$(nproc)
 sudo ninja install
-find $QT6PREFIX/ -name \*.prl \
+sudo su -c "find $QT6PREFIX/ -name \*.prl \
    -exec sed -i -e '/^QMAKE_PRL_BUILD_DIR/d' {} \;
 pushd qttools/src &&
 
@@ -91,7 +91,7 @@ Terminal=false
 Encoding=UTF-8
 Type=Application
 Categories=Qt;Development;Debugger;
-EOF
+EOF"
 cd ..
-rm -rf "$filename" "$direname"
+sudo rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
