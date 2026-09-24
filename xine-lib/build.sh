@@ -14,7 +14,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-depends=(alsa-lib brotli bzip2 dav1d dbus elfutils expat flac fontconfig freetype gcc gdk-pixbuf glib2 glibc glu glycin gmp gnutls icu ImageMagick jack lame lcms2 liba52 libaom libdrm libdvdnav libdvdread libffi libgcrypt libgpg-error libICE libidn2 libjpeg-turbo libmng libogg libpciaccess libpng libseccomp libSM libsndfile libssh2 libtasn1 libtool libunistring libva libvorbis libvpx libX11 libXau libxcb libXdmcp libXext libXfixes libXinerama libxml2 libxshmfence libXt libXv libXxf86vm llvm lm-sensors mesa mpg123 nettle openssl opus p11-kit pcre2 pulseaudio speex spirv-tools systemd util-linux v4l-utils wayland xz zlib zstd)
+depends=(alsa-lib brotli bzip2 dav1d dbus elfutils expat flac fontconfig freetype gcc gdk-pixbuf glib2 glibc glu glycin gmp gnutls icu imagemagick jack lame lcms2 liba52 libaom libdrm libdvdnav libdvdread libffi libgcrypt libgpg-error libICE libidn2 libjpeg-turbo libmng libogg libpciaccess libpng libseccomp libSM libsndfile libssh2 libtasn1 libtool libunistring libva libvorbis libvpx libX11 libXau libxcb libXdmcp libXext libXfixes libXinerama libxml2 libxshmfence libXt libXv libXxf86vm llvm lm-sensors mesa mpg123 nettle openssl opus p11-kit pcre2 pulseaudio speex spirv-tools systemd util-linux v4l-utils wayland xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 download_src "https://downloads.sourceforge.net/xine/$filename"
