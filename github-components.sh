@@ -64,6 +64,9 @@ function ghl_ver {
 		timeout 5 git ls-remote --tags --refs "$URL" \
 		| grep "core-[0-9-]+$" -oE | sed 's/^core-//g' | tr '-' '.' | sort -V \
 		| tail -n 1
+	elif [[ "$1" == "golang/go" ]]; then
+		timeout 5 git ls-remote --tags --refs "$URL" \
+		| grep "tags/go[0-9.]+" -oE | sed 's/.*go//g' | sort -V | tail -n 1
 	else
 		timeout 5 git ls-remote --tags --refs "$URL" 2>/dev/null \
 		| cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" \
@@ -74,10 +77,12 @@ function ghl_ver {
 
 function ght_ver {
 	if [[ "$1" == "avahi/avahi" ]]; then
-		wget -T 5 -t 1 -cqO- https://github.com/$1 /tags \
+		wget -T 5 -t 1 -cqO- https://github.com/$1/tags \
 		| grep -E "tags/v[0-9.]+[-rc]*[0-9]*.tar.gz" | sed 's|.*tags/v||g' \
 		| sed 's/.tar.gz.*//g' | sort -V | tail -n 1
 		return
+	elif [[ "$1" == "golang/go" ]]; then
+		wget -T 5 -t 1 -cqO- https://github.com/golang/go/tags | grep "tag/go[0-9.]+" -oE | sed 's/.*go//g' | sort -V | tail -n 1
 	fi
 	if [[ "$1" == "GNOME/gcr3" ]]; then
 		local repo="GNOME/gcr"
