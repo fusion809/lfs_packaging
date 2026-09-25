@@ -1,9 +1,16 @@
 #!/bin/bash
 source ~/lfs_packaging/base-funcs.sh
 source ~/lfs_packaging/base-version.sh
+source ~/lfs_packaging/distro.sh
 source ~/lfs_packaging/version-checks.sh
 source ~/lfs_packaging/freedesktop.sh
+source ~/lfs_packaging/github-components.sh
+source ~/lfs_packaging/github.sh
+source ~/lfs_packaging/gitlab-components.sh
+source ~/lfs_packaging/gitlab.sh
+source ~/lfs_packaging/gnome-components.sh
 source ~/lfs_packaging/gnome.sh
+source ~/lfs_packaging/kde.sh
 source ~/lfs_packaging/oss-hosts.sh
 source ~/lfs_packaging/add_deps.sh
 source ~/lfs_packaging/compile.sh
