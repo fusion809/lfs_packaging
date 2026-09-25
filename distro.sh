@@ -144,6 +144,193 @@ function nixver {
         head -n1
 }
 
+typeset -A uver_projects=(
+	go	1227
+	scc	376740
+)
+
+typeset -g UVER_CACHE=${XDG_CACHE_HOME:-$HOME/.cache}/uver
+typeset -g UVER_CACHE_TTL=300
+
+uver() {
+	local pkg=${1:l}
+	local build repo name projects project_count
+	local project_id backend homepage ecosystem
+	local cache_file cache_time now version tags line
+	local -a project_lines matches
+
+	if [[ -z "$pkg" ]]; then
+		print -u2 'usage: uver package'
+		return 2
+	fi
+
+	mkdir -p "$UVER_CACHE"
+
+	projects=$(
+		timeout 15 wget -qO- \
+			"https://release-monitoring.org/api/v2/projects/?name=$pkg&items_per_page=10" |
+		python3 -c '
+import json
+import sys
+
+for p in json.load(sys.stdin).get("items", []):
+    print(
+        str(p.get("id", "")) + "\t" +
+        str(p.get("backend", "")) + "\t" +
+        str(p.get("homepage", "")) + "\t" +
+        str(p.get("ecosystem", ""))
+    )
+	'
+	)
+
+	if [[ -z "$projects" ]]; then
+		print -u2 "No Anitya project found for $pkg"
+		return 1
+	fi
+
+	project_lines=("${(@f)projects}")
+	project_count=${#project_lines}
+
+	# No ambiguity: do not inspect build.sh.
+	if (( project_count == 1 )); then
+		IFS=$'\t' read -r project_id backend homepage ecosystem <<< "${project_lines[1]}"
+	else
+		# Ambiguous package name: use build.sh to identify the upstream repo.
+		build=$LFP/$pkg/build.sh
+
+		if [[ ! -f "$build" ]]; then
+			print -u2 "Multiple Anitya projects found for $pkg; no $build"
+			return 1
+		fi
+
+		repo=$(
+			sed -n '
+				/^[[:space:]]*repo=/ {
+					s/^[[:space:]]*repo=[[:space:]]*//
+					p
+					q
+				}
+			' "$build"
+		)
+
+		if [[ -z "$repo" ]]; then
+			print -u2 "Multiple Anitya projects found for $pkg; no repo= in $build"
+			return 1
+		fi
+
+		# Remove matching surrounding quotes.
+		repo=${repo#\"}
+		repo=${repo%\"}
+		repo=${repo#\'}
+		repo=${repo%\'}
+
+		# Expand variables such as $name in repo=golang/$name.
+		name=$pkg
+		repo=${(e)repo}
+
+		matches=()
+
+		for line in "${project_lines[@]}"; do
+			IFS=$'\t' read -r project_id backend homepage ecosystem <<< "$line"
+
+			if [[ "$homepage" == "https://github.com/$repo" ||
+			      "$homepage" == "http://github.com/$repo" ||
+			      "$homepage" == "https://www.github.com/$repo" ||
+			      "$homepage" == "http://www.github.com/$repo" ]]; then
+				matches+=("$line")
+			fi
+		done
+
+		if (( ${#matches[@]} == 1 )); then
+			IFS=$'\t' read -r project_id backend homepage ecosystem <<< "${matches[1]}"
+		else
+			# Anitya may use a different homepage from the actual
+			# repository, e.g. golang/go -> https://go.dev.
+			project_id=
+			backend=GitHub
+			homepage="https://github.com/$repo"
+		fi
+	fi
+
+	# Cache by upstream repository when available, otherwise Anitya ID.
+	if [[ -n "$repo" ]]; then
+		cache_file="$UVER_CACHE/${repo//\//__}"
+	else
+		cache_file="$UVER_CACHE/anitya-$project_id"
+	fi
+
+	if [[ -f "$cache_file" ]]; then
+		cache_time=$(stat -c %Y "$cache_file" 2>/dev/null) || cache_time=0
+	else
+		cache_time=0
+	fi
+
+	now=$(date +%s)
+
+	if (( now - cache_time < UVER_CACHE_TTL )); then
+		version=$(<"$cache_file")
+
+		if [[ -n "$version" ]]; then
+			print -r -- "$version"
+			return 0
+		fi
+	fi
+
+	# For a GitHub repository, query Git directly rather than api.github.com.
+	if [[ -n "$repo" && "$backend" == GitHub ]]; then
+		tags=$(
+			timeout 15 git ls-remote --tags --refs \
+				"https://github.com/$repo.git" 2>/dev/null |
+			sed -n 's#^[^	]*	refs/tags/##p'
+		)
+
+		if [[ -n "$tags" ]]; then
+			if [[ "$repo" == golang/go ]]; then
+				version=$(
+					print -r -- "$tags" |
+					grep -E '^go[0-9]+(\.[0-9]+)+$' |
+					sed 's/^go//' |
+					sort -V |
+					tail -n1
+				)
+			else
+				version=$(
+					print -r -- "$tags" |
+					grep -E '^v?[0-9]+(\.[0-9]+)+$' |
+					sed 's/^v//' |
+					sort -V |
+					tail -n1
+				)
+			fi
+
+			if [[ -n "$version" ]]; then
+				print -r -- "$version" >| "$cache_file"
+				print -r -- "$version"
+				return 0
+			fi
+		fi
+	fi
+
+	# Fall back to Anitya's recorded latest version.
+	if [[ -n "$project_id" ]]; then
+		version=$(
+			timeout 15 wget -qO- \
+				"https://release-monitoring.org/api/v2/versions/?project_id=$project_id" |
+			sed -n 's/.*"latest_version":[[:space:]]*"\([^"]*\)".*/\1/p' |
+			head -n1
+		)
+
+		if [[ -n "$version" ]]; then
+			print -r -- "$version" >| "$cache_file"
+			print -r -- "$version"
+			return 0
+		fi
+	fi
+
+	print -u2 "Could not determine upstream version for $pkg"
+	return 1
+}
+
 function vatver {
 	export VAT_URL="https://raw.githubusercontent.com/tox-wtf/vat/refs/heads/master/p/"
 	wget -cqO- -T 5 -t 1 "$VAT_URL/$1/v.tsv" | grep -F release | cut -f3

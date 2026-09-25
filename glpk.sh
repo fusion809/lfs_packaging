@@ -20,6 +20,8 @@ function glpk_ver {
 	ver_check "$git_ver" "$inst_ver" "$arch_ver" && return
 	local wgnu_vers=$(wgnu_ver "$name")
 	ver_check "$wgnu_vers" "$inst_ver" "$arch_ver" && return
+    local mon_ver=$(uver $name)
+	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
 	local nix_ver=$(nixver $name)
 	ver_check "$nix_ver" "$inst_ver" "$arch_ver" && return
 	local art_ver=$(artver $name)

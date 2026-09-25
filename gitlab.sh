@@ -12,6 +12,8 @@ function gl_ver {
 	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
 	local git_ver=$(gll_ver $1)
 	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
+    local mon_ver=$(uver $name)
+	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
 	local vat_ver=$(vatver $name)
 	ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
 	local arch_ver=$(aver $name)

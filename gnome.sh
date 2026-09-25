@@ -13,13 +13,18 @@ function gn_ver {
 
 		local git_ver=$(ggn_ver "gtk" "3")
 		ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
+		local mon_ver=$(uver $name)
+		ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
 	elif [[ "$1" == "gtk" || "$1" == "gtk4" ]]; then
 		local up_ver=$(wgn_ver "gtk" "4")
 		ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
 
 		local git_ver=$(ggn_ver "gtk" "4")
 		ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
-
+		
+		local mon_ver=$(uver $name)
+		ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
+		
 		local arch_ver=$(aver "gtk4")
 		ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
 	elif [[ "$1" == "glib" || "$1" == "glib2" ]]; then
@@ -29,6 +34,8 @@ function gn_ver {
 		local git_ver=$(ggn_ver "glib2" "glib")
 		ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
 
+		local mon_ver=$(uver $name)
+		ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
 		local arch_ver=$(aver "glib2")
 		ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
 	elif [[ "$1" == "libpeas" ]]; then
@@ -36,12 +43,16 @@ function gn_ver {
 		ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
 		local git_ver=$(glp_ver "$1")
 		ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
+		local mon_ver=$(uver $name)
+		ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
 	else
 		local up_ver=$(wgn_ver "$1")
 		ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
 
 		local git_ver=$(ggn_ver "$1")
 		ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
+		local mon_ver=$(uver $name)
+		ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
 	fi
 	if [[ $pkg_name == "vte" ]]; then
 		pkg_name="vte3"
@@ -64,6 +75,8 @@ function lgd_ver {
 
 	local git_ver=$(glgd_ver $name)
 	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
+	local mon_ver=$(uver $name)
+	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
 	local arch_ver=$(aver "$name")
 	ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
 	local art_ver=$(artver $name)

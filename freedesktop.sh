@@ -18,6 +18,8 @@ function gfd_ver {
 	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
 	local git_ver=$(gfl_ver $repo $name)
 	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
+	local mon_ver=$(uver $name)
+	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
 	local vat_ver=$(vatver $name)
 	ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
 	local arch_ver=$(aver $name)
@@ -36,6 +38,8 @@ function spice_ver {
 	ver_check "$up_ver" "$inst_ver" "$art_vers" && return
 	local git_ver=$(gsp_ver $repo)
 	ver_check "$git_ver" "$inst_ver" "$art_ver" && return
+	local mon_ver=$(uver $name)
+	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
 	local vat_ver=$(vatver $name)
 	ver_check "$vat_ver" "$inst_ver" "$art_ver" && return
 	local arch_ver=$(aver $name)
@@ -46,17 +50,19 @@ function spice_ver {
 }
 
 function way_ver {
-    	local name=$1
+    local name=$1
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)
-    	local up_ver=$(wget -T 5 -cqO- https://wayland.freedesktop.org/releases.html | grep "$name-[0-9].*.tar.xz" | grep -v ".9[0-9].tar.xz" | head -n 1 | cut -d '/' -f 8)
-    	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
-    	local git_ver=$(git ls-remote --tags --refs https://gitlab.freedesktop.org/wayland/$name.git | grep "refs/tags/[0-9.]*$" | cut -d '/' -f 3 | sort -V | tail -n 1)
+    local up_ver=$(wget -T 5 -cqO- https://wayland.freedesktop.org/releases.html | grep "$name-[0-9].*.tar.xz" | grep -v ".9[0-9].tar.xz" | head -n 1 | cut -d '/' -f 8)
+    ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
+    local git_ver=$(git ls-remote --tags --refs https://gitlab.freedesktop.org/wayland/$name.git | grep "refs/tags/[0-9.]*$" | cut -d '/' -f 3 | sort -V | tail -n 1)
 	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
-    	local vat_ver=$(vatver $name)
-    	ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
-    	local arch_ver=$(aver $name)
-    	ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
+	local mon_ver=$(uver $name)
+	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
+    local vat_ver=$(vatver $name)
+    ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
+    local arch_ver=$(aver $name)
+    ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
 	local art_ver=$(artver $name)
 	ver_check "$art_ver" "$inst_ver" "$lfs_vers" && return
 	fver "$name" "$inst_ver"
@@ -96,7 +102,8 @@ function xfd_ver() {
 		local git_ver=$(gxfd_ver $type $name)
 	fi
 	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
-
+	local mon_ver=$(uver $name)
+	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
 	local vat_ver=$(vatver $name)
 	ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
 
@@ -119,6 +126,8 @@ function xcb_ver {
 	local lfs_vers=$(lfs_ver $name)
 	local up_ver=$(wxcb_ver $name)
 	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
+	local mon_ver=$(uver $name)
+	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
 	local vat_ver=$(vatver $name)
 	ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
 	local arch_ver=$(aver $name)
