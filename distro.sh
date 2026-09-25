@@ -100,9 +100,43 @@ function lfs_ver {
 }
 
 function nixver {
-	local name=$(echo $1 | tr '[:upper:]' '[:lower:]')
-	local URL="https://search.nixos.org/packages?channel=unstable&query=$name#show=$name"	
-	wget -cqO- -T 5 -t 1 "$URL"
+    if [[ -z "$1" ]]; then
+        echo "Usage: nixver PACKAGE" >&2
+        return 1
+    fi
+
+    local pkg="$1"
+    local index
+    local response
+
+    index=$(
+        wget -qO- \
+            --user='aWVSALXpZv' \
+            --password='X8gPHnzL52wFEekuxsfQ9cSh' \
+            'https://search.nixos.org/backend/_aliases' |
+        grep -oE 'latest-[0-9]+-nixos-unstable' |
+        sed 's/^latest-\([0-9][0-9]*\)-nixos-unstable$/\1/' |
+        sort -n |
+        tail -n1
+    )
+
+    if [[ -z "$index" ]]; then
+        echo "Could not determine current NixOS Search index" >&2
+        return 1
+    fi
+
+    response=$(
+        wget -qO- \
+            --user='aWVSALXpZv' \
+            --password='X8gPHnzL52wFEekuxsfQ9cSh' \
+            --header='Content-Type: application/json' \
+            --post-data="{\"query\":{\"bool\":{\"filter\":[{\"term\":{\"type\":\"package\"}}],\"must\":[{\"term\":{\"package_attr_name\":\"$pkg\"}}]}}}" \
+            "https://search.nixos.org/backend/latest-${index}-nixos-unstable/_search"
+    ) || return 1
+
+    printf '%s\n' "$response" |
+        sed -n 's/.*"package_pversion":"\([^"]*\)".*/\1/p' |
+        head -n1
 }
 
 function vatver {

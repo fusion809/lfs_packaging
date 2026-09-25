@@ -2,7 +2,7 @@
 set -e
 name=hicolor-icon-theme
 repo=xdg/default-icon-theme
-version=$(gfd_ver $repo)
+version=$(gfd_ver $repo "$name")
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 download_src "https://icon-theme.freedesktop.org/releases/$filename"

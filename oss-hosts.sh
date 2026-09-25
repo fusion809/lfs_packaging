@@ -42,23 +42,6 @@ function cb_ver {
 	fver "$name" "$inst_ver"
 }
 
-function ngnu_ver {
-	local name=$1
-	local inst_ver=$(pkgver $name)
-	local lfs_vers=$(lfs_ver $name)
-	local up_ver=$(wngnu_ver $name)
-	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
-	local git_ver=$(gngnu_ver $name)
-	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
-	local vat_ver=$(vatver $name)
-	ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
-	local arch_ver=$(aver $name)
-	ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
-	local art_ver=$(artver $name)
-	ver_check "$art_ver" "$inst_ver" "$lfs_vers" && return
-	fver "$name" "$inst_ver"
-}
-
 function perl_ver {
 	local name=$1
 	local _name=$2
@@ -90,42 +73,6 @@ function sd_ver {
 	local up_ver=$(wget -T 5 -t 1 -cqO- https://salsa.debian.org/$repo/-/tags | grep "[v]*[0-9]+\.[0-9]+\.[0-9]+" -oE | sed 's/^v//g' | sort -V | tail -n 1)
 	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
 	local git_ver=$(timeout 5 git ls-remote --tags --refs https://salsa.debian.org/$repo.git | grep "[v]*[0-9]+\.[0-9]+\.[0-9]+" -oE | sed 's/^v//g' | sort -V | tail -n 1)
-	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
-    	local vat_ver=$(vatver $name)
-    	ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
-    	local arch_ver=$(aver $name)
-	ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
-	local art_ver=$(artver $name)
-	ver_check "$art_ver" "$inst_ver" "$lfs_vers" && return
-	fver "$name" "$inst_ver"
-}
-
-# SourceForge version fetcher
-function sf_ver {
-	local repo=$1
-	local name=$(echo $repo | cut -d '/' -f 1)
-	local lfs_vers=$(lfs_ver $name)
-    	local inst_ver=$(pkgver $name)
-    	local up_ver=$(wsf_ver $repo)
-	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
-    	local git_ver=$(gsf_ver $repo)
-	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
-    	local vat_ver=$(vatver $name)
-    	ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
-    	local arch_ver=$(aver $name)
-	ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
-	local art_ver=$(artver $name)
-	ver_check "$art_ver" "$inst_ver" "$lfs_vers" && return
-	fver "$name" "$inst_ver"
-}
-
-function sw_ver {
-	local name=$1
-	local inst_ver=$(pkgver $name)
-	local lfs_vers=$(lfs_ver $name)
-    	local up_ver=$(wsw_ver $name)
-	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
-	local git_ver=$(gsw_ver $name)
 	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
     	local vat_ver=$(vatver $name)
     	ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
