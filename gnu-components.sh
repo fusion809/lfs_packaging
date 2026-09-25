@@ -17,9 +17,6 @@ function ggnu_ver {
     if [[ "$name" == "octave" ]]; then
 		echo $(goct_ver)
         return 0;
-	elif [[ "$name" == "glpk" ]]; then
-	    echo $(gglpk_ver)
-        return 0;
 	elif [[ "$name" == "libtool" ]]; then
 	    echo $(glib_ver)
         return 0;

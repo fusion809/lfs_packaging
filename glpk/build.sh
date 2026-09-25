@@ -2,7 +2,7 @@
 set -e
 depends=(bash coreutils gcc glibc gmp gzip make sed tar)
 name=glpk
-version=$(gnu_ver $name)
+version=$(glpk_ver)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 gnu_download "$name" "$filename"

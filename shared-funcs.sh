@@ -13,6 +13,7 @@ source ~/lfs_packaging/gnome-components.sh
 source ~/lfs_packaging/gnome.sh
 source ~/lfs_packaging/gnu-components.sh
 source ~/lfs_packaging/gnu.sh
+source ~/lfs_packaging/glpk.sh
 source ~/lfs_packaging/ngnu-components.sh
 source ~/lfs_packaging/ngnu.sh
 source ~/lfs_packaging/sourceforge-components.sh

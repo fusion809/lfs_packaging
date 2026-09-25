@@ -18,21 +18,3 @@ function gbb_ver {
 	| grep -vi "alpha\|beta\|rc" | sed -E 's|tags/[a-z-]*||g' | sort -V \
 	| tail -n 1
 }
-
-function gglpk_ver {
-	local URL="https://salsa.debian.org/science-team/glpk.git"
-    timeout 5 git ls-remote --tags --refs $URL 2>/dev/null | grep "upstream" \
-	| cut -d '/' -f 4 | sort -V | tail -n 1
-}
-
-function wglpk_ver {
-	wget -T 5 -t 1 -cqO- https://salsa.debian.org/$repo/-/tags \
-	| grep "upstream/[0-9.]+" -oE | cut -d '/' -f 2 | sort -V | tail -n 1
-}
-
-function glpk_ver {
-	local name=$1
-	local inst_ver=$(pkgver $name)
-	local arch_ver=$(arch_ver $name)
-
-}
