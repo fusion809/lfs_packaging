@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=spectacle
+homepage="https://apps.kde.org/spectacle/"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(acl attr breeze-icons brotli bzip2 curl cyrus-sasl dbus double-conversion e2fsprogs expat flac fontconfig freetype gcc giflib glib2 glibc graphite2 harfbuzz icu karchive kcodecs kcolorscheme kcompletion kconfig kconfigwidgets kcoreaddons kcrash kdbusaddons keyutils kglobalaccel kguiaddons ki18n kiconthemes kio kirigami kitemviews kjobwidgets knotifications kpipewire kquickimageeditor kservice kstatusnotifieritem kwidgetsaddons kwindowsystem kxmlgui lame layer-shell-qt leptonica libarchive libcanberra libdrm libelf libepoxy libffi libidn2 libjpeg-turbo libogg libpciaccess libpng libpsl libsndfile libtiff libunistring libva libvorbis libwebp libx11 libxau libxcb libxdmcp libxext libxfixes libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors lz4 mesa mitkrb mpg123 nghttp2 opencv openjpeg openldap openssl opus pcre2 pipewire prison pulseaudio purpose qt6 solid spirv-tools systemd tesseract util-linux wayland webkitgtk xcb-util xcb-util-cursor xcb-util-image xcb-util-keysyms xcb-util-renderutil xz zlib zstd zxing-cpp)

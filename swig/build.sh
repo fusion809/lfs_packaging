@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=swig
+homepage="https://www.swig.org"
 repo=$name/$name
 version=$(gh_ver $repo)
 depends=(gcc glibc pcre2 zlib)

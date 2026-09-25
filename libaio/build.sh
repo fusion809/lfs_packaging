@@ -1,10 +1,11 @@
 #!/bin/bash
 set -e
 name=libaio
+homepage="https://pagure.io/libaio"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)
-	local git_ver=$(timeout 5 git ls-remote --tags --refs https://pagure.io/libaio.git | grep "refs/tags/libaio-[0-9.]+$" -oE | cut -d '-' -f 2)
+	local git_ver=$(timeout 5 git ls-remote --tags --refs $homepage.git | grep "refs/tags/libaio-[0-9.]+$" -oE | cut -d '-' -f 2)
 	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
 	local mon_ver=$(uver $name)
 	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return

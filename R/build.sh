@@ -2,6 +2,7 @@
 set -e
 # Variable declarations
 name=R
+homepage="https://www.r-project.org"
 function R_version {
   local inst_ver=$(pkgver $name)
   local art_ver=$(artver $name)

@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=dbus
+homepage="https://www.freedesktop.org/wiki/Software/dbus/"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

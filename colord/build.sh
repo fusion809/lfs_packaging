@@ -3,6 +3,7 @@ set -e
 # Variable declaration
 name=colord
 repo=hughsie/colord
+homepage="http://www.freedesktop.org/software/colord/"
 get_version() {
       local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

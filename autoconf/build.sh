@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=autoconf
+homepage="http://www.gnu.org/software/autoconf/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

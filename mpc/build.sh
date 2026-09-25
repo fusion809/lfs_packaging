@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=mpc
+homepage="https://www.multiprecision.org"
 version=$(gnu_ver $name)
 depends=(glibc gmp mpfr)
 filename="$name-$version.tar.xz"

@@ -2,6 +2,7 @@
 set -e
 # Variable declaration
 name=libhandy
+homepage="https://gitlab.gnome.org/GNOME/libhandy"
 version=$(gn_ver libhandy)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"

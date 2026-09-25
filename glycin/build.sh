@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=glycin
+homepage="https://gitlab.gnome.org/GNOME/glycin"
 version=$(gn_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

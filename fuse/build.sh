@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 name=fuse
-repo=lib$name/lib$name
+_name=libfuse
+repo=$_name/$_name
 version=$(gh_ver $repo)
 depends=(glibc)
 filename="$name-$version.tar.gz"

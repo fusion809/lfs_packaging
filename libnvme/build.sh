@@ -2,6 +2,7 @@
 set -e
 name=libnvme
 repo=linux-nvme/$name
+homepage="https://github.com/$repo"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"

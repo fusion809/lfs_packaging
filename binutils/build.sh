@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=binutils
+homepage="https://www.gnu.org/software/binutils/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

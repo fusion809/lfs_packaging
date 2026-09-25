@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=librsvg
+homepage="https://wiki.gnome.org/Projects/LibRsvg"
 repo=GNOME/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

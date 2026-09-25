@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=pygobject
+homepage="https://wiki.gnome.org/Projects/PyGObject"
 version=$(gn_ver pygobject)
 majVer=$(echo $version | sed 's/.[0-9]$//g')
 depends=(glib2 pycairo)

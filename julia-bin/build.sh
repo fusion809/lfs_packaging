@@ -2,6 +2,7 @@
 set -e
 _name=julia
 name=$_name-bin
+homepage="http://julialang.org"
 repo=julialang/$_name
 version=$(gh_ver $repo)
 depends=(gcc glibc zlib zstd)

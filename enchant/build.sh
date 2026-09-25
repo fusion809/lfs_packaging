@@ -2,6 +2,7 @@
 set -e
 name=enchant
 repo="rrthomas/enchant"
+homepage="https://rrthomas.github.io/enchant/"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"

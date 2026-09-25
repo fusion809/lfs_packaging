@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=ruby
+homepage="https://www.ruby-lang.org/en/downloads/branches/"
 repo=$name/$name
 version=$(gh_ver $repo)
 majVer=$(echo $version | cut -d '.' -f1-2)

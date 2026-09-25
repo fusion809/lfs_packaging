@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=hub
+homepage="http://hub.github.com/"
 repo=mislav/$name
 version=$(gh_ver $repo)
 depends=(glibc)

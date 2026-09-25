@@ -1,10 +1,12 @@
 #!/bin/bash
 set -e
 name=lmdb
+homepage="https://symas.com/lmdb/"
+url="https://git.openldap.org/openldap/openldap"
 get_version() {
   local inst_ver=$(pkgver $name)
   local lfs_vers=$(lfs_ver $name)
-  local git_ver=$(timeout 15 git ls-remote --tags --refs https://git.openldap.org/openldap/openldap.git 'refs/tags/LMDB_*' | grep -oE "refs/tags/LMDB_[0-9.]+$" | sed 's/.*LMDB_//g' | sort -V | tail -n 1)
+  local git_ver=$(timeout 15 git ls-remote --tags --refs $url.git 'refs/tags/LMDB_*' | grep -oE "refs/tags/LMDB_[0-9.]+$" | sed 's/.*LMDB_//g' | sort -V | tail -n 1)
   ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
   local mon_ver=$(uver $name)
 	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
@@ -18,7 +20,7 @@ get_version() {
 version=$(get_version)
 filename="openldap-LMDB_$version.tar.bz2"
 direname="${filename/.tar.*/}"
-download_src "https://git.openldap.org/openldap/openldap/-/archive/LMDB_$version/$filename"
+download_src "$url/-/archive/LMDB_$version/$filename"
 unpk_enter "$filename" "$direname"
 cd libraries/liblmdb
 make -j$(nproc)

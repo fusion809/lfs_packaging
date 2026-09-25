@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=less
+homepage="https://gnu.org/s/less/"
 get_version() {
 	local lfs_vers=$(lfs_ver $name)
 	local inst_ver=$(pkgver $name)

@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=which
+homepage="https://gnu.org/s/which/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"

@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=libtool
+homepage="https://gnu.org/s/libtool/"
 version=$(gnu_ver $name)
 depends=(glibc)
 filename="$name-$version.tar.xz"

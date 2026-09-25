@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=coreutils
+homepage="https://www.gnu.org/software/coreutils/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

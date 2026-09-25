@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=protobuf
+homepage="https://protobuf.dev"
 repo="protocolbuffers/$name"
 version=$(gh_ver $repo)
 depends=(abseil-cpp gcc glibc zlib)

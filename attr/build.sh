@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=attr
+homepage="https://savannah.nongnu.org/projects/attr"
 version=$(ngnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"

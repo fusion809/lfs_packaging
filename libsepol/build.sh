@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 name=libsepol
-repo=SELinuxProject/selinux
+_name=selinux
+repo=SELinuxProject/$_name
 version=$(gh_ver $repo)
 depends=(glibc)
 filename="$name-$version.tar.gz"

@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=gdbm
+homepage="http://www.gnu.org/software/gdbm/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"

@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=aurorae
+homepage="https://invent.kde.org/plasma/aurorae"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(breeze-icons brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kcmutils kcodecs kcolorscheme kconfig kconfigwidgets kcoreaddons kdecoration keyutils kglobalaccel kguiaddons ki18n kiconthemes kitemviews kpackage ksvg kwidgetsaddons kxmlgui libdrm libelf libffi libpciaccess libpng libx11 libxau libxcb libxdmcp libxext libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qt6 spirv-tools systemd util-linux wayland xz zlib zstd)

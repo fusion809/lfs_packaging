@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=pipewire
+homepage="https://pipewire.org"
 repo=$name/$name
 version=$(gfd_ver $repo)
 depends=(alsa-lib avahi bluez dbus fdk-aac flac gcc glib2 glibc jack lame libcanberra libffi libogg libsndfile libtool libusb libvorbis libx11 libxau libxcb libxdmcp libxfixes mpg123 ncurses openssl opus pcre2 pulseaudio readline sbc systemd util-linux zlib)

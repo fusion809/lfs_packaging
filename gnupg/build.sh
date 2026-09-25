@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=gnupg
+homepage="https://gnupg.org/download/"
 repo="gpg/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.bz2"

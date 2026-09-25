@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=readline
+homepage="https://www.gnu.org/software/readline/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"

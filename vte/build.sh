@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=vte
+homepage="https://gitlab.gnome.org/GNOME/vte"
 get_version() {
 	local ver=$(gn_ver $name)
 	if [[ $ver == "2.91" ]]; then

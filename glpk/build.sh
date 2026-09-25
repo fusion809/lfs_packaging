@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+homepage="http://www.gnu.org/software/glpk/"
 depends=(bash coreutils gcc glibc gmp gzip make sed tar)
 name=glpk
 version=$(glpk_ver)

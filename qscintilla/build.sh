@@ -2,6 +2,7 @@
 set -e
 # Variable declarations
 name=qscintilla
+homepage="https://riverbankcomputing.com/software/qscintilla/intro"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local art_ver=$(artver $name)

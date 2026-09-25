@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=libsecret
+homepage="https://wiki.gnome.org/Projects/Libsecret"
 repo=GNOME/$name
 version=$(gh_ver $repo)
 depends=(glib2 glibc libffi libgcrypt libgpg-error pcre2 systemd util-linux zlib)

@@ -2,6 +2,7 @@
 set -e
 # Variable declarations
 name=xtrans
+homepage="https://gitlab.freedesktop.org/xorg/lib/libxtrans"
 version=$(xfd_ver $name)
 direname="$name-$version"
 filename="$direname.tar.xz"

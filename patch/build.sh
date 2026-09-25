@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=patch
+homepage="https://savannah.gnu.org/projects/patch/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

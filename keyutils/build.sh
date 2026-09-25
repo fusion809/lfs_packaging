@@ -1,10 +1,11 @@
 #!/bin/bash
 set -e
 name=keyutils
+homepage="https://git.kernel.org/pub/scm/linux/kernel/git/dhowells/keyutils.git/"
 get_version() {
 	local lfs_vers=$(lfs_ver $name)
 	local inst_ver=$(pkgver $name)
-	local git_ver=$(timeout 5 git ls-remote --tags --refs https://git.kernel.org/pub/scm/linux/kernel/git/dhowells/keyutils.git | grep -oE "[0-9]+\.[0-9]+\.[0-9]+" | sort -V | tail -n 1)
+	local git_ver=$(timeout 5 git ls-remote --tags --refs "$homepage" | grep -oE "[0-9]+\.[0-9]+\.[0-9]+" | sort -V | tail -n 1)
 	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
 	local mon_ver=$(uver $name)
 	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
@@ -21,7 +22,7 @@ version=$(get_version)
 depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-download_src "https://git.kernel.org/pub/scm/linux/kernel/git/dhowells/keyutils.git/snapshot/$filename"
+download_src "$homepage/snapshot/$filename"
 unpk_enter "$filename" "$direname"
 make -j$(nproc)
 sudo make NO_ARLIB=1 LIBDIR=/usr/lib BINDIR=/usr/bin SBINDIR=/usr/sbin install

@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=make
+homepage="http://www.gnu.org/software/make/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"

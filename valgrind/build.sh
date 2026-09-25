@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=valgrind
+homepage="https://valgrind.org/"
 version=$(wsw_ver $name)
 depends=(glibc hwloc libevent libfabric numactl openmpi systemd)
 filename="$name-$version.tar.bz2"

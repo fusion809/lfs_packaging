@@ -2,6 +2,7 @@
 # Oddly seems necessary to launch GNOME via SDDM
 set -e
 name=gdm
+homepage="https://wiki.gnome.org/Projects/GDM"
 repo=GNOME/$name
 version=$(gh_ver $repo)
 depends=(accountsservice glib2 glibc json-glib keyutils libffi libgudev libxau libxcrypt linux-pam pcre2 polkit systemd util-linux zlib)

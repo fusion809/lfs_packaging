@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=tar
+homepage="https://www.gnu.org/software/tar/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

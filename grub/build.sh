@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=grub
+homepage="https://gnu.org/s/grub/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

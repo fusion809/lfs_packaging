@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=libpcap
+homepage="https://www.tcpdump.org/"
 repo=the-tcpdump-group/$name
 version=$(gh_ver $repo)
 depends=(dbus glibc libnl systemd)

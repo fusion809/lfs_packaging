@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=iptables
+homepage="https://www.netfilter.org/projects/iptables/"
 repo=cernekee/$name
 version=$(gh_ver $repo)
 depends=(glibc)

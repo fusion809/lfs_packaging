@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=bison
+homepage="http://www.gnu.org/software/bison/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

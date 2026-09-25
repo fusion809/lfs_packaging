@@ -1,12 +1,8 @@
 #!/bin/bash
 set -e
 name=gdk-pixbuf
-if [[ $(pkgver glycin) -ge 2.2  ]] ; then
-	version=$(gn_ver $name)
-else
-	version=2.44.7 
-fi
-# 2.44.8 and later require 2.2.x versions of glycin which are pre-release
+homepage="http://www.gtk.org"
+version=$(gn_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(docutils glib2 glycin shared-mime-info)

@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=bzip2
+homepage="https://sourceware.org/bzip2/"
 version=$(sw_ver $name)
 depends=(coreutils gcc gzip make tar)
 filename="$name-$version.tar.gz"

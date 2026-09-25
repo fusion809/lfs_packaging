@@ -1,10 +1,11 @@
 #!/bin/bash
 set -e
 name=poppler
+homepage="http://poppler.freedesktop.org/"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)
-	local up_ver=$(wget -T 5 -t 1 -cqO- https://poppler.freedesktop.org/ | grep "poppler-[0-9]+\.[0-9]+\.[0-9]+" -oE | cut -d '-' -f 2 | sort -V | tail -n 1)
+	local up_ver=$(wget -T 5 -t 1 -cqO- $homepage | grep "poppler-[0-9]+\.[0-9]+\.[0-9]+" -oE | cut -d '-' -f 2 | sort -V | tail -n 1)
 	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
 	local mon_ver=$(uver $name)
 	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
@@ -18,11 +19,11 @@ get_version() {
 version=$(get_version)
 depends=(brotli bzip2 cairo curl cyrus-sasl dbus double-conversion elfutils expat fontconfig freetype gcc glib2 glibc gpgme gpgmepp graphite2 harfbuzz icu lcms2 libassuan libdrm libffi libgpg-error libidn2 libjpeg-turbo libpciaccess libpng libpsl libtiff libunistring libwebp libx11 libxau libxcb libxdmcp libxext libxkbcommon libxml2 libxrender libxshmfence libxxf86vm llvm lm-sensors mesa nghttp2 nspr nss openjpeg openldap openssl pcre2 pixman qt6 spirv-tools systemd util-linux wayland xz zlib zstd)
 filename="$name-$version.tar.xz"
-dversion=$(wget -cqO- https://poppler.freedesktop.org/ | grep "poppler-data-[0-9]+\.[0-9]+\.[0-9]+" -oE | cut -d '-' -f 3 | sort -V | tail -n 1)
+dversion=$(wget -cqO- $homepage | grep "poppler-data-[0-9]+\.[0-9]+\.[0-9]+" -oE | cut -d '-' -f 3 | sort -V | tail -n 1)
 data_filename="$name-data-$dversion.tar.gz"
 direname="${filename/.tar.*/}"
-download_src "https://poppler.freedesktop.org/$filename"
-download_src "https://poppler.freedesktop.org/$data_filename"
+download_src "$homepage/$filename"
+download_src "$homepage/$data_filename"
 unpk_enter "$filename" "$direname"
 options=(-D CMAKE_BUILD_TYPE=Release   \
       -D CMAKE_INSTALL_PREFIX=/usr  \

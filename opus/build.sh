@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=opus
+homepage="https://opus-codec.org"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

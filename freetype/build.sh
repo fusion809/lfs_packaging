@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=freetype
+homepage="https://www.freetype.org"
 repo="$name/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

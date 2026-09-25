@@ -2,6 +2,7 @@
 set -e
 name=gh
 _name=cli
+homepage="https://github.com/cli/cli"
 repo=$_name/$_name
 version=$(gh_ver $repo)
 filename="${_name}-$version.tar.gz"

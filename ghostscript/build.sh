@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=ghostscript
+homepage="https://www.ghostscript.com"
 repo=ArtifexSoftware/ghostpdl-downloads
 version=$(gh_ver $repo | sed -E 's/(..)(..)/\1.\2./')
 verd=$(echo $version | sed 's/\.//g')

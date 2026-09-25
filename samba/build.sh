@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=samba
+homepage="https://www.samba.org"
 repo=$name-team/$name
 get_version() {
 	local inst_ver=$(pkgver $name)

@@ -2,6 +2,7 @@
 set -e
 # Variable declaration
 name=gedit
+homepage="https://gedit-text-editor.org/"
 version=$(gn_ver $name)
 depends=(at-spi2-core brotli bzip2 cairo dbus enchant exempi expat fontconfig freetype fribidi gcc gdk-pixbuf glib glib2 glibc glycin gnome-desktop graphite2 gspell gtk3 gtk3 harfbuzz hicolor-icon-theme lcms lcms2 libepoxy libffi libgedit-amtk libgedit-gfls libgedit-gtksourceview libgedit-tepl libhandy libpeas libpng libseccomp libx11 libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxml2 libxrandr libxrender libxres meson pango pcre2 pixman systemd util-linux wayland webkitgtk zlib)
 # Fetch source and unpack it

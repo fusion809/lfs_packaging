@@ -2,6 +2,7 @@
 set -e
 # Variable declaration
 name=libadwaita
+homepage="https://gitlab.gnome.org/GNOME/libadwaita"
 version=$(gn_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"

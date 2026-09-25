@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=gpgmepp
+homepage="https://git.gnupg.org/cgi-bin/gitweb.cgi?p=gpgmepp.git;a=summary"
 repo="gpg/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

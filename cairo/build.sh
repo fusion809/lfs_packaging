@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=cairo
+homepage="http://rubygems.org/gems/cairo"
 repo=$name/$name
 version=$(gfd_ver $repo)
 depends=(brotli bzip2 expat fontconfig freetype glib2 glibc libffi libpng libx11 libxau libxcb libxdmcp libxext libxrender pcre2 pixman zlib)

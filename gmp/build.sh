@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=gmp
+homepage="https://gnu.org/s/gmp"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

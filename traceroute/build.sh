@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=traceroute
+homepage="http://traceroute.sourceforge.net/"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

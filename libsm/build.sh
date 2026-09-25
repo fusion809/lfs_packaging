@@ -1,9 +1,11 @@
 #!/bin/bash
 set -e
 # Variable declarations
-name=libSM
-version=$(xfd_ver $name)
-direname="${name}-$version"
+name=libsm
+_name=libSM
+homepage="https://gitlab.freedesktop.org/xorg/lib/libsm"
+version=$(xfd_ver $_name)
+direname="${_name}-$version"
 filename="$direname.tar.xz"
 depends=(bash coreutils fontconfig glibc libice libxcb make sed systemd tar util-linux xorg-libs xz zlib)
 # Fetch and unpack source

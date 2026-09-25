@@ -2,6 +2,7 @@
 set -e
 name=gtk4
 _name=gtk
+homepage="https://www.gtk.org"
 version=$(gn_ver $_name $name)
 filename="$_name-$version.tar.xz"
 direname="${filename/.tar.*/}"

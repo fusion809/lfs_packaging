@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=libpng
+homepage="https://www.libpng.org/pub/png/libpng.html"
 repo=pnggroup/libpng
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

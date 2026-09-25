@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=dav1d
+homepage="https://code.videolan.org/videolan/dav1d"
 repo=videolan/$name
 version=$(gh_ver $repo)
 depends=(glibc)

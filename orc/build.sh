@@ -2,7 +2,9 @@
 set -e
 # Variable declarations
 name=orc
-version=$(gfd_ver "gstreamer/orc")
+repo="gstreamer/$name"
+homepage="https://gstreamer.freedesktop.org/projects/orc.html"
+version=$(gfd_ver "$repo")
 direname="$name-$version"
 filename="$direname.tar.xz"
 depends=(bash coreutils meson ninja pkgconf sed tar wget xz)

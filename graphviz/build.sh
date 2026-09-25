@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=graphviz
+homepage="https://www.graphviz.org"
 repo=$name/$name
 version=$(gl_ver $repo)
 filename="$name-$version.tar.bz2"

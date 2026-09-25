@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=m4
+homepage="http://www.gnu.org/software/m4/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
