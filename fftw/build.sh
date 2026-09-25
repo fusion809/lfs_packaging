@@ -7,7 +7,9 @@ get_version() {
 	local up_ver=$(wget -T 5 -t 1 -cqO- https://www.fftw.org/download.html | grep "fftw-[0-9.]+.tar.gz" -oE | sed 's/fftw-//g' | sed 's/.tar.gz//g' | sort -V | tail -n 1)
 	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
 	local git_ver=$(timeout 5 git ls-remote --tags --refs https://github.com/FFTW/fftw3.git | grep "fftw-[0-9.]+[-rc]*[0-9]" -oE | sed 's/fftw-//g' | grep -v "rc" | sort -V | tail -n 1)
-	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return	
+	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
+    local mon_ver=$(uver $name)
+	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
 	local vat_ver=$(vatver $name)
 	ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
 

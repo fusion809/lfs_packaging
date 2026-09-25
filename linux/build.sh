@@ -17,6 +17,8 @@ get_version() {
 	elif [[ "$base_ver" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
 		ver_check "$base_ver" "$inst_ver" "$lfs_vers" && return
 	else
+		local mon_ver=$(uver $name)
+		ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
 		local vat_ver=$(vatver $name)
 		ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
 

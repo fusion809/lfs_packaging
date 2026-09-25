@@ -9,6 +9,8 @@ get_version() {
     local version=$(wget -T 5 -cqO- https://kerberos.org/dist/krb5/$majMinVer/ | cut -d '"' -f 8 | grep "^krb5" | grep -v "asc" | cut -d '-' -f 2 | sed 's/.tar.gz//g' | sort | uniq | tail -n 1)
     ver_check "$version" "$inst_ver" "$lfs_vers" && return
   fi
+  local mon_ver=$(uver $name)
+	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
   local vat_ver=$(vatver $name)
   ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
 

@@ -144,10 +144,8 @@ function nixver {
         head -n1
 }
 
-typeset -A uver_projects=(
-	go	1227
-	scc	376740
-)
+typeset -g UVER_CACHE=${XDG_CACHE_HOME:-$HOME/.cache}/uver
+typeset -g UVER_CACHE_TTL=300
 
 typeset -g UVER_CACHE=${XDG_CACHE_HOME:-$HOME/.cache}/uver
 typeset -g UVER_CACHE_TTL=300
@@ -155,8 +153,9 @@ typeset -g UVER_CACHE_TTL=300
 uver() {
 	local pkg=${1:l}
 	local build repo name projects project_count
-	local project_id backend homepage ecosystem
-	local cache_file cache_time now version tags line
+	local project_id backend project_homepage ecosystem
+	local homepage cache_file cache_time now version line
+	local wanted_homepage wanted_repo
 	local -a project_lines matches
 
 	if [[ -z "$pkg" ]]; then
@@ -180,7 +179,7 @@ for p in json.load(sys.stdin).get("items", []):
         str(p.get("homepage", "")) + "\t" +
         str(p.get("ecosystem", ""))
     )
-	'
+'
 	)
 
 	if [[ -z "$projects" ]]; then
@@ -191,17 +190,28 @@ for p in json.load(sys.stdin).get("items", []):
 	project_lines=("${(@f)projects}")
 	project_count=${#project_lines}
 
-	# No ambiguity: do not inspect build.sh.
+	# With one Anitya project there is no ambiguity, so build.sh is
+	# neither required nor consulted.
 	if (( project_count == 1 )); then
-		IFS=$'\t' read -r project_id backend homepage ecosystem <<< "${project_lines[1]}"
+		IFS=$'\t' read -r project_id backend project_homepage ecosystem <<< "${project_lines[1]}"
 	else
-		# Ambiguous package name: use build.sh to identify the upstream repo.
+		# Multiple projects: use build.sh to resolve the ambiguity.
 		build=$LFP/$pkg/build.sh
 
 		if [[ ! -f "$build" ]]; then
 			print -u2 "Multiple Anitya projects found for $pkg; no $build"
 			return 1
 		fi
+
+		homepage=$(
+			sed -n '
+				/^[[:space:]]*homepage=/ {
+					s/^[[:space:]]*homepage=[[:space:]]*//
+					p
+					q
+				}
+			' "$build"
+		)
 
 		repo=$(
 			sed -n '
@@ -213,51 +223,95 @@ for p in json.load(sys.stdin).get("items", []):
 			' "$build"
 		)
 
-		if [[ -z "$repo" ]]; then
-			print -u2 "Multiple Anitya projects found for $pkg; no repo= in $build"
-			return 1
-		fi
+		# Remove surrounding quotes.
+		homepage=${homepage#\"}
+		homepage=${homepage%\"}
+		homepage=${homepage#\'}
+		homepage=${homepage%\'}
 
-		# Remove matching surrounding quotes.
 		repo=${repo#\"}
 		repo=${repo%\"}
 		repo=${repo#\'}
 		repo=${repo%\'}
 
-		# Expand variables such as $name in repo=golang/$name.
+		# Expand variables such as $name.
 		name=$pkg
+		homepage=${(e)homepage}
 		repo=${(e)repo}
+
+		# Normalize URLs for comparison.
+		normalize_url() {
+			local url=${1:l}
+
+			url=${url#http://}
+			url=${url#https://}
+			url=${url#www.}
+			url=${url%/}
+
+			print -r -- "$url"
+		}
 
 		matches=()
 
-		for line in "${project_lines[@]}"; do
-			IFS=$'\t' read -r project_id backend homepage ecosystem <<< "$line"
+		# First try the explicit homepage.
+		if [[ -n "$homepage" ]]; then
+			wanted_homepage=$(normalize_url "$homepage")
 
-			if [[ "$homepage" == "https://github.com/$repo" ||
-			      "$homepage" == "http://github.com/$repo" ||
-			      "$homepage" == "https://www.github.com/$repo" ||
-			      "$homepage" == "http://www.github.com/$repo" ]]; then
-				matches+=("$line")
-			fi
-		done
+			for line in "${project_lines[@]}"; do
+				IFS=$'\t' read -r project_id backend project_homepage ecosystem <<< "$line"
 
-		if (( ${#matches[@]} == 1 )); then
-			IFS=$'\t' read -r project_id backend homepage ecosystem <<< "${matches[1]}"
-		else
-			# Anitya may use a different homepage from the actual
-			# repository, e.g. golang/go -> https://go.dev.
-			project_id=
-			backend=GitHub
-			homepage="https://github.com/$repo"
+				if [[ "$wanted_homepage" == "$(normalize_url "$project_homepage")" ||
+				      "$wanted_homepage" == "$(normalize_url "$ecosystem")" ]]; then
+					matches+=("$line")
+				fi
+			done
 		fi
+
+		# If homepage did not resolve the ambiguity, try repo=.
+		#
+		# For GitHub repositories, Anitya may have:
+		#
+		#   homepage  = https://project.example.org/
+		#   ecosystem = https://github.com/owner/project
+		#
+		# or the GitHub URL may appear as the homepage itself. Compare
+		# the normalized GitHub repository URL against both fields.
+		if (( ${#matches[@]} == 0 )) && [[ -n "$repo" ]]; then
+			wanted_repo=$(normalize_url "https://github.com/$repo")
+
+			for line in "${project_lines[@]}"; do
+				IFS=$'\t' read -r project_id backend project_homepage ecosystem <<< "$line"
+
+				project_homepage=$(normalize_url "$project_homepage")
+				ecosystem=$(normalize_url "$ecosystem")
+
+				if [[ "$project_homepage" == "$wanted_repo" ||
+				      "$ecosystem" == "$wanted_repo" ||
+				      "$project_homepage" == *"/$repo" ||
+				      "$ecosystem" == *"/$repo" ]]; then
+					matches+=("$line")
+				fi
+			done
+		fi
+
+		if (( ${#matches[@]} != 1 )); then
+			if (( ${#matches[@]} > 1 )); then
+				print -u2 "Multiple Anitya projects match $pkg"
+			elif [[ -n "$homepage" ]]; then
+				print -u2 "No Anitya project for $pkg matches homepage=$homepage"
+			elif [[ -n "$repo" ]]; then
+				print -u2 "No Anitya project for $pkg matches repo=$repo"
+			else
+				print -u2 "Multiple Anitya projects found for $pkg; no homepage= or repo= in $build"
+			fi
+			return 1
+		fi
+
+		IFS=$'\t' read -r project_id backend project_homepage ecosystem <<< "${matches[1]}"
 	fi
 
-	# Cache by upstream repository when available, otherwise Anitya ID.
-	if [[ -n "$repo" ]]; then
-		cache_file="$UVER_CACHE/${repo//\//__}"
-	else
-		cache_file="$UVER_CACHE/anitya-$project_id"
-	fi
+	# Cache by Anitya project ID.
+	cache_file="$UVER_CACHE/anitya-$project_id"
 
 	if [[ -f "$cache_file" ]]; then
 		cache_time=$(stat -c %Y "$cache_file" 2>/dev/null) || cache_time=0
@@ -276,55 +330,23 @@ for p in json.load(sys.stdin).get("items", []):
 		fi
 	fi
 
-	# For a GitHub repository, query Git directly rather than api.github.com.
-	if [[ -n "$repo" && "$backend" == GitHub ]]; then
-		tags=$(
-			timeout 15 git ls-remote --tags --refs \
-				"https://github.com/$repo.git" 2>/dev/null |
-			sed -n 's#^[^	]*	refs/tags/##p'
-		)
+	# Get the latest version recorded by Anitya.
+	version=$(
+		timeout 15 wget -qO- \
+			"https://release-monitoring.org/api/v2/versions/?project_id=$project_id" |
+		python3 -c '
+import json
+import sys
 
-		if [[ -n "$tags" ]]; then
-			if [[ "$repo" == golang/go ]]; then
-				version=$(
-					print -r -- "$tags" |
-					grep -E '^go[0-9]+(\.[0-9]+)+$' |
-					sed 's/^go//' |
-					sort -V |
-					tail -n1
-				)
-			else
-				version=$(
-					print -r -- "$tags" |
-					grep -E '^v?[0-9]+(\.[0-9]+)+$' |
-					sed 's/^v//' |
-					sort -V |
-					tail -n1
-				)
-			fi
+data = json.load(sys.stdin)
+print(data.get("latest_version", ""))
+'
+	)
 
-			if [[ -n "$version" ]]; then
-				print -r -- "$version" >| "$cache_file"
-				print -r -- "$version"
-				return 0
-			fi
-		fi
-	fi
-
-	# Fall back to Anitya's recorded latest version.
-	if [[ -n "$project_id" ]]; then
-		version=$(
-			timeout 15 wget -qO- \
-				"https://release-monitoring.org/api/v2/versions/?project_id=$project_id" |
-			sed -n 's/.*"latest_version":[[:space:]]*"\([^"]*\)".*/\1/p' |
-			head -n1
-		)
-
-		if [[ -n "$version" ]]; then
-			print -r -- "$version" >| "$cache_file"
-			print -r -- "$version"
-			return 0
-		fi
+	if [[ -n "$version" ]]; then
+		print -r -- "$version" >| "$cache_file"
+		print -r -- "$version"
+		return 0
 	fi
 
 	print -u2 "Could not determine upstream version for $pkg"

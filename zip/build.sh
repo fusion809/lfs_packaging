@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=zip
+homepage="https://tukaani.org/xz/"
 version=$(aver $name)
 depends=(bzip2 glibc)
 filename="${name}${version/./}.tar.gz"

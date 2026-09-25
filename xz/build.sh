@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=xz
+homepage="https://tukaani.org/xz/"
 repo=tukaani-project/$name
 version=$(gh_ver $repo)
 depends=(coreutils gcc glibc gzip make tar xz)

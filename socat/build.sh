@@ -9,7 +9,8 @@ get_version() {
 
     local git_ver=$(git ls-remote --tags --refs https://repo.or.cz/socat.git | grep "refs/tags/tag-[0-9.]*$" | cut -d '-' -f 2 | sort -V | tail -n 1)
     ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
-
+    local mon_ver=$(uver $name)
+	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
     local vat_ver=$(vatver $name)
     ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
 

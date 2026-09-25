@@ -5,6 +5,8 @@ get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)
 	local up_ver=$(wget -cqO- -T 5 -t 1 https://invisible-mirror.net/archives/luit/ | grep -oE "luit-[0-9]+" | cut -d '-' -f 2 | sort -V | tail -n 1)
+	local mon_ver=$(uver $name)
+	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
 	local vat_ver=$(vatver $name)
 	ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
 

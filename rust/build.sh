@@ -1,20 +1,22 @@
 #!/bin/bash
 set -e
-name=rustc
+name=rust
+_name=rustc
+repo=rust-lang/rust
 # Takes about 3hrs 10 mins to compile, roughly
 get_version() {
     local inst_ver=$(pkgver $name)
-    local lfs_vers=$(lfs_ver $name)
+    local lfs_vers=$(lfs_ver $_name)
     local up_ver=$(wget -T 5 -cqO- https://blog.rust-lang.org/releases/latest | grep "\-[0-9]\." | head -n 1 | cut -d '/' -f 5 | cut -d '-' -f 2)
     ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
 
-    local ghub_ver=$(gh_ver rust-lang/rust)
+    local ghub_ver=$(gh_ver $repo)
     ver_check "$ghub_ver" "$inst_ver" "$lfs_vers" && return
 
     fver "$name" "$inst_ver"
 }
 version=$(get_version)
-filename="$name-$version-src.tar.xz"
+filename="$_name-$version-src.tar.xz"
 direname="${filename/.tar.xz/}"
 depends=(brotli cmake coreutils curl cyrus-sasl gcc glibc libffi libidn2 libpsl libunistring libxml2 llvm nghttp2 openldap openssl python zlib zstd)
 if [[ $(free -h | tail -n 2 | head -n 1 | sed 's/Mem:\s*//g' | cut -d ' ' -f 1 | sed 's/Gi//g') -lt 15 ]]; then
@@ -22,8 +24,8 @@ if [[ $(free -h | tail -n 2 | head -n 1 | sed 's/Mem:\s*//g' | cut -d ' ' -f 1 |
 fi
 download_src "https://static.rust-lang.org/dist/$filename"
 unpk_enter "$filename" "$direname"
-sudo mkdir -pv /opt/$name-$version      &&
-sudo ln -svfn $name-$version /opt/$name
+sudo mkdir -pv /opt/$_name-$version      &&
+sudo ln -svfn $_name-$version /opt/$_name
 change_id=$(cat src/bootstrap/src/utils/change_tracker.rs | grep "change_id" | sed 's/^\s*change_id:\s//g' | cut -d ',' -f 1 | grep -E "^[0-9]+$" | sort -V | tail -n 1)
 cat << EOF > bootstrap.toml
 # See bootstrap.toml.example for more possible options,
@@ -80,7 +82,7 @@ EOF
 export LIBSSH2_SYS_USE_PKG_CONFIG=1
 export LIBSQLITE3_SYS_USE_PKG_CONFIG=1
 (
-	export PATH=$PATH:/opt/rustc-$(cat /var/lib/custom-packages/rustc | head -n 1)/bin
+	export PATH=$PATH:/opt/rustc-$(cat /var/lib/custom-packages/$name | head -n 1)/bin
     cd src/tools/cargo
     cargo update --offline
 )

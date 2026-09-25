@@ -7,6 +7,8 @@ get_version() {
   local inst_ver=$(pkgver $name)
   local up_ver=$(wget -cqO- -T 5 "https://download.savannah.gnu.org/releases/lzip/" | grep -oE 'lzip-[0-9.]+\.tar\.gz' | sort -V | tail -n 1 | sed -e 's/lzip-//' -e 's/.tar.gz//')
   ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
+  local mon_ver=$(uver $name)
+	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
   local vat_ver=$(vatver $name)
   ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
 

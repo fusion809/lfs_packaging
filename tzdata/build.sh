@@ -9,6 +9,8 @@ get_version() {
 	local art_ver=$(artver $name)
 	local up_ver=$(wget -T 5 -t 1 -cqO- https://www.iana.org/time-zones | grep "time-zones/releases" | cut -d '/' -f 4 | sed 's/".*//g' | head -n 1)
 	ver_check "$up_ver" "$inst_ver" "$art_ver" && return
+	local mon_ver=$(uver $name)
+	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
 	local vat_ver=$(vatver $name)
 	ver_check "$vat_ver" "$inst_ver" "$art_ver" && return
 

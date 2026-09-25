@@ -6,6 +6,8 @@ get_version() {
   local lfs_vers=$(lfs_ver $name)
   local git_ver=$(timeout 15 git ls-remote --tags --refs https://git.openldap.org/openldap/openldap.git 'refs/tags/LMDB_*' | grep -oE "refs/tags/LMDB_[0-9.]+$" | sed 's/.*LMDB_//g' | sort -V | tail -n 1)
   ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
+  local mon_ver=$(uver $name)
+	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
   local vat_ver=$(vatver $name)
   ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
 

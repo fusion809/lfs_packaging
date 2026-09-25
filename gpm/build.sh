@@ -8,7 +8,12 @@ get_version() {
 	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
 	local git_ver=$(timeout 5 git ls-remote --tags --refs https://github.com/telmich/gpm.git | grep "refs/tags/[0-9]+\.[0-9]+\.[0-9]+" -oE | grep -v "\.99" | cut -d '/' -f 3 | sort -V | tail -n 1)
 	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
+	local mon_ver=$(uver $name)
+	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
 	local arch_ver=$(aver $name | sed 's/\.r.*//g')
+	ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
+	local art_ver=$(artver $name | sed 's/\.r.*//g')
+	ver_check "$art_ver" "$inst_ver" "$lfs_vers" && return
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)

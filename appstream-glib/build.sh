@@ -7,7 +7,8 @@ get_version() {
 	local lfs_vers=$(lfs_ver $name)
 	local up_ver=$(wget -T 5 -t 1 -cqO- https://people.freedesktop.org/~hughsient/appstream-glib/releases/ | grep -v "sha.*sum" | grep "appstream-glib-.*.tar.xz" | tail -n 1 | cut -d '"' -f 2 | sed 's/appstream-glib-//g' | sed 's/.tar.xz//g')
 	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
-
+	local mon_ver=$(uver $name)
+	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
 	local vat_ver=$(vatver $name)
 	ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
 

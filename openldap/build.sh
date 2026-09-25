@@ -8,6 +8,8 @@ get_version() {
   ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
   local git_ver=$(timeout 5 git ls-remote --tags --refs "https://git.openldap.org/openldap/openldap.git" | grep -E "refs/tags/OPENLDAP_REL_ENG_[0-9_]+$" | sed 's/.*OPENLDAP_REL_ENG_//g' | tr '_' '.' | sort -V | tail -n 1)
   ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
+  local mon_ver=$(uver $name)
+	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
   fver "$name" "$inst_ver"
 }
 version=$(get_version)

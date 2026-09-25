@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=zstd
+homepage="https://facebook.github.io/zstd/"
 repo=facebook/$name
 version=$(gh_ver $repo)
 depends=(coreutils gcc glibc gzip make tar)

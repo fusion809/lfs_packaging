@@ -6,6 +6,9 @@ get_version() {
 	local lfs_vers=$(lfs_ver $name)
 	local up_ver=$(wget -cqO- -T 5 -t 1 https://sourceforge.net/projects/potrace/files/ | grep "[0-9]+\.[0-9]+/" -oE | cut -d '/' -f 1 | sort -V | tail -n 1)
 	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
+	local mon_ver=$(uver $name)
+	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
+
 	local vat_ver=$(vatver $name)
 	ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
 

@@ -1,12 +1,14 @@
 #!/bin/bash
 set -e
 name=curl
+repo=$name/$name
+homepage="https://curl.se/"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)
 	local up_ver=$(wget -T 5 -t 1 -cqO- https://curl.se/download | grep "curl-[0-9.]+.tar.xz" -oE | sed 's/.tar.xz//g' | cut -d '-' -f 2 | sort -V | tail -n 1)
 	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
-	echo $(gh_ver curl/curl)
+	echo $(gh_ver $repo)
 }
 version=$(get_version)
 filename="$name-$version.tar.xz"

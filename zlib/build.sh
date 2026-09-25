@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=zlib
+homepage="https://www.zlib.net"
 get_up_ver() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)
@@ -11,7 +12,7 @@ get_up_ver() {
 	local art_ver=$(aver $name)
 	ver_check "$art_ver" "$inst_ver" "$lfs_vers" && return
 }
-repo=malder/$name
+repo=madler/$name
 version=$(get_up_ver || gh_ver $repo)
 depends=(coreutils gcc glibc gzip make tar wget)
 filename="$name-$version.tar.gz"

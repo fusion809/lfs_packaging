@@ -14,6 +14,8 @@ get_version() {
 	fi
 	local inst_ver=$(pkgver $name)
 	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
+    local mon_ver=$(uver $name)
+	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
 	local vat_ver=$(vatver $name)
 	ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
 

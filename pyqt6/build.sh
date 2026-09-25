@@ -8,6 +8,9 @@ get_version() {
   local art_ver=$(artver $name)
   local up_ver=$(wget -T 5 -cqO- https://pypi.org/rss/project/pyqt6/releases.xml | grep "pyqt6/[0-9]" | grep -v "alpha\|beta\|rc" | head -n 1 | cut -d '/' -f 6)
   ver_check "$up_ver" "$inst_ver" "$art_ver" && return
+  local mon_ver=$(uver $name)
+	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
+
   local vat_ver=$(vatver $name)
   ver_check "$vat_ver" "$inst_ver" "$art_ver" && return
 
