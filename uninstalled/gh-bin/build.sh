@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-name=gh
+name=gh-bin
 repo=cli/cli
 version=$(gh_ver $repo)
 filename="${name}_${version}_linux_amd64.tar.gz"
