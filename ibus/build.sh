@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
-source $HOME/lfs_packaging/shared-funcs.sh
 name=ibus
-version=$(gh_ver "ibus/ibus")
+repo=$name/$name
+version=$(gh_ver "$repo")
 filename="$name-$version.tar.gz"
 direname="$name-$version"
 depends=(at-spi2-core bash brotli bzip2 cairo coreutils dbus dconf elfutils expat fontconfig freetype fribidi gcc gdk-pixbuf gettext glib2 glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk3 gtk3 gtk4 gzip harfbuzz iso-codes lcms2 libdrm libelf libepoxy libffi libgudev libjpeg-turbo libnotify libnotify libpciaccess libpng libseccomp libsoup libtiff libunwind libwebp libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxml2 libxrandr libxrender libxres libxshmfence libxxf86vm llvm lm-sensors mesa orc pango pcre2 pixman python spirv-tools systemd tar util-linux vala vulkan-loader wayland wget xz zip zlib zstd)
