@@ -457,7 +457,10 @@ function gngnu_ver {
 }
 
 function goct_ver {
-    timeout 5 git ls-remote --tags --refs https://github.com/gnu-octave/octave.git 2>/dev/null | grep "release-" | cut -d '/' -f 3 | sed 's/release-//g' | sed 's/-/./g' | sort -V | tail -n1
+	local URL="https://github.com/gnu-octave/octave.git"
+    timeout 5 git ls-remote --tags --refs "$URL" 2>/dev/null \
+	| grep "release-" | cut -d '/' -f 3 | sed 's/release-//g' \
+	| sed 's/-/./g' | sort -V | tail -n1
 }
 
 function gsf_ver {
@@ -467,23 +470,38 @@ function gsf_ver {
 		local URL="https://git.code.sf.net/p/$1.git"
 	fi
 	local name=$(echo $1 | cut -d '/' -f 1)
-    timeout 5 git ls-remote --tags --refs $URL 2>/dev/null | grep -E "tags/(v?[0-9.]+|${name}-[0-9.]+)" | sed "s/$name-//g" | cut -d '/' -f 3 | sed 's/^v//g' | sort -V | tail -n 1
+    timeout 5 git ls-remote --tags --refs $URL 2>/dev/null \
+	| grep -E "tags/(v?[0-9.]+|${name}-[0-9.]+)" | sed "s/$name-//g" \
+	| cut -d '/' -f 3 | sed 's/^v//g' | sort -V | tail -n 1
 }
 
 function gsp_ver {
-    timeout 5 git ls-remote --tags --refs https://gitlab.freedesktop.org/$1.git 2>/dev/null | cut -d '/' -f 3 | grep "[0-9]" | grep -v "server\|common\|client" | sed -E 's|[a-z_-]+||g' | sort -V | tail -n 1
+	local URL="https://gitlab.freedesktop.org/$1.git"
+    timeout 5 git ls-remote --tags --refs "$URL" 2>/dev/null \
+	| cut -d '/' -f 3 | grep "[0-9]" | grep -v "server\|common\|client" \
+	| sed -E 's|[a-z_-]+||g' | sort -V | tail -n 1
 }
 
 function gsw_ver {
-	timeout 5 git ls-remote --tags --refs https://sourceware.org/git/$1.git | grep -oEi "$1[_-]*[0-9_.]+" | sed -E 's/^[A-Za-z0-9]+[_-]//g' | tr '_' '.' | sort -V | tail -n 1
+	local URL="https://sourceware.org/git/$1.git"
+	timeout 5 git ls-remote --tags --refs "$URL" \
+	| grep -oEi "$1[_-]*[0-9_.]+" | sed -E 's/^[A-Za-z0-9]+[_-]//g' \
+	| tr '_' '.' | sort -V | tail -n 1
 }
 
 function gver {
 	local repo=$1
-	wget -T 5 -t 1 -cqO- https://gitweb.gentoo.org/repo/gentoo.git/tree/$repo | grep "\-[0-9]+\.[0-9.]+[_p0-9]*" -oE | grep -v "9999" | grep -vE "[prc][0-9]+" | sed 's/^-//g' | sed 's/\.$//g' | sort -V | tail -n 1
+	local URL="https://gitweb.gentoo.org/repo/gentoo.git/tree/$repo"
+	wget -T 5 -t 1 -cqO- "$URL" | grep "\-[0-9]+\.[0-9.]+[_p0-9]*" -oE \
+	| grep -v "9999" | grep -vE "[prc][0-9]+" | sed 's/^-//g' \
+	| sed 's/\.$//g' | sort -V | tail -n 1
 }
+
 function gxfd_ver {
-    timeout 5 git ls-remote --tags --refs https://gitlab.freedesktop.org/xorg/$1/$2.git 2>/dev/null | grep "$2-" -i | sed -E "s/.*$2[-_]+//g" | tr '_' '.' | sort -V | tail -n 1
+	local URL="https://gitlab.freedesktop.org/xorg/$1/$2.git"
+    timeout 5 git ls-remote --tags --refs "$URL" 2>/dev/null \
+	| grep "$2-" -i | sed -E "s/.*$2[-_]+//g" | tr '_' '.' | sort -V \
+	| tail -n 1
 }
 
 function lfs_ver {
@@ -519,8 +537,9 @@ function lfs_ver {
 }
 
 function nixver {
-	local name=$(echo $1 | tr '[:upper:]' '[:lower:]')	
-	wget -cqO- -T 5 -t 1 "https://search.nixos.org/packages?channel=unstable&query=$name#show=$name"
+	local name=$(echo $1 | tr '[:upper:]' '[:lower:]')
+	local URL="https://search.nixos.org/packages?channel=unstable&query=$name#show=$name"	
+	wget -cqO- -T 5 -t 1 "$URL"
 }
 
 function vatver {
@@ -541,58 +560,102 @@ function wgn_ver {
 		URL="https://gitlab.gnome.org/GNOME/$1"
 	fi
     if [[ "$1" == "gtk3" || "$2" == "3" ]]; then
-	    wget --timeout=10 -t 1 -cqO- "$URL/-/tags" | grep -oE "tags/[^\"]+" | sed 's|tags/||' | grep -viE "alpha|beta|\.rc|rc[0-9]|\.9[0-9]" | sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' | grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^3\.[02468]+" | sort -V | tail -n 1
+	    wget -T 10 -t 1 -cqO- "$URL/-/tags" | grep -oE "tags/[^\"]+" \
+		| sed 's|tags/||' | grep -viE "alpha|beta|\.rc|rc[0-9]|\.9[0-9]" \
+		| sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' \
+		| grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^3\.[02468]+" | sort -V \
+		| tail -n 1
     elif [[ "$1" == "gtk" || "$1" == "gtk4" || "$2" == "4" ]]; then
-	    wget --timeout=10 -t 1 -cqO- "$URL/-/tags" | grep -oE "tags/[^\"]+" | sed 's|tags/||' | grep -viE "alpha|beta|\.rc|rc[0-9]|\.9[0-9]" | sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' | grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^4\.[02468]+\.[0-9]+$" | sort -V | tail -n 1
+	    wget -T 10 -t 1 -cqO- "$URL/-/tags" | grep -oE "tags/[^\"]+" \
+		| sed 's|tags/||' | grep -viE "alpha|beta|\.rc|rc[0-9]|\.9[0-9]" \
+		| sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' \
+		| grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^4\.[02468]+\.[0-9]+$" \
+		| sort -V | tail -n 1
 	elif [[ "$1" == "gjs" ]]; then
-	    wget --timeout=10 -t 1 -cqO- "$URL/-/tags" | grep -oE "tags/[^\"]+" | sed 's|tags/||' | grep -viE "alpha|beta|\.rc|rc[0-9]|\.9[0-9]" | sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' | grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^[0-9]+\.[0-9]+\.[0-9]+$" | grep -vE "[0-9]+\.[0-9]+\.9[0-9]" | sort -V | tail -n 1
+	    wget -T 10 -t 1 -cqO- "$URL/-/tags" | grep -oE "tags/[^\"]+" \
+		| sed 's|tags/||' | grep -viE "alpha|beta|\.rc|rc[0-9]|\.9[0-9]" \
+		| sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' \
+		| grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^[0-9]+\.[0-9]+\.[0-9]+$" \
+		| grep -vE "[0-9]+\.[0-9]+\.9[0-9]" | sort -V | tail -n 1
     elif [[ "$1" == "libsoup" ]]; then
-	    wget --timeout=10 -t 1 -cqO- "$URL/-/tags" | grep -oE "tags/[^\"]+" | sed 's|tags/||' | grep -viE "alpha|beta|\.rc|rc[0-9]|\.9[0-9]" | sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' | grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^[0-9]+\.[02468]+\.[0-9]+$" | grep -vE "[0-9]+\.[0-9]+\.9[0-9]" | sort -V | tail -n 1
+	    wget -T 10 -t 1 -cqO- "$URL/-/tags" | grep -oE "tags/[^\"]+" \
+		| sed 's|tags/||' | grep -viE "alpha|beta|\.rc|rc[0-9]|\.9[0-9]" \
+		| sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' \
+		| grep -E '^[0-9]+(\.[0-9]+)+$' \
+		| grep -E "^[0-9]+\.[02468]+\.[0-9]+$" \
+		| grep -vE "[0-9]+\.[0-9]+\.9[0-9]" | sort -V | tail -n 1
     elif [[ "$1" == "glib2" || "$1" == "glib-networking" ]]; then
-	    wget --timeout=10 -t 1 -cqO- "$URL/-/tags" | grep -oE "tags/[^\"]+" | sed 's|tags/||' | grep -viE "alpha|beta|\.rc|rc" | sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' | grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^${2:-[0-9]}" | sort -V | tail -n 1
+	    wget -T 10 -t 1 -cqO- "$URL/-/tags" | grep -oE "tags/[^\"]+" \
+		| sed 's|tags/||' | grep -viE "alpha|beta|\.rc|rc" \
+		| sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' \
+		| grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^${2:-[0-9]}" | sort -V \
+		| tail -n 1
     else
-	    wget --timeout=10 -t 1 -cqO- "$URL/-/tags" | grep -oE "tags/[^\"]+" | sed 's|tags/||' | grep -viE "alpha|beta|\.rc|rc[0-9]|\.9[0-9]" | sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' | grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^${2:-[0-9]}" | sort -V | tail -n 1
+	    wget -T 10 -t 1 -cqO- "$URL/-/tags" | grep -oE "tags/[^\"]+" \
+		| sed 's|tags/||' | grep -viE "alpha|beta|\.rc|rc[0-9]|\.9[0-9]" \
+		| sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' \
+		| grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^${2:-[0-9]}" | sort -V \
+		| tail -n 1
     fi
 }
 
 function wgnu_ver {
-    curl -sL --connect-timeout 3 --max-time 5 "https://ftp.gnu.org/gnu/$1/" 2>/dev/null | sed -nE "s/.*href=[\"\x27]?$1-([0-9]+(\.[0-9]+)*)(\/|\.tar\.[a-z0-9]+|\.zip)[\"\x27]?.*/\1/p" | sort -V | tail -n 1
+    wget -cqO- -T 5 -t 1 "https://ftp.gnu.org/gnu/$1/" 2>/dev/null \
+	| sed -nE "s/.*href=[\"\x27]?$1-([0-9]+(\.[0-9]+)*)(\/|\.tar\.[a-z0-9]+|\.zip)[\"\x27]?.*/\1/p" \
+	| sort -V | tail -n 1
 }
 
 function wkap_ver {
-	wget -T 5 -t 1 -c https://download.kde.org/stable/release-service -qO- | grep -oE "[0-9]+\.[0-9]+\.[0-9]+" | sort -V | tail -n 1
+	wget -T 5 -t 1 -cqO- https://download.kde.org/stable/release-service \
+	| grep -oE "[0-9]+\.[0-9]+\.[0-9]+" | sort -V | tail -n 1
 }
 
 function wlgd_ver {
-    wget --timeout=5 -t 1 -cqO- https://gitlab.gnome.org/World/gedit/$1/-/tags | grep "tags/"| grep -v "alpha\|beta\|\.rc" | cut -d '"' -f 2 | cut -d '/' -f 7 | head -n 1
+    wget -T 5 -t 1 -cqO- https://gitlab.gnome.org/World/gedit/$1/-/tags \
+	| grep "tags/"| grep -v "alpha\|beta\|\.rc" | cut -d '"' -f 2 \
+	| cut -d '/' -f 7 | head -n 1
 }
 
 function wlp_ver {
-	wget --timeout=5 -t 1 -cqO- "$1/-/tags" | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv} -oE "tags/[^\"]+" | sed 's|tags/||' | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv} -viE "alpha|beta|\.rc|rc[0-9]|\.9[0-9]" | sed -E 's/libpeas-//g' | grep '^1' | sort -V | tail -n 1
+	wget -T 5 -t 1 -cqO- "$1/-/tags" | grep -oE "tags/[^\"]+" \
+	| sed 's|tags/||' | grep -viE "alpha|beta|\.rc|rc[0-9]|\.9[0-9]" \
+	| sed -E 's/libpeas-//g' | grep '^1' | sort -V | tail -n 1
 }
 
 function wngnu_ver {
-	curl -sL --connect-timeout 3 --max-time 5 "https://download.savannah.nongnu.org/releases/$1/" 2>/dev/null | grep -oE "$1-[0-9]+(\.[0-9]+)+(\.tar\.[a-z0-9]+|\.src\.tar\.gz|\.zip)" | sed -E "s/$1-([0-9]+(\.[0-9]+)+).*/\1/" | sort -V | tail -n 1
+	local URL="https://download.savannah.nongnu.org/releases/$1/"
+	wget -T 5 -t 1 -cqO- "$URL" 2>/dev/null \
+	| grep -oE "$1-[0-9]+(\.[0-9]+)+(\.tar\.[a-z0-9]+|\.src\.tar\.gz|\.zip)" \
+	| sed -E "s/$1-([0-9]+(\.[0-9]+)+).*/\1/" | sort -V | tail -n 1
 }
 
 function wsf_ver {
-    #wget --timeout=5 -t 1 -cqO- https://sourceforge.net/p/$1/ref/master/tags/ | grep "/tree" | grep -v "alpha\|beta\|rc" | grep -v "git-conv" | tail -n 1 | cut -d '/' -f 6
-    wget --timeout=5 -t 1 -cqO- https://sourceforge.net/p/$1/ref/master/tags/ | grep -oE "ci/[v]*[0-9]+\.[0-9]+\.[0-9]+" | cut -d '/' -f 2 | sed 's/v//g' | tail -n 1
+    wget -T 5 -t 1 -cqO- https://sourceforge.net/p/$1/ref/master/tags/ \
+	| grep -oE "ci/[v]*[0-9]+\.[0-9]+\.[0-9]+" | cut -d '/' -f 2 \
+	| sed 's/v//g' | tail -n 1
 }
 
 function wsp_ver {
 	local repo_url=$(echo $1 | sed "s|/|%2F|g")
-    wget --timeout=5 -t 1 -cqO- "https://gitlab.freedesktop.org/api/v4/projects/${repo_url}/releases?per_page=1" | grep -o '"tag_name":"[^"]*"' | grep -v "server" | sed -E 's|[a-z_-]+||g' | head -n 1 | cut -d'"' -f4
+	local URL="https://gitlab.freedesktop.org/api/v4/projects/${repo_url}/releases?per_page=1"
+    wget -T 5 -t 1 -cqO- "$URL" | grep -o '"tag_name":"[^"]*"' \
+	| grep -v "server" | sed -E 's|[a-z_-]+||g' | head -n 1 | cut -d '"' -f4
 }
 
 function wsw_ver {
-	wget -cqO- -T 5 -t 1 "https://sourceware.org/pub/$1/" | grep "$1-[0-9]+\.[0-9]+\.[0-9]+" -oE | sed "s/$1-//g" | sort -V | tail -n 1
+	wget -cqO- -T 5 -t 1 "https://sourceware.org/pub/$1/" \
+	| grep "$1-[0-9]+\.[0-9]+\.[0-9]+" -oE | sed "s/$1-//g" | sort -V \
+	| tail -n 1
 }
 
 function wxfd_ver {
-    wget --timeout=5 -t 1 -cqO- https://xorg.freedesktop.org/archive/individual/$1/ | grep "$2-" | grep '\.tar\.xz"' | cut -d '"' -f 2 | sed "s/$2-//g" | sed 's/.tar.*$//g' | sort -V | tail -n 1
+    wget -T 5 -t 1 -cqO- https://xorg.freedesktop.org/archive/individual/$1/ \
+	| grep "$2-" | grep '\.tar\.xz"' | cut -d '"' -f 2 | sed "s/$2-//g" 
+	| sed 's/.tar.*$//g' | sort -V | tail -n 1
 }
 
 function wxcb_ver {
-	wget -T 5 -t 1 -cqO- https://xorg.freedesktop.org/archive/individual/lib/ | grep "$1-[0-9]+\.[0-9]+\.[0-9]+" -oE | sed "s/$1-//g" | sort -V | tail -n 1
+	wget -T 5 -t 1 -cqO- https://xorg.freedesktop.org/archive/individual/lib/ \
+	| grep "$1-[0-9]+\.[0-9]+\.[0-9]+" -oE | sed "s/$1-//g" | sort -V \
+	| tail -n 1
 }
