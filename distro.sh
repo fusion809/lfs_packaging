@@ -30,14 +30,9 @@ function check_aur {
 
 function aver {
 	local name=$(echo $1 | tr '[:upper:]' '[:lower:]')
-    if echo $(check_arch $name) &> /dev/null; then
+    	if echo $(check_arch $name) &> /dev/null; then
 		local URL="https://gitlab.archlinux.org/archlinux/packaging/packages/$name/-/raw/main/PKGBUILD"
-		if [[ -n $2 ]]; then
-			local no="$2"
-		else
-			local no=1
-		fi
-		local pkgver=$(wget -cqO- "$URL" | sed -n '1,/^pkgver=/p')
+		local pkgver=$(wget -cqO- "$URL" | grep -E "^pkgver=[0-9.a-z]+$" | sed 's/^pkgver=//g')
 	elif echo $(check_aur $name) &> /dev/null; then
 		local pkgver=$(aurver "$name")
 	else
