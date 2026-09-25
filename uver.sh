@@ -3,31 +3,39 @@ typeset -g UVER_CACHE=${XDG_CACHE_HOME:-$HOME/.cache}/uver
 typeset -g UVER_CACHE_TTL=300
 uver() {
 	local input_pkg=${1:-}
-	local pkg=${input_pkg:l}
+	local pkg=${input_pkg,,}
 	local build repo name fallback_name
 	local project_id backend project_homepage ecosystem version_url
 	local homepage cache_file cache_time now version line
 	local wanted_homepage
 	local search_name
 	local candidate candidate_pkg
-	local -a project_lines matches
 	local projects project_count
+	local matches match_count
+	local repo_matches repo_match_count
+	local homepage_matches homepage_match_count
+	local lowest_id lowest_line
+	local search_attempt
+
+	# Bash does not support ${var,,} in very old versions, while Zsh
+	# does not interpret it identically.  tr works in both shells.
+	pkg=$(printf '%s\n' "$input_pkg" | tr '[:upper:]' '[:lower:]')
 
 	if [[ -z "$pkg" ]]; then
-		print -u2 'usage: uver package'
+		printf '%s\n' 'usage: uver package' >&2
 		return 2
 	fi
 
 	mkdir -p "$UVER_CACHE"
 
-	# Locate build.sh.  Package directory names are normally lowercase,
-	# but allow the name supplied by the caller as well, e.g. R/build.sh.
+	# Locate build.sh.  Try the exact package name first, then the
+	# lower-case name, then uninstalled/.
 	build=
 	for candidate in \
-		"$LFP/$pkg/build.sh" \
 		"$LFP/$input_pkg/build.sh" \
-		"$LFP/uninstalled/$pkg/build.sh" \
-		"$LFP/uninstalled/$input_pkg/build.sh"
+		"$LFP/$pkg/build.sh" \
+		"$LFP/uninstalled/$input_pkg/build.sh" \
+		"$LFP/uninstalled/$pkg/build.sh"
 	do
 		if [[ -f "$candidate" ]]; then
 			build=$candidate
@@ -35,18 +43,31 @@ uver() {
 		fi
 	done
 
-	# If that did not find it, try case-insensitive directory matching.
+	# If the exact names did not work, find build.sh case-insensitively.
+	# This avoids zsh-only glob qualifiers such as (N).
 	if [[ -z "$build" ]]; then
-		for candidate in "$LFP"/*/build.sh(N) "$LFP/uninstalled"/*/build.sh(N); do
-			candidate_pkg=${candidate:h:t}
-			if [[ "${candidate_pkg:l}" == "$pkg" ]]; then
+		while IFS= read -r candidate; do
+			candidate_pkg=${candidate%/build.sh}
+			candidate_pkg=${candidate_pkg##*/}
+			candidate_pkg=$(printf '%s\n' "$candidate_pkg" |
+				tr '[:upper:]' '[:lower:]')
+
+			if [[ "$candidate_pkg" == "$pkg" ]]; then
 				build=$candidate
 				break
 			fi
-		done
+		done < <(
+			find "$LFP" "$LFP/uninstalled" \
+				-mindepth 2 -maxdepth 2 \
+				-type f -name build.sh \
+				-print 2>/dev/null
+		)
 	fi
 
-	# Read build.sh metadata when available.
+	homepage=
+	repo=
+	fallback_name=
+
 	if [[ -n "$build" ]]; then
 		homepage=$(
 			sed -n '
@@ -94,19 +115,30 @@ uver() {
 		fallback_name=${fallback_name#\'}
 		fallback_name=${fallback_name%\'}
 
-		# Expand variables such as $name using the package name as the
-		# value of $name, preserving the existing uver behaviour.
+		# Expand variables such as $name, preserving the previous
+		# behaviour of uver.  eval is supported by both Bash and Zsh.
 		name=$pkg
-		homepage=${(e)homepage}
-		repo=${(e)repo}
-		fallback_name=${(e)fallback_name}
+
+		if [[ -n "$homepage" ]]; then
+			eval "homepage=$homepage"
+		fi
+
+		if [[ -n "$repo" ]]; then
+			eval "repo=$repo"
+		fi
+
+		if [[ -n "$fallback_name" ]]; then
+			eval "fallback_name=$fallback_name"
+		fi
 	fi
 
-	# Search Anitya.  If the package name produces no usable project,
-	# _name is tried as a fallback.
+	# Search Anitya.  _name is used when the normal package name either
+	# has no Anitya project or only produces projects that do not match
+	# the build.sh metadata.
 	search_name=$pkg
+	search_attempt=0
 
-	while true; do
+	while :; do
 		projects=$(
 			timeout 15 wget -qO- \
 				"https://release-monitoring.org/api/v2/projects/?name=$search_name&items_per_page=10" |
@@ -126,247 +158,227 @@ for p in json.load(sys.stdin).get("items", []):
 		)
 
 		if [[ -z "$projects" ]]; then
-			# If _name was tried already, there is nothing more to do.
-			if [[ "$search_name" != "$pkg" || -z "$fallback_name" ||
-			      "${fallback_name:l}" == "$pkg" ]]; then
-				print -u2 "No Anitya project found for $search_name"
-				return 1
+			if [[ "$search_attempt" -eq 0 &&
+			      -n "$fallback_name" &&
+			      "$(printf '%s\n' "$fallback_name" | tr '[:upper:]' '[:lower:]')" != "$pkg" ]]
+			then
+				search_name=$(printf '%s\n' "$fallback_name" |
+					tr '[:upper:]' '[:lower:]')
+				search_attempt=1
+				continue
 			fi
 
-			search_name=${fallback_name:l}
-			continue
+			printf 'No Anitya project found for %s\n' "$search_name" >&2
+			return 1
 		fi
 
-		project_lines=("${(@f)projects}")
-		project_count=${#project_lines}
+		project_count=$(printf '%s\n' "$projects" | wc -l)
 
-		# If build.sh is available, determine whether the projects returned
-		# for the current name actually correspond to it.
-		if [[ -n "$build" && ( -n "$homepage" || -n "$repo" ) ]]; then
-			matches=()
+		# For a single project, check the build metadata if available.
+		# If it does not match, _name may provide the correct project.
+		if [[ "$project_count" -eq 1 &&
+		      -n "$build" &&
+		      ( -n "$homepage" || -n "$repo" ) ]]
+		then
+			IFS=$'\t' read -r \
+				project_id backend project_homepage ecosystem version_url \
+				<<< "$projects"
 
-			normalize_url() {
-				local url=${1:l}
-				url=${url#http://}
-				url=${url#https://}
-				url=${url#www.}
-				url=${url%/}
-				print -r -- "$url"
-			}
-
-			wanted_homepage=$(normalize_url "$homepage")
+			match_count=0
 
 			if [[ -n "$homepage" ]]; then
-				for line in "${project_lines[@]}"; do
-					IFS=$'\t' read -r \
-						project_id backend project_homepage ecosystem version_url \
-						<<< "$line"
+				wanted_homepage=$homepage
+				wanted_homepage=${wanted_homepage#http://}
+				wanted_homepage=${wanted_homepage#https://}
+				wanted_homepage=${wanted_homepage#www.}
+				wanted_homepage=${wanted_homepage%/}
 
-					if [[ "$wanted_homepage" == "$(normalize_url "$project_homepage")" ||
-					      "$wanted_homepage" == "$(normalize_url "$ecosystem")" ]]; then
-						matches+=("$line")
-					fi
-				done
-			fi
+				project_homepage_normalized=$project_homepage
+				project_homepage_normalized=${project_homepage_normalized#http://}
+				project_homepage_normalized=${project_homepage_normalized#https://}
+				project_homepage_normalized=${project_homepage_normalized#www.}
+				project_homepage_normalized=${project_homepage_normalized%/}
 
-			# repo= is used whenever the homepage does not uniquely identify
-			# a project.  This is important when several Anitya projects
-			# share the same homepage.
-			if (( ${#matches[@]} != 1 )) && [[ -n "$repo" ]]; then
-				local -a repo_matches
-				repo_matches=()
-
-				for line in "${project_lines[@]}"; do
-					IFS=$'\t' read -r \
-						project_id backend project_homepage ecosystem version_url \
-						<<< "$line"
-
-					if [[ "$version_url" == "$repo" ]]; then
-						repo_matches+=("$line")
-					fi
-				done
-
-				if (( ${#repo_matches[@]} == 1 )); then
-					matches=("${repo_matches[@]}")
+				if [[ "$wanted_homepage" == "$project_homepage_normalized" ]]; then
+					match_count=1
 				fi
 			fi
 
-			# The current Anitya search name is usable if its metadata
-			# identifies exactly one project, or if there is no metadata
-			# available with which to disambiguate it.
-			if (( ${#matches[@]} == 1 )); then
+			if [[ "$match_count" -eq 0 && -n "$repo" &&
+			      "$version_url" == "$repo" ]]
+			then
+				match_count=1
+			fi
+
+			if [[ "$match_count" -eq 1 ]]; then
 				break
 			fi
 
-			# If the current name produced projects but none correspond to
-			# the build.sh metadata, try _name.
-			if (( ${#matches[@]} == 0 )) &&
-			   [[ "$search_name" == "$pkg" ]] &&
-			   [[ -n "$fallback_name" ]] &&
-			   [[ "${fallback_name:l}" != "$pkg" ]]
+			if [[ "$search_attempt" -eq 0 &&
+			      -n "$fallback_name" &&
+			      "$(printf '%s\n' "$fallback_name" | tr '[:upper:]' '[:lower:]')" != "$pkg" ]]
 			then
-				search_name=${fallback_name:l}
+				search_name=$(printf '%s\n' "$fallback_name" |
+					tr '[:upper:]' '[:lower:]')
+				search_attempt=1
 				continue
 			fi
-		else
-			# No build metadata to disambiguate with.  A single project is
-			# sufficient; multiple projects are handled below.
-			break
 		fi
 
 		break
 	done
 
-	project_lines=("${(@f)projects}")
-	project_count=${#project_lines}
+	# Re-read the resulting project list.
+	project_count=$(printf '%s\n' "$projects" | wc -l)
 
-	# One project: use it directly.
-	if (( project_count == 1 )); then
+	if [[ "$project_count" -eq 1 ]]; then
 		IFS=$'\t' read -r \
 			project_id backend project_homepage ecosystem version_url \
-			<<< "${project_lines[1]}"
+			<<< "$projects"
 	else
-		# Multiple projects: use build.sh metadata to resolve them.
 		if [[ -z "$build" ]]; then
-			print -u2 "Multiple Anitya projects found for $search_name; no $build"
-			print -u2 "Candidates:"
-			for line in "${project_lines[@]}"; do
-				IFS=$'\t' read -r \
-					project_id backend project_homepage ecosystem version_url \
-					<<< "$line"
+			printf 'Multiple Anitya projects found for %s; no build.sh\n' \
+				"$search_name" >&2
+			printf '%s\n' 'Candidates:' >&2
 
-				print -u2 \
-					"  $project_id  $project_homepage  [$backend${version_url:+: $version_url}]"
-			done
+			while IFS=$'\t' read -r \
+				project_id backend project_homepage ecosystem version_url
+			do
+				printf '  %s  %s  [%s%s]\n' \
+					"$project_id" \
+					"$project_homepage" \
+					"$backend" \
+					"${version_url:+: $version_url}" >&2
+			done <<< "$projects"
+
 			return 1
 		fi
 
-		matches=()
+		matches=
+		match_count=0
 
-		normalize_url() {
-			local url=${1:l}
-			url=${url#http://}
-			url=${url#https://}
-			url=${url#www.}
-			url=${url%/}
-			print -r -- "$url"
-		}
-
-		wanted_homepage=$(normalize_url "$homepage")
-
-		# First restrict candidates by homepage.
+		# First match by normalised homepage.
 		if [[ -n "$homepage" ]]; then
-			for line in "${project_lines[@]}"; do
-				IFS=$'\t' read -r \
-					project_id backend project_homepage ecosystem version_url \
-					<<< "$line"
+			wanted_homepage=$homepage
+			wanted_homepage=${wanted_homepage#http://}
+			wanted_homepage=${wanted_homepage#https://}
+			wanted_homepage=${wanted_homepage#www.}
+			wanted_homepage=${wanted_homepage%/}
 
-				if [[ "$wanted_homepage" == "$(normalize_url "$project_homepage")" ||
-				      "$wanted_homepage" == "$(normalize_url "$ecosystem")" ]]; then
-					matches+=("$line")
+			while IFS=$'\t' read -r \
+				project_id backend project_homepage ecosystem version_url
+			do
+				project_homepage_normalized=$project_homepage
+				project_homepage_normalized=${project_homepage_normalized#http://}
+				project_homepage_normalized=${project_homepage_normalized#https://}
+				project_homepage_normalized=${project_homepage_normalized#www.}
+				project_homepage_normalized=${project_homepage_normalized%/}
+
+				if [[ "$wanted_homepage" == "$project_homepage_normalized" ]]; then
+					if [[ -z "$matches" ]]; then
+						matches=$project_id$'\t'$backend$'\t'$project_homepage$'\t'$ecosystem$'\t'$version_url
+					else
+						matches=$matches$'\n'$project_id$'\t'$backend$'\t'$project_homepage$'\t'$ecosystem$'\t'$version_url
+					fi
+					match_count=$((match_count + 1))
 				fi
-			done
+			done <<< "$projects"
 		fi
 
-		# Then use repo= whenever homepage did not uniquely identify one.
-		if (( ${#matches[@]} != 1 )) && [[ -n "$repo" ]]; then
-			local -a repo_matches
-			repo_matches=()
+		# If homepage did not uniquely identify the project, try repo=.
+		if [[ "$match_count" -ne 1 && -n "$repo" ]]; then
+			repo_matches=
+			repo_match_count=0
 
-			for line in "${project_lines[@]}"; do
-				IFS=$'\t' read -r \
-					project_id backend project_homepage ecosystem version_url \
-					<<< "$line"
-
+			while IFS=$'\t' read -r \
+				project_id backend project_homepage ecosystem version_url
+			do
 				if [[ "$version_url" == "$repo" ]]; then
-					repo_matches+=("$line")
+					if [[ -z "$repo_matches" ]]; then
+						repo_matches=$project_id$'\t'$backend$'\t'$project_homepage$'\t'$ecosystem$'\t'$version_url
+					else
+						repo_matches=$repo_matches$'\n'$project_id$'\t'$backend$'\t'$project_homepage$'\t'$ecosystem$'\t'$version_url
+					fi
+					repo_match_count=$((repo_match_count + 1))
 				fi
-			done
+			done <<< "$projects"
 
-			if (( ${#repo_matches[@]} == 1 )); then
-				matches=("${repo_matches[@]}")
+			if [[ "$repo_match_count" -eq 1 ]]; then
+				matches=$repo_matches
+				match_count=1
 			fi
 		fi
 
-		if (( ${#matches[@]} == 1 )); then
+		if [[ "$match_count" -eq 1 ]]; then
 			IFS=$'\t' read -r \
 				project_id backend project_homepage ecosystem version_url \
-				<<< "${matches[1]}"
+				<<< "$matches"
 		else
-			# If several candidates have the same normalized homepage,
-			# choose the one with the lowest numeric Anitya project ID.
-			#
-			# This handles cases such as R:
-			#   4150   https://www.r-project.org
-			#   386062 https://www.r-project.org/
-			#
-			# Both normalize to the same homepage, so the oldest/lower-ID
-			# project is selected.
-			local -a homepage_matches
-			local lowest_id lowest_line
-			homepage_matches=()
+			# Multiple projects with the same normalised homepage:
+			# select the one with the lowest numeric Anitya ID.
+			homepage_matches=
+			homepage_match_count=0
+			lowest_id=
+			lowest_line=
 
 			if [[ -n "$homepage" ]]; then
-				for line in "${project_lines[@]}"; do
-					IFS=$'\t' read -r \
-						project_id backend project_homepage ecosystem version_url \
-						<<< "$line"
+				wanted_homepage=$homepage
+				wanted_homepage=${wanted_homepage#http://}
+				wanted_homepage=${wanted_homepage#https://}
+				wanted_homepage=${wanted_homepage#www.}
+				wanted_homepage=${wanted_homepage%/}
 
-					if [[ "$wanted_homepage" == "$(normalize_url "$project_homepage")" ]]; then
-						homepage_matches+=("$line")
+				while IFS=$'\t' read -r \
+					project_id backend project_homepage ecosystem version_url
+				do
+					project_homepage_normalized=$project_homepage
+					project_homepage_normalized=${project_homepage_normalized#http://}
+					project_homepage_normalized=${project_homepage_normalized#https://}
+					project_homepage_normalized=${project_homepage_normalized#www.}
+					project_homepage_normalized=${project_homepage_normalized%/}
+
+					if [[ "$wanted_homepage" == "$project_homepage_normalized" ]]; then
+						homepage_match_count=$((homepage_match_count + 1))
+
+						if [[ -z "$lowest_id" ||
+						      "$project_id" -lt "$lowest_id" ]]
+						then
+							lowest_id=$project_id
+							lowest_line=$project_id$'\t'$backend$'\t'$project_homepage$'\t'$ecosystem$'\t'$version_url
+						fi
 					fi
-				done
+				done <<< "$projects"
 			fi
 
-			if (( ${#homepage_matches[@]} > 1 )); then
-				lowest_id=
-				lowest_line=
-
-				for line in "${homepage_matches[@]}"; do
-					IFS=$'\t' read -r \
-						project_id backend project_homepage ecosystem version_url \
-						<<< "$line"
-
-					if [[ -z "$lowest_id" || "$project_id" -lt "$lowest_id" ]]; then
-						lowest_id=$project_id
-						lowest_line=$line
-					fi
-				done
-
+			if [[ "$homepage_match_count" -gt 1 ]]; then
 				IFS=$'\t' read -r \
 					project_id backend project_homepage ecosystem version_url \
 					<<< "$lowest_line"
 			else
-				if (( ${#matches[@]} > 1 )); then
-					print -u2 "Multiple Anitya projects match $search_name:"
+				if [[ "$match_count" -gt 1 ]]; then
+					printf 'Multiple Anitya projects match %s:\n' \
+						"$search_name" >&2
 				elif [[ -n "$homepage" ]]; then
-					print -u2 "No Anitya project for $search_name matches homepage=$homepage"
+					printf 'No Anitya project for %s matches homepage=%s\n' \
+						"$search_name" "$homepage" >&2
 				elif [[ -n "$repo" ]]; then
-					print -u2 "No Anitya project for $search_name matches repo=$repo"
+					printf 'No Anitya project for %s matches repo=%s\n' \
+						"$search_name" "$repo" >&2
 				else
-					print -u2 "Multiple Anitya projects found for $search_name; no homepage= or repo= in $build"
+					printf 'Multiple Anitya projects found for %s; no homepage= or repo= in %s\n' \
+						"$search_name" "$build" >&2
 				fi
 
-				if (( ${#matches[@]} == 0 )); then
-					print -u2 "Candidates:"
-					for line in "${project_lines[@]}"; do
-						IFS=$'\t' read -r \
-							project_id backend project_homepage ecosystem version_url \
-							<<< "$line"
-
-						print -u2 \
-							"  $project_id  $project_homepage  [$backend${version_url:+: $version_url}]"
-					done
-				else
-					for line in "${matches[@]}"; do
-						IFS=$'\t' read -r \
-							project_id backend project_homepage ecosystem version_url \
-							<<< "$line"
-
-						print -u2 \
-							"  $project_id  $project_homepage  [$backend${version_url:+: $version_url}]"
-					done
-				fi
+				printf '%s\n' 'Candidates:' >&2
+				while IFS=$'\t' read -r \
+					project_id backend project_homepage ecosystem version_url
+				do
+					printf '  %s  %s  [%s%s]\n' \
+						"$project_id" \
+						"$project_homepage" \
+						"$backend" \
+						"${version_url:+: $version_url}" >&2
+				done <<< "$projects"
 
 				return 1
 			fi
@@ -385,10 +397,10 @@ for p in json.load(sys.stdin).get("items", []):
 	now=$(date +%s)
 
 	if (( now - cache_time < UVER_CACHE_TTL )); then
-		version=$(<"$cache_file")
+		version=$(cat "$cache_file")
 
 		if [[ -n "$version" ]]; then
-			print -r -- "$version"
+			printf '%s\n' "$version"
 			return 0
 		fi
 	fi
@@ -407,11 +419,11 @@ print(data.get("latest_version", ""))
 	)
 
 	if [[ -n "$version" ]]; then
-		print -r -- "$version" >| "$cache_file"
-		print -r -- "$version"
+		printf '%s\n' "$version" > "$cache_file"
+		printf '%s\n' "$version"
 		return 0
 	fi
 
-	print -u2 "Could not determine upstream version for $search_name"
+	printf 'Could not determine upstream version for %s\n' "$search_name" >&2
 	return 1
 }
