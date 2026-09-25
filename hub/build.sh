@@ -13,7 +13,7 @@ export CGO_CFLAGS="${CFLAGS}"
 export CGO_CXXFLAGS="${CXXFLAGS}"
 export CGO_LDFLAGS="${LDFLAGS}"
 export GOFLAGS="-buildmode=pie -trimpath -mod=readonly -modcacherw"
-maki
+maki prefix=/usr
 sudo su -c "install -Dm644 etc/hub.bash_completion.sh /usr/share/bash-completion/completions/hub
   install -Dm644 etc/hub.zsh_completion /usr/share/zsh/site-functions/_hub
   install -Dm644 etc/hub.fish_completion /usr/share/fish/vendor_completions.d/hub.fish"
