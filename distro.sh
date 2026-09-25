@@ -18,11 +18,58 @@ function gent_ver {
 }
 
 function gver {
-	local repo=$1
-	local URL="https://gitweb.gentoo.org/repo/gentoo.git/tree/$repo"
-	wget -T 5 -t 1 -cqO- "$URL" | grep "\-[0-9]+\.[0-9.]+[_p0-9]*" -oE \
-	| grep -v "9999" | grep -vE "[prc][0-9]+" | sed 's/^-//g' \
-	| sed 's/\.$//g' | sort -V | tail -n 1
+	local arg=$1
+	local pkg=${arg##*/}
+	local atom=$arg
+	local candidates candidate version versions
+
+	if [[ "$arg" != */* ]]; then
+		candidates=$(
+			wget -T 10 -t 1 -qO- \
+				"https://gpo.zugaina.org/Search?search=$pkg" |
+			grep -oE 'href="/[^"]+"' |
+			sed -E 's|href="/||; s|"$||' |
+			grep -E "/${pkg}$"
+		)
+
+		[[ -n "$candidates" ]] || return 1
+
+		# Find the candidate with the highest stable version.
+		while IFS= read -r candidate; do
+			version=$(
+				wget -T 10 -t 1 -qO- \
+					"https://gpo.zugaina.org/$candidate" |
+				grep -oE "${pkg}-[0-9][[:alnum:]_.+-]*" |
+				sed "s/^${pkg}-//" |
+				grep -vE '(^|[._-])9999([._-]|$)|_p[0-9]+$' |
+				sed -E 's/-r[0-9]+$//' |
+				sort -V |
+				tail -n1
+			)
+
+			if [[ -n "$version" ]]; then
+				versions+=("$version $candidate")
+			fi
+		done <<< "$candidates"
+
+		[[ ${#versions} -gt 0 ]] || return 1
+
+		atom=$(
+			printf '%s\n' "${versions[@]}" |
+			sort -V |
+			tail -n1 |
+			sed 's/^[^ ]* //'
+		)
+	fi
+
+	wget -T 10 -t 1 -qO- \
+		"https://gpo.zugaina.org/$atom" |
+	grep -oE "${pkg}-[0-9][[:alnum:]_.+-]*" |
+	sed "s/^${pkg}-//" |
+	grep -vE '(^|[._-])9999([._-]|$)|_p[0-9]+$' |
+	sed -E 's/-r[0-9]+$//' |
+	sort -V |
+	tail -n1
 }
 
 function lfs_ver {
