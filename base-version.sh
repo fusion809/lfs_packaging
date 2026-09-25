@@ -17,18 +17,34 @@ function aurver {
 	else
 		local var="pkgver"
 	fi
-	wget -T 5 -t 1 -cqO- "https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=$name" | grep "^$var=" | sed "s/^$var=//g"
+	local URL="https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=$name"
+	wget -T 5 -t 1 -cqO- "$URL" | grep "^$var=" | sed "s/^$var=//g"
+}
+
+function check_arch {
+	wget -T 5 -t 1 -cqO- "https://archlinux.org/packages/search/json/?name=$1" | grep "\"pkgname\": \"$1\""
+}
+
+function check_aur {
+	wget -T 5 -t 1 -cqO- "https://aur.archlinux.org/rpc/v5/info?arg%5B%5D=$1" | grep "\"Name\":\"$1\""
 }
 
 function aver {
 	local name=$(echo $1 | tr '[:upper:]' '[:lower:]')
-	local URL="https://gitlab.archlinux.org/archlinux/packaging/packages/$name/-/raw/main/PKGBUILD"
-	if [[ -n $2 ]]; then
-		local no="$2"
+    if echo $(check_arch $name) &> /dev/null; then
+		local URL="https://gitlab.archlinux.org/archlinux/packaging/packages/$name/-/raw/main/PKGBUILD"
+		if [[ -n $2 ]]; then
+			local no="$2"
+		else
+			local no=1
+		fi
+		local pkgver=$(wget -cqO- "$URL" | sed -n '1,/^pkgver=/p')
+	elif echo $(check_aur $name) &> /dev/null; then
+		local pkgver=$(aurver "$name")
 	else
-		local no=1
+		echo "$(date +"%r %d/%m/%Y"), $name" > ~/logs/failed_arch_versioning.log
 	fi
-	eval "$(wget -cqO- "$URL" | sed -n '1,/^pkgver=/p')"
+
 	if [[ "$name" == "gcc" ]]; then
 		echo "$pkgver" | sed 's/\.1+r.*/\.0/g'
 	else
@@ -40,9 +56,15 @@ function fdt_ver {
     local repo=$1
 	local name=$2
     if [[ $repo != "gstreamer/gstreamer" ]]; then
-    	wget --timeout=5 -t 1 -cqO- "https://gitlab.freedesktop.org/$repo/-/tags" | grep -oE 'tags/([v]*[0-9.][^"]*|'"$name"'-[0-9]+\.[0-9]+\.[0-9]+)' | grep -v "\.99" | sed "s|$name-||g" | grep -vE "dev|rc|alpha|beta" | sed 's|tags/||; s/^v//' | sort -V | tail -n 1
+    	wget -T 5 -t 1 -cqO- "https://gitlab.freedesktop.org/$repo/-/tags" \
+		| grep -oE 'tags/([v]*[0-9.][^"]*|'"$name"'-[0-9]+\.[0-9]+\.[0-9]+)' \
+		| grep -v "\.99" | sed "s|$name-||g" | grep -vE "dev|rc|alpha|beta" \
+		| sed 's|tags/||; s/^v//' | sort -V | tail -n 1
     else
-    	wget --timeout=5 -t 1 -cqO- "https://gitlab.freedesktop.org/$repo/-/tags" | grep -oE 'tags/[v0-9.][^"]*' | grep -vE "dev|rc|alpha|beta" | sed 's|tags/||; s/^v//' | grep -oE "[0-9]+\.[0-9]*[02468]\.[0-9]+" | sort -V | tail -n 1
+    	wget -T 5 -t 1 -cqO- "https://gitlab.freedesktop.org/$repo/-/tags" \
+		| grep -oE 'tags/[v0-9.][^"]*' | grep -vE "dev|rc|alpha|beta" \
+		| sed 's|tags/||; s/^v//' | grep -oE "[0-9]+\.[0-9]*[02468]\.[0-9]+" \
+		| sort -V | tail -n 1
     fi
 }
 
@@ -59,17 +81,23 @@ function fver {
 function gbb_ver {
 	local repo=$1
 	local name=$2
-	timeout 5 git ls-remote --tags --refs https://bitbucket.org/$repo.git | grep -oE 'tags/([v]*[0-9.][^"]*|'"$name"'-[0-9]+\.[0-9]+\.[0-9]+)' | grep -vi "alpha\|beta\|rc" | sed -E 's|tags/[a-z-]*||g' | sort -V | tail -n 1
+	timeout 5 git ls-remote --tags --refs https://bitbucket.org/$repo.git \
+	| grep -oE 'tags/([v]*[0-9.][^"]*|'"$name"'-[0-9]+\.[0-9]+\.[0-9]+)' \
+	| grep -vi "alpha\|beta\|rc" | sed -E 's|tags/[a-z-]*||g' | sort -V \
+	| tail -n 1
 }
 
 function gent_ver {
 	local pkg="$1"
 	local name=$(echo $pkg | cut -d '/' -f 2)
-	wget -T 5 -t 1 -cqO- https://packages.gentoo.org/packages/$pkg | grep -oE "$name-[0-9.]+ebuild" | sed 's/\.ebuild//g' | sed "s/$name-//g" | sort -V | tail -n 1
+	wget -T 5 -t 1 -cqO- https://packages.gentoo.org/packages/$pkg \
+	| grep -oE "$name-[0-9.]+ebuild" | sed 's/\.ebuild//g' | sed "s/$name-//g" \
+	| sort -V | tail -n 1
 }
 
 function gh_com {
-    timeout 5 git ls-remote https://github.com/$1.git HEAD 2>/dev/null | awk '{ print $1 }'
+    timeout 5 git ls-remote https://github.com/$1.git HEAD 2>/dev/null \
+	| awk '{ print $1 }'
 }
 
 function gfl_ver {
@@ -78,16 +106,27 @@ function gfl_ver {
 	else
 		local name=$(echo $1 | cut -d '/' -f 2)
 	fi
+	local URL="https://gitlab.freedesktop.org/$1.git"
     if [[ "$1" != "gstreamer/gstreamer" ]]; then
-	    timeout 5 git ls-remote --tags "https://gitlab.freedesktop.org/$1.git" 2>/dev/null | grep -oE 'tags/([v]*[0-9.][^"]*|'"$name"'-[0-9]+\.[0-9]+\.[0-9]+)' | grep -v "\.99" | sed "s|$name-||g" | sed -n 's|tags/v\?\([0-9][0-9.]*\)$|\1|p' | grep -vE "dev|rc|alpha|beta" | sort -V | tail -1
+	    timeout 5 git ls-remote --tags "$URL" 2>/dev/null \
+		| grep -oE 'tags/([v]*[0-9.][^"]*|'"$name"'-[0-9]+\.[0-9]+\.[0-9]+)' \
+		| grep -v "\.99" | sed "s|$name-||g" \
+		| sed -n 's|tags/v\?\([0-9][0-9.]*\)$|\1|p' \
+		| grep -vE "dev|rc|alpha|beta" | sort -V | tail -1
     else
-	    timeout 5 git ls-remote --tags "https://gitlab.freedesktop.org/$1.git" 2>/dev/null | sed -n 's|.*refs/tags/v\?\([0-9][0-9.]*\)$|\1|p' | grep -vE "dev|rc|alpha|beta" | grep -oE "[0-9]+\.[0-9]*[02468]\.[0-9]+" | sort -V | tail -1
+	    timeout 5 git ls-remote --tags "$URL" 2>/dev/null \
+		| sed -n 's|.*refs/tags/v\?\([0-9][0-9.]*\)$|\1|p' \
+		| grep -vE "dev|rc|alpha|beta" \
+		| grep -oE "[0-9]+\.[0-9]*[02468]\.[0-9]+" | sort -V \
+		| tail -1
     fi
 
 }
 
 function gglpk_ver {
-    timeout 5 git ls-remote --tags --refs https://salsa.debian.org/science-team/glpk.git 2>/dev/null | grep "upstream" | cut -d '/' -f 4 | sort -V | tail -n 1
+	local URL="https://salsa.debian.org/science-team/glpk.git"
+    timeout 5 git ls-remote --tags --refs $URL 2>/dev/null | grep "upstream" \
+	| cut -d '/' -f 4 | sort -V | tail -n 1
 }
 
 function ggn_ver {
@@ -104,26 +143,52 @@ function ggn_ver {
 	fi
 
 	if [[ "${1}${2}" == "gtk3" || "$1" == "gtk3" ]]; then
-		timeout 15 git ls-remote --tags --refs "$URL.git" 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init|\.9[0-9]" | grep -E "^3\.[02468]+\.[0-9]+$" | sort -V | tail -n 1
+		timeout 15 git ls-remote --tags --refs "$URL.git" 2>/dev/null \
+		| cut -d '/' -f 3 \
+		| grep -viE "alpha|beta|rc|dev|snapshot|init|\.9[0-9]" \
+		| grep -E "^3\.[02468]+\.[0-9]+$" | sort -V | tail -n 1
 	elif [[ "${1}${2}" == "gtk4" || "$1" == "gtk" || "$1" == "gtk4" ]]; then
-		timeout 15 git ls-remote --tags --refs "$URL.git" 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init|\.9[0-9]" | grep -E "^${2:-4}\.[02468]+\.[0-9]+$" | sort -V | tail -n 1
+		timeout 15 git ls-remote --tags --refs "$URL.git" 2>/dev/null \
+		| cut -d '/' -f 3 \
+		| grep -viE "alpha|beta|rc|dev|snapshot|init|\.9[0-9]" \
+		| grep -E "^${2:-4}\.[02468]+\.[0-9]+$" | sort -V | tail -n 1
 	elif [[ "${1}" == "gjs" ]]; then
-		timeout 15 git ls-remote --tags --refs "$URL.git" 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init|\.9[0-9]" | grep -E "^[0-9]+\.[0-9]+\.[0-9]+$" | grep -vE "[0-9]+\.[0-9]+\.9[0-9]$" | sort -V | tail -n 1
+		timeout 15 git ls-remote --tags --refs "$URL.git" 2>/dev/null \
+		| cut -d '/' -f 3 \
+		| grep -viE "alpha|beta|rc|dev|snapshot|init|\.9[0-9]" \
+		| grep -E "^[0-9]+\.[0-9]+\.[0-9]+$" \
+		| grep -vE "[0-9]+\.[0-9]+\.9[0-9]$" | sort -V | tail -n 1
 	elif [[ "$1" == "libsoup" ]]; then
-		timeout 15 git ls-remote --tags --refs "$URL.git" 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init|\.9[0-9]" | grep -E "^[0-9]+\.[02468]+\.[0-9]+$" | grep -vE "[0-9]+\.[0-9]+\.9[0-9]$" | sort -V | tail -n 1
+		timeout 15 git ls-remote --tags --refs "$URL.git" 2>/dev/null \
+		| cut -d '/' -f 3 \
+		| grep -viE "alpha|beta|rc|dev|snapshot|init|\.9[0-9]" \
+		| grep -E "^[0-9]+\.[02468]+\.[0-9]+$" \
+		| grep -vE "[0-9]+\.[0-9]+\.9[0-9]$" | sort -V | tail -n 1
 	elif [[ "$1" == "glib2"  || "$1" == "glib-networking" ]]; then
-		timeout 5 git ls-remote --tags --refs "$URL.git" 2> /dev/null | cut -d '/' -f 3 | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv} -viE "alpha|beta|rc|dev|snapshot|init" | grep -E "^[0-9.]+$" | sort -V | tail -n 1
+		timeout 5 git ls-remote --tags --refs "$URL.git" 2> /dev/null \
+		| cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" \
+		| grep -E "^[0-9.]+$" | sort -V | tail -n 1
 	else		
-    		timeout 5 git ls-remote --tags --refs "$URL.git" 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init|\.9[0-9]" | sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' | grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^${2:-[0-9]}" | sort -V | tail -n 1
+    	timeout 5 git ls-remote --tags --refs "$URL.git" 2>/dev/null \
+		| cut -d '/' -f 3 \
+		| grep -viE "alpha|beta|rc|dev|snapshot|init|\.9[0-9]" \
+		| sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' \
+		| tr '_' '.' | grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^${2:-[0-9]}" \
+		| sort -V | tail -n 1
 	fi
 }
 
 function ggcc_ver {
-    timeout 5 git ls-remote --tags --refs https://gitlab.com/gnutools/gcc.git 2>/dev/null | grep -oE "releases/gcc-[0-9]+\.[0-9]+\.[0-9]+" | sed "s|releases/gcc-||" | sort -V | tail -n 1
+	local URL="https://gitlab.com/gnutools/gcc.git"
+    timeout 5 git ls-remote --tags --refs "$URL" 2>/dev/null \
+	| grep -oE "releases/gcc-[0-9]+\.[0-9]+\.[0-9]+" | sed "s|releases/gcc-||" \
+	| sort -V | tail -n 1
 }
 
 function ggrub_ver {
-	timeout 5 git ls-remote --tags --refs https://gitlab.freedesktop.org/gnu-grub/grub.git | grep -E "grub-[0-9]+\.[0-9]+$" | cut -d '-' -f 2 | sort -V | tail -n 1
+	local URL="https://gitlab.freedesktop.org/gnu-grub/grub.git"
+	timeout 5 git ls-remote --tags --refs "$URL" \
+	| grep -E "grub-[0-9]+\.[0-9]+$" | cut -d '-' -f 2 | sort -V | tail -n 1
 }
 
 function ggnu_ver {
@@ -147,50 +212,103 @@ function ggnu_ver {
 	    gl_ver gnutls/libtasn1
 	    return 0;
     elif [[ "$name" == "libunistring" ]]; then
-	    timeout 5 git ls-remote --tags --refs https://https.git.savannah.gnu.org/git/libunistring.git | grep "refs/tags/v[0-9.]+" -oE | sed 's/.*v//g' | sort -V | tail -n 1
+		local URL="https://https.git.savannah.gnu.org/git/libunistring.git"
+	    timeout 5 git ls-remote --tags --refs "$URL" \
+		| grep "refs/tags/v[0-9.]+" -oE | sed 's/.*v//g' | sort -V | tail -n 1
 	    return 0;
     elif [[ "$name" == "nettle" ]]; then
-	    timeout 5 git ls-remote --tags --refs https://git.lysator.liu.se/nettle/nettle.git | grep "refs/tags/nettle_[0-9.]+_release" -oE | cut -d '_' -f 2 | sort -V | tail -n 1
+		local URL="https://git.lysator.liu.se/nettle/nettle.git"
+	    timeout 5 git ls-remote --tags --refs "$URL" \
+		| grep "refs/tags/nettle_[0-9.]+_release" -oE | cut -d '_' -f 2 \
+		| sort -V | tail -n 1
 	    return 0;
     else
-        timeout 5 git ls-remote --tags --refs "https://https.git.savannah.gnu.org/git/$name.git" 2>/dev/null | cut -d '/' -f 3 | sed -E "s/^(${name}|release)[-_]//; s/^[vVrR]//" | grep -viE "alpha|beta|rc|dev|snapshot|init" | grep -E '^[0-9]+(\.[0-9]+)+$' | sort -V | tail -n 1
+		local URL="https://https.git.savannah.gnu.org/git/$name.git"
+        timeout 5 git ls-remote --tags --refs "$URL" 2>/dev/null \
+		| cut -d '/' -f 3 | sed -E "s/^(${name}|release)[-_]//; s/^[vVrR]//" \
+		| grep -viE "alpha|beta|rc|dev|snapshot|init" \
+		| grep -E '^[0-9]+(\.[0-9]+)+$' | sort -V | tail -n 1
         return 0;
 	fi
 }
 
 function ghl_ver {
+	local URL="https://github.com/$1.git"
 	if [[ "$1" == "avahi/avahi" ]]; then
-		timeout 5 git ls-remote --tags --refs https://github.com/avahi/avahi.git | grep "tags/v[0-9.]+[-rc]*[0-9]*" -E | sed 's|.*tags/v||g' | sort -V | tail -n 1
+		timeout 5 git ls-remote --tags --refs "$URL" \
+		| grep "tags/v[0-9.]+[-rc]*[0-9]*" -E | sed 's|.*tags/v||g' \
+		| sort -V | tail -n 1
 	elif [[ "$1" == "openpmix/prrte" ]]; then
-		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep "^3" | sort -V | tail -n 1
+		timeout 5 git ls-remote --tags --refs "$URL" 2>/dev/null \
+		| cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" \
+		| sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' \
+		| grep -E "^[0-9]+(\.[0-9]+)+$" | grep "^3" | sort -V | tail -n 1
 	elif [[ "$1" == "openpmix/openpmix" ]]; then
-		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep "^5" | sort -V | tail -n 1
+		timeout 5 git ls-remote --tags --refs "$URL" 2>/dev/null \
+		| cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" \
+		| sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' \
+		| grep -E "^[0-9]+(\.[0-9]+)+$" | grep "^5" | sort -V | tail -n 1
 	elif [[ "$1" == "GNOME/librsvg" ]]; then
-		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep -oE "[0-9]+.[0-9]+.[0-8][0-9]*" | sort -V | tail -n 1
-	elif [[ "$1" == "KhronosGroup/Vulkan-Loader" ]] || [[ "$1" == "KhronosGroup/Vulkan-Headers" ]]; then
-            timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep -oE "[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+" | sort -V | tail -n 1
+		timeout 5 git ls-remote --tags --refs "$URL" 2>/dev/null \
+		| cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" \
+		| sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' \
+		| grep -E "^[0-9]+(\.[0-9]+)+$" \
+		| grep -oE "[0-9]+.[0-9]+.[0-8][0-9]*" | sort -V | tail -n 1
+	elif [[ "$1" == "KhronosGroup/Vulkan-Loader" ]] \
+	|| [[ "$1" == "KhronosGroup/Vulkan-Headers" ]]; then
+        timeout 5 git ls-remote --tags --refs "$URL" 2>/dev/null \
+		| cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" \
+		| sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' \
+		| grep -E "^[0-9]+(\.[0-9]+)+$" \
+		| grep -oE "[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+" | sort -V | tail -n 1
 	elif [[ "$1" == "GNOME/gcr3" ]]; then
-		timeout 5 git ls-remote --tags --refs https://github.com/GNOME/gcr.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep -oE "3\.[0-8][0-9]*\.[0-9]+" | sort -V | tail -n 1
+		local URL="https://github.com/GNOME/gcr.git"
+		timeout 5 git ls-remote --tags --refs "$URL" 2>/dev/null \
+		| cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" \
+		| sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' \
+		| grep -E "^[0-9]+(\.[0-9]+)+$" | grep -oE "3\.[0-8][0-9]*\.[0-9]+" \
+		| sort -V | tail -n 1
 	elif [[ "$1" == "GNOME/libgtop" ]]; then
-		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep -oE "2\.[0-8][0-9]*\.[0-9]+" | sort -V | tail -n 1
+		timeout 5 git ls-remote --tags --refs "$URL" 2>/dev/null \
+		| cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" \
+		| sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' \
+		| grep -E "^[0-9]+(\.[0-9]+)+$" | grep -oE "2\.[0-8][0-9]*\.[0-9]+" \
+		| sort -V | tail -n 1
 	elif [[ "$1" == "GNOME/gvfs" ]]; then
-		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | grep -oE "[0-9]+\.[0-9][02468]\.[0-8][0-9]*" | sort -V | tail -n 1
+		timeout 5 git ls-remote --tags --refs "$URL" 2>/dev/null \
+		| cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" \
+		| sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' \
+		| grep -E "^[0-9]+(\.[0-9]+)+$" \
+		| grep -oE "[0-9]+\.[0-9][02468]\.[0-8][0-9]*" | sort -V | tail -n 1
 	elif [[ "$1" == "GNOME/at-spi2-core" ]]; then
-		timeout 5 git ls-remote --tags --refs https://github.com/GNOME/at-spi2-core.git | grep -oE "refs/tags/[0-9]+\.[0-9]*[02468]+\.[0-8][0-9]*" | cut -d '/' -f 3 | sort -V | tail -n 1
+		timeout 5 git ls-remote --tags --refs "$URL" \
+		| grep -oE "refs/tags/[0-9]+\.[0-9]*[02468]+\.[0-8][0-9]*" \
+		| cut -d '/' -f 3 | sort -V | tail -n 1
 	elif echo $1 | grep "KDE" &> /dev/null; then
-		timeout 5 git ls-remote --tags --refs https://github.com/$1.git | grep -oE "refs/tags/[v]*[0-9]+\.[0-9]+\.[0-8][0-9]*" | cut -d '/' -f 3 | sed 's/^v//g' | sort -V | tail -n 1 
+		timeout 5 git ls-remote --tags --refs "$URL" \
+		| grep -oE "refs/tags/[v]*[0-9]+\.[0-9]+\.[0-8][0-9]*" \
+		| cut -d '/' -f 3 | sed 's/^v//g' | sort -V | tail -n 1 
 	elif echo $1 | grep hyfetch &> /dev/null; then
-		timeout 5 git ls-remote --tags --refs https://github.com/$1.git | grep -oE "refs/tags/[0-9]+\.[0-9]+\.[0-8][0-9]*" | cut -d '/' -f 3 | sed 's/^v//g' | sort -V | tail -n 1 
+		timeout 5 git ls-remote --tags --refs "$URL" \
+		| grep -oE "refs/tags/[0-9]+\.[0-9]+\.[0-8][0-9]*" | cut -d '/' -f 3 \
+		| sed 's/^v//g' | sort -V | tail -n 1 
 	elif [[ "$1" == "tcltk/tcl" ]]; then
-		timeout 5 git ls-remote --tags --refs https://github.com/$1.git | grep "core-[0-9-]+$" -oE | sed 's/^core-//g' | tr '-' '.' | sort -V | tail -n 1
+		timeout 5 git ls-remote --tags --refs "$URL" \
+		| grep "core-[0-9-]+$" -oE | sed 's/^core-//g' | tr '-' '.' | sort -V \
+		| tail -n 1
 	else
-		timeout 5 git ls-remote --tags --refs https://github.com/$1.git 2>/dev/null | cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" | sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' | grep -E "^[0-9]+(\.[0-9]+)+$" | tr '-' '.' | sort -V | tail -n 1
+		timeout 5 git ls-remote --tags --refs "$URL" 2>/dev/null \
+		| cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" \
+		| sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' \
+		| grep -E "^[0-9]+(\.[0-9]+)+$" | tr '-' '.' | sort -V | tail -n 1
 	fi
 }
 
 function ght_ver {
 	if [[ "$1" == "avahi/avahi" ]]; then
-		wget -T 5 -t 1 -cqO- https://github.com/avahi/avahi/tags | grep -E "tags/v[0-9.]+[-rc]*[0-9]*.tar.gz" | sed 's|.*tags/v||g' | sed 's/.tar.gz.*//g' | sort -V | tail -n 1
+		wget -T 5 -t 1 -cqO- https://github.com/$1 /tags \
+		| grep -E "tags/v[0-9.]+[-rc]*[0-9]*.tar.gz" | sed 's|.*tags/v||g' \
+		| sed 's/.tar.gz.*//g' | sort -V | tail -n 1
 		return
 	fi
 	if [[ "$1" == "GNOME/gcr3" ]]; then
@@ -209,7 +327,9 @@ function ght_ver {
     latest_tag=$(grep -oP '/tag/\K.*' <<< "$latest_url")
 
     # Only use the GitHub "latest release" result if its tag is stable.
-    if [[ "$1" != "GNOME/at-spi2-core" ]] && [[ -n "$latest_tag" ]] && [[ "$1" != "GNOME/gvfs" ]] && [[ "$1" != "GNOME/gcr3" ]] && [[ $repo != "GNOME/librsvg" ]] && ! echo $repo | grep KDE &> /dev/null &&
+    if [[ "$1" != "GNOME/at-spi2-core" ]] && [[ -n "$latest_tag" ]] && \
+	[[ "$1" != "GNOME/gvfs" ]] && [[ "$1" != "GNOME/gcr3" ]] && \
+	[[ $repo != "GNOME/librsvg" ]] && ! echo $repo | grep KDE &> /dev/null &&
 	    [[ $repo != "KhronosGroup/Vulkan-Loader" ]] &&
             [[ $repo != "KhronosGroup/Vulkan-Headers" ]] &&
 	! grep -qiE '(alpha|beta|rc|pre|preview|dev|snapshot|init|[0-9]+\.[0-9]+\.9[0-9])' <<< "$latest_tag"; then
@@ -227,46 +347,42 @@ function ght_ver {
         fi
     fi
 
+	local URL="https://github.com/$repo/tags.atom"
     # Special handling for libvpx.
     if [[ "$repo" == "webmproject/libvpx" ]]; then
-        wget -T 5 -t 1 -cqO- \
-            https://github.com/webmproject/libvpx/tags.atom |
-            grep -oE 'link.*v[0-9.]+' |
-            sed 's/.*v//' |
-            head -n 1
+        wget -T 5 -t 1 -cqO- "$URL" | grep -oE 'link.*v[0-9.]+' \
+		| sed 's/.*v//' | head -n 1
         return
     elif [[ "$repo" == "GNOME/librsvg" || "$repo" == "GNOME/gjs" ]]; then
-	wget -T 5 -t 1 -cqO- \
-            https://github.com/$repo/tags.atom | grep -v "beta" |
-            grep -oE "[0-9]+\.[0-9]+\.[0-8]" | sort -V | tail -n 1
-	return
+		wget -T 5 -t 1 -cqO- "$URL" | grep -v "beta" \
+		| grep -oE "[0-9]+\.[0-9]+\.[0-8]" | sort -V | tail -n 1
+		return
 	elif [[ "$1" == "GNOME/gcr3" ]]; then
-	wget -T 5 -t 1 -cqO- \
-		    https://github.com/$repo/tags.atom | grep -v "beta" |
-            grep -oE "3\.[0-8][0-9]*\.[0-9]" | sort -V | tail -n 1
-	return
+		wget -T 5 -t 1 -cqO- "$URL" | grep -v "beta" \
+		| grep -oE "3\.[0-8][0-9]*\.[0-9]" | sort -V | tail -n 1
+		return
 	elif [[ "$1" == "GNOME/gvfs" ]]; then
-	wget -T 5 -t 1 -cqO- \
-		    https://github.com/$repo/tags.atom | grep -v "beta" |
-            grep -oE "[0-9]+\.[0-9][02468]\.[0-9]+" | sort -V | tail -n 1
-	return
-    elif [[ "$repo" == "KhronosGroup/Vulkan-Loader" ]] || [[ "$repo" == "KhronosGroup/Vulkan-Headers" ]]; then
-	wget -T 5 -t 1 -cqO- \
-            https://github.com/$repo/tags.atom | grep -v "beta" |
-            grep -oE "[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+" | sort -V | tail -n 1
-	return
+		wget -T 5 -t 1 -cqO- "$URL" | grep -v "beta" \
+		| grep -oE "[0-9]+\.[0-9][02468]\.[0-9]+" | sort -V | tail -n 1
+		return
+    elif [[ "$repo" == "KhronosGroup/Vulkan-Loader" ]] || \
+	[[ "$repo" == "KhronosGroup/Vulkan-Headers" ]]; then
+		wget -T 5 -t 1 -cqO- "$URL" | grep -v "beta" \
+        | grep -oE "[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+" | sort -V | tail -n 1
+		return
     elif [[ "$repo" == "GNOME/at-spi2-core" ]]; then
-	    wget -T 5 -t 1 -cqO- https://github.com/GNOME/at-spi2-core/tags.atom | grep -oE "[0-9]+\.[0-9]*[02468]+\.[0-8][0-9]*" | sort -V | tail -n 1
-	return
-elif echo $repo | grep "KDE" &> /dev/null; then
-	    wget -T 5 -t 1 -cqO- https://github.com/$repo/tags.atom | grep -oE "[0-9]+\.[0-9]+\.[0-8][0-9]*" | sort -V | tail -n 1
-
+	    wget -T 5 -t 1 -cqO- "$URL" \
+		| grep -oE "[0-9]+\.[0-9]*[02468]+\.[0-8][0-9]*" | sort -V | tail -n 1
+		return
+	elif echo $repo | grep "KDE" &> /dev/null; then
+	    wget -T 5 -t 1 -cqO- "$URL" | grep -oE "[0-9]+\.[0-9]+\.[0-8][0-9]*" \
+		| sort -V | tail -n 1
 	    return
     fi
 
     # Fall back to finding the highest stable tag.
     wget --timeout=5 -t 1 -cqO- \
-        "https://github.com/$repo/tags.atom" |
+        "$URL" |
         grep '<title>' |
         grep -vE '<title>Tags from |(alpha|beta|rc|pre|preview|dev|snapshot|init)' |
         sed -nE \
