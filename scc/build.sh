@@ -5,7 +5,7 @@ repo=boyter/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(go)
+depends=(glibc go)
 gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 export CGO_CPPFLAGS="${CPPFLAGS}"

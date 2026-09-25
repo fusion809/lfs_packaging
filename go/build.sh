@@ -4,6 +4,7 @@ set -e
 name=go
 repo=golang/$name
 version=$(gh_ver $repo)
+depends=(gcc glibc libjpeg-turbo libwebp tiff xz zlib zstd)
 filename="${name}${version}.src.tar.gz"
 direname="$name"
 download_src "https://go.dev/dl/$filename"
