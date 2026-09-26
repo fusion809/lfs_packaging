@@ -3,6 +3,7 @@ set -e
 name=corrosion
 homepage="https://github.com/corrosion-rs/corrosion"
 description="Tool for integrating Rust into an existing CMake project"
+depends=(rust)
 repo=$name-rs/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
