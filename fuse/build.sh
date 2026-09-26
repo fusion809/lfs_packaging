@@ -3,6 +3,8 @@ set -e
 name=fuse
 _name=libfuse
 repo=$_name/$_name
+homepage="https://github.com/$repo"
+description="The reference implementation of the Linux FUSE (Filesystem in Userspace) interface."
 version=$(gh_ver $repo)
 depends=(glibc)
 filename="$name-$version.tar.gz"
