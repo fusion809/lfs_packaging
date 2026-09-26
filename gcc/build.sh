@@ -2,7 +2,7 @@
 set -e
 name=gcc
 homepage="https://gcc.gnu.org"
-description="The GNU Compiler Collection - C and C++ frontends"
+description="The GNU Compiler Collection - C, C++ and Fortran frontends."
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
