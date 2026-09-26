@@ -3,6 +3,7 @@ set -e
 name=pay-respects
 repo=iff/$name
 version=$(cb_ver $repo)
+depends=(gcc glibc)
 filename="$name-$version.tar.gz"
 direname="$name"
 cba_download "$repo" "v$version" "$filename"
