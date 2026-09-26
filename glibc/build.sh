@@ -2,7 +2,7 @@
 set -e
 name=glibc
 homepage="https://www.gnu.org/software/libc"
-description="GNU C Library"
+description="GNU C standard library."
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

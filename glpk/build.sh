@@ -3,7 +3,7 @@ set -e
 homepage="http://www.gnu.org/software/glpk/"
 depends=(bash coreutils gcc glibc gmp gzip make sed tar)
 name=glpk
-description="GNU Linear Programming Kit: solve LP, MIP and other problems"
+description="GNU Linear Programming Kit: solve LP, MIP and other problems."
 version=$(glpk_ver)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
