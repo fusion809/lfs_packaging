@@ -1,9 +1,10 @@
 #!/bin/bash
 set -e
-name=LibreNote
-repo="Procurador1337/$name"
+_name=LibreNote
+name=librenote
+repo="Procurador1337/$_name"
 version=$(gh_com "$repo")
-filename="$name-$version.tar.gz"
+filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(brotli bzip2 cmake coreutils dbus double-conversion expat fontconfig freetype gcc git glib2 glibc graphite2 harfbuzz libdrm libelf libffi libpciaccess libpng libx11 libxau libxcb libxdmcp libxext libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors make mesa pcre2 qt6 spirv-tools systemd tar wayland xz zlib zstd)
 
