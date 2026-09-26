@@ -2,7 +2,7 @@
 set -e
 name=systemd
 homepage="https://systemd.io/"
-description="system and service manager"
+description="System and service manager"
 repo=$name/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
