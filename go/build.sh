@@ -9,7 +9,7 @@ version=$(gh_ver $repo)
 depends=(gcc glibc libjpeg-turbo libwebp tiff xz zlib zstd)
 filename="${name}${version}.src.tar.gz"
 direname="$name"
-download_src "https://go.dev/dl/$filename"
+download_src "$homepage/dl/$filename"
 unpk_enter "$filename" "$direname" "src"
 export GOARCH=amd64
 export GOAMD64=v1 # make sure we're building for the right x86-64 version
