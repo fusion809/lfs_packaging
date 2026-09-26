@@ -3,6 +3,8 @@ set -e
 # Variable declaration
 name=udisks
 repo="storaged-project/udisks"
+homepage="https://www.freedesktop.org/wiki/Software/udisks/"
+description="Daemon, tools and libraries to access and manipulate disks, storage devices and technologies."
 version=$(gh_ver $repo)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"

@@ -1,12 +1,13 @@
 #!/bin/bash
 set -e
 name=firefox-bin
-homepage="Standalone web browser from mozilla.org - Static binaries from upstream"
+homepage="https://www.firefox.com/"
 description="Standalone web browser from mozilla.org - Static binaries from upstream"
 _name=firefox
+url="https://ftp.mozilla.org/pub/firefox/releases"
 get_version() {
 	local inst_ver=$(pkgver $name)
-	local up_ver=$(wget -cqO- https://ftp.mozilla.org/pub/firefox/releases/ | grep "[0-9]+\.[0-9]+\.[0-9b]+" -oE | grep -v "b" | sort -V | tail -n 1)
+	local up_ver=$(wget -cqO- $url | grep "[0-9]+\.[0-9]+\.[0-9b]+" -oE | grep -v "b" | sort -V | tail -n 1)
 	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
 	local mon_ver=$(uver $name)
 	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
@@ -21,7 +22,7 @@ version=$(get_version)
 depends=(alsa-lib at-spi2-core brotli bzip2 cairo dbus expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz libepoxy libffi libpng libseccomp libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxrandr libxrender libxres nspr nss pango pcre2 pixman systemd util-linux wayland zlib)
 filename="$_name-$version.tar.xz"
 direname="$_name"
-download_src "https://ftp.mozilla.org/pub/firefox/releases/$version/linux-x86_64/en-GB/$filename"
+download_src "$url/$version/linux-x86_64/en-GB/$filename"
 unpk_enter "$filename" "$direname"
 sudo mkdir -p /usr/lib/$_name
 sudo cp -r * /usr/lib/$_name

@@ -2,6 +2,8 @@
 set -e
 name=nodejs-bin
 _name=nodejs
+homepage="https://nodejs.org/"
+description="Evented I/O for V8 javascript - package built from precompiled binaries."
 repo=$_name/node
 version=$(gh_ver $repo)
 filename="node-v$version-linux-x64.tar.xz"

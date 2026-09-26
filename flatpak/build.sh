@@ -3,7 +3,7 @@ set -e
 # Variable declarations
 name=flatpak
 homepage="https://flatpak.org"
-description="Linux application sandboxing and distribution framework (formerly xdg-app)"
+description="Cross-distribution Linux package manager."
 repo=$name/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

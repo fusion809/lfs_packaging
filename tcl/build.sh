@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=tcl
-description="Powerful, easy-to-learn dynamic programming language"
+description="Powerful, easy-to-learn dynamic programming language."
 homepage="https://tcl.tk"
 repo=tcltk/tcl
 version=$(gh_ver $repo)

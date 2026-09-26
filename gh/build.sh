@@ -3,6 +3,7 @@ set -e
 name=gh
 _name=cli
 homepage="https://github.com/cli/cli"
+description="GitHub's modern command-line client."
 repo=$_name/$_name
 version=$(gh_ver $repo)
 filename="${_name}-$version.tar.gz"

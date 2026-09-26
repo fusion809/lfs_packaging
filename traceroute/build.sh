@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=traceroute
-description="Tracks the route taken by packets over an IP network"
+description="Tracks the route taken by packets over an IP network."
 homepage="http://traceroute.sourceforge.net/"
 get_version() {
 	local inst_ver=$(pkgver $name)

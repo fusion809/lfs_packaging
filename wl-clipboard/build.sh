@@ -2,9 +2,9 @@
 set -e
 # Variable declarations
 name="wl-clipboard"
-homepage="https://github.com/bugaevc/wl-clipboard"
-description="Command-line copy/paste utilities for Wayland"
 repo="bugaevc/wl-clipboard"
+homepage="https://github.com/$repo"
+description="Command-line copy/paste utilities for Wayland"
 version=$(gh_com $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
