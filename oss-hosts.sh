@@ -29,9 +29,9 @@ function cb_ver {
 	fi
 	local lfs_vers=$(lfs_ver $name)
 	local inst_ver=$(pkgver $name)
-	local up_ver=$(wget -cqO- https://codeberg.org/$repo/tags | grep "/tag/" | head -n 1 | cut -d '"' -f 4 | cut -d '/' -f 6)
+	local up_ver=$(wget -cqO- https://codeberg.org/$repo/tags | grep -oE "/tag/[v]*[0-9.]+" | sed 's|/tag/[v]*||g' | sort -V | tail -n 1)
 	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
-	local git_ver=$(git ls-remote --tags https://codeberg.org/$repo.git | grep -v "\^{}" | cut -d '/' -f 3 | sort -V | tail -n 1)
+	local git_ver=$(git ls-remote --tags https://codeberg.org/$repo.git | grep "[v]*[0-9.]+" -E | grep -v "\^{}" | cut -d '/' -f 3 | sort -V | tail -n 1)
 	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
 	local vat_ver=$(vatver $name)
 	ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
