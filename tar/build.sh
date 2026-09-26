@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=tar
+description="Utility used to store, backup, and transport files"
 homepage="https://www.gnu.org/software/tar/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"

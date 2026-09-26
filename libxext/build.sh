@@ -7,6 +7,8 @@ direname="$_name-$version"
 filename="$direname.tar.xz"
 depends=(bash coreutils fontconfig glibc libx11 libxau libxcb libxdmcp make sed systemd tar util-linux xorg-libs xz zlib)
 name=$(echo $_name | tr '[:upper:]' '[:lower:]')
+homepage="https://gitlab.freedesktop.org/xorg/lib/libxext"
+description="X11 miscellaneous extensions library"
 # Fetch and unpack source
 xfd_download "$filename"
 unpk_enter "$filename" "$direname"

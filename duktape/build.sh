@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=duktape
+homepage="https://duktape.org/"
+description="Embeddable Javascript engine"
 repo="svaarala/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=glslang
+homepage="https://github.com/KhronosGroup/glslang"
+description="OpenGL and OpenGL ES shader front end and validator"
 repo=KhronosGroup/$name
 version=$(gh_ver $repo)
 depends=(gcc glibc spirv-tools)

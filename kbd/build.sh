@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=kbd
+homepage="http://www.kbd-project.org"
+description="Keytable files and keyboard utilities"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

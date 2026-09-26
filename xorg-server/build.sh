@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=xorg-server
+homepage="https://xorg.freedesktop.org"
+description="Xorg X server"
 repo=xorg/xserver
 version=$(gfd_ver $repo $name)
 depends=(brotli bzip2 dbus expat freetype gcc glibc icu libdrm libelf libepoxy libffi libfontenc libpciaccess libpng libtirpc libx11 libxau libxcb libxcvt libxdmcp libxext libxfont2 libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa nettle pixman spirv-tools systemd xz zlib zstd)

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libqmi
+homepage="https://www.freedesktop.org/wiki/Software/libqmi/"
+description="QMI modem protocol helper library"
 repo=mobile-broadband/$name
 version=$(gfd_ver $repo)
 filename="$name-$version.tar.gz"

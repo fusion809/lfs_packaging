@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=mdadm
+homepage="https://git.kernel.org/pub/scm/utils/mdadm"
+description="A tool for managing/monitoring Linux md device arrays, also known as Software RAID"
 repo=md-raid-utilities/$name
 version=$(gh_ver $repo)
 depends=(glibc systemd)

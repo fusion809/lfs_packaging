@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=sqlite
+homepage="https://www.sqlite.org/"
+description="A C library that implements an SQL database engine"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name=libaec
+homepage="https://gitlab.dkrz.de/k202009/libaec"
+description="Adaptive Entropy Coding library"
 repo=Deutsches-Klimarechenzentrum/$name
 get_version() {
     local up_ver=$(wget -T 5 -t 1 -cqO- "https://gitlab.dkrz.de/api/v4/projects/dkrz-sw%2Flibaec/repository/tags" | perl -nle 'while (m{"name":"v?([0-9.]+)"}g) { print $1 }' | sort -V | tail -n 1)

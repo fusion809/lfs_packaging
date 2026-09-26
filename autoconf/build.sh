@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=autoconf
+description="A GNU tool for automatically configuring source code"
 homepage="http://www.gnu.org/software/autoconf/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"

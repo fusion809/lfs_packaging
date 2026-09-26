@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name=fastfetch
+homepage="https://github.com/fastfetch-cli/fastfetch"
+description="A feature-rich and performance oriented neofetch like system information tool"
 repo=fastfetch-cli/$name
 depends=(bash coreutils gcc glibc yyjson zlib
 pulseaudio libxcb libxrandr sqlite)

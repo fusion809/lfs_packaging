@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=ibus
+homepage="https://github.com/ibus/ibus/wiki"
+description="Intelligent input bus for Linux/Unix"
 repo=$name/$name
 version=$(gh_ver "$repo")
 filename="$name-$version.tar.gz"

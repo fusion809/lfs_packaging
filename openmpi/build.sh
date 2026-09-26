@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name=openmpi
+homepage="https://www.open-mpi.org"
+description="High performance message passing library (MPI)"
 get_version() {
   local inst_ver=$(pkgver $name)
   local art_ver=$(artver $name)

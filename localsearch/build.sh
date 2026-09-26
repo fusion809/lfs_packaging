@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=localsearch
+homepage="https://gnome.pages.gitlab.gnome.org/localsearch/"
+description="Filesystem indexer and metadata extractor"
 repo=GNOME/$name
 version=$(gh_ver $repo)
 depends=(acl brotli bzip2 cairo curl cyrus-sasl elfutils exempi expat fontconfig freetype gcc gexiv2 giflib glib2 glibc gpgme gpgmepp gst-plugins-base gstreamer icu inih jansson json-glib lcms2 libarchive libassuan libelf libffi libgcrypt libgpg-error libgxps libidn2 libjpeg-turbo libpng libpsl libseccomp libtiff libunistring libunwind libwebp libx11 libxau libxcb libxdmcp libxext libxml2 libxrender lz4 nghttp2 nspr nss openjpeg openldap openssl pcre2 pixman poppler sqlite systemd tinysparql totem-pl-parser upower util-linux xz zlib zstd)

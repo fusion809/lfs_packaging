@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libgcrypt
+homepage="https://www.gnupg.org"
+description="General purpose cryptographic library based on the code from GnuPG"
 repo="gpg/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.bz2"

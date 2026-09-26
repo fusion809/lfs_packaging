@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libmng
+homepage="https://www.libmng.com/"
+description="A collection of routines used to create and manipulate MNG format graphics files"
 repo=LuaDist/$name
 version=$(gh_ver $repo)
 depends=(glibc lcms2 libjpeg-turbo zlib)

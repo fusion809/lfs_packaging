@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=rsync
+homepage="https://rsync.samba.org/"
+description="A fast and versatile file copying tool for remote and local files"
 repo=RsyncProject/$name
 version=$(gh_ver $repo)
 depends=(acl glibc lz4 openssl popt zlib zstd)

@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=pipewire
+description="Low-latency audio/video router and processor"
 homepage="https://pipewire.org"
 repo=$name/$name
 version=$(gfd_ver $repo)

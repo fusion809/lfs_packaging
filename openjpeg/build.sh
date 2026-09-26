@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=openjpeg
+homepage="An open source JPEG 2000 codec"
+description="An open source JPEG 2000 codec"
 repo=uclouvain/$name
 version=$(gh_ver $repo)
 depends=(cmake glibc lcms2 libjpeg-turbo libpng libtiff libwebp xz zlib zstd)

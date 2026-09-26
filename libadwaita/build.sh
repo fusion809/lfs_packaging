@@ -2,6 +2,7 @@
 set -e
 # Variable declaration
 name=libadwaita
+description="Building blocks for modern adaptive GNOME applications"
 homepage="https://gitlab.gnome.org/GNOME/libadwaita"
 version=$(gn_ver $name)
 filename="$name-$version.tar.xz"

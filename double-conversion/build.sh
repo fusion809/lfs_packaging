@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=double-conversion
+homepage="https://github.com/google/double-conversion"
+description="Binary-decimal and decimal-binary routines for IEEE doubles"
 repo=google/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

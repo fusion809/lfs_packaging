@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=harfbuzz
+homepage="https://harfbuzz.github.io/"
+description="OpenType text shaping engine"
 repo="$name/$name"
 version=$(gh_ver $repo)
 depends=(brotli bzip2 cairo expat fontconfig freetype gcc glib2 glib2 glibc graphite2 icu libffi libpng libx11 libxau libxcb libxdmcp libxext libxrender pcre2 pixman zlib)

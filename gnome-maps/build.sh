@@ -2,6 +2,8 @@
 set -e
 # Variable declaration
 name=gnome-maps
+homepage="https://apps.gnome.org/Maps"
+description="Find places around the world"
 repo=GNOME/$name
 version=$(gn_ver $name)
 filename="$name-$version.tar.gz"

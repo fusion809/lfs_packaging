@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=gsettings-desktop-schemas
+homepage="https://gitlab.gnome.org/GNOME/gsettings-desktop-schemas"
+description="GSettings schemas for GNOME desktop components"
 repo=GNOME/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

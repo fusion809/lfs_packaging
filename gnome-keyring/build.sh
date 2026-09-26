@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=gnome-keyring
+homepage="https://gitlab.gnome.org/GNOME/gnome-keyring"
+description="Stores passwords and encryption keys"
 repo=GNOME/$name
 version=$(gh_ver $repo)
 depends=(gcr3 glib2 glibc libffi libgcrypt libgpg-error linux-pam p11-kit pcre2 systemd util-linux zlib)

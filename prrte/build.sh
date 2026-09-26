@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name=prrte
+homepage="https://github.com/openpmix/prrte"
+description="PMIx Reference RunTime Environment"
 repo=openpmix/prrte
 version=$(gh_ver "$repo")
 filename="$name-$version.tar.gz"

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=kcolorpicker
+homepage="https://github.com/DamirPorobic/kColorPicker"
+description="Qt based Color Picker with popup menu"
 _name=kColorPicker
 repo=ksnip/$_name
 version=$(gh_ver $repo)

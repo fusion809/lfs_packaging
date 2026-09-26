@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libssh
+homepage="https://www.libssh.org/"
+description="Library for accessing ssh client services through C libraries"
 maj_ver=$(wget -cqO- https://www.libssh.org/files/ | grep -E "[0-9.]+/" | cut -d '"' -f 8 | cut -d '/' -f 1 | sort -V | tail -n 1)
 get_version() {
 	local up_ver=$(wget -cqO- https://www.libssh.org/files/$maj_ver/ | grep -E "[0-9.]+.tar.xz\"" | cut -d '-' -f 2 | sed 's/.tar.xz.*//g' | sort -V | tail -n 1)

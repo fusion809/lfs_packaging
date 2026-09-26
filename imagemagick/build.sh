@@ -3,6 +3,8 @@
 set -e
 # Variable declarations
 name=imagemagick
+homepage="https://www.imagemagick.org/"
+description="An image viewing/manipulation program"
 _name=ImageMagick
 repo=$_name/$_name
 version=$(gh_ver $repo | sed 's/\.\([0-9]*\)$/-\1/')

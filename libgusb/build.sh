@@ -2,6 +2,8 @@
 set -e
 # Variable declaration
 name=libgusb
+homepage="https://github.com/hughsie/libgusb"
+description="GObject wrapper for libusb1"
 repo=hughsie/libgusb
 version=$(gh_ver "$repo")
 filename="$name-$version.tar.xz"

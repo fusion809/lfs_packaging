@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libcap
+homepage="https://sites.google.com/site/fullycapable/"
+description="POSIX 1003.1e capabilities"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

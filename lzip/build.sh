@@ -2,6 +2,7 @@
 set -e
 # Variable declarations
 name=lzip
+description="A lossless file compressor based on the LZMA algorithm"
 homepage="https://www.nongnu.org/lzip"
 url="https://download.savannah.gnu.org/releases/$name"
 # Get versions into temp variables (updates will include these because they are ABOVE the version= line)

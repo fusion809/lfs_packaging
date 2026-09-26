@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=make
+description="GNU make utility to maintain groups of programs"
 homepage="http://www.gnu.org/software/make/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"

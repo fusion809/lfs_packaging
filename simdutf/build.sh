@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=simdutf
+homepage="https://simdutf.github.io/simdutf/"
+description="Unicode routines (UTF8, UTF16, UTF32) and Base64"
 repo="$name/$name"
 version=$(gh_ver $repo)
 depends=(cmake gcc glibc)

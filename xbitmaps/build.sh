@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=xbitmaps
+homepage="https://xorg.freedesktop.org/"
+description="X.org Bitmap files"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

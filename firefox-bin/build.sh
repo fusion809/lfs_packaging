@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=firefox-bin
+homepage="Standalone web browser from mozilla.org - Static binaries from upstream"
+description="Standalone web browser from mozilla.org - Static binaries from upstream"
 _name=firefox
 get_version() {
 	local inst_ver=$(pkgver $name)

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=mpfr
+homepage="https://www.mpfr.org/"
+description="Multiple-precision floating-point library"
 version=$(gnu_ver $name)
 depends=(glibc gmp)
 filename="$name-$version.tar.xz"

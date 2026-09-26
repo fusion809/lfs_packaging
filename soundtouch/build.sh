@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=soundtouch
+homepage="https://www.surina.net/soundtouch/"
+description="An audio processing library"
 repo=VinMing/$name
 version=$(gh_ver $repo)
 depends=(gcc glibc)

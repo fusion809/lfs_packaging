@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libselinux
+homepage="SELinux library and simple utilities"
+description="SELinux library and simple utilities"
 repo=SELinuxProject/selinux
 version=$(gh_ver $repo)
 depends=(gcc glibc libsepol pcre2)

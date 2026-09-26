@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=rust-bindgen
+homepage="https://github.com/rust-lang/rust-bindgen"
+description="Automatically generates Rust FFI bindings to C (and some C++) libraries"
 repo=rust-lang/$name
 # gh_ver sometimes reports an out-of-date version due to the releases page having older versions listed than are tagged
 get_version() {

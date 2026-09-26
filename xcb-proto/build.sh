@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=xcb-proto
+homepage="https://xcb.freedesktop.org/"
+description="XML-XCB protocol descriptions"
 repo=xorg/proto/xcbproto
 version=$(gfd_ver $repo $name)
 filename="$name-$version.tar.xz"

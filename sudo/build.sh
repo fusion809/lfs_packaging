@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=sudo
+description="Give certain users the ability to run some commands as root"
 homepage="https://www.sudo.ws"
 get_version() {
 	local inst_ver=$(pkgver $name)

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=findutils
+homepage="https://www.gnu.org/software/findutils/"
+description="GNU utilities to locate files"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

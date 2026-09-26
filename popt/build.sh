@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=popt
+homepage="https://github.com/rpm-software-management/popt"
+description="A commandline option parser"
 repo=rpm-software-management/$name
 version=$(gh_ver $repo)
 majVer=$(echo $version | cut -d '.' -f 1)

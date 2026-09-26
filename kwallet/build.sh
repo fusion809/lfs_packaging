@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=kwallet
+homepage="https://develop.kde.org/products/frameworks/"
+description="Secure and unified container for user passwords"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc gpgme gpgmepp graphite2 harfbuzz icu kcolorscheme kconfig kcoreaddons kcrash kdbusaddons keyutils kguiaddons ki18n knotifications kwidgetsaddons kwindowsystem libassuan libcanberra libdrm libelf libffi libgcrypt libgpg-error libogg libpciaccess libpng libsecret libvorbis libx11 libxau libxcb libxdmcp libxext libxfixes libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qca qt6 spirv-tools systemd util-linux wayland webkitgtk xcb-util-keysyms xz zlib zstd)

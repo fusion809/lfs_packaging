@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=shared-mime-info
+homepage="https://www.freedesktop.org/wiki/Specifications/shared-mime-info-spec/"
+description="Freedesktop.org Shared MIME Info"
 repo=xdg/$name
 version=$(gfd_ver $repo $name)
 depends=(gcc glib2 glibc icu libxml2 pcre2)

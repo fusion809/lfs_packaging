@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=smartmontools
+homepage="https://www.smartmontools.org/"
+description="Control and monitor S.M.A.R.T. enabled ATA and SCSI Hard Drives"
 repo=$name/$name
 version=$(gh_ver $repo)
 depends=(gcc glibc systemd)

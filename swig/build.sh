@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=swig
+description="Generate scripting interfaces to C/C++ code"
 homepage="https://www.swig.org"
 repo=$name/$name
 version=$(gh_ver $repo)

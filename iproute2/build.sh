@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=iproute2
+homepage="https://git.kernel.org/pub/scm/network/iproute2/iproute2.git"
+description="IP Routing Utilities"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

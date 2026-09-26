@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=brotli
+homepage="https://github.com/google/brotli"
+description="Generic-purpose lossless compression algorithm"
 repo=google/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

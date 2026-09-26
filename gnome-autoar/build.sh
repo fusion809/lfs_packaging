@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=gnome-autoar
+homepage="https://gnome.pages.gitlab.gnome.org/gnome-autoar/"
+description="Automatic archives creating and extracting library"
 repo=GNOME/$name
 version=$(gh_ver $repo)
 depends=(acl at-spi2-core brotli bzip2 cairo dbus expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz icu lcms2 libarchive libepoxy libffi libpng libseccomp libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxml2 libxrandr libxrender libxres lz4 openssl pango pcre2 pixman systemd util-linux wayland xz zlib zstd)

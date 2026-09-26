@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=nspr
+homepage="https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSPR"
+description="Netscape Portable Runtime"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

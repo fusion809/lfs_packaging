@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name=appstream
+homepage="https://distributions.freedesktop.org/wiki/AppStream"
+description="Provides a standard for creating app stores across distributions"
 version=$(gh_ver "ximion/appstream")
 docs="AUTHORS CHANGELOG.md COPYING README"
 depends=(brotli curl cyrus-sasl docbook-xsl-nons freetype2 gcc glib2 glibc itstool libffi libfyaml libidn2 libpsl libunistring libxml2 libxmlb libxslt llvm nghttp2 openldap openssl pcre2 qt6 systemd util-linux webkitgtk xz zlib zstd)

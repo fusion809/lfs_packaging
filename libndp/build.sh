@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libndp
+homepage="http://libndp.org/"
+description="Library for Neighbor Discovery Protocol"
 repo=jpirko/$name
 version=$(gh_ver $repo)
 depends=(glibc)

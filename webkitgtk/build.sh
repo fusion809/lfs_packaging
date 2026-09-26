@@ -1,10 +1,12 @@
 #!/bin/bash
 set -e
 name=webkitgtk
+description="Web content engine for GTK"
+homepage="https://webkitgtk.org"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)
-	local up_ver=$(wget -cqO- -T 5 -t 1 https://webkitgtk.org/releases/ | grep "webkitgtk-[0-9]+\.[0-9][02468]\.[0-9]+" -oE | cut -d '-' -f 2 | sort -V | tail -n 1)
+	local up_ver=$(wget -cqO- -T 5 -t 1 $homepage/releases/ | grep "webkitgtk-[0-9]+\.[0-9][02468]\.[0-9]+" -oE | cut -d '-' -f 2 | sort -V | tail -n 1)
 	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
       local mon_ver=$(uver $name)
 	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
@@ -19,7 +21,7 @@ version=$(get_version)
 depends=(at-spi2-core brotli bzip2 cairo curl cyrus-sasl dav1d dbus e2fsprogs elfutils enchant expat fontconfig freetype fribidi gcc gcr4 gdk-pixbuf glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk3 gtk4 harfbuzz highway icu json-glib keyutils lapack lcms2 libadwaita libaom libavif libdrm libelf libepoxy libffi libfyaml libgcrypt libgpg-error libgudev libidn2 libjpeg-turbo libjxl libpciaccess libpng libpsl librest libseccomp libsecret libsoup libtasn1 libtiff libunistring libunwind libwebp libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxml2 libxmlb libxrandr libxrender libxres libxshmfence libxslt libxxf86vm llvm lm-sensors mesa mitkrb nghttp2 openldap openssl orc p11-kit pango pcre2 pixman spirv-tools sqlite svt-av1 systemd util-linux vulkan-loader wayland xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-download_src "https://webkitgtk.org/releases/$filename"
+download_src "$homepage/releases/$filename"
 unpk_enter "$filename" "$direname"
 echo "Compiling with GTK+3 support"
 options1=(-D CMAKE_BUILD_TYPE=Release     \

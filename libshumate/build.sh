@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libshumate
+homepage="https://gitlab.gnome.org/GNOME/libshumate"
+description="Map widget for GTK 4"
 repo=GNOME/$name
 version=$(gh_ver $repo)
 depends=(brotli bzip2 cairo e2fsprogs elfutils expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk4 harfbuzz icu json-glib keyutils lcms2 libdrm libelf libepoxy libffi libgudev libidn2 libjpeg-turbo libpciaccess libpng libpsl libseccomp libsoup libtiff libunistring libunwind libwebp libx11 libxau libxcb libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxml2 libxrandr libxrender libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb nghttp2 orc pango pcre2 pixman protobuf-c spirv-tools sqlite systemd util-linux vulkan-loader wayland xz zlib zstd)

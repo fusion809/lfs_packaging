@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=pciutils
+homepage="https://mj.ucw.cz/sw/pciutils/"
+description="PCI bus configuration space access library and tools"
 repo=$name/$name
 version=$(gh_ver $repo)
 depends=(glibc kmod openssl systemd xz zlib zstd)

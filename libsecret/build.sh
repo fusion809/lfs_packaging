@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=libsecret
+description="Library for storing and retrieving passwords and other secrets"
 homepage="https://wiki.gnome.org/Projects/Libsecret"
 repo=GNOME/$name
 version=$(gh_ver $repo)

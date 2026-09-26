@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libyaml
+homepage="https://pyyaml.org/wiki/LibYAML"
+description="YAML 1.1 library"
 repo="yaml/$name"
 version=$(gh_ver $repo)
 depends=(glibc)

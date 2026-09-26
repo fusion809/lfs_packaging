@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=opencv
+homepage="https://opencv.org/"
+description="Open Source Computer Vision Library"
 repo=$name/$name
 version=$(gh_ver $repo)
 depends=(at-spi2-core brotli bzip2 cairo dav1d dbus elfutils expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gst-plugins-base gstreamer gtk3 harfbuzz lcms2 libaom libavif libdrm libepoxy libffi libjpeg-turbo libpng libseccomp libtiff libunwind libwebp libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxrandr libxrender libxres openjpeg orc pango pcre2 pixman svt-av1 systemd util-linux wayland xine-lib xz zlib zstd)

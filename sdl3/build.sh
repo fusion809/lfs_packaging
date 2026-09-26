@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=sdl3
+homepage="https://www.libsdl.org"
+description="A library for portable low-level access to a video framebuffer, audio output, mouse, and keyboard (Version 3)"
 repo=libsdl-org/SDL
 version=$(gh_ver $repo)
 depends=(glibc)

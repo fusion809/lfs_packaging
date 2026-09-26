@@ -2,6 +2,7 @@
 set -e
 # Variable declarations
 name=libsm
+description="X11 Session Management library"
 _name=libSM
 homepage="https://gitlab.freedesktop.org/xorg/lib/libsm"
 version=$(xfd_ver $_name)

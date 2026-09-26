@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libportal
+homepage="https://github.com/flatpak/libportal"
+description="GIO-style async APIs for most Flatpak portals"
 repo=flatpak/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

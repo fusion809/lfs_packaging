@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=kwin-x11
+homepage="https://kde.org/plasma-desktop/"
+description="An easy to use, but flexible, X Window Manager"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(acl attica attr breeze-icons brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kauth kcmutils kcodecs kcolorscheme kconfig kconfigwidgets kcoreaddons kcrash kdecoration keyutils kglobalaccel kglobalacceld kguiaddons kholidays ki18n kiconthemes kidletime kio kitemviews kjobwidgets knewstuff knighttime knotifications kpackage kscreenlocker kservice ksvg kwidgetsaddons kwindowsystem kxmlgui lcms2 libcanberra libdisplay-info libdrm libelf libepoxy libffi libice libogg libpciaccess libpng libSM libvorbis libx11 libxau libxcb libxdmcp libxext libxfixes libxi libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 plasma-activities qt6 solid spirv-tools syndication systemd util-linux wayland webkitgtk xcb-util xcb-util-cursor xcb-util-image xcb-util-keysyms xcb-util-renderutil xcb-util-wm xz zlib zstd)

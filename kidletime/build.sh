@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=kidletime
+homepage="https://develop.kde.org/products/frameworks/"
+description="Monitoring user activity"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu keyutils libdrm libelf libffi libice libpciaccess libpng libSM libx11 libxau libxcb libxdmcp libxext libxkbcommon libxml2 libxscrnsaver libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qt6 spirv-tools systemd util-linux wayland xz zlib zstd)

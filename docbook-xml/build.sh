@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=docbook-xml
+homepage="https://www.oasis-open.org/docbook/"
+description="A widely used XML scheme for writing documentation and help"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

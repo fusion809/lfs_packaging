@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=gawk
+homepage="https://www.gnu.org/software/gawk/"
+description="GNU version of awk"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

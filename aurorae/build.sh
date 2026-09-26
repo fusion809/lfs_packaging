@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=aurorae
+description="A themeable window decoration for KWin"
 homepage="https://invent.kde.org/plasma/aurorae"
 repo=KDE/$name
 version=$(gh_ver $repo)

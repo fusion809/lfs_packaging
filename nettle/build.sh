@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=nettle
+description="A low-level cryptographic library"
 homepage="https://www.gnu.org/software/nettle/"
 version=$(gnu_ver nettle)
 filename="$name-$version.tar.gz"

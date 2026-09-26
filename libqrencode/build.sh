@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libqrencode
+description="C library for encoding data in a QR Code symbol."
+homepage="https://fukuchi.org/works/qrencode/"
 repo=fukuchi/$name
 version=$(gh_ver $repo)
 depends=(glibc libpng zlib)

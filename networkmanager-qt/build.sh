@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=networkmanager-qt
+homepage="https://develop.kde.org/products/frameworks/"
+description="Qt wrapper for NetworkManager API"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(brotli dbus double-conversion e2fsprogs gcc glib2 glibc icu keyutils libffi mitkrb networkmanager nspr nss openssl pcre2 qt6 systemd util-linux zlib zstd)

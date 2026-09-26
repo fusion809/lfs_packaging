@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=cups
+homepage="https://openprinting.github.io/cups/"
+description="OpenPrinting CUPS - daemon package"
 repo=OpenPrinting/$name
 version=$(gh_ver $repo)
 depends=(avahi dbus gcc glibc lapack libxcrypt linux-pam openssl systemd xdg-utils zlib)

@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=geoclue
+description="Modular geoinformation service built on the D-Bus messaging system"
 homepage="https://gitlab.freedesktop.org/geoclue/geoclue/-/wikis/home"
 repo=$name/$name
 version=$(gfd_ver $repo)

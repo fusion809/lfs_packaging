@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=cryptsetup
+homepage="https://gitlab.com/cryptsetup/cryptsetup/"
+description="Userspace setup tool for transparent encryption of block devices using dm-crypt"
 repo=mbroz/$name
 version=$(gh_ver $repo)
 majMinVer=$(echo $version | cut -d '.' -f1-2)

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=fuzzel
+homepage="https://codeberg.org/dnkl/fuzzel"
+description="Application launcher for wlroots based Wayland compositors"
 repo=dnkl/$name
 version=$(cb_ver $repo)
 direname="$name-$version"

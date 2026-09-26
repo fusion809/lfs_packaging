@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libqalculate
+homepage="https://qalculate.github.io/"
+description="Multi-purpose desktop calculator"
 repo=Qalculate/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

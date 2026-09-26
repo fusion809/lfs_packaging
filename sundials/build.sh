@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name=sundials
+homepage="https://computing.llnl.gov/projects/sundials"
+description="Suite of nonlinear differential/algebraic equation solvers"
 repo="llnl/sundials"
 version=$(gh_ver $repo)
 filename=$name-$version.tar.gz

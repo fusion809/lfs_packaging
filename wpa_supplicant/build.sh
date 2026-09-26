@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=wpa_supplicant
+homepage="https://w1.fi/wpa_supplicant/"
+description="A utility providing key negotiation for WPA wireless networks"
 repo=digsrc/$name
 version=$(gh_ver $repo)
 depends=(dbus glibc libnl ncurses openssl readline systemd)

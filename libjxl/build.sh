@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libjxl
+homepage="https://jpeg.org/jpegxl/"
+description="JPEG XL image format reference implementation"
 repo=$name/$name
 version=$(gh_ver $repo)
 depends=(acl at-spi2-core brotli bzip2 cairo dav1d dbus expat fontconfig freetype fribidi gcc gdk-pixbuf giflib glib2 glibc glycin gpm graphite2 gtk3 harfbuzz highway lcms2 libaom libavif libcanberra libepoxy libffi libice libjpeg-turbo libogg libpng libseccomp libSM libtool libvorbis libwebp libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxrandr libxrender libxres libxt ncurses pango pcre2 pixman svt-av1 systemd util-linux wayland zlib)

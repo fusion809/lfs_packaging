@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=poppler
+description="PDF rendering library based on xpdf 3.0"
 homepage="http://poppler.freedesktop.org/"
 get_version() {
 	local inst_ver=$(pkgver $name)

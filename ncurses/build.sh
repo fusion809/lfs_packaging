@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=ncurses
+homepage="https://invisible-island.net/ncurses/ncurses.html"
+description="System V Release 4.0 curses emulation library"
 get_version() {
     local inst_ver=$(pkgver $name)
     local lfs_vers=$(lfs_ver $name)

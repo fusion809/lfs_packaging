@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name=suitesparse
+homepage="http://faculty.cse.tamu.edu/davis/suitesparse.html"
+description="A collection of sparse matrix libraries"
 _name=SuiteSparse
 repo="DrTimothyAldenDavis/SuiteSparse"
 version=$(gh_ver $repo)

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=adwaita-icon-theme
+homepage="https://gitlab.gnome.org/GNOME/adwaita-icon-theme"
+description="GNOME standard icons"
 version=$(gn_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

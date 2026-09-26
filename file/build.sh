@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=file
+description="File type identification utility"
 homepage="https://darwinsys.com/file/"
 get_version() {
 	local inst_ver=$(pkgver $name)

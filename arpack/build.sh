@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name="arpack"
+homepage="https://github.com/opencollab/arpack-ng"
+description="Fortran77 subroutines for solving large scale eigenvalue problems"
 _name="arpack-ng"
 repo="opencollab/arpack-ng"
 version=$(gh_ver $repo)

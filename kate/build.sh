@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=kate
+homepage="https://apps.kde.org/kate/"
+description="Advanced text editor"
 version=$(kap_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

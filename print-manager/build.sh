@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=print-manager
+homepage="https://kde.org/plasma-desktop/"
+description="A tool for managing print jobs and printers"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(acl attr avahi breeze-icons brotli bzip2 cups dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kcmutils kcodecs kcolorscheme kcompletion kconfig kconfigwidgets kcoreaddons kcrash kdbusaddons keyutils kglobalaccel kguiaddons ki18n kiconthemes kio kirigami kirigami-addons kitemviews kjobwidgets knotifications kpackage kservice ksvg kwidgetsaddons kwindowsystem libcanberra libdrm libelf libffi libogg libpciaccess libplasma libpng libvorbis libx11 libxau libxcb libxcrypt libxdmcp libxext libxfixes libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 plasma-activities qt6 solid spirv-tools systemd util-linux wayland webkitgtk xcb-util-keysyms xz zlib zstd)

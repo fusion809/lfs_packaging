@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libraw
+homepage="https://www.libraw.org/"
+description="A library for reading RAW files obtained from digital photo cameras (CRW/CR2, NEF, RAF, DNG, and others)"
 repo=$name/$name
 version=$(gh_ver $repo)
 depends=(gcc glibc lcms2 libjpeg-turbo zlib)

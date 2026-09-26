@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name=gl2ps
+homepage="https://geuz.org/gl2ps/"
+description="an OpenGL to PostScript printing library"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local up_ver=$(wget -T 5 -t 1 -cqO- https://geuz.org/gl2ps/src/ | grep "[0-9].tgz" | grep -v "alpha\|beta\|\.rc" | cut -d '"' -f 8 | tail -n 1 | sed 's/gl2ps-//g' | sed 's/.tgz//g')

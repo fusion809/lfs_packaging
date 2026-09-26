@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=kservice
+homepage="https://develop.kde.org/products/frameworks/"
+description="Advanced plugin and service introspection"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(brotli dbus double-conversion e2fsprogs gcc glib2 glibc icu kconfig kcoreaddons keyutils ki18n mitkrb openssl pcre2 qt6 systemd util-linux zlib zstd)

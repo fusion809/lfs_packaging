@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=gtk4
+description="GObject-based multi-platform GUI toolkit"
 _name=gtk
 homepage="https://www.gtk.org"
 version=$(gn_ver $_name $name)

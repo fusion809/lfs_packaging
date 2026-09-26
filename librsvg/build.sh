@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=librsvg
+description="SVG rendering library"
 homepage="https://wiki.gnome.org/Projects/LibRsvg"
 repo=GNOME/$name
 version=$(gh_ver $repo)

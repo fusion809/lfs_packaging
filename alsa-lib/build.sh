@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=alsa-lib
+homepage="https://www.alsa-project.org"
+description="An alternative implementation of Linux sound support"
 repo=alsa-project/$name
 version=$(gh_ver $repo)
 depends=(glibc)

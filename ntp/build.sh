@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=ntp
+description="Network Time Protocol reference implementation"
 homepage="http://www.ntp.org/"
 url="https://github.com/$repo"
 repo=$name-project/$name

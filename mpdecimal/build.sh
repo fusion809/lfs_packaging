@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=mpdecimal
+homepage="https://www.bytereef.org/mpdecimal/index.html"
+description="Package for correctly-rounded arbitrary precision decimal floating point arithmetic"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

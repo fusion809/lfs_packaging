@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=mesa
+description="Open-source OpenGL drivers"
 homepage="https://mesa3d.org"
 get_version() {
   local inst_ver=$(pkgver $name)

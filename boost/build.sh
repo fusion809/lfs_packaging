@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=boost
+homepage="https://www.boost.org/"
+description="Free peer-reviewed portable C++ source libraries (development headers)"
 repo=boostorg/$name
 version=$(gh_ver $repo)
 filename="$name-$version-b2-nodocs.tar.xz"

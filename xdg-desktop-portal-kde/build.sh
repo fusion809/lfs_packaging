@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=xdg-desktop-portal-kde
+homepage="https://kde.org/plasma-desktop/"
+description="A backend implementation for xdg-desktop-portal using Qt/KF5"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(acl attr breeze-icons brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kbookmarks kcodecs kcolorscheme kcompletion kconfig kcoreaddons kcrash keyutils kglobalaccel kguiaddons ki18n kiconthemes kio kitemviews kjobwidgets knotifications kservice kstatusnotifieritem kwidgetsaddons kwindowsystem libcanberra libdrm libelf libffi libogg libpciaccess libpng libvorbis libx11 libxau libxcb libxdmcp libxext libxfixes libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qt6 solid spirv-tools systemd util-linux wayland webkitgtk xcb-util-keysyms xz zlib zstd)

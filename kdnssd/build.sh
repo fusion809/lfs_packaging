@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=kdnssd
+homepage="https://develop.kde.org/products/frameworks/"
+description="Abstraction to system DNSSD features"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(brotli dbus double-conversion e2fsprogs gcc glib2 glibc icu keyutils mitkrb openssl pcre2 qt6 systemd zlib zstd)

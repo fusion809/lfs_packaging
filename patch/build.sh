@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=patch
+description="A utility to apply patch files to original sources"
 homepage="https://savannah.gnu.org/projects/patch/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"

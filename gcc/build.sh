@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=gcc
+homepage="https://gcc.gnu.org"
+description="The GNU Compiler Collection - C and C++ frontends"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

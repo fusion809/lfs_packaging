@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=slang
+description="S-Lang is a powerful interpreted language"
 homepage="https://www.jedsoft.org/slang/"
 get_version() {
 	local inst_ver=$(pkgver $name)

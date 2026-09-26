@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=mpg123
+homepage="https://mpg123.de/"
+description="Console based real time MPEG Audio Player for Layer 1, 2 and 3"
 repo=libsdl-org/$name
 version=$(gh_ver $repo)
 depends=(alsa-lib dbus flac gcc glibc jack lame libogg libsndfile libvorbis libxau libxcb libxdmcp opus portaudio pulseaudio sdl2-compat systemd)

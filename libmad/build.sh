@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libmad
+homepage="https://www.underbit.com/products/mad/"
+description="A high-quality MPEG audio decoder"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

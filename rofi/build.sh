@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=rofi
+homepage="https://davatorium.github.io/rofi"
+description="A window switcher, application launcher and dmenu replacement"
 version=$(gh_ver davatorium/rofi)
 
 if ! [[ -d rofi ]]; then

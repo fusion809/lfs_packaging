@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=hicolor-icon-theme
+homepage="https://gitlab.freedesktop.org/xdg/default-icon-theme"
+description="Freedesktop.org Hicolor icon theme"
 repo=xdg/default-icon-theme
 version=$(gfd_ver $repo "$name")
 filename="$name-$version.tar.xz"

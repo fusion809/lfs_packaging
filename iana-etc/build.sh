@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=iana-etc
+homepage="https://www.iana.org/protocols"
+description="/etc/protocols and /etc/services provided by IANA"
 repo="Mic92/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

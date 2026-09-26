@@ -2,6 +2,7 @@
 set -e
 # Variable declarations
 name=hyfetch
+description="Neofetch with LGBTQ+ pride flags!"
 homepage="https://github.com/hykilpikonna/hyfetch"
 repo=hykilpikonna/hyfetch
 depends=(bash coreutils fastfetch gcc glibc rustc)

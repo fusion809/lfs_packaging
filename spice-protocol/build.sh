@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name=spice-protocol
+homepage="https://spice-space.org"
+description="Headers for SPICE protocol"
 version=$(spice_ver $name)
 docs="COPYING *.md"
 direname="$name-$version"

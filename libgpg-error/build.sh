@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libgpg-error
+homepage="https://www.gnupg.org"
+description="Support library for libgcrypt"
 repo="gpg/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.bz2"

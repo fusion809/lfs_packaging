@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=links
+homepage="http://links.twibright.com/"
+description="A text WWW browser, similar to Lynx"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

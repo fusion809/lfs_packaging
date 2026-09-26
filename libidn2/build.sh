@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libidn2
+homepage="https://www.gnu.org/software/libidn/#libidn2"
+description="Free software implementation of IDNA2008, Punycode and TR46"
 version=$(gl_ver libidn/libidn2)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"

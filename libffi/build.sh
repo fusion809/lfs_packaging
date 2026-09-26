@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libffi
+homepage="https://sourceware.org/libffi/"
+description="Portable foreign function interface library"
 repo=libffi/libffi
 version=$(gh_ver $repo)
 depends=(coreutils gcc glibc gzip make tar)

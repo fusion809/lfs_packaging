@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=breeze-gtk
+homepage="https://kde.org/plasma-desktop/"
+description="Breeze widget theme for GTK 2 and 3"
 repo=KDE/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

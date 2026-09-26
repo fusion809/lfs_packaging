@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name=tesseract
+homepage="https://github.com/tesseract-ocr/tesseract"
+description="An OCR program"
 repo="tesseract-ocr/tesseract"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

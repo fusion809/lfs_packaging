@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libcanberra
+homepage="https://0pointer.net/lennart/projects/libcanberra/"
+description="A small and lightweight implementation of the XDG Sound Theme Specification"
 repo=Distrotech/$name
 version=$(gh_ver $repo)
 depends=(alsa-lib at-spi2-core brotli bzip2 cairo dbus elfutils expat flac fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gstreamer gtk3 harfbuzz lame lcms2 libepoxy libffi libogg libpng libseccomp libsndfile libtool libunwind libvorbis libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxrandr libxrender libxres mpg123 opus pango pcre2 pixman pulseaudio systemd util-linux wayland xz zlib zstd)

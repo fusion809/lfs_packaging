@@ -6,6 +6,8 @@ depends=(brotli bzip2 dbus double-conversion elfutils expat fontconfig freetype 
 filename="$_name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 name=$(echo $_name | tr '[:upper:]' '[:lower:]')
+homepage="https://gitlab.freedesktop.org/xorg/lib/libxdmcp"
+description="X11 Display Manager Control Protocol library"
 xfd_download "$filename"
 unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --docdir=/usr/share/doc/$direname

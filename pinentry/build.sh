@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=pinentry
+description="Collection of simple PIN or passphrase entry dialogs which utilize the Assuan protocol"
 homepage="https://gnupg.org/index.html"
 repo="gpg/$name"
 version=$(gh_ver $repo)

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=sassc
+homepage="https://sass-lang.com"
+description="C implementation of Sass CSS preprocessor"
 repo=sass/$name
 version=$(gh_ver $repo)
 librepo=sass/libsass

@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=linux
+description="The Linux kernel and modules"
 homepage="https://kernel.org"
 get_base_version() {
 	local up_ver=$(wget -T 5 -cqO- $homepage/releases.json 2>/dev/null | grep -A 2 '"latest_stable":' | grep '"version":' | head -n 1 | cut -d '"' -f 4)

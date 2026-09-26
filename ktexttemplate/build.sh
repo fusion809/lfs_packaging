@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=ktexttemplate
+homepage="https://develop.kde.org/products/frameworks/"
+description="Library to allow application developers to separate the structure of documents from the data they contain"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(brotli double-conversion e2fsprogs gcc glib2 glibc icu keyutils mitkrb openssl pcre2 qt6 systemd zlib zstd)

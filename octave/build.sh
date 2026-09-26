@@ -3,6 +3,8 @@ set -e
 # Variable declarations
 export JAVA_HOME=/opt/jdk
 name=octave
+homepage="https://www.gnu.org/software/octave/"
+description="A high-level language, primarily intended for numerical computations"
 version=$(gnu_ver $name)
 docs="AUTHORS BUGS CITATION COPYING ChangeLog INSTALL* NEWS README"
 depends=(alsa-lib arpack at-spi2-core bash blas-lapack brotli bzip2 cairo coreutils curl cyrus-sasl dbus double-conversion e2fsprogs expat fftw flac fltk fontconfig freeglut freetype fribidi gcc gcc gdk-pixbuf gl2ps glib2 glibc glpk glu glycin gmp gnuplot graphicsmagick graphite2 gtk3 harfbuzz hdf5 hwloc jack java keyutils lame lcms2 libaec libdrm libelf libepoxy libevent libfabric libffi libice libidn2 libogg libpciaccess libpng libpsl libseccomp libSM libsndfile libunistring libvorbis libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxft libxi libxinerama libxkbcommon libxml2 libxmu libxrandr libxrender libxres libxshmfence libxt libxxf86vm llvm lm-sensors lzip make mesa mitkrb mpg123 ncurses nghttp2 numactl openblas openldap openmpi openpmix openssl opus pango pcre2 pixman portaudio qhull qrupdate qscintilla qt6 rapidjson readline sed spirv-tools suitesparse sundials systemd tar texinfo util-linux wayland webkitgtk xz zlib zstd)

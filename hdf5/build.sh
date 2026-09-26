@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name=hdf5
+homepage="https://www.hdfgroup.org/hdf5"
+description="General purpose library and file format for storing scientific data"
 repo="HDFGroup/hdf5"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

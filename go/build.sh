@@ -2,6 +2,7 @@
 # Heavily based on PKGBUILD
 set -e
 name=go
+description="Core compiler tools for the Go programming language"
 repo=golang/$name
 homepage="https://go.dev/"
 version=$(gh_ver $repo)

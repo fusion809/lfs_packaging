@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=plasma-welcome
+homepage="https://kde.org/plasma-desktop/"
+description="A friendly onboarding wizard for Plasma"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(acl attr breeze-icons brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kcmutils kcodecs kcolorscheme kconfig kconfigwidgets kcoreaddons kcrash kdbusaddons keyutils kglobalaccel kguiaddons ki18n kiconthemes kio kirigami kitemviews kjobwidgets knotifications kpackage kservice ksvg kwidgetsaddons kwindowsystem kxmlgui libcanberra libdrm libelf libffi libogg libpciaccess libplasma libpng libvorbis libx11 libxau libxcb libxdmcp libxext libxfixes libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 plasma-activities qt6 solid spirv-tools systemd util-linux wayland webkitgtk xcb-util-keysyms xz zlib zstd)

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libblockdev
+homepage="https://github.com/storaged-project/libblockdev"
+description="A library for manipulating block devices"
 repo="storaged-project/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=kpeople
+homepage="https://develop.kde.org/products/frameworks/"
+description="A library that provides access to all contacts and the people who hold them"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu kcodecs kconfig kcontacts kcoreaddons keyutils ki18n kitemviews kwidgetsaddons libdrm libelf libffi libpciaccess libpng libx11 libxau libxcb libxdmcp libxext libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qt6 spirv-tools systemd util-linux wayland xz zlib zstd)

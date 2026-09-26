@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libfyaml
+homepage="https://pantoniou.github.io/libfyaml/"
+description="Fully feature complete YAML parser and emitter"
 repo=pantoniou/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

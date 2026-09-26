@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=binutils
+description="A set of programs to assemble and manipulate binary and object files"
 homepage="https://www.gnu.org/software/binutils/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"

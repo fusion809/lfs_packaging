@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=taglib
+homepage="https://taglib.github.io/"
+description="A Library for reading and editing the meta-data of several popular audio formats"
 repo=$name/$name
 version=$(gh_ver $repo)
 depends=(gcc glibc zlib)

@@ -2,6 +2,7 @@
 # Build currently fails due to tcl9.0.4 issues
 set -e
 name=expect
+description="A tool for automating interactive applications"
 homepage="https://sourceforge.net/projects/expect/"
 get_version() {
 	local inst_ver=$(pkgver $name)

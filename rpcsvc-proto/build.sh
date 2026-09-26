@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=rpcsvc-proto
+homepage="https://github.com/thkukuk/rpcsvc-proto"
+description="rpcsvc protocol definitions from glibc"
 repo=thkukuk/$name
 version=$(gh_ver $repo)
 depends=(glibc)

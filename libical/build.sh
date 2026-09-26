@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libical
+homepage="https://github.com/libical/libical"
+description="An open source reference implementation of the icalendar data type and serialization format"
 repo="$name/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

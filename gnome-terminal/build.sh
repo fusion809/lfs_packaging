@@ -2,6 +2,8 @@
 set -e
 # Variable declaration
 name=gnome-terminal
+homepage="https://wiki.gnome.org/Apps/Terminal"
+description="The GNOME Terminal Emulator"
 version=$(gn_ver $name)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=glibc
+homepage="https://www.gnu.org/software/libc"
+description="GNU C Library"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

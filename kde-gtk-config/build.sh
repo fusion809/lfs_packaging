@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=kde-gtk-config
+homepage="https://kde.org/plasma-desktop/"
+description="Syncs KDE settings to GTK applications"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(at-spi2-core brotli bzip2 cairo dbus double-conversion expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz icu kcolorscheme kconfig kcoreaddons kdbusaddons kdecoration kguiaddons ki18n kwindowsystem lcms2 libdrm libelf libepoxy libffi libpciaccess libpng libseccomp libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxml2 libxrandr libxrender libxres libxshmfence libxxf86vm llvm lm-sensors mesa pango pcre2 pixman qt6 spirv-tools systemd util-linux wayland xcb-util-keysyms xz zlib zstd)

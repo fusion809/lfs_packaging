@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=pixman
+homepage="https://gitlab.freedesktop.org/pixman/pixman"
+description="The pixel-manipulation library for X and cairo"
 repo=lib$name/$name
 version=$(gh_ver $repo)
 depends=(glibc)

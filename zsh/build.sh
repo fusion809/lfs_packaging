@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=zsh
+homepage="https://www.zsh.org/"
+description="A modern, more extensible shell for Unix-like operating systems."
 repo=$name/code
 version=$(sf_ver $repo)
 direname="$name-$version"

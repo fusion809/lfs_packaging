@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libvpx
+homepage="https://www.webmproject.org/"
+description="VP8 and VP9 codec"
 repo="webmproject/$name"
 version=$(gh_ver $repo)
 depends=(nasm which yasm)

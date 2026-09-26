@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libxslt
+homepage="https://gitlab.gnome.org/GNOME/libxslt/-/wikis/home"
+description="XML stylesheet transformation library"
 version=$(gn_ver $name)
 majVer=$(echo $version | sed -E 's/.[0-9]+$//g')
 filename="$name-$version.tar.xz"

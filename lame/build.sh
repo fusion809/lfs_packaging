@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=lame
+homepage="http://lame.sourceforge.net/"
+description="A high quality MPEG Audio Layer III (MP3) encoder"
 repo=${name}project/$name
 version=$(gh_ver $repo)
 depends=(glibc ncurses)

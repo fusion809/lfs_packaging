@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libsndfile
+homepage="https://libsndfile.github.io/libsndfile/"
+description="A C library for reading and writing files containing sampled audio data"
 repo=$name/$name
 version=$(gh_ver $repo)
 depends=(alsa-lib brotli bzip2 dbus double-conversion elfutils expat flac fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu lame libdrm libffi libogg libpciaccess libpng libvorbis libx11 libxau libxcb libxdmcp libxext libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mpg123 opus pcre2 qt6 spirv-tools systemd wayland xz zlib zstd)

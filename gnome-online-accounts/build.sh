@@ -2,6 +2,8 @@
 set -e
 # Variable declaration
 name=gnome-online-accounts
+homepage="https://gitlab.gnome.org/GNOME/gnome-online-accounts/-/wikis/home"
+description="Single sign-on framework for GNOME"
 version=$(gn_ver $name)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"

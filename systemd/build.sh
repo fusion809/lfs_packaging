@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=systemd
+homepage="https://systemd.io/"
+description="system and service manager"
 repo=$name/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
@@ -8,7 +10,6 @@ _version=$(lfs_ver $name)
 _filename="$name-man-pages-$_version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(acl bash coreutils dbus glibc gzip hwdata kbd kmod lz4 meson ninja openssl pcre2 tar util-linux wget xz)
-
 gha_download "$repo" "v$version" "$filename"
 download_src "https://anduin.linuxfromscratch.org/LFS/$_filename"
 unpk_enter "$filename" "$direname"

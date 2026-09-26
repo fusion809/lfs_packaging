@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=xdotool
+homepage="https://www.semicomplete.com/projects/xdotool/"
+description="Command-line X11 automation tool"
 repo=jordansissel/$name
 version=$(gh_ver $repo)
 depends=(glibc libx11 libxau libxcb libxdmcp libxext libxi libxinerama libxkbcommon libxtst)

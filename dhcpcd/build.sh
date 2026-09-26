@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e 
 name=dhcpcd
+homepage="https://roy.marples.name/projects/dhcpcd/"
+description="DHCP/ IPv4LL/ IPv6RA/ DHCPv6 client"
 repo="NetworkConfiguration/dhcpcd"
 version=$(gh_ver "$repo")
 direname="$name-$version"

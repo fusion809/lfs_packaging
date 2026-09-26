@@ -2,6 +2,8 @@
 set -e
 # Variable declaration
 name=polkit
+homepage="https://github.com/polkit-org/polkit"
+description="Application development toolkit for controlling system-wide privileges"
 repo="$name-org/$name"
 version=$(gh_ver "$repo")
 filename="$name-$version.tar.gz"

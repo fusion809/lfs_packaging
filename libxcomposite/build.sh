@@ -3,6 +3,8 @@ set -e
 # Variable declarations
 _name=libXcomposite
 name=$(echo $_name | tr '[:upper:]' '[:lower:]')
+homepage="https://xorg.freedesktop.org/"
+description="X11 Composite extension library"
 version=$(xfd_ver $_name)
 direname="${_name}-$version"
 filename="$direname.tar.xz"

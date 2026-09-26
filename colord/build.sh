@@ -2,6 +2,7 @@
 set -e
 # Variable declaration
 name=colord
+description="System daemon for managing color devices"
 repo=hughsie/colord
 homepage="http://www.freedesktop.org/software/colord/"
 get_version() {

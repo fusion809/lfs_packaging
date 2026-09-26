@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=openssh
+homepage="https://www.openssh.com/portable.html"
+description="SSH protocol implementation for remote login, command execution and file transfer"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

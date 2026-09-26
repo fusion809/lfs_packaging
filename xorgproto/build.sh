@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=xorgproto
+homepage="https://xorg.freedesktop.org/"
+description="combined X.Org X11 Protocol headers"
 version=$(xfd_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

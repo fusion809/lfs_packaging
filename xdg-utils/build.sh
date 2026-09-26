@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=xdg-utils
+homepage="https://gitlab.freedesktop.org/xdg/xdg-utils"
+description="Command line tools that assist applications with a variety of desktop integration tasks"
 repo=xdg/$name
 version=$(gfd_ver $repo)
 filename="$name-v$version.tar.gz"

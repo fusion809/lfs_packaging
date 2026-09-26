@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=qqc2-breeze-style
+homepage="https://kde.org/plasma-desktop/"
+description="Applications useful for Plasma development"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(breeze-icons brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kcolorscheme kconfig keyutils kguiaddons ki18n kiconthemes kirigami libdrm libelf libffi libpciaccess libpng libx11 libxau libxcb libxdmcp libxext libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qt6 spirv-tools systemd wayland xz zlib zstd)

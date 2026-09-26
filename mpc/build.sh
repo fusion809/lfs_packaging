@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=mpc
+description="Minimalist command line interface to MPD"
 homepage="https://www.multiprecision.org"
 version=$(gnu_ver $name)
 depends=(glibc gmp mpfr)

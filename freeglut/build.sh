@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=freeglut
+homepage="https://freeglut.sourceforge.net/"
+description="Free OpenGL Utility Toolkit"
 repo=$name/$name
 version=$(gh_ver $repo)
 depends=(bzip2 expat gcc glibc icu libdrm libelf libffi libpciaccess libx11 libxau libxcb libxdmcp libxext libxi libxml2 libxrandr libxrender libxshmfence libxxf86vm llvm lm-sensors mesa spirv-tools xz zlib zstd)

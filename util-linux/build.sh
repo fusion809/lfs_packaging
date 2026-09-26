@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=util-linux
+homepage="https://github.com/util-linux/util-linux"
+description="Miscellaneous system utilities for Linux"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local majVer=$(wget -T 5 -t 1 -cqO- https://www.kernel.org/pub/linux/utils/util-linux/ | grep -E "v[0-9]+\.[0-9]+" | cut -d '"' -f 2 | sed 's/v//g' | sed 's|/||g' | sort -V | tail -n 1)

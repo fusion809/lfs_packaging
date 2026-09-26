@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=vte
+description="Virtual Terminal Emulator widget"
 homepage="https://gitlab.gnome.org/GNOME/vte"
 get_version() {
 	local ver=$(gn_ver $name)

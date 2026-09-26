@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=breeze
+homepage="https://kde.org/plasma-desktop/"
+description="Artwork, styles and assets for the Breeze visual style for the Plasma Desktop"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(breeze-icons brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig frameworkintegration freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kcmutils kcodecs kcolorscheme kconfig kconfigwidgets kcoreaddons kdecoration keyutils kglobalaccel kguiaddons ki18n kiconthemes kitemviews kwidgetsaddons kwindowsystem kxmlgui libdrm libelf libffi libpciaccess libpng libx11 libxau libxcb libxdmcp libxext libxfixes libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qt6 spirv-tools systemd util-linux wayland xcb-util-keysyms xz zlib zstd)

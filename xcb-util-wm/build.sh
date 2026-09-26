@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=xcb-util-wm
+homepage="https://xcb.freedesktop.org"
+description="Utility libraries for XC Binding - client and window-manager helpers for ICCCM"
 version=$(xcb_ver $name)
 depends=(glibc libxau libxcb libxdmcp)
 filename="$name-$version.tar.xz"

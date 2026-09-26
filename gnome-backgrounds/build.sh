@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=gnome-backgrounds
+homepage="https://gitlab.gnome.org/GNOME/gnome-backgrounds"
+description="Background images and data for GNOME"
 repo=GNOME/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

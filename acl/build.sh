@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=acl
+homepage="https://savannah.nongnu.org/projects/acl"
+description="Access control list utilities, libraries and headers"
 version=$(ngnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=libpng
+description="A collection of routines used to create PNG format graphics files"
 homepage="https://www.libpng.org/pub/png/libpng.html"
 repo=pnggroup/libpng
 version=$(gh_ver $repo)

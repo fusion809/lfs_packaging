@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=kdsoap
+homepage="https://github.com/KDAB/KDSoap"
+description="Qt-based client-side and server-side SOAP component"
 repo=KDAB/KDSoap
 version=$(gh_ver $repo)
 depends=(brotli double-conversion e2fsprogs gcc glib2 glibc icu keyutils mitkrb openssl pcre2 qt6 systemd zlib zstd)

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=kdeplasma-addons
+homepage="https://kde.org/plasma-desktop/"
+description="All kind of addons to improve your Plasma experience"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(acl attr breeze-icons brotli bzip2 corrosion dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kcmutils kcodecs kcolorscheme kcompletion kconfig kconfigwidgets kcoreaddons kcrash kdeclarative keyutils kglobalaccel kguiaddons kholidays ki18n kiconthemes kio kirigami kitemmodels kitemviews kjobwidgets knotifications kpackage krunner kservice ksvg kunitconversion kwidgetsaddons kwindowsystem kxmlgui libcanberra libdrm libelf libffi libogg libpciaccess libplasma libpng libvorbis libx11 libxau libxcb libxdmcp libxext libxfixes libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 plasma-activities qt6 solid sonnet spirv-tools systemd util-linux wayland webkitgtk xcb-util-keysyms xz zlib zstd)

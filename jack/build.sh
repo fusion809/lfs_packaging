@@ -3,6 +3,8 @@
 set -e
 # Variable declarations
 name=jack
+homepage="A low-latency audio server"
+description="A low-latency audio server"
 reponame=jack2
 repo=jackaudio/$reponame
 version=$(gh_com $repo)

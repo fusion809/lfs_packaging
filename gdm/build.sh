@@ -2,6 +2,7 @@
 # Oddly seems necessary to launch GNOME via SDDM
 set -e
 name=gdm
+description="Display manager and login screen"
 homepage="https://wiki.gnome.org/Projects/GDM"
 repo=GNOME/$name
 version=$(gh_ver $repo)

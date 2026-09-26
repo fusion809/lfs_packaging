@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name=libwmf
+homepage="https://github.com/caolanm/libwmf"
+description="A library for reading vector images in Microsoft's native Windows Metafile Format (WMF)"
 repo=caolanm/libwmf
 version=$(gh_ver "$repo")
 filename="$name-$version.tar.gz"

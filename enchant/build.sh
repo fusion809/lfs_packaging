@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=enchant
+description="A wrapper library for generic spell checking"
 repo="rrthomas/enchant"
 homepage="https://rrthomas.github.io/enchant/"
 version=$(gh_ver $repo)

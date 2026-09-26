@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=iptables
+description="Linux kernel packet control tool (using nft interface)"
 homepage="https://www.netfilter.org/projects/iptables/"
 repo=cernekee/$name
 version=$(gh_ver $repo)

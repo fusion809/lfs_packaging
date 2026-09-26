@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=perl-xml-parser
+homepage="https://github.com/cpan-authors/XML-Parser"
+description="Expat-based XML parser module for perl"
 _name=XML-Parser
 code=TODDR
 version=$(perl_ver $name $_name $code)

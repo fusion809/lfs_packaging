@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=sbc
+description="Bluetooth Subband Codec (SBC) library"
 homepage="https://www.kernel.org/pub/linux/bluetooth/"
 get_version() {
 	local inst_ver=$(pkgver $name)

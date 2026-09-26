@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=curl
+description="command line tool and library for transferring data with URLs"
 repo=$name/$name
 homepage="https://curl.se/"
 get_version() {

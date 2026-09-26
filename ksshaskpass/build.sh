@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=ksshaskpass
+homepage="https://kde.org/plasma-desktop/"
+description="ssh-add helper that uses kwallet and kpassworddialog"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(brotli bzip2 dbus double-conversion expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu kcoreaddons ki18n kwidgetsaddons libdrm libelf libffi libgcrypt libgpg-error libpciaccess libpng libsecret libx11 libxau libxcb libxdmcp libxext libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa pcre2 qt6 qtkeychain spirv-tools systemd util-linux wayland xz zlib zstd)

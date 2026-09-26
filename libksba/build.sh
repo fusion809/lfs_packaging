@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libksba
+homepage="https://www.gnupg.org/related_software/libksba/"
+description="Library for working with X.509 certificates, CMS data and related objects"
 repo="gpg/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.bz2"

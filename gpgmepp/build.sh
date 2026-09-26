@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=gpgmepp
+description="C++ bindings for GPGME"
 homepage="https://git.gnupg.org/cgi-bin/gitweb.cgi?p=gpgmepp.git;a=summary"
 repo="gpg/$name"
 version=$(gh_ver $repo)

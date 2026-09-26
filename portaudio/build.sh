@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name=portaudio
+homepage="https://github.com/portaudio/portaudio/"
+description="A free, cross-platform, open source, audio I/O library."
 repo=$name/$name
 version=$(gh_ver "$repo")
 filename="$name-v$version.tar.gz"

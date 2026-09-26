@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=attica
+homepage="https://develop.kde.org/products/frameworks/"
+description="Qt library that implements the Open Collaboration Services API"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(brotli double-conversion e2fsprogs gcc glib2 glibc icu keyutils mitkrb openssl pcre2 qt6 systemd zlib zstd)

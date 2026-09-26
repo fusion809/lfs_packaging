@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=vscode
+description="Visual Studio Code (vscode): Editor for building and debugging modern web and cloud applications"
+homepage="https://code.visualstudio.com/"
 version=$(git ls-remote --tags https://github.com/microsoft/vscode.git | grep -oP 'refs/tags/\K[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -n 1)
 depends=(alsa-lib at-spi2-core avahi brotli bzip2 cairo cups curl cyrus-sasl dav1d dbus e2fsprogs elfutils enchant expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gst-plugins-base gstreamer gtk3 harfbuzz highway keyutils lcms2 libaom libavif libdrm libelf libepoxy libffi libgcrypt libgpg-error libidn2 libjpeg-turbo libjxl libpng libpsl libseccomp libsecret libsoup libtasn1 libunistring libunwind libwebp libx11 libxau libxcb libxcomposite libxcrypt libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxkbfile libxml2 libxrandr libxrender libxres libxslt mesa mitkrb nghttp2 nspr nss openldap openssl orc pango pcre2 pixman sqlite svt-av1 systemd util-linux wayland webkitgtk xz zlib zstd)
 filename="code_${version}_amd64.deb"

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=xdg-desktop-portal-gtk
+homepage="https://github.com/flatpak/xdg-desktop-portal-gtk"
+description="A backend implementation for xdg-desktop-portal using GTK"
 repo=flatpak/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

@@ -7,6 +7,8 @@ direname="$_name-$version"
 filename="$direname.tar.xz"
 depends=(bash brotli bzip2 coreutils expat fontconfig freetype glibc libpng libx11 libxau libxcb libxdmcp libxrender make sed systemd tar util-linux xorg-libs xz zlib)
 name=$(echo $_name | tr '[:upper:]' '[:lower:]')
+homepage="https://xorg.freedesktop.org/"
+description="FreeType-based font drawing library for X"
 # Fetch and unpack source
 xfd_download "$filename"
 unpk_enter "$filename" "$direname"

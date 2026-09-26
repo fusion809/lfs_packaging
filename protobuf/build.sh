@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=protobuf
+description="Protocol Buffers - Google's data interchange format"
 homepage="https://protobuf.dev"
 repo="protocolbuffers/$name"
 version=$(gh_ver $repo)

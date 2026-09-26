@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=tecla
+homepage="https://gitlab.gnome.org/GNOME/tecla"
+description="Keyboard layout viewer"
 repo=GNOME/$name
 version=$(gh_ver $repo)
 depends=(brotli bzip2 cairo curl cyrus-sasl elfutils expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk4 harfbuzz icu lcms2 libadwaita libdrm libelf libepoxy libffi libfyaml libgudev libidn2 libjpeg-turbo libpciaccess libpng libpsl libseccomp libtiff libunistring libunwind libwebp libx11 libxau libxcb libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxml2 libxmlb libxrandr libxrender libxshmfence libxxf86vm llvm lm-sensors mesa nghttp2 openldap openssl orc pango pcre2 pixman spirv-tools systemd util-linux vulkan-loader wayland webkitgtk xz zlib zstd)

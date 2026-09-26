@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=bzip2
+description="A high-quality data compression program"
 homepage="https://sourceware.org/bzip2/"
 version=$(sw_ver $name)
 depends=(coreutils gcc gzip make tar)

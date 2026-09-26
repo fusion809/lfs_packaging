@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=plasma-sdk
+homepage="https://kde.org/plasma-desktop/"
+description="Applications useful for Plasma development"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(acl attr breeze-icons brotli bzip2 dbus double-conversion e2fsprogs expat flac fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kauth kcodecs kcolorscheme kcompletion kconfig kconfigwidgets kcoreaddons kcrash kdbusaddons keyutils kglobalaccel kguiaddons ki18n ki18n kiconthemes kio kirigami kitemviews kjobwidgets knotifications kpackage kparts kservice ksvg ktexteditor kwidgetsaddons kwindowsystem kxmlgui lame libcanberra libdrm libelf libffi libice libogg libpciaccess libplasma libpng libSM libsndfile libvorbis libx11 libxau libxcb libxdmcp libxext libxfixes libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb mpg123 openssl opus pcre2 plasma5support plasma-activities pulseaudio qt6 solid sonnet spirv-tools syntax-highlighting systemd util-linux wayland webkitgtk xcb-util-keysyms xz zlib zstd)

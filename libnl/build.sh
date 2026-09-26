@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libnl
+homepage="https://github.com/thom311/libnl/"
+description="Library for applications dealing with netlink sockets"
 repo=thom311/$name
 version=$(gh_ver $repo)
 depends=(glibc)

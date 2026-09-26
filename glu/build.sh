@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=glu
+homepage="https://gitlab.freedesktop.org/mesa/glu"
+description="Mesa OpenGL utility library"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

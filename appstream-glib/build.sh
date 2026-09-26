@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name=appstream-glib
+homepage="https://people.freedesktop.org/~hughsient/appstream-glib/"
+description="Objects and methods for reading and writing AppStream metadata"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

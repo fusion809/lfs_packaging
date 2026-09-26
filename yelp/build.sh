@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=yelp
+homepage="https://apps.gnome.org/Yelp"
+description="Get help with GNOME"
 repo=GNOME/$name
 version=$(gh_ver $repo)
 depends=(brotli bzip2 cairo curl cyrus-sasl dav1d e2fsprogs elfutils enchant expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk4 harfbuzz highway icu keyutils lcms2 libadwaita libaom libavif libdrm libelf libepoxy libffi libfyaml libgcrypt libgpg-error libgudev libidn2 libjpeg-turbo libjxl libpciaccess libpng libpsl libseccomp libsecret libsoup libtasn1 libtiff libunistring libunwind libwebp libx11 libxau libxcb libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxml2 libxmlb libxrandr libxrender libxshmfence libxslt libxxf86vm llvm lm-sensors mesa mitkrb nghttp2 openldap openssl orc pango pcre2 pixman spirv-tools sqlite svt-av1 systemd util-linux vulkan-loader wayland webkitgtk xz zlib zstd)

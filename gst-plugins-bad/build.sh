@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=gst-plugins-bad
+homepage="https://gstreamer.freedesktop.org/"
+description="Multimedia graph framework - bad plugins"
 version=$(gfd_ver gstreamer/gstreamer)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

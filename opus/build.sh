@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=opus
+description="Totally open, royalty-free, highly versatile audio codec"
 homepage="https://opus-codec.org"
 get_version() {
 	local inst_ver=$(pkgver $name)

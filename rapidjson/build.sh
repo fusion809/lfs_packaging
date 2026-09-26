@@ -4,6 +4,8 @@
 set -e
 # Variable declarations
 name=rapidjson
+homepage="https://github.com/miloyip/rapidjson"
+description="Fast JSON parser/generator for C++ with both SAX/DOM style API"
 repo="Tencent/$name"
 version=$(gh_com $repo)
 depends=(bash cmake coreutils git make sed)

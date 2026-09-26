@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=ktextwidgets
+homepage="https://develop.kde.org/products/frameworks/"
+description="Advanced text editing widgets"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(brotli bzip2 dbus double-conversion e2fsprogs expat flac fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu kcodecs kcompletion kconfig keyutils ki18n kwidgetsaddons lame libdrm libelf libffi libogg libpciaccess libpng libsndfile libvorbis libx11 libxau libxcb libxdmcp libxext libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb mpg123 openssl opus pcre2 pulseaudio qt6 sonnet spirv-tools systemd wayland xz zlib zstd)

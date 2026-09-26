@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libuv
+homepage="https://github.com/libuv/libuv"
+description="Multi-platform support library with a focus on asynchronous I/O"
 repo=$name/$name
 version=$(gh_ver $repo)
 filename="$name-v$version.tar.gz"

@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name=qrupdate
+homepage="https://sourceforge.net/projects/qrupdate"
+description="Fortran library for fast updates of QR and Cholesky decompositions"
 repo=mpimd-csc/qrupdate-ng
 version=$(gh_ver $repo $name)
 filename=$name-$version.tar.gz

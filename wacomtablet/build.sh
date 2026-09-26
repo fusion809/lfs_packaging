@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=wacomtablet
+homepage="https://kde.org/plasma-desktop/"
+description="GUI for Wacom Linux drivers that supports different button/pen layout profiles"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(acl attr breeze-icons brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kcmutils kcodecs kcolorscheme kconfig kconfigwidgets kcoreaddons kcrash kdbusaddons keyutils kglobalaccel kguiaddons ki18n kiconthemes kio kirigami kitemviews knotifications kpackage kservice ksvg kwidgetsaddons kwindowsystem kxmlgui libcanberra libdrm libelf libevdev libffi libgudev libice libogg libpciaccess libplasma libpng libSM libvorbis libwacom libx11 libxau libxcb libxdmcp libxext libxfixes libxi libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 plasma5support plasma-activities qt6 solid spirv-tools systemd util-linux wayland webkitgtk xcb-util-keysyms xz zlib zstd)

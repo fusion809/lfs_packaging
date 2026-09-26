@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=woff2
+homepage="https://github.com/google/woff2"
+description="Web Open Font Format 2 reference implementation"
 repo=google/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=cdparanoia
+homepage="https://www.xiph.org/paranoia/"
+description="Compact Disc Digital Audio extraction tool"
 repo=jwilk-mirrors/$name
 version=$(gh_ver $repo)
 depends=(glibc)

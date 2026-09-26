@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name="leptonica"
+homepage="http://www.leptonica.com"
+description="Software that is broadly useful for image processing and image analysis applications"
 repo="DanBloomberg/leptonica"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

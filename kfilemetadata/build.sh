@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=kfilemetadata
+homepage="https://develop.kde.org/products/frameworks/"
+description="A library for extracting file metadata"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(brotli bzip2 curl cyrus-sasl dav1d dbus double-conversion e2fsprogs expat fdk-aac ffmpeg fontconfig freetype gcc glib2 glibc gpgme gpgmepp graphite2 harfbuzz icu inih jansson karchive kcodecs kcoreaddons keyutils ki18n lame lcms2 libaom libassuan libdrm libelf libffi libgpg-error libidn2 libjpeg-turbo libogg libpciaccess libpng libpsl libtiff libunistring libva libvorbis libvpx libwebp libx11 libxau libxcb libxdmcp libxext libxfixes libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb nghttp2 nspr nss numactl openjpeg openldap openssl opus pcre2 poppler qt6 spirv-tools svt-av1 systemd taglib util-linux wayland x264 x265 xz zlib zstd)

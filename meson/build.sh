@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=meson
+homepage="https://mesonbuild.com/"
+description="High productivity build system"
 repo=${name}build/$name
 version=$(gh_ver $repo)
 depends=(bash coreutils gzip ninja python tar)

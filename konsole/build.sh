@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=konsole
+description="KDE terminal emulator"
 homepage="https://konsole.kde.org/"
 repo=KDE/konsole
 version=$(curl -sL https://download.kde.org/stable/release-service/ | perl -nle 'while (m{href="\K[0-9]+\.[0-9]+\.[0-9]+}g) { print $& }' | sort -V | tail -n 1 || gh_ver $repo)

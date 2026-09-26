@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=gnome-shell-extensions
+homepage="https://gitlab.gnome.org/GNOME/gnome-shell-extensions"
+description="Extensions for GNOME shell, including classic mode"
 repo=GNOME/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

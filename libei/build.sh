@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libei
+homepage="https://libinput.pages.freedesktop.org/libei/"
+description="Library for Emulated Input"
 repo=libinput/$name
 version=$(gfd_ver $repo)
 depends=(glibc libevdev libxkbcommon systemd)

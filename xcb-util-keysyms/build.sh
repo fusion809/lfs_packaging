@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=xcb-util-keysyms
+homepage="https://xcb.freedesktop.org"
+description="Utility libraries for XC Binding - Standard X key constants and conversion to/from keycodes"
 version=$(xcb_ver $name)
 depends=(glibc libxau libxcb libxdmcp)
 filename="$name-$version.tar.xz"

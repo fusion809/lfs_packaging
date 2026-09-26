@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=xz
+description="Library and command line tools for XZ and LZMA compressed files"
 homepage="https://tukaani.org/xz/"
 repo=tukaani-project/$name
 version=$(gh_ver $repo)

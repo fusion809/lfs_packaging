@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=bison
+description="The GNU general-purpose parser generator"
 homepage="http://www.gnu.org/software/bison/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"

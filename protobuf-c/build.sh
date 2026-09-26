@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=protobuf-c
+homepage="https://github.com/protobuf-c/protobuf-c"
+description="Protocol Buffers implementation in C"
 repo=$name/$name
 version=$(gh_ver $repo)
 depends=(gcc glibc)

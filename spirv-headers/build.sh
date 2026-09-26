@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=spirv-headers
+homepage="https://www.khronos.org/spirv/"
+description="SPIR-V header files and registry"
 _name=SPIRV-Headers-vulkan-sdk
 repo=KhronosGroup/SPIRV-Headers
 get_version() {

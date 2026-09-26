@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=gstreamer
+description="Multimedia graph framework - core"
 homepage="https://gstreamer.freedesktop.org"
 version=$(gfd_ver gstreamer/gstreamer)
 filename="$name-$version.tar.xz"

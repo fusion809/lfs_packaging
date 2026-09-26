@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=ruby
+description="An object-oriented language for quick and easy programming"
 homepage="https://www.ruby-lang.org/en/downloads/branches/"
 repo=$name/$name
 version=$(gh_ver $repo)

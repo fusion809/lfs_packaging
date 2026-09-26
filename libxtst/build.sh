@@ -3,6 +3,8 @@ set -e
 # Variable declarations
 _name=libXtst
 name=$(echo $_name | tr '[:upper:]' '[:lower:]')
+homepage="https://gitlab.freedesktop.org/xorg/lib/libxtst"
+description="library for XTEST & RECORD extensions"
 version=$(xfd_ver $_name)
 direname="${_name}-$version"
 filename="$direname.tar.xz"

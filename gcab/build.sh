@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name=gcab
+homepage="https://wiki.gnome.org/msitools"
+description="A GObject library to create cabinet files"
 version=$(gn_ver $name)
 direname="$name-$version"
 filename="$direname.tar.xz"

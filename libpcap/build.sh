@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=libpcap
+description="A system-independent interface for user-level packet capture"
 homepage="https://www.tcpdump.org/"
 repo=the-tcpdump-group/$name
 version=$(gh_ver $repo)

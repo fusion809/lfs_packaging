@@ -3,6 +3,8 @@ set -e
 # Variable declarations
 _name=libXt
 name=$(echo $version | tr '[:upper:]' '[:lower:]')
+homepage="https://xorg.freedesktop.org/"
+description="X11 toolkit intrinsics library"
 version=$(xfd_ver $_name)
 direname="${_name}-$version"
 filename="$direname.tar.xz"

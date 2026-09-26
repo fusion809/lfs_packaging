@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=man-db
+homepage="https://gitlab.com/man-db/man-db"
+description="A utility for reading man pages"
 version=$(gl_ver $name/$name)
 depends=(bash coreutils gcc glibc make tar xz)
 filename="$name-$version.tar.xz"

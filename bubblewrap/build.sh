@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=bubblewrap
+homepage="https://github.com/containers/bubblewrap"
+description="Unprivileged sandboxing tool"
 repo="containers/$name"
 version=$(gh_ver $repo)
 depends=(glibc libcap)

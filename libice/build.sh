@@ -3,6 +3,8 @@ set -e
 # Variable declarations
 _name=libice
 name=$(echo $name | tr '[:upper:]' '[:lower:]')
+homepage="https://xorg.freedesktop.org/"
+description="X11 Inter-Client Exchange library"
 version=$(xfd_ver $_name)
 direname="${_name}-$version"
 filename="$direname.tar.xz"

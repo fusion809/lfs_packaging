@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name=ostree
+homepage="https://ostreedev.github.io/ostree/"
+description="Operating system and container binary deployment and upgrades"
 repo=ostreedev/ostree
 version=$(gh_ver $repo)
 direname="lib${name}-$version"

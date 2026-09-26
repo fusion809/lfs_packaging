@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libmbim
+homepage="https://www.freedesktop.org/wiki/Software/libmbim/"
+description="MBIM modem protocol helper library"
 repo=mobile-broadband/$name
 version=$(gfd_ver $repo)
 filename="$name-$version.tar.gz"

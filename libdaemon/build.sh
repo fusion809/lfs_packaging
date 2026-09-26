@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libdaemon
+homepage="http://0pointer.de/lennart/projects/libdaemon/"
+description="Lightweight C library that eases the writing of UNIX daemons"
 version=$(gh_ver Distrotech/libdaemon)
 depends=(glibc)
 filename="$name-$version.tar.gz"

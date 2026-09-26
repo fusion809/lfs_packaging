@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=gspell
+description="Spell-checking library for GTK applications"
 homepage="https://gitlab.gnome.org/GNOME/gspell"
 version=$(gn_ver gspell)
 filename="$name-$version.tar.xz"

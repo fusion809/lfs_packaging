@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=exiv2
+homepage="https://exiv2.org"
+description="Exif, Iptc and XMP metadata manipulation library and tools"
 repo="Exiv2/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

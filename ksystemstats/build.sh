@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=ksystemstats
+homepage="https://kde.org/plasma-desktop/"
+description="A plugin based system monitoring daemon"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(acl attr brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu kauth kconfig kcoreaddons kcrash keyutils ki18n kio kservice libdrm libelf libffi libksysguard libnl libpciaccess libpng libx11 libxau libxcb libxdmcp libxext libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb networkmanager networkmanager-qt nspr nss openssl pcre2 qt6 solid spirv-tools systemd util-linux wayland xz zlib zstd)

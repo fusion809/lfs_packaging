@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=zstd
+description="Zstandard - Fast real-time compression algorithm"
 homepage="https://facebook.github.io/zstd/"
 repo=facebook/$name
 version=$(gh_ver $repo)

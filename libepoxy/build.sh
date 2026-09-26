@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libepoxy
+homepage="https://github.com/anholt/libepoxy"
+description="Library handling OpenGL function pointer management"
 repo=anholt/libepoxy
 version=$(gh_ver $repo)
 majVer=$(echo $version | sed -E 's/.[0-9]+$//g')

@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=readline
+description="GNU readline library"
 homepage="https://www.gnu.org/software/readline/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"

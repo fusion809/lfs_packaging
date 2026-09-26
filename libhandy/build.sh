@@ -2,6 +2,7 @@
 set -e
 # Variable declaration
 name=libhandy
+description="GTK 3 UI elements for mobile devices"
 homepage="https://gitlab.gnome.org/GNOME/libhandy"
 version=$(gn_ver libhandy)
 filename="$name-$version.tar.xz"

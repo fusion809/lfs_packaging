@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=v4l-utils
+homepage="https://linuxtv.org/"
+description="Userspace tools and conversion library for Video 4 Linux"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

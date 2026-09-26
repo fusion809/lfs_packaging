@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=spirv-llvm-translator
+homepage="https://www.khronos.org/spirv/"
+description="LLVM <-> SPIR-V converter for compilers targeting SPIR-V"
 repo=KhronosGroup/SPIRV-LLVM-Translator
 version=$(gh_ver $repo $name)
 depends=(libxml2 llvm spirv-tools)

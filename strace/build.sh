@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=strace
+homepage="https://strace.io/"
+description="A diagnostic, debugging and instructional userspace tracer"
 repo="$name/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

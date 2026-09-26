@@ -8,6 +8,8 @@
 # cmake-based installation is required
 set -e
 name=libssh2
+homepage="https://www.libssh2.org/"
+description="A library implementing the SSH2 protocol as defined by Internet Drafts"
 version=$(gh_ver "$name/$name")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"

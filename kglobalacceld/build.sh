@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=kglobalacceld
+homepage="https://kde.org/plasma-desktop/"
+description="Daemon providing Global Keyboard Shortcut (Accelerator) functionality"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(acl attr brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu kconfig kcoreaddons kcrash kdbusaddons keyutils kglobalaccel ki18n kio kjobwidgets knotifications kservice kwidgetsaddons kwindowsystem libcanberra libdrm libelf libffi libogg libpciaccess libpng libvorbis libx11 libxau libxcb libxdmcp libxext libxfixes libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qt6 solid spirv-tools systemd util-linux wayland webkitgtk xcb-util-keysyms xz zlib zstd)

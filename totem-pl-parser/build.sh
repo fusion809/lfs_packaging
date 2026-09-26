@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=totem-pl-parser
+homepage="https://gitlab.gnome.org/GNOME/totem-pl-parser"
+description="Simple GObject-based library to parse and save a host of playlist formats"
 repo=GNOME/$name
 version=$(gh_ver $repo)
 depends=(acl bzip2 gcc glib2 glibc icu libarchive libffi libgcrypt libgpg-error libxml2 lz4 openssl pcre2 systemd util-linux xz zlib zstd)

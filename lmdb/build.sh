@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=lmdb
+description="Symas Lightning Memory-Mapped Database"
 homepage="https://symas.com/lmdb/"
 url="https://git.openldap.org/openldap/openldap"
 get_version() {

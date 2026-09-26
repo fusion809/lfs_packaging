@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libavif
+homepage="https://github.com/AOMediaCodec/libavif"
+description="Library for encoding and decoding .avif files"
 repo=AOMediaCodec/$name
 version=$(gh_ver $repo)
 depends=(dav1d glibc libaom svt-av1)

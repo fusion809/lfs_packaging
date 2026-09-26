@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=gmp
+description="A free library for arbitrary precision arithmetic"
 homepage="https://gnu.org/s/gmp"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"

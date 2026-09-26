@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=zlib
+description="Compression library implementing the deflate compression method found in gzip and PKZIP"
 homepage="https://www.zlib.net"
 get_up_ver() {
 	local inst_ver=$(pkgver $name)

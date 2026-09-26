@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=gnutls
+homepage="https://www.gnutls.org/"
+description="A library which provides a secure layer over a reliable transport layer"
 repo="$name/$name"
 version=$(gh_ver $repo)
 majMinVer=$(echo $version | cut -d '.' -f1-2)

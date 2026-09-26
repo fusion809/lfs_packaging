@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name=openpmix
+homepage="https://github.com/openpmix/openpmix"
+description="Extended version of the PMI standard"
 _name=pmix
 version=$(gh_ver $name/$name)
 filename="$_name-$version.tar.gz"

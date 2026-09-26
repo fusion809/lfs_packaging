@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=json-c
+description="JSON implementation in C"
 repo="$name/$name"
 homepage="https://github.com/$repo"
 version=$(gh_ver "$repo" | sed -E 's/[.-][0-9]+$//g')

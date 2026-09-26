@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libxcvt
+homepage="https://gitlab.freedesktop.org/xorg/lib/libxcvt"
+description="library providing a standalone version of the X server implementation of the VESA CVT standard timing modelines generator"
 version=$(xfd_ver $name | grep -oE "[0-9.]+")
 depends=(glibc)
 filename="$name-$version.tar.xz"

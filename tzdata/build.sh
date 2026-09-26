@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=tzdata
+description="Sources for time zone and daylight saving time data"
 homepage="https://www.iana.org/time-zones"
 _timezones=('africa' 'antarctica' 'asia' 'australasia'
            'europe' 'northamerica' 'southamerica'

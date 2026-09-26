@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=gperf
+homepage="https://www.gnu.org/software/gperf/"
+description="Perfect hash function generator"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=exempi
+homepage="https://libopenraw.freedesktop.org/exempi/"
+description="Library to parse XMP metadata"
 repo=libopenraw/$name
 version=$(gfd_ver $repo)
 filename="$name-$version.tar.xz"

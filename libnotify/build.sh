@@ -2,6 +2,8 @@
 set -e
 # Variable declaration
 name=libnotify
+homepage="https://gitlab.gnome.org/GNOME/libnotify"
+description="Library for sending desktop notifications"
 version=$(gn_ver libnotify)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"

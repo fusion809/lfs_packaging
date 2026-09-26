@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=perl-xml-libxml-simple
+homepage="https://metacpan.org/release/XML-LibXML-Simple"
+description="An analogue of XML::Simple using libxml"
 _name=XML-LibXML-Simple
 code=MARKOV
 version=$(perl_ver $name $_name $code)

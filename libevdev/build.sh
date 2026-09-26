@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=libevdev
+description="Wrapper library for evdev devices"
 homepage="https://www.freedesktop.org/wiki/Software/libevdev/"
 get_version() {
 	local inst_ver=$(pkgver $name)

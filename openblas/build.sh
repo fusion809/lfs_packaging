@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=openblas
+homepage="https://www.openblas.net/"
+description="An optimized BLAS library based on GotoBLAS2 1.13 BSD"
 repo=OpenMathLib/OpenBLAS
 version=$(gh_ver $repo)
 filename="OpenBLAS-$version.tar.gz"

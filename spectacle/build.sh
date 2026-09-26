@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=spectacle
+description="KDE screenshot capture utility"
 homepage="https://apps.kde.org/spectacle/"
 repo=KDE/$name
 version=$(gh_ver $repo)

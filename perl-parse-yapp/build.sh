@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=perl-parse-yapp
+homepage="https://search.cpan.org/dist/Parse-Yapp"
+description="Perl/CPAN Module Parse::Yapp : Generates OO LALR parser modules"
 _name=Parse-Yapp
 code=WBRASWELL
 version=$(perl_ver $name $_name $code)

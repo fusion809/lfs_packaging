@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=wayland-protocols
+description="Specifications of extended Wayland protocols"
 repo=wayland/$name
 homepage="https://wayland.freedesktop.org"
 version=$(way_ver $name)

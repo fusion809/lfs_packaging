@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=libaio
+description="The Linux-native asynchronous I/O facility (aio) library"
 homepage="https://pagure.io/libaio"
 get_version() {
 	local inst_ver=$(pkgver $name)

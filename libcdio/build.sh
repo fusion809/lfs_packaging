@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libcdio
+homepage="https://www.gnu.org/software/libcdio/"
+description="GNU Compact Disc Input and Control Library"
 version=$(gnu_ver $name)
 depends=(gcc glibc ncurses)
 filename="$name-$version.tar.bz2"

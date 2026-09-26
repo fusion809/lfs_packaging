@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=pango
+description="A library for layout and rendering of text"
 homepage="http://www.pango.org"
 version=$(gn_ver pango)
 filename="$name-$version.tar.bz2"

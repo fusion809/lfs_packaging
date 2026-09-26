@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=icu
+homepage="https://icu.unicode.org"
+description="International Components for Unicode library"
 repo="unicode-org/$name"
 version=$(gh_ver $repo)
 filename="${name}4c-$version-sources.tgz"

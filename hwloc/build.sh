@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name=hwloc
+homepage="https://www.open-mpi.org/projects/hwloc/"
+description="Portable Hardware Locality is a portable abstraction of hierarchical architectures"
 repo="open-mpi/hwloc"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.bz2"

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=git
+homepage="https://git-scm.com/"
+description="the fast distributed version control system"
 repo=$name/$name
 version=$(gh_ver $repo)
 depends=(brotli curl cyrus-sasl expat glibc libidn2 libpsl libunistring nghttp2 openldap openssl pcre2 zlib zstd)

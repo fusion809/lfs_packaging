@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libxcb
+homepage="https://gitlab.freedesktop.org/xorg/lib/libxcb"
+description="X11 client-side library"
 version=$(xfd_ver $name | grep -oE "[0-9.]+")
 depends=(glibc libxau libxdmcp xcb-proto)
 filename="$name-$version.tar.xz"

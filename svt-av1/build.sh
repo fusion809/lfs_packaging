@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=svt-av1
+homepage="https://gitlab.com/AOMediaCodec/SVT-AV1"
+description="Scalable Video Technology AV1 encoder and decoder"
 repo=AOMediaCodec/SVT-AV1
 version=$(gl_ver $repo | sed 's/-cqp-extended//g')
 depends=(gcc glibc)

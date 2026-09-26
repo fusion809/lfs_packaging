@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libcloudproviders
+homepage="https://gitlab.gnome.org/GNOME/libcloudproviders"
+description="DBus API that allows cloud storage sync clients to expose their services"
 version=$(gn_ver libcloudproviders)
 majVer=$(echo $version | sed -E 's/.[0-9]+$//g')
 filename="$name-$version.tar.xz"

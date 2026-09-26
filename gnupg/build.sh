@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=gnupg
+description="Complete and free implementation of the OpenPGP standard"
 homepage="https://gnupg.org/download/"
 repo="gpg/$name"
 version=$(gh_ver $repo)

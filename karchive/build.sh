@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=karchive
+homepage="https://develop.kde.org/products/frameworks/"
+description="Qt addon providing access to numerous types of archives"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(brotli bzip2 double-conversion e2fsprogs gcc glib2 glibc icu keyutils mitkrb openssl pcre2 qt6 systemd xz zlib zstd)

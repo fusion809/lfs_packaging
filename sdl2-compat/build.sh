@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=sdl2-compat
+homepage="https://github.com/libsdl-org/sdl2-compat"
+description="An SDL2 compatibility layer that uses SDL3 behind the scenes"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

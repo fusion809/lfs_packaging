@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=xcursor-themes
+homepage="https://xorg.freedesktop.org/"
+description="X.org Cursor themes"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

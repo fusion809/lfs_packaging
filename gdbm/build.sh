@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=gdbm
+description="GNU database library"
 homepage="http://www.gnu.org/software/gdbm/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"

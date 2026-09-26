@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=xdg-desktop-portal-gnome
+homepage="https://gitlab.gnome.org/GNOME/xdg-desktop-portal-gnome"
+description="Backend implementation for xdg-desktop-portal for the GNOME desktop environment"
 version=$(gn_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

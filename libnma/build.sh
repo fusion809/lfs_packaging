@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libnma
+homepage="https://gitlab.gnome.org/GNOME/libnma"
+description="NetworkManager GUI client library (GTK3)"
 repo=GNOME/$name
 version=$(gh_ver $repo)
 depends=(at-spi2-core brotli bzip2 cairo dbus elfutils expat fontconfig freetype fribidi gcc gcr4 gdk-pixbuf glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk3 gtk4 harfbuzz icu lcms2 libdrm libepoxy libffi libgcrypt libgpg-error libgudev libjpeg-turbo libpciaccess libpng libseccomp libunwind libwebp libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxml2 libxrandr libxrender libxres libxshmfence libxxf86vm llvm lm-sensors mesa networkmanager nspr nss orc p11-kit pango pcre2 pixman spirv-tools systemd tiff util-linux vulkan-loader wayland xz zlib zstd)

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=glib2
+homepage="https://gitlab.gnome.org/GNOME/glib"
+description="Low level core library"
 _name=glib
 version=$(gn_ver $_name $name)
 gobj_ver=$(gn_ver "gobject-introspection")

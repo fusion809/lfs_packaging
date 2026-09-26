@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=plasma-disks
+homepage="https://kde.org/plasma-desktop/"
+description="Monitors S.M.A.R.T. capable devices for imminent failure"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(acl attr brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu kauth kcmutils kconfig kcoreaddons kcrash kdbusaddons keyutils ki18n kio kitemviews knotifications kservice kwindowsystem libcanberra libdrm libelf libffi libogg libpciaccess libpng libvorbis libx11 libxau libxcb libxdmcp libxext libxfixes libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qt6 solid spirv-tools systemd util-linux wayland webkitgtk xcb-util-keysyms xz zlib zstd)

@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=gdk-pixbuf
+description="Image loading and manipulation library"
 homepage="http://www.gtk.org"
 version=$(gn_ver $name)
 filename="$name-$version.tar.xz"

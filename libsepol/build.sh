@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libsepol
+homepage="SELinux binary policy manipulation library"
+description="SELinux binary policy manipulation library"
 _name=selinux
 repo=SELinuxProject/$_name
 version=$(gh_ver $repo)

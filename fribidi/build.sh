@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=fribidi
+homepage="https://github.com/fribidi/fribidi"
+description="A Free Implementation of the Unicode Bidirectional Algorithm"
 repo=$name/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

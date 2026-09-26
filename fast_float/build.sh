@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=fast_float
+homepage="https://github.com/fastfloat/fast_float"
+description="Fast and exact implementation of the C++ from_chars functions for float and double types"
 repo="fastfloat/fast_float"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

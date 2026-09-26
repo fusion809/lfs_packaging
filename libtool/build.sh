@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=libtool
+description="A generic library support script"
 homepage="https://gnu.org/s/libtool/"
 version=$(gnu_ver $name)
 depends=(glibc)

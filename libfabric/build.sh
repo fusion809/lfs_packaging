@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name=libfabric
+homepage="https://ofiwg.github.io/libfabric/"
+description="User-space API for OpenFabrics Interfaces (OFI)"
 repo="ofiwg/libfabric"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.bz2"

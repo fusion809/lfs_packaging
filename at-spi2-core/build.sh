@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=at-spi2-core
+homepage="https://gitlab.gnome.org/GNOME/at-spi2-core"
+description="Protocol definitions and daemon for D-Bus at-spi"
 repo=GNOME/$name
 version=$(gh_ver $repo)
 depends=(dbus glib2 glibc libffi libx11 libxau libxcb libxdmcp libxext libxi libxres libxtst pcre2 systemd util-linux zlib)

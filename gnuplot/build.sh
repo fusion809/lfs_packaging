@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name=gnuplot
+homepage="http://www.gnuplot.info"
+description="Plotting package which outputs to X11, PostScript, PNG, GIF, and others"
 version=$(sf_ver "gnuplot/gnuplot-main")
 direname="$name-$version"
 filename="$direname.tar.gz"

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=flex
+homepage="https://github.com/westes/flex"
+description="A tool for generating text-scanning programs"
 repo="westes/flex"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

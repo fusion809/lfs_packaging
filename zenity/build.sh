@@ -2,6 +2,8 @@
 set -e
 # Variable declaration
 name=zenity
+homepage="https://gitlab.gnome.org/GNOME/zenity"
+description="Display graphical dialog boxes from shell scripts"
 version=$(gn_ver zenity)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"

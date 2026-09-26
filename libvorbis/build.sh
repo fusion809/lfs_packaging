@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libvorbis
+homepage="https://www.xiph.org/vorbis/"
+description="Reference implementation of the Ogg Vorbis audio format"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

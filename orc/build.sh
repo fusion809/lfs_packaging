@@ -2,6 +2,7 @@
 set -e
 # Variable declarations
 name=orc
+description="Optimized Inner Loop Runtime Compiler"
 repo="gstreamer/$name"
 homepage="https://gstreamer.freedesktop.org/projects/orc.html"
 version=$(gfd_ver "$repo")

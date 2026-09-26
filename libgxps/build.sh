@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libgxps
+homepage="https://wiki.gnome.org/Projects/libgxps"
+description="XPS Documents library"
 repo=GNOME/$name
 version=$(gh_ver $repo)
 depends=(acl brotli bzip2 cairo expat fontconfig freetype gcc glib2 glibc icu lcms2 libarchive libffi libjpeg-turbo libpng libwebp libx11 libxau libxcb libxdmcp libxext libxml2 libxrender lz4 openssl pcre2 pixman systemd tiff util-linux xz zlib zstd)

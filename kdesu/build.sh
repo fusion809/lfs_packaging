@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=kdesu
+homepage="https://develop.kde.org/products/frameworks/"
+description="Integration with su for elevated privileges"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(brotli dbus double-conversion e2fsprogs gcc glib2 glibc icu kconfig kcoreaddons keyutils ki18n kpty libice libSM libx11 libxau libxcb libxdmcp libxext mitkrb openssl pcre2 qt6 systemd util-linux zlib zstd)

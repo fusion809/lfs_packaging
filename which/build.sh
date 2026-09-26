@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=which
+description="A utility to show the full path of commands"
 homepage="https://gnu.org/s/which/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=plasma-integration
+homepage="https://kde.org/plasma-desktop/"
+description="Qt Platform Theme integration plugins for the Plasma workspaces"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(acl attr breeze-icons brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kbookmarks kcodecs kcolorscheme kcompletion kconfig kcoreaddons kcrash keyutils kguiaddons ki18n kiconthemes kio kitemviews kjobwidgets knotifications kservice kstatusnotifieritem kwidgetsaddons kwindowsystem libcanberra libdrm libelf libffi libogg libpciaccess libpng libvorbis libx11 libxau libxcb libxcursor libxdmcp libxext libxfixes libxkbcommon libxml2 libxrender libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qt6 solid spirv-tools systemd util-linux wayland webkitgtk xcb-util-keysyms xz zlib zstd)

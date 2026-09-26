@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=valgrind
+description="Tool to help find memory-management problems in programs"
 homepage="https://valgrind.org/"
 version=$(wsw_ver $name)
 depends=(glibc hwloc libevent libfabric numactl openmpi systemd)

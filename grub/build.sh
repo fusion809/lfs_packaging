@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=grub
+description="GNU GRand Unified Bootloader (2)"
 homepage="https://gnu.org/s/grub/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"

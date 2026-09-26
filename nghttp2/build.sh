@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=nghttp2
+homepage="Client, server and proxy programs from the nghttp2 library"
+description="Client, server and proxy programs from the nghttp2 library"
 repo="$name/$name"
 version=$(gh_ver $repo)
 majVer=$(echo $version | sed 's/.[0-9]+$//g')

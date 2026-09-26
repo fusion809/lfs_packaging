@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=socat
+homepage="http://www.dest-unreach.org/socat/"
+description="Multipurpose relay"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

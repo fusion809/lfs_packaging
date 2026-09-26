@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=firefox
+homepage="https://www.firefox.com/"
+description="Fast, Private & Safe Web Browser"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

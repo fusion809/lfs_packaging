@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=cargo-c
+homepage="https://github.com/lu-zero/cargo-c/"
+description="A cargo subcommand to build and install C-ABI compatible dynamic and static libraries"
 repo=lu-zero/$name
 version=$(gh_ver $repo)
 depends=(brotli curl cyrus-sasl gcc glibc libidn2 libpsl libssh2 libunistring nghttp2 openldap openssl sqlite zlib zstd)

@@ -3,7 +3,7 @@ typeset -g UVER_CACHE=${XDG_CACHE_HOME:-$HOME/.cache}/uver
 typeset -g UVER_CACHE_TTL=300
 uver() {
 	local input_pkg=${1:-}
-	local pkg=${input_pkg,,}
+	local pkg
 	local build repo name fallback_name
 	local project_id backend project_homepage ecosystem version_url
 	local homepage cache_file cache_time now version line
@@ -16,9 +16,8 @@ uver() {
 	local homepage_matches homepage_match_count
 	local lowest_id lowest_line
 	local search_attempt
+	local project_homepage_normalized
 
-	# Bash does not support ${var,,} in very old versions, while Zsh
-	# does not interpret it identically.  tr works in both shells.
 	pkg=$(printf '%s\n' "$input_pkg" | tr '[:upper:]' '[:lower:]')
 
 	if [[ -z "$pkg" ]]; then
@@ -28,7 +27,7 @@ uver() {
 
 	mkdir -p "$UVER_CACHE"
 
-	# Locate build.sh.  Try the exact package name first, then the
+	# Locate build.sh. Try the exact package name first, then the
 	# lower-case name, then uninstalled/.
 	build=
 	for candidate in \
@@ -44,7 +43,6 @@ uver() {
 	done
 
 	# If the exact names did not work, find build.sh case-insensitively.
-	# This avoids zsh-only glob qualifiers such as (N).
 	if [[ -z "$build" ]]; then
 		while IFS= read -r candidate; do
 			candidate_pkg=${candidate%/build.sh}
@@ -115,8 +113,7 @@ uver() {
 		fallback_name=${fallback_name#\'}
 		fallback_name=${fallback_name%\'}
 
-		# Expand variables such as $name, preserving the previous
-		# behaviour of uver.  eval is supported by both Bash and Zsh.
+		# Expand variables such as $name.
 		name=$pkg
 
 		if [[ -n "$homepage" ]]; then
@@ -132,7 +129,7 @@ uver() {
 		fi
 	fi
 
-	# Search Anitya.  _name is used when the normal package name either
+	# Search Anitya. _name is used when the normal package name either
 	# has no Anitya project or only produces projects that do not match
 	# the build.sh metadata.
 	search_name=$pkg
@@ -228,7 +225,6 @@ for p in json.load(sys.stdin).get("items", []):
 		break
 	done
 
-	# Re-read the resulting project list.
 	project_count=$(printf '%s\n' "$projects" | wc -l)
 
 	if [[ "$project_count" -eq 1 ]]; then
@@ -316,7 +312,6 @@ for p in json.load(sys.stdin).get("items", []):
 		else
 			# Multiple projects with the same normalised homepage:
 			# select the one with the lowest numeric Anitya ID.
-			homepage_matches=
 			homepage_match_count=0
 			lowest_id=
 			lowest_line=

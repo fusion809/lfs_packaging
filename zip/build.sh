@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=zip
+description="Compressor/archiver for creating and modifying zipfiles"
 homepage="http://www.info-zip.org/Zip.html"
 version=$(aver $name)
 depends=(bzip2 glibc)

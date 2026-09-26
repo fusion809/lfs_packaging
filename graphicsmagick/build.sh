@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name=graphicsmagick
+homepage="http://www.graphicsmagick.org/"
+description="Image processing system"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local up_ver=$(wget -cqO- http://www.graphicsmagick.org/ | grep "Released" | cut -d ' ' -f 1 | sed 's/.*<p>//g')

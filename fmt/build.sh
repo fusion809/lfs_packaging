@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=fmt
+homepage="https://fmt.dev"
+description="Open-source formatting library for C++"
 repo=fmtlib/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

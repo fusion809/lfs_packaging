@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=cairo
+description="2D graphics library with support for multiple output devices"
 homepage="http://rubygems.org/gems/cairo"
 repo=$name/$name
 version=$(gfd_ver $repo)

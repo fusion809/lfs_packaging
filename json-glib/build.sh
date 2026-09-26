@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=json-glib
+homepage="https://gnome.pages.gitlab.gnome.org/json-glib/"
+description="JSON library built on GLib"
 version=$(gn_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

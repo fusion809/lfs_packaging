@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=coreutils
+description="The basic file, shell and text manipulation utilities of the GNU operating system"
 homepage="https://www.gnu.org/software/coreutils/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"

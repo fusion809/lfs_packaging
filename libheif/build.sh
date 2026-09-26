@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libheif
+homepage="https://github.com/strukturag/libheif"
+description="An HEIF and AVIF file format decoder and encoder"
 repo="strukturag/$name"
 version=$(gh_ver $repo)
 depends=(libaom libde265 x265)

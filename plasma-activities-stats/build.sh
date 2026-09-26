@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=plasma-activities-stats
+homepage="https://kde.org/plasma-desktop/"
+description="A library for accessing the usage data collected by the activities system"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(dbus double-conversion gcc glib2 glibc icu kconfig pcre2 plasma-activities qt6 systemd zlib zstd)

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=fontconfig
+homepage="https://www.freedesktop.org/wiki/Software/fontconfig/"
+description="Library for configuring and customizing font access"
 repo=$name/$name
 version=$(gfd_ver $repo)
 filename="$name-$version.tar.xz"

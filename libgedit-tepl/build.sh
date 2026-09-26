@@ -2,6 +2,8 @@
 set -e
 # Variable declaration
 name=libgedit-tepl
+homepage="https://gitlab.gnome.org/World/gedit/libgedit-tepl"
+description="Library that eases the development of GtkSourceView-based text editors and IDEs"
 version=$(lgd_ver $name)
 depends=(at-spi2-core brotli bzip2 cairo dbus exempi expat fontconfig freetype fribidi gcc gdk-pixbuf glib glib2 glibc glycin gnome-desktop graphite2 gtk3 gtk3 harfbuzz hicolor-icon-theme lcms lcms2 libepoxy libffi libgedit-amtk libgedit-gfls libgedit-gtksourceview libhandy libpng libseccomp libx11 libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxml2 libxrandr libxrender libxres meson pango pcre2 pixman systemd util-linux wayland webkitgtk zlib)
 # Fetch source and unpack it

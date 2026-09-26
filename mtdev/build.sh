@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=mtdev
+homepage="https://bitmath.org/code/mtdev/"
+description="A stand-alone library which transforms all variants of kernel MT events to the slotted type B protocol"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

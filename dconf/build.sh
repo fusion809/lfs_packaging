@@ -2,6 +2,8 @@
 set -e
 # Variable declaration
 name=dconf
+homepage="https://wiki.gnome.org/Projects/dconf"
+description="Configuration database system"
 version="$(gn_ver $name)"
 edVersion="$(gn_ver $name-editor)"
 filename="$name-$version.tar.xz"

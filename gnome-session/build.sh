@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=gnome-session
+homepage="https://gitlab.gnome.org/GNOME/gnome-session"
+description="The GNOME Session Handler"
 repo=GNOME/$name
 version=$(gh_ver $repo)
 depends=(brotli bzip2 expat fontconfig freetype gcc gdk-pixbuf glib2 glibc glycin gnome-desktop icu lcms2 libffi libpng libseccomp libxkbcommon libxml2 pcre2 systemd util-linux zlib)

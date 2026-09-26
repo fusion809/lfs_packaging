@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=gettext
+description="GNU internationalization library"
 homepage="https://gnu.org/s/gettext/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"

@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=help2man
+description="Conversion tool to create man files"
 homepage="http://www.gnu.org/software/help2man/"
 version=$(gnu_ver help2man)
 filename="$name-$version.tar.xz"

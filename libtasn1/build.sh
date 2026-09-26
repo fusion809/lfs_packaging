@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=libtasn1
+homepage="https://www.gnu.org/software/libtasn1/"
+description="The ASN.1 library used in GNUTLS"
 version=$(gnu_ver libtasn1)
 depends=(coreutils gcc glibc gzip make tar wget)
 filename="$name-v${version}.tar.gz"

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=wget
+homepage="https://www.gnu.org/software/wget/wget.html"
+description="Network utility to retrieve files from the web"
 version=$(gnu_ver $name)
 depends=(glibc libidn2 libpsl libunistring openssl pcre2 util-linux zlib)
 filename="$name-$version.tar.gz"
@@ -9,9 +11,7 @@ gnu_download $name $filename
 unpk_enter "$filename" "$direname"
 NEW_LINE='#if !defined OPENSSL_NO_SSL3_METHOD '
 NEW_LINE+='&& OPENSSL_VERSION_NUMBER < 0x40000000L'
-
 sed -i "/SSL3/c $NEW_LINE" src/openssl.c
-
 unset NEW_LINE
 cmi --prefix=/usr --sysconfdir=/etc --with-ssl=openssl
 cd ../

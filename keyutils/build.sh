@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=keyutils
+description="Linux Key Management Utilities"
 homepage="https://git.kernel.org/pub/scm/linux/kernel/git/dhowells/keyutils.git/"
 get_version() {
 	local lfs_vers=$(lfs_ver $name)

@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=dolphin
+description="KDE File Manager"
 homepage="https://invent.kde.org/system/dolphin"
 repo=KDE/$name
 version=$(gh_ver $repo)

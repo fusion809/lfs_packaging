@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=libnvme
+description="C Library for NVM Express on Linux"
 repo=linux-nvme/$name
 homepage="https://github.com/$repo"
 version=$(gh_ver $repo)

@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=less
+description="A terminal based program for viewing text files"
 homepage="https://gnu.org/s/less/"
 get_version() {
 	local lfs_vers=$(lfs_ver $name)

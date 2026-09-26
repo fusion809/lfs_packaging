@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=kitemmodels
+homepage="https://develop.kde.org/products/frameworks/"
+description="Models for Qt Model/View system"
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(brotli double-conversion e2fsprogs gcc glib2 glibc icu keyutils mitkrb openssl pcre2 qt6 systemd zlib zstd)

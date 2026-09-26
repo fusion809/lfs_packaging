@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=geocode-glib
+homepage="https://gitlab.gnome.org/GNOME/geocode-glib"
+description="Helper library for geocoding services"
 repo=GNOME/$name
 version=$(gh_ver $repo)
 depends=(brotli e2fsprogs glib2 glibc json-glib keyutils libffi libidn2 libpsl libsoup libunistring mitkrb nghttp2 pcre2 sqlite systemd util-linux zlib)

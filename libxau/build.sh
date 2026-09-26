@@ -2,6 +2,8 @@
 set -e
 _name=libXau
 name=$(echo $_name | tr '[:upper:]' '[:lower:]')
+homepage="https://xorg.freedesktop.org/"
+description="X11 authorisation library"
 version=$(xfd_ver $_name)
 depends=(glibc)
 filename="$_name-$version.tar.xz"

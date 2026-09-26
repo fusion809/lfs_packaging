@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=ffmpeg
+homepage="https://ffmpeg.org"
+description="Complete solution to record, convert and stream audio and video"
 repo=$name/$name
 version=$(gh_ver $repo)
 depends=(alsa-lib brotli bzip2 dav1d expat fdk-aac fontconfig freetype fribidi gcc glib2 glibc graphite2 harfbuzz lame libaom libass libdrm libogg libpng libva libvorbis libvpx libx11 libxau libxcb libxdmcp libxext libxfixes libxv numactl openssl opus pcre2 sdl2-compat svt-av1 x264 x265 xz zlib)

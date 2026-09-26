@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=dvisvgm
+homepage="https://dvisvgm.de/"
+description="A fast DVI, EPS, and PDF to SVG converter"
 repo=mgieseki/$name
 version=$(gh_ver $repo)
 depends=(avahi brotli bzip2 cups dbus expat fontconfig freetype gcc ghostscript glibc lcms2 libice libjpeg-turbo libpaper libpng libSM libwebp libx11 libxau libxcb libxcrypt libxdmcp libxext libxt openjpeg openssl potrace systemd texlive tiff util-linux woff2 xz zlib zstd)
