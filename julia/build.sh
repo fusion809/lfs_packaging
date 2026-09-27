@@ -26,10 +26,8 @@ make_options=(
     USE_SYSTEM_ZLIB=1
     USE_SYSTEM_NGHTTP2=1
     USE_SYSTEM_LIBSSH2=1)
-download_src "https://gitlab.archlinux.org/archlinux/packaging/packages/julia/-/raw/main/system-zstd.patch?ref_type=heads&inline=false" "system-zstd.patch"
-patch -p1 -i system-zstd.patch
-make -j$(nproc) "${make_options[@]}"
-sudo make "${make_options[@]}" install
+arch_patch "$name" "system-zstd.patch"
+maki "${make_options[@]}"
 cd ../
 sudo rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"

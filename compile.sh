@@ -162,6 +162,13 @@ meson setup "${meson_args[@]}" "$source_dir" || exit 1
 
 }
 
+function arch_patch {
+    local pkg="$1"
+    local patch_name="$2"
+    download_src "https://gitlab.archlinux.org/archlinux/packaging/packages/$pkg/-/raw/main/$patch_name?ref_type=heads&inline=false" "$patch_name"
+    patch -p1 -i "$patch_name"
+}
+
 function pfile {
     wget -cqO- \
         "https://www.linuxfromscratch.org/lfs/view/systemd/chapter08/$1.html" \
