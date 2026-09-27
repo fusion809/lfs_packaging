@@ -9,9 +9,9 @@ version=1.13.1
 depends=(blas-lapack gcc glibc gmp mpfr nghttp2 libssh2 openssl pcre2 suitesparse zlib zstd)
 majVer=$(echo $version | cut -d '.' -f1-2)
 #filename="$name-$version.tar.gz"
-filename="$name-$version-full.tar.gz"
+filename="$name-$version.tar.gz"
 direname="$name-$version"
-ghr_download "$repo" "v$version" "$filename"
+gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 make_options=(
     prefix=/usr
