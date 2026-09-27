@@ -1,8 +1,8 @@
 #!/bin/bash
 function gcb_ver {
     local url="https://codeberg.org/$1.git"
-    timeout 5 git ls-remote --tags --refs "$url" | grep "[v]*[0-9.]+" -E \
-    | grep -v "\^{}" | cut -d '/' -f 3 | sort -V | tail -n 1
+    timeout 5 git ls-remote --tags --refs "$url" | grep "tags/[v]*[0-9.]+" -oE \
+    | sed 's|.*tags/[v]*||g' | sort -V | tail -n 1
 }
 
 function wcb_ver {
