@@ -4,7 +4,7 @@ name=tiff
 _name=lib$name
 repo=$_name/$_name
 version=$(gl_ver $repo)
-depends=(bzip2 elfutils expat freeglut gcc glibc icu libdrm libffi libice libjpeg-turbo libpciaccess libSM libwebp libx11 libxau libxcb libxdmcp libxext libxi libxml2 libxmu libxrandr libxrender libxshmfence libxt libxxf86vm llvm lm-sensors mesa spirv-tools util-linux xz zlib zstd)
+depends=(bzip2 elfutils expat freeglut gcc glibc icu libdrm libffi libice libjpeg-turbo libpciaccess libsm libwebp libx11 libxau libxcb libxdmcp libxext libxi libxml2 libxmu libxrandr libxrender libxshmfence libxt libxxf86vm llvm lm-sensors mesa spirv-tools util-linux xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 download_src "https://download.osgeo.org/libtiff/$filename"

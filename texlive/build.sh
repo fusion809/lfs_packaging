@@ -26,7 +26,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-depends=(brotli bzip2 cairo expat fontconfig freetype gcc glib2 glibc gmp graphite2 harfbuzz icu libice libpaper libpng libSM libx11 libxau libxaw libxcb libxdmcp libxext libxi libxmu libxpm libxrender libxt mpfr pcre2 pixman util-linux zlib)
+depends=(brotli bzip2 cairo expat fontconfig freetype gcc glib2 glibc gmp graphite2 harfbuzz icu libice libpaper libpng libsm libx11 libxau libxaw libxcb libxdmcp libxext libxi libxmu libxpm libxrender libxt mpfr pcre2 pixman util-linux zlib)
 filename="$name-$version-source.tar.xz"
 direname="${filename/.tar.*/}"
 download_src "https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/$year/$filename"

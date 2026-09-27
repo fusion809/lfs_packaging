@@ -4,7 +4,7 @@ set -e
 name=xclip
 homepage="https://github.com/astrand/xclip"
 description="Command line interface to the X11 clipboard"
-depends=(autoconf bash coreutils git glibc libice libSM libx11 libxau libxcb libxdmcp libxext libxmu libxt make util-linux)
+depends=(autoconf bash coreutils git glibc libice libsm libx11 libxau libxcb libxdmcp libxext libxmu libxt make util-linux)
 repo="astrand/xclip"
 version=$(gh_com $repo)
 filename="$name-$version.tar.gz"
