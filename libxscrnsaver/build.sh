@@ -5,6 +5,8 @@ _name=libXScrnSaver
 version=$(xfd_ver $_name)
 direname="$_name-$version"
 filename="$direname.tar.xz"
+homepage="https://www.x.org"
+description="Xorg libXss runtime library."
 depends=(bash coreutils fontconfig glibc libx11 libxau libxcb libxdmcp libxext make sed systemd tar util-linux xorg-libs xz zlib)
 name=$(echo $_name | tr '[:upper:]' '[:lower:]')
 # Fetch and unpack source

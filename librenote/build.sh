@@ -3,6 +3,8 @@ set -e
 _name=LibreNote
 name=librenote
 repo="Procurador1337/$_name"
+homepage="https://github.com/$repo"
+description="A simple, lightweight plain-text notepad based in QT6."
 version=$(gh_com "$repo")
 filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"

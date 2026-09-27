@@ -2,6 +2,8 @@
 set -e
 name=lsb-tools
 repo=lfs-book/LSB-Tools
+homepage="https://github.com/$repo"
+description="Distro agnostic tools for LSB spec compliance."
 version=$(gh_ver $repo)
 filename="LSB-Tools-$version.tar.gz"
 direname="${filename/.tar.*/}"

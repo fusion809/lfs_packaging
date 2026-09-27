@@ -3,6 +3,8 @@ set -e
 _name=LibrePlayer
 name=libreplayer
 repo="Procurador1337/$_name"
+homepage="https://github.com/$repo"
+description="A lightweight Qt6 desktop audio player."
 version=$(gh_com "$repo")
 filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
