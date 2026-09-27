@@ -23,7 +23,14 @@ source ~/lfs_packaging/sourceforge.sh
 source ~/lfs_packaging/sourceware-components.sh
 source ~/lfs_packaging/sourceware.sh
 source ~/lfs_packaging/kde.sh
-source ~/lfs_packaging/oss-hosts.sh
+source ~/lfs_packaging/bitbucket-components.sh
+source ~/lfs_packaging/bitbucket.sh
+source ~/lfs_packaging/salsa-components.sh
+source ~/lfs_packaging/salsa.sh
+source ~/lfs_packaging/perl-components.sh
+source ~/lfs_packaging/perl.sh
+source ~/lfs_packaging/codeberg-components.sh
+source ~/lfs_packaging/codeberg.sh
 source ~/lfs_packaging/add_deps.sh
 source ~/lfs_packaging/compile.sh
 source ~/lfs_packaging/download.sh
