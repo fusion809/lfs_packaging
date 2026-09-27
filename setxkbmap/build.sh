@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name=setxkbmap
+homepage="http://xorg.freedesktop.org/"
+description="Utility for quickly managing keyboard layouts in Xorg."
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"

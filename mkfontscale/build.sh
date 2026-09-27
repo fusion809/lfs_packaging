@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name=mkfontscale
+description="Tool to generate legacy X11 font system index files"
+homepage="https://www.x.org"
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"
