@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 # Variable declarations
-_name=libfs
+_name=libFS
 name=$(echo $_name | tr '[:upper:]' '[:lower:]')
 homepage="X Font Service client library"
 description="X Font Service client library"
