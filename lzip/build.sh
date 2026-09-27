@@ -9,14 +9,12 @@ url="https://download.savannah.gnu.org/releases/$name"
 get_version() {
   local inst_ver=$(pkgver $name)
   local up_ver=$(wget -cqO- -T 5 -t 1 "$url" | grep -oE '$name-[0-9.]+\.tar\.gz' | sort -V | tail -n 1 | sed -e "s/$name-//" -e 's/.tar.gz//')
-  ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
   local mon_ver=$(uver $name)
-	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
+  ver_check "$up_ver" "$inst_ver" "$mon_ver" && return
   local vat_ver=$(vatver $name)
-  ver_check "$vat_ver" "$inst_ver" "$lfs_vers" && return
-
+  ver_check "$vat_ver" "$inst_ver" "$mon_ver" && return
   local arch_ver=$(aver $name)
-  ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
+  ver_check "$arch_ver" "$inst_ver" "$mon_ver" && return
   fver "$name" "$inst_ver"
 }
 
