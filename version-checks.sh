@@ -18,12 +18,16 @@ function pkgver {
     fi
 }
 
-# Echoes $1 and returns 0 if it looks like a valid version string, otherwise returns 1.
+# Fed three arguments:
+# version that should be the latest, installed version and some reference version that may newer than the installed version
+# If $1 is defined and not older than $2 and $3, print it.
+# If $3 is defined and not equal to $2, print it. 
 function ver_check {
     newest=$(printf '%s\n%s\n%s\n' "${3:-$2}" "$2" "$1" | sort -V | tail -n1)
 	if [[ $1 =~ ^[0-9.+a-z-]+ && "$newest" == "$1" ]]; then
 		echo "$1"
 		return 0
+    # Print 
     elif [[ "$3" =~ ^[0-9.a-z]+ && "$newest" != "$2" && "$newest" == "$3" ]]; then
         echo "$3"
         return 0
