@@ -1,11 +1,14 @@
 #!/bin/bash
 set -e
 name=libaom
+repo="https://aomedia.googlesource.com/aom/"
+description="Contains a reference version of the Alliance for Open Media video codec."
+homepage="https://aomedia.org/"
 get_version() {
 	local inst_ver=$(pkgver $name)
-	local up_ver=$(wget -T 5 -t 1 -cqO- https://aomedia.googlesource.com/aom/ | grep "v[0-9]+\.[0-9]+\.[0-9]+" -oE | sed 's/.*v//g' | head -n 1)
+	local up_ver=$(wget -T 5 -t 1 -cqO- $repo | grep "v[0-9]+\.[0-9]+\.[0-9]+" -oE | sed 's/.*v//g' | head -n 1)
 	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
-	local git_ver=$(timeout 5 git ls-remote --tags --refs https://aomedia.googlesource.com/aom.git | grep -oE "refs/tags/v[0-9.]+" | sed 's/.*v//g' | sort -V | tail -n 1)
+	local git_ver=$(timeout 5 git ls-remote --tags --refs $repo.git | grep -oE "refs/tags/v[0-9.]+" | sed 's/.*v//g' | sort -V | tail -n 1)
 	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
 	local mon_ver=$(uver $name)
 	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return

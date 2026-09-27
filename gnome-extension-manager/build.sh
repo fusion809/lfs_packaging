@@ -3,6 +3,8 @@ set -e
 name=gnome-extension-manager
 _name=extension-manager
 repo=mjakeman/$_name
+homepage="https://mattjakeman.com/apps/extension-manager"
+description="A utility for browsing and installing GNOME Shell Extensions."
 version=$(gh_ver $repo)
 direname="$_name-$version"
 filename=$direname.tar.gz

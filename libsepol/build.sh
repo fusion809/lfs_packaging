@@ -1,10 +1,10 @@
 #!/bin/bash
 set -e
 name=libsepol
-homepage="SELinux binary policy manipulation library"
-description="SELinux binary policy manipulation library"
 _name=selinux
 repo=SELinuxProject/$_name
+homepage="https://github.com/$repo"
+description="SELinux binary policy manipulation library"
 version=$(gh_ver $repo)
 depends=(glibc)
 filename="$name-$version.tar.gz"

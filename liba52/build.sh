@@ -1,12 +1,15 @@
 #!/bin/bash
 set -e
 name=liba52
+repo="https://git.adelielinux.org/community/a52dec"
+homepage="https://sourceforge.net/projects/liba52/"
+description="A free library for decoding ATSC A/52 (also known as AC-3) streams."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)
-	local up_ver=$(wget -cqO- -T 5 -t 1 https://git.adelielinux.org/community/a52dec/-/tags | grep -oE "[0-9]+\.[0-9]+\.[0-9]+" | sort -V | tail -n 1)
+	local up_ver=$(wget -cqO- -T 5 -t 1 $repo/-/tags | grep -oE "[0-9]+\.[0-9]+\.[0-9]+" | sort -V | tail -n 1)
 	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
-	local git_ver=$(timeout 5 git ls-remote --tags --refs https://git.adelielinux.org/community/a52dec.git | grep -oE "[0-9]+\.[0-9]+\.[0-9]+" | sort -V | tail -n 1)
+	local git_ver=$(timeout 5 git ls-remote --tags --refs $repo.git | grep -oE "[0-9]+\.[0-9]+\.[0-9]+" | sort -V | tail -n 1)
 	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
 	local mon_ver=$(uver $name)
 	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return

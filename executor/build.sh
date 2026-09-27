@@ -1,7 +1,11 @@
 #!/bin/bash
 set -e
 name=executor
-version=$(wget -T 5 -t 1 -cqO- https://raw.githubusercontent.com/fusion809/executor-raujonas.github.io/refs/heads/master/metadata.json | grep '"version"' | sed 's/.*://g')
+homepage="https://raujonas.github.io/executor"
+url="https://raw.githubusercontent.com/fusion809/executor-raujonas.github.io"
+description="GNOME Shell extension that adds command output to GNOME panel."
+version=$(wget -T 5 -t 1 -cqO- "${url}/refs/heads/master/metadata.json" \
+| grep '"version"' | sed 's/.*://g')
 depends=(git glib2 gnome-shell gnome-shell-extensions wget)
 
 if ! [[ -d /usr/share/gnome-shell/extensions/executor@raujonas.github.io ]]; then

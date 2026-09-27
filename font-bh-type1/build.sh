@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=font-bh-type1
+homepage="https://www.x.org"
+description="Xorg Bigelow and Holmes type 1 fonts."
 depends=(glibc)
 get_version() {
 	local inst_ver=$(pkgver $name)

@@ -2,6 +2,8 @@
 set -e
 name=glslc
 repo=google/shaderc
+homepage="https://github.com/google/shaderc"
+description="Compiler for OpenGL/high-level shading language."
 version=$(gh_ver $repo)
 filename="shaderc-$version.tar.gz"
 direname="${filename/.tar.*/}"

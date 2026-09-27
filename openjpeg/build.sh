@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=openjpeg
-homepage="An open source JPEG 2000 codec"
+homepage="https://www.openjpeg.org/"
 description="An open source JPEG 2000 codec"
 repo=uclouvain/$name
 version=$(gh_ver $repo)

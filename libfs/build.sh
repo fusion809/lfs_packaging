@@ -3,7 +3,7 @@ set -e
 # Variable declarations
 _name=libFS
 name=$(echo $_name | tr '[:upper:]' '[:lower:]')
-homepage="X Font Service client library"
+homepage="https://www.x.org"
 description="X Font Service client library"
 version=$(xfd_ver $_name)
 direname="$_name-$version"
