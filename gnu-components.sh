@@ -2,8 +2,8 @@
 function ggcc_ver {
 	local URL="https://gitlab.com/gnutools/gcc.git"
     timeout 5 git ls-remote --tags --refs "$URL" 2>/dev/null \
-	| grep -oE "releases/gcc-[0-9]+\.[0-9]+\.[0-9]+" | sed "s|releases/gcc-||" \
-	| sort -V | tail -n 1
+	| grep -oE "releases/gcc-[0-9]+\.[0-9]+\.[0-9]+" \
+	| sed "s|releases/gcc-||" | sort -V | tail -n 1
 }
 
 function ggrub_ver {

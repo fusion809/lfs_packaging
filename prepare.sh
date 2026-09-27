@@ -76,7 +76,8 @@ function file_ext {
 }
 
 function unpk_enter {
-	if ! [[ -d $1/.git ]] && ( ( echo $1 | grep "\.[gtlbx]" &> /dev/null ) || ( echo $1 | grep "\.zstd" &> /dev/null ) ); then
+	if ! [[ -d $1/.git ]] && ( ( echo $1 | grep "\.[gtlbx]" &> /dev/null ) \
+    || ( echo $1 | grep "\.zstd" &> /dev/null ) ); then
     		local filename=$1
    		if [[ -n $2 ]]; then
         		local direname=$2
