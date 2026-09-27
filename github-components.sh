@@ -81,8 +81,12 @@ function ght_ver {
 		| grep -E "tags/v[0-9.]+[-rc]*[0-9]*.tar.gz" | sed 's|.*tags/v||g' \
 		| sed 's/.tar.gz.*//g' | sort -V | tail -n 1
 		return
+	elif [[ "$1" == "julialang/julia" ]]; then
+		wget -T 5 -t 1 -cqO- https://github.com/$1/tags/ | grep "tag/v[0-9a-z.-]+" -oE | grep -v "alpha\|rc\|beta" | sed 's|tag/v||g' | sort -V | tail -n 1
+		return
 	elif [[ "$1" == "golang/go" ]]; then
 		wget -T 5 -t 1 -cqO- https://github.com/golang/go/tags | grep "tag/go[0-9.]+" -oE | sed 's/.*go//g' | sort -V | tail -n 1
+		return
 	fi
 	if [[ "$1" == "GNOME/gcr3" ]]; then
 		local repo="GNOME/gcr"

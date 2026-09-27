@@ -1,14 +1,11 @@
 #!/bin/bash
 set -e
 name=julia
-description="A high-level, high-performance, dynamic scientific computing-oriented programming language."
+description="A high-level, high-performance, dynamic, scientific computing-oriented programming language."
 homepage="http://julialang.org"
 repo=julialang/$name
-version=1.13.1
-# $(gh_ver $repo)
+version=$(gh_ver $repo)
 depends=(blas-lapack gcc glibc gmp mpfr nghttp2 libssh2 openssl pcre2 suitesparse zlib zstd)
-majVer=$(echo $version | cut -d '.' -f1-2)
-#filename="$name-$version.tar.gz"
 filename="$name-$version.tar.gz"
 direname="$name-$version"
 gha_download "$repo" "v$version" "$filename"
