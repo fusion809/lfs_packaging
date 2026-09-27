@@ -8,7 +8,7 @@ url="https://download.savannah.gnu.org/releases/$name"
 # Get versions into temp variables (updates will include these because they are ABOVE the version= line)
 get_version() {
   local inst_ver=$(pkgver $name)
-  local up_ver=$(wget -cqO- -T 5 "$url" | grep -oE '$name-[0-9.]+\.tar\.gz' | sort -V | tail -n 1 | sed -e "s/$name-//" -e 's/.tar.gz//')
+  local up_ver=$(wget -cqO- -T 5 -t 1 "$url" | grep -oE '$name-[0-9.]+\.tar\.gz' | sort -V | tail -n 1 | sed -e "s/$name-//" -e 's/.tar.gz//')
   ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
   local mon_ver=$(uver $name)
 	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
