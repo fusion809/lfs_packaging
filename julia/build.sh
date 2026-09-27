@@ -5,6 +5,8 @@ description="A high-level, high-performance, dynamic, scientific computing-orien
 homepage="http://julialang.org"
 repo=julialang/$name
 version=$(gh_ver $repo)
+# openssl version 3 libs, libssl.so.3 and libcrypt.so.3, are required
+# I added them from julia-bin
 depends=(blas-lapack gcc glibc gmp mpfr nghttp2 libssh2 openssl pcre2 suitesparse zlib zstd)
 filename="$name-$version.tar.gz"
 direname="$name-$version"
