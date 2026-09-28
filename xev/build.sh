@@ -5,6 +5,8 @@ name=xev
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"
+homepage="https://www.x.org"
+description="Print contents of X events."
 depends=(bash coreutils fontconfig glibc libpng libx11 libxau libxcb libxdmcp libxext libxrandr libxrender make mesa sed systemd tar util-linux xbitmaps xcb-util xorg-libs xz zlib)
 # Fetch and unpack source
 xfd_download "$filename"
