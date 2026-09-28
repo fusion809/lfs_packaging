@@ -10,7 +10,7 @@ repo=$_name/$_name
 version=$(gh_ver $repo | sed 's/\.\([0-9]*\)$/-\1/')
 depends=(brotli bzip2 cairo expat fftw fontconfig fontconfig freetype freetype fribidi gcc glib2 glibc graphite2 graphviz harfbuzz highway lcms2 libaom libde265 libffi libheif libice libjpeg-turbo libjxl libpng libpng libraw libsm libtiff libwebp libwmf libx11 libxau libxcb libxdmcp libxext libxml2 libxrender libxt numactl openjpeg pango pcre2 pixman util-linux webkitgtk x264 x265 xorg-lib xz zlib zstd)
 direname="$_name-$version"
-filename="$filename.tar.xz"
+filename="$direname.tar.xz"
 # Fetch and unpack source
 ghr_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
