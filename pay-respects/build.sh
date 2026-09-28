@@ -2,6 +2,8 @@
 set -e
 name=pay-respects
 repo=iff/$name
+homepage="https://codeberg.org/$repo"
+description="Command suggestions, command-not-found and thefuck replacement written in Rust."
 version=$(cb_ver $repo)
 depends=(gcc glibc)
 filename="$name-$version.tar.gz"
