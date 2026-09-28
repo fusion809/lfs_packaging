@@ -2,7 +2,7 @@
 set -e
 # Variable declaration
 name=dconf
-homepage="https://wiki.gnome.org/Projects/dconf"
+homepage="https://wiki.gnome.org/action/show/Projects/dconf"
 description="Configuration database system"
 version="$(gn_ver $name)"
 edVersion="$(gn_ver $name-editor)"
