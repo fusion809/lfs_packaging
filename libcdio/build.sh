@@ -3,11 +3,14 @@ set -e
 name=libcdio
 homepage="https://www.gnu.org/software/libcdio/"
 description="GNU Compact Disc Input and Control Library"
-version=$(gnu_ver $name)
+repo=libcdio/libcdio-C
+#version=$(gnu_ver $name)
+version=$(gh_ver $repo "$name")
 depends=(gcc glibc ncurses)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
-gnu_download $name $filename
+#gnu_download $name $filename
+ghr_download "$repo" "$version" "$filename"
 pr_url=$(wget -cqO- https://www.linuxfromscratch.org/blfs/view/systemd/multimedia/libcdio.html | grep "libcdio-paranoia" | cut -d '"' -f 2 | head -n 1)
 pr_filename=$(echo $pr_url | sed 's|.*libcdio/||g')
 pr_direname=$(echo $pr_filename | sed 's/.tar.*//g')
