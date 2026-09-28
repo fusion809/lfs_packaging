@@ -9,6 +9,7 @@ direname="${filename/.tar.*/}"
 ghr_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 mni --prefix=/usr --buildtype=release
+sudo mv /usr/share/doc/fwupd /usr/share/doc/$direname
 cd ../..
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
