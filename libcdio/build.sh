@@ -6,15 +6,15 @@ description="GNU Compact Disc Input and Control Library"
 repo=libcdio/libcdio-C
 #version=$(gnu_ver $name)
 version=$(gh_ver $repo "$name")
+pr_repo=libcdio/libcdio-paranoia
+pr_version=$(gh_ver $pr_repo)
+pr_filename="libcdio-paranoia-$pr_version.tar.bz2"
+pr_direname="${pr_filename/.tar.*/}"
 depends=(gcc glibc ncurses)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
-#gnu_download $name $filename
 ghr_download "$repo" "$version" "$filename"
-pr_url=$(wget -cqO- https://www.linuxfromscratch.org/blfs/view/systemd/multimedia/libcdio.html | grep "libcdio-paranoia" | cut -d '"' -f 2 | head -n 1)
-pr_filename=$(echo $pr_url | sed 's|.*libcdio/||g')
-pr_direname=$(echo $pr_filename | sed 's/.tar.*//g')
-download_src "$pr_url"
+ghr_download "$pr_repo" "$pr_version" "$pr_filename"
 unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static
 tar -xf ../$pr_filename &&
