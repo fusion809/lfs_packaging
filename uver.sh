@@ -170,26 +170,20 @@ for p in json.load(sys.stdin).get("items", []):
 		fi
 
 		project_count=$(printf '%s\n' "$projects" | wc -l)
+		matches=
+		match_count=0
 
-		# For a single project, check the build metadata if available.
-		# If it does not match, _name may provide the correct project.
-		if [[ "$project_count" -eq 1 &&
-		      -n "$build" &&
-		      ( -n "$homepage" || -n "$repo" ) ]]
-		then
-			IFS=$'\t' read -r \
-				project_id backend project_homepage ecosystem version_url \
-				<<< "$projects"
+		# Match by normalised homepage.
+		if [[ -n "$homepage" ]]; then
+			wanted_homepage=$homepage
+			wanted_homepage=${wanted_homepage#http://}
+			wanted_homepage=${wanted_homepage#https://}
+			wanted_homepage=${wanted_homepage#www.}
+			wanted_homepage=${wanted_homepage%/}
 
-			match_count=0
-
-			if [[ -n "$homepage" ]]; then
-				wanted_homepage=$homepage
-				wanted_homepage=${wanted_homepage#http://}
-				wanted_homepage=${wanted_homepage#https://}
-				wanted_homepage=${wanted_homepage#www.}
-				wanted_homepage=${wanted_homepage%/}
-
+			while IFS=$'\t' read -r \
+				project_id backend project_homepage ecosystem version_url
+			do
 				project_homepage_normalized=$project_homepage
 				project_homepage_normalized=${project_homepage_normalized#http://}
 				project_homepage_normalized=${project_homepage_normalized#https://}
@@ -197,34 +191,86 @@ for p in json.load(sys.stdin).get("items", []):
 				project_homepage_normalized=${project_homepage_normalized%/}
 
 				if [[ "$wanted_homepage" == "$project_homepage_normalized" ]]; then
-					match_count=1
+					if [[ -z "$matches" ]]; then
+						matches=$project_id$'\t'$backend$'\t'$project_homepage$'\t'$ecosystem$'\t'$version_url
+					else
+						matches=$matches$'\n'$project_id$'\t'$backend$'\t'$project_homepage$'\t'$ecosystem$'\t'$version_url
+					fi
+					match_count=$((match_count + 1))
 				fi
-			fi
+			done <<< "$projects"
+		fi
 
-			if [[ "$match_count" -eq 0 && -n "$repo" &&
-			      "$version_url" == "$repo" ]]
-			then
+		# If homepage did not uniquely identify the project, try repo=.
+		if [[ "$match_count" -ne 1 && -n "$repo" ]]; then
+			repo_matches=
+			repo_match_count=0
+
+			while IFS=$'\t' read -r \
+				project_id backend project_homepage ecosystem version_url
+			do
+				if [[ "$version_url" == "$repo" ]]; then
+					if [[ -z "$repo_matches" ]]; then
+						repo_matches=$project_id$'\t'$backend$'\t'$project_homepage$'\t'$ecosystem$'\t'$version_url
+					else
+						repo_matches=$repo_matches$'\n'$project_id$'\t'$backend$'\t'$project_homepage$'\t'$ecosystem$'\t'$version_url
+					fi
+					repo_match_count=$((repo_match_count + 1))
+				fi
+			done <<< "$projects"
+
+			if [[ "$repo_match_count" -eq 1 ]]; then
+				matches=$repo_matches
 				match_count=1
-			fi
-
-			if [[ "$match_count" -eq 1 ]]; then
-				break
-			fi
-
-			if [[ "$search_attempt" -eq 0 &&
-			      -n "$fallback_name" &&
-			      "$(printf '%s\n' "$fallback_name" | tr '[:upper:]' '[:lower:]')" != "$pkg" ]]
-			then
-				search_name=$(printf '%s\n' "$fallback_name" |
-					tr '[:upper:]' '[:lower:]')
-				search_attempt=1
-				continue
 			fi
 		fi
 
-		break
-	done
+		# Exactly one project is required. Otherwise try _name.
+		if [[ "$match_count" -eq 1 ]]; then
+			IFS=$'\t' read -r \
+				project_id backend project_homepage ecosystem version_url \
+				<<< "$matches"
+			break
+		fi
 
+		if [[ "$search_attempt" -eq 0 &&
+		      -n "$fallback_name" &&
+		      "$(printf '%s\n' "$fallback_name" | tr '[:upper:]' '[:lower:]')" != "$pkg" ]]
+		then
+			search_name=$(printf '%s\n' "$fallback_name" |
+				tr '[:upper:]' '[:lower:]')
+			search_attempt=1
+			continue
+		fi
+
+		# _name either was not available or did not resolve uniquely.
+		if [[ "$match_count" -gt 1 ]]; then
+			printf 'Multiple Anitya projects match %s:\n' \
+				"$search_name" >&2
+		elif [[ -n "$homepage" ]]; then
+			printf 'No Anitya project for %s matches homepage=%s\n' \
+				"$search_name" "$homepage" >&2
+		elif [[ -n "$repo" ]]; then
+			printf 'No Anitya project for %s matches repo=%s\n' \
+				"$search_name" "$repo" >&2
+		else
+			printf 'Multiple Anitya projects found for %s; no homepage= or repo= in %s\n' \
+				"$search_name" "$build" >&2
+		fi
+
+		printf '%s\n' 'Candidates:' >&2
+		while IFS=$'\t' read -r \
+			project_id backend project_homepage ecosystem version_url
+		do
+			printf '  %s  %s  [%s%s]\n' \
+				"$project_id" \
+				"$project_homepage" \
+				"$backend" \
+				"${version_url:+: $version_url}" >&2
+		done <<< "$projects"
+
+		return 1
+	done
 	project_count=$(printf '%s\n' "$projects" | wc -l)
 
 	if [[ "$project_count" -eq 1 ]]; then

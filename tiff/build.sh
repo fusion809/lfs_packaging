@@ -3,6 +3,8 @@ set -e
 name=tiff
 _name=lib$name
 repo=$_name/$_name
+homepage="http://www.simplesystems.org/libtiff/"
+description="Provides support for the tag image file format (TIFF)."
 version=$(gl_ver $repo)
 depends=(bzip2 elfutils expat freeglut gcc glibc icu libdrm libffi libice libjpeg-turbo libpciaccess libsm libwebp libx11 libxau libxcb libxdmcp libxext libxi libxml2 libxmu libxrandr libxrender libxshmfence libxt libxxf86vm llvm lm-sensors mesa spirv-tools util-linux xz zlib zstd)
 filename="$name-$version.tar.gz"

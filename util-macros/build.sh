@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=util-macros
+homepage="https://www.x.org"
+description="Facilitates the generation of configure scripts with autoconf."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

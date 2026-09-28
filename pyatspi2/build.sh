@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=pyatspi2
-hoempage="https://gitlab.gnome.org/GNOME/pyatspi2"
+homepage="https://gitlab.gnome.org/GNOME/pyatspi2"
 description="Python wrapper for libatspi."
 _name=$(echo $name | sed 's/2//g')
 version=$(gn_ver $name)
