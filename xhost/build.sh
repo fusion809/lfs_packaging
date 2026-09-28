@@ -5,6 +5,8 @@ name=xhost
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"
+homepage="https://www.x.org"
+description="Xorg server access control utility."
 depends=(bash coreutils fontconfig glibc libpng libx11 libxau libxcb libxdmcp libxmu make mesa sed systemd tar util-linux xbitmaps xcb-util xorg-libs xz zlib)
 # Fetch and unpack source
 xfd_download "$filename"
