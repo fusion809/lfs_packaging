@@ -2,7 +2,7 @@
 set -e
 name=texinfo
 homepage="https://www.gnu.org/software/texinfo/"
-description="GNU documentation system for on-line information and printed output"
+description="GNU documentation system for on-line information and printed output."
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

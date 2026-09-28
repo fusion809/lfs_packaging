@@ -2,7 +2,7 @@
 set -e
 name=libpaper
 homepage="https://github.com/rrthomas/libpaper"
-description="Library for handling paper characteristics"
+description="Library for handling paper characteristics."
 repo=rrthomas/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

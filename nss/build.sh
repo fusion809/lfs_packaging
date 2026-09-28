@@ -2,7 +2,7 @@
 set -e
 name=nss
 homepage="https://firefox-source-docs.mozilla.org/security/nss/index.html"
-description="Network Security Services"
+description="Network Security Services."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

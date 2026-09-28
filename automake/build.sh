@@ -2,7 +2,7 @@
 set -e
 name=automake
 homepage="https://www.gnu.org/software/automake"
-description="A GNU tool for automatically creating Makefiles"
+description="A GNU tool for automatically creating Makefiles."
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

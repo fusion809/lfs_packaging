@@ -2,7 +2,7 @@
 set -e
 name=iso-codes
 homepage="https://salsa.debian.org/iso-codes-team/iso-codes"
-description="Lists of the country, language, and currency names"
+description="Lists of the country, language, and currency names."
 repo=iso-codes-team/$name
 version=$(sd_ver $repo)
 filename="$name-v$version.tar.gz"

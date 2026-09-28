@@ -2,7 +2,7 @@
 set -e
 name=hwdata
 homepage="https://github.com/vcrhonek/hwdata"
-description="hardware identification databases"
+description="hardware identification databases."
 repo=vcrhonek/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

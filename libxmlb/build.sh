@@ -2,7 +2,7 @@
 set -e
 name=libxmlb
 homepage="https://github.com/hughsie/libxmlb"
-description="Library to help create and query binary XML blobs"
+description="Library to help create and query binary XML blobs."
 repo="hughsie/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

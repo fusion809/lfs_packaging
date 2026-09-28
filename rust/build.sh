@@ -2,7 +2,7 @@
 set -e
 name=rust
 homepage="https://www.rust-lang.org/"
-description="Systems programming language focused on safety, speed and concurrency"
+description="Systems programming language focused on safety, speed and concurrency."
 _name=rustc
 repo=rust-lang/rust
 # Takes about 3hrs 10 mins to compile, roughly

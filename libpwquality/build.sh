@@ -2,7 +2,7 @@
 set -e
 name=libpwquality
 homepage="https://github.com/libpwquality/libpwquality"
-description="Library for password quality checking and generating random passwords"
+description="Library for password quality checking and generating random passwords."
 repo=$name/$name
 version=$(gh_ver $repo)
 depends=(cracklib glibc linux-pam zlib)

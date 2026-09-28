@@ -3,7 +3,7 @@ set -e
 # Variable declarations
 name=spice-vdagent
 homepage="https://www.spice-space.org/"
-description="Spice agent for Linux guests"
+description="Spice agent for Linux guests."
 version=$(spice_ver $name)
 docs="COPYING CHANGELOG.md README.md"
 direname="$name-$version"

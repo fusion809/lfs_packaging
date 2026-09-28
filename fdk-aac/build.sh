@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=fdk-aac
-description="Fraunhofer FDK AAC codec library"
+description="Fraunhofer FDK AAC codec library."
 homepage="https://sourceforge.net/projects/opencore-amr/"
 repo=mstorsjo/$name
 version=$(gh_ver $repo)

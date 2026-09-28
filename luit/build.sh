@@ -2,7 +2,7 @@
 set -e
 name=luit
 homepage="https://invisible-island.net/luit/luit.html"
-description="Filter that can be run between an arbitrary application and a UTF-8 terminal emulator"
+description="Filter that can be run between an arbitrary application and a UTF-8 terminal emulator."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

@@ -2,7 +2,7 @@
 set -e
 name=xcb-util
 homepage="https://xcb.freedesktop.org"
-description="Utility libraries for XC Binding"
+description="Utility libraries for XC Binding."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

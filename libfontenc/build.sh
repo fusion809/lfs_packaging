@@ -3,7 +3,7 @@ set -e
 # Variable declarations
 name=libfontenc
 homepage="https://gitlab.freedesktop.org/xorg/lib/libfontenc"
-description="X11 font encoding library"
+description="X11 font encoding library."
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"

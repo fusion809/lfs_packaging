@@ -2,7 +2,7 @@
 set -e
 name=sed
 homepage="https://www.gnu.org/software/sed/"
-description="GNU stream editor"
+description="GNU stream editor."
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

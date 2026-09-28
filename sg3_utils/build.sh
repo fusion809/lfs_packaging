@@ -2,7 +2,7 @@
 set -e
 name=sg3_utils
 homepage="http://sg.danny.cz/sg/sg3_utils.html"
-description="Generic SCSI utilities"
+description="Generic SCSI utilities."
 repo=doug-gilbert/$name
 version=$(gh_ver $repo)
 depends=(glibc)

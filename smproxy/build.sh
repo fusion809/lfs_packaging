@@ -6,7 +6,7 @@ version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"
 homepage="https://www.x.org"
-description="SMProxy allows X applications that do not support X11R6 session management to participate in an X11R6 session."
+description="SMProxy allows X applications that do not support X11R6 session management to participate in an X11R6 session.."
 depends=(bash coreutils fontconfig glibc libice libpng libsm libx11 libxau libxcb libxdmcp libxmu libxt make mesa sed systemd tar util-linux xbitmaps xcb-util xorg-libs xz zlib)
 # Fetch and unpack source
 xfd_download "$filename"

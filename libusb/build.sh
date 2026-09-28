@@ -2,7 +2,7 @@
 set -e
 name=libusb
 homepage="https://libusb.info/"
-description="Library that provides generic access to USB devices"
+description="Library that provides generic access to USB devices."
 repo=$name/$name
 version=$(gh_ver $repo)
 depends=(glibc systemd)

@@ -2,7 +2,7 @@
 set -e
 name=ocean-sound-theme
 homepage="https://kde.org/plasma-desktop/"
-description="Ocean Sound Theme for Plasma"
+description="Ocean Sound Theme for Plasma."
 repo=KDE/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

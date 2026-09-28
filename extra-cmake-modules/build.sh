@@ -2,7 +2,7 @@
 set -e
 name=extra-cmake-modules
 homepage="https://develop.kde.org/products/frameworks/"
-description="Extra modules and scripts for CMake"
+description="Extra modules and scripts for CMake."
 repo=KDE/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

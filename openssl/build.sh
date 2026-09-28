@@ -2,7 +2,7 @@
 set -e
 name=openssl
 homepage="https://www.openssl.org"
-description="The Open Source toolkit for cryptography and Transport Layer Security"
+description="The Open Source toolkit for cryptography and Transport Layer Security."
 repo=${name}/$name
 version=$(gh_ver $repo)
 depends=(bash brotli coreutils glibc gzip tar zlib zstd)

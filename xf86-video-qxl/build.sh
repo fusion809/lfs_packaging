@@ -3,7 +3,7 @@ set -e
 # Variable declarations
 name=xf86-video-qxl
 homepage="https://www.x.org"
-description="Xorg X11 qxl video driver"
+description="Xorg X11 qxl video driver."
 version=$(xfd_ver $name)
 if [ "${XSPICE:-no}" = "yes" ]; then
   with_xspice="--enable-xspice=yes"

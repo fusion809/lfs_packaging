@@ -2,7 +2,7 @@
 set -e
 name=abseil-cpp
 homepage="https://abseil.io"
-description="Collection of C++ library code designed to augment the C++ standard library"
+description="Collection of C++ library code designed to augment the C++ standard library."
 repo=abseil/abseil-cpp
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

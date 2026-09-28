@@ -4,7 +4,7 @@ set -e
 _name=libFS
 name=$(echo $_name | tr '[:upper:]' '[:lower:]')
 homepage="https://www.x.org"
-description="X Font Service client library"
+description="X Font Service client library."
 version=$(xfd_ver $_name)
 direname="$_name-$version"
 filename="$direname.tar.xz"

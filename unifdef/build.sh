@@ -2,7 +2,7 @@
 set -e
 name=unifdef
 homepage="https://dotat.at/prog/unifdef/"
-description="Remove #ifdef'ed lines"
+description="Remove #ifdef'ed lines."
 repo=fanf2/$name
 version=$(gh_ver $repo)
 depends=(glibc)

@@ -3,6 +3,7 @@ set -e
 # Variable declarations
 name=xmessage
 homepage="https://www.x.org"
+description="Display a message or query in a window."
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"

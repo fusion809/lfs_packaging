@@ -2,7 +2,7 @@
 set -e
 name=vulkan-headers
 homepage="https://www.vulkan.org/"
-description="Vulkan header files and API registry"
+description="Vulkan header files and API registry."
 repo=KhronosGroup/Vulkan-Headers
 version=$(gh_ver $repo)
 filename="Vulkan-Headers-vulkan-sdk-$version.tar.gz"

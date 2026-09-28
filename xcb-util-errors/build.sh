@@ -2,7 +2,7 @@
 set -e
 name=xcb-util-errors
 homepage="https://cgit.freedesktop.org/xcb/util-errors/"
-description="XCB errors library"
+description="XCB errors library."
 version=$(xcb_ver $name)
 depends=(glibc libxau libxcb libxdmcp)
 filename="$name-$version.tar.xz"

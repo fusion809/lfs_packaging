@@ -2,7 +2,7 @@
 set -e
 name=groff
 homepage="https://www.gnu.org/software/groff/groff.html"
-description="GNU troff text-formatting system"
+description="GNU troff text-formatting system."
 version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"

@@ -2,7 +2,7 @@
 set -e
 name=man-pages
 homepage="https://www.kernel.org/doc/man-pages/"
-description="Linux man pages"
+description="Linux man pages."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

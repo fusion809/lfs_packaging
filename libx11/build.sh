@@ -3,7 +3,7 @@ set -e
 # Variable declarations
 name=libx11
 homepage="https://gitlab.freedesktop.org/xorg/lib/libx11"
-description="X11 client-side library"
+description="X11 client-side library."
 _name=libX11
 version=$(xfd_ver $_name)
 direname="${_name}-$version"

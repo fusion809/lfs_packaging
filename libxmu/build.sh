@@ -8,7 +8,7 @@ filename="$direname.tar.xz"
 depends=(bash coreutils fontconfig glibc libice libsm libx11 libxau libxcb libxdmcp libxext libxt make sed systemd tar util-linux xorg-libs xz zlib)
 name=$(echo $_name | tr '[:upper:]' '[:lower:]')
 homepage="https://gitlab.freedesktop.org/xorg/lib/libxmu"
-description="X11 miscellaneous micro-utility library"
+description="X11 miscellaneous micro-utility library."
 # Fetch and unpack source
 xfd_download "$filename"
 unpk_enter "$filename" "$direname"

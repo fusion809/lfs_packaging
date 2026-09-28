@@ -2,7 +2,7 @@
 set -e
 name=kmod
 homepage="https://git.kernel.org/pub/scm/utils/kernel/kmod/kmod.git"
-description="Linux kernel module management tools and library"
+description="Linux kernel module management tools and library."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

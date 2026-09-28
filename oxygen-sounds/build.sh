@@ -2,7 +2,7 @@
 set -e
 name=oxygen-sounds
 homepage="https://kde.org/plasma-desktop/"
-description="The Oxygen Sound Theme"
+description="The Oxygen Sound Theme."
 repo=KDE/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

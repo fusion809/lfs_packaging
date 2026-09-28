@@ -2,7 +2,7 @@
 set -e
 name=libinput
 homepage="https://wayland.freedesktop.org/libinput/doc/latest/"
-description="Input device management and event handling library"
+description="Input device management and event handling library."
 repo=$name/$name
 get_version() {
 	local inst_ver=$(pkgver $name)

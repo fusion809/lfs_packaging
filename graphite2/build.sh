@@ -3,7 +3,7 @@ set -e
 name=graphite2
 repo=silnrsi/graphite
 homepage="https://graphite.sil.org/"
-description='A "smart font" system to handle the complexities of lesser-known languages of the world.'
+description='A "smart font" system to handle the complexities of lesser-known languages of the world.'.
 version=$(gh_ver $repo)
 filename="$name-$version.tgz"
 direname="${filename/.tgz/}"

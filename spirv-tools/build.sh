@@ -2,7 +2,7 @@
 set -e
 name=spirv-tools
 homepage="https://www.khronos.org/spirv/"
-description="API and commands for processing SPIR-V modules"
+description="API and commands for processing SPIR-V modules."
 repo=KhronosGroup/SPIRV-Tools
 get_version() {
 	local inst_ver=$(pkgver $name)

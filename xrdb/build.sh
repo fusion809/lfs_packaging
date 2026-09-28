@@ -3,6 +3,7 @@ set -e
 # Variable declarations
 name=xrdb
 homepage="https://www.x.org"
+description="X server resource database utility."
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"

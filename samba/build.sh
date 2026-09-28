@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=samba
-description="SMB Fileserver and AD Domain server"
+description="SMB Fileserver and AD Domain server."
 homepage="https://www.samba.org"
 repo=$name-team/$name
 get_version() {

@@ -2,7 +2,7 @@
 set -e
 name=expat
 homepage="https://libexpat.github.io/"
-description="An XML parser library"
+description="An XML parser library."
 repo=libexpat/libexpat
 version=$(gh_ver $repo)
 _version=$(echo $version | sed 's/\./_/g')

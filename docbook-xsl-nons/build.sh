@@ -3,7 +3,7 @@ set -e
 name=docbook-xsl-nons
 repo=docbook/"xslt10-stylesheets"
 homepage="https://github.com/docbook/wiki/wiki/DocBookXslStylesheets"
-description="Stylesheets for processing DocBook XML to various output formats"
+description="Stylesheets for processing DocBook XML to various output formats."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

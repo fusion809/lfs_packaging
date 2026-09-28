@@ -2,7 +2,7 @@
 set -e
 name=nasm
 homepage="https://www.nasm.us"
-description="80x86 assembler designed for portability and modularity"
+description="80x86 assembler designed for portability and modularity."
 repo="netwide-assembler/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

@@ -2,7 +2,7 @@
 set -e
 name=pkgconf
 homepage="https://github.com/pkgconf/pkgconf"
-description="Package compiler and linker metadata toolkit"
+description="Package compiler and linker metadata toolkit."
 version=$(gh_ver pkgconf/pkgconf)
 depends=(bash coreutils glibc meson ninja tar xz)
 filename="$name-$version.tar.xz"

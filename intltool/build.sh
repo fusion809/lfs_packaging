@@ -2,7 +2,7 @@
 set -e
 name=intltool
 homepage="https://launchpad.net/intltool"
-description="The internationalization tool collection"
+description="The internationalization tool collection."
 repo=Distrotech/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

@@ -2,7 +2,7 @@
 set -e
 name=lua
 homepage="https://www.lua.org/"
-description="Powerful lightweight programming language designed for extending applications"
+description="Powerful lightweight programming language designed for extending applications."
 repo=$name/$name
 version=$(gh_ver $repo)
 majMinVer=$(echo $version | cut -d '.' -f1-2)

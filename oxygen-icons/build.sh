@@ -2,7 +2,7 @@
 set -e
 name=oxygen-icons
 homepage="https://develop.kde.org/products/frameworks/"
-description="The Oxygen Icon Theme"
+description="The Oxygen Icon Theme."
 repo=KDE/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

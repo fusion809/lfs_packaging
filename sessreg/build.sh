@@ -4,7 +4,7 @@ set -e
 name=sessreg
 version=$(xfd_ver $name)
 homepage="http://xorg.freedesktop.org/"
-description="Simple program for managing utmp/wtmp X session entries."
+description="Simple program for managing utmp/wtmp X session entries.."
 direname="${name}-$version"
 filename="$direname.tar.xz"
 depends=(bash coreutils fontconfig glibc libpng libxcb make mesa sed systemd tar util-linux xbitmaps xcb-util xorg-libs xz zlib)

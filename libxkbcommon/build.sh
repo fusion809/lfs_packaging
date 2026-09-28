@@ -2,7 +2,7 @@
 set -e
 name=libxkbcommon
 homepage="https://xkbcommon.org/"
-description="Keymap handling library for toolkits and window systems"
+description="Keymap handling library for toolkits and window systems."
 repo=lfs-book/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

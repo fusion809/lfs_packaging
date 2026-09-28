@@ -3,7 +3,7 @@ set -e
 # Variable declarations
 name=qhull
 homepage="http://www.qhull.org/"
-description="A general dimension code for computing convex hulls and related structures"
+description="A general dimension code for computing convex hulls and related structures."
 get_version() {
     local inst_ver=$(pkgver $name)
     local art_ver=$(artver $name)

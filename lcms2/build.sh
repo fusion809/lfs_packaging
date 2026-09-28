@@ -2,7 +2,7 @@
 set -e
 name=lcms2
 homepage="http://www.littlecms.com/"
-description="Small-footprint color management engine, version 2"
+description="Small-footprint color management engine, version 2."
 repo=mm2/Little-CMS
 version=$(gh_ver $repo)
 depends=(glibc libjpeg-turbo libwebp tiff xz zlib zstd)

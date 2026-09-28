@@ -2,7 +2,7 @@
 set -e
 name=libatasmart
 homepage="https://0pointer.de/blog/projects/being-smart.html"
-description="ATA S.M.A.R.T. reader and parser library"
+description="ATA S.M.A.R.T. reader and parser library."
 repo=$name/$name
 version=$(gh_ver $repo)
 depends=(glibc systemd)

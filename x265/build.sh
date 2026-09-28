@@ -2,7 +2,7 @@
 set -e
 name=x265
 homepage="https://www.x265.org/"
-description="Open Source H265/HEVC video encoder"
+description="Open Source H265/HEVC video encoder."
 repo=Multicorewareinc/$name
 version=$(gh_ver $repo)
 filename="${name}_$version.tar.gz"

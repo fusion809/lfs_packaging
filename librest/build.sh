@@ -2,7 +2,7 @@
 set -e
 name=librest
 homepage="https://gitlab.gnome.org/GNOME/librest"
-description="Library for accessing RESTful web services"
+description="Library for accessing RESTful web services."
 repo=GNOME/$name
 version=$(gh_ver $repo)
 depends=(brotli e2fsprogs gcc glib2 glibc icu json-glib keyutils libffi libidn2 libpsl libsoup libunistring libxml2 mitkrb nghttp2 pcre2 sqlite systemd util-linux zlib)

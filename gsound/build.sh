@@ -2,7 +2,7 @@
 set -e
 name=gsound
 homepage="https://wiki.gnome.org/Projects/GSound"
-description="Small library for playing system sounds"
+description="Small library for playing system sounds."
 version=$(gn_ver $name)
 depends=(glib2 glibc libcanberra libffi libogg libvorbis pcre2 systemd util-linux webkitgtk zlib)
 filename="$name-$version.tar.xz"

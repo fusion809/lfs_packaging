@@ -2,7 +2,7 @@
 set -e
 name=npth
 homepage="https://www.gnupg.org/software/npth/index.html"
-description="The new GNU portable threads library"
+description="The new GNU portable threads library."
 repo="gpg/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.bz2"

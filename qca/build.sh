@@ -2,7 +2,7 @@
 set -e
 name=qca
 repo=KDE/$name
-description="Qt cryptographic architecture."
+description="Qt cryptographic architecture.."
 homepage="https://api.kde.org/legacy/qca/html/index.html"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

@@ -2,7 +2,7 @@
 set -e
 name=libxcrypt
 homepage="https://github.com/besser82/libxcrypt/"
-description="Modern library for one-way hashing of passwords"
+description="Modern library for one-way hashing of passwords."
 repo=besser82/$name
 version=$(gh_ver $repo)
 depends=(coreutils gcc glibc gzip make sed tar)

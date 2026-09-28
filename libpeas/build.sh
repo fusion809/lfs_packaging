@@ -2,7 +2,7 @@
 set -e 
 name=libpeas
 homepage="https://gitlab.gnome.org/GNOME/libpeas"
-description="GObject Plugin System"
+description="GObject Plugin System."
 version=$(gn_ver libpeas)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

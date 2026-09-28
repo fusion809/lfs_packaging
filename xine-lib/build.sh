@@ -2,7 +2,7 @@
 set -e
 name=xine-lib
 homepage="https://www.xine-project.org"
-description="Multimedia playback engine"
+description="Multimedia playback engine."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

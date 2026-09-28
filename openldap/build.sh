@@ -2,7 +2,7 @@
 set -e
 name=openldap
 homepage="https://www.openldap.org/"
-description="Lightweight Directory Access Protocol (LDAP) client and server"
+description="Lightweight Directory Access Protocol (LDAP) client and server."
 get_version() {
 	local lfs_vers=$(lfs_ver $name)
   local inst_ver=$(pkgver $name)

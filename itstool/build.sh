@@ -2,7 +2,7 @@
 set -e
 name=itstool
 homepage="https://itstool.org/"
-description="Translate XML with PO files using W3C Internationalization Tag Set rules"
+description="Translate XML with PO files using W3C Internationalization Tag Set rules."
 repo=$name/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

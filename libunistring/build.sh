@@ -2,7 +2,7 @@
 set -e
 name=libunistring
 homepage="https://www.gnu.org/software/libunistring/"
-description="Library for manipulating Unicode strings and C strings"
+description="Library for manipulating Unicode strings and C strings."
 version=$(gnu_ver libunistring)
 depends=(glibc)
 filename="$name-$version.tar.xz"

@@ -2,7 +2,7 @@
 set -e
 name=lz4
 homepage="https://lz4.github.io/lz4/"
-description="Extremely fast compression algorithm"
+description="Extremely fast compression algorithm."
 repo=$name/$name
 version=$(gh_ver $repo)
 depends=(coreutils gcc glibc gzip make tar)

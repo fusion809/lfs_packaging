@@ -2,6 +2,7 @@
 set -e
 name=xorg-evdev-driver
 homepage="https://www.x.org"
+description="X.org evdev input driver.."
 version=$(xfd_ver xf86-input-evdev)
 depends=(glibc libevdev mtdev systemd)
 filename="xf86-input-evdev-$version.tar.xz"

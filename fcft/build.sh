@@ -2,7 +2,7 @@
 set -e
 name=fcft
 homepage="https://codeberg.org/dnkl/fcft"
-description="Simple library for font loading and glyph rasterization"
+description="Simple library for font loading and glyph rasterization."
 repo=dnkl/$name
 version=$(cb_ver $repo)
 depends=(fontconfig freetype2 meson ninja pixman)

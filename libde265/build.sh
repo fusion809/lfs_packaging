@@ -2,7 +2,7 @@
 set -e
 name=libde265
 homepage="https://github.com/strukturag/libde265"
-description="Open h.265 video codec implementation"
+description="Open h.265 video codec implementation."
 repo=strukturag/$name
 version=$(gh_ver $repo)
 depends=(cmake)

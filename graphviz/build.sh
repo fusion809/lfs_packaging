@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=graphviz
-description="Graph visualization software"
+description="Graph visualization software."
 homepage="https://www.graphviz.org"
 repo=$name/$name
 version=$(gl_ver $repo)

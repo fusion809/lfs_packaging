@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=julia
-description="A high-level, high-performance, dynamic, scientific computing-oriented programming language."
+description="A high-level, high-performance, dynamic, scientific computing-oriented programming language.."
 homepage="http://julialang.org"
 repo=julialang/$name
 version=$(gh_ver $repo)

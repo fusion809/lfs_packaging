@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=hub
-description="cli interface for Github"
+description="cli interface for Github."
 homepage="http://hub.github.com/"
 repo=mislav/$name
 version=$(gh_ver $repo)

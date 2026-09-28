@@ -3,7 +3,7 @@ set -e
 # Variable declaration
 name=gnome-tweaks
 homepage="https://wiki.gnome.org/Apps/Tweaks"
-description="Graphical interface for advanced GNOME 3 settings (Tweak Tool)"
+description="Graphical interface for advanced GNOME 3 settings (Tweak Tool)."
 version=$(gn_ver $name)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"

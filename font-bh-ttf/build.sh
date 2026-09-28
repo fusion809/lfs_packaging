@@ -2,7 +2,7 @@
 set -e
 name=font-bh-ttf
 homepage="https://www.x.org"
-description="X.org Luxi Truetype fonts"
+description="X.org Luxi Truetype fonts."
 depends=(glibc)
 get_version() {
 	local inst_ver=$(pkgver $name)

@@ -2,7 +2,7 @@
 set -e
 name=modemmanager
 homepage="https://www.freedesktop.org/wiki/Software/ModemManager/"
-description="Mobile broadband modem management service"
+description="Mobile broadband modem management service."
 repo=linux-mobile-broadband/ModemManager
 version=$(gh_ver $repo)
 depends=(glib2 glibc libffi libgudev libmbim libqmi pcre2 polkit systemd util-linux zlib)

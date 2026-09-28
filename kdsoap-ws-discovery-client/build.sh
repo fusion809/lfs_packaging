@@ -2,7 +2,7 @@
 set -e
 name=kdsoap-ws-discovery-client
 homepage="https://caspermeijn.gitlab.io/kdsoap-ws-discovery-client/"
-description="WS-Discovery client library based on KDSoap"
+description="WS-Discovery client library based on KDSoap."
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(brotli double-conversion e2fsprogs gcc glib2 glibc icu kdsoap keyutils mitkrb openssl pcre2 qt6 systemd zlib zstd)

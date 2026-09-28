@@ -2,7 +2,7 @@
 set -e
 name=libpsl
 homepage="https://github.com/rockdaboot/libpsl"
-description="Public Suffix List library"
+description="Public Suffix List library."
 repo="rockdaboot/libpsl"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

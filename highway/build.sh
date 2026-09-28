@@ -2,7 +2,7 @@
 set -e
 name=highway
 homepage="https://github.com/google/highway/"
-description="A C++ library that provides portable SIMD/vector intrinsics"
+description="A C++ library that provides portable SIMD/vector intrinsics."
 repo=google/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

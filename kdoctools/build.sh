@@ -2,7 +2,7 @@
 set -e
 name=kdoctools
 homepage="https://develop.kde.org/products/frameworks/"
-description="Documentation generation from docbook"
+description="Documentation generation from docbook."
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(brotli bzip2 double-conversion e2fsprogs gcc glib2 glibc icu karchive keyutils libxml2 libxslt mitkrb openssl pcre2 qt6 systemd xz zlib zstd)

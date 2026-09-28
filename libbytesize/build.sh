@@ -2,7 +2,7 @@
 set -e
 name=libbytesize
 homepage="https://github.com/storaged-project/libbytesize"
-description="A tiny library providing a C "class" for working with arbitrary big sizes in bytes"
+description="A tiny library providing a C "class" for working with arbitrary big sizes in bytes."
 repo="storaged-project/libbytesize"
 version=$(gh_ver $repo)
 depends=(glibc gmp mpfr pcre2)

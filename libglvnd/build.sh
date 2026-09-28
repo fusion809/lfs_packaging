@@ -2,7 +2,7 @@
 set -e
 name=libglvnd
 homepage="https://gitlab.freedesktop.org/glvnd/libglvnd"
-description="The GL Vendor-Neutral Dispatch library"
+description="The GL Vendor-Neutral Dispatch library."
 repo=glvnd/libglvnd
 version=$(gfd_ver $repo)
 depends=(glibc libx11 libxau libxcb libxdmcp)

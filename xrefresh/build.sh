@@ -3,6 +3,7 @@ set -e
 # Variable declarations
 name=xrefresh
 homepage="https://www.x.org"
+description="Refresh all or part of an X screen."
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"

@@ -2,7 +2,7 @@
 set -e
 name=libexif
 homepage="https://github.com/libexif/libexif"
-description="Library to parse an EXIF file and read the data from those tags"
+description="Library to parse an EXIF file and read the data from those tags."
 repo=$name/$name
 version=$(gh_ver $repo)
 depends=(glibc)

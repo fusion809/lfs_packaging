@@ -2,7 +2,7 @@
 set -e
 name=libjpeg-turbo
 homepage="https://libjpeg-turbo.org/"
-description="JPEG image codec with accelerated baseline compression and decompression"
+description="JPEG image codec with accelerated baseline compression and decompression."
 repo=$name/$name
 version=$(gh_ver $repo)
 depends=(glibc)

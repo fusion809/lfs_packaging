@@ -3,7 +3,7 @@ set -e
 # Variable declaration
 name=eog
 homepage="https://gitlab.gnome.org/GNOME/eog"
-description="Eye of Gnome: An image viewing and cataloging program"
+description="Eye of Gnome: An image viewing and cataloging program."
 version=$(gn_ver $name)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"

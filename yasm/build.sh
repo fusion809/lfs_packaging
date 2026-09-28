@@ -2,7 +2,7 @@
 set -e
 name=yasm
 homepage="https://github.com/yasm/yasm"
-description="A rewrite of NASM to allow for multiple syntax supported (NASM, TASM, GAS, etc.)"
+description="A rewrite of NASM to allow for multiple syntax supported (NASM, TASM, GAS, etc.)."
 repo="$name/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

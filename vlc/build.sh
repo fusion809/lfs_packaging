@@ -2,7 +2,7 @@
 set -e
 name=vlc
 homepage="https://www.videolan.org/vlc/"
-description="Free and open source cross-platform multimedia player and framework"
+description="Free and open source cross-platform multimedia player and framework."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

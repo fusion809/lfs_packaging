@@ -3,7 +3,7 @@ set -e
 # Variable declarations
 name=libxkbfile
 homepage="https://gitlab.freedesktop.org/xorg/lib/libxkbfile"
-description="X11 keyboard file manipulation library"
+description="X11 keyboard file manipulation library."
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"

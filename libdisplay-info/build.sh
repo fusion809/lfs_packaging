@@ -2,7 +2,7 @@
 set -e
 name=libdisplay-info
 homepage="https://gitlab.freedesktop.org/emersion/libdisplay-info"
-description="EDID and DisplayID library"
+description="EDID and DisplayID library."
 repo=emersion/$name
 version=$(gfd_ver "$repo")
 direname="$name-$version"

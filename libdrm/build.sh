@@ -2,7 +2,7 @@
 set -e
 name=libdrm
 homepage="https://dri.freedesktop.org/"
-description="Userspace interface to kernel DRM services"
+description="Userspace interface to kernel DRM services."
 repo=Distrotech/$name
 version=$(gh_ver $repo)
 depends=(glibc libpciaccess zlib)

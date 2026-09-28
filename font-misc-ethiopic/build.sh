@@ -2,7 +2,7 @@
 set -e
 name=font-misc-ethiopic
 homepage="https://www.x.org"
-description="Miscellaneous xorg Ethiopic fonts."
+description="Miscellaneous xorg Ethiopic fonts.."
 depends=(glibc)
 get_version() {
 	local inst_ver=$(pkgver $name)

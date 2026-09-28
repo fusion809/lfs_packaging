@@ -2,7 +2,7 @@
 set -e
 name=xcb-util-cursor
 homepage="https://cgit.freedesktop.org/xcb/util-cursor"
-description="XCB cursor library"
+description="XCB cursor library."
 version=$(xcb_ver $name)
 depends=(glibc libxau libxcb libxdmcp)
 filename="$name-$version.tar.xz"

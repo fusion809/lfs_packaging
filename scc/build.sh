@@ -3,7 +3,7 @@ set -e
 name=scc
 repo=boyter/$name
 homepage="https://github.com/$repo"
-description="Sloc, Cloc and Code: a very fast accurate code counter with complexity calculations and COCOMO estimates written in pure Go"
+description="Sloc, Cloc and Code: a very fast accurate code counter with complexity calculations and COCOMO estimates written in pure Go."
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"

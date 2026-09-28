@@ -3,7 +3,7 @@ set -e
 name=xinit
 version=$(xfd_ver $name)
 homepage="https://www.x.org"
-description="Commands to start X window server."
+description="Commands to start X window server.."
 depends=(glibc libx11 libxau libxcb libxdmcp)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

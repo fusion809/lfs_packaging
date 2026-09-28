@@ -2,7 +2,7 @@
 set -e
 name=plasma-workspace
 homepage="https://kde.org/plasma-desktop/"
-description="KDE Plasma Workspace"
+description="KDE Plasma Workspace."
 repo=KDE/$name
 version=$(gh_ver $repo)
 # appstream needs qt support

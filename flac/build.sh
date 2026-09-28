@@ -2,7 +2,7 @@
 set -e
 name=flac
 homepage="https://xiph.org/flac/"
-description="Free Lossless Audio Codec"
+description="Free Lossless Audio Codec."
 repo=xiph/$name
 version=$(gh_ver $repo)
 depends=(gcc glibc libogg)

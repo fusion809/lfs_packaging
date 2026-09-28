@@ -8,7 +8,7 @@ filename="$direname.tar.xz"
 depends=(bash coreutils fontconfig glibc libice libsm libx11 libxau libxcb libxdmcp libxext libxt make sed systemd tar util-linux xorg-libs xz zlib)
 name=$(echo $_name | tr '[:upper:]' '[:lower:]')
 homepage="https://xorg.freedesktop.org/"
-description="X11 pixmap library"
+description="X11 pixmap library."
 # Fetch and unpack source
 xfd_download "$filename"
 unpk_enter "$filename" "$direname"

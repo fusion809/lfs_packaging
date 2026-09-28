@@ -2,7 +2,7 @@
 set -e
 name=cyrus-sasl
 homepage="https://www.cyrusimap.org/sasl/"
-description="Cyrus saslauthd SASL authentication daemon"
+description="Cyrus saslauthd SASL authentication daemon."
 repo="cyrusimap/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

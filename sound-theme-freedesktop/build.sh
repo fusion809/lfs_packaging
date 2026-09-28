@@ -2,7 +2,7 @@
 set -e
 name=sound-theme-freedesktop
 homepage="https://freedesktop.org/wiki/Specifications/sound-theme-spec"
-description="Freedesktop sound theme"
+description="Freedesktop sound theme."
 repo=deepin-community/$name
 get_version() {
 	local inst_ver=$(pkgver $name)

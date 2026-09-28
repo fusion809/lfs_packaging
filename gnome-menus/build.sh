@@ -2,7 +2,7 @@
 set -e
 name=gnome-menus
 homepage="https://gitlab.gnome.org/GNOME/gnome-menus"
-description="GNOME menu specifications"
+description="GNOME menu specifications."
 repo=GNOME/$name
 version=$(gh_ver $repo)
 depends=(glib2 glibc libffi pcre2 systemd util-linux zlib)

@@ -8,7 +8,7 @@ filename="$direname.tar.xz"
 depends=(bash coreutils fontconfig glibc libx11 libxau libxcb libxdmcp libxext libxv make sed systemd tar util-linux xorg-libs xz zlib)
 name=$(echo $_name | tr '[:upper:]' '[:lower:]')
 homepage="https://gitlab.freedesktop.org/xorg/lib/libxvmc"
-description="X11 Video Motion Compensation extension library"
+description="X11 Video Motion Compensation extension library."
 # Fetch and unpack source
 xfd_download "$filename"
 unpk_enter "$filename" "$direname"

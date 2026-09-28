@@ -2,7 +2,7 @@
 set -e
 name=libcdio
 homepage="https://www.gnu.org/software/libcdio/"
-description="GNU Compact Disc Input and Control Library"
+description="GNU Compact Disc Input and Control Library."
 repo=libcdio/libcdio-C
 #version=$(gnu_ver $name)
 version=$(gh_ver $repo "$name")

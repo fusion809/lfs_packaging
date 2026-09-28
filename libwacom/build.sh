@@ -2,7 +2,7 @@
 set -e
 name=libwacom
 homepage="https://github.com/linuxwacom/libwacom/wiki"
-description="Library to identify Wacom tablets and their features"
+description="Library to identify Wacom tablets and their features."
 repo=linuxwacom/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

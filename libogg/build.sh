@@ -2,7 +2,7 @@
 set -e
 name=libogg
 homepage="https://www.xiph.org/ogg/"
-description="Ogg bitstream and framing library"
+description="Ogg bitstream and framing library."
 repo=gcp/$name
 version=$(gh_ver $repo)
 depends=(glibc)

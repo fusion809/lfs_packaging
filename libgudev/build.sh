@@ -2,7 +2,7 @@
 set -e
 name=libgudev
 homepage="https://gitlab.gnome.org/GNOME/libgudev"
-description="GObject bindings for libudev"
+description="GObject bindings for libudev."
 version=$(gn_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

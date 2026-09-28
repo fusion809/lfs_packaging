@@ -2,7 +2,7 @@
 set -e
 name=procps-ng
 homepage="https://gitlab.com/procps-ng/procps"
-description="Utilities for monitoring your system and its processes"
+description="Utilities for monitoring your system and its processes."
 version=$(gl_ver $name/procps $name)
 depends=(coreutils gcc glibc make tar wget xz)
 filename="$name-$version.tar.xz"

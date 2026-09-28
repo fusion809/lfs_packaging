@@ -2,7 +2,7 @@
 set -e
 name=gzip
 homepage="https://www.gnu.org/software/gzip/"
-description="GNU compression utility"
+description="GNU compression utility."
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

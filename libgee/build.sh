@@ -2,7 +2,7 @@
 set -e
 name=libgee
 homepage="https://gitlab.gnome.org/GNOME/libgee"
-description="A collection library providing GObject-based interfaces and classes for commonly used data structures"
+description="A collection library providing GObject-based interfaces and classes for commonly used data structures."
 repo=GNOME/$name
 version=$(gh_ver $repo)
 depends=(glib2 glibc libffi pcre2 systemd util-linux zlib)

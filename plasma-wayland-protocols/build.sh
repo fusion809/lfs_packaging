@@ -2,7 +2,7 @@
 set -e
 name=plasma-wayland-protocols
 homepage="https://kde.org/plasma-desktop"
-description="Plasma Specific Protocols for Wayland"
+description="Plasma Specific Protocols for Wayland."
 repo=KDE/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

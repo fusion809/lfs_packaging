@@ -2,7 +2,7 @@
 set -e
 name=tinysparql
 homepage="https://tinysparql.org/"
-description="Low-footprint RDF triple store with SPARQL 1.1 interface"
+description="Low-footprint RDF triple store with SPARQL 1.1 interface."
 repo=GNOME/$name
 version=$(gh_ver $repo)
 depends=(avahi brotli dbus e2fsprogs gcc glib2 glibc icu json-glib keyutils libffi libidn2 libpsl libsoup libunistring libxml2 mitkrb nghttp2 pcre2 sqlite systemd util-linux zlib)

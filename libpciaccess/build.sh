@@ -3,7 +3,7 @@ set -e
 # Variable declarations
 name=libpciaccess
 homepage="https://gitlab.freedesktop.org/xorg/lib/libpciaccess"
-description="X11 PCI access library"
+description="X11 PCI access library."
 version=$(xfd_ver $name)
 filename="$name-$version.tar.xz"
 direname=${filename/.tar.xz/}

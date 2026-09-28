@@ -2,7 +2,7 @@
 set -e
 name=libaom
 repo="https://aomedia.googlesource.com/aom/"
-description="Contains a reference version of the Alliance for Open Media video codec."
+description="Contains a reference version of the Alliance for Open Media video codec.."
 homepage="https://aomedia.org/"
 get_version() {
 	local inst_ver=$(pkgver $name)

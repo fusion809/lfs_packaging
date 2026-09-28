@@ -3,7 +3,7 @@ set -e
 # Variable declarations
 name=iceauth
 homepage="https:///www.x.org"
-description="Command-line utility used to manage information for the ICE protocol."
+description="Command-line utility used to manage information for the ICE protocol.."
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"

@@ -2,7 +2,7 @@
 set -e
 name=xmlto
 homepage="https://pagure.io/xmlto/"
-description="Convert xml to many other formats"
+description="Convert xml to many other formats."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

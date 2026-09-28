@@ -2,7 +2,7 @@
 set -e
 name=xdg-dbus-proxy
 homepage="https://github.com/flatpak/xdg-dbus-proxy"
-description="Filtering proxy for D-Bus connections"
+description="Filtering proxy for D-Bus connections."
 repo="flatpak/$name"
 version=$(gh_ver $repo)
 depends=(glib2 glib2 glibc libffi pcre2 util-linux zlib)

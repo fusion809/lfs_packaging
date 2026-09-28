@@ -2,7 +2,7 @@
 set -e
 name=newt
 homepage="https://pagure.io/newt"
-description="Programming library for colour text mode and widget-based user interface."
+description="Programming library for colour text mode and widget-based user interface.."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

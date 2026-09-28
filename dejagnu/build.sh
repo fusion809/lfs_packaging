@@ -2,7 +2,7 @@
 set -e
 name=dejagnu
 homepage="https://www.gnu.org/software/dejagnu/"
-description="Framework for testing other programs"
+description="Framework for testing other programs."
 version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"

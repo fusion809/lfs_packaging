@@ -2,7 +2,7 @@
 set -e
 name=cracklib
 homepage="https://github.com/cracklib/cracklib"
-description="Password Checking Library"
+description="Password Checking Library."
 repo=$name/$name
 version=$(gh_ver $repo)
 depends=(glibc zlib)

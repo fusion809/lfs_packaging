@@ -2,7 +2,7 @@
 set -e
 name=e2fsprogs
 homepage="http://e2fsprogs.sourceforge.net"
-description="Ext2/3/4 filesystem utilities"
+description="Ext2/3/4 filesystem utilities."
 version=$(sf_ver $name/$name)
 depends=(bash coreutils gcc glibc gzip make tar wget)
 filename="$name-$version.tar.gz"

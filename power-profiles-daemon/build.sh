@@ -2,7 +2,7 @@
 set -e
 name=power-profiles-daemon
 homepage="https://gitlab.freedesktop.org/upower/power-profiles-daemon"
-description="Makes power profiles handling available over D-Bus"
+description="Makes power profiles handling available over D-Bus."
 repo=upower/power-profiles-daemon
 get_ver() {
       local inst_ver=$(pkgver $name)

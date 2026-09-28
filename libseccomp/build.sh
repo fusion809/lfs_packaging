@@ -2,7 +2,7 @@
 set -e
 name=libseccomp
 homepage="https://github.com/seccomp/libseccomp"
-description="Enhanced seccomp library"
+description="Enhanced seccomp library."
 repo=seccomp/$name
 version=$(gh_ver $repo)
 depends=(glibc)

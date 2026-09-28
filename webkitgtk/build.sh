@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=webkitgtk
-description="Web content engine for GTK"
+description="Web content engine for GTK."
 homepage="https://webkitgtk.org"
 get_version() {
 	local inst_ver=$(pkgver $name)

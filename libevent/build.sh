@@ -2,7 +2,7 @@
 set -e
 name=libevent
 homepage="https://libevent.org/"
-description="Event notification library"
+description="Event notification library."
 repo=$name/$name
 version=$(gh_ver $repo | sed 's/-stable//g')
 depends=(glibc openssl)

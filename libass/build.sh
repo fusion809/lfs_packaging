@@ -2,7 +2,7 @@
 set -e
 name=libass
 homepage="https://github.com/libass/libass/"
-description="A portable library for SSA/ASS subtitles rendering"
+description="A portable library for SSA/ASS subtitles rendering."
 repo=$name/$name
 version=$(gh_ver $repo)
 depends=(brotli bzip2 expat fontconfig freetype fribidi glib2 glibc graphite2 harfbuzz libpng pcre2 zlib)

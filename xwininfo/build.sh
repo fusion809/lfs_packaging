@@ -3,6 +3,7 @@ set -e
 # Variable declarations
 name=xwininfo
 homepage="https://www.x.org"
+description="Command-line utility to print information about windows on an X server."
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"

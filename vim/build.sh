@@ -2,7 +2,7 @@
 set -e
 name=vim
 homepage="https://www.vim.org"
-description="Vi Improved, a highly configurable, improved version of the vi text editor"
+description="Vi Improved, a highly configurable, improved version of the vi text editor."
 repo=$name/$name
 version=$(gh_ver $repo)
 majver=$(echo $version | cut -d . -f 1)

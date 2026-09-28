@@ -2,7 +2,7 @@
 set -e
 name=libassuan
 homepage="https://www.gnupg.org/related_software/libassuan/"
-description="IPC library used by some GnuPG related software"
+description="IPC library used by some GnuPG related software."
 repo="gpg/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.bz2"

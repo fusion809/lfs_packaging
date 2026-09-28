@@ -2,7 +2,7 @@
 set -e
 name=x264
 homepage="https://www.videolan.org/developers/x264.html"
-description="Open Source H264/AVC video encoder"
+description="Open Source H264/AVC video encoder."
 repo=mirror/$name
 version=$(gh_ver $repo)
 depends=(glibc)

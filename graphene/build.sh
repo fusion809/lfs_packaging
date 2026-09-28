@@ -2,7 +2,7 @@
 set -e
 name=graphene
 homepage="https://ebassi.github.io/graphene/"
-description="Thin layer of graphic data types"
+description="Thin layer of graphic data types."
 repo=ebassi/$name
 version=$(gh_ver $repo)
 majVer=$(echo $version | sed -E 's/.[0-9]+//g')

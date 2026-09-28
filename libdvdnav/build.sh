@@ -2,7 +2,7 @@
 set -e
 name=libdvdnav
 homepage="https://www.videolan.org/developers/libdvdnav.html"
-description="Library to navigate DVD video disks"
+description="Library to navigate DVD video disks."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

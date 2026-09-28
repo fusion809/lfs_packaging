@@ -2,7 +2,7 @@
 set -e
 name=wget
 homepage="https://www.gnu.org/software/wget/wget.html"
-description="Network utility to retrieve files from the web"
+description="Network utility to retrieve files from the web."
 version=$(gnu_ver $name)
 depends=(glibc libidn2 libpsl libunistring openssl pcre2 util-linux zlib)
 filename="$name-$version.tar.gz"

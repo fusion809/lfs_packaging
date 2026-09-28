@@ -3,7 +3,7 @@ set -e
 name=qtkeychain
 repo=frankosterfeld/$name
 homepage="https://github.com/$repo"
-description="Platform-independent Qt API for storing passwords."
+description="Platform-independent Qt API for storing passwords.."
 version=$(gh_ver $repo)
 depends=(dbus double-conversion gcc glib2 glibc icu libffi libgcrypt libgpg-error libsecret pcre2 qt6 systemd util-linux zlib zstd)
 filename="$name-$version.tar.gz"

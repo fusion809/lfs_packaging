@@ -3,6 +3,7 @@ set -e
 # Variable declarations
 name=xrandr
 homepage="https://www.x.org"
+description="Primitive command line interface to RandR extension."
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"

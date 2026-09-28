@@ -2,7 +2,7 @@
 set -e
 name=aspell
 homepage="http://aspell.net/"
-description="A spell checker designed to eventually replace Ispell"
+description="A spell checker designed to eventually replace Ispell."
 version=$(gnu_ver aspell)
 majVer=$(echo $version | sed 's/.[0-9]+.[0-9]+//g' -E)
 filename="$name-$version.tar.gz"

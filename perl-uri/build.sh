@@ -2,7 +2,7 @@
 set -e
 name=perl-uri
 homepage="https://search.cpan.org/dist/URI/"
-description="Uniform Resource Identifiers (absolute and relative)"
+description="Uniform Resource Identifiers (absolute and relative)."
 _name=URI
 code=OALDERS
 version=$(perl_ver $name $_name $code)

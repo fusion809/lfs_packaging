@@ -2,7 +2,7 @@
 set -e
 name=startup-notification
 homepage="https://www.freedesktop.org/wiki/Software/startup-notification/"
-description="Libary to monitor and display application startup"
+description="Libary to monitor and display application startup."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

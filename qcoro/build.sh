@@ -2,7 +2,7 @@
 set -e
 name=qcoro
 homepage="https://github.com/danvratil/qcoro"
-description="C++ Coroutines for Qt"
+description="C++ Coroutines for Qt."
 repo="danvratil/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

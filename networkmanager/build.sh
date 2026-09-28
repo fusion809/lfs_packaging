@@ -2,7 +2,7 @@
 set -e
 name=networkmanager
 homepage="https://networkmanager.dev/"
-description="Network connection manager and user applications"
+description="Network connection manager and user applications."
 repo=$name/$name
 version=$(gfd_ver "$repo")
 # Deps

@@ -3,7 +3,7 @@ set -e
 name=lm-sensors
 repo=$name/$name
 homepage="https://hwmon.wiki.kernel.org/"
-description="User-space support for hardware monitoring."
+description="User-space support for hardware monitoring.."
 version=$(gh_ver $repo | sed 's/-/\./g')
 _version=$(echo $version | sed 's/\./-/g')
 depends=(glibc)

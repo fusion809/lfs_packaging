@@ -2,7 +2,7 @@
 set -e
 # Combine lapack and blas
 homepage="https://www.netlib.org/lapack/"
-description="Linear algebra package"
+description="Linear algebra package."
 depends=(bash cmake coreutils gcc gcc glibc gzip make python sed tar wget)
 name=blas-lapack
 repo="Reference-LAPACK/lapack"

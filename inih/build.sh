@@ -3,7 +3,7 @@ set -e
 name=inih
 repo=benhoyt/$name
 homepage="https://github.com/$repo"
-description="Simple .INI file parser in C, good for embedded systems."
+description="Simple .INI file parser in C, good for embedded systems.."
 version=$(gh_ver $repo | sed 's/^r//g')
 filename="$name-r$version.tar.gz"
 direname="${filename/.tar.*/}"

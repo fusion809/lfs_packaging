@@ -2,7 +2,7 @@
 set -e
 name=p11-kit
 homepage="https://p11-glue.freedesktop.org"
-description="Loads and enumerates PKCS#11 modules"
+description="Loads and enumerates PKCS#11 modules."
 repo=p11-glue/p11-kit
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

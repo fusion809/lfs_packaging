@@ -2,7 +2,7 @@
 set -e
 name=kimageannotator
 homepage="https://github.com/ksnip/kImageAnnotator"
-description="Tool for annotating images"
+description="Tool for annotating images."
 _name=kImageAnnotator
 repo=ksnip/$_name
 version=$(gh_ver $repo)

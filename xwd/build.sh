@@ -3,6 +3,7 @@ set -e
 # Variable declarations
 name=xwd
 homepage="https://www.x.org"
+description="X Window System image dumping utility."
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"

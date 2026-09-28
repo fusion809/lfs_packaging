@@ -3,7 +3,7 @@ set -e
 # Variable declaration
 name=java
 homepage="https://www.java.com/"
-description="OpenJDK Java development kit - development branch."
+description="OpenJDK Java development kit - development branch.."
 majorver=$(curl -s https://jdk.java.net/ | grep "Early access:" | cut -d '/' -f 2)
 minorver=$(curl -s https://jdk.java.net/$majorver/ | grep ">Build" | cut -d ' ' -f 2)
 version="$majorver+$minorver"

@@ -2,7 +2,7 @@
 set -e
 name=jpegoptim
 homepage="https://github.com/tjko/jpegoptim"
-description="Jpeg optimisation utility"
+description="Jpeg optimisation utility."
 repo="tjko/jpegoptim"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

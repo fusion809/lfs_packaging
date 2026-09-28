@@ -2,7 +2,7 @@
 set -e
 name=xdg-desktop-portal
 homepage="https://flatpak.github.io/xdg-desktop-portal/"
-description="Desktop integration portals for sandboxed apps"
+description="Desktop integration portals for sandboxed apps."
 repo=flatpak/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

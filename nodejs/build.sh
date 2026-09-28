@@ -2,7 +2,7 @@
 set -e
 name=nodejs
 homepage="https://nodejs.org/"
-description="Evented I/O for V8 javascript ("Current" release)"
+description="Evented I/O for V8 javascript ("Current" release)."
 repo=$name/node
 version=$(gh_ver $repo $name)
 filename="node-v$version.tar.xz"

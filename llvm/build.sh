@@ -2,7 +2,7 @@
 set -e
 name=llvm
 homepage="https://llvm.org/"
-description="Compiler infrastructure"
+description="Compiler infrastructure."
 repo=$name/$name-project
 version=$(gh_ver $repo)
 depends=(gcc glibc icu libffi libxml2 zlib zstd)

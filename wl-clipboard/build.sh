@@ -4,7 +4,7 @@ set -e
 name="wl-clipboard"
 repo="bugaevc/wl-clipboard"
 homepage="https://github.com/$repo"
-description="Command-line copy/paste utilities for Wayland"
+description="Command-line copy/paste utilities for Wayland."
 version=$(gh_com $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"

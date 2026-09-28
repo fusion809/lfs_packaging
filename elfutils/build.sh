@@ -2,7 +2,7 @@
 set -e
 name=elfutils
 homepage="https://sourceware.org/elfutils/"
-description="Handle ELF object files and DWARF debugging information (utilities)"
+description="Handle ELF object files and DWARF debugging information (utilities)."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

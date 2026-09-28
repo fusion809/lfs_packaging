@@ -3,6 +3,7 @@ set -e
 # Variable declarations
 name=xprop
 homepage="https://www.x.org"
+description="Property displayer for X."
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"

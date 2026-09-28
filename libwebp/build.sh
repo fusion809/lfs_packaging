@@ -2,7 +2,7 @@
 set -e
 name=libwebp
 homepage="https://developers.google.com/speed/webp/"
-description="WebP image codec library"
+description="WebP image codec library."
 repo=webmproject/$name
 get_version() {
 	local inst_ver=$(pkgver $name)

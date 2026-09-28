@@ -2,7 +2,7 @@
 set -e
 name=python
 homepage="https://www.python.org/"
-description="The Python programming language"
+description="The Python programming language."
 get_version() {
     local inst_ver=$(pkgver $name)
     local lfs_vers=$(lfs_ver $name)

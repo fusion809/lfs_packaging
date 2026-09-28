@@ -2,7 +2,7 @@
 set -e
 name=inetutils
 homepage="https://www.gnu.org/software/inetutils/"
-description="A collection of common network programs"
+description="A collection of common network programs."
 version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"

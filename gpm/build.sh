@@ -2,7 +2,7 @@
 set -e
 name=gpm
 homepage="https://www.nico.schottelius.org/software/gpm/"
-description="A mouse server for the console and xterm"
+description="A mouse server for the console and xterm."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

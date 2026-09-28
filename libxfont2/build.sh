@@ -8,7 +8,7 @@ filename="$direname.tar.xz"
 depends=(bash brotli bzip2 coreutils fontconfig freetype glibc libfontenc libpng libxcb make sed systemd tar util-linux xorg-libs xz zlib)
 name=$(echo $_name | tr '[:upper:]' '[:lower:]')
 homepage="https://xorg.freedesktop.org/"
-description="X11 font rasterisation library"
+description="X11 font rasterisation library."
 # Fetch and unpack source
 xfd_download "$filename"
 unpk_enter "$filename" "$direname"

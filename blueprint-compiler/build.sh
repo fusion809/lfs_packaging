@@ -2,7 +2,7 @@
 set -e
 name=blueprint-compiler
 homepage="https://gnome.pages.gitlab.gnome.org/blueprint-compiler/"
-description="Markup language and compiler for GTK 4 user interfaces"
+description="Markup language and compiler for GTK 4 user interfaces."
 version=$(gn_ver $name)
 depends=(pygobject)
 filename="$name-$version.tar.xz"

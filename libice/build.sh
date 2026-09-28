@@ -4,7 +4,7 @@ set -e
 _name=libICE
 name=$(echo $_name | tr '[:upper:]' '[:lower:]')
 homepage="https://xorg.freedesktop.org/"
-description="X11 Inter-Client Exchange library"
+description="X11 Inter-Client Exchange library."
 version=$(xfd_ver $_name)
 direname="${_name}-$version"
 filename="$direname.tar.xz"

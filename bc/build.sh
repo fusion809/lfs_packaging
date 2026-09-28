@@ -2,7 +2,7 @@
 set -e
 name=bc
 homepage="https://www.gnu.org/software/bc/"
-description="An arbitrary precision calculator language"
+description="An arbitrary precision calculator language."
 repo="gavinhoward/bc"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

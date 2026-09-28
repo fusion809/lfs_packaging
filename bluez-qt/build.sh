@@ -2,7 +2,7 @@
 set -e
 name=bluez-qt
 homepage="https://develop.kde.org/products/frameworks/"
-description="Qt wrapper for Bluez 5 DBus API"
+description="Qt wrapper for Bluez 5 DBus API."
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(brotli dbus double-conversion e2fsprogs gcc glib2 glibc icu keyutils mitkrb openssl pcre2 qt6 systemd zlib zstd)

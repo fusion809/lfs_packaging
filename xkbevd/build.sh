@@ -3,7 +3,7 @@ set -e
 # Variable declarations
 name=xkbevd
 homepage="https://www.x.org"
-description="XKB event daemon."
+description="XKB event daemon.."
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"

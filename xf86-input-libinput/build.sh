@@ -2,7 +2,7 @@
 set -e
 name=xf86-input-libinput
 homepage="http://xorg.freedesktop.org/"
-description="Generic input driver for the X.Org server based on libinput"
+description="Generic input driver for the X.Org server based on libinput."
 version=$(xfd_ver $name)
 depends=(glibc libevdev libinput lua mtdev systemd)
 filename="$name-$version.tar.xz"

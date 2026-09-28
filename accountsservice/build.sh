@@ -2,7 +2,7 @@
 set -e
 name=accountsservice
 homepage="https://gitlab.freedesktop.org/accountsservice/accountsservice"
-description="D-Bus interface for user account query and manipulation"
+description="D-Bus interface for user account query and manipulation."
 repo=$name/$name
 version=$(gfd_ver $repo)
 depends=(glib2 glibc json-c libffi libxcrypt pcre2 polkit systemd util-linux zlib)

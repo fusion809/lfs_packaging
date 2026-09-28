@@ -2,7 +2,7 @@
 set -e
 name=kwallet-pam
 homepage="https://kde.org/plasma-desktop/"
-description="KWallet PAM integration"
+description="KWallet PAM integration."
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(glibc libgcrypt libgpg-error linux-pam)

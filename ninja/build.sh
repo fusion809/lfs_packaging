@@ -2,7 +2,7 @@
 set -e
 name=ninja
 homepage="https://ninja-build.org/"
-description="Small build system with a focus on speed"
+description="Small build system with a focus on speed."
 repo=${name}-build/$name
 version=$(gh_ver $repo)
 depends=(bash coreutils gzip python sed tar)

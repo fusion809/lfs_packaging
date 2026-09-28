@@ -3,6 +3,7 @@ set -e
 # Variable declarations
 name=xset
 homepage="https://www.x.org"
+description="User preference utility for X."
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"

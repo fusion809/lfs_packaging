@@ -4,7 +4,7 @@ set -e
 _name=libXaw
 name=$(echo $_name | tr '[:upper:]' '[:lower:]')
 homepage="https://gitlab.freedesktop.org/xorg/lib/libxaw"
-description="X11 Athena Widget library"
+description="X11 Athena Widget library."
 version=$(xfd_ver $_name)
 direname="${_name}-$version"
 filename="$direname.tar.xz"

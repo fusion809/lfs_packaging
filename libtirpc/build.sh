@@ -2,7 +2,7 @@
 set -e
 name=libtirpc
 homepage="http://git.linux-nfs.org/?p=steved/libtirpc.git;a=summary"
-description="Transport Independent RPC library (SunRPC replacement)"
+description="Transport Independent RPC library (SunRPC replacement)."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

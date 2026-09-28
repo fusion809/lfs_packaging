@@ -3,6 +3,7 @@ set -e
 # Variable declarations
 name=xpr
 homepage="https://www.x.org"
+description="Print an X window dump from xwd."
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"

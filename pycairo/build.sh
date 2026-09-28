@@ -3,7 +3,7 @@ set -e
 name=pycairo
 repo="pygobject/$name"
 homepage="https://www.cairographics.org/pycairo/"
-description="Python bindings for Cairo graphics library."
+description="Python bindings for Cairo graphics library.."
 version=$(gh_ver $repo)
 majVer=$(echo $version | sed 's/.[0-9]$//g')
 depends=(cairo)

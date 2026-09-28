@@ -3,6 +3,7 @@ set -e
 # Variable declarations
 name=xmodmap
 homepage="https://www.x.org"
+description="Utility for modifying keymaps and button mappings."
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"

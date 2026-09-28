@@ -2,7 +2,7 @@
 set -e
 name=cbindgen
 homepage="https://github.com/mozilla/cbindgen"
-description="A tool for generating C bindings to Rust code"
+description="A tool for generating C bindings to Rust code."
 repo=mozilla/$name
 version=$(gh_ver $repo)
 depends=(gcc glibc)

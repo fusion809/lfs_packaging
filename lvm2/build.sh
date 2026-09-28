@@ -2,7 +2,7 @@
 set -e
 name=lvm2
 homepage="https://sourceware.org/lvm2/"
-description="Logical Volume Manager 2 utilities"
+description="Logical Volume Manager 2 utilities."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

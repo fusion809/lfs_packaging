@@ -2,7 +2,7 @@
 set -e
 name=plasma-workspace-wallpapers
 homepage="https://kde.org/plasma-desktop/"
-description="Additional wallpapers for the Plasma Workspace"
+description="Additional wallpapers for the Plasma Workspace."
 repo=KDE/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

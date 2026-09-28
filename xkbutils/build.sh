@@ -2,7 +2,7 @@
 set -e
 # Variable declarations
 name=xkbutils
-description="XKB utility demos"
+description="XKB utility demos."
 homepage="https://gitlab.freedesktop.org/xorg/app/xkbutils"
 version=$(xfd_ver $name)
 direname="${name}-$version"

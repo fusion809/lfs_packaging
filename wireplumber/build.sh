@@ -2,7 +2,7 @@
 set -e
 name=wireplumber
 homepage="https://pipewire.pages.freedesktop.org/wireplumber/"
-description="Session / policy manager implementation for PipeWire"
+description="Session / policy manager implementation for PipeWire."
 repo="pipewire/wireplumber"
 version=$(gfd_ver $repo)
 filename="$name-$version.tar.bz2"

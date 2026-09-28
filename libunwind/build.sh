@@ -2,7 +2,7 @@
 set -e
 name=libunwind
 homepage="https://www.nongnu.org/libunwind/"
-description="Determine and manipulate the call-chain of a program"
+description="Determine and manipulate the call-chain of a program."
 repo=$name/$name
 version=$(gh_ver $repo)
 depends=(gcc glibc xz zlib)

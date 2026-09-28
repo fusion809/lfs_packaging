@@ -2,7 +2,7 @@
 set -e
 name=vala
 homepage="https://wiki.gnome.org/Projects/Vala"
-description="Compiler for the GObject type system"
+description="Compiler for the GObject type system."
 version=$(gh_ver GNOME/vala)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

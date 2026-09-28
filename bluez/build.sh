@@ -2,7 +2,7 @@
 set -e
 name=bluez
 homepage="http://www.bluez.org/"
-description="Daemons for the bluetooth protocol stack"
+description="Daemons for the bluetooth protocol stack."
 repo=$name/$name
 version=$(gh_ver $repo)
 depends=(dbus gcc glib2 glibc icu libical ncurses pcre2 readline systemd)

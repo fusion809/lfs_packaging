@@ -4,7 +4,7 @@ set -e
 name=xauth
 version=$(xfd_ver $name)
 homepage="https://www.x.org"
-description="X authority file utility."
+description="X authority file utility.."
 direname="${name}-$version"
 filename="$direname.tar.xz"
 depends=(bash coreutils fontconfig glibc libpng libx11 libxau libxcb libxdmcp libxext libxmu make mesa sed systemd tar util-linux xbitmaps xcb-util xorg-libs xz zlib)

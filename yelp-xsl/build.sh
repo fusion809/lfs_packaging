@@ -2,7 +2,7 @@
 set -e
 name=yelp-xsl
 homepage="https://gitlab.gnome.org/GNOME/yelp-xsl"
-description="Document transformations from Yelp"
+description="Document transformations from Yelp."
 repo=GNOME/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

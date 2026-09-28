@@ -2,7 +2,7 @@
 set -e
 name=bash
 homepage="https://www.gnu.org/software/bash/bash.html"
-description="The GNU Bourne Again shell"
+description="The GNU Bourne Again shell."
 version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"

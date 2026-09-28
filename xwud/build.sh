@@ -3,6 +3,7 @@ set -e
 # Variable declarations
 name=xwud
 homepage="https://www.x.org"
+description="X Window System image undumping utility."
 version=$(xfd_ver $name | grep -oE "[0-9.]+")
 direname="${name}-$version"
 filename="$direname.tar.xz"

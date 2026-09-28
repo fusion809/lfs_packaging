@@ -2,7 +2,7 @@
 set -e
 name=font-xfree86-type1
 homepage="https://www.x.org/"
-description="Xorg xfree86 type 1 font."
+description="Xorg xfree86 type 1 font.."
 depends=(glibc)
 get_version() {
 	local inst_ver=$(pkgver $name)

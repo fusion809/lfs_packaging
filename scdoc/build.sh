@@ -2,7 +2,7 @@
 set -e
 name=scdoc
 homepage="https://git.sr.ht/~sircmpwn/scdoc/"
-description="Tool for generating roff manual pages"
+description="Tool for generating roff manual pages."
 version=$(wget -cqO- https://git.sr.ht/~sircmpwn/scdoc/refs | grep "/refs/[0-9]" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 5)
 direname="$name-$version"
 filename="$direname.tar.gz"

@@ -3,7 +3,7 @@ set -e
 # Variable declarations
 name=numactl
 homepage="https://github.com/numactl/numactl"
-description="Simple NUMA policy support"
+description="Simple NUMA policy support."
 repo=numactl/numactl
 version=$(gh_ver "$repo")
 filename="$name-$version.tar.gz"
