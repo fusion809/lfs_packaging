@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 name=glib2
-homepage="https://gitlab.gnome.org/GNOME/glib"
+#homepage="https://gitlab.gnome.org/GNOME/glib"
+homepage="https://developer.gnome.org/glib/"
 description="Low level core library."
 _name=glib
 version=$(gn_ver $_name $name)
