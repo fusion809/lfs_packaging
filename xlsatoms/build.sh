@@ -2,6 +2,8 @@
 set -e
 # Variable declarations
 name=xlsatoms
+homepage="https://www.x.org"
+description="List interned atoms defined on server."
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"

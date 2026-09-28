@@ -2,6 +2,7 @@
 set -e
 # Variable declarations
 name=xwud
+homepage="https://www.x.org"
 version=$(xfd_ver $name | grep -oE "[0-9.]+")
 direname="${name}-$version"
 filename="$direname.tar.xz"

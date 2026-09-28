@@ -2,6 +2,7 @@
 set -e
 # Variable declarations
 name=xlsclients
+homepage="https://www.x.org"
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"
