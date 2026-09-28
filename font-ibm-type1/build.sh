@@ -2,7 +2,7 @@
 set -e
 name=font-ibm-type1
 homepage="https://www.x.org"
-description="Xorg IBM courier font.."
+description="Xorg IBM courier font."
 depends=(glibc)
 get_version() {
 	local inst_ver=$(pkgver $name)

@@ -2,7 +2,7 @@
 set -e
 name=font-adobe-utopia-type1
 homepage="https://www.x.org"
-description="Xorg Adobe utopia type 1 fonts.."
+description="Xorg Adobe utopia type 1 fonts."
 depends=(glibc)
 get_version() {
 	local inst_ver=$(pkgver $name)

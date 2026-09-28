@@ -3,7 +3,7 @@ set -e
 name=encodings
 depends=(glibc)
 homepage="https://xorg.freedesktop.org/archive/X11R6.8.0/doc/fonts2.html"
-description="A Xorg font.."
+description="A Xorg font."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

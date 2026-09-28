@@ -3,7 +3,7 @@ set -e
 name=gh-bin
 repo=cli/cli
 homepage="https://github.com/cli/cli"
-description="GitHub's modern command-line client - version built from precompiled binary.."
+description="GitHub's modern command-line client - version built from precompiled binary."
 version=$(gh_ver $repo)
 filename="${name}_${version}_linux_amd64.tar.gz"
 direname="${filename/.tar.*/}"

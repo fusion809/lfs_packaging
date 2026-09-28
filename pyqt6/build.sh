@@ -4,7 +4,7 @@ set -e
 # Variable declarations
 name=pyqt6
 homepage="http://www.riverbankcomputing.com/software/pyqt/"
-description="Python binding for Qt6.."
+description="Python binding for Qt6."
 get_version() {
   local inst_ver=$(pkgver $name)
   local art_ver=$(artver $name)

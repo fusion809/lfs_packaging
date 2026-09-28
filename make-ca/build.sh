@@ -3,7 +3,7 @@ set -e
 name=make-ca
 repo=lfs-book/make-ca
 homepage="https://github.com/$repo"
-description="PKI setup script for LFS and other systems.."
+description="PKI setup script for LFS and other systems."
 version=$(gh_ver "$repo")
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"

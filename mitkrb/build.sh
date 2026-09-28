@@ -2,7 +2,7 @@
 set -e
 name=mitkrb
 homepage="https://web.mit.edu/kerberos/"
-description="The Kerberos network authentication system.."
+description="The Kerberos network authentication system."
 majMinVer=$(wget -T 5 -cqO- https://kerberos.org/dist/krb5/ | grep "/</a>" | tail -n 1 | cut -d '"' -f 8 | sed 's|/||g')
 get_version() {
   local inst_ver=$(pkgver $name)

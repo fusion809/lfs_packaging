@@ -2,7 +2,7 @@
 set -e
 name=font-util
 homepage="https://www.x.org/"
-description="Xorg font utilities.."
+description="Xorg font utilities."
 depends=(glibc)
 get_version() {
 	local inst_ver=$(pkgver $name)

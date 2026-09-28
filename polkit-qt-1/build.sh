@@ -3,7 +3,7 @@ set -e
 name=polkit-qt-1
 repo=KDE/$name
 homepage="https://www.kde.org/"
-description="Library that allows access to a Qt-style API for PolicyKit.."
+description="Library that allows access to a Qt-style API for PolicyKit."
 version=$(gh_ver $repo)
 depends=(brotli bzip2 dbus double-conversion expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu libdrm libelf libffi libpciaccess libpng libx11 libxau libxcb libxdmcp libxext libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa pcre2 polkit qt6 spirv-tools systemd util-linux wayland xz zlib zstd)
 filename="$name-$version.tar.xz"

@@ -3,7 +3,7 @@ set -e
 name=liba52
 repo="https://git.adelielinux.org/community/a52dec"
 homepage="https://sourceforge.net/projects/liba52/"
-description="A free library for decoding ATSC A/52 (also known as AC-3) streams.."
+description="A free library for decoding ATSC A/52 (also known as AC-3) streams."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

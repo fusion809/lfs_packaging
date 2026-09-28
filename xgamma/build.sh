@@ -6,7 +6,7 @@ version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"
 homepage="https://www.x.org"
-description="Alter a monitor's gamma correction.."
+description="Alter a monitor's gamma correction."
 depends=(bash coreutils fontconfig glibc libpng libx11 libxau libxcb libxdmcp libxext libxxf86vm make mesa sed systemd tar util-linux xbitmaps xcb-util xorg-libs xz zlib)
 # Fetch and unpack source
 xfd_download "$filename"

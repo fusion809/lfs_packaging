@@ -3,7 +3,7 @@ set -e
 name=linux-pam
 repo=linux-pam/linux-pam
 homepage="https://github.com/$repo"
-description="Pluggable authentication modules for Linux.."
+description="Pluggable authentication modules for Linux."
 version=$(gh_ver "$repo")
 if [[ -z ${version// /} ]]; then
 	echo "Version is empty."

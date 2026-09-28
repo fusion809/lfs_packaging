@@ -3,7 +3,7 @@ set -e
 year=$(date +"%Y")
 name=texlive
 homepage="https://tug.org/texlive/"
-description="TeX Live - a comprehensive TeX distribution.."
+description="TeX Live - a comprehensive TeX distribution."
 get_version() {
 	if [[ -n "$year" ]]; then
 		year=$(date +"%Y")

@@ -3,7 +3,7 @@ set -e
 # Variable declarations
 name=xkill
 homepage="https://www.x.org"
-description="Kill a client by its X resource.."
+description="Kill a client by its X resource."
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"

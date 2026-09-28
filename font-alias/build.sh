@@ -2,7 +2,7 @@
 set -e
 name=font-alias
 homepage="https://www.x.org"
-description="Xorg font aliases.."
+description="Xorg font aliases."
 depends=(glibc)
 get_version() {
 	local inst_ver=$(pkgver $name)

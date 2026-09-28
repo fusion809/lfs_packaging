@@ -2,7 +2,7 @@
 set -e
 name=polkit-kde-agent-1
 homepage="https://kde.org/plasma-desktop/"
-description="Daemon providing a polkit authentication UI for KDE.."
+description="Daemon providing a polkit authentication UI for KDE."
 repo=KDE/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
