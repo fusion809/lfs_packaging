@@ -67,6 +67,9 @@ function ghl_ver {
 	elif [[ "$1" == "golang/go" ]]; then
 		timeout 5 git ls-remote --tags --refs "$URL" \
 		| grep "tags/go[0-9.]+" -oE | sed 's/.*go//g' | sort -V | tail -n 1
+	elif [[ "$1" == "flatpak/flatpak" ]]; then
+		timeout 5 git ls-remote --tags --refs "$URL" \
+		| grep "tags/[0-9]+\.[0-9]*[02468]\.[0-9]+" -oE | sed 's|tags/||g' | sort -V | tail -n 1
 	else
 		timeout 5 git ls-remote --tags --refs "$URL" 2>/dev/null \
 		| cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" \
