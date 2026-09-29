@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=attica
-homepage="https://develop.kde.org/products/frameworks/"
+homepage="https://invent.kde.org/frameworks/attica"
 description="Qt library that implements the Open Collaboration Services API."
 repo=KDE/$name
 version=$(gh_ver $repo)

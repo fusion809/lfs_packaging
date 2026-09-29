@@ -166,7 +166,7 @@ for p in json.load(sys.stdin).get("items", []):
 				continue
 			fi
 
-			printf 'No Anitya project found for %s\n' "$search_name" >&2
+			#printf 'No Anitya project found for %s\n' "$search_name" >&2
 			return 1
 		fi
 

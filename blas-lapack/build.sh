@@ -5,6 +5,7 @@ homepage="https://www.netlib.org/lapack/"
 description="Linear algebra package."
 depends=(bash cmake coreutils gcc gcc glibc gzip make python sed tar wget)
 name=blas-lapack
+_name=lapack
 repo="Reference-LAPACK/lapack"
 version=$(gh_com $repo)
 CFLAGS="-O2 -fPIC"

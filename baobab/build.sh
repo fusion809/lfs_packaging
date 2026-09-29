@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=baobab
-homepage="https://apps.gnome.org/Baobab"
+homepage="https://wiki.gnome.org/Apps/Baobab"
 description="A graphical directory tree analyser for GNOME."
 repo=GNOME/$name
 version=$(gh_ver $repo)

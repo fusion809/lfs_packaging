@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=docbook-xml
-homepage="https://www.oasis-open.org/docbook/"
+homepage="https://docbook.org/"
 description="A widely used XML scheme for writing documentation and help."
 get_version() {
 	local inst_ver=$(pkgver $name)

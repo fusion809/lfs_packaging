@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=avahi
-homepage="https://github.com/avahi/avahi"
+homepage="http://avahi.org/"
 description="Service Discovery for Linux using mDNS/DNS-SD (compatible with Bonjour)."
 repo=$name/$name
 version=$(gh_ver $repo | sed -E 's/^version=([0-9.]+)(rc[0-9]+)$/version=\1-\2/')

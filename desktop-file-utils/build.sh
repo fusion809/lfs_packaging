@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=desktop-file-utils
-homepage="https://www.freedesktop.org/wiki/Software/desktop-file-utils"
+homepage="https://www.freedesktop.org/software/desktop-file-utils"
 description="Command line utilities for working with desktop entries."
 repo=PCMan/$name
 version=$(gh_ver $repo)

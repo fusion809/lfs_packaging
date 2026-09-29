@@ -2,7 +2,7 @@
 set -e
 name=alsa-lib
 description="An alternative implementation of Linux sound support."
-repo=alsa-project/$name
+repo=alsa-project/alsa-lib
 homepage="https://github.com/$repo"
 version=$(gh_ver $repo)
 depends=(glibc)

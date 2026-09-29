@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=colord-gtk
-homepage="https://www.freedesktop.org/software/colord/"
+homepage="https://github.com/hughsie/colord-gtk"
 description="Additional GTK3 support code for colord."
 repo=hughsie/$name
 version=$(gh_ver $repo)

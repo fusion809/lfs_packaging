@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=breeze-icons
-homepage="https://develop.kde.org/products/frameworks/"
+homepage="https://invent.kde.org/frameworks/breeze-icons"
 description="Breeze icon theme."
 repo=KDE/$name
 version=$(gh_ver $repo)
