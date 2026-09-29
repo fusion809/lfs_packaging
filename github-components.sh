@@ -97,18 +97,18 @@ function ght_ver {
     local latest_tag
     local version
 
-    latest_url=$(curl --max-time 10 --connect-timeout 3 -Ls \
-        -o /dev/null -w '%{url_effective}' \
-        "https://github.com/$repo/releases/latest")
-
-    latest_tag=$(grep -oP '/tag/\K.*' <<< "$latest_url")
+    local latest_url=""
+    local latest_tag=""
+    # Only query /releases/latest if repo uses GitHub releases
+    if [[ "$1" != "GNOME/at-spi2-core" && "$1" != "GNOME/gvfs" && "$1" != "GNOME/gcr3" && "$repo" != "GNOME/librsvg" && "$repo" != *"KDE"* && "$repo" != "KhronosGroup/Vulkan-Loader" && "$repo" != "KhronosGroup/Vulkan-Headers" ]]; then
+        latest_url=$(curl --max-time 6 --connect-timeout 3 -Ls \
+            -o /dev/null -w '%{url_effective}' \
+            "https://github.com/$repo/releases/latest")
+        latest_tag=$(grep -oP '/tag/\K.*' <<< "$latest_url")
+    fi
 
     # Only use the GitHub "latest release" result if its tag is stable.
-    if [[ "$1" != "GNOME/at-spi2-core" ]] && [[ -n "$latest_tag" ]] && \
-	[[ "$1" != "GNOME/gvfs" ]] && [[ "$1" != "GNOME/gcr3" ]] && \
-	[[ $repo != "GNOME/librsvg" ]] && ! echo $repo | grep KDE &> /dev/null &&
-	    [[ $repo != "KhronosGroup/Vulkan-Loader" ]] &&
-            [[ $repo != "KhronosGroup/Vulkan-Headers" ]] &&
+    if [[ -n "$latest_tag" ]] && \
 	! grep -qiE '(alpha|beta|rc|pre|preview|dev|snapshot|init|[0-9]+\.[0-9]+\.9[0-9])' <<< "$latest_tag"; then
 
         version=$(sed -nE \

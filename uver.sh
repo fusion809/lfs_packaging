@@ -1,6 +1,7 @@
 #!/bin/bash
 typeset -g UVER_CACHE=${XDG_CACHE_HOME:-$HOME/.cache}/uver
 typeset -g UVER_CACHE_TTL=300
+typeset -g LFP=${LFP:-$HOME/lfs_packaging}
 uver() {
 	local input_pkg=${1:-}
 	local pkg

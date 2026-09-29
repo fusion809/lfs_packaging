@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=at-spi2-core
-homepage="https://gitlab.gnome.org/GNOME/at-spi2-core"
+homepage="http://ftp.gnome.org/pub/gnome/sources/at-spi2-core/"
 description="Protocol definitions and daemon for D-Bus at-spi."
 repo=GNOME/$name
 version=$(gh_ver $repo)
