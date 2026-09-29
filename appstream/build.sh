@@ -2,7 +2,7 @@
 set -e
 # Variable declarations
 name=appstream
-homepage="https://distributions.freedesktop.org/wiki/AppStream"
+homepage="https://www.freedesktop.org/wiki/Distributions/AppStream/"
 description="Provides a standard for creating app stores across distributions."
 version=$(gh_ver "ximion/appstream")
 docs="AUTHORS CHANGELOG.md COPYING README"

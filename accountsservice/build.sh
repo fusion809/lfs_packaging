@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=accountsservice
-homepage="https://gitlab.freedesktop.org/accountsservice/accountsservice"
+homepage="https://freedesktop.org/wiki/Software/AccountsService/"
 description="D-Bus interface for user account query and manipulation."
 repo=$name/$name
 version=$(gfd_ver $repo)
