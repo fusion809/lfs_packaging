@@ -2,7 +2,8 @@
 set -e
 # Combine lapack and blas
 homepage="https://www.netlib.org/lapack/"
-description="Linear algebra package."
+description="Linear algebra package - combining both BLAS and LAPACK packages."
+categories=("Science", "Mathematics")
 depends=(bash cmake coreutils gcc gcc glibc gzip make python sed tar wget)
 name=blas-lapack
 _name=lapack
@@ -14,7 +15,7 @@ if ! which gfortran &> /dev/null; then
         echo "GCC hasn't been built with Fortran support. This needs to be addressed!"
         exit
 fi
-direname="lapack-$version"
+direname="$_name-$version"
 filename="$direname.tar.gz"
 gha_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
