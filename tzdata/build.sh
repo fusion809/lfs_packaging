@@ -37,7 +37,6 @@ for tz in etcetera southamerica northamerica europe africa antarctica \
  sudo zic -L leapseconds -d $ZONEINFO/right ${tz}
 done
 sudo cp -v zone.tab zone1970.tab iso3166.tab $ZONEINFO
-sudo zic -d $ZONEINFO -p America/New_York
 unset ZONEINFO tz
 cd ..
 rm -rf $filename $direname
