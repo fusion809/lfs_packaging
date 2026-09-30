@@ -3,7 +3,7 @@ set -e
 name=valgrind
 description="Tool to help find memory-management problems in programs."
 homepage="https://valgrind.org/"
-version=$(wsw_ver $name)
+version=$(sw_ver $name)
 depends=(glibc hwloc libevent libfabric numactl openmpi systemd)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"

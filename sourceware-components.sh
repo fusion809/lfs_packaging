@@ -1,9 +1,17 @@
 #!/bin/bash
 function gsw_ver {
 	local URL="https://sourceware.org/git/$1.git"
-	timeout 5 git ls-remote --tags --refs "$URL" \
-	| grep -oEi "$1[_-]*[0-9_.]+" | sed -E 's/^[A-Za-z0-9]+[_-]//g' \
-	| tr '_' '.' | sort -V | tail -n 1
+	if [[ "$1" == "valgrind" ]]; then
+		timeout 5 git ls-remote --tags --refs "$URL" \
+		| grep "refs/tags/VALGRIND_[0-9_]+" -oE \
+		| sed 's|.*VALGRIND_||g' | tr '_' '.' \
+		| sort -V | tail -n 1
+	else
+		timeout 5 git ls-remote --tags --refs "$URL" \
+		| grep -oEi "$1[_-]*[0-9_.]+" \
+	       	| sed -E 's/^[A-Za-z0-9]+[_-]//g' \
+		| tr '_' '.' | sort -V | tail -n 1
+	fi
 }
 
 function wsw_ver {
