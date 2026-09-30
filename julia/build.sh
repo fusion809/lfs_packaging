@@ -5,7 +5,7 @@ description="A high-level, high-performance, dynamic, scientific computing-orien
 homepage="http://julialang.org"
 repo=julialang/$name
 version=$(gh_ver $repo)
-depends=(blas-lapack gcc glibc gmp libssh2 lz4 mpfr nghttp2 openssl openssl-julia openssl3 pcre2 suitesparse xz zlib zstd)
+depends=(blas-lapack gcc glibc gmp libopenssl3 libssh2 lz4 mpfr nghttp2 openssl pcre2 suitesparse xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="$name-$version"
 gha_download "$repo" "v$version" "$filename"
