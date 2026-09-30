@@ -23,6 +23,7 @@ rm -rf qtwebengine qt3d qtquick3dphysics qtopcua
             -no-rpath            \
             -no-sbom             \
             -journald            &&
+	    export LD_LIBRARY_PATH=$(pwd)/qtbase/lib:$LD_LIBRARY_PATH
 	    ninja -j$(nproc)
 sudo ninja install
 sudo su -c "find $QT6PREFIX/ -name \*.prl \

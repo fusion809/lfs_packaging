@@ -6,10 +6,10 @@ description="Convert xml to many other formats."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)
-	local up_ver=$(wget -T 5 -cqO- https://pagure.io/xmlto/releases | grep "/xmlto/archive/.*tar.gz" | cut -d '"' -f 2 | cut -d '/' -f 4)
+	local up_ver=$(wget -T 5 -t 1 -cqO- https://pagure.io/xmlto/releases | grep "/xmlto/archive/.*tar.gz" | cut -d '"' -f 2 | cut -d '/' -f 4)
 	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
 
-	local git_ver=$(git ls-remote --tags --refs https://pagure.io/xmlto.git | grep "refs/tags/" | cut -d '/' -f 3)
+	local git_ver=$(timeout 5 git ls-remote --tags --refs https://pagure.io/xmlto.git | grep "refs/tags/" | cut -d '/' -f 3)
 	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
 	local mon_ver=$(uver $name)
 	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return

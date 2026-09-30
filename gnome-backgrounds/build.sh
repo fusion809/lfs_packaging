@@ -5,10 +5,10 @@ homepage="https://gitlab.gnome.org/GNOME/gnome-backgrounds"
 description="Background images and data for GNOME."
 repo=GNOME/$name
 version=$(gh_ver $repo)
-filename="$name-$version.tar.xz"
+filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(libjxl)
-gn_download "$filename"
+gha_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 options=(--prefix=/usr)
 mni "${options[@]}"
