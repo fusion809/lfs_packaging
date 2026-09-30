@@ -12,9 +12,9 @@ function gh_ver {
 	fi
 	local lfs_vers=$(lfs_ver $name)
 	local inst_ver=$(pkgver $name)
-	local up_ver=$(ght_ver $1)
+	local up_ver=$(ght_ver $1 $2)
 	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
-	local git_ver=$(ghl_ver $1)
+	local git_ver=$(ghl_ver $1 $2)
 	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
     local mon_ver=$(uver $name)
 	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
