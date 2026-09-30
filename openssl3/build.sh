@@ -4,8 +4,9 @@ name=openssl3
 _name=openssl
 repo=$_name/$_name
 homepage="https://www.openssl.org"
-description="The Open Source toolkit for cryptography and Transport Layer Security."
+description="OpenSSL 3.x series, required as a dependency of Julia."
 version=$(gh_ver $repo "$name")
+depends=(glibc)
 filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 ghr_download "$repo" "$direname" "$filename"
