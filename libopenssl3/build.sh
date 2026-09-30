@@ -3,7 +3,7 @@ set -e
 name=libopenssl3
 _name=openssl
 repo=$_name/$_name
-homepage="https://www.openssl.org"
+homepage="https://openssl-library.org"
 description="OpenSSL 3.x libraries, required as a dependency of Julia."
 version=$(gh_ver $repo "$name")
 depends=(glibc)
