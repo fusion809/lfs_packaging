@@ -70,7 +70,7 @@ function ghl_ver {
 	elif [[ "$1" == "flatpak/flatpak" ]]; then
 		timeout 5 git ls-remote --tags --refs "$URL" \
 		| grep "tags/[0-9]+\.[0-9]*[02468]\.[0-9]+" -oE | sed 's|tags/||g' | sort -V | tail -n 1
-	elif [[ "$2" == "openssl3" ]]; then
+	elif [[ "$2" == "libopenssl3" ]]; then
 		timeout 5 git ls-remote --tags --refs "$URL" 2>/dev/null \
 		| cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" \
 		| sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' \
@@ -95,7 +95,7 @@ function ght_ver {
 	elif [[ "$1" == "golang/go" ]]; then
 		wget -T 5 -t 1 -cqO- https://github.com/golang/go/tags | grep "tag/go[0-9.]+" -oE | sed 's/.*go//g' | sort -V | tail -n 1
 		return
-	elif [[ "$2" == "openssl3" ]]; then
+	elif [[ "$2" == "libopenssl3" ]]; then
 		wget -T 5 -t 1 -cqO- https://github.com/$1/tags | grep "tag/openssl-3\.[0-9.]+" -oE | cut -d '-' -f 2 | sort -V | tail -n 1
 	fi
 	if [[ "$1" == "GNOME/gcr3" ]]; then
