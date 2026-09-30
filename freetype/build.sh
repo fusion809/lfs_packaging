@@ -2,6 +2,7 @@
 set -e
 name=freetype
 homepage="https://www.freetype.org"
+description="Font rasterization library."
 repo="$name/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

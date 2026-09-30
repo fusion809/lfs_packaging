@@ -3,6 +3,7 @@ set -e
 # Variable declarations
 name=qscintilla
 homepage="https://riverbankcomputing.com/software/qscintilla/intro"
+description="A port to Qt6 of Neil Hodgson's Scintilla C++ editor class."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local art_ver=$(artver $name)

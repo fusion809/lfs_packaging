@@ -2,6 +2,7 @@
 set -e
 name=libgweather
 homepage="https://wiki.gnome.org/Projects/LibGWeather"
+homepage="A library to access weather information from online services for numerous locations."
 repo=GNOME/$name
 version=$(gh_ver $repo)
 depends=(brotli e2fsprogs gcc geocode-glib glib2 glibc icu json-glib keyutils libffi libidn2 libpsl libsoup libunistring libxml2 mitkrb nghttp2 pcre2 sqlite systemd util-linux zlib)
