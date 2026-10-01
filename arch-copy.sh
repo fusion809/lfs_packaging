@@ -1,10 +1,10 @@
 #!/bin/bash
-pkgurl() {
+function arch_url {
 	local pkg=${1:-}
 	local desc
 
 	if [[ -z "$pkg" ]]; then
-		printf '%s\n' 'usage: pkgurl package' >&2
+		printf '%s\n' 'usage: arch_url package' >&2
 		return 2
 	fi
 
@@ -56,7 +56,7 @@ if results:
 	return 1
 }
 
-add_pkgurls() {
+function add_arch_urls {
 	local pkgdir build pkg url escaped tmp
 
 	while IFS= read -r pkgdir; do
@@ -70,7 +70,7 @@ add_pkgurls() {
 			continue
 		fi
 
-		url=$(pkgurl "$pkg") || {
+		url=$(arch_url "$pkg") || {
 			printf 'Could not determine homepage for %s\n' "$pkg" >&2
 			continue
 		}
@@ -116,12 +116,12 @@ add_pkgurls() {
 	)
 }
 
-pkgdesc() {
+function arch_desc {
 	local pkg=${1:-}
 	local desc
 
 	if [[ -z "$pkg" ]]; then
-		printf '%s\n' 'usage: pkgdesc package' >&2
+		printf '%s\n' 'usage: arch_desc package' >&2
 		return 2
 	fi
 
@@ -138,7 +138,7 @@ results = data.get("results", [])
 
 for package in results:
     if package.get("pkgname") == sys.argv[1]:
-        print(package.get("pkgdesc", ""))
+        print(package.get("arch_desc", ""))
         break
 ' "$pkg"
 	)
@@ -173,7 +173,7 @@ if results:
 	return 1
 }
 
-add_pkgdescs() {
+function add_arch_descs {
 	local pkgdir build name desc escaped tmp
 
 	while IFS= read -r pkgdir; do
@@ -187,7 +187,7 @@ add_pkgdescs() {
 			continue
 		fi
 
-		desc=$(pkgdesc "$name") || {
+		desc=$(arch_desc "$name") || {
 			printf 'Could not determine description for %s\n' "$name" >&2
 			continue
 		}
