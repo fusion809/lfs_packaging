@@ -3,12 +3,12 @@ set -e
 # Variable declarations
 name=openmpi
 homepage="https://www.open-mpi.org"
-description="High performance message passing library (MPI)."
+description="High performance message passing library."
 get_version() {
   local inst_ver=$(pkgver $name)
   local art_ver=$(artver $name)
   local up_ver
-  up_ver=$(wget -T 5 -cqO- https://www-lb.open-mpi.org/software/ompi/ \
+  up_ver=$(wget -T 5 -t 1 -cqO- https://www-lb.open-mpi.org/software/ompi/ \
     | grep ".tar.gz" | grep -v "alpha\|beta\|rc" | head -n 1 \
     | cut -d '"' -f 2 | cut -d '/' -f 7 \
     | sed 's/.tar.gz//g' | sed 's/openmpi-//g') || true
