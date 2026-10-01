@@ -1,7 +1,11 @@
 #!/bin/bash
 function fdt_ver {
     local repo=$1
-	local name=$2
+    if [[ -n "$2" ]]; then
+    	local name=$2
+    else
+	local name=$(echo $2 | cut -d '/' -f 2)
+    fi
     if [[ $repo != "gstreamer/gstreamer" ]]; then
     	wget -T 5 -t 1 -cqO- "https://gitlab.freedesktop.org/$repo/-/tags" \
 		| grep -oE 'tags/([v]*[0-9.][^"]*|'"$name"'-[0-9]+\.[0-9]+\.[0-9]+)' \

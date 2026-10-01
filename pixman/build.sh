@@ -3,8 +3,8 @@ set -e
 name=pixman
 homepage="https://gitlab.freedesktop.org/pixman/pixman"
 description="The pixel-manipulation library for X and cairo."
-repo=lib$name/$name
-version=$(gh_ver $repo)
+repo=$name/$name
+version=$(gfd_ver $repo "$name")
 depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
