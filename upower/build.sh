@@ -2,7 +2,7 @@
 set -e
 name=upower
 homepage="https://upower.freedesktop.org"
-description="Abstraction for enumerating power devices, listening to device events and querying history and statistics."
+description="Abstraction for power devices and their information."
 repo=$name/$name
 version=$(gfd_ver $repo)
 depends=(glib2 glibc libffi libgudev pcre2 polkit systemd util-linux zlib)
