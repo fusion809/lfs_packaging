@@ -10,7 +10,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
-gap_patches libsoup3
+gap_patches libsoup3 || echo "Patching failed, continuing"
 options=(--prefix=/usr          \
             --buildtype=release    \
 	    --wrap-mode=nofallback)
