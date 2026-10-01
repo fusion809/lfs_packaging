@@ -2,7 +2,7 @@
 set -e
 name=firefox-bin
 homepage="https://www.firefox.com/"
-description="Standalone web browser from mozilla.org - Static binaries from upstream."
+description="Popular web browser from Mozilla - built from precompiled binaries."
 _name=firefox
 url="https://ftp.mozilla.org/pub/firefox/releases"
 get_version() {
