@@ -60,3 +60,4 @@ x265/x265_[0-9.]*
 .Rhistory
 .RData
 uninstalled/Libre*/Libre*
+*/*/*
