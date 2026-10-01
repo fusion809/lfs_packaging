@@ -86,6 +86,13 @@ function cba_download {
 	download_src "https://codeberg.org/$repo/archive/$tag.tar.gz" "$filename"
 }
 
+function cbr_download {
+	local repo="$1"
+	local tag="$2"
+	local filename="$3"
+	download_src "https://codeberg.org/$repo/releases/download/$tag/$filename"
+}
+
 function fd_download {
 	local filename=$1
 	local name=$(echo $filename | sed -E 's/-[0-9.]+.tar.*//g')

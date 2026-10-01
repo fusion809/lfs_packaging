@@ -3,31 +3,13 @@ set -e
 name=libmad
 homepage="https://www.underbit.com/products/mad/"
 description="A high-quality MPEG audio decoder."
-get_version() {
-	local inst_ver=$(pkgver $name)
-	local lfs_vers=$(lfs_ver $name)
-	local up_ver=$(wget -T 5 -t 1 -cqO- https://sourceforge.net/projects/mad/files/libmad | grep "libmad/[0-9.]+b/" -oE | cut -d '/' -f 2 | sort -V | tail -n 1)
-	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
-	local mon_ver=$(uver $name)
-	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
-	local arch_ver=$(aver $name)
-	ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
-	local artix_ver=$(artver $name)
-	ver_check "$artix_ver" "$inst_ver" "$lfs_vers" && return
-	fver "$name" "$inst_ver"
-}
-repo=sezero/$name
-version=$(get_version)
+repo="tenacityteam/libmad"
+version=$(cb_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-gha_download "$repo" "$version" "$filename"
-unpk_enter "$filename" "$direname"
-gap_patches "$name"
-sed "s@AM_CONFIG_HEADER@AC_CONFIG_HEADERS@g" -i configure.ac &&
-touch NEWS AUTHORS ChangeLog                                 &&
-sudo autoreconf -fi
-sudo chown $USER -R .
-cmi --prefix=/usr --disable-static
+cbr_download "$repo" "$version" "$filename"
+unpk_enter "$filename" "$name"
+cmaki -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=3.5
 sudo su -c '
 cat > /usr/lib/pkgconfig/mad.pc << "EOF"
 prefix=/usr
@@ -42,6 +24,6 @@ Version: 0.15.1b
 Libs: -L${libdir} -lmad
 Cflags: -I${includedir}
 EOF'
-cd ../
-rm -rf "$filename" "$direname"
+cd ../..
+rm -rf "$filename" "$name"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
