@@ -3,7 +3,7 @@ set -e
 # Variable declarations
 name=xvinfo
 homepage="https://www.x.org"
-description="Lists capabilities of any display-associated video adaptors accessible through the X-Video extension."
+description="Lists capabilities of video adaptors accessible through the XVideo extension."
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"

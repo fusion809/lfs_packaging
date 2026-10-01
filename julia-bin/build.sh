@@ -2,7 +2,7 @@
 set -e
 _name=julia
 name=$_name-bin
-description="Scientific computing-oriented high-level and performant programming language (binary version)."
+description="High-level and performant scientific computing programming language (binary)."
 homepage="http://julialang.org"
 repo=julialang/$_name
 version=$(gh_ver $repo)

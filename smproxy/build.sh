@@ -6,7 +6,7 @@ version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"
 homepage="https://www.x.org"
-description="Allows participation in X11R6 session management for X apps without X11R6 support."
+description="Facilitates participation in X11R6 session management."
 depends=(bash coreutils fontconfig glibc libice libpng libsm libx11 libxau libxcb libxdmcp libxmu libxt make mesa sed systemd tar util-linux xbitmaps xcb-util xorg-libs xz zlib)
 # Fetch and unpack source
 xfd_download "$filename"

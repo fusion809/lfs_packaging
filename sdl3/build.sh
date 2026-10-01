@@ -2,7 +2,7 @@
 set -e
 name=sdl3
 homepage="https://www.libsdl.org"
-description="Provides portable low-level access to a multimedia, mouse, and keyboard (version 3)."
+description="Provides portable low-level access to a multimedia, mouse, and keyboard (v3)."
 repo=libsdl-org/SDL
 version=$(gh_ver $repo)
 depends=(glibc)

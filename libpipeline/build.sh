@@ -2,7 +2,7 @@
 set -e
 name=libpipeline
 homepage="https://nongnu.org/libpipeline/"
-description="A C library for manipulating pipelines of subprocesses in a flexible and convenient way."
+description="C library for manipulating pipelines of subprocesses."
 version=$(ngnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"

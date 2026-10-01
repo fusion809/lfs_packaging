@@ -2,7 +2,7 @@
 set -e
 name=kpackage
 homepage="https://develop.kde.org/products/frameworks/"
-description="Framework that lets applications manage user installable packages of non-binary assets."
+description="Allows applications manage user installable packages of non-binary assets."
 repo=KDE/$name
 version=$(gh_ver $repo)
 depends=(brotli bzip2 dbus double-conversion e2fsprogs gcc glib2 glibc icu karchive kcoreaddons keyutils ki18n mitkrb openssl pcre2 qt6 systemd util-linux xz zlib zstd)

@@ -2,7 +2,7 @@
 set -e
 name=zxing-cpp
 homepage="https://github.com/zxing-cpp/zxing-cpp"
-description="An open-source, multi-format linear/matrix barcode image processing library implemented in C++."
+description="Multi-format linear/matrix barcode-processing library implemented in C++."
 repo=$name/$name
 version=$(gh_ver $repo)
 depends=(gcc glibc)

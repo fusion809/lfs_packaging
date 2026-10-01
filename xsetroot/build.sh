@@ -3,7 +3,7 @@ set -e
 # Variable declarations
 name=xsetroot
 homepage="https://www.x.org"
-description="Classic X utility to set your root window background to a given pattern or color."
+description="X utility to set your root window background to a given pattern/colour."
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"

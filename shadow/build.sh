@@ -2,7 +2,7 @@
 set -e
 name=shadow
 homepage="https://github.com/shadow-maint/shadow"
-description="Password and account management tool suite with support for shadow files and PAM."
+description="Password/account management tool suite."
 repo="shadow-maint/shadow"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"

@@ -3,7 +3,7 @@ set -e
 name=vulkan-loader
 repo=KhronosGroup/Vulkan-Loader
 homepage="https://github.com/$repo"
-description="Allows multiple installable client drivers each supporting one or more devices to be used collectively."
+description="Allows multiple installable client drivers to be used collectively."
 version=$(gh_ver $repo)
 filename="Vulkan-Loader-vulkan-sdk-$version.tar.gz"
 direname="${filename/.tar.*/}"

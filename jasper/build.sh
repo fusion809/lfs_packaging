@@ -2,7 +2,7 @@
 set -e
 name=jasper
 homepage="https://www.ece.uvic.ca/~frodo/jasper/"
-description="Software-based implementation of the codec specified in the emerging JPEG-2000 Part-1 standard."
+description="Implementation of the JPEG-2000 Part-1 standard codec."
 repo=$name-software/$name
 version=$(gh_ver $repo)
 depends=(gcc glibc libaom libde265 libheif libjpeg-turbo libwebp numactl x264 x265)
