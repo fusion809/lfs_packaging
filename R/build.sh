@@ -3,7 +3,7 @@ set -e
 # Variable declarations
 name=R
 homepage="https://www.r-project.org"
-description="High-level interpreted statistical programming language."
+description="High-level, interpreted and statistics-focused programming language."
 function R_version {
   local inst_ver=$(pkgver $name)
   local art_ver=$(artver $name)
