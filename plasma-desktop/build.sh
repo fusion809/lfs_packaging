@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=plasma-desktop
+_name="KDE Plasma Desktop"
 homepage="https://kde.org/plasma-desktop/"
 description="KDE Plasma Desktop."
 repo=KDE/$name

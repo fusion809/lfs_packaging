@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 name=qt6
+_name=qt
 repo=qt/qtbase
 homepage="https://www.qt.io"
 description="A cross-platform application and UI framework."
