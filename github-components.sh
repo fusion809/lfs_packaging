@@ -54,6 +54,7 @@ function ghl_ver {
 		| cut -d '/' -f 3 | sort -V | tail -n 1
 	elif echo $1 | grep "KDE" &> /dev/null; then
 		timeout 5 git ls-remote --tags --refs "$URL" \
+		| grep -v "rc" \
 		| grep -oE "refs/tags/[v]*[0-9]+\.[0-9]+\.[0-8][0-9]*" \
 		| cut -d '/' -f 3 | sed 's/^v//g' | sort -V | tail -n 1 
 	elif echo $1 | grep hyfetch &> /dev/null; then
@@ -162,8 +163,9 @@ function ght_ver {
 	    wget -T 5 -t 1 -cqO- "$URL" \
 		| grep -oE "[0-9]+\.[0-9]*[02468]+\.[0-8][0-9]*" | sort -V | tail -n 1
 		return
-	elif echo $repo | grep "KDE" &> /dev/null; then
-	    wget -T 5 -t 1 -cqO- "$URL" | grep -oE "[0-9]+\.[0-9]+\.[0-8][0-9]*" \
+    elif echo $repo | grep "KDE" &> /dev/null; then
+	    wget -T 5 -t 1 -cqO- "$URL" | grep -v "rc" \
+		| grep -oE "[0-9]+\.[0-9]+\.[0-8][0-9]*" \
 		| sort -V | tail -n 1
 	    return
     fi
