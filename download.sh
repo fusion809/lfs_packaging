@@ -195,13 +195,13 @@ function kde_download {
 	local version=$(echo $filename | sed "s/$name-//g" | sed "s/.tar.*//g")
 	local majVer=$(echo $version | cut -d '.' -f1-2)
 	if [[ "$type" == "frameworks" ]]; then
-		download_src "https://download.kde.org/stable/$type/$majVer/$filename"
+		download_src "https://download.kde.org/stable/$type/$majVer/$filename" || filename=${filename/xz/gz} && gha_download "KDE/$name" "v$version" "$filename"
 	elif [[ "$type" == "app" ]]; then
-		download_src "https://download.kde.org/stable/release-service/$version/src/$filename"
+		download_src "https://download.kde.org/stable/release-service/$version/src/$filename" || filename=${filename/xz/gz} && gha_download "KDE/$name" "v$version" "$filename"
 	elif [[ "$name" == "phonon-backend-vlc" ]]; then
-		download_src "https://download.kde.org/stable/phonon/$name/$version/$filename"
+		download_src "https://download.kde.org/stable/phonon/$name/$version/$filename" || filename=${filename/xz/gz} && gha_download "KDE/$name" "v$version" "$filename"
 	else
-		download_src "https://download.kde.org/stable/$name/$filename" || download_src "https://download.kde.org/stable/$name/$version/$filename"
+		download_src "https://download.kde.org/stable/$name/$filename" || download_src "https://download.kde.org/stable/$name/$version/$filename" || filename=${filename/xz/gz} && gha_download "KDE/$name" "v$version" "$filename"
 	fi
 }
 
