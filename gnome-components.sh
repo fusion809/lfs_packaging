@@ -121,7 +121,8 @@ function wlgd_ver {
 }
 
 function wlp_ver {
-	wget -T 5 -t 1 -cqO- "$1/-/tags" | grep -oE "tags/[^\"]+" \
+	wget -T 5 -t 1 -cqO- "https://gitlab.gnome.org/GNOME/$1/-/tags" \
+	| grep -oE "tags/[^\"]+" \
 	| sed 's|tags/||' | grep -viE "alpha|beta|\.rc|rc[0-9]|\.9[0-9]" \
 	| sed -E 's/libpeas-//g' | grep '^1' | sort -V | tail -n 1
 }
