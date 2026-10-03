@@ -97,6 +97,7 @@ function ght_ver {
 		return
 	elif [[ "$2" == "libopenssl3" ]]; then
 		wget -T 5 -t 1 -cqO- https://github.com/$1/tags | grep "tag/openssl-3\.[0-9.]+" -oE | cut -d '-' -f 2 | sort -V | tail -n 1
+		return
 	fi
 	if [[ "$1" == "GNOME/gcr3" ]]; then
 		local repo="GNOME/gcr"
