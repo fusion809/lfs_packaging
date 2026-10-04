@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e 
 name=libpeas
-homepage="https://gitlab.gnome.org/GNOME/libpeas"
+#homepage="https://gitlab.gnome.org/GNOME/libpeas"
+homepage="https://wiki.gnome.org/Projects/Libpeas"
 description="GObject Plugin System."
 version=$(gn_ver libpeas)
 filename="$name-$version.tar.xz"

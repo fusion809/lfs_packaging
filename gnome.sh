@@ -43,8 +43,6 @@ function gn_ver {
 		ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
 		local git_ver=$(glp_ver "$1")
 		ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
-		local mon_ver=$(uver $name)
-		ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
 	else
 		local up_ver=$(wgn_ver "$1")
 		ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
@@ -61,6 +59,8 @@ function gn_ver {
 	ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
 	local art_ver=$(artver $pkg_name)
 	ver_check "$art_ver" "$inst_ver" "$lfs_vers" && return
+	local nix_ver=$(nixver $pkg_name)
+	ver_check "$nix_ver" "$inst_ver" "$lfs_vers" && return
 
 	fver "$pkg_name" "$inst_ver"
 }
