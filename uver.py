@@ -85,11 +85,6 @@ def normalise_url(url):
 
     parsed = urllib.parse.urlsplit(url)
 
-    if parsed.scheme in ("http", "https"):
-        scheme = ""
-    else:
-        scheme = parsed.scheme
-
     netloc = parsed.netloc
 
     if netloc.startswith("www."):
@@ -97,10 +92,7 @@ def normalise_url(url):
 
     path = parsed.path.rstrip("/")
 
-    if scheme:
-        result = f"{scheme}://{netloc}{path}"
-    else:
-        result = f"{netloc}{path}"
+    result = f"{netloc}{path}"
 
     if parsed.query:
         result += f"?{parsed.query}"
@@ -161,11 +153,15 @@ def select_project(projects, homepage="", repo=""):
     if not projects:
         return None
 
+    # If Anitya returns exactly one project, it is unambiguous.
+    # Do not require its homepage or repository to match build.sh.
+    if len(projects) == 1:
+        return projects[0]
+
     homepage = normalise_url(homepage)
     repo = normalise_repo(repo)
 
-    # A homepage match takes precedence over the number of
-    # projects returned by Anitya.
+    # Multiple projects remain. Use the homepage to disambiguate.
     if homepage:
         homepage_matches = [
             project
@@ -177,12 +173,13 @@ def select_project(projects, homepage="", repo=""):
 
         if homepage_matches:
             projects = homepage_matches
-        else:
-            return None
 
-    # A unique homepage match is sufficient to select a project.
-    # Only use the repository to disambiguate multiple remaining
-    # projects.
+    # If the homepage produced a unique match, select it.
+    if len(projects) == 1:
+        return projects[0]
+
+    # If multiple projects still remain, use the repository
+    # to further disambiguate.
     if repo and len(projects) > 1:
         repo_matches = [
             project
@@ -210,7 +207,7 @@ def anitya_versions(project):
         return None
 
     params = urllib.parse.urlencode(
-        {
+                    {
             "project_id": project_id,
         }
     )
