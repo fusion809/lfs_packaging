@@ -138,46 +138,45 @@ def select_project(projects, homepage="", repo=""):
     if not projects:
         return None
 
-    if len(projects) == 1:
-        return projects[0]
-
     homepage = normalise_url(homepage)
     repo = normalise_repo(repo)
 
+    # If a homepage was supplied, it takes precedence over the
+    # number of projects returned by Anitya.
     if homepage:
-        homepage_matches = []
-
-        for project in projects:
-            project_homepage = normalise_url(
+        homepage_matches = [
+            project
+            for project in projects
+            if normalise_url(
                 project.get("homepage", "")
-            )
+            ) == homepage
+        ]
 
-            if project_homepage == homepage:
-                homepage_matches.append(project)
-
-        if len(homepage_matches) == 1:
-            return homepage_matches[0]
-
-        if len(homepage_matches) > 1:
+        if homepage_matches:
             projects = homepage_matches
+        else:
+            return None
 
+    # If a repository was supplied, use it to further disambiguate.
     if repo:
-        repo_matches = []
-
-        for project in projects:
-            project_repo = normalise_repo(
+        repo_matches = [
+            project
+            for project in projects
+            if normalise_repo(
                 project.get("repo", "")
-            )
+            ) == repo
+        ]
 
-            if project_repo == repo:
-                repo_matches.append(project)
-
-        if len(repo_matches) == 1:
-            return repo_matches[0]
-
-        if len(repo_matches) > 1:
+        if repo_matches:
             projects = repo_matches
+        else:
+            return None
 
+    # A single remaining project is unambiguous.
+    if len(projects) == 1:
+        return projects[0]
+
+    # Multiple projects remain. Do not arbitrarily choose one here.
     return None
 
 
@@ -359,7 +358,7 @@ def find_project(
     homepage="",
     repo="",
 ):
-    # First try the normal name.
+    # First try the normal package name.
     projects = anitya_projects(name)
 
     if projects:
@@ -372,7 +371,8 @@ def find_project(
         if project is not None:
             return project, projects, name
 
-    # If the normal name did not identify a project, try _name.
+    # If the normal name did not identify the correct project,
+    # try the explicit _name from build.sh.
     if fallback_name and fallback_name != name:
         fallback_projects = anitya_projects(fallback_name)
 
@@ -390,8 +390,6 @@ def find_project(
                     fallback_name,
                 )
 
-            # If the normal name produced no projects, retain
-            # the fallback project's alternatives for options.
             if not projects:
                 return (
                     None,
