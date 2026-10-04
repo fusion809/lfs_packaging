@@ -6,10 +6,10 @@ description="Multipurpose relay."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)
-    local up_ver=$(wget -T 5 -cqO- http://www.dest-unreach.org/socat/ | grep "download/socat-" | head -n 1 | cut -d '"' -f 2 | sed 's|download/socat-||g' | sed 's/.tar.gz//g')
+    local up_ver=$(wget -T 5 -t 1 -cqO- http://www.dest-unreach.org/socat/ | grep "download/socat-" | head -n 1 | cut -d '"' -f 2 | sed 's|download/socat-||g' | sed 's/.tar.gz//g')
     ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
 
-    local git_ver=$(git ls-remote --tags --refs https://repo.or.cz/socat.git | grep "refs/tags/tag-[0-9.]*$" | cut -d '-' -f 2 | sort -V | tail -n 1)
+    local git_ver=$(timeout 5 git ls-remote --tags --refs https://repo.or.cz/socat.git | grep "refs/tags/tag-[0-9.]*$" | cut -d '-' -f 2 | sort -V | tail -n 1)
     ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
     local mon_ver=$(uver $name)
 	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
