@@ -49,9 +49,14 @@ function gsp_ver {
 }
 
 function gxfd_ver {
+	if [[ $2 == "libXfont" ]]; then
+		local name="libXfont2"
+	else
+		local name="$2"
+	fi
 	local URL="https://gitlab.freedesktop.org/xorg/$1/$2.git"
     timeout 5 git ls-remote --tags --refs "$URL" 2>/dev/null \
-	| grep "$2-" -i | sed -E "s/.*$2[-_]+//g" | tr '_' '.' | sort -V \
+	| grep "$name-" -i | sed -E "s/.*${name}[-_]+//g" | tr '_' '.' | sort -V \
 	| tail -n 1
 }
 
