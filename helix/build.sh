@@ -23,6 +23,8 @@ rm -rf /usr/lib/helix/grammars/sources   &&
 
 install -vDm644 contrib/Helix.desktop     \
         -t /usr/share/applications/      &&
+sed -i -e 's|ConsoleOnly;$|ConsoleOnly;Development;|g' \
+	/usr/share/applications/Helix.desktop
 install -vDm644 contrib/Helix.appdata.xml \
         -t /usr/share/metainfo/          &&
 install -vDm644 contrib/helix.png         \
