@@ -23,8 +23,8 @@ filename="$name-$version.tar.xz"
 dversion=$(wget -cqO- $homepage | grep "poppler-data-[0-9]+\.[0-9]+\.[0-9]+" -oE | cut -d '-' -f 3 | sort -V | tail -n 1)
 data_filename="$name-data-$dversion.tar.gz"
 direname="${filename/.tar.*/}"
-download_src "$homepage/$filename"
-download_src "$homepage/$data_filename"
+download_src "https://poppler.freedesktop.org/$filename"
+download_src "https://poppler.freedesktop.org/$data_filename"
 unpk_enter "$filename" "$direname"
 options=(-D CMAKE_BUILD_TYPE=Release   \
       -D CMAKE_INSTALL_PREFIX=/usr  \

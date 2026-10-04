@@ -65,7 +65,10 @@ mkdir texlive-build
 cd texlive-build
 ../configure "${options[@]}"
 make -j$(nproc)
-sudo su -c "make install-strip &&
+sudo su -c "export PATH=$PATH:$TEXLIVE_PREFIX/bin/x86_64-linux
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$TEXLIVE_PREFIX/lib
+export TEXLIVE_PREFIX=$TEXLIVE_PREFIX
+make install-strip &&
 make texlinks      &&
 mkdir -pv                                $TEXLIVE_PREFIX/tlpkg/TeXLive/ &&
 install -v -m644 ../texk/tests/TeXLive/* $TEXLIVE_PREFIX/tlpkg/TeXLive/ &&
