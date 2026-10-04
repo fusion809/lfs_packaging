@@ -82,10 +82,33 @@ def normalise_url(url):
         return ""
 
     url = url.strip().lower()
-    url = re.sub(r"^https?://", "", url)
-    url = re.sub(r"^www\.", "", url)
 
-    return url.rstrip("/")
+    parsed = urllib.parse.urlsplit(url)
+
+    if parsed.scheme in ("http", "https"):
+        scheme = ""
+    else:
+        scheme = parsed.scheme
+
+    netloc = parsed.netloc
+
+    if netloc.startswith("www."):
+        netloc = netloc[4:]
+
+    path = parsed.path.rstrip("/")
+
+    if scheme:
+        result = f"{scheme}://{netloc}{path}"
+    else:
+        result = f"{netloc}{path}"
+
+    if parsed.query:
+        result += f"?{parsed.query}"
+
+    if parsed.fragment:
+        result += f"#{parsed.fragment}"
+
+    return result
 
 
 def normalise_repo(repo):
@@ -141,8 +164,8 @@ def select_project(projects, homepage="", repo=""):
     homepage = normalise_url(homepage)
     repo = normalise_repo(repo)
 
-    # If a homepage was supplied, it takes precedence over the
-    # number of projects returned by Anitya.
+    # A homepage match takes precedence over the number of
+    # projects returned by Anitya.
     if homepage:
         homepage_matches = [
             project
@@ -157,8 +180,10 @@ def select_project(projects, homepage="", repo=""):
         else:
             return None
 
-    # If a repository was supplied, use it to further disambiguate.
-    if repo:
+    # A unique homepage match is sufficient to select a project.
+    # Only use the repository to disambiguate multiple remaining
+    # projects.
+    if repo and len(projects) > 1:
         repo_matches = [
             project
             for project in projects
@@ -169,14 +194,12 @@ def select_project(projects, homepage="", repo=""):
 
         if repo_matches:
             projects = repo_matches
-        else:
-            return None
 
     # A single remaining project is unambiguous.
     if len(projects) == 1:
         return projects[0]
 
-    # Multiple projects remain. Do not arbitrarily choose one here.
+    # Multiple projects remain and could not be disambiguated.
     return None
 
 
@@ -473,3 +496,4 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
+
