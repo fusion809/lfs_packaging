@@ -371,7 +371,6 @@ def print_ambiguous_project_error(pkg):
 
     return 1
 
-
 def find_project(
     name,
     fallback_name,
@@ -387,6 +386,18 @@ def find_project(
             homepage=homepage,
             repo=repo,
         )
+
+        if project is not None:
+            # If an explicit homepage or repository is supplied,
+            # make sure a uniquely named project does not override it.
+            if homepage and normalise_url(
+                project.get("homepage", "")
+            ) != normalise_url(homepage):
+                project = None
+            elif repo and normalise_repo(
+                project.get("repo", "")
+            ) != normalise_repo(repo):
+                project = None
 
         if project is not None:
             return project, projects, name
@@ -418,7 +429,6 @@ def find_project(
                 )
 
     return None, projects, name
-
 
 def main():
     if len(sys.argv) not in (2, 3):

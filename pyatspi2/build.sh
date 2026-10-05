@@ -3,7 +3,7 @@ set -e
 name=pyatspi2
 homepage="https://gitlab.gnome.org/GNOME/pyatspi2"
 description="Python wrapper for libatspi."
-_name=$(echo $name | sed 's/2//g')
+_name=pyatspi
 version=$(gn_ver $name)
 depends=(dbus-python pygobject)
 filename="$_name-$version.tar.xz"
