@@ -65,9 +65,9 @@ export VENV_ROOT=\$(ls \$SAGE_ROOT/var/lib/sage/venv-python* -ld | rev \
 	| cut -d ' ' -f 1 | rev)
 export PATH=\$PATH:\$SAGE_ROOT/bin:\$VENV_ROOT/bin
 export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:\$SAGE_ROOT/lib:\$VENV_ROOT/lib
-sage
+$SAGE_ROOT/bin/sage "$@"
 EOF
-
+sudo chmod +x /usr/bin/sage
 sudo tee /usr/share/applications/sage.desktop << EOF
 [Desktop Entry]
 Name=SageMath
@@ -84,8 +84,9 @@ export VENV_ROOT=\$(ls \$SAGE_ROOT/var/lib/sage/venv-python* -ld | rev \
 	| cut -d ' ' -f 1 | rev)
 export PATH=\$PATH:\$SAGE_ROOT/bin:\$VENV_ROOT/bin
 export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:\$SAGE_ROOT/lib:\$VENV_ROOT/lib
-sage -n jupyterlab
+$SAGE_ROOT/bin/sage -n jupyterlab
 EOF
+sudo chmod +x /usr/bin/sage-jupyterlab
 
 sudo tee /usr/share/applications/sage-jupyterlab.desktop << EOF
 [Desktop Entry]
