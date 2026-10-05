@@ -12,6 +12,7 @@ direname="${filename/.tar.*/}"
 download_src "https://mirror.aarnet.edu.au/pub/sage/src/$filename"
 unpk_enter "$filename" "$direname"
 oldver=$(pkgver $name)
+sudo rm -rf /opt/$direname
 sudo mkdir -p /opt/$direname
 
 if ! [[ -d /home/builder ]]; then
@@ -19,10 +20,13 @@ if ! [[ -d /home/builder ]]; then
 fi
 
 sudo chown -R builder /opt/$direname .
-
+sudo systemctl restart ntpd
 sudo -u builder -H bash -c "
 ./configure --prefix=/opt/$direname --with-sage-venv=yes --disable-editable
-make -j$(nproc)
+until make -j$(nproc); do
+    sudo systemctl restart ntpd
+    export SAGE_KEEP_BUILD_SPKGS=yes
+done
 "
 sudo ln -sf /opt/$direname /opt/sage
 if [[ "$version" != "$oldver" ]] &&
