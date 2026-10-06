@@ -3,12 +3,14 @@ set -e
 name=grub
 description="GNU GRand Unified Bootloader (2)."
 homepage="https://gnu.org/s/grub/"
+repo=gnu-grub/grub
 version=$(gnu_ver $name)
-filename="$name-$version.tar.xz"
+filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
 depends=(gcc glibc make tar wget xz)
-gnu_download $name $filename
-unpk_enter "$filename" "$direname"
+gfd_download "$repo" "$direname" "$filename"
+unpk_enter "$filename"
+./bootstrap
 if ( cat /etc/fstab | grep "efi\|fat" &> /dev/null ) && [[ $(uname -m) == "x86_64" ]]; then
 	cmi --prefix=/usr --sysconfdir=/etc --target=x86_64 --with-platform=efi --disable-efiemu --disable-werror
 elif ( cat /etc/fstab | grep "efi\|fat" &> /dev/null ); then

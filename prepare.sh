@@ -79,11 +79,11 @@ function unpk_enter {
 	if ! [[ -d $1/.git ]] && ( ( echo $1 | grep "\.[gtlbx]" &> /dev/null ) \
     || ( echo $1 | grep "\.zstd" &> /dev/null ) ); then
     		local filename=$1
-   		if [[ -n $2 ]]; then
-        		local direname=$2
-		    else
-        		local direname=$(strip_file_ext $filename)
-		fi
+		local direname=$2
+		[[ -n $direname ]] || case $(file_ext "$filename") in
+	    		tar.*|tgz) direname=$(tar -tf "$filename" | cut -d/ -f1 | sort -u) ;;
+			*) echo "Missing a second argument and input does not appear to be a tar archive or zip file, unclear what directory name to use."
+		esac
 	    	sudo rm -rf $direname
 	    	case $(file_ext $filename) in
 			tar.*|tgz) tar xf $filename ;;

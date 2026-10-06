@@ -22,7 +22,7 @@ function aver {
 	local name=$(echo $1 | tr '[:upper:]' '[:lower:]')
     	if echo $(check_arch $name) &> /dev/null; then
 		local URL="https://gitlab.archlinux.org/archlinux/packaging/packages/$name/-/raw/main/PKGBUILD"
-		local pkgver=$(wget -cqO- "$URL" | grep -E "^pkgver=[0-9.a-z]+$" | sed 's/^pkgver=//g')
+		local pkgver=$(wget -cqO- "$URL" | grep -E "^[_]*pkgver=[0-9.a-z]+$" | sed 's/^[_]*pkgver=//g')
 	elif echo $(check_aur $name) &> /dev/null; then
 		local pkgver=$(aurver "$name")
 	else

@@ -57,7 +57,13 @@ function glib_ver {
 }
 
 function wgnu_ver {
-    wget -cqO- -T 5 -t 1 "https://ftp.gnu.org/gnu/$1/" 2>/dev/null \
-	| sed -nE "s/.*href=[\"\x27]?$1-([0-9]+(\.[0-9]+)*)(\/|\.tar\.[a-z0-9]+|\.zip)[\"\x27]?.*/\1/p" \
-	| sort -V | tail -n 1
+	if [[ "$1" == "grub" ]]; then
+		wget -cqO- -T 5 -t 1 https://gitlab.freedesktop.org/gnu-grub/grub/-/tags \
+			| grep "grub-[0-9]+\.[0-9]+" -oE | cut -d '-' -f 2 | uniq | sort -V \
+			| tail -n 1
+	else
+    		wget -cqO- -T 5 -t 1 "https://ftp.gnu.org/gnu/$1/" 2>/dev/null \
+			| sed -nE "s/.*href=[\"\x27]?$1-([0-9]+(\.[0-9]+)*)(\/|\.tar\.[a-z0-9]+|\.zip)[\"\x27]?.*/\1/p" \
+			| sort -V | tail -n 1
+	fi
 }
