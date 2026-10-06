@@ -57,7 +57,16 @@ function cmi {
 	    echo "configure found"
     elif [[ -f "autogen.sh" ]]; then
 	    echo "autogen.sh found"
-	    sudo ./autogen.sh "${configure_args[@]}"
+	    if ! output=$(sudo ./autogen.sh "${configure_args[@]}" 2>&1); then
+    		printf '%s\n' "$output"
+    		if [[ $output == *bootstrap* ]]; then
+		        sudo ./bootstrap
+    		else
+			return 1
+    		fi
+	    else
+		printf '%s\n' "$output"
+	    fi
 	    if [[ -f "configure" ]]; then
 		    echo "configure script found"
             else

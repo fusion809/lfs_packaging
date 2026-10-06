@@ -10,7 +10,6 @@ direname="${filename/.tar.*/}"
 depends=(gcc glibc make tar wget xz)
 gfd_download "$repo" "$direname" "$filename"
 unpk_enter "$filename"
-./bootstrap
 if ( cat /etc/fstab | grep "efi\|fat" &> /dev/null ) && [[ $(uname -m) == "x86_64" ]]; then
 	cmi --prefix=/usr --sysconfdir=/etc --target=x86_64 --with-platform=efi --disable-efiemu --disable-werror
 elif ( cat /etc/fstab | grep "efi\|fat" &> /dev/null ); then
