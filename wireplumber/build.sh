@@ -7,7 +7,7 @@ repo="pipewire/wireplumber"
 version=$(gfd_ver $repo)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
-depends=(glib2 lua pipewire systemd)
+depends=(glib2 glibc libffi lua pcre2 pipewire systemd util-linux zlib)
 gfd_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 mni --prefix=/usr --buildtype=release -D system-lua=true

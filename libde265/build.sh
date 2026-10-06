@@ -5,7 +5,7 @@ homepage="https://github.com/strukturag/libde265"
 description="Open h.265 video codec implementation."
 repo=strukturag/$name
 version=$(gh_ver $repo)
-depends=(cmake)
+depends=(cmake gcc glibc sdl2-compat)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"

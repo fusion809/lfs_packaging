@@ -7,7 +7,7 @@ repo=$name/$name
 version=$(gfd_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(freetype)
+depends=(brotli bzip2 expat freetype glibc libpng zlib)
 download_src "https://gitlab.freedesktop.org/api/v4/projects/890/packages/generic/fontconfig/$version/$filename"
 unpk_enter "$filename" "$direname"
 configure_options=(--prefix=/usr        \

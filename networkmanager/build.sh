@@ -6,7 +6,7 @@ description="Network connection manager and user applications."
 repo=$name/$name
 version=$(gfd_ver "$repo")
 # Deps
-depends=(brotli curl cyrus-sasl glib2 glib2 glibc iptables libffi libidn2 libndp libpsl libunistring ncurses newt nghttp2 nspr nss openldap openssl pcre2 polkit pygobject readline systemd systemd util-linux vala wpa_supplicant zlib zstd)
+depends=(brotli curl cyrus-sasl glib2 glibc iptables libffi libgudev libidn2 libmbim libndp libpsl libqmi libunistring ncurses newt nghttp2 nspr nss openldap openssl pcre2 polkit pygobject readline slang systemd util-linux vala wpa_supplicant zlib zstd)
 # Source file/dir
 filename="NetworkManager-$version.tar.xz"
 direname="${filename/.tar.xz/}"

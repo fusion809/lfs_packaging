@@ -6,7 +6,7 @@ homepage="https://gstreamer.freedesktop.org"
 version=$(gfd_ver gstreamer/gstreamer)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(glib2)
+depends=(bzip2 elfutils gcc glib2 glibc libcap libffi libunwind pcre2 systemd util-linux xz zlib zstd)
 download_src "https://gstreamer.freedesktop.org/src/$name/$filename"
 unpk_enter "$filename" "$direname"
 meson_options=(--prefix=/usr       \

@@ -18,6 +18,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
+depends=(gcc glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 download_src "https://www.bytereef.org/software/mpdecimal/releases/$filename"

@@ -7,7 +7,7 @@ repo=lfs-book/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(libxcb wayland wayland-protocols xkeyboard-config)
+depends=(gcc glibc icu libffi libxau libxcb libxdmcp libxml2 wayland wayland-protocols xkeyboard-config)
 gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 gap_patches $name

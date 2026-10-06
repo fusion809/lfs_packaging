@@ -5,6 +5,7 @@ homepage="https://www.nasm.us"
 description="80x86 assembler designed for portability and modularity."
 repo="netwide-assembler/$name"
 version=$(gh_ver $repo)
+depends=(glibc zlib)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 doc_filename="$name-$version-xdoc.tar.xz"

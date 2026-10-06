@@ -5,6 +5,7 @@ description="C Library for NVM Express on Linux."
 repo=linux-nvme/$name
 homepage="https://github.com/$repo"
 version=$(gh_ver $repo)
+depends=(dbus glibc json-c keyutils openssl systemd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"

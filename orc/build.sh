@@ -8,7 +8,7 @@ homepage="https://gstreamer.freedesktop.org/projects/orc.html"
 version=$(gfd_ver "$repo")
 direname="$name-$version"
 filename="$direname.tar.xz"
-depends=(bash coreutils meson ninja pkgconf sed tar wget xz)
+depends=(bash coreutils glibc meson ninja pkgconf sed tar wget xz)
 optional_depends=(libcacard) # Provides smartcard support
 docs="CONTRIBUTING.md COPYING README RELEASE ROADMAP.md"
 # check if libcacard is there

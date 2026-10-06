@@ -6,7 +6,7 @@ description="The GNU Compiler Collection - C, C++ and Fortran frontends."
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(gcc glibc make ncurses tar wget xz)
+depends=(gcc glibc gmp make mpc mpfr ncurses tar wget xz zlib zstd)
 gnu_download $name $filename
 unpk_enter "$filename" "$direname"
 sed -e '/m64=/s/lib64/lib/' \

@@ -4,7 +4,7 @@ name=xcb-util-cursor
 homepage="https://cgit.freedesktop.org/xcb/util-cursor"
 description="XCB cursor library."
 version=$(xcb_ver $name)
-depends=(glibc libxau libxcb libxdmcp)
+depends=(glibc libxau libxcb libxdmcp xcb-util xcb-util-image xcb-util-renderutil)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 xfd_download "$filename"

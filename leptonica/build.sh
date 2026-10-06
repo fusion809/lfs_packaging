@@ -8,7 +8,7 @@ repo="DanBloomberg/leptonica"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
-depends=(bash coreutils giflib glibc gzip libjpeg-turbo libpng libtiff libwebp make openjpeg sed tar wget xz zlib zstd)
+depends=(bash coreutils giflib glibc gzip libjpeg-turbo libpng libtiff libwebp make openjpeg sed tar tiff wget xz zlib zstd)
 # Fetch and unpack source
 gha_download $repo $version $filename
 unpk_enter "$filename" "$direname"

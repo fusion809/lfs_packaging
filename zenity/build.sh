@@ -7,7 +7,7 @@ description="Display graphical dialog boxes from shell scripts."
 version=$(gn_ver zenity)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
-depends=(brotli cairo curl cyrus-sasl elfutils expat fontconfig freetype fribidi gcc gdk-pixbuf gettext glib2 glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk4 gzip harfbuzz hicolor-icon-theme lcms2 libadwaita libadwaita libdrm libelf libepoxy libffi libfyaml libgudev libidn2 libjpeg-turbo libpciaccess libpng libpsl libseccomp libtiff libunistring libunwind libwebp libx11 libxau libxcb libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxml2 libxmlb libxrandr libxrender libxshmfence libxxf86vm llvm lm-sensors mesa meson nghttp2 openldap openssl orc pango pango pcre2 pixman spirv-tools systemd tar util-linux vulkan-loader wayland webkitgtk zlib zstd)
+depends=(brotli bzip2 cairo curl cyrus-sasl elfutils expat fontconfig freetype fribidi gcc gdk-pixbuf gettext glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk4 gzip harfbuzz hicolor-icon-theme lcms2 libadwaita libdrm libelf libepoxy libffi libfyaml libglvnd libgudev libidn2 libjpeg-turbo libpciaccess libpng libpsl libseccomp libtiff libunistring libunwind libwebp libx11 libxau libxcb libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxml2 libxmlb libxrandr libxrender libxshmfence libxxf86vm llvm lm-sensors mesa meson nghttp2 openldap openssl orc pango pcre2 pixman spirv-tools systemd tar tiff util-linux vulkan-loader wayland webkitgtk xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 # Fetch source and unpack it

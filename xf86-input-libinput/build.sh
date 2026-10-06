@@ -4,7 +4,7 @@ name=xf86-input-libinput
 homepage="http://xorg.freedesktop.org/"
 description="Generic input driver for the X.Org server based on libinput."
 version=$(xfd_ver $name)
-depends=(glibc libevdev libinput lua mtdev systemd)
+depends=(glib2 glibc libevdev libffi libgudev libinput libwacom lua mtdev pcre2 systemd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 xfd_download "$filename"

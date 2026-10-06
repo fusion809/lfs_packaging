@@ -4,6 +4,7 @@ name=binutils
 description="Set of programs to assemble and manipulate binary and object files."
 homepage="https://www.gnu.org/software/binutils/"
 version=$(gnu_ver $name)
+depends=(brotli bzip2 curl cyrus-sasl elfutils flex gcc glibc json-c libidn2 libpsl libunistring nghttp2 openldap openssl xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 sw_download "$name" "$filename"

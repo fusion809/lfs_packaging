@@ -8,7 +8,7 @@ version=$(gh_ver $repo)
 majVer=$(echo $version | sed -E 's/.[0-9]+//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(glib2)
+depends=(glib2 glibc libffi pcre2)
 gn_download "$filename"
 unpk_enter "$filename" "$direname"
 mni --prefix=/usr --buildtype=release

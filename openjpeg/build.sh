@@ -5,7 +5,7 @@ homepage="https://www.openjpeg.org/"
 description="An open source JPEG 2000 codec."
 repo=uclouvain/$name
 version=$(gh_ver $repo)
-depends=(cmake glibc lcms2 libjpeg-turbo libpng libtiff libwebp xz zlib zstd)
+depends=(cmake glibc lcms2 libjpeg-turbo libpng libtiff libwebp tiff xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"

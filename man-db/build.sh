@@ -4,7 +4,7 @@ name=man-db
 homepage="https://gitlab.com/man-db/man-db"
 description="Utility for reading man pages."
 version=$(gl_ver $name/$name)
-depends=(bash coreutils gcc glibc make tar xz)
+depends=(bash coreutils gcc gdbm glibc libpipeline libseccomp make tar xz zlib)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 download_src "https://download.savannah.gnu.org/releases/$name/$filename"

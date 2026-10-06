@@ -4,7 +4,7 @@ name=procps-ng
 homepage="https://gitlab.com/procps-ng/procps"
 description="Utilities for monitoring your system and its processes."
 version=$(gl_ver $name/procps $name)
-depends=(coreutils gcc glibc make tar wget xz)
+depends=(coreutils gcc glibc make ncurses systemd tar wget xz)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 if ! [[ -f $filename ]]; then

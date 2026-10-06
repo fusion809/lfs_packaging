@@ -5,7 +5,7 @@ homepage="https://wayland.freedesktop.org/"
 description="Computer display server protocol."
 repo=$name/$name
 version=$(way_ver $name)
-depends=(coreutils expat gcc glibc libffi libxml2 meson ninja tar wget xz)
+depends=(coreutils expat gcc glibc icu libffi libidn2 libpsl libunistring libxml2 meson ninja openssl pcre2 tar util-linux wget xz zlib)
 filename="$name-$version.tar.gz"
 direname="$name-$version"
 gfd_download "$repo" "$version" "$filename"

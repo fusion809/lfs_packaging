@@ -5,6 +5,7 @@ description="Collection of routines used to create PNG format graphics files."
 homepage="https://www.libpng.org/pub/png/libpng.html"
 repo=pnggroup/libpng
 version=$(gh_ver $repo)
+depends=(glibc zlib)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 patch_filename="$name-$version-apng.patch.gz"

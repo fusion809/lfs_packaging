@@ -7,7 +7,7 @@ description="Allows multiple installable client drivers to be used collectively.
 version=$(gh_ver $repo)
 filename="Vulkan-Loader-vulkan-sdk-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(cmake mesa vulkan-headers wayland xorg-libs)
+depends=(cmake glibc mesa vulkan-headers wayland xorg-libs)
 gha_download "$repo" "vulkan-sdk-$version" "$filename"
 unpk_enter "$filename" "$direname"
 cmake_options=(

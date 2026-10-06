@@ -4,7 +4,7 @@ name=wget
 homepage="https://www.gnu.org/software/wget/wget.html"
 description="Network utility to retrieve files from the web."
 version=$(gnu_ver $name)
-depends=(glibc libidn2 libpsl libunistring openssl pcre2 util-linux zlib)
+depends=(expat gcc glibc icu libffi libidn2 libpsl libunistring libxml2 openssl pcre2 util-linux wayland zlib)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gnu_download $name $filename

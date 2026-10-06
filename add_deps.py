@@ -343,3 +343,4 @@ if __name__ == "__main__":
     is_verbose = "--verbose" in sys.argv or "-v" in sys.argv
 
     sys.exit(find_deps(pkg, dry_run=is_dry_run, verbose=is_verbose))
+

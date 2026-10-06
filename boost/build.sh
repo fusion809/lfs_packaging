@@ -7,7 +7,7 @@ repo=boostorg/$name
 version=$(gh_ver $repo)
 filename="$name-$version-b2-nodocs.tar.xz"
 direname="$name-$version"
-depends=(which)
+depends=(bzip2 gcc glibc icu openssl which xz zlib zstd)
 gha_download "$repo" "$direname" "$filename"
 unpk_enter "$filename" "$direname"
 ./bootstrap.sh --prefix=/usr --with-python=python3 &&

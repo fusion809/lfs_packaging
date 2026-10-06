@@ -6,7 +6,7 @@ homepage="https://gnu.org/s/gettext/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(gcc glibc make ncurses readline tar wget xz)
+depends=(acl attr brotli curl cyrus-sasl gcc glibc icu json-c libidn2 libpsl libunistring libxml2 make ncurses nghttp2 openldap openssl readline tar wget xz zlib zstd)
 gnu_download $name $filename
 unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static --docdir=/usr/share/doc/$direname

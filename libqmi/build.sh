@@ -7,7 +7,7 @@ repo=mobile-broadband/$name
 version=$(gfd_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(glib2 libgudev libmbim)
+depends=(glib2 glibc libffi libgudev libmbim pcre2 systemd util-linux zlib)
 gfd_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 meson_options=(--prefix=/usr            \

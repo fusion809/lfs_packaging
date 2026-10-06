@@ -18,7 +18,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-depends=(glibc)
+depends=(glibc libdvdread)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 #download_src "https://get.videolan.org/$name/$version/$filename"

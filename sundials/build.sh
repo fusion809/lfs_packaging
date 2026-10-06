@@ -8,7 +8,7 @@ repo="llnl/sundials"
 version=$(gh_ver $repo)
 filename=$name-$version.tar.gz
 direname="${filename/.tar.gz/}"
-depends=(bash cmake coreutils gcc gcc glibc gzip hwloc lapack libevent libfabric make numactl openmpi openpmix python sed suitesparse systemd tar wget)
+depends=(bash cmake coreutils gcc glibc gzip hwloc lapack libevent libfabric make numactl openblas openmpi openpmix python sed suitesparse systemd tar wget)
 # Fetch and unpack source
 gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"

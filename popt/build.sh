@@ -5,6 +5,7 @@ homepage="https://github.com/rpm-software-management/popt"
 description="Commandline option parser."
 repo=rpm-software-management/$name
 version=$(gh_ver $repo)
+depends=(glibc)
 majVer=$(echo $version | cut -d '.' -f 1)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"

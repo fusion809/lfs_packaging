@@ -4,6 +4,7 @@ name=giflib
 homepage="https://giflib.sourceforge.net/"
 description="Library for reading and writing gif images."
 version=$(sf_ver giflib/code)
+depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 download_src "https://sourceforge.net/projects/giflib/files/$filename"

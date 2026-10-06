@@ -5,7 +5,7 @@ homepage="https://github.com/protobuf-c/protobuf-c"
 description="Protocol Buffers implementation in C."
 repo=$name/$name
 version=$(gh_ver $repo)
-depends=(gcc glibc)
+depends=(abseil-cpp gcc glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 ghr_download "$repo" "v$version" "$filename"

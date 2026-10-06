@@ -4,7 +4,7 @@ name=xcb-util-image
 homepage="https://xcb.freedesktop.org"
 description="Utility libraries for XC Binding - XImage/XShmImage functions."
 version=$(xcb_ver $name)
-depends=(glibc libxau libxcb libxdmcp)
+depends=(glibc libxau libxcb libxdmcp xcb-util)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 xfd_download "$filename"

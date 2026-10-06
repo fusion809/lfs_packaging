@@ -5,7 +5,7 @@ homepage="https://www.speex.org/"
 description="Free codec for free speech."
 repo=xiph/$name
 version=$(gh_ver $repo)
-depends=(glibc libogg)
+depends=(glibc glycin libogg)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 download_src "https://downloads.xiph.org/releases/speex/$filename"

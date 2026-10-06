@@ -8,7 +8,7 @@ repo=mpimd-csc/qrupdate-ng
 version=$(gh_ver $repo $name)
 filename=$name-$version.tar.gz
 direname="$name-ng-$version"
-depends=(bash blas-lapack cmake coreutils gcc glibc gzip make sed tar wget)
+depends=(bash blas-lapack cmake coreutils gcc glibc gzip make openblas sed tar wget)
 # Fetch and unpack source
 gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"

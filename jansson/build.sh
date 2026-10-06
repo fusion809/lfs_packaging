@@ -5,6 +5,7 @@ homepage="https://www.digip.org/jansson/"
 description="C library for encoding, decoding and manipulating JSON data."
 repo="akheron/$name"
 version=$(gh_ver $repo)
+depends=(glibc)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
 ghr_download "$repo" "v$version" "$filename"

@@ -5,6 +5,7 @@ homepage="https://github.com/libuv/libuv"
 description="Multi-platform support library with a focus on asynchronous I/O."
 repo=$name/$name
 version=$(gh_ver $repo)
+depends=(glibc)
 filename="$name-v$version.tar.gz"
 direname="${filename/.tar.*/}"
 download_src "https://dist.libuv.org/dist/v$version/$filename"

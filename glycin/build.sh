@@ -6,7 +6,7 @@ homepage="https://gitlab.gnome.org/GNOME/glycin"
 version=$(gn_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(bubblewrap fontconfig glib2 lcms2 libheif libjxl librsvg libseccomp rust vala)
+depends=(brotli bubblewrap bzip2 cairo dav1d elfutils expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk4 harfbuzz highway icu lcms2 libaom libde265 libdrm libepoxy libffi libglvnd libgudev libheif libjpeg-turbo libjxl libogg libpng librsvg libseccomp libunwind libwebp libx11 libxau libxcb libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxml2 libxrandr libxrender mesa numactl orc pango pcre2 pixman rust systemd tiff util-linux vala vulkan-loader wayland x264 x265 xz zlib zstd)
 gn_download "$filename"
 unpk_enter "$filename" "$direname"
 sed -e "s/get_option('libglycin-gtk4')/(& or get_option('glycin-thumbnailer'))/" \

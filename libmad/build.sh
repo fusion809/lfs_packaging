@@ -5,6 +5,7 @@ homepage="https://www.underbit.com/products/mad/"
 description="High-quality MPEG audio decoder."
 repo="tenacityteam/libmad"
 version=$(cb_ver $repo)
+depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 cbr_download "$repo" "$version" "$filename"

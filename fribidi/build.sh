@@ -5,6 +5,7 @@ homepage="https://github.com/fribidi/fribidi"
 description="Free Implementation of the Unicode Bidirectional Algorithm."
 repo=$name/$name
 version=$(gh_ver $repo)
+depends=(glibc)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 ghr_download "$repo" "v$version" "$filename"

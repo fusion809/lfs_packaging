@@ -7,7 +7,7 @@ description="GObject library to create cabinet files."
 version=$(gn_ver $name)
 direname="$name-$version"
 filename="$direname.tar.xz"
-depends=(bash coreutils gcc glib glib2 glibc gtk-doc libffi meson ninja pcre2 sed tar util-linux vala xz zlib)
+depends=(bash coreutils gcc glib glib2 glibc gtk-doc libffi meson ninja pcre2 sed systemd tar util-linux vala xz zlib)
 # Fetch and unpack source
 gn_download "$filename"
 unpk_enter "$filename" "$direname"

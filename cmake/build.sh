@@ -24,7 +24,7 @@ version=$(get_version)
 majVer=$(echo $version | sed -E 's/.[0-9]+$//g')
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(curl libarchive libuv nghttp2)
+depends=(acl brotli bzip2 curl cyrus-sasl expat gcc glibc icu libarchive libidn2 libpsl libunistring libuv libxml2 lz4 ncurses nghttp2 openldap openssl xz zlib zstd)
 download_src "https://cmake.org/files/v$majVer/$filename"
 unpk_enter "$filename" "$direname"
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake &&

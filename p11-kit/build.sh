@@ -7,7 +7,7 @@ repo=p11-glue/p11-kit
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(libtasn1 make-ca nss)
+depends=(glibc libffi libtasn1 make-ca nss)
 ghr_download "$repo" "$version" "$filename" 
 unpk_enter "$filename" "$direname"
 sed '20,$ d' -i trust/trust-extract-compat &&

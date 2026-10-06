@@ -21,6 +21,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
+depends=(glibc libxcrypt)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 download_src "https://www.cpan.org/src/$(echo $version | sed 's/\..*/.0/g')/$filename"

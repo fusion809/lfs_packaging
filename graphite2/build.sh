@@ -7,7 +7,7 @@ description="Smart font system for handling lesser-known languages of the world.
 version=$(gh_ver $repo)
 filename="$name-$version.tgz"
 direname="${filename/.tgz/}"
-depends=(cmake)
+depends=(cmake gcc glibc)
 ghr_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 sed -i '/cmake_policy(SET CMP0012 NEW)/d' CMakeLists.txt &&

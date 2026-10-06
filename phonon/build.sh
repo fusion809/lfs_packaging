@@ -5,7 +5,7 @@ homepage="https://download.kde.org/stable/phonon/"
 description="Multimedia API for KDE."
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(brotli bzip2 dbus double-conversion expat flac fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu lame libdrm libelf libffi libogg libpciaccess libpng libsndfile libvorbis libx11 libxau libxcb libxdmcp libxext libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mpg123 opus pcre2 pulseaudio qt6 spirv-tools systemd wayland xz zlib zstd)
+depends=(brotli bzip2 dbus double-conversion expat flac fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu lame libdrm libelf libffi libglvnd libogg libpciaccess libpng libsndfile libvorbis libx11 libxau libxcb libxdmcp libxext libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mpg123 openssl opus pcre2 pulseaudio qt6 spirv-tools systemd wayland xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 kde_download "$filename"

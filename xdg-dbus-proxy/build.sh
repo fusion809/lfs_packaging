@@ -5,7 +5,7 @@ homepage="https://github.com/flatpak/xdg-dbus-proxy"
 description="Filtering proxy for D-Bus connections."
 repo="flatpak/$name"
 version=$(gh_ver $repo)
-depends=(glib2 glib2 glibc libffi pcre2 util-linux zlib)
+depends=(glib2 glibc libffi pcre2 systemd util-linux zlib)
 direname="$name-$version"
 filename="$direname.tar.xz"
 ghr_download "$repo" "$version" "$filename"

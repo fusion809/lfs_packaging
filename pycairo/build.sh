@@ -6,7 +6,7 @@ homepage="https://www.cairographics.org/pycairo/"
 description="Python bindings for Cairo graphics library."
 version=$(gh_ver $repo)
 majVer=$(echo $version | sed 's/.[0-9]$//g')
-depends=(cairo)
+depends=(brotli bzip2 cairo expat fontconfig freetype glibc libpng libx11 libxau libxcb libxdmcp libxext libxrender pixman zlib)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 ghr_download "pygobject/pycairo" "v$version" "$filename"

@@ -20,7 +20,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-depends=(glibc json-c keyutils libaio libnvme ncurses openssl readline systemd util-linux)
+depends=(gcc glibc json-c keyutils libaio libnvme libselinux ncurses openssl pcre2 readline systemd util-linux)
 filename="LVM2.$version.tgz"
 direname="${filename/.tgz/}"
 # Has kernel config deps, too

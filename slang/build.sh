@@ -18,7 +18,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-depends=(gcc glibc glslang spirv-tools)
+depends=(gcc glibc glslang libpng ncurses readline spirv-tools zlib)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
 download_src "$homepage/$filename"

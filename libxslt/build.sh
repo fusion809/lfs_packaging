@@ -7,7 +7,7 @@ version=$(gn_ver $name)
 majVer=$(echo $version | sed -E 's/.[0-9]+$//g')
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(docbook-xml docbook-xsl-nons libxml2)
+depends=(docbook-xml docbook-xsl-nons gcc glibc icu libxml2)
 gn_download "$filename"
 unpk_enter "$filename" "$direname"
 configure_options=(--prefix=/usr    \

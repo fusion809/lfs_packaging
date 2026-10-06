@@ -6,7 +6,7 @@ description="Miscellaneous procfs tools."
 version=$(gl_ver "$name/$name")
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(coreutils gcc make ncurses tar xz)
+depends=(coreutils gcc glibc make ncurses tar xz)
 sf_download "$name" "" "$filename"
 unpk_enter "$filename" "$direname"
 cmi --prefix=/usr

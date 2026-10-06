@@ -7,7 +7,7 @@ homepage="https://rrthomas.github.io/enchant/"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(aspell glib2 vala)
+depends=(aspell gcc glib2 glibc libffi pcre2 systemd util-linux vala zlib)
 ghr_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 configure_options=(

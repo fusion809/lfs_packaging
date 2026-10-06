@@ -12,6 +12,7 @@ get_version() {
 	echo "$(gh_ver $repo)"
 }
 version=$(get_version)
+depends=(acl avahi bzip2 cups cyrus-sasl dbus e2fsprogs gcc gdbm glibc gmp gnutls icu jansson keyutils libarchive libcap libffi libidn2 libselinux libsepol libtasn1 libtirpc libunistring libxcrypt libxml2 linux-pam lmdb lz4 mitkrb ncurses nettle openldap openssl p11-kit pcre2 popt python readline systemd xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 download_src "https://download.samba.org/pub/samba/stable/$filename"

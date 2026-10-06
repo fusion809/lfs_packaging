@@ -1,12 +1,13 @@
 #!/bin/bash
 set -e
 # Variable declarations
-name=R
+name=r
+_name=R
 homepage="https://www.r-project.org"
 description="High-level, interpreted and statistics-focused programming language."
 function R_version {
-  local inst_ver=$(pkgver $name)
-  local art_ver=$(artver $name)
+  local inst_ver=$(pkgver $_name)
+  local art_ver=$(artver $_name)
   local up_ver1=$(wget -cqO- https://cran.r-project.org/sources.html | grep ".tar.gz" | grep -v "alpha\|beta\|\.rc" | head -n 1 | cut -d '"' -f 2 | cut -d '/' -f 4 | sed 's/.tar.gz//g' | cut -d '-' -f 2) 
   ver_check "$up_ver1" "$inst_ver" "$art_ver" && return
 
@@ -24,19 +25,19 @@ function R_version {
   )
   ver_check "$up_ver2" "$inst_ver" "$art_ver" && return
 
-  local vat_ver=$(vatver $name)
+  local vat_ver=$(vatver $_name)
   ver_check "$vat_ver" "$inst_ver" "$art_ver" && return
 
-  local arch_ver=$(aver $name)
+  local arch_ver=$(aver $_name)
   ver_check "$arch_ver" "$inst_ver" "$art_ver" && return
   fver "$name" "$inst_ver"
 }
 version=$(R_version)
-direname="$name-$version"
+direname="$_name-$version"
 filename="$direname.tar.xz"
 depends=(bash blas-lapack brotli bzip2 cairo coreutils curl cyrus-sasl expat fontconfig freetype fribidi gcc glib glib2 glibc graphite2 harfbuzz icu java libffi libice libidn2 libjpeg-turbo libpng libpsl libsm libtiff libtirpc libunistring libwebp libx11 libxau libxcb libxdmcp libxext libxmu libxrender libxt make ncurses nghttp2 openldap openssl pango pcre2 pixman readline sed systemd tar tiff tk util-linux which xz zip zlib zstd)
 # Fetch and unpack source
-download_src "https://cran.r-project.org/src/base/$name-${version/.*/}/$filename"
+download_src "https://cran.r-project.org/src/base/$_name-${version/.*/}/$filename"
 unpk_enter "$filename" "$direname"
 # Compile and install
 CFLAGS="-O2 -fPIC"
@@ -59,7 +60,7 @@ sudo cp -a \
    COPYING README SVN-REVISION VERSION VERSION-NICK \
    /usr/share/doc/$direname
 cd ..
-sudo install -Dm755 $name.desktop /usr/share/applications
+sudo install -Dm755 $_name.desktop /usr/share/applications
 # Cleanup and add to database
 sudo rm -rf $filename $direname
 echo $version | sudo tee /var/lib/custom-packages/$name

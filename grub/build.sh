@@ -7,7 +7,7 @@ repo=gnu-grub/grub
 version=$(gnu_ver $name)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
-depends=(gcc git glibc make tar wget xz)
+depends=(brotli bzip2 freetype fuse gcc git glibc libpng libselinux libtasn1 lvm2 make pcre2 systemd tar wget xz zlib)
 gfd_download "$repo" "$direname" "$filename"
 unpk_enter "$filename"
 if ( cat /etc/fstab | grep "efi\|fat" &> /dev/null ) && [[ $(uname -m) == "x86_64" ]]; then

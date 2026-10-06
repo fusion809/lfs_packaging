@@ -7,7 +7,7 @@ repo=libopenraw/$name
 version=$(gfd_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(boost)
+depends=(boost expat gcc glibc zlib)
 download_src "https://libopenraw.freedesktop.org/download/$filename"
 unpk_enter "$filename" "$direname"
 sed -i -r '/^\s?testadobesdk/d' exempi/Makefile.am &&

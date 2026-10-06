@@ -8,7 +8,7 @@ repo="tesseract-ocr/tesseract"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
-depends=(acl bash brotli bzip2 coreutils curl cyrus-sasl gcc giflib glibc gzip icu leptonica libarchive libarchive libidn2 libjpeg-turbo libpng libpsl libtiff libunistring libwebp libxml2 lz4 make nghttp2 openjpeg openldap openssl pango tar wget xz zlib zstd)
+depends=(acl bash brotli bzip2 coreutils curl cyrus-sasl gcc giflib glibc gzip icu leptonica libarchive libidn2 libjpeg-turbo libpng libpsl libtiff libunistring libwebp libxml2 lz4 make nghttp2 openjpeg openldap openssl pango tar tiff wget xz zlib zstd)
 # Fetch and unpack source
 gha_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"

@@ -28,6 +28,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
+depends=(glibc ncurses readline zlib)
 filename="$name-autoconf-$version.tar.gz"
 direname="${filename/.tar.*/}"
 docs_filename="$name-doc-$version.zip"

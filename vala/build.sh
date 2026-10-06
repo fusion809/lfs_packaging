@@ -6,7 +6,7 @@ description="Compiler for the GObject type system."
 version=$(gh_ver GNOME/vala)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(glib2 graphviz)
+depends=(expat glib2 glibc graphviz libffi libtool pcre2 zlib)
 gn_download $name $version
 unpk_enter "$filename" "$direname"
 if [[ $(pkgver vala) != $version ]]; then

@@ -8,7 +8,7 @@ repo=$name/$name
 version=$(gh_ver $repo)
 direname="$name-$version"
 filename="$direname.tar.xz"
-depends=(acl bzip2 coreutils gcc glibc libxml2 lz4 make openssl tar wget xz zlib zstd)
+depends=(acl bzip2 coreutils gcc glibc icu libxml2 lz4 make openssl tar wget xz zlib zstd)
 ghr_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --disable-static

@@ -7,7 +7,7 @@ repo=$name/$name
 version=$(gh_ver "$repo")
 filename="$name-$version.tar.gz"
 direname="$name-$version"
-depends=(at-spi2-core bash brotli bzip2 cairo coreutils dbus dconf elfutils expat fontconfig freetype fribidi gcc gdk-pixbuf gettext glib2 glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk3 gtk3 gtk4 gzip harfbuzz iso-codes lcms2 libdrm libelf libepoxy libffi libgudev libjpeg-turbo libnotify libnotify libpciaccess libpng libseccomp libsoup libtiff libunwind libwebp libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxml2 libxrandr libxrender libxres libxshmfence libxxf86vm llvm lm-sensors mesa orc pango pcre2 pixman python spirv-tools systemd tar util-linux vala vulkan-loader wayland wget xz zip zlib zstd)
+depends=(at-spi2-core bash brotli bzip2 cairo coreutils dbus dconf elfutils expat fontconfig freetype fribidi gcc gdk-pixbuf gettext glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk3 gtk4 gzip harfbuzz iso-codes lcms2 libdrm libelf libepoxy libffi libglvnd libgudev libjpeg-turbo libnotify libpciaccess libpng libseccomp libsoup libtiff libunwind libwebp libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxml2 libxrandr libxrender libxres libxshmfence libxxf86vm llvm lm-sensors mesa orc pango pcre2 pixman python spirv-tools systemd tar tiff util-linux vala vulkan-loader wayland wget xz zip zlib zstd)
 gha_download "$repo" "$version" "$filename"
 LFS_URL="https://www.linuxfromscratch.org/blfs/view/systemd/general/ibus.html"
 UCD_URL=$(wget -T 5 -t 1 -cqO- $LFS_URL \

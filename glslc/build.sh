@@ -7,7 +7,7 @@ description="Compiler for OpenGL/high-level shading language."
 version=$(gh_ver $repo)
 filename="shaderc-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(cmake glslang spirv-tools)
+depends=(cmake gcc glibc glslang spirv-tools)
 gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 sed '/build-version/d'   -i glslc/CMakeLists.txt            &&

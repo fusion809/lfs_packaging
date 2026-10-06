@@ -7,7 +7,7 @@ repo="cyrusimap/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(lmdb)
+depends=(e2fsprogs glibc keyutils libxcrypt linux-pam lmdb mitkrb openssl)
 ghr_download "$repo" "$direname" "$filename"
 unpk_enter "$filename" "$direname"
 gap_patches $name || echo "Applying patches failed... Continuing anyway."

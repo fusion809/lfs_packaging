@@ -5,7 +5,7 @@ homepage="http://lame.sourceforge.net/"
 description="High quality MPEG Audio Layer III (MP3) encoder."
 repo=${name}project/$name
 version=$(gh_ver $repo)
-depends=(glibc ncurses)
+depends=(glibc mpg123 ncurses)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 sf_download "$name" "$version" "$filename"

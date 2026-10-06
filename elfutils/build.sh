@@ -24,7 +24,7 @@ get_version() {
 version=$(get_version)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
-depends=(acl brotli bzip2 curl cyrus-sasl gcc glibc json-c libarchive libarchive libelf libidn2 libpsl libunistring libxml2 lz4 nghttp2 openldap openssl sqlite xz zlib zstd)
+depends=(acl brotli bzip2 curl cyrus-sasl gcc glibc icu json-c libarchive libelf libidn2 libpsl libunistring libxml2 lz4 nghttp2 openldap openssl sqlite xz zlib zstd)
 download_src "https://sourceware.org/elfutils/ftp/$version/$filename"
 unpk_enter "$filename" "$direname"
 ./configure --prefix=/usr        \

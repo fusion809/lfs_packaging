@@ -6,7 +6,7 @@ description="Multimedia graph framework - base plugins."
 version=$(gfd_ver gstreamer/gstreamer)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(alsa-lib cdparanoia glib2 gstreamer iso-codes libgudev libjpeg-turbo libogg libpng libvorbis mesa pango wayland-protocols xorg-libs)
+depends=(alsa-lib brotli bzip2 cairo cdparanoia elfutils expat fontconfig freetype fribidi gcc glib2 glibc graphene graphite2 gstreamer harfbuzz iso-codes libdrm libffi libglvnd libgudev libjpeg-turbo libogg libpng libunwind libvorbis libx11 libxau libxcb libxdmcp libxext libxi libxrender libxv mesa opus orc pango pcre2 pixman systemd util-linux wayland wayland-protocols xorg-libs xz zlib zstd)
 download_src "https://gstreamer.freedesktop.org/src/$name/$filename"
 unpk_enter "$filename" "$direname"
 meson_options=(--prefix=/usr       \

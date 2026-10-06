@@ -4,7 +4,7 @@ name=e2fsprogs
 homepage="http://e2fsprogs.sourceforge.net"
 description="Ext2/3/4 filesystem utilities."
 version=$(sf_ver $name/$name)
-depends=(bash coreutils gcc glibc gzip make tar wget)
+depends=(bash coreutils fuse gcc glibc gzip make tar util-linux wget)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 sf_download "$name" "v$version" "$filename"

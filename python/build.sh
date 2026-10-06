@@ -22,7 +22,7 @@ version=$(get_version)
 filename="Python-$version.tar.xz"
 direname="${filename/.tar.*/}"
 docs_filename="python-${version}-docs-html.tar.bz2"
-depends=(gcc glibc make ncurses tar wget xz)
+depends=(bzip2 expat gcc gdbm glibc libffi make mpdecimal ncurses openssl readline sqlite tar util-linux wget xz zlib zstd)
 download_src "https://www.python.org/ftp/python/$version/$filename"
 download_src "https://www.python.org/ftp/python/doc/$version/$docs_filename"
 unpk_enter "$filename" "$direname"

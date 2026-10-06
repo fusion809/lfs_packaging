@@ -4,6 +4,7 @@ name=nettle
 description="Low-level cryptographic library."
 homepage="https://www.gnu.org/software/nettle/"
 version=$(gnu_ver nettle)
+depends=(glibc gmp)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gnu_download $name $filename

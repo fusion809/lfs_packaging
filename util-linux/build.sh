@@ -21,6 +21,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
+depends=(bzip2 file glibc libseccomp libxcrypt ncurses readline systemd xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 download_src "https://www.kernel.org/pub/linux/utils/util-linux/v$(echo $version | sed -E 's/.[0-9]+$//g')/$filename"

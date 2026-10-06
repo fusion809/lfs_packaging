@@ -5,6 +5,7 @@ homepage="https://github.com/google/woff2"
 description="Web Open Font Format 2 reference implementation."
 repo=google/$name
 version=$(gh_ver $repo)
+depends=(brotli gcc glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"

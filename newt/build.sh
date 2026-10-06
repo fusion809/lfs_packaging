@@ -18,7 +18,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-depends=(glibc popt python tcl zlib)
+depends=(glibc popt python slang tcl zlib)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 download_src "https://releases.pagure.org/newt/$filename"

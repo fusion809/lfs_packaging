@@ -7,7 +7,7 @@ description="Fortran77 subroutines for solving large scale eigenvalue problems."
 _name="arpack-ng"
 repo="opencollab/arpack-ng"
 version=$(gh_ver $repo)
-depends=(bash coreutils gcc gcc glibc gzip hwloc lapack libevent libfabric make numactl openmpi openpmix sed systemd tar wget)
+depends=(bash coreutils gcc glibc gzip hwloc lapack libevent libfabric make numactl openblas openmpi openpmix sed systemd tar wget)
 filename="$_name-$version.tar.gz"
 direname=${filename/.tar.gz/}
 # Fetch and unpack source

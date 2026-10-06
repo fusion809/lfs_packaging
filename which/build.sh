@@ -4,6 +4,7 @@ name=which
 description="Utility to show the full path of commands."
 homepage="https://gnu.org/s/which/"
 version=$(gnu_ver $name)
+depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 download_src "https://mirror.freedif.org/pub/blfs/development/w/$filename"

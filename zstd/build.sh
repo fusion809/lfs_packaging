@@ -5,7 +5,7 @@ description="Zstandard - Fast real-time compression algorithm."
 homepage="https://facebook.github.io/zstd/"
 repo=facebook/$name
 version=$(gh_ver $repo)
-depends=(coreutils gcc glibc gzip make tar)
+depends=(coreutils gcc glibc gzip lz4 make tar xz zlib)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 ghr_download "$repo" "v$version" "$filename"

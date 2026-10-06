@@ -19,6 +19,7 @@ get_version() {
   fver "$name" "$inst_ver"
 }
 version=$(get_version)
+depends=(glibc)
 filename="openldap-LMDB_$version.tar.bz2"
 direname="${filename/.tar.*/}"
 download_src "$url/-/archive/LMDB_$version/$filename"

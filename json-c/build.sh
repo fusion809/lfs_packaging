@@ -7,7 +7,7 @@ homepage="https://github.com/$repo"
 version=$(gh_ver "$repo" | sed -E 's/[.-][0-9]+$//g')
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(cmake)
+depends=(cmake glibc)
 download_src "https://s3.amazonaws.com/json-c_releases/releases/$filename"
 unpk_enter "$filename" "$direname"
 cmake_options=(

@@ -5,6 +5,7 @@ homepage="https://github.com/rrthomas/libpaper"
 description="Library for handling paper characteristics."
 repo=rrthomas/$name
 version=$(gh_ver $repo)
+depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 ghr_download "$repo" "v$version" "$filename"

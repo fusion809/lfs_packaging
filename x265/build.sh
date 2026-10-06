@@ -7,7 +7,7 @@ repo=Multicorewareinc/$name
 version=$(gh_ver $repo)
 filename="${name}_$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(cmake nasm)
+depends=(cmake gcc glibc nasm numactl)
 ghr_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 sed -i 's/FORMAT_ELF/UNIX64 \&\& FORMAT_ELF/' source/common/x86/cpu-a.asm

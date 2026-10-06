@@ -5,7 +5,7 @@ homepage="https://rsync.samba.org/"
 description="Fast and versatile file copying tool for remote and local files."
 repo=RsyncProject/$name
 version=$(gh_ver $repo)
-depends=(acl glibc lz4 openssl popt zlib zstd)
+depends=(acl glibc libidn2 libunistring lz4 openssl popt zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 download_src "https://www.samba.org/ftp/rsync/src/$filename"

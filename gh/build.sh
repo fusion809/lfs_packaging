@@ -6,6 +6,7 @@ homepage="https://github.com/cli/cli"
 description="GitHub's modern command-line client."
 repo=$_name/$_name
 version=$(gh_ver $repo)
+depends=(glibc)
 filename="${_name}-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"

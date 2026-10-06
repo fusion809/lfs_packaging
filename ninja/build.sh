@@ -5,7 +5,7 @@ homepage="https://ninja-build.org/"
 description="Small build system with a focus on speed."
 repo=${name}-build/$name
 version=$(gh_ver $repo)
-depends=(bash coreutils gzip python sed tar)
+depends=(bash coreutils gcc glibc gzip python sed tar)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"

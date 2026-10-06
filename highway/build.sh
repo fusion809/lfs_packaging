@@ -7,7 +7,7 @@ repo=google/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(cmake)
+depends=(cmake gcc glibc)
 gha_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 cmake_options=(

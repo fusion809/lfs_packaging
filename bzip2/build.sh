@@ -4,7 +4,7 @@ name=bzip2
 description="High-quality data compression program."
 homepage="https://sourceware.org/bzip2/"
 version=$(sw_ver $name)
-depends=(coreutils gcc gzip make tar)
+depends=(coreutils gcc glibc gzip make tar)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 sw_download "$name" "$filename"

@@ -5,7 +5,7 @@ repo=GNOME/$name
 homepage="https://libsoup.gnome.org/"
 description="HTTP client/server library for GNOME."
 version=$(gn_ver $name)
-depends=(brotli e2fsprogs glib2 glibc keyutils libffi libidn2 libpsl libunistring mitkrb nghttp2 pcre2 sqlite systemd util-linux zlib)
+depends=(brotli e2fsprogs glib2 glibc keyutils libffi libidn2 libpsl libunistring mitkrb nghttp2 pcre2 sqlite systemd util-linux zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "$version" "$filename"

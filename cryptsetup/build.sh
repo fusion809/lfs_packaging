@@ -6,7 +6,7 @@ description="Setup tool for transparent encryption of block devices using dm-cry
 repo=mbroz/$name
 version=$(gh_ver $repo)
 majMinVer=$(echo $version | cut -d '.' -f1-2)
-depends=(glibc json-c lvm2 openssl popt systemd util-linux)
+depends=(gcc glibc json-c libselinux lvm2 openssl pcre2 popt systemd util-linux)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 # Kernel options required

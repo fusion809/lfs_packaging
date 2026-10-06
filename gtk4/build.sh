@@ -7,7 +7,7 @@ homepage="https://www.gtk.org"
 version=$(gn_ver $_name $name)
 filename="$_name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(adwaita-icon-theme gdk-pixbuf glslc graphene gst-plugins-bad gst-plugins-good hicolor-icon-theme iso-codes libepoxy librsvg libxkbcommon pango pygobject vulkan-loader wayland-protocols xdg-desktop-portal xdg-desktop-portal-gnome)
+depends=(adwaita-icon-theme brotli bzip2 cairo elfutils expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glslc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gst-plugins-good gstreamer harfbuzz hicolor-icon-theme iso-codes libdrm libepoxy libffi libglvnd libgudev libjpeg-turbo libpng librsvg libseccomp libunwind libwebp libx11 libxau libxcb libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxrandr libxrender mesa orc pango pcre2 pixman pygobject systemd tiff util-linux vulkan-loader wayland wayland-protocols xdg-desktop-portal xdg-desktop-portal-gnome xz zlib zstd)
 # Requires userspace dmabuf misc driver from kernel
 gn_download "$filename"
 unpk_enter "$filename" "$direname"

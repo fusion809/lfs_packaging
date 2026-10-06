@@ -3,7 +3,7 @@ set -e
 name=bash
 homepage="https://www.gnu.org/software/bash/"
 description="The GNU Bourne Again shell."
-version=$(gnu_ver $name)
+version=$(gnu_ver $name | cut -d '.' -f1-2)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(gcc glibc gzip make ncurses readline tar wget)

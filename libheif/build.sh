@@ -5,7 +5,7 @@ homepage="https://github.com/strukturag/libheif"
 description="An HEIF and AVIF file format decoder and encoder."
 repo="strukturag/$name"
 version=$(gh_ver $repo)
-depends=(libaom libde265 x265)
+depends=(gcc glibc libaom libde265 libjpeg-turbo libpng libwebp numactl sdl2-compat tiff x264 x265 xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 ghr_download "$repo" "v$version" "$filename"

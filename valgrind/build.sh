@@ -4,7 +4,7 @@ name=valgrind
 description="Tool to help find memory-management problems in programs."
 homepage="https://valgrind.org/"
 version=$(sw_ver $name)
-depends=(glibc hwloc libevent libfabric numactl openmpi systemd)
+depends=(glibc hwloc libevent libfabric numactl openmpi openpmix systemd)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.*/}"
 sw_download "$name" "$filename"

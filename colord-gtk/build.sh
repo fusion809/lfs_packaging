@@ -5,7 +5,7 @@ homepage="https://github.com/hughsie/colord-gtk"
 description="Additional GTK3 support code for colord."
 repo=hughsie/$name
 version=$(gh_ver $repo)
-depends=(at-spi2-core brotli bzip2 cairo colord dbus elfutils expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk3 gtk4 harfbuzz icu lcms2 libdrm libepoxy libffi libgudev libjpeg-turbo libpciaccess libpng libseccomp libunwind libwebp libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxml2 libxrandr libxrender libxres libxshmfence libxxf86vm llvm lm-sensors mesa orc pango pcre2 pixman spirv-tools systemd tiff util-linux vulkan-loader wayland xz zlib zstd)
+depends=(at-spi2-core brotli bzip2 cairo colord dbus elfutils expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk3 gtk4 harfbuzz icu lcms2 libdrm libepoxy libffi libglvnd libgudev libjpeg-turbo libpciaccess libpng libseccomp libunwind libwebp libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxml2 libxrandr libxrender libxres libxshmfence libxxf86vm llvm lm-sensors mesa orc pango pcre2 pixman spirv-tools systemd tiff util-linux vulkan-loader wayland xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 fd_download "$filename"

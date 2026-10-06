@@ -6,6 +6,7 @@ homepage="https://nodejs.org/"
 description="Evented I/O for V8 javascript - package built from precompiled binaries."
 repo=$_name/node
 version=$(gh_ver $repo)
+depends=(gcc glibc)
 filename="node-v$version-linux-x64.tar.xz"
 direname="${filename/.tar.*/}"
 download_src "https://nodejs.org/dist/v$version/$filename"

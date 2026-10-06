@@ -5,7 +5,7 @@ homepage="https://kde.org/plasma-desktop/"
 description="Integrate the Bluetooth technology within KDE workspace and applications."
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(acl attr bluez-qt breeze-icons brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kbookmarks kcmutils kcodecs kcolorscheme kcompletion kconfig kcoreaddons kcrash kdbusaddons keyutils kglobalaccel kguiaddons ki18n kiconthemes kio kirigami kitemviews kjobwidgets knotifications kpackage kservice ksvg kwidgetsaddons kwindowsystem libcanberra libdrm libelf libffi libogg libpciaccess libplasma libpng libvorbis libx11 libxau libxcb libxdmcp libxext libxfixes libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 plasma-activities qt6 solid spirv-tools systemd util-linux wayland webkitgtk xcb-util-keysyms xz zlib zstd)
+depends=(acl attr bluez-qt breeze-icons brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kbookmarks kcmutils kcodecs kcolorscheme kcompletion kconfig kcoreaddons kcrash kdbusaddons keyutils kglobalaccel kguiaddons ki18n kiconthemes kio kirigami kitemviews kjobwidgets knotifications kpackage kservice ksvg kwidgetsaddons kwindowsystem libcanberra libdrm libelf libffi libglvnd libogg libpciaccess libplasma libpng libtool libvorbis libx11 libxau libxcb libxdmcp libxext libxfixes libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 plasma-activities qt6 solid spirv-tools systemd util-linux wayland webkitgtk xcb-util-keysyms xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"

@@ -18,6 +18,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
+depends=(glibc)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 # INPUT_EVDEV and INPUT_UINPUT kernel options required

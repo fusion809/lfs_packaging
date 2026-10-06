@@ -7,7 +7,7 @@ version=$(gnu_ver aspell)
 majVer=$(echo $version | sed 's/.[0-9]+.[0-9]+//g' -E)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(which)
+depends=(gcc glibc ncurses which)
 gnu_download $name $filename
 dict_url=$(wget -T 5 -t 1 -cqO- https://www.linuxfromscratch.org/blfs/view/systemd/general/aspell.html | grep -oE "https:.*aspell.*.bz2" | head -n 1)
 dict_filename=$(echo $dict_url | sed -E 's|.*/||g')

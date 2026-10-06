@@ -5,6 +5,7 @@ homepage="https://github.com/yasm/yasm"
 description="Rewrite of NASM to allow for multiple syntax supported."
 repo="$name/$name"
 version=$(gh_ver $repo)
+depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 download_src "https://www.tortall.net/projects/yasm/releases/$filename"

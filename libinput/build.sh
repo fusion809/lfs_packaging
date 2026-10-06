@@ -21,7 +21,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-depends=(glibc libevdev lua mtdev systemd)
+depends=(brotli bzip2 cairo elfutils expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphene graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk4 harfbuzz libdrm libepoxy libevdev libffi libglvnd libgudev libjpeg-turbo libpng libseccomp libunwind libwacom libwebp libx11 libxau libxcb libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxrandr libxrender lua mesa mtdev orc pango pcre2 pixman systemd tiff util-linux vulkan-loader wayland xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gfd_download "$repo" "$version" "$filename"

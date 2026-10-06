@@ -5,7 +5,7 @@ homepage="https://www.webmproject.org/"
 description="VP8 and VP9 codec."
 repo="webmproject/$name"
 version=$(gh_ver $repo)
-depends=(nasm which yasm)
+depends=(gcc glibc nasm which yasm)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"

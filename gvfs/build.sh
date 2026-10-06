@@ -5,7 +5,7 @@ homepage="https://gitlab.gnome.org/GNOME/gvfs"
 description="Virtual filesystem implementation for GIO."
 repo=GNOME/$name
 version=$(gh_ver $repo)
-depends=(brotli e2fsprogs gcc gcr4 glib2 glibc icu keyutils libcdio libffi libgcrypt libgpg-error libgudev libidn2 libpsl libsecret libsoup libunistring libxml2 mitkrb nghttp2 p11-kit pcre2 polkit sqlite systemd udisks util-linux zlib)
+depends=(brotli e2fsprogs gcc gcr4 glib2 glibc icu keyutils libcdio libffi libgcrypt libgpg-error libgudev libidn2 libpsl libsecret libsoup libunistring libxml2 mitkrb nghttp2 p11-kit pcre2 polkit sqlite systemd udisks util-linux zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 gn_download "$filename"

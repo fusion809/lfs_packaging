@@ -5,6 +5,7 @@ homepage="https://duktape.org/"
 description="Embeddable Javascript engine."
 repo="svaarala/$name"
 version=$(gh_ver $repo)
+depends=(glibc)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 download_src "https://duktape.org/$filename"

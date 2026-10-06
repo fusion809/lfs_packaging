@@ -7,7 +7,7 @@ description="Plotting package which outputs to X11, PostScript, PNG, GIF, and ot
 version=$(sf_ver "gnuplot/gnuplot-main")
 direname="$name-$version"
 filename="$direname.tar.gz"
-depends=(bash brotli bzip2 cairo coreutils expat fontconfig freetype fribidi gcc gd glib glib2 glibc graphite2 gtk3 gzip harfbuzz libffi libpng libwebp libx11 libx11 libxau libxcb libxdmcp libxext libxrender lua make ncurses pango pango pcre2 pixman qt6 readline tar util-linux zlib)
+depends=(bash brotli bzip2 cairo coreutils expat fontconfig freetype fribidi gcc gd glib glib2 glibc graphite2 gtk3 gzip harfbuzz libffi libpng libwebp libx11 libxau libxcb libxdmcp libxext libxrender lua make ncurses pango pcre2 pixman qt6 readline systemd tar util-linux zlib)
 # libcaca, libcerf  and wxwidgets are listed for Arch, but seems to run for my uses without them
 # Fetch and unpack source
 sf_download "$name" "$version" "$filename"

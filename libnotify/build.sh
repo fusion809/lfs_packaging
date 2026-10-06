@@ -7,7 +7,7 @@ description="Library for sending desktop notifications."
 version=$(gn_ver libnotify)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
-depends=(brotli bzip2 expat fontconfig freetype gcc gdk-pixbuf glib2 glib2 glibc glycin lcms2 libffi libpng libseccomp pcre2 util-linux zlib)
+depends=(brotli bzip2 expat fontconfig freetype gcc gdk-pixbuf glib2 glibc glycin lcms2 libffi libpng libseccomp pcre2 systemd util-linux zlib)
 # Fetch source and unpack it
 gn_download "$filename"
 unpk_enter "$filename" "$direname"

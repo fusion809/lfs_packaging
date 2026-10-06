@@ -5,7 +5,7 @@ homepage="https://kde.org/plasma-desktop/"
 description="Library for accessing the usage data collected by the activities system."
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(dbus double-conversion gcc glib2 glibc icu kconfig pcre2 plasma-activities qt6 systemd zlib zstd)
+depends=(dbus double-conversion gcc glib2 glibc icu kconfig openssl pcre2 plasma-activities qt6 systemd zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"

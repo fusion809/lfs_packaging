@@ -7,7 +7,7 @@ description="Eye of Gnome: An image viewing and cataloging program."
 version=$(gn_ver $name)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
-depends=(at-spi2-core brotli bzip2 cairo dav1d dbus dconf exempi expat fontconfig freetype fribidi gcc gdk-pixbuf glib glib2 glibc glycin gnome-desktop graphite2 gtk3 gtk3 harfbuzz hicolor-icon-theme lcms lcms2 libepoxy libexif libffi libhandy libjpeg-turbo libpeas libpng libportal librsvg libseccomp libx11 libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxml2 libxrandr libxrender libxres meson pango pcre2 pixman systemd util-linux wayland webkitgtk zlib)
+depends=(at-spi2-core brotli bzip2 cairo dav1d dbus dconf exempi expat fontconfig freetype fribidi gcc gdk-pixbuf glib glib2 glibc glycin gnome-desktop graphite2 gtk3 harfbuzz hicolor-icon-theme icu lcms lcms2 libepoxy libexif libffi libhandy libjpeg-turbo libpeas libpng libportal librsvg libseccomp libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxml2 libxrandr libxrender libxres meson pango pcre2 pixman systemd util-linux wayland webkitgtk zlib)
 # Fetch source and unpack it
 ggn_download "$filename"
 unpk_enter "$filename" "$direname"

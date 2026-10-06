@@ -7,7 +7,7 @@ homepage="https://api.kde.org/legacy/qca/html/index.html"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(cmake make-ca qt6 which)
+depends=(cmake cyrus-sasl double-conversion gcc glib2 glibc icu libgcrypt libgpg-error make-ca nspr nss openssl pcre2 qt6 sqlite systemd which zlib zstd)
 kde_download "$filename"
 unpk_enter "$filename" "$direname"
 sed -i 's@cert.pem@certs/ca-bundle.crt@' CMakeLists.txt

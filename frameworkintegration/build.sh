@@ -5,7 +5,7 @@ homepage="https://develop.kde.org/products/frameworks/"
 description="Framework allowing applications to integrate with a KDE Workspace."
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(attica breeze-icons brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kcodecs kcolorscheme kconfig kcoreaddons keyutils kguiaddons ki18n kiconthemes knewstuff knotifications kpackage kwidgetsaddons libcanberra libdrm libelf libffi libogg libpciaccess libpng libvorbis libx11 libxau libxcb libxdmcp libxext libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qt6 spirv-tools syndication systemd util-linux wayland webkitgtk xz zlib zstd)
+depends=(attica breeze-icons brotli bzip2 dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu karchive kcodecs kcolorscheme kconfig kcoreaddons keyutils kguiaddons ki18n kiconthemes knewstuff knotifications kpackage kwidgetsaddons libcanberra libdrm libelf libffi libglvnd libogg libpciaccess libpng libtool libvorbis libx11 libxau libxcb libxdmcp libxext libxkbcommon libxml2 libxshmfence libxxf86vm llvm lm-sensors mesa mitkrb openssl pcre2 qt6 spirv-tools syndication systemd util-linux wayland webkitgtk xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 kde_download "frameworks" "$filename"

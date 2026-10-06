@@ -19,7 +19,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-depends=(tcl)
+depends=(glibc tcl)
 filename="${name}${version}.tar.gz"
 direname="${filename/.tar.*/}"
 download_src "https://prdownloads.sourceforge.net/$name/$filename"
