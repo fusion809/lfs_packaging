@@ -34,7 +34,7 @@ function R_version {
 version=$(R_version)
 direname="$name-$version"
 filename="$direname.tar.xz"
-depends=(bash blas-lapack bzip2 cairo coreutils curl gcc glib glibc icu java libjpeg-turbo libpng libtiff libtirpc libx11 libxmu libxt make pango pcre2 readline sed tar tk which xz zip zlib zstd)
+depends=(bash blas-lapack brotli bzip2 cairo coreutils curl cyrus-sasl expat fontconfig freetype fribidi gcc glib glib2 glibc graphite2 harfbuzz icu java libffi libice libidn2 libjpeg-turbo libpng libpsl libsm libtiff libtirpc libunistring libwebp libx11 libxau libxcb libxdmcp libxext libxmu libxrender libxt make ncurses nghttp2 openldap openssl pango pcre2 pixman readline sed systemd tar tiff tk util-linux which xz zip zlib zstd)
 # Fetch and unpack source
 download_src "https://cran.r-project.org/src/base/$name-${version/.*/}/$filename"
 unpk_enter "$filename" "$direname"
