@@ -3,7 +3,7 @@ set -e
 name=nodejs-bin
 _name=nodejs
 homepage="https://nodejs.org/"
-description="Evented I/O for V8 javascript - package built from precompiled binaries."
+description="Evented I/O for V8 JavaScript - package built from precompiled binaries."
 repo=$_name/node
 version=$(gh_ver $repo)
 depends=(gcc glibc)
