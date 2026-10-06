@@ -37,6 +37,13 @@ download_src "https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/$year/$
 unpk_enter "$filename" "$direname"
 export TEXARCH=$(uname -m | sed -e 's/i.86/i386/' -e 's/$/-linux/') &&
 TEXLIVE_PREFIX=/opt/texlive/$year
+prevyear=$(ls /opt/texlive/[0-9]* -ld | sed 's|.*/opt/texlive/||g' | grep -v $year)
+while read -r oldyear
+do
+	sudo rm -rf /opt/texlive/$oldyear
+	echo "If upgrading texlive, remember to reinstall dvisvgm against " \
+	     "the new texlive."
+done <<< $prevyear
 options=(CXX="g++ -std=gnu++17" -C            \
     --prefix=$TEXLIVE_PREFIX                      \
     --bindir=$TEXLIVE_PREFIX/bin/$TEXARCH         \
