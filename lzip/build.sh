@@ -11,10 +11,12 @@ get_version() {
   local up_ver=$(wget -cqO- -T 5 -t 1 "$url" | grep -oE '$name-[0-9.]+\.tar\.gz' | sort -V | tail -n 1 | sed -e "s/$name-//" -e 's/.tar.gz//')
   local mon_ver=$(uver $name)
   ver_check "$up_ver" "$inst_ver" "$mon_ver" && return
-  local vat_ver=$(vatver $name)
-  ver_check "$vat_ver" "$inst_ver" "$mon_ver" && return
   local arch_ver=$(aver $name)
   ver_check "$arch_ver" "$inst_ver" "$mon_ver" && return
+  local art_ver=$(artver $name)
+  ver_check "$art_ver" "$inst_ver" "$mon_ver" && return
+  local gent_ver=$(gver $name)
+  ver_check "$gent_ver" "$inst_ver" "$monst_ver" && return
   fver "$name" "$inst_ver"
 }
 
