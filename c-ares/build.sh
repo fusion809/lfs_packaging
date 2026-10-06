@@ -2,7 +2,7 @@
 set -e
 name=c-ares
 homepage="https://c-ares.org/"
-description="A C library for asynchronous DNS requests."
+description="C library for asynchronous DNS requests."
 repo=$name/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

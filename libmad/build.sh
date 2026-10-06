@@ -2,7 +2,7 @@
 set -e
 name=libmad
 homepage="https://www.underbit.com/products/mad/"
-description="A high-quality MPEG audio decoder."
+description="High-quality MPEG audio decoder."
 repo="tenacityteam/libmad"
 version=$(cb_ver $repo)
 filename="$name-$version.tar.gz"

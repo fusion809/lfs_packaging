@@ -3,7 +3,7 @@ set -e
 # Variable declarations
 name=libxshmfence
 homepage="https://xorg.freedesktop.org/"
-description="A library that exposes a event API on top of Linux futexes."
+description="Library that exposes a event API on top of Linux futexes."
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"

@@ -3,7 +3,7 @@ set -e
 # Variable declarations
 name=pcre2
 homepage="https://github.com/PCRE2Project/pcre2"
-description="A library that implements Perl 5-style regular expressions. 2nd version."
+description="Library that implements Perl 5-style regular expressions. 2nd version."
 repo=PCRE2Project/pcre2
 version=$(gh_ver $repo)
 filename="$name-$version.tar.bz2"

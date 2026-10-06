@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=cmake
-description="A cross-platform open-source make system."
+description="Cross-platform open-source make system."
 homepage="https://cmake.org"
 get_version() {
 	local inst_ver=$(pkgver $name)

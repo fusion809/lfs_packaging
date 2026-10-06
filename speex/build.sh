@@ -2,7 +2,7 @@
 set -e
 name=speex
 homepage="https://www.speex.org/"
-description="A free codec for free speech."
+description="Free codec for free speech."
 repo=xiph/$name
 version=$(gh_ver $repo)
 depends=(glibc libogg)

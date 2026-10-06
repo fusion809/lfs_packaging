@@ -2,7 +2,7 @@
 set -e
 name=pulseaudio
 homepage="https://www.freedesktop.org/wiki/Software/PulseAudio/"
-description="A featureful, general-purpose sound server."
+description="Featureful, general-purpose sound server."
 repo=$name/$name
 version=$(gh_ver $repo)
 depends=(alsa-lib avahi bzip2 dbus elfutils flac gcc gdbm glib2 glibc gst-plugins-base gstreamer jack lame libcap libelf libffi libice libogg libsm libsndfile libunwind libvorbis libx11 libxau libxcb libxdmcp libxext libxi libxtst mpg123 openssl opus orc pcre2 speed systemd util-linux webkitgtk xz zlib zstd)

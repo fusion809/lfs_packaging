@@ -2,7 +2,7 @@
 set -e
 name=perl
 homepage="https://www.perl.org"
-description="A highly capable, feature-rich programming language."
+description="Highly capable, feature-rich programming language."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

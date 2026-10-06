@@ -2,7 +2,7 @@
 set -e
 name=fftw
 homepage="http://www.fftw.org/"
-description="A library for computing the discrete Fourier transform (DFT)."
+description="Library for computing the discrete Fourier transform (DFT)."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

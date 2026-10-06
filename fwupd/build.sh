@@ -2,7 +2,7 @@
 set -e
 name=fwupd
 repo=$name/$name
-description="A system daemon to allow session software to update firmware."
+description="System daemon to allow session software to update firmware."
 homepage="https://fwupd.org/"
 version=$(gh_ver $repo)
 depends=(brotli curl cyrus-sasl e2fsprogs glib2 glibc gmp gnutls keyutils libdrm libffi libidn2 libmbim libpsl libqmi libsoup libtasn1 libunistring libusb libxmlb mitkrb ncurses nettle networkmanager nghttp2 openldap openssl p11-kit pcre2 polkit readline sqlite systemd util-linux xz zlib zstd)

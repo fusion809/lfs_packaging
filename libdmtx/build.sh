@@ -3,7 +3,7 @@
 set -e
 name=libdmtx
 homepage="https://libdmtx.sourceforge.net/"
-description="A software for reading and writing Data Matrix 2D barcodes."
+description="Software for reading and writing Data Matrix 2D barcodes."
 repo="dmtx/libdmtx"
 version=$(gh_ver "$repo")
 filename="$name-$version.tar.gz"

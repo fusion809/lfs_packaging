@@ -2,7 +2,7 @@
 set -e
 name=yyjson
 homepage="https://ibireme.github.io/yyjson"
-description="A high performance JSON library written in ANSI C."
+description="High performance JSON library written in ANSI C."
 repo=ibireme/$name
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

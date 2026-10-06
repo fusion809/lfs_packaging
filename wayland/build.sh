@@ -2,7 +2,7 @@
 set -e
 name=wayland
 homepage="https://wayland.freedesktop.org/"
-description="A computer display server protocol."
+description="Computer display server protocol."
 repo=$name/$name
 version=$(way_ver $name)
 depends=(coreutils expat gcc glibc libffi libxml2 meson ninja tar wget xz)

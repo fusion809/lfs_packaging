@@ -2,7 +2,7 @@
 set -e
 name=docbook-xml
 homepage="https://docbook.org/"
-description="A widely used XML scheme for writing documentation and help."
+description="Widely used XML scheme for writing documentation and help."
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)

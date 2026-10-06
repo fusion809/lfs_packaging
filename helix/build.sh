@@ -3,7 +3,7 @@ set -e
 name=helix
 repo=$name-editor/$name
 homepage="https://helix-editor.com/"
-description="A post-modern modal text editor."
+description="Post-modern modal text editor."
 version=$(gh_ver $repo)
 depends=(gcc glibc rust)
 filename="$name-$version-source.tar.xz"

@@ -2,7 +2,7 @@
 set -e
 name=cbindgen
 homepage="https://crates.io/crates/cbindgen"
-description="A tool for generating C bindings to Rust code."
+description="Tool for generating C bindings to Rust code."
 repo=mozilla/$name
 version=$(gh_ver $repo)
 depends=(gcc glibc)

@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=less
-description="A terminal based program for viewing text files."
+description="Terminal based program for viewing text files."
 homepage="https://gnu.org/s/less/"
 repo="gwsw/less"
 version=$(gh_ver $repo || wgnu_ver "$name")

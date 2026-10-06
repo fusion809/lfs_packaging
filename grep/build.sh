@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=grep
-description="A string search utility."
+description="String search utility."
 homepage="http://www.gnu.org/software/grep/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.xz"

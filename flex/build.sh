@@ -3,7 +3,7 @@ set -e
 name=flex
 repo="westes/flex"
 homepage="https://github.com/$repo"
-description="A tool for generating text-scanning programs."
+description="Tool for generating text-scanning programs."
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
