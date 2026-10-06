@@ -6,7 +6,7 @@ repo=$name/$_name
 homepage="https://www.sagemath.org/"
 description="Open-source mathematics software system integrating multiple others."
 version=$(gh_ver $repo)
-depends=(R blas-lapack bzip2 gcc glibc glpk gmp icu libffi libtirpc mpc mpfr ncurses openblas pcre2 readline suitesparse xz zlib zstd)
+depends=(blas-lapack bzip2 cmake gcc glibc glpk gmp icu libffi libtirpc make mpc mpfr ncurses openblas pcre2 R readline suitesparse xz zlib zstd)
 filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 download_src "https://mirror.aarnet.edu.au/pub/sage/src/$filename"
