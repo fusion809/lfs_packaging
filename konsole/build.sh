@@ -16,7 +16,7 @@ export PATH=$PATH:$QT6DIR/bin
 export CMAKE_PREFIX_PATH=$QT6PREFIX:$KF6_PREFIX:$CMAKE_PREFIX_PATH
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$QT6DIR/lib
 unpk_enter "$filename" "$direname"
-gap_patches "$name"
+gap_patches "$name" || echo "Patching failed."
 cmake_options=(
 	-D CMAKE_INSTALL_LIBDIR=lib
 	-D CMAKE_INSTALL_PREFIX=$KF6_PREFIX  
@@ -27,5 +27,5 @@ cmake_options=(
 )
 cmaki "${cmake_options[@]}"
 cd ../..
-#rm -rf $filename $direname
+rm -rf $filename $direname
 echo "$version" | sudo tee /var/lib/custom-packages/$name
