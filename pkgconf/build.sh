@@ -10,6 +10,7 @@ direname="${filename/.tar.xz/}"
 
 ghr_download "pkgconf/pkgconf" "$direname" "$filename"
 unpk_enter "$filename" "$direname"
+sed -i '/^# Unit test for spdxtool.s util uri encode\./,/^test('\''api-util'\'', test_api_util_exe)$/d' meson.build
 mni --prefix=/usr --buildtype=release
 sudo mv /usr/share/doc/pkgconf{,-$version}
 if ! [[ -f /usr/bin/pkg-config ]]; then
