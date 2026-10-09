@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=perl-uri
-homepage="https://search.cpan.org/dist/URI/"
+homepage="https://metacpan.org/dist/URI/"
 description="Uniform Resource Identifiers (absolute and relative)."
 _name=URI
 code=OALDERS

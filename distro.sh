@@ -4,6 +4,8 @@ function artver {
 	local ver=$(wget -T 5 -t 1 -cqO- https://packages.artixlinux.org/packages/{world,system,galaxy}/{x86_64,any}/$name/ | grep -oE "$name ([0-9.]+[a-z0-9]*|[0-9]:[0-9.]+[a-z0-9]*)" | rev | cut -d ':' -f 1 | rev | sed 's/rc/-rc/g' | head -n 1 | cut -d ' ' -f 2)
 	if [[ "$name" == "gcc" ]]; then
 		echo $ver | sed -E 's/\.1$/\.0/g'
+	elif [[ "$name" == "linux" ]]; then
+		echo $ver | sed 's/\.artix[0-9]*//g'
 	else
 		echo $ver
 	fi
