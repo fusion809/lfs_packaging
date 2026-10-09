@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=xdotool
-homepage="https://www.semicomplete.com/projects/xdotool/"
+homepage="https://github.com/jordansissel/xdotool"
 description="Command-line X11 automation tool."
 repo=jordansissel/$name
 version=$(gh_ver $repo)

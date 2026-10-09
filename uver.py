@@ -7,7 +7,6 @@ import sys
 import urllib.parse
 import urllib.request
 
-
 ANITYA_API = "https://release-monitoring.org/api/v2"
 LFP = os.environ.get("LFP", os.path.expanduser("~/lfs_packaging"))
 
@@ -30,6 +29,35 @@ def fetch_json(url, description):
         return None
 
 
+def expand_metadata_variables(metadata):
+    """Expand references to other variables declared in build.sh."""
+    variable_pattern = re.compile(
+        r"\$\{([A-Za-z_][A-Za-z0-9_]*)\}"
+        r"|\$([A-Za-z_][A-Za-z0-9_]*)"
+    )
+
+    for _ in range(len(metadata) + 1):
+        changed = False
+
+        for key, value in metadata.items():
+            expanded = variable_pattern.sub(
+                lambda match: metadata.get(
+                    match.group(1) or match.group(2),
+                    match.group(0),
+                ),
+                value,
+            )
+
+            if expanded != value:
+                metadata[key] = expanded
+                changed = True
+
+        if not changed:
+            break
+
+    return metadata
+
+
 def read_build_metadata(pkg):
     build_file = os.path.join(LFP, pkg, "build.sh")
 
@@ -50,13 +78,13 @@ def read_build_metadata(pkg):
         return metadata
 
     for variable in ("name", "_name", "homepage", "repo"):
-        match = re.search(
-            rf'^\s*(?:export\s+)?{re.escape(variable)}\s*=\s*'
-            rf'(?:"([^"]*)"|\'([^\']*)\'|([^\s#]*))'
-            rf'\s*(?:#.*)?$',
-            content,
-            re.MULTILINE,
+        pattern = (
+            rf"""^\s*(?:export\s+)?{re.escape(variable)}\s*=\s*"""
+            rf"""(?:"([^"]*)"|'([^']*)'|([^\s#]*))"""
+            rf"""\s*(?:#.*)?$"""
         )
+
+        match = re.search(pattern, content, re.MULTILINE)
 
         if match:
             metadata[variable] = next(
@@ -68,21 +96,25 @@ def read_build_metadata(pkg):
                 "",
             ).strip()
 
-    return metadata
+    return expand_metadata_variables(metadata)
 
 
 def normalise_url(url):
     if not url:
         return ""
 
-    parsed = urllib.parse.urlsplit(url.strip())
+    url = url.strip()
+    parsed = urllib.parse.urlsplit(url)
+
+    if not parsed.netloc and parsed.path and "://" not in url:
+        parsed = urllib.parse.urlsplit("//" + url)
+
     netloc = parsed.netloc.lower()
 
     if netloc.startswith("www."):
         netloc = netloc[4:]
 
-    # Preserve both path case and trailing slashes. These can
-    # distinguish otherwise duplicate Anitya project records.
+    # Preserve path case so distinct project URLs remain distinct.
     result = f"{netloc}{parsed.path}"
 
     if parsed.query:
@@ -95,8 +127,6 @@ def normalise_url(url):
 
 
 def normalise_url_relaxed(url):
-    # Use only as a fallback when no exact homepage matches.
-    # This treats trailing slashes as insignificant.
     return normalise_url(url).rstrip("/")
 
 
@@ -105,18 +135,8 @@ def normalise_repo(repo):
         return ""
 
     repo = repo.strip()
-    repo = re.sub(
-        r"^https?://",
-        "",
-        repo,
-        flags=re.IGNORECASE,
-    )
-    repo = re.sub(
-        r"^www\.",
-        "",
-        repo,
-        flags=re.IGNORECASE,
-    )
+    repo = re.sub(r"^https?://", "", repo, flags=re.IGNORECASE)
+    repo = re.sub(r"^www\.", "", repo, flags=re.IGNORECASE)
     repo = repo.rstrip("/")
 
     if repo.endswith(".git"):
@@ -126,69 +146,78 @@ def normalise_repo(repo):
 
 
 def anitya_projects(name):
-    params = urllib.parse.urlencode(
-        {
-            "name": name,
-            "items_per_page": 250,
-        }
-    )
+    params = urllib.parse.urlencode({
+        "name": name,
+        "items_per_page": 250,
+    })
 
     url = f"{ANITYA_API}/projects/?{params}"
-
-    data = fetch_json(
-        url,
-        f"project {name}",
-    )
+    data = fetch_json(url, f"project {name}")
 
     if not isinstance(data, dict):
         return []
 
-    projects = data.get("items")
+    for key in ("items", "projects"):
+        projects = data.get(key)
 
-    if isinstance(projects, list):
-        return projects
-
-    projects = data.get("projects")
-
-    if isinstance(projects, list):
-        return projects
+        if isinstance(projects, list):
+            return projects
 
     return []
 
 
+def deduplicate_projects(projects):
+    unique = []
+    seen = set()
+
+    for project in projects:
+        project_id = project.get("id")
+
+        if project_id is not None:
+            identity = ("id", str(project_id))
+        else:
+            identity = (
+                "record",
+                project.get("name", ""),
+                normalise_url(project.get("homepage", "")),
+                normalise_repo(project.get("repo", "")),
+            )
+
+        if identity not in seen:
+            seen.add(identity)
+            unique.append(project)
+
+    return unique
+
+
 def select_project(projects, homepage="", repo=""):
+    projects = deduplicate_projects(projects)
+
     if not projects:
         return None
 
-    if len(projects) == 1:
-        return projects[0]
+    homepage_normalised = normalise_url(homepage)
+    repo_normalised = normalise_repo(repo)
 
-    homepage = normalise_url(homepage)
-    repo = normalise_repo(repo)
-
-    if homepage:
-        # First require an exact homepage match, preserving
-        # path capitalisation and trailing-slash differences.
-        homepage_matches = [
+    # Prefer an exact homepage match across all candidate projects.
+    if homepage_normalised:
+        matches = [
             project
             for project in projects
-            if normalise_url(
-                project.get("homepage", "")
-            ) == homepage
+            if normalise_url(project.get("homepage", ""))
+            == homepage_normalised
         ]
 
-        if len(homepage_matches) == 1:
-            return homepage_matches[0]
+        if len(matches) == 1:
+            return matches[0]
 
-        if homepage_matches:
-            projects = homepage_matches
-
+        if matches:
+            projects = matches
         else:
-            # Only relax trailing-slash matching when there
-            # were no exact homepage matches at all.
+            # Only relax trailing-slash matching when exact matching fails.
             relaxed_homepage = normalise_url_relaxed(homepage)
 
-            homepage_matches = [
+            matches = [
                 project
                 for project in projects
                 if normalise_url_relaxed(
@@ -196,32 +225,52 @@ def select_project(projects, homepage="", repo=""):
                 ) == relaxed_homepage
             ]
 
-            if len(homepage_matches) == 1:
-                return homepage_matches[0]
+            if len(matches) == 1:
+                return matches[0]
 
-            if homepage_matches:
-                projects = homepage_matches
+            if matches:
+                projects = matches
 
-    # Use the repository to distinguish remaining candidates.
-    if repo:
-        repo_matches = [
+    # Use the repository only if the homepage did not uniquely identify
+    # the project.
+    if repo_normalised:
+        matches = [
             project
             for project in projects
-            if normalise_repo(
-                project.get("repo", "")
-            ) == repo
+            if normalise_repo(project.get("repo", ""))
+            == repo_normalised
         ]
 
-        if len(repo_matches) == 1:
-            return repo_matches[0]
+        if len(matches) == 1:
+            return matches[0]
 
-        if repo_matches:
-            projects = repo_matches
+        if matches:
+            projects = matches
 
     if len(projects) == 1:
         return projects[0]
 
     return None
+
+
+def find_project(name, fallback_name, homepage="", repo=""):
+    # Search both the package name and the expanded upstream name before
+    # selecting, so a misleading package-name match cannot hide the
+    # correct upstream project.
+    projects = anitya_projects(name)
+
+    if fallback_name and fallback_name.casefold() != name.casefold():
+        projects.extend(anitya_projects(fallback_name))
+
+    projects = deduplicate_projects(projects)
+
+    project = select_project(
+        projects,
+        homepage=homepage,
+        repo=repo,
+    )
+
+    return project, projects
 
 
 def anitya_versions(project):
@@ -230,18 +279,10 @@ def anitya_versions(project):
     if project_id is None:
         return None
 
-    params = urllib.parse.urlencode(
-        {
-            "project_id": project_id,
-        }
-    )
-
+    params = urllib.parse.urlencode({"project_id": project_id})
     url = f"{ANITYA_API}/versions/?{params}"
 
-    return fetch_json(
-        url,
-        f"versions for Anitya project {project_id}",
-    )
+    return fetch_json(url, f"versions for Anitya project {project_id}")
 
 
 def stable_version(data):
@@ -250,24 +291,20 @@ def stable_version(data):
 
     stable = data.get("stable_versions")
 
-    if not isinstance(stable, list):
-        stable = []
+    if isinstance(stable, list):
+        stable = [str(version) for version in stable if version]
 
-    stable = [
-        str(version)
-        for version in stable
-        if version
-    ]
+        if stable:
+            latest = data.get("latest_version")
 
-    if not stable:
-        return None
+            if latest and str(latest) in stable:
+                return str(latest)
 
-    latest = data.get("latest_version")
+            return stable[0]
 
-    if latest and str(latest) in stable:
-        return str(latest)
+    latest = data.get("latest_version") or data.get("version")
 
-    return stable[0]
+    return str(latest) if latest else None
 
 
 def get_anitya_version(project):
@@ -279,49 +316,7 @@ def get_anitya_version(project):
         if version:
             return version
 
-    stable = project.get("stable_versions")
-
-    if isinstance(stable, list):
-        stable = [
-            str(version)
-            for version in stable
-            if version
-        ]
-
-        if stable:
-            latest = project.get("latest_version")
-
-            if latest and str(latest) in stable:
-                return str(latest)
-
-            return stable[0]
-
-    latest = project.get("latest_version")
-
-    if latest:
-        return str(latest)
-
-    latest = project.get("version")
-
-    if latest:
-        return str(latest)
-
-    return None
-
-
-def get_anitya_project(name, homepage="", repo=""):
-    projects = anitya_projects(name)
-
-    if not projects:
-        return None, projects
-
-    project = select_project(
-        projects,
-        homepage=homepage,
-        repo=repo,
-    )
-
-    return project, projects
+    return stable_version(project)
 
 
 def get_project_detail(project, detail):
@@ -338,10 +333,7 @@ def get_project_detail(project, detail):
         return None
 
     if isinstance(value, (dict, list)):
-        return json.dumps(
-            value,
-            ensure_ascii=False,
-        )
+        return json.dumps(value, ensure_ascii=False)
 
     return str(value)
 
@@ -355,7 +347,7 @@ def print_project_options(projects, selected_project=None):
 
     options = [
         project
-        for project in projects
+        for project in deduplicate_projects(projects)
         if project.get("id") != selected_id
     ]
 
@@ -363,13 +355,13 @@ def print_project_options(projects, selected_project=None):
         print("No alternative Anitya projects found.")
         return 0
 
-    def project_sort_key(project):
+    def sort_key(project):
         try:
-            return int(project.get("id", 2**63 - 1))
+            return (0, int(project.get("id", 0)))
         except (TypeError, ValueError):
-            return 2**63 - 1
+            return (1, str(project.get("id", "")))
 
-    for project in sorted(options, key=project_sort_key):
+    for project in sorted(options, key=sort_key):
         print(
             f"{project.get('id', '')}\t"
             f"{project.get('name', '')}\t"
@@ -379,13 +371,22 @@ def print_project_options(projects, selected_project=None):
     return 0
 
 
-def print_ambiguous_project_error(pkg):
+def print_ambiguous_project_error(pkg, projects):
     print(
         f"Multiple Anitya projects found for {pkg}, "
-        "but none could be selected using the "
-        "build.sh homepage or repo.",
+        "but none matched its build.sh homepage or repo.",
         file=sys.stderr,
     )
+
+    print("Candidates:", file=sys.stderr)
+
+    for project in projects:
+        print(
+            f"  {project.get('id', '')}\t"
+            f"{project.get('name', '')}\t"
+            f"{project.get('homepage', '')}",
+            file=sys.stderr,
+        )
 
     print(
         f"Run 'uver {pkg} options' to list the alternatives.",
@@ -395,56 +396,10 @@ def print_ambiguous_project_error(pkg):
     return 1
 
 
-def find_project(
-    name,
-    fallback_name,
-    homepage="",
-    repo="",
-):
-    projects = anitya_projects(name)
-
-    if projects:
-        project = select_project(
-            projects,
-            homepage=homepage,
-            repo=repo,
-        )
-
-        if project is not None:
-            return project, projects, name
-
-    if fallback_name and fallback_name != name:
-        fallback_projects = anitya_projects(fallback_name)
-
-        if fallback_projects:
-            fallback_project = select_project(
-                fallback_projects,
-                homepage=homepage,
-                repo=repo,
-            )
-
-            if fallback_project is not None:
-                return (
-                    fallback_project,
-                    fallback_projects,
-                    fallback_name,
-                )
-
-            if not projects:
-                return (
-                    None,
-                    fallback_projects,
-                    fallback_name,
-                )
-
-    return None, projects, name
-
-
 def main():
     if len(sys.argv) not in (2, 3):
         print(
-            f"Usage: {os.path.basename(sys.argv[0])} "
-            "PACKAGE [DETAIL]",
+            f"Usage: {os.path.basename(sys.argv[0])} PACKAGE [DETAIL]",
             file=sys.stderr,
         )
         return 2
@@ -459,7 +414,7 @@ def main():
     homepage = metadata["homepage"]
     repo = metadata["repo"]
 
-    project, projects, selected_name = find_project(
+    project, projects = find_project(
         name,
         fallback_name,
         homepage=homepage,
@@ -467,10 +422,7 @@ def main():
     )
 
     if detail == "options":
-        return print_project_options(
-            projects,
-            project,
-        )
+        return print_project_options(projects, project)
 
     if not projects:
         print(
@@ -480,13 +432,10 @@ def main():
         return 1
 
     if project is None:
-        return print_ambiguous_project_error(pkg)
+        return print_ambiguous_project_error(pkg, projects)
 
     if detail:
-        value = get_project_detail(
-            project,
-            detail,
-        )
+        value = get_project_detail(project, detail)
 
         if value is None:
             return 1
@@ -509,4 +458,3 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
-

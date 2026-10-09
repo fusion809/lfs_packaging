@@ -3,6 +3,7 @@ set -e
 name=tiff
 _name=lib$name
 repo=$_name/$_name
+# uver versioning fails as this version of tiff doesn't exist in their database
 homepage="http://www.simplesystems.org/libtiff/"
 description="Provides support for the tag image file format (TIFF)."
 version=$(gl_ver $repo)
