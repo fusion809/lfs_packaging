@@ -2,7 +2,7 @@
 set -e
 name=tcl
 description="Powerful, easy-to-learn dynamic programming language."
-homepage="https://tcl.tk"
+homepage="https://www.tcl-lang.org"
 repo=tcltk/tcl
 version=$(gh_ver $repo)
 depends=(bash coreutils gcc glibc gzip make tar zlib)
