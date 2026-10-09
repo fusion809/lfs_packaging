@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 name=spectacle
+# uver versions this wrong for some unknown reason
+# despite correct homepage
 description="KDE screenshot capture utility."
 homepage="https://apps.kde.org/spectacle/"
 repo=KDE/$name
