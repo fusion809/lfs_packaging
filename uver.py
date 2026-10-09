@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 
 import json
@@ -82,7 +83,6 @@ def normalise_url(url):
         return ""
 
     url = url.strip().lower()
-
     parsed = urllib.parse.urlsplit(url)
 
     netloc = parsed.netloc
@@ -153,15 +153,16 @@ def select_project(projects, homepage="", repo=""):
     if not projects:
         return None
 
-    # If Anitya returns exactly one project, it is unambiguous.
-    # Do not require its homepage or repository to match build.sh.
+    # A single result is unambiguous. Do not reject it merely
+    # because its homepage or repository differs from build.sh.
     if len(projects) == 1:
         return projects[0]
 
     homepage = normalise_url(homepage)
     repo = normalise_repo(repo)
 
-    # Multiple projects remain. Use the homepage to disambiguate.
+    # When several projects exist, use the homepage to narrow
+    # down the candidates.
     if homepage:
         homepage_matches = [
             project
@@ -174,12 +175,11 @@ def select_project(projects, homepage="", repo=""):
         if homepage_matches:
             projects = homepage_matches
 
-    # If the homepage produced a unique match, select it.
     if len(projects) == 1:
         return projects[0]
 
-    # If multiple projects still remain, use the repository
-    # to further disambiguate.
+    # If necessary, use the repository to narrow down the
+    # remaining candidates.
     if repo and len(projects) > 1:
         repo_matches = [
             project
@@ -192,11 +192,11 @@ def select_project(projects, homepage="", repo=""):
         if repo_matches:
             projects = repo_matches
 
-    # A single remaining project is unambiguous.
     if len(projects) == 1:
         return projects[0]
 
-    # Multiple projects remain and could not be disambiguated.
+    # Several candidates remain, and none can be selected
+    # unambiguously.
     return None
 
 
@@ -207,7 +207,7 @@ def anitya_versions(project):
         return None
 
     params = urllib.parse.urlencode(
-                    {
+        {
             "project_id": project_id,
         }
     )
@@ -371,6 +371,7 @@ def print_ambiguous_project_error(pkg):
 
     return 1
 
+
 def find_project(
     name,
     fallback_name,
@@ -387,23 +388,15 @@ def find_project(
             repo=repo,
         )
 
-        if project is not None:
-            # If an explicit homepage or repository is supplied,
-            # make sure a uniquely named project does not override it.
-            if homepage and normalise_url(
-                project.get("homepage", "")
-            ) != normalise_url(homepage):
-                project = None
-            elif repo and normalise_repo(
-                project.get("repo", "")
-            ) != normalise_repo(repo):
-                project = None
-
+        # Do not re-check the homepage or repository here.
+        # select_project() already handles disambiguation when
+        # multiple results exist, and deliberately accepts a
+        # single result without requiring a metadata match.
         if project is not None:
             return project, projects, name
 
-    # If the normal name did not identify the correct project,
-    # try the explicit _name from build.sh.
+    # If the normal name did not identify a project
+    # unambiguously, try the explicit _name from build.sh.
     if fallback_name and fallback_name != name:
         fallback_projects = anitya_projects(fallback_name)
 
@@ -421,6 +414,9 @@ def find_project(
                     fallback_name,
                 )
 
+            # Preserve the fallback candidates if the normal
+            # name returned no candidates, so options can list
+            # the results that actually need disambiguation.
             if not projects:
                 return (
                     None,
@@ -429,6 +425,7 @@ def find_project(
                 )
 
     return None, projects, name
+
 
 def main():
     if len(sys.argv) not in (2, 3):
@@ -484,7 +481,6 @@ def main():
             return 1
 
         print(value)
-
         return 0
 
     version = get_anitya_version(project)

@@ -3,7 +3,7 @@ set -e
 name=libnvme
 description="C Library for NVM Express on Linux."
 repo=linux-nvme/$name
-homepage="https://github.com/$repo"
+homepage="https://github.com/linux-nvme/libnvme"
 version=$(gh_ver $repo)
 depends=(dbus glibc json-c keyutils openssl systemd)
 filename="$name-$version.tar.gz"
