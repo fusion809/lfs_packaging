@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=openssl
-homepage="https://www.openssl.org"
+homepage="https://openssl-library.org"
 description="The Open Source toolkit for cryptography and Transport Layer Security."
 repo=${name}/$name
 version=$(gh_ver $repo)

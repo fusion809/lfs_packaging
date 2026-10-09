@@ -2,7 +2,7 @@
 set -e
 name=readline
 description="GNU readline library."
-homepage="https://www.gnu.org/software/readline/"
+homepage="https://gnu.org/s/readline/"
 version=$(gnu_ver $name)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"

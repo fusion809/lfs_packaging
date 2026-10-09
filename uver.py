@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 
 import json
@@ -28,7 +27,6 @@ def fetch_json(url, description):
             f"Could not query Anitya for {description}: {error}",
             file=sys.stderr,
         )
-
         return None
 
 
@@ -48,7 +46,6 @@ def read_build_metadata(pkg):
     try:
         with open(build_file, "r", encoding="utf-8") as file:
             content = file.read()
-
     except OSError:
         return metadata
 
@@ -61,19 +58,15 @@ def read_build_metadata(pkg):
             re.MULTILINE,
         )
 
-        if not match:
-            continue
-
-        value = next(
-            (
-                group
-                for group in match.groups()
-                if group is not None
-            ),
-            "",
-        )
-
-        metadata[variable] = value.strip()
+        if match:
+            metadata[variable] = next(
+                (
+                    group
+                    for group in match.groups()
+                    if group is not None
+                ),
+                "",
+            ).strip()
 
     return metadata
 
@@ -82,17 +75,15 @@ def normalise_url(url):
     if not url:
         return ""
 
-    url = url.strip().lower()
-    parsed = urllib.parse.urlsplit(url)
-
-    netloc = parsed.netloc
+    parsed = urllib.parse.urlsplit(url.strip())
+    netloc = parsed.netloc.lower()
 
     if netloc.startswith("www."):
         netloc = netloc[4:]
 
-    path = parsed.path.rstrip("/")
-
-    result = f"{netloc}{path}"
+    # Preserve both path case and trailing slashes. These can
+    # distinguish otherwise duplicate Anitya project records.
+    result = f"{netloc}{parsed.path}"
 
     if parsed.query:
         result += f"?{parsed.query}"
@@ -103,13 +94,29 @@ def normalise_url(url):
     return result
 
 
+def normalise_url_relaxed(url):
+    # Use only as a fallback when no exact homepage matches.
+    # This treats trailing slashes as insignificant.
+    return normalise_url(url).rstrip("/")
+
+
 def normalise_repo(repo):
     if not repo:
         return ""
 
-    repo = repo.strip().lower()
-    repo = re.sub(r"^https?://", "", repo)
-    repo = re.sub(r"^www\.", "", repo)
+    repo = repo.strip()
+    repo = re.sub(
+        r"^https?://",
+        "",
+        repo,
+        flags=re.IGNORECASE,
+    )
+    repo = re.sub(
+        r"^www\.",
+        "",
+        repo,
+        flags=re.IGNORECASE,
+    )
     repo = repo.rstrip("/")
 
     if repo.endswith(".git"):
@@ -153,17 +160,15 @@ def select_project(projects, homepage="", repo=""):
     if not projects:
         return None
 
-    # A single result is unambiguous. Do not reject it merely
-    # because its homepage or repository differs from build.sh.
     if len(projects) == 1:
         return projects[0]
 
     homepage = normalise_url(homepage)
     repo = normalise_repo(repo)
 
-    # When several projects exist, use the homepage to narrow
-    # down the candidates.
     if homepage:
+        # First require an exact homepage match, preserving
+        # path capitalisation and trailing-slash differences.
         homepage_matches = [
             project
             for project in projects
@@ -172,15 +177,33 @@ def select_project(projects, homepage="", repo=""):
             ) == homepage
         ]
 
+        if len(homepage_matches) == 1:
+            return homepage_matches[0]
+
         if homepage_matches:
             projects = homepage_matches
 
-    if len(projects) == 1:
-        return projects[0]
+        else:
+            # Only relax trailing-slash matching when there
+            # were no exact homepage matches at all.
+            relaxed_homepage = normalise_url_relaxed(homepage)
 
-    # If necessary, use the repository to narrow down the
-    # remaining candidates.
-    if repo and len(projects) > 1:
+            homepage_matches = [
+                project
+                for project in projects
+                if normalise_url_relaxed(
+                    project.get("homepage", "")
+                ) == relaxed_homepage
+            ]
+
+            if len(homepage_matches) == 1:
+                return homepage_matches[0]
+
+            if homepage_matches:
+                projects = homepage_matches
+
+    # Use the repository to distinguish remaining candidates.
+    if repo:
         repo_matches = [
             project
             for project in projects
@@ -189,14 +212,15 @@ def select_project(projects, homepage="", repo=""):
             ) == repo
         ]
 
+        if len(repo_matches) == 1:
+            return repo_matches[0]
+
         if repo_matches:
             projects = repo_matches
 
     if len(projects) == 1:
         return projects[0]
 
-    # Several candidates remain, and none can be selected
-    # unambiguously.
     return None
 
 
@@ -306,7 +330,6 @@ def get_project_detail(project, detail):
             f"Anitya project has no '{detail}' field",
             file=sys.stderr,
         )
-
         return None
 
     value = project[detail]
@@ -324,10 +347,11 @@ def get_project_detail(project, detail):
 
 
 def print_project_options(projects, selected_project=None):
-    selected_id = None
-
-    if selected_project is not None:
-        selected_id = selected_project.get("id")
+    selected_id = (
+        selected_project.get("id")
+        if selected_project is not None
+        else None
+    )
 
     options = [
         project
@@ -339,18 +363,17 @@ def print_project_options(projects, selected_project=None):
         print("No alternative Anitya projects found.")
         return 0
 
-    for project in sorted(
-        options,
-        key=lambda project: int(
-            project.get("id", 2**63 - 1)
-        ),
-    ):
-        project_id = project.get("id", "")
-        name = project.get("name", "")
-        homepage = project.get("homepage", "")
+    def project_sort_key(project):
+        try:
+            return int(project.get("id", 2**63 - 1))
+        except (TypeError, ValueError):
+            return 2**63 - 1
 
+    for project in sorted(options, key=project_sort_key):
         print(
-            f"{project_id}\t{name}\t{homepage}"
+            f"{project.get('id', '')}\t"
+            f"{project.get('name', '')}\t"
+            f"{project.get('homepage', '')}"
         )
 
     return 0
@@ -378,7 +401,6 @@ def find_project(
     homepage="",
     repo="",
 ):
-    # First try the normal package name.
     projects = anitya_projects(name)
 
     if projects:
@@ -388,15 +410,9 @@ def find_project(
             repo=repo,
         )
 
-        # Do not re-check the homepage or repository here.
-        # select_project() already handles disambiguation when
-        # multiple results exist, and deliberately accepts a
-        # single result without requiring a metadata match.
         if project is not None:
             return project, projects, name
 
-    # If the normal name did not identify a project
-    # unambiguously, try the explicit _name from build.sh.
     if fallback_name and fallback_name != name:
         fallback_projects = anitya_projects(fallback_name)
 
@@ -414,9 +430,6 @@ def find_project(
                     fallback_name,
                 )
 
-            # Preserve the fallback candidates if the normal
-            # name returned no candidates, so options can list
-            # the results that actually need disambiguation.
             if not projects:
                 return (
                     None,
@@ -434,7 +447,6 @@ def main():
             "PACKAGE [DETAIL]",
             file=sys.stderr,
         )
-
         return 2
 
     pkg = sys.argv[1]
@@ -465,7 +477,6 @@ def main():
             f"Could not find Anitya project for {pkg}",
             file=sys.stderr,
         )
-
         return 1
 
     if project is None:
@@ -493,7 +504,6 @@ def main():
         f"Could not determine upstream stable version for {pkg}",
         file=sys.stderr,
     )
-
     return 1
 
 

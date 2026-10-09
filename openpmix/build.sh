@@ -2,6 +2,9 @@
 set -e
 # Variable declarations
 name=openpmix
+# Anitya uses
+#homepage="https://pmix.org/"
+# but they track the 6.x series of pmix not the 5.x that we do
 homepage="https://github.com/openpmix/openpmix"
 description="Extended version of the PMI standard."
 _name=pmix

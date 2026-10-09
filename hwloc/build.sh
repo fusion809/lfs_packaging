@@ -6,11 +6,11 @@ homepage="https://www.open-mpi.org/projects/hwloc/"
 description="Portable abstraction of hierarchical architectures."
 repo="open-mpi/hwloc"
 version=$(gh_ver $repo)
-filename="$name-$version.tar.bz2"
-direname=${filename/.tar.bz2/}
+filename="$name-$version.tar.gz"
+direname=$name-${filename/.tar.*/}
 depends=(bash brotli bzip2 cairo coreutils expat fontconfig freetype gcc glibc icu libice libpciaccess libpng libsm libtool libx11 libxau libxcb libxdmcp libxext libxml2 libxrender make ncurses pixman sed systemd tar util-linux wget zlib)
 # Fetch and unpack source
-ghr_download "$repo" "hwloc-$version" "$filename"
+gha_download "$repo" "hwloc-$version" "$filename"
 unpk_enter "$filename" "$direname"
 # Compile and install
 configure_options=(

@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 name=scc
-repo=boyter/$name
-homepage="https://github.com/$repo"
+repo=boyter/scc
+homepage="https://github.com/boyter/scc"
 description="Sloc, Cloc and Code: a fast and feature-full code counter/analyser."
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
