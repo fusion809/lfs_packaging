@@ -3,12 +3,12 @@
 set -e
 # Variable declarations
 name=jack
+_name=jack2
 homepage="https://jackaudio.org/"
 description="Jackdmp jack implemention for multi-processor machine."
-reponame=jack2
-repo=jackaudio/$reponame
+repo=jackaudio/$_name
 version=$(gh_com $repo)
-filename="$reponame-$version.tar.gz"
+filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(alsa-lib bash coreutils dbus dbus expat gcc glibc opus portaudio python systemd)
 # Fetch and unpack source

@@ -6,7 +6,14 @@ homepage="https://www.java.com/"
 description="OpenJDK Java development kit - development branch."
 majorver=$(curl -s https://jdk.java.net/ | grep "Early access:" | cut -d '/' -f 2)
 minorver=$(curl -s https://jdk.java.net/$majorver/ | grep ">Build" | cut -d ' ' -f 2)
-version="$majorver+$minorver"
+get_version() {
+	local upver="$majorver+$minorver"
+	local aur_ver=$(aurver java-openjdk-ea-bin | sed 's/b/+/g')
+	local inst_ver=$(pkgver $name)
+	ver_check "$upver" "$inst_ver" "$aur_ver" && return
+	fver "$name" "$inst_ver"
+}
+version=$(get_version)
 filename="openjdk-$majorver-ea+${minorver}_linux-x64_bin.tar.gz"
 direname="jdk-$majorver"
 instdir="jdk-$version"
