@@ -5,7 +5,7 @@ homepage="https://invent.kde.org/frameworks/attica"
 description="Qt library that implements the Open Collaboration Services API."
 repo=KDE/$name
 version=$(gh_ver $repo)
-depends=(brotli double-conversion e2fsprogs gcc glib2 glibc icu keyutils mitkrb openssl pcre2 qt6 systemd zlib zstd)
+depends=(brotli double-conversion e2fsprogs extra-cmake-modules gcc glib2 glibc icu keyutils mitkrb openssl pcre2 qt6 systemd zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 kde_download "frameworks" "$filename"
@@ -20,5 +20,5 @@ cmake_options=(-D CMAKE_INSTALL_PREFIX=/usr \
 	    -W no-author)
 cmaki "${cmake_options[@]}"
 cd ../..
-rm -rf "$filename" "$direname"
+rm -rf "$direname"*
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"

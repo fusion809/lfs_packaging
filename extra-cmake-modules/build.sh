@@ -20,5 +20,5 @@ cmake_options=(-D CMAKE_INSTALL_PREFIX=/usr \
       -D DOC_INSTALL_DIR=/usr/share/doc/$direname)
 cmaki "${cmake_options[@]}"
 cd ../..
-rm -rf "$filename" "$direname"
+rm -rf "$direname"*
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
