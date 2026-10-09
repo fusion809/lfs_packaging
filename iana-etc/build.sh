@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=iana-etc
-homepage="https://www.iana.org/protocols"
+homepage="https://github.com/Mic92/iana-etc"
 description="/etc/protocols and /etc/services provided by IANA."
 repo="Mic92/$name"
 version=$(gh_ver $repo)

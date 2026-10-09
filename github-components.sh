@@ -96,6 +96,9 @@ function ght_ver {
 	elif [[ "$1" == "golang/go" ]]; then
 		wget -T 5 -t 1 -cqO- https://github.com/golang/go/tags | grep "tag/go[0-9.]+" -oE | sed 's/.*go//g' | sort -V | tail -n 1
 		return
+	elif [[ "$1" == "open-mpi/hwloc" ]]; then
+		wget -T 5 -t 1 -cqO- https://github.com/open-mpi/hwloc/tags | grep "hwloc-[0-9.]+" -oE | grep -v "\.$" | cut -d '-' -f 2 | uniq | sort -V | tail -n 1
+		return
 	elif [[ "$2" == "libopenssl3" ]]; then
 		wget -T 5 -t 1 -cqO- https://github.com/$1/tags | grep "tag/openssl-3\.[0-9.]+" -oE | cut -d '-' -f 2 | sort -V | tail -n 1
 		return
