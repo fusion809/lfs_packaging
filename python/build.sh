@@ -26,7 +26,8 @@ depends=(bzip2 expat gcc gdbm glibc libffi make mpdecimal ncurses openssl readli
 download_src "https://www.python.org/ftp/python/$version/$filename"
 download_src "https://www.python.org/ftp/python/doc/$version/$docs_filename"
 unpk_enter "$filename" "$direname"
-gap_patches Python
+gap_patches Python || echo "Patching failed"
+export LD_LIBRARY_PATH=/usr/lib:/opt/qt6/lib:/opt/sage/lib:/opt/rustc/lib:/opt/texlive/2026/lib:$PWD
 configure_options=(--prefix=/usr          \
     --enable-shared        \
     --with-system-expat    \

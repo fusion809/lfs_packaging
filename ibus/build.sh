@@ -16,7 +16,7 @@ UCD_URL=$(wget -T 5 -t 1 -cqO- $LFS_URL \
 | head -n 1)
 download_src "$UCD_URL"
 unpk_enter "$filename" "$direname"
-python3 -m zipfile -e ../UCD.zip /usr/share/unicode/ucd
+sudo python3 -m zipfile -e ../UCD.zip /usr/share/unicode/ucd
 sed -e 's@/desktop/ibus@/org/freedesktop/ibus@g' \
     -i data/dconf/org.freedesktop.ibus.gschema.xml
 export SAVE_DIST_FILES=1

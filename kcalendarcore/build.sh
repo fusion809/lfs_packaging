@@ -19,7 +19,7 @@ cmake_options=(
     -D BUILD_TESTING=OFF                \
     -D BUILD_PYTHON_BINDINGS=OFF        \
 	-W no-author)
-cmaki "${cmake_options[@]}" || cd .. && cmaki "${cmake_options[@]}"
+cmaki "${cmake_options[@]}"
 cd ../..
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
