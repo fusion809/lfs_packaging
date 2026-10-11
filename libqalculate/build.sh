@@ -8,7 +8,7 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(brotli curl cyrus-sasl gcc glibc gmp icu libidn2 libpsl libunistring libxml2 mpfr ncurses nghttp2 openldap openssl readline zlib zstd)
-ghr_download "Qalculate/libqalculate" "v$version" "$filename"
+gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 configure_options=(--prefix=/usr    \
             --disable-static \
