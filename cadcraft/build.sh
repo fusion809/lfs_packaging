@@ -28,6 +28,9 @@ for s in ${_icons[@]}; do
 	sudo cp -r assets/app-icon/hicolor/$dim/apps/ai.storyteller.$name.png "/usr/share/icons/hicolor/$dim/apps/"
 done
 sudo cp -r assets/app-icon/$name-1024.png /usr/share/pixmaps/ai.storyteller.$name.png
+if ! [[ -f /usr/share/pixmaps/ai.storyteller.$name.png ]]; then
+	sudo wget -c https://github.com/storytold/cadcraft/raw/main/assets/app-icon/cadcraft-1024.png -O /usr/share/pixmaps/ai.storyteller.$name.png
+fi
 cd ../
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
