@@ -10,8 +10,8 @@ direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 export CARGO_HOME="$srcdir"
-export CARGO_PROFILE_RELEASE_DEBUG=2
-export CARGO_PROFILE_RELEASE_STRIP=false
+export CARGO_PROFILE_RELEASE_DEBUG=0
+export CARGO_PROFILE_RELEASE_STRIP=debuginfo
 export CARGO_PROFILE_RELEASE_LTO=thin
 export CARGO_PROFILE_RELEASE_CODEGEN_UNITS=1
 export CARGO_PROFILE_RELEASE_OPT_LEVEL=3
