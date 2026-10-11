@@ -22,10 +22,12 @@ cargo build --release
 sudo cp -r "target/release/$name"{,-cli} /usr/bin/
 sudo cp -r "packaging/linux/ai.storyteller.$name.desktop" "/usr/share/applications/"
 sudo cp -r "packaging/linux/ai.storyteller.$name.mime.xml" "/usr/share/mime/packages/" 
-sudo cp -r assets/app-icon/hicolor/scalable/apps/ai.storyteller.$name.svg "/usr/share/icons/hicolor/scalable/"
+#sudo cp -r assets/app-icon/hicolor/scalable/apps/ai.storyteller.$name.svg "/usr/share/icons/hicolor/scalable/"
 for s in ${_icons[@]}; do
 	dim="${s}x${s}"
+	if [[ -f  assets/app-icon/hicolor/$dim/apps/ai.storyteller.$name.png ]]; then  
 	sudo cp -r assets/app-icon/hicolor/$dim/apps/ai.storyteller.$name.png "/usr/share/icons/hicolor/$dim/apps/"
+	fi
 done
 sudo cp -r assets/app-icon/$name-1024.png /usr/share/pixmaps/ai.storyteller.$name.png
 if ! [[ -f /usr/share/pixmaps/ai.storyteller.$name.png ]]; then
@@ -33,4 +35,4 @@ if ! [[ -f /usr/share/pixmaps/ai.storyteller.$name.png ]]; then
 fi
 cd ../
 rm -rf "$filename" "$direname"
-echo "$version" | sudo tee "/var/lib/custom-packages/$name"
+]]$$echo "$version" | sudo tee "/var/lib/custom-packages/$name"

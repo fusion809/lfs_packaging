@@ -9,7 +9,7 @@ depends=(glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 cbr_download "$repo" "$version" "$filename"
-unpk_enter "$filename" "$name"
+unpk_enter "$filename"
 cmaki -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=3.5
 sudo su -c '
 cat > /usr/lib/pkgconfig/mad.pc << "EOF"
