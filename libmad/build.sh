@@ -7,7 +7,7 @@ repo="tenacityteam/libmad"
 version=$(cb_ver $repo)
 depends=(glibc)
 filename="$name-$version.tar.gz"
-direname="${filename/.tar.*/}"
+direname="$name-$version-source"
 cbr_download "$repo" "$version" "$filename"
 unpk_enter "$filename"
 cmaki -D CMAKE_INSTALL_PREFIX=/usr -D CMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=3.5
@@ -26,5 +26,5 @@ Libs: -L${libdir} -lmad
 Cflags: -I${includedir}
 EOF'
 cd ../..
-rm -rf "$filename" "$name"
+rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
