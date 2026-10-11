@@ -19,8 +19,8 @@ export CARGO_HOME="$srcdir"
 	export CARGO_TARGET_DIR=target
 	export RUSTUP_TOOLCHAIN=stable
 	CFLAGS+=' -fno-lto'
+sudo chown $USER -R .
 cargo build --release
-sudo killall pdfcraft || echo "No pdfcraft processes to stop"
 sudo cp -r "target/release/$name"{,-cli} /usr/bin/
 sudo cp -r "packaging/linux/ai.storyteller.$name.desktop" "/usr/share/applications/"
 sudo cp -r "packaging/linux/ai.storyteller.$name.mime.xml" "/usr/share/mime/packages/" 
