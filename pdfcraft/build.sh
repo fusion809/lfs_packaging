@@ -5,6 +5,7 @@ repo=storytold/$name
 description="An open-source, clean-room reimplementation of Adobe Acrobat built in pure Rust."
 homepage="https://getartcraft.com/apps/pdfcraft"
 version=$(gh_ver $repo)
+depends=(gcc glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"
