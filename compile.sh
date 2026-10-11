@@ -224,3 +224,43 @@ function gap_patches {
         patch -Np1 -i "$i"
     done <<< "$patches"
 }
+
+function craft_buildin {
+	local name=$1
+	local version=$2
+	local repo=storytold/$1
+	local filename="$name-$version.tar.gz"
+	local direname="${filename/.tar.gz/}"
+	gha_download "$repo" "v$version" "$filename"
+	unpk_enter "$filename"
+	export CARGO_HOME="$srcdir"
+	export CARGO_PROFILE_RELEASE_DEBUG=0
+	export CARGO_PROFILE_RELEASE_STRIP=debuginfo
+	export CARGO_PROFILE_RELEASE_LTO=thin
+	export CARGO_PROFILE_RELEASE_CODEGEN_UNITS=1
+	export CARGO_PROFILE_RELEASE_OPT_LEVEL=3
+	export CARGO_TARGET_DIR=target
+	export RUSTUP_TOOLCHAIN=stable
+	CFLAGS+=' -fno-lto'
+	cargo build --release
+	sudo cp -r "target/release/$name"{,-cli} /usr/bin/
+	sudo cp -r "packaging/linux/ai.storyteller.$name.desktop" "/usr/share/applications/"
+	sudo cp -r "packaging/linux/ai.storyteller.$name.mime.xml" "/usr/share/mime/packages/" 
+	if [[ -f assets/app-icon/hicolor/scalable/apps/ai.storyteller.$name.svg ]]; then
+		sudo cp -r assets/app-icon/hicolor/scalable/apps/ai.storyteller.$name.svg "/usr/share/icons/hicolor/scalable/"
+	fi
+	for s in ${_icons[@]}; do
+		dim="${s}x${s}"
+		if [[ -f  assets/app-icon/hicolor/$dim/apps/ai.storyteller.$name.png ]]; then  
+			sudo cp -r assets/app-icon/hicolor/$dim/apps/ai.storyteller.$name.png "/usr/share/icons/hicolor/$dim/apps/"
+		fi
+	done
+	if [[ -f assets/app-icon/$name-1024.png ]]; then
+		sudo cp -r assets/app-icon/$name-1024.png /usr/share/pixmaps/ai.storyteller.$name.png
+	else
+		sudo wget -c https://github.com/$repo/raw/main/assets/app-icon/$name-1024.png -O /usr/share/pixmaps/ai.storyteller.$name.png
+	fi
+	cd ../
+	sudo rm -rf "$filename" "$direname"
+	echo "$version" | sudo tee "/var/lib/custom-packages/$name"
+}

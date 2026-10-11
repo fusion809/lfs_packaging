@@ -5,9 +5,9 @@ repo=storytold/$name
 description="IDE for interactive AI image and video creation."
 homepage="https://getartcraft.com/apps/artcraft"
 version=$(gh_ver $repo)
-filename="$name-$version.tar.gz"
-direname="${filename/.tar.*/}"
-gha_download "$repo" "v$version" "$filename"
+filename="$name-v$version.tar.gz"
+direname="$name-${filename/.tar.*/}"
+gha_download "$repo" "$name-v$version" "$filename"
 unpk_enter "$filename" "$direname"
 export CARGO_HOME="$srcdir"
 export CARGO_PROFILE_RELEASE_DEBUG=0
