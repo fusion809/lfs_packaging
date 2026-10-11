@@ -2,7 +2,7 @@
 set -e
 name=artcraft
 repo=storytold/$name
-description="An open-source, clean-room reimplementation of Adobe Acrobat built in pure Rust."
+description="IDE for interactive AI image and video creation."
 homepage="https://getartcraft.com/apps/artcraft"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"

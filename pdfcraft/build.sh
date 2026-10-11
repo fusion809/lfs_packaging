@@ -28,6 +28,7 @@ for s in ${_icons[@]}; do
 	dim="${s}x${s}"
 	sudo cp -r assets/app-icon/hicolor/$dim/apps/ai.storyteller.$name.png "/usr/share/icons/hicolor/$dim/apps/"
 done
+sudo cp -r assets/app-icon/$name-1024.png /usr/share/pixmaps/$name.png
 cd ../
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"

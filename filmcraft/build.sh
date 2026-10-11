@@ -2,7 +2,7 @@
 set -e
 name=filmcraft
 repo=storytold/$name
-description="An open-source, clean-room reimplementation of Adobe Acrobat built in pure Rust."
+description="Vibe coded clean-room reimplementation of Adobe Premiere Pro."
 homepage="https://getartcraft.com/apps/filmcraft"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
@@ -27,6 +27,7 @@ for s in ${_icons[@]}; do
 	dim="${s}x${s}"
 	sudo cp -r assets/app-icon/hicolor/$dim/apps/ai.storyteller.$name.png "/usr/share/icons/hicolor/$dim/apps/"
 done
+sudo cp -r assets/app-icon/$name-1024.png /usr/share/pixmaps/$name.png
 cd ../
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
