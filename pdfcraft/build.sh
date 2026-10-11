@@ -8,9 +8,8 @@ version=$(gh_ver $repo)
 depends=(gcc glibc)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-#gha_download "$repo" "v$version" "$filename"
-#unpk_enter "$filename" "$direname"
-cd $direname
+gha_download "$repo" "v$version" "$filename"
+unpk_enter "$filename" "$direname"
 export CARGO_HOME="$srcdir"
 	export CARGO_PROFILE_RELEASE_DEBUG=2
 	export CARGO_PROFILE_RELEASE_STRIP=false
@@ -20,7 +19,8 @@ export CARGO_HOME="$srcdir"
 	export CARGO_TARGET_DIR=target
 	export RUSTUP_TOOLCHAIN=stable
 	CFLAGS+=' -fno-lto'
-#cargo build --release
+cargo build --release
+sudo killall pdfcraft
 sudo cp -r "target/release/$name"{,-cli} /usr/bin/
 sudo cp -r "packaging/linux/ai.storyteller.$name.desktop" "/usr/share/applications/"
 sudo cp -r "packaging/linux/ai.storyteller.$name.mime.xml" "/usr/share/mime/packages/" 
