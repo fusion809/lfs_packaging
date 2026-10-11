@@ -1,9 +1,9 @@
 #!/bin/bash
 set -e
-name=griftcraft
+name=gridcraft
 repo=storytold/$name
 description="."
-homepage="https://getartcraft.com/apps/griftcraft"
+homepage="https://getartcraft.com/apps/gridcraft"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
@@ -27,7 +27,7 @@ for s in ${_icons[@]}; do
 	dim="${s}x${s}"
 	sudo cp -r assets/app-icon/hicolor/$dim/apps/ai.storyteller.$name.png "/usr/share/icons/hicolor/$dim/apps/"
 done
-sudo cp -r assets/app-icon/$name-1024.png /usr/share/pixmaps/$name.png
+sudo cp -r assets/app-icon/$name-1024.png /usr/share/pixmaps/ai.storyteller.$name.png
 cd ../
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"

@@ -5,6 +5,7 @@ repo=storytold/$name
 description="Vibe coded clean-room reimplementation of Microsoft Word."
 homepage="https://getartcraft.com/apps/wordcraft"
 version=$(gh_ver $repo)
+depends=(acl avahi bzip2 cups cyrus-sasl dbus e2fsprogs gcc glibc gmp gnutls icu jansson keyutils libarchive libcap libffi libidn2 libtasn1 libtirpc libunistring libxcrypt libxml2 linux-pam lmdb lz4 mitkrb ncurses nettle openldap openssl p11-kit popt python readline systemd xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"
@@ -27,7 +28,7 @@ for s in ${_icons[@]}; do
 	dim="${s}x${s}"
 	sudo cp -r assets/app-icon/hicolor/$dim/apps/ai.storyteller.$name.png "/usr/share/icons/hicolor/$dim/apps/"
 done
-sudo cp -r assets/app-icon/$name-1024.png /usr/share/pixmaps/$name.png
+sudo cp -r assets/app-icon/$name-1024.png /usr/share/pixmaps/ai.storyteller.$name.png
 cd ../
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
