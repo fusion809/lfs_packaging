@@ -52,11 +52,20 @@ function ghl_ver {
 		timeout 5 git ls-remote --tags --refs "$URL" \
 		| grep -oE "refs/tags/[0-9]+\.[0-9]*[02468]+\.[0-8][0-9]*" \
 		| cut -d '/' -f 3 | sort -V | tail -n 1
+	elif [[ "$1" == "KDE/kdav" ]]; then
+		timeout 5 git ls-remote --tags --refs "$URL" \
+			| grep -v rc | sed 's|.*tags/v||g' \
+			| grep -v "^[12][0-9]" | sort -V | tail -n 1
 	elif echo $1 | grep "KDE" &> /dev/null; then
 		timeout 5 git ls-remote --tags --refs "$URL" \
 		| grep -v "rc" \
 		| grep -oE "refs/tags/[v]*[0-9]+\.[0-9]+\.[0-8][0-9]*" \
 		| cut -d '/' -f 3 | sed 's/^v//g' | sort -V | tail -n 1 
+	elif [[ "$1" == "GNOME/libgweather" ]]; then
+		timeout 5 git ls-remote --tags --refs "$URL" \ 
+		| grep -v rc | sed 's|.*tags/||g' -E | grep -oE "[0-9.]+" \
+		| grep "[0-9]\." | grep -v "\.$" | grep -v "^40.0$" \
+		| sort -V | tail -n 1
 	elif echo $1 | grep hyfetch &> /dev/null; then
 		timeout 5 git ls-remote --tags --refs "$URL" \
 		| grep -oE "refs/tags/[0-9]+\.[0-9]+\.[0-8][0-9]*" | cut -d '/' -f 3 \
