@@ -12,7 +12,6 @@ gha_download "$repo" "$direname" "$filename"
 unpk_enter "$filename" "$direname"
 cargo build --release
 sudo cp -r target/release/$name /usr/bin/
-sudo cp -r crates/tauri-cli/completions/_$name /usr/share/zsh/site-functions/
 cd ../
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
