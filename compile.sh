@@ -247,7 +247,7 @@ function craft_buildin {
 	sudo cp -r "packaging/linux/ai.storyteller.$name.desktop" "/usr/share/applications/"
 	sudo cp -r "packaging/linux/ai.storyteller.$name.mime.xml" "/usr/share/mime/packages/" 
 	if [[ -f assets/app-icon/hicolor/scalable/apps/ai.storyteller.$name.svg ]]; then
-		sudo cp -r assets/app-icon/hicolor/scalable/apps/ai.storyteller.$name.svg "/usr/share/icons/hicolor/scalable/"
+		sudo cp -r assets/app-icon/hicolor/scalable/apps/ai.storyteller.$name.svg "/usr/share/icons/hicolor/scalable/apps/"
 	fi
 	for s in ${_icons[@]}; do
 		dim="${s}x${s}"
