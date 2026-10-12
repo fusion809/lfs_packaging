@@ -54,7 +54,7 @@ function ghl_ver {
 		| cut -d '/' -f 3 | sort -V | tail -n 1
 	elif [[ "$1" == "KDE/kdav" ]]; then
 		timeout 5 git ls-remote --tags --refs "$URL" \
-			| grep -v rc | sed 's|.*tags/v||g' \
+			| grep -v "alpha\|beta\|rc" | sed 's|.*tags/v||g' \
 			| grep -v "^[12][0-9]" | sort -V | tail -n 1
 	elif echo $1 | grep "KDE" &> /dev/null; then
 		timeout 5 git ls-remote --tags --refs "$URL" \
