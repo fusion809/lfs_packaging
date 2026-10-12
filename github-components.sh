@@ -62,10 +62,10 @@ function ghl_ver {
 		| grep -oE "refs/tags/[v]*[0-9]+\.[0-9]+\.[0-8][0-9]*" \
 		| cut -d '/' -f 3 | sed 's/^v//g' | sort -V | tail -n 1 
 	elif [[ "$1" == "GNOME/libgweather" ]]; then
-		timeout 5 git ls-remote --tags --refs "$URL" \ 
-		| grep -v rc | sed 's|.*tags/||g' -E | grep -oE "[0-9.]+" \
-		| grep "[0-9]\." | grep -v "\.$" | grep -v "^40.0$" \
-		| sort -V | tail -n 1
+		timeout 5 git ls-remote --tags --refs "$URL" | 
+		grep -v rc | sed 's|.*tags/||g' -E | grep -oE "[0-9.]+" |
+		grep "[0-9]\." | grep -v "\.$" | grep -v "^40.0$" |
+		sort -V | tail -n 1
 	elif echo $1 | grep hyfetch &> /dev/null; then
 		timeout 5 git ls-remote --tags --refs "$URL" \
 		| grep -oE "refs/tags/[0-9]+\.[0-9]+\.[0-8][0-9]*" | cut -d '/' -f 3 \

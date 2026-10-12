@@ -5,7 +5,7 @@ repo=storytold/$name
 description="IDE for interactive AI image and video creation."
 homepage="https://getartcraft.com/apps/artcraft"
 version=$(gh_ver $repo)
-depends=(cargo-tauri)
+depends=(at-spi2-core brotli bzip2 cairo cargo-tauri dav1d dbus e2fsprogs elfutils enchant expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gst-plugins-base gstreamer gtk3 harfbuzz highway icu keyutils lcms2 libaom libavif libdrm libepoxy libffi libgcrypt libglvnd libgpg-error libgudev libidn2 libjpeg-turbo libjxl libpng libpsl libseccomp libsecret libselinux libsoup libtasn1 libunistring libunwind libwebp libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxml2 libxrandr libxrender libxres libxslt mesa mitkrb nghttp2 orc pango pcre2 pixman sqlite svt-av1 systemd util-linux wayland webkitgtk xz zlib zstd)
 filename="$name-v$version.tar.gz"
 direname="$name-${filename/.tar.*/}"
 gha_download "$repo" "$name-v$version" "$filename"
