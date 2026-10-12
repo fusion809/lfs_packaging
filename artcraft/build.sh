@@ -39,7 +39,12 @@ print("Patched tauri.conf.json:", d["build"]["beforeBuildCommand"])
 PYEOF2
 script/artcraft/unix_build.sh
 sudo cp -r "crates/desktop/artcraft/target/release/$name" /usr/bin/
-sudo cp -r "frontend/apps/artcraft/app/public/resources/images/services/$name.svg" /usr/share/icons/hicolor/scalable/ai.storyteller.$name.svg
+if [[ -f "frontend/apps/artcraft/app/public/$name.svg" ]]; then
+	sudo cp -r "frontend/apps/artcraft/app/public/$name.svg" /usr/share/icons/hicolor/scalable/apps/ai.storyteller.$name.svg
+else
+	sudo wget -c https://github.com/storytold/artcraft/raw/refs/heads/main/frontend/apps/artcraft/app/public/artcraft-icon.svg -O /usr/share/icons/hicolor/scalable/apps/ai.storyteller.$name.svg
+fi
+sudo magick -background none /usr/share/icons/hicolor/scalable/apps/ai.storyteller.$name.svg -resize 1024x /usr/share/pixmaps/ai.storyteller.$name.png
 cat > /usr/share/applications/ai.storyteller.$name.desktop << EOF
 [Desktop Entry]
 Type=Application
