@@ -3,7 +3,17 @@ set -e
 name=zip
 description="Compressor/archiver for creating and modifying zipfiles."
 homepage="http://www.info-zip.org/Zip.html"
-version=$(aver $name)
+get_version() {
+	local inst_ver=$(pkgver $name)
+	local arch_ver=$(aver $name)
+	local mon_ver=$(uver $name)
+	ver_check "$mon_ver" "$inst_ver" "$arch_ver" && return
+	local nix_ver=$(nixver $name)
+	local art_ver=$(artver $name)
+	ver_check "$art_ver" "$inst_ver" "$nix_ver" && return
+	fver "$name" "$inst_ver"
+}
+version=$(get_version)
 depends=(bzip2 glibc)
 filename="${name}${version/./}.tar.gz"
 direname="${filename/.tar.*/}"
