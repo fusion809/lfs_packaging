@@ -227,13 +227,18 @@ function gap_patches {
 
 function craft_buildin {
 	local name=$1
+	if [[ $name == "artcraft-launcher" ]]; then
+		local _name="craft-launcher"
+	else
+		local _name=$name
+	fi
 	local version=$2
-	local repo=storytold/$1
-	local filename="$name-$version.tar.gz"
+	local repo=storytold/$_name
+	local filename="$_name-$version.tar.gz"
 	local direname="${filename/.tar.gz/}"
 	gha_download "$repo" "v$version" "$filename"
 	unpk_enter "$filename"
-	export CARGO_HOME="$srcdir"
+	export CARGO_HOME="$PWD"
 	export CARGO_PROFILE_RELEASE_DEBUG=0
 	export CARGO_PROFILE_RELEASE_STRIP=debuginfo
 	export CARGO_PROFILE_RELEASE_LTO=thin
@@ -243,9 +248,16 @@ function craft_buildin {
 	export RUSTUP_TOOLCHAIN=stable
 	CFLAGS+=' -fno-lto'
 	cargo build --release
-	sudo cp -r "target/release/$name"{,-cli} /usr/bin/
+	sudo cp -r "target/release/$name" /usr/bin/
+	if [[ -f "target/release/$name-cli" ]]; then
+		sudo cp -r "target/release/$name-cli" /usr/bin/
+	elif [[ -f "target/release/$name-web" ]]; then
+		sudo cp -r "target/release/$name-web" /usr/bin/
+	fi
 	sudo cp -r "packaging/linux/ai.storyteller.$name.desktop" "/usr/share/applications/"
-	sudo cp -r "packaging/linux/ai.storyteller.$name.mime.xml" "/usr/share/mime/packages/" 
+	if [[ -f "packaging/linux/ai.storyteller.$name.mime.xml" ]]; then
+		sudo cp -r "packaging/linux/ai.storyteller.$name.mime.xml" "/usr/share/mime/packages/" 
+	fi
 	if [[ -f assets/app-icon/hicolor/scalable/apps/ai.storyteller.$name.svg ]]; then
 		sudo cp -r assets/app-icon/hicolor/scalable/apps/ai.storyteller.$name.svg "/usr/share/icons/hicolor/scalable/apps/"
 	fi
