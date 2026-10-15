@@ -7,8 +7,9 @@ description="Command-line interface for building Tauri apps."
 homepage="https://github.com/tauri-apps/tauri"
 version=$(gh_ver $repo)
 filename="$_name-v$version.tar.gz"
-direname="$_name-${filename/.tar.*/}"
-gha_download "$repo" "$direname" "$filename"
+_direname="${filename/.tar.*/}"
+direname="$_name-$_direname"
+gha_download "$repo" "$_direname" "$filename"
 unpk_enter "$filename" "$direname"
 cargo build --release
 sudo cp -r target/release/$name /usr/bin/
