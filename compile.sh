@@ -184,8 +184,15 @@ meson setup "${meson_args[@]}" "$source_dir" || exit 1
 
 function arch_patch {
     local pkg="$1"
+    source $HOME/lfs-scripts/Shell/14-package-version.sh
+    local upst_ver=$(upver $pkg)
+    local arch_ver=$(aver $pkg)
     local patch_name="$2"
-    download_src "https://gitlab.archlinux.org/archlinux/packaging/packages/$pkg/-/raw/main/$patch_name?ref_type=heads&inline=false" "$patch_name"
+    if [[ "$upst_ver" == "$arch_ver" ]]; then
+    	download_src "https://gitlab.archlinux.org/archlinux/packaging/packages/$pkg/-/raw/main/$patch_name?ref_type=heads&inline=false" "$patch_name"
+    else
+    	download_src "https://aur.archlinux.org/cgit/aur.git/plain/$patch_name?h=$pkg-git" "$patch_name"
+    fi
     patch -p1 -i "$patch_name"
 }
 

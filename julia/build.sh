@@ -26,7 +26,7 @@ make_options=(
     USE_SYSTEM_ZLIB=1
     USE_SYSTEM_NGHTTP2=1
     USE_SYSTEM_LIBSSH2=1)
-arch_patch "$name" "system-zstd.patch"
+arch_patch "$name" "system-zstd.patch" || echo "Patching failed, continuing build anyway"
 maki "${make_options[@]}"
 cd ../
 sudo rm -rf "$filename" "$direname"
