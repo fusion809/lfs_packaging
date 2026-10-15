@@ -8,8 +8,12 @@ get_version() {
 	local lfs_vers=$(lfs_ver $name)
 	local majVer=$(wget -T 5 -t 1 -cqO- https://cmake.org/files/ | grep "v[0-9.]+" -oE | sed 's/^v//g' | sort -V | tail -n 1)
 	local up_ver=$(wget -T 5 -t 1 -cqO- https://cmake.org/files/v$majVer | grep "cmake-[0-9.]+.tar.gz" -oE | grep -oE "[0-9]+\.[0-9]+\.[0-9]+" | sort -V | tail -n 1)
+	if [[ -z "$up_ver" ]]; then
+		majVer=$(wget -T 5 -t 1 -cqO- https://cmake.org/files/ | grep -v "$majVer" | grep "v[0-9.]+" -oE | sed 's/^v//g' | sort -V | tail -n 1)
+		up_ver=$(wget -T 5 -t 1 -cqO- https://cmake.org/files/v$majVer | grep "cmake-[0-9.]+.tar.gz" -oE | grep -oE "[0-9]+\.[0-9]+\.[0-9]+" | sort -V | tail -n 1)
+	fi
 	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
-	local git_ver=$(timeout 5 git ls-remote --tags --refs https://gitlab.kitware.com/cmake/cmake.git | grep "refs/tags/v[0-9.]+" -oE | sed 's|refs/tags/v||g' | sort -V | tail -n 1)
+	local git_ver=$(timeout 5 git ls-remote --tags --refs https://gitlab.kitware.com/cmake/cmake.git | grep -vi "alpha\|beta\|rc" | grep "refs/tags/v[0-9.]+" -oE | sed 's|refs/tags/v||g' | sort -V | tail -n 1)
 	ver_check "$git_ver" "$inst_ver" "$lfs_vers" && return
 	local mon_ver=$(uver $name)
 	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
