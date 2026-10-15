@@ -5,7 +5,7 @@ name=libgedit-gfls
 homepage="https://gitlab.gnome.org/World/gedit/libgedit-gfls"
 description="File loading and saving library."
 version=$(lgd_ver $name)
-depends=(gcc glib2 glibc libffi pcre2 systemd util-linux zlib)
+depends=(gcc glib2 glibc libffi pcre2 systemd util-linux zlib
 	exempi
 	gdk-pixbuf
 	glib
