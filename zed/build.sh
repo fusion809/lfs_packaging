@@ -18,6 +18,7 @@ sudo sed -i \
     -e 's|^Exec=\$APP_CLI --new \$APP_ARGS|Exec=zed --new %f|g' \
     -e 's|^Name=\$APP_NAME|Name=zed|g' \
     -e 's|^StartupNotify=.*$|StartupNotify=true|g' \
+    -e '/^MimeType=/ s|$|inode/directory;|' \
     /usr/share/applications/$name.desktop
 sudo cp -r crates/zed/resources/app-icon.png /usr/share/pixmaps/$name.png
 sudo cp -r target/release/$name /usr/bin
