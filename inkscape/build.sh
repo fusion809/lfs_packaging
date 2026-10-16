@@ -8,10 +8,15 @@ version=$(gl_ver $repo)
 depends=(gsl gtkmm3 bdwgc double-conversion boost libxslt poppler popt imagemagick lcms2 potrace libcanberra)
 _version=$(echo $version | tr '.' '_')
 tag="INKSCAPE_$_version"
-filename="$name-$tag.tar.bz2"
+filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-gla_download "$repo" "$tag" "$filename"
-unpk_enter "$filename" "$direname"
+_direname=$(wget -cqO- $homepage/release/$direname/source/archive/xz/dl/ | 
+grep "href=\"https://media.inkscape.*$version_.*.tar.xz" -oE | rev | 
+cut -d '/' -f 1 | rev | sed 's/.tar.xz//g')
+src=$homepage/$(wget -cqO- $homepage/release/$direname/source/archive/xz/dl/ | 
+grep "href.*$version.tar.xz" | cut -d '"' -f 2)
+download_src "$src"
+unpk_enter "$filename"
 gap_patches "$name"
 cmake_options=(-D CMAKE_INSTALL_PREFIX=/usr \
       -D CMAKE_BUILD_TYPE=Release  \
@@ -19,5 +24,5 @@ cmake_options=(-D CMAKE_INSTALL_PREFIX=/usr \
       -W no-author)
 cmaki "${cmake_options[@]}"
 cd ../..
-rm -rf "$filename" "$direname"
+rm -rf "$filename" "$_direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
