@@ -14,7 +14,7 @@ description="Provides a C++ interface to Pango."
 version=$(get_version)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(cairomm glibmm pango)
+depends=(brotli bzip2 cairo cairomm expat fontconfig freetype fribidi gcc glib2 glibc glibmm glibmm24 graphite2 harfbuzz libffi libpng libselinux libsigcpp2 libx11 libxau libxcb libxdmcp libxext libxrender pango pcre2 pixman systemd util-linux zlib)
 gha_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 mni --prefix=/usr --buildtype=release -D maintainer-mode=true -D build-documentation=false

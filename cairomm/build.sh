@@ -7,7 +7,7 @@ description="Provides a C++ interface to Pango."
 version=$(gfl_ver $repo)
 filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(glib2 libsigcpp2)
+depends=(brotli bzip2 cairo expat fontconfig freetype gcc glib2 glibc libpng libsigcpp2 libx11 libxau libxcb libxdmcp libxext libxrender pixman zlib)
 gfd_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 mni --prefix=/usr --buildtype=release

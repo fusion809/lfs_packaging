@@ -7,7 +7,7 @@ description="C++ interface for the ATK accessibility toolkit library."
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(dbus glib2 gsettings-desktop-schemas)
+depends=(at-spi2-core dbus gcc glib2 glibc glibmm24 gsettings-desktop-schemas libffi libsigcpp2 pcre2)
 gha_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 mni --prefix=/usr --buildtype=release -D maintainer-mode=true -D build-documentation=false
