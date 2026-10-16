@@ -8,7 +8,7 @@ description="libsigc++ implements a typesafe callback system for standard C++."
 version=$(gh_ver $repo $name)
 filename="libsigc++-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(boost libxslt)
+depends=(boost gcc glibc libxslt)
 ghr_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 sed -i "s/'system',//" meson.build

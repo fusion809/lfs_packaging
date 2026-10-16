@@ -6,6 +6,7 @@ repo=GNOME/$_name
 homepage="https://github.com/GNOME/glibmm"
 description="Set of C++ bindings for GLib."
 version=$(gh_ver $repo $name)
+depends=(gcc glib2 glibc libffi libselinux libsigcpp2 pcre2 systemd util-linux zlib)
 filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "$version" "$filename"
