@@ -49,7 +49,7 @@ link-shared = true
 targets = "X86"
 
 [build]
-description = "For BLFS r13.0-1024."
+description = "For $(cat /etc/blfs-release)."
 
 
 # Omit the documentation to save time and space (the default is to build them).
