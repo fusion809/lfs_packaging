@@ -7,7 +7,6 @@ description="Open-source vector graphics editing software."
 version=$(gl_ver $repo)
 depends=(gsl gtkmm3 bdwgc double-conversion boost libxslt poppler popt imagemagick lcms2 potrace libcanberra)
 _version=$(echo $version | tr '.' '_')
-tag="INKSCAPE_$_version"
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 _direname=$(wget -cqO- $homepage/release/$direname/source/archive/xz/dl/ | 
