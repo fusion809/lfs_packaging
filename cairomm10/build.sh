@@ -1,9 +1,10 @@
 #!/bin/bash
 set -e
-name=cairomm
+name=cairomm10
+_name=cairomm
 repo=cairo/cairomm
 homepage="https://gitlab.freedesktop.org/cairo/cairomm"
-description="Provides a C++ interface to Pango."
+description="Provides a C++ interface to Cairo - library version 1.0."
 version=$(gfl_ver $repo)
 filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"

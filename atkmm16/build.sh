@@ -1,11 +1,12 @@
 #!/bin/bash
 set -e
-name=atkmm
-repo=GNOME/$name
+name=atkmm16
+_name=atkmm
+repo=GNOME/$_name
 homepage="https://github.com/GNOME/atkmm"
-description="C++ interface for the ATK accessibility toolkit library."
+description="C++ interface for the ATK accessibility toolkit library - library version 1.6."
 version=$(gh_ver $repo)
-filename="$name-$version.tar.gz"
+filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(at-spi2-core dbus gcc glib2 glibc glibmm24 gsettings-desktop-schemas libffi libsigcpp2 pcre2)
 gha_download "$repo" "$version" "$filename"
