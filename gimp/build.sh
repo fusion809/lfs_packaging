@@ -11,10 +11,12 @@ filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 download_src "https://download.gimp.org/gimp/v$majMinVer/$filename"
 unpk_enter "$filename" "$direname"
-sudo su -c "rm -rf /usr/{lib,share}/gimp/3.0 &&
-rm -f  /usr/share/gir-1.0/Gimp-3.0.gir &&
-rm -f  /usr/lib/girepository-1.0/Gimp-3.0.typelib &&
-rm -f  /usr/lib/libgimp*-3.0.so*"
+if [[ -f /var/lib/custom-packages/$name ]]; then
+	sudo su -c "rm -rf /usr/{lib,share}/gimp/3.0 &&
+				rm -rf  /usr/share/gir-1.0/Gimp-3.0.gir &&
+			    rm -rf  /usr/lib/girepository-1.0/Gimp-3.0.typelib &&
+				rm -rf  /usr/lib/libgimp*-3.0.so*"
+fi
 patch -Np1 -i build/macos/patches/0001-build-macos-Do-not-require-gexiv2-0.14-on-homebrew.patch
 mni --prefix=/usr --buildtype=release -D headless-tests=disabled
 cd ../..

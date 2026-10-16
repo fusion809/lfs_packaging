@@ -9,6 +9,12 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
+if ! which automake-1.16 &> /dev/null; then
+	sudo ln -sf /usr/bin/automake-1.19 /usr/bin/automake-1.16
+fi
+if ! which aclocal-1.16 &> /dev/null; then
+	sudo ln -sf /usr/bin/aclocal-1.19 /usr/bin/aclocal-1.16
+fi
 cmi --prefix=/usr --disable-static
 cd ../
 rm -rf "$filename" "$direname"

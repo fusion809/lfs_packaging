@@ -12,6 +12,8 @@ depends=(autoconf bash brotli bzip2 coreutils expat fontconfig freetype gcc gdk-
 # Fetch and unpack source
 gha_download "$repo" "v${version}" "$filename"
 unpk_enter "$filename" "$direname"
+# Fix missing stdint.h for uint64_t in bmp.h
+sed -i '1i #include <stdint.h>' src/ipa/ipa/bmp.h
 # Compile and install
 sudo autoreconf -fi
 sudo chmod 777 -R *
