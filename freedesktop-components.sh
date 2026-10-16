@@ -26,18 +26,24 @@ function gfl_ver {
 		local name=$(echo $1 | cut -d '/' -f 2)
 	fi
 	local URL="https://gitlab.freedesktop.org/$1.git"
-    if [[ "$1" != "gstreamer/gstreamer" ]]; then
-	    timeout 5 git ls-remote --tags "$URL" 2>/dev/null \
-		| grep -oE 'tags/([v]*[0-9.][^"]*|'"$name"'-[0-9]+\.[0-9]+\.[0-9]+)' \
-		| grep -v "\.99" | sed "s|$name-||g" \
-		| sed -n 's|tags/v\?\([0-9][0-9.]*\)$|\1|p' \
-		| grep -vE "dev|rc|alpha|beta" | sort -V | tail -1
-    else
+    if [[ "$1" == "gstreamer/gstreamer" ]]; then
 	    timeout 5 git ls-remote --tags "$URL" 2>/dev/null \
 		| sed -n 's|.*refs/tags/v\?\([0-9][0-9.]*\)$|\1|p' \
 		| grep -vE "dev|rc|alpha|beta" \
 		| grep -oE "[0-9]+\.[0-9]*[02468]\.[0-9]+" | sort -V \
 		| tail -1
+     elif [[ "$1" == "cairo/cairomm" ]]; then
+	    timeout 5 git ls-remote --tags "$URL" 2>/dev/null \
+		| grep -oE 'tags/1.14.[0-9]+' \
+		| grep -v "\.99" | sed "s|$name-||g" \
+		| sed -n 's|tags/v\?\([0-9][0-9.]*\)$|\1|p' \
+		| grep -vE "dev|rc|alpha|beta" | sort -V | tail -1
+     else
+	    timeout 5 git ls-remote --tags "$URL" 2>/dev/null \
+		| grep -oE 'tags/([v]*[0-9.][^"]*|'"$name"'-[0-9]+\.[0-9]+\.[0-9]+)' \
+		| grep -v "\.99" | sed "s|$name-||g" \
+		| sed -n 's|tags/v\?\([0-9][0-9.]*\)$|\1|p' \
+		| grep -vE "dev|rc|alpha|beta" | sort -V | tail -1
     fi
 }
 

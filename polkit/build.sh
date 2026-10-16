@@ -10,7 +10,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=(duktape expat glib2 glib2 glibc libffi libxslt linux-pam linux-pam pcre2 systemd systemd util-linux zlib)
 # Download source, unpack and enter it
-gha_download "$repo" "v$version" "$filename"
+gha_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 # Compile and install
 #sudo groupadd -fg 27 polkitd &&

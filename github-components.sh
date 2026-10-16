@@ -22,6 +22,25 @@ function ghl_ver {
 		| sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' \
 		| grep -E "^[0-9]+(\.[0-9]+)+$" \
 		| grep -oE "[0-9]+.[0-9]+.[0-8][0-9]*" | sort -V | tail -n 1
+	elif [[ "$1" == "GNOME/glibmm" && "$2" == "glibmm24" ]]; then
+		timeout 5 git ls-remote --tags --refs "$URL" 2>/dev/null \
+		| cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" \
+		| sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' \
+		| grep -oE "2.66.[0-9]+" | sort -V | tail -n 1
+	elif [[ "$1" == "GNOME/pangomm" ]]; then
+		timeout 5 git ls-remote --tags --refs "$URL" 2>/dev/null \
+		| cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" \
+		| sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' \
+		| grep -oE "2.46.[0-9]+" | sort -V | tail -n 1
+	elif [[ "$1" == "GNOME/atkmm" ]]; then
+		timeout 5 git ls-remote --tags --refs "$URL" 2>/dev/null \
+		| cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" \
+		| sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' \
+		| grep -oE "2.28.[0-9]+" | sort -V | tail -n 1
+	elif [[ "$1" == "libsigcplusplus/libsigcplusplus" && "$2" == "libsigcpp2" ]]; then
+		timeout 5 git ls-remote --tags --refs "$URL" | 
+		grep -v "alpha\|beta\|rc" | sed 's|.*tags/||g' -E | grep -oE "^2\.[0-9][02468]\.[0-9]+" | grep -v "\.$"
+		sort -V | tail -n 1
 	elif [[ "$1" == "KhronosGroup/Vulkan-Loader" ]] \
 	|| [[ "$1" == "KhronosGroup/Vulkan-Headers" ]]; then
         timeout 5 git ls-remote --tags --refs "$URL" 2>/dev/null \
@@ -70,6 +89,10 @@ function ghl_ver {
 		timeout 5 git ls-remote --tags --refs "$URL" | 
 		grep -v "alpha\|beta\|rc" | sed 's|.*tags/||g' -E | grep -oE "[0-9]+\.[0-9][02468]\.[0-9]+" | grep -v "\.$" | grep -v "^40.0$" |
 		sort -V | tail -n 1
+	elif [[ "$1" == "GNOME/gtkmm" && "$2" == "gtkmm3" ]]; then
+		timeout 5 git ls-remote --tags --refs "$URL" | 
+		grep -v "alpha\|beta\|rc" | sed 's|.*tags/||g' -E | grep -oE "^3\.[0-9][02468]\.[0-9]+" | grep -v "\.$" | grep -v "^40.0$" |
+		sort -V | tail -n 1
 	elif echo $1 | grep hyfetch &> /dev/null; then
 		timeout 5 git ls-remote --tags --refs "$URL" \
 		| grep -oE "refs/tags/[0-9]+\.[0-9]+\.[0-8][0-9]*" | cut -d '/' -f 3 \
@@ -114,6 +137,21 @@ function ght_ver {
 		return
 	elif [[ "$2" == "libopenssl3" ]]; then
 		wget -T 5 -t 1 -cqO- https://github.com/$1/tags | grep "tag/openssl-3\.[0-9.]+" -oE | cut -d '-' -f 2 | sort -V | tail -n 1
+		return
+	elif [[ "$1" == "GNOME/gtkmm" && "$2" == "gtkmm3" ]]; then
+		wget -T 5 -t 1 -cqO- https://github.com/$1/tags | grep "tag/3\.[0-9]*[02468]+\.[0-9]+" -oE | cut -d '/' -f 2 | sort -V | tail -n 1
+		return
+	elif [[ "$1" == "GNOME/glibmm" && "$2" == "glibmm24" ]]; then
+		wget -T 5 -t 1 -cqO- https://github.com/$1/tags | grep "tag/2\.66\.[0-9]+" -oE | cut -d '/' -f 2 | sort -V | tail -n 1
+		return
+	elif [[ "$1" == "GNOME/pangomm" ]]; then
+		wget -T 5 -t 1 -cqO- https://github.com/$1/tags | grep "tag/2\.46\.[0-9]+" -oE | cut -d '/' -f 2 | sort -V | tail -n 1
+		return
+	elif [[ "$1" == "GNOME/atkmm" ]]; then
+		wget -T 5 -t 1 -cqO- https://github.com/$1/tags | grep "tag/2\.28\.[0-9]+" -oE | cut -d '/' -f 2 | sort -V | tail -n 1
+		return
+	elif [[ "$1" == "libsigcplusplus/libsigcplusplus" && "$2" == "libsigcpp2" ]]; then
+		wget -T 5 -t 1 -cqO- https://github.com/$1/tags | grep "tag/2\.[0-9]*[02468]+\.[0-9]+" -oE | cut -d '/' -f 2 | sort -V | tail -n 1
 		return
 	fi
 	if [[ "$1" == "GNOME/gcr3" ]]; then

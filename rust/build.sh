@@ -49,7 +49,7 @@ link-shared = true
 targets = "X86"
 
 [build]
-DESCRIPTION = "For BLFS r13.0-1024."
+description = "For BLFS r13.0-1024."
 
 
 # Omit the documentation to save time and space (the default is to build them).
