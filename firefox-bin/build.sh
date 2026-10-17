@@ -38,7 +38,7 @@ Terminal=false
 Type=Application
 Icon=firefox
 Categories=GNOME;GTK;Network;WebBrowser;
-MimeType=$MIMETYPE
+MimeType=text/html;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;x-scheme-handler/http;x-scheme-handler/https
 StartupNotify=true
 StartupWMClass=firefox
 EOF

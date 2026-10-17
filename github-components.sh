@@ -112,6 +112,11 @@ function ghl_ver {
 		| cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" \
 		| sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' \
 		| grep -E "^3(\.[0-9]+)+$" | tr '-' '.' | sort -V | tail -n 1
+	elif [[ "$1" == "thunderbird/thunderbird-desktop" ]]; then
+		timeout 5 git ls-remote --tags --refs "$URL" \
+			| grep -v "[0-9]b[0-9]" | grep "THUNDERBIRD_[0-9_]+" -oE \
+			| sed 's/THUNDERBIRD_//g' | tr '_' '.' | sed 's/.$//g' \
+			| sort -V | tail -n 1
 	else
 		timeout 5 git ls-remote --tags --refs "$URL" 2>/dev/null \
 		| cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" \
