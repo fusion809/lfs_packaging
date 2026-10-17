@@ -5,6 +5,7 @@ repo=KDE/$name
 homepage="https://develop.kde.org/products/frameworks/"
 description="Wrapper around exiv2 for KDE."
 version=$(gh_ver $repo)
+depends=(brotli bzip2 curl cyrus-sasl dbus double-conversion exiv2 expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu inih libglvnd libidn2 libpng libpsl libunistring libx11 libxau libxcb libxdmcp libxkbcommon nghttp2 openldap openssl pcre2 qt6 systemd zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"

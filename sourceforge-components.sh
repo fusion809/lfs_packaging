@@ -6,9 +6,15 @@ function gsf_ver {
 		local URL="https://git.code.sf.net/p/$1.git"
 	fi
 	local name=$(echo $1 | cut -d '/' -f 1)
-    timeout 5 git ls-remote --tags --refs $URL 2>/dev/null \
+    if [[ "$1" == "djvu/djvulibre-git" ]]; then
+	    timeout 5 git ls-remote --tags --refs $URL \
+		    | grep "refs/tags/release.[0-9.]+" -oE \
+		    | sed 's/.*release.//g' | sort -V | tail -n 1
+    else
+    	timeout 5 git ls-remote --tags --refs $URL 2>/dev/null \
 	| grep -E "tags/(v?[0-9.]+|${name}-[0-9.]+)" | sed "s/$name-//g" \
 	| cut -d '/' -f 3 | sed 's/^v//g' | sort -V | tail -n 1
+    fi
 }
 
 function wsf_ver {
