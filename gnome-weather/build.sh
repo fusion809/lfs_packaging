@@ -5,6 +5,7 @@ name=gnome-weather
 repo=GNOME/$name
 homepage="https://wiki.gnome.org/Apps/Weather"
 description="Small application that provides local weather forecasts."
+depends=(geoclue gjs libadwaita libgweather)
 version=$(gn_ver $name)
 major_ver="${version%%.*}"
 filename="$name-$version.tar.xz"
