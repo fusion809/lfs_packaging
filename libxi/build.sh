@@ -2,11 +2,11 @@
 set -e
 # Variable declarations
 _name=libXi
+name=libxi
 version=$(xfd_ver $_name)
 direname="$_name-$version"
 filename="$direname.tar.xz"
-depends=(bash coreutils fontconfig glibc libx11 libxau libxcb libxdmcp libxext make sed systemd tar util-linux xorg-libs xz zlib)
-name=$(echo $_name | tr '[:upper:]' '[:lower:]')
+depends=(bash coreutils fontconfig glibc libx11 libxau libxcb libxdmcp libxext make sed systemd tar util-linux xz zlib)
 homepage="https://xorg.freedesktop.org"
 description="X11 Input extension library."
 # Fetch and unpack source

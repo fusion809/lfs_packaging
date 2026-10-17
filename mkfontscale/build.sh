@@ -7,7 +7,7 @@ homepage="https://www.x.org"
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"
-depends=(bash brotli bzip2 coreutils fontconfig freetype glibc libfontenc libpng libxcb make mesa sed systemd tar util-linux xbitmaps xcb-util xorg-libs xz zlib)
+depends=(bash brotli bzip2 coreutils fontconfig freetype glibc libfontenc libpng libxcb make mesa sed systemd tar util-linux xbitmaps xcb-util xz zlib)
 # Fetch and unpack source
 xfd_download "$filename"
 unpk_enter "$filename" "$direname"

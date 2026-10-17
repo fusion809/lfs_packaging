@@ -7,7 +7,7 @@ description="Kill a client by its X resource."
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"
-depends=(bash coreutils fontconfig glibc libpng libx11 libxau libxcb libxdmcp libxmu make mesa sed systemd tar util-linux xbitmaps xcb-util xorg-libs xz zlib)
+depends=(bash coreutils fontconfig glibc libpng libx11 libxau libxcb libxdmcp libxmu make mesa sed systemd tar util-linux xbitmaps xcb-util xz zlib)
 # Fetch and unpack source
 xfd_download "$filename"
 unpk_enter "$filename" "$direname"

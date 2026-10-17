@@ -7,7 +7,7 @@ direname="${name}-$version"
 filename="$direname.tar.xz"
 homepage="https://www.x.org"
 description="Facilitates participation in X11R6 session management."
-depends=(bash coreutils fontconfig glibc libice libpng libsm libx11 libxau libxcb libxdmcp libxmu libxt make mesa sed systemd tar util-linux xbitmaps xcb-util xorg-libs xz zlib)
+depends=(bash coreutils fontconfig glibc libice libpng libsm libx11 libxau libxcb libxdmcp libxmu libxt make mesa sed systemd tar util-linux xbitmaps xcb-util xz zlib)
 # Fetch and unpack source
 xfd_download "$filename"
 unpk_enter "$filename" "$direname"

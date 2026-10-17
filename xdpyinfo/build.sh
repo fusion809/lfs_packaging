@@ -7,7 +7,7 @@ direname="${name}-$version"
 filename="$direname.tar.xz"
 homepage="https://www.x.org"
 description="Xorg display information utility."
-depends=(bash coreutils fontconfig glibc libpng libx11 libxau libxcb libxcomposite libxdmcp libxext libxfixes libxi libxinerama libxpresent libxrandr libxrender libxtst libxxf86dga libxxf86vm make mesa sed systemd tar util-linux xbitmaps xcb-util xorg-libs xz zlib)
+depends=(bash coreutils fontconfig glibc libpng libx11 libxau libxcb libxcomposite libxdmcp libxext libxfixes libxi libxinerama libxpresent libxrandr libxrender libxtst libxxf86dga libxxf86vm make mesa sed systemd tar util-linux xbitmaps xcb-util xz zlib)
 # Fetch and unpack source
 xfd_download "$filename"
 unpk_enter "$filename" "$direname"

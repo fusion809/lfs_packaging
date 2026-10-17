@@ -2,11 +2,11 @@
 set -e
 # Variable declarations
 _name=libXpm
+name=libxpm
 version=$(xfd_ver $_name)
 direname="$_name-$version"
 filename="$direname.tar.xz"
-depends=(bash coreutils fontconfig glibc libice libsm libx11 libxau libxcb libxdmcp libxext libxt make sed systemd tar util-linux xorg-libs xz zlib)
-name=$(echo $_name | tr '[:upper:]' '[:lower:]')
+depends=(bash coreutils fontconfig glibc libice libsm libx11 libxau libxcb libxdmcp libxext libxt make sed systemd tar util-linux xz zlib)
 homepage="https://xorg.freedesktop.org/"
 description="X11 pixmap library."
 # Fetch and unpack source

@@ -2,13 +2,13 @@
 set -e
 # Variable declarations
 _name=libXtst
-name=$(echo $_name | tr '[:upper:]' '[:lower:]')
+name=libxtst
 homepage="https://gitlab.freedesktop.org/xorg/lib/libxtst"
 description="Library for XTEST & RECORD extensions."
 version=$(xfd_ver $_name)
 direname="${_name}-$version"
 filename="$direname.tar.xz"
-depends=(bash coreutils fontconfig glibc libx11 libxau libxcb libxdmcp libxext libxi make sed systemd tar util-linux xorg-libs xz zlib)
+depends=(bash coreutils fontconfig glibc libx11 libxau libxcb libxdmcp libxext libxi make sed systemd tar util-linux xz zlib)
 # Fetch and unpack source
 xfd_download "$filename"
 unpk_enter "$filename" "$direname"

@@ -7,7 +7,7 @@ description="X11 keyboard file manipulation library."
 version=$(xfd_ver $name)
 direname="${name}-$version"
 filename="$direname.tar.xz"
-depends=(bash coreutils fontconfig glibc libx11 libxau libxcb libxdmcp meson sed systemd tar util-linux xorg-libs xz zlib)
+depends=(bash coreutils fontconfig glibc libx11 libxau libxcb libxdmcp meson sed systemd tar util-linux xz zlib)
 # Fetch and unpack source
 xfd_download "$filename"
 unpk_enter "$filename" "$direname"
