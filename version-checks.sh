@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function pkgver {
-    if [[ -n $2 ]]; then
+    if [[ -n ${2-} ]]; then
         find /var/lib/{book,custom}-packages -type f -name "$1" -exec sh -c '
             lines=$1
             shift
