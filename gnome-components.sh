@@ -13,12 +13,12 @@ function ggn_ver {
 		URL="https://gitlab.gnome.org/GNOME/$1"
 	fi
 
-	if [[ "${1}${2}" == "gtk3" || "$1" == "gtk3" ]]; then
+	if [[ "${1}${2-}" == "gtk3" || "$1" == "gtk3" ]]; then
 		timeout 15 git ls-remote --tags --refs "$URL.git" 2>/dev/null \
 		| cut -d '/' -f 3 \
 		| grep -viE "alpha|beta|rc|dev|snapshot|init|\.9[0-9]" \
 		| grep -E "^3\.[02468]+\.[0-9]+$" | sort -V | tail -n 1
-	elif [[ "${1}${2}" == "gtk4" || "$1" == "gtk" || "$1" == "gtk4" ]]; then
+	elif [[ "${1}${2-}" == "gtk4" || "$1" == "gtk" || "$1" == "gtk4" ]]; then
 		timeout 15 git ls-remote --tags --refs "$URL.git" 2>/dev/null \
 		| cut -d '/' -f 3 \
 		| grep -viE "alpha|beta|rc|dev|snapshot|init|\.9[0-9]" \
@@ -74,13 +74,13 @@ function wgn_ver {
 	else
 		URL="https://gitlab.gnome.org/GNOME/$1"
 	fi
-    if [[ "$1" == "gtk3" || "$2" == "3" ]]; then
+    if [[ "$1" == "gtk3" || "${2-}" == "3" ]]; then
 	    wget -T 10 -t 1 -cqO- "$URL/-/tags" | grep -oE "tags/[^\"]+" \
 		| sed 's|tags/||' | grep -viE "alpha|beta|\.rc|rc[0-9]|\.9[0-9]" \
 		| sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' \
 		| grep -E '^[0-9]+(\.[0-9]+)+$' | grep -E "^3\.[02468]+" | sort -V \
 		| tail -n 1
-    elif [[ "$1" == "gtk" || "$1" == "gtk4" || "$2" == "4" ]]; then
+    elif [[ "$1" == "gtk" || "$1" == "gtk4" || "${2-}" == "4" ]]; then
 	    wget -T 10 -t 1 -cqO- "$URL/-/tags" | grep -oE "tags/[^\"]+" \
 		| sed 's|tags/||' | grep -viE "alpha|beta|\.rc|rc[0-9]|\.9[0-9]" \
 		| sed -E 's/^[a-zA-Z0-9_-]*_([0-9])/\1/; s/^[vVrR]//' | tr '_' '.' \
