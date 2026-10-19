@@ -28,6 +28,7 @@ make_options=(
     USE_SYSTEM_LIBSSH2=1)
 arch_patch "$name" "system-zstd.patch" || echo "Patching failed, continuing build anyway"
 maki "${make_options[@]}"
+sudo sed -i -e "s|Categories=Development;|Categories=Development;Science;Math;|g" /usr/share/applications/$name.desktop
 cd ../
 sudo rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
