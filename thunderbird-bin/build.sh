@@ -13,7 +13,7 @@ homepage="https://www.thunderbird.net/en-GB/"
 description="Stand-alone mail/news client from Mozilla."
 version=$(get_version)
 filename="$_name-$version.tar.xz"
-direname="${filename/.tar.*/}"
+direname="$_name"
 download_src "https://archive.mozilla.org/pub/thunderbird/releases/$version/linux-x86_64/en-GB/$filename"
 unpk_enter "$filename"
 sudo mkdir -p /usr/lib/$_name
