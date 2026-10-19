@@ -18,7 +18,18 @@ cat > /usr/bin/jchempaint << EOF
 exec java -jar /opt/jchempaint/jchempaint.jar "\$@"
 EOF
 sudo chmod +x /usr/bin/jchempaint
-sudo cp -r appstream/io.github.jchempaint.JChemPaint.desktop /usr/share/applications
+cat > /usr/share/applications/io.github.jchempaint.JChemPaint.desktop << EOF
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=JChemPaint
+GenericName=Chemical 2D structure editor
+Icon=io.github.jchempaint.JChemPaint
+Exec=/usr/bin/jchempaint %f
+TryExec=/usr/bin/jchempaint
+Categories=Science;Chemistry;Education;
+StartupWMClass=org-openscience-jchempaint-application-JChemPaint
+EOF
 sudo cp -r appstream/io.github.jchempaint.JChemPaint.512.png /usr/share/pixmaps/io.github.jchempaint.JChemPaint.png
 cd ../
 rm -rf "$filename" "$direname"

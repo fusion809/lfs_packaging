@@ -1,0 +1,41 @@
+#!/bin/bash
+set -e
+name=jmol
+_name=Jmol
+url="https://sourceforge.net/projects/jmol/files/Jmol"
+get_version() {
+	local majMinVer=$(wget -T 5 -t 1 -cqO- $url | grep "Version [0-9.]+" -oE | head -n 1 | cut -d ' ' -f 2)
+	local version=$(wget -T 5 -t 1 -cqO- $url/Version%20$majMinVer/ | grep "Jmol $majMinVer.*gz" | sed 's/.*Jmol //g' | cut -d '/' -f 1)
+	local inst_ver=$(pkgver $name)
+	local arch_ver=$(aver $name)
+	ver_check "$version" "$inst_ver" "$arch_ver" && return
+	fver "$name" "$inst_ver"
+}
+homepage="https://sourceforge.net/projects/jmol/"
+description="Interactive 3D molecule viewer."
+version=$(get_version)
+filename="$_name-$version-binary.tar.gz"
+direname="${filename/-binary.tar.*/}"
+depends=(java)
+download_src "$url/Version%20${version%.*}/Jmol%20$version/$filename"
+unpk_enter "$filename" "$direname"
+sudo mkdir -p /usr/share/jmol
+sudo cp *.jar /usr/share/jmol
+sudo install -Dm755 jmol.sh /usr/bin/jmol
+cat > /usr/share/applications/jmol.desktop << EOF
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Jmol
+Comment=Molecular visualization system in Java
+Exec=jmol %F
+Icon=jmol
+Terminal=false
+StartupNotify=false
+Categories=Science;Chemistry;Education;
+MimeType=application/x-jmol;chemical/x-cif;chemical/x-cml;chemical/x-gaussian-input;chemical/x-mdl-molfile;chemical/x-mmcif;chemical/x-pdb;chemical/x-xyz
+EOF
+sudo wget -c "https://static.macupdate.com/products/28305/l/jmol-logo.png?v=1629318339" -O /usr/share/pixmaps/jmol.png
+cd ../
+rm -rf "$filename" "$direname"
+echo "$version" | sudo tee "/var/lib/custom-packages/$name"
