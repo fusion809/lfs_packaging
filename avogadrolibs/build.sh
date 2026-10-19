@@ -20,10 +20,6 @@ cmake_options=(-DCMAKE_INSTALL_PREFIX=/usr \
     -DUSE_EXTERNAL_PUGIXML=ON \
     -DQT_VERSION=6)
 cmaki "${cmake_options[@]}"
-_sitepkgs="$(python -c 'import site; print(site.getsitepackages()[0])')"
-sudo ln -sr "${_sitepkgs}/pybind11/include/pybind11" "/usr/include/pybind11"
-sudo ln -sr "${_sitepkgs}/pybind11/share/cmake/pybind11" "/usr/lib/cmake/pybind11"
-sudo ln -sr "${_sitepkgs}/pybind11/share/pkgconfig/pybind11.pc" "/usr/lib/pkgconfig/pybind11.pc"
 cd ../..
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
