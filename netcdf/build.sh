@@ -6,7 +6,7 @@ repo=Unidata/$_name
 homepage="https://www.unidata.ucar.edu/software/netcdf/"
 description="Network common data form interface."
 version=$(gh_ver $repo)
-filename="$name-$version.tar.gz"
+filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"

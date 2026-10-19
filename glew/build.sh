@@ -7,9 +7,10 @@ description="The OpenGL Extension Wrangler Library."
 version=$(gh_ver $repo)
 filename="$name-$version.tgz"
 direname="${filename/.tgz/}"
-gha_download "$repo" "$direname" "$filename"
+ghr_download "$repo" "$direname" "$filename"
 unpk_enter "$filename" "$direname"
-arch_patch $name
+arch_patch $name glew-2.3.0-install.patch
+arch_patch $name glew-ldflags.patch
 make STRIP=
 sudo make install.all DESTDIR=/
 cd ../

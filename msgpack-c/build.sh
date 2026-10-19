@@ -4,11 +4,11 @@ name=msgpack-c
 repo=msgpack/$name
 get_version() {
 	local git_ver=$(timeout 5 git ls-remote --tags --refs https://github.com/$repo.git \
-		| grep "c-[0-9.]+" -oE | cut -d '-' -f 2 | sort -V | tail -n )
+		| grep "c-[0-9.]+" -oE | cut -d '-' -f 2 | sort -V | tail -n 1)
 	local inst_ver=$(pkgver $name)
 	local arch_ver=$(aver $name)
 	ver_check "$git_ver" "$inst_ver" "$arch_ver" && return
-	local up_ver=(wget -cqO- -T 5 -t 1 https://github.com/$repo/tags \
+	local up_ver=$(wget -cqO- -T 5 -t 1 https://github.com/$repo/tags \
 		| grep "tag/c-[0-9.]+" -oE | head -n 1 | cut -d '-' -f 2)
 
 	ver_check "$up_ver" "$inst_ver" "$arch_ver" && return

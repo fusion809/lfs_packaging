@@ -6,7 +6,7 @@ repo=psavery/$name
 homepage="https://github.com/psavery/genXrdPattern"
 description="Uses ObjCryst++ to generate theoretical XRD pattern."
 version=$(gh_ver $repo)
-filename="$name-$version-linux.tar.gz"
+filename="$_name-$version-linux.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "$version-linux" "$filename"
 ghr_download "$repo" "$version-linux" "objcryst.tgz"

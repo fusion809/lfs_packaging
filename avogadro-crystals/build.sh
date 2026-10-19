@@ -6,7 +6,7 @@ repo=OpenChemistry/$_name
 homepage="https://openchemistry.org/"
 description="Crystallographic files of common materials."
 version=$(gh_ver $repo)
-filename="$name-$version.tar.gz"
+filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"

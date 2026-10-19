@@ -7,7 +7,7 @@ description="C++ implementation of MMTF API, de/encoder."
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-ghr_download "$repo" "$direname" "$filename"
+gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 cmaki -DCMAKE_INSTALL_PREFIX=/usr
 cd ../..

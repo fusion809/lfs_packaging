@@ -61,3 +61,4 @@ x265/x265_[0-9.]*
 .RData
 uninstalled/Libre*/Libre*
 */*/*
+*.rpm
