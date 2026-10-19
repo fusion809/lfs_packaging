@@ -15,7 +15,7 @@ homepage="https://sourceforge.net/projects/jmol/"
 description="Interactive 3D molecule viewer."
 version=$(get_version)
 filename="$_name-$version-binary.tar.gz"
-direname="${filename/-binary.tar.*/}"
+direname="jmol-$version"
 depends=(java)
 download_src "$url/Version%20${version%.*}/Jmol%20$version/$filename"
 unpk_enter "$filename" "$direname"

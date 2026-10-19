@@ -13,9 +13,14 @@ function maki {
 
 function cmaki {
 	if [[ -d build ]]; then
-		mkdir build2
-		cmake -S . -B build2 "$@"
-		cd build2
+		if [[ ! -d build2 ]]; then
+			fold=build2
+		elif [[ ! -d build10 ]]; then
+			fold=build10
+		fi
+		mkdir $fold
+		cmake -S . -B $fold "$@"
+		cd $fold
 	else
 		cmake -S . -B build "$@"
 		cd build

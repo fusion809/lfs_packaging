@@ -9,8 +9,12 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
-wget -c https://github.com/fltk/nanosvg/commit/abcd277ea45e9098bed752cf9c6875b533c0892f.patch -O fltk.patch
-patch -Np1 -i fltk.patch || echo "fltk patching failed."
+#wget -c \
+#    https://github.com/fltk/nanosvg/commit/abcd277ea45e9098bed752cf9c6875b533c0892f.patch \
+#    -O fltk.patch
+
+#patch --dry-run -Np1 -i fltk.patch
+#patch -Np1 -i fltk.patch
 cmake_options=(-DCMAKE_BUILD_TYPE='None' \
 	-DCMAKE_INSTALL_PREFIX=/usr \
 	-DBUILD_SHARED_LIBS=ON \

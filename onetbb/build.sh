@@ -6,10 +6,11 @@ repo=uxlfoundation/$_name
 homepage="https://uxlfoundation.github.io/oneTBB/"
 description="oneAPI Threading Building Blocks - a high level abstract threading library."
 version=$(gh_ver $repo)
-filename="$name-$version.tar.gz"
+filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
+arch_patch "$name" "010-onetbb-fix-linkage-of-test-malloc-pure-c.patch"
 cmake_options=(-G "Unix Makefiles" \
 	-DCMAKE_INSTALL_PREFIX=/usr \
 	-DCMAKE_BUILD_TYPE:STRING="none" \

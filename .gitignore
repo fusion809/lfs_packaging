@@ -62,3 +62,4 @@ x265/x265_[0-9.]*
 uninstalled/Libre*/Libre*
 */*/*
 *.rpm
+wxWidgets

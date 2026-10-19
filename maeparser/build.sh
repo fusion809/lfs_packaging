@@ -5,6 +5,7 @@ repo=schrodinger/$name
 homepage="https://github.com/schrodinger/maeparser"
 description="Maestro file parser."
 version=$(gh_ver $repo)
+depends=(boost bzip2 gcc glibc xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"

@@ -5,12 +5,13 @@ repo=$name/$name
 homepage="https://openbabel.org/"
 description="Library to convert between multiple chemical file formats."
 version=$(gh_ver $repo)
-_version=(echo $version | tr '.' '-')
+_version=$(echo $version | tr '.' '-')
 filename="$name-$_version.tar.gz"
 direname="$name-${filename/.tar.*/}"
 depends=(wxwidgets-gtk3 maeparser inchi coordgen cairo zlib eigen rapidjson glibc libxml2)
 gha_download "$repo" "$name-$_version" "$filename"
 unpk_enter "$filename" "$direname"
+sed -i 's/wxwxMenuItemListNode [*]node/auto node/' src/GUI/OBGUI.cpp
 cmake_options=(-DCMAKE_INSTALL_PREFIX=/usr \
     -DRUN_SWIG=ON \
     -DPYTHON_BINDINGS=ON \

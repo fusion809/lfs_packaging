@@ -7,10 +7,12 @@ homepage="https://wxwidgets.org"
 description="GTK+3 implementation of wxWidgets API GUI."
 version=$(gh_ver $repo)
 depends=(cmake git glu gst-plugins-base libmspack libnotify nanosvg webkitgtk)
-filename="$name-$version.tar.gz"
-direname="${filename/.tar.*/}"
-gha_download "$repo" "v$version" "$filename"
-unpk_enter "$filename" "$direname"
+#filename="$_name-$version.tar.gz"
+#direname="${filename/.tar.*/}"
+#gha_download "$repo" "v$version" "$filename"
+download_git "https://github.com/wxWidgets/wxWidgets"
+#unpk_enter "$filename" "$direname"
+cd wxWidgets
 cmake_options=(
 	-DCMAKE_INSTALL_PREFIX=/usr \
 	-DCMAKE_BUILD_TYPE=None \
@@ -30,5 +32,5 @@ cmake_options=(
     -DwxUSE_HOTKEY=ON)
 cmaki "${cmake_options[@]}"
 cd ../..
-rm -rf "$filename" "$direname"
+#rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"

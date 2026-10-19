@@ -7,7 +7,7 @@ function download_git {
 	fi
 	local URL=$1
 	if ! [[ -d $name/.git ]]; then
-		git clone $URL $name
+		git clone $URL $name --recursive
 	else
 		git -C $name fetch --tags origin
 	fi

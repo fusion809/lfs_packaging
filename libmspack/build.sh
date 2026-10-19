@@ -9,6 +9,7 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
+cd $name
 sudo autoreconf -fiv
 sudo chown $USER -R .
 ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-static

@@ -8,7 +8,7 @@ description="Molecular visualization system."
 version=$(gh_ver $repo)
 filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(freetype gcc glew msgpack-cxx glm pyqt6 netcdf netcdf-cxx python tcsh cmake desktop-file-utils mmtf-cpp msgpack-c)
+depends=(brotli bzip2 cmake curl cyrus-sasl desktop-file-utils freetype gcc glew glibc glm hdf5 icu libaec libglvnd libidn2 libpng libpsl libunistring libx11 libxau libxcb libxdmcp libxml2 libzip mmtf-cpp msgpack-c msgpack-cxx netcdf netcdf-cxx nghttp2 openldap openssl pyqt6 python tcsh xz zlib zstd)
 pip_depends=(build installer wheel setptools numpy)
 gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
