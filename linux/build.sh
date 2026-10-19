@@ -37,10 +37,7 @@ filename="$name-$version.tar.xz"
 remote_direname="${remote_filename/.tar.xz/}"
 direname="${filename/.tar.xz/}"
 download_src "https://cdn.kernel.org/pub/linux/kernel/v$(echo ${base_version} | cut -d '.' -f 1).x/${remote_filename}" "$filename"
-if [[ $remote_direname != $direname ]]; then
-	mv $remote_direname $direname
-fi
-unpk_enter "$filename" "$direname"
+unpk_enter "$filename"
 make mrproper
 sudo cp ../config .config
 make -j$(nproc)
@@ -55,5 +52,5 @@ if [[ "$version" != $(uname -r) ]]; then
 fi
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 cd ..
-sudo rm -rf $filename $direname
+sudo rm -rf $filename $remote_direname $direname
 echo "$version" | sudo tee /var/lib/custom-packages/$name
