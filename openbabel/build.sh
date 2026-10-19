@@ -17,6 +17,19 @@ cmake_options=(-DCMAKE_INSTALL_PREFIX=/usr \
     -DPYTHON_BINDINGS=ON \
     -DOPENBABEL_USE_SYSTEM_INCHI=ON)
 cmaki "${cmake_options[@]}"
+cat > /usr/share/applications/openbabel.desktop << EOF
+[Desktop Entry]
+Name=OpenBabel GUI
+Icon=openbabel
+Exec=/usr/bin/obgui %F
+TryExec=/usr/bin/obgui
+Type=Application
+Version=1.0
+MimeType=chemical/x-pdb;chemical/pdby;chemical/x-mol2;chemical/x-mdl-molfile;chemical/x-mdl-sdfile;chemical/x-xyz;chemical/x-macromodel-input;chemical/x-vmd;
+Categories=Science;Chemistry;Education;
+StartupWMClass=obgui
+EOF
+sudo wget -c "https://upload.wikimedia.org/wikipedia/commons/c/ce/Open_Babel_computer_icon.png" -O /usr/share/pixmaps/openbabel.png
 cd ../..
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
