@@ -18,7 +18,7 @@ cmake_options=(-D CMAKE_INSTALL_PREFIX=/usr \
     -G Ninja \
     -W no-dev)
 cmaki "${cmake_options[@]}"
-sudo sed -i -e "s|Categories=Science;|Categories=Science;Education;|g" /usr/share/applications/molsketch.desktop
+sudo sed -i -e "s|Categories=Science;|Categories=Science;Chemistry;Education;|g" /usr/share/applications/molsketch.desktop
 cd ../..
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
