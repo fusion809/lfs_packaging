@@ -16,6 +16,7 @@ get_version() {
 version=$(get_version)
 depends=(java)
 filename="${name}_linux_$version.rpm"
+direname="opt"
 download_src "https://dl.chemaxon.com/marvin/$version/$filename"
 bsdtar xf "$filename"
 cat > /usr/share/applications/MarvinSketch.desktop << EOF
