@@ -6,6 +6,7 @@ repo=IUPAC-$_name/$_name
 homepage="https://github.com/IUPAC-InChI/InChI"
 description="The IUPAC international chemical identifier."
 version=$(gh_ver $repo)
+depends=(glibc)
 filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"
