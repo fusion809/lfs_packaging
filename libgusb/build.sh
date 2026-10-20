@@ -8,7 +8,7 @@ repo=hughsie/libgusb
 version=$(gh_ver "$repo")
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
-depends=(glib2 glib2 glibc hwdata json-glib2 libffi libusb pcre2 systemd util-linux vala webkitgtk zlib)
+depends=(glib2 glib2 glibc hwdata json-glib libffi libusb pcre2 systemd util-linux vala webkitgtk zlib)
 # Fetch source and unpack it
 ghr_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"

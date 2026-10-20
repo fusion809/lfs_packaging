@@ -19,7 +19,7 @@ get_version() {
 version=$(get_version)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.xz/}"
-depends=(dbus glib2 glib2 glibc json-glib2 lcms2 libffi libgudev libgusb libusb pcre2 polkit polkit sqlite systemd systemd util-linux vala webkitgtk zlib)
+depends=(dbus glib2 glib2 glibc json-glib lcms2 libffi libgudev libgusb libusb pcre2 polkit polkit sqlite systemd systemd util-linux vala webkitgtk zlib)
 # Fetch source and unpack it
 fd_download "$filename"
 unpk_enter "$filename" "$direname"

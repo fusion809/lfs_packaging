@@ -6,14 +6,14 @@ homepage="https://www.ghostscript.com"
 repo=ArtifexSoftware/ghostpdl-downloads
 version=$(gh_ver $repo | sed -E 's/(..)(..)/\1.\2./')
 verd=$(echo $version | sed 's/\.//g')
-depends=(at-spi2-core avahi brotli bzip2 cairo cups dbus expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz lcms2 libepoxy libffi libice libjpeg-turbo libpaper libpng libseccomp libsm libtiff libwebp libx11 libxau libxcb libxcomposite libxcrypt libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxrandr libxrender libxres libxt openjpeg openssl pango pcre2 pixman systemd tiff util-linux wayland xz zlib zstd)
+depends=(at-spi2-core avahi brotli bzip2 cairo cups dbus expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz lcms2 libepoxy libffi libice libjpeg-turbo libpaper libpng libseccomp libsm tiff libwebp libx11 libxau libxcb libxcomposite libxcrypt libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxrandr libxrender libxres libxt openjpeg openssl pango pcre2 pixman systemd tiff util-linux wayland xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 ghr_download "$repo" "gs$verd" "$filename"
 unpk_enter "$filename" "$direname"
 # Remove system-wide installed dependencies
 rm -rf freetype lcms2mt jpeg libpng openjpeg zlib
-./configure --prefix=/usr --disable-compile-inits --with-system-libtiff CFLAGS="${CFLAGS:--g -O3} -fPIC"
+./configure --prefix=/usr --disable-compile-inits --with-system-tiff CFLAGS="${CFLAGS:--g -O3} -fPIC"
 make -j$(nproc)
 make so -j$(nproc)
 sudo make install

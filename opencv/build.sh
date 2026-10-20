@@ -5,7 +5,7 @@ homepage="https://opencv.org/"
 description="Open Source Computer Vision Library."
 repo=$name/$name
 version=$(gh_ver $repo)
-depends=(alsa-lib at-spi2-core brotli bzip2 cairo dav1d dbus elfutils expat fdk-aac ffmpeg fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gst-plugins-base gstreamer gtk3 harfbuzz lame lcms2 libaom libass libavif libdrm libepoxy libffi libjpeg-turbo libogg libpng libseccomp libtiff libunwind libva libvorbis libvpx libwebp libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxrandr libxrender libxres libxv mpg123 numactl openblas openjpeg openssl opus orc pango pcre2 pixman svt-av1 systemd tiff util-linux wayland x264 xdg-desktop-portal-kde xine-lib xz zlib zstd)
+depends=(alsa-lib at-spi2-core brotli bzip2 cairo dav1d dbus elfutils expat fdk-aac ffmpeg fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gst-plugins-base gstreamer gtk3 harfbuzz lame lcms2 libaom libass libavif libdrm libepoxy libffi libjpeg-turbo libogg libpng libseccomp tiff libunwind libva libvorbis libvpx libwebp libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxrandr libxrender libxres libxv mpg123 numactl openblas openjpeg openssl opus orc pango pcre2 pixman svt-av1 systemd tiff util-linux wayland x264 xdg-desktop-portal-kde xine-lib xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "$version" "$filename"
