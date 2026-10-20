@@ -18,7 +18,7 @@ if [[ -f dist-electron/linux-unpacked/$name ]]; then
 	sudo mv /opt/$name/usr/share/metainfo/* /usr/share/metainfo
 	sudo ln -sf /opt/$name/$name /usr/bin/
 	sudo cp flatpak/com.ketcher.desktop.desktop /usr/share/applications
-	sudo sed -i -e "s|Ketcher Desktop|$name|g" \
+	sudo sed -i -e "s|StartupWMClass=Ketcher Desktop|StartupWMClass=$name|g" \
 		-e "s|Science;Education;|Science;Chemistry;Education;|g" /usr/share/applications/com.ketcher.desktop.desktop
 	sudo cp flatpak/icons/256x256.png /usr/share/icons/hicolor/256x256/apps/com.ketcher.desktop.png
 	sudo cp flatpak/icons/512x512.png /usr/share/icons/hicolor/512x512/apps/com.ketcher.desktop.png
