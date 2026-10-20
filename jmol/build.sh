@@ -21,7 +21,7 @@ download_src "$url/Version%20${version%.*}/Jmol%20$version/$filename"
 unpk_enter "$filename" "$direname"
 sudo mkdir -p /usr/share/jmol
 sudo cp *.jar /usr/share/jmol
-sudo tee > /usr/bin/jmol << EOF
+sudo tee /usr/bin/jmol << EOF
 #!/bin/sh
 
 # Collect -D & -m options as java arguments
