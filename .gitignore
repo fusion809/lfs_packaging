@@ -61,5 +61,8 @@ x265/x265_[0-9.]*
 .RData
 uninstalled/Libre*/Libre*
 */*/*
+*/*/.*
+xdrawchem/xdrawchem
+ketcher-desktop/ketcher-desktop
 *.rpm
 wxWidgets
