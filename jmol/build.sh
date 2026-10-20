@@ -21,31 +21,33 @@ download_src "$url/Version%20${version%.*}/Jmol%20$version/$filename"
 unpk_enter "$filename" "$direname"
 sudo mkdir -p /usr/share/jmol
 sudo cp *.jar /usr/share/jmol
-sudo tee /usr/bin/jmol << EOF
+sudo tee /usr/bin/jmol << 'EOF'
 #!/bin/sh
 
 # Collect -D & -m options as java arguments
 command=java
-while [ \`echo \$1 | egrep '^-D|^-m' | wc -l\` != 0 ]; do
-	command="\$command \$1"
+while [ `echo $1 | egrep '^-D|^-m' | wc -l` != 0 ]; do
+	command="$command $1"
 	shift
 done
 JMOL_HOME=/usr/share/jmol
-if [ ! -e \${JMOL_HOME}/Jmol.jar ]; then
+export PATH=$PATH:/opt/jdk/bin
+if [ ! -e ${JMOL_HOME}/Jmol.jar ]; then
 	echo "Jmol could not find its installed files."
 	exit
 fi
 
-\$command -Djmol.home="\$JMOL_HOME" -jar \${JMOL_HOME}/Jmol.jar "\$@"
+$command -Djmol.home="$JMOL_HOME" -jar ${JMOL_HOME}/Jmol.jar "$@"
 EOF
 sudo chmod +x /usr/bin/jmol
-cat > /usr/share/applications/jmol.desktop << EOF
+sudo tee /usr/share/applications/jmol.desktop << 'EOF'
 [Desktop Entry]
 Version=1.0
 Type=Application
 Name=Jmol
 Comment=Molecular visualization system in Java
 Exec=jmol %F
+TryExec=/usr/bin/jmol
 Icon=jmol
 Terminal=false
 StartupNotify=false
