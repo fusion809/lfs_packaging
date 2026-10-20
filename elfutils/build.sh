@@ -24,17 +24,17 @@ get_version() {
 version=$(get_version)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
-depends=(acl brotli bzip2 curl cyrus-sasl gcc glibc icu json-c libarchive libelf libidn2 libpsl libunistring libxml2 lz4 nghttp2 openldap openssl sqlite xz zlib zstd)
+depends=(acl brotli bzip2 curl cyrus-sasl gcc glibc icu json-c libarchive elfutils libidn2 libpsl libunistring libxml2 lz4 nghttp2 openldap openssl sqlite xz zlib zstd)
 download_src "https://sourceware.org/elfutils/ftp/$version/$filename"
 unpk_enter "$filename" "$direname"
 ./configure --prefix=/usr        \
             --disable-debuginfod \
             --enable-libdebuginfod=dummy
 make -C lib -j$(nproc)
-make -C libelf -j$(nproc)
-sudo su -c "make -C libelf install
-install -vm644 config/libelf.pc /usr/lib/pkgconfig
-rm /usr/lib/libelf.a"
+make -C elfutils -j$(nproc)
+sudo su -c "make -C elfutils install
+install -vm644 config/elfutils.pc /usr/lib/pkgconfig
+rm /usr/lib/elfutils.a"
 cd ..
 unpk_enter "$filename" "$direname"
 MOCK_GCC_DIR="/tmp/mock_gcc_elfutils"

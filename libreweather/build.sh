@@ -6,7 +6,7 @@ repo=Procurador1337/$_name
 homepage="https://github.com/$repo"
 description="Lightweight command-line weather tool for Linux."
 version=$(gh_com "$repo")
-depends=(brotli cmake coreutils dbus double-conversion e2fsprogs expat gcc glib2 glibc keyutils libelf libffi make mitkrb openssl pcre2 qt6 systemd zlib zstd)
+depends=(brotli cmake coreutils dbus double-conversion e2fsprogs expat gcc glib2 glibc keyutils elfutils libffi make mitkrb openssl pcre2 qt6 systemd zlib zstd)
 filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "$version" "$filename"

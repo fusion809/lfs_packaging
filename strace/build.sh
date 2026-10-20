@@ -7,7 +7,7 @@ repo="$name/$name"
 version=$(gh_ver $repo)
 filename="$name-$version.tar.xz"
 direname="$name-$version"
-depends=(bash bzip2 coreutils elfutils glibc libelf ncurses python tar wget xz zip zlib zstd)
+depends=(bash bzip2 coreutils elfutils glibc elfutils ncurses python tar wget xz zip zlib zstd)
 ghr_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 cmi --prefix=/usr --enable-mpers=no

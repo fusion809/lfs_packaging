@@ -20,7 +20,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
-depends=(bash bzip2 coreutils elfutils gcc glibc iptables libcap libelf libtirpc make tar xz zlib zstd)
+depends=(bash bzip2 coreutils elfutils gcc glibc iptables libcap elfutils libtirpc make tar xz zlib zstd)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 download_src "https://www.kernel.org/pub/linux/utils/net/$name/$filename"

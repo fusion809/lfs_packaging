@@ -6,7 +6,7 @@ homepage="http://www.gtk.org"
 version=$(gn_ver $name)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
-depends=(brotli bzip2 docutils expat fontconfig freetype gcc glib2 glibc glycin libffi libpng libseccomp pcre2 shared-mime-info systemd util-linux zlib)
+depends=(brotli bzip2 expat fontconfig freetype gcc glib2 glibc glycin libffi libpng libseccomp pcre2 shared-mime-info systemd util-linux zlib)
 gn_download "$filename"
 unpk_enter "$filename" "$direname"
 meson_options=(

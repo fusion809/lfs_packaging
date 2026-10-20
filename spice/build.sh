@@ -6,7 +6,7 @@ homepage="https://www.spice-space.org"
 description="SPICE server."
 version=$(spice_ver $name)
 docs="AUTHORS CHANGELOG.md COPYING README"
-depends=(bash bzip2 coreutils cyrus-sasl elfutils gcc glib glib2 glibc gst-plugins-base gstreamer libdrm libelf libffi libjpeg-turbo libunwind lz4 lz4 make meson openssl opus orc pcre2 pixman sasl sed spice-protocol systemd tar util-linux wget xz zlib zstd)
+depends=(bash bzip2 coreutils cyrus-sasl elfutils gcc glib glib2 glibc gst-plugins-base gstreamer libdrm elfutils libffi libjpeg-turbo libunwind lz4 lz4 make meson openssl opus orc pcre2 pixman sasl sed spice-protocol systemd tar util-linux wget xz zlib zstd)
 pip_depends=(pyparsing)
 # check if libcacard is there
 if pkg-config --exists libcacard ; then
