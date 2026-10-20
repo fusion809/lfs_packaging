@@ -21,7 +21,24 @@ download_src "$url/Version%20${version%.*}/Jmol%20$version/$filename"
 unpk_enter "$filename" "$direname"
 sudo mkdir -p /usr/share/jmol
 sudo cp *.jar /usr/share/jmol
-sudo install -Dm755 jmol.sh /usr/bin/jmol
+sudo tee > /usr/bin/jmol << EOF
+#!/bin/sh
+
+# Collect -D & -m options as java arguments
+command=java
+while [ \`echo \$1 | egrep '^-D|^-m' | wc -l\` != 0 ]; do
+	command="\$command \$1"
+	shift
+done
+JMOL_HOME=/usr/share/jmol
+if [ ! -e \${JMOL_HOME}/Jmol.jar ]; then
+	echo "Jmol could not find its installed files."
+	exit
+fi
+
+\$command -Djmol.home="\$JMOL_HOME" -jar \${JMOL_HOME}/Jmol.jar "\$@"
+EOF
+sudo chmod +x /usr/bin/jmol
 cat > /usr/share/applications/jmol.desktop << EOF
 [Desktop Entry]
 Version=1.0
@@ -32,6 +49,7 @@ Exec=jmol %F
 Icon=jmol
 Terminal=false
 StartupNotify=false
+StartupWMClass=org-openscience-jmol-app-jmolpanel-JmolPanel
 Categories=Science;Chemistry;Education;
 MimeType=application/x-jmol;chemical/x-cif;chemical/x-cml;chemical/x-gaussian-input;chemical/x-mdl-molfile;chemical/x-mmcif;chemical/x-pdb;chemical/x-xyz
 EOF
