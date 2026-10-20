@@ -7,7 +7,7 @@ description="GEneric Graphics Library, which is a graph based image processing f
 version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 _version=$(echo $version | tr '.' '_')
-depends=(babl json-glib glib2 graphviz)
+depends=(babl json-glib2 glib2 graphviz)
 tag=GEGL_${_version}
 gha_download "$repo" "$tag" "$filename"
 unpk_enter "$filename"

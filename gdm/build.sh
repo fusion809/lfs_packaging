@@ -6,7 +6,7 @@ description="Display manager and login screen."
 homepage="https://wiki.gnome.org/Projects/GDM"
 repo=GNOME/$name
 version=$(gh_ver $repo)
-depends=(accountsservice glib2 glibc json-glib keyutils libffi libgudev libxau libxcrypt linux-pam pcre2 polkit systemd util-linux zlib)
+depends=(accountsservice glib2 glibc json-glib2 keyutils libffi libgudev libxau libxcrypt linux-pam pcre2 polkit systemd util-linux zlib)
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 gn_download "$filename"

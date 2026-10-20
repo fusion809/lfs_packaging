@@ -5,7 +5,7 @@ repo=OpenChemistry/$name
 homepage="https://two.avogadro.cc/"
 description="Libraries that provide 3D modelling, rendering, visualization, analysis, etc."
 version=$(gh_ver $repo)
-depends=(avogadro-crystals avogadro-fragments avogadro-molecules glew hdf5 libglvnd pugixml spglib boost cmake eigen fast_float genxrdpattern jkqtplotter libmsym mmtf-cpp nlohmann-json openmpi qt6 utf8cpp onetbb pybind11)
+depends=(avogadro-crystals avogadro-fragments avogadro-molecules glew hdf5 libglvnd pugixml spglib2 boost cmake eigen fast_float genxrdpattern jkqtplotter libmsym mmtf-cpp nlohmann-json openmpi qt6 utf8cpp onetbb pybind11)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "$version" "$filename"

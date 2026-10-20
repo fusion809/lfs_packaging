@@ -8,7 +8,7 @@ repo=ostreedev/ostree
 version=$(gh_ver $repo)
 direname="lib${name}-$version"
 filename="$direname.tar.xz"
-depends=(acl avahi bash brotli bzip2 coreutils curl dbus e2fsprogs fuse gcab gcc glib glib2 glibc gpgme gtk-doc icu keyutils libarchive libassuan libffi libgpg-error libidn2 libpsl libsoup libunistring libxml2 libxslt lz4 make mitkrb nghttp2 openssl pcre2 python sed sqlite systemd tar util-linux wget which xz zlib zstd)
+depends=(acl avahi bash brotli bzip2 coreutils curl dbus e2fsprogs fuse gcab gcc glib2 glib2 glibc gpgme gtk-doc icu keyutils libarchive libassuan libffi libgpg-error libidn2 libpsl libsoup libunistring libxml2 libxslt lz4 make mitkrb nghttp2 openssl pcre2 python sed sqlite systemd tar util-linux wget which xz zlib zstd)
 # Fetch and unpack source
 ghr_download "$repo" "v${version}" "$filename"
 unpk_enter "$filename" "$direname"
