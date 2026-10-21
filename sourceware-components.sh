@@ -18,6 +18,8 @@ function gsw_ver {
 
 function wsw_ver {
 	wget -cqO- -T 5 -t 1 "https://sourceware.org/pub/$1/" \
-	| grep "$1-[0-9]+\.[0-9]+\.[0-9]+" -oE | sed "s/$1-//g" | sort -V \
+	| grep -vi "rc[0-9]\|alpha[0-9]\|beta[0-9]" | 
+	grep "$1-[0-9]+\.[0-9]+\.[0-9]+" -oE \
+	| sed "s/$1-//g" | sort -V \
 	| tail -n 1
 }
