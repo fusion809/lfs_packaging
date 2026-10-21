@@ -25,12 +25,14 @@ export RT=/opt/chemcanvas
 export PATH=$PATH:$RT/bin
 export LIB=$RT/lib
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$LIB
-$LIB/chemcanvas/chemcanvas "$@"
+SSL_CERT_FILE=/etc/pki/tls/certs/ca-bundle.crt \
+REQUESTS_CA_BUNDLE=/etc/pki/tls/certs/ca-bundle.crt \
+SSL_CERT_DIR=/etc/ssl/certs $LIB/chemcanvas/chemcanvas "$@"
 EOF
 sudo chmod +x /opt/$name/bin/$name
 sudo ln -sf /opt/$name/bin/$name /usr/bin/
 sudo ln -sf /opt/$name/share/applications/$desk /usr/share/applications/
-sudo sed -i -e "s|Categories=Science;|Categories=Science;Education;Chemistry;|g" /opt/$name/share/applications/$desk
+sudo sed -i -e "s|Categories=Science;|Categories=Science;Education;Chemistry;\nStartupWMClass=chemcanvas|g" /opt/$name/share/applications/$desk
 sudo rm -rf /opt/$name/share/icons/hicolor/[0-9]*x[0-9]*/
 sudo ln -sf /opt/$name/share/metainfo/$meta /usr/share/metainfo/
 sudo magick -density 300 /opt/$name/share/icons/hicolor/scalable/apps/$name.svg /opt/$name/share/pixmaps/$name.png
