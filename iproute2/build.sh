@@ -24,7 +24,7 @@ depends=(bash bzip2 coreutils elfutils gcc glibc iptables libcap elfutils libtir
 filename="$name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 download_src "https://www.kernel.org/pub/linux/utils/net/$name/$filename"
-unpK_enter "$filename" "$direname"
+unpk_enter "$filename" "$direname"
 sed -i /ARPD/d Makefile
 rm -fv man/man8/arpd.8
 make NETNS_RUN_DIR=/run/netns
