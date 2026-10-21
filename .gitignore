@@ -68,3 +68,5 @@ ketcher-desktop/ketcher-desktop
 wxWidgets
 *.AppImage
 squashfs-root
+pari/pari
+gmp-ecm/ecm
