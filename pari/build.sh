@@ -2,7 +2,7 @@
 set -e
 name=pari
 get_version() {
-	local git_ver=$(git ls-remote --tags --refs https://pari.math.u-bordeaux.fr/git/pari.git | grep "pari-[0-9]+\.[0-9]+\.[0-9]+" -oE | cut -d '-' -f 2 | sort -V | tail -n 1)
+	local git_ver=$(timeout 5 git ls-remote --tags --refs https://pari.math.u-bordeaux.fr/git/pari.git | grep "pari-[0-9]+\.[0-9]+\.[0-9]+" -oE | cut -d '-' -f 2 | sort -V | tail -n 1)
 	local inst_ver=$(pkgver $name)
 	local arch_ver=$(aver $name)
 	ver_check "$git_ver" "$inst_ver" "$arch_ver" && return
