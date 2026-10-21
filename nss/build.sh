@@ -21,11 +21,10 @@ get_version() {
 }
 version=$(get_version)
 depends=(glibc libtasn1 nspr sqlite zlib)
-majVer=$(echo $version | cut -d '.' -f 1)
-minVer=$(echo $version | cut -d '.' -f 2)
+_version=$(echo $version | tr '.' '_')
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-download_src "https://archive.mozilla.org/pub/security/nss/releases/NSS_${majVer}_${minVer}_RTM/src/$filename"
+download_src "https://archive.mozilla.org/pub/security/nss/releases/NSS_${_version}_RTM/src/$filename"
 unpk_enter "$filename" "$direname"
 gap_patches $name
 cd nss &&
