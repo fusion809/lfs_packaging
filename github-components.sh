@@ -27,6 +27,10 @@ function ghl_ver {
 		| cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" \
 		| sed -E 's/^[a-zA-Z0-9-]*-//g; s/^[vVrR][-_]?//g' | tr '_' '.' \
 		| grep -oE "2.66.[0-9]+" | sort -V | tail -n 1
+	elif [[ "$1" == "postgres/postgres" ]]; then
+		timeout 5 git ls-remote --tags --refs $URL \
+			| grep -vi "alpha\|beta\|rc" | grep -oE "REL_[0-9]+_[0-9]+" \
+			| sed 's/REL_//g' | tr '_' '.' | sort -V | tail -n 1
 	elif [[ "$1" == "GNOME/pangomm" ]]; then
 		timeout 5 git ls-remote --tags --refs "$URL" 2>/dev/null \
 		| cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" \
@@ -101,6 +105,10 @@ function ghl_ver {
 		timeout 5 git ls-remote --tags --refs "$URL" \
 		| grep "core-[0-9-]+$" -oE | sed 's/^core-//g' | tr '-' '.' | sort -V \
 		| tail -n 1
+	elif [[ "$1" == "GNOME/gtksourceview" && "$2" == "gtksourceview4" ]]; then
+		timeout 5 git ls-remote --tags --refs $URL \
+			| grep "refs/tags/4\.[0-9]*[02468]\.[0-9]+" -oE \
+			| cut -d '/' -f 3 | sort -V | tail -n 1
 	elif [[ "$1" == "golang/go" ]]; then
 		timeout 5 git ls-remote --tags --refs "$URL" \
 		| grep "tags/go[0-9.]+" -oE | sed 's/.*go//g' | sort -V | tail -n 1
@@ -130,6 +138,15 @@ function ght_ver {
 		wget -T 5 -t 1 -cqO- https://github.com/$1/tags \
 		| grep -E "tags/v[0-9.]+[-rc]*[0-9]*.tar.gz" | sed 's|.*tags/v||g' \
 		| sed 's/.tar.gz.*//g' | sort -V | tail -n 1
+		return
+	elif [[ "$1" == "postgres/postgres" ]]; then
+		wget -cqO- -T 5 -t 1 https://github.com/$1/tags \
+			| grep "REL_" | grep -vi "alpha\|beta\|rc" | grep -oE "REL_[0-9]+_[0-9]+" \
+			| sed 's/REL_//g' | tr '_' '.' | sort -V | tail -n 1
+		return
+	elif [[ "$1" == "GNOME/gtksourceview" && "$2" == "gtksourceview4" ]]; then
+		wget -cqO- -T 5 -t 1 https://download.gnome.org/sources/gtksourceview/4.8/ \
+			| grep "4\.8\.[0-9]+" -oE | uniq | sort -V | tail -n 1
 		return
 	elif [[ "$1" == "julialang/julia" ]]; then
 		wget -T 5 -t 1 -cqO- https://github.com/$1/tags/ | grep "tag/v[0-9a-z.-]+" -oE | grep -v "alpha\|rc\|beta" | sed 's|tag/v||g' | sort -V | tail -n 1

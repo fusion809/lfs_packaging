@@ -173,7 +173,11 @@ function gng_download {
 function gn_download {
 	local filename=$1
 	local version=$(echo $filename | sed -E 's/\.tar\.[a-z0-9]+//g' | rev | cut -d '-' -f 1 | rev)
-	local truncVer=$(echo $version | cut -d '.' -f 1)
+	if echo $filename | grep "gtksourceview" &> /dev/null; then
+		local truncVer=$(echo $version | cut -d '.' -f 1-2)
+	else
+		local truncVer=$(echo $version | cut -d '.' -f 1)
+	fi
 	#if [[ $(tr -cd '.' <<< $truncVer | wc -c) -ge 2 ]]; then
 #		truncVer=$(echo $truncVer | cut -d '.' -f1-2)
 #	fi
