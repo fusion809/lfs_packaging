@@ -12,6 +12,7 @@ ghr_download "$repo" "release-$version" "$filename"
 unpk_enter "$filename" "$name" "source"
 oldVer=$(pkgver $name)
 cmi --prefix=/usr
+# No, don't remove old libraries as it'll break dozens of apps
 #if [[ $oldVer != $version ]]; then
 #	sudo rm -rf /usr/lib/icu/$oldVer /usr/lib/libicu*.so.$oldVer /usr/share/icu/$oldVer
 #fi
