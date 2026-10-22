@@ -1,14 +1,13 @@
 #!/bin/bash
 set -e
 # Combine lapack and blas
-homepage="https://www.netlib.org/lapack/"
-description="Linear algebra package - combining both BLAS and LAPACK packages."
-categories=("Science", "Mathematics")
-depends=(bash cmake coreutils gcc gcc glibc gzip make python sed tar wget)
 name=blas-lapack
 _name=lapack
 repo="Reference-LAPACK/lapack"
 version=$(gh_com $repo)
+homepage="https://www.netlib.org/lapack/"
+description="Linear algebra package - combining both BLAS and LAPACK packages."
+depends=(bash cmake coreutils gcc gcc glibc gzip make python sed tar wget)
 CFLAGS="-O2 -fPIC"
 
 if ! which gfortran &> /dev/null; then

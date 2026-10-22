@@ -12,6 +12,8 @@ direname="${filename/.tar.*/}"
 download_src "https://mirror.aarnet.edu.au/pub/sage/src/$filename"
 unpk_enter "$filename" "$direname"
 oldver=$(pkgver $name)
+wget -c "https://gitlab.archlinux.org/archlinux/packaging/packages/sagemath/-/raw/main/pari-2.19.patch"
+patch -Np1 -i pari-2.19.patch
 sudo rm -rf /opt/$direname
 sudo mkdir -p /opt/$direname
 
@@ -20,12 +22,14 @@ if ! [[ -d /home/builder ]]; then
 fi
 
 sudo chown -R builder /opt/$direname .
-sudo systemctl restart ntpd
+#sudo systemctl restart ntpd
 sudo -u builder -H bash -c "
-./configure --prefix=/opt/$direname --with-sage-venv=yes --disable-editable
+export PATH=$PATH:/home/fusion809/miniconda3/bin
+./configure --prefix=/opt/$direname --with-python=/home/fusion809/miniconda3/bin/python3 --with-sage-venv=yes --disable-editable
 until make -j$(nproc); do
     sudo systemctl restart ntpd
     export SAGE_KEEP_BUILD_SPKGS=yes
+    make -j$(nproc)
 done
 "
 sudo ln -sf /opt/$direname /opt/sage
@@ -49,23 +53,23 @@ venv_dir=$(find /opt/sage/var/lib/sage -maxdepth 1 -type d -name "venv-python*" 
 sudo ln -sf "$venv_dir/bin/sage" /opt/$direname/bin/sage
 
 # Environment setup
-sudo tee /etc/profile.d/sagemath.sh << EOF
-export SAGE_ROOT=/opt/sage
-export VENV_ROOT=\$(ls \$SAGE_ROOT/var/lib/sage/venv-python* -ld | rev \
-| cut -d ' ' -f 1 | rev)
-pathappend \$SAGE_ROOT/bin:\$VENV_ROOT/bin
-pathappend \$SAGE_ROOT/lib:\$VENV_ROOT/lib LD_LIBRARY_PATH
-EOF
-sudo chmod +x /etc/profile.d/sagemath.sh
+#sudo tee /etc/profile.d/sagemath.sh << EOF
+#export SAGE_ROOT=/opt/sage
+#export VENV_ROOT=\$(ls \$SAGE_ROOT/var/lib/sage/venv-python* -ld | rev \
+#| cut -d ' ' -f 1 | rev)
+#pathappend \$SAGE_ROOT/bin:\$VENV_ROOT/bin
+#pathappend \$SAGE_ROOT/lib:\$VENV_ROOT/lib LD_LIBRARY_PATH
+#EOF
+#sudo chmod +x /etc/profile.d/sagemath.sh
 
 sudo tee /usr/bin/sage << EOF
 #!/bin/bash
 export SAGE_ROOT=/opt/sage
 export VENV_ROOT=\$(ls \$SAGE_ROOT/var/lib/sage/venv-python* -ld | rev \
 	| cut -d ' ' -f 1 | rev)
-export PATH=\$PATH:\$SAGE_ROOT/bin:\$VENV_ROOT/bin
-export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:\$SAGE_ROOT/lib:\$VENV_ROOT/lib
-$SAGE_ROOT/bin/sage "$@"
+export PATH=\$PATH:\$HOME/miniconda3/bin:\$SAGE_ROOT/bin:\$VENV_ROOT/bin
+export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:\$HOME/miniconda3/lib:\$SAGE_ROOT/lib:\$VENV_ROOT/lib
+\$SAGE_ROOT/bin/sage "\$@"
 EOF
 sudo chmod +x /usr/bin/sage
 sudo tee /usr/share/applications/sage.desktop << EOF
@@ -82,9 +86,9 @@ sudo tee /usr/bin/sage-jupyterlab << EOF
 export SAGE_ROOT=/opt/sage
 export VENV_ROOT=\$(ls \$SAGE_ROOT/var/lib/sage/venv-python* -ld | rev \
 	| cut -d ' ' -f 1 | rev)
-export PATH=\$PATH:\$SAGE_ROOT/bin:\$VENV_ROOT/bin
-export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:\$SAGE_ROOT/lib:\$VENV_ROOT/lib
-$SAGE_ROOT/bin/sage -n jupyterlab
+export PATH=\$PATH:\$HOME/miniconda3/bin:\$SAGE_ROOT/bin:\$VENV_ROOT/bin
+export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:\$HOME/miniconda3/lib:\$SAGE_ROOT/lib:\$VENV_ROOT/lib
+\$SAGE_ROOT/bin/sage -n jupyterlab
 EOF
 sudo chmod +x /usr/bin/sage-jupyterlab
 
