@@ -1,6 +1,4 @@
 #!/bin/bash
-set -e
-# Combine lapack and blas
 name=blas-lapack
 _name=lapack
 repo="Reference-LAPACK/lapack"
