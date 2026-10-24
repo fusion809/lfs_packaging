@@ -173,11 +173,12 @@ function gng_download {
 function gn_download {
 	local filename=$1
 	local version=$(echo $filename | sed -E 's/\.tar\.[a-z0-9]+//g' | rev | cut -d '-' -f 1 | rev)
-	if echo $filename | grep "gtksourceview\|gnome-terminal" &> /dev/null; then
-		local truncVer=$(echo $version | cut -d '.' -f 1-2)
-	else
-		local truncVer=$(echo $version | cut -d '.' -f 1)
-	fi
+	#if echo $filename | grep "gtksourceview\|gnome-terminal\|libxml2" &> /dev/null; then
+	#	local truncVer=$(echo $version | cut -d '.' -f 1-2)
+	#else
+	#	local truncVer=$(echo $version | cut -d '.' -f 1)
+	#fi
+	local truncVer=$(echo $version | sed -E 's/\.[0-9]+$//g')
 	#if [[ $(tr -cd '.' <<< $truncVer | wc -c) -ge 2 ]]; then
 #		truncVer=$(echo $truncVer | cut -d '.' -f1-2)
 #	fi
