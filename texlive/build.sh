@@ -37,13 +37,13 @@ download_src "https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/$year/$
 unpk_enter "$filename" "$direname"
 export TEXARCH=$(uname -m | sed -e 's/i.86/i386/' -e 's/$/-linux/') &&
 TEXLIVE_PREFIX=/opt/texlive/$year
-prevyear=$(ls /opt/texlive/[0-9]* -ld | sed 's|.*/opt/texlive/||g' | grep -v $year)
-while read -r oldyear
-do
-	sudo rm -rf /opt/texlive/$oldyear
-	echo "If upgrading texlive, remember to reinstall dvisvgm against " \
-	     "the new texlive."
-done <<< $prevyear
+#prevyear=$(ls /opt/texlive/[0-9]* -ld | sed 's|.*/opt/texlive/||g' | grep -v $year)
+#while read -r oldyear
+#do
+#	sudo rm -rf /opt/texlive/$oldyear
+#	echo "If upgrading texlive, remember to reinstall dvisvgm against " \
+#	     "the new texlive."
+#done <<< $prevyear
 options=(CXX="g++ -std=gnu++17" -C            \
     --prefix=$TEXLIVE_PREFIX                      \
     --bindir=$TEXLIVE_PREFIX/bin/$TEXARCH         \
@@ -72,8 +72,8 @@ mkdir texlive-build
 cd texlive-build
 ../configure "${options[@]}"
 make -j$(nproc)
-sudo su -c "export PATH=$PATH:$TEXLIVE_PREFIX/bin/x86_64-linux
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$TEXLIVE_PREFIX/lib
+sudo su -c "export PATH=/home/fusion809/.local/bin:/usr/bin:/opt/rustc/bin:/opt/jdk/bin:/opt/qt6/bin:/opt/sage/bin:/opt/sage/var/lib/sage/venv-python3.14/bin:/sbin:/usr/sbin:/opt/rustc/bin:/opt/jdk/bin:/opt/qt6/bin:/opt/sage/bin:/opt/sage/var/lib/sage/venv-python3.14/bin:$TEXLIVE_PREFIX/bin/x86_64-linux:/sbin:/usr/sbin
+export LD_LIBRARY_PATH=/home/fusion809/lfs_packaging/qt6/qt-everywhere-src-6.12.0/qtbase/lib:/opt/rustc/lib:/opt/jdk/lib:/opt/qt6/lib:/opt/sage/lib:/opt/sage/var/lib/sage/venv-python3.14/lib:/opt/rustc/lib:/opt/jdk/lib:/opt/qt6/lib:/opt/sage/lib:/opt/sage/var/lib/sage/venv-python3.14/lib:/opt/texlive/2026/lib:/opt/rustc/lib:/opt/jdk/lib:/opt/qt6/lib:/opt/sage/lib:/opt/sage/var/lib/sage/venv-python3.14/lib:$TEXLIVE_PREFIX/lib
 export TEXLIVE_PREFIX=$TEXLIVE_PREFIX
 make install-strip &&
 make texlinks      &&

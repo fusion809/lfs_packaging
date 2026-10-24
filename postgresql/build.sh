@@ -14,10 +14,13 @@ unpk_enter "$filename" "$direname"
 sed -e '/DEFAULT_PGSOCKET_DIR/s@/tmp@/run/postgresql@' \
     -i src/include/pg_config_manual.h
 cmi --prefix=/usr --docdir=/usr/share/doc/$direname
-sudo su -c "install -v -dm700 /srv/pgsql/data &&
-install -v -dm755 /run/postgresql &&
-chown -Rv postgres:postgres /srv/pgsql /run/postgresql"
-sudo su - postgres -c '/usr/bin/initdb -D /srv/pgsql/data'
+sudo su -c "
+if ! [[ -d /srv/pgsql/data ]]; then
+	install -v -dm700 /srv/pgsql/data
+	install -v -dm755 /run/postgresql
+	chown -Rv postgres:postgres /srv/pgsql /run/postgresql
+	su - postgres -c '/usr/bin/initdb -D /srv/pgsql/data'
+fi"
 cd ../
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
