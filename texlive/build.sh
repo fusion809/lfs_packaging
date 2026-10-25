@@ -84,7 +84,9 @@ tar -xf ../../$mf_filename -C $TEXLIVE_PREFIX --strip-components=1
 mktexlsr &&
 fmtutil-sys --all
 ln -svf $TEXLIVE_PREFIX/lib/libkpathsea.so{,.6} /usr/lib
-ln -svf $TEXLIVE_PREFIX/applications/* /usr/share/applications"
+ln -svf $TEXLIVE_PREFIX/applications/* /usr/share/applications
+# I don't use the docs
+rm -rf $TEXLIVE_PREFIX/texmf-dist/doc"
 cd ../..
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
