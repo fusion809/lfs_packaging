@@ -30,7 +30,9 @@ else
 		-exec sudo install -Dm755 {} "/usr/bin/{}" \;
 fi
 cd ../..
+wget -c https://woxi.ad-si.com/docs/favicon.png -O woxi.png
 sudo install -Dm644 woxi.png /usr/share/pixmaps/
+sudo rm woxi.png
 sudo install -Dm644 woxi-studio.desktop /usr/share/applications
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
