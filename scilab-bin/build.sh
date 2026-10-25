@@ -23,7 +23,7 @@ find share/icons/hicolor -type f -name '*.png' -print0 |
 	done
 sudo ln -sf /usr/share/icons/hicolor/256x256/apps/*.png /usr/share/pixmaps/
 for _executable in scilab scilab-cli scilab-adv-cli scinotes xcos; do
-	sudo rm /usr/bin/$_executable
+	sudo rm -rf /usr/bin/$_executable
 	sudo tee /usr/bin/$_executable > /dev/null << EOF
 #!/usr/bin/env bash
 set -u
