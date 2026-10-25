@@ -30,5 +30,7 @@ else
 		-exec sudo install -Dm755 {} "/usr/bin/{}" \;
 fi
 cd ../..
+sudo install -Dm644 woxi.png /usr/share/pixmaps/
+sudo install -Dm644 woxi-studio.desktop /usr/share/applications
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
