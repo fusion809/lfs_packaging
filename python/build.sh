@@ -24,23 +24,23 @@ direname="${filename/.tar.*/}"
 docs_filename="python-${version}-docs-html.tar.bz2"
 depends=(bzip2 expat gcc gdbm glibc libffi make mpdecimal ncurses openssl readline sqlite tar util-linux wget xz zlib zstd)
 download_src "https://www.python.org/ftp/python/$version/$filename"
-download_src "https://www.python.org/ftp/python/doc/$version/$docs_filename"
+#download_src "https://www.python.org/ftp/python/doc/$version/$docs_filename"
 unpk_enter "$filename" "$direname"
 gap_patches Python || echo "Patching failed"
-export LD_LIBRARY_PATH=/usr/lib:/opt/qt6/lib:/opt/sage/lib:/opt/rustc/lib:/opt/texlive/2026/lib:$PWD
+export LD_LIBRARY_PATH=$(echo $LD_LIBRARY_PATH | sed 's/\s*//g'):$PWD
 configure_options=(--prefix=/usr          \
     --enable-shared        \
     --with-system-expat    \
     --enable-optimizations \
     --without-static-libpython)
 cmi "${configure_options[@]}"
-sudo su -c "install -v -dm755 /usr/share/doc/$direname/html
-
-tar --strip-components=1  \
-    --no-same-owner       \
-    --no-same-permissions \
-    -C /usr/share/doc/$direname/html \
-    -xvf ../$docs_filename"
+#sudo su -c "install -v -dm755 /usr/share/doc/$direname/html
+#
+#tar --strip-components=1  \
+#    --no-same-owner       \
+#    --no-same-permissions \
+#    -C /usr/share/doc/$direname/html \
+#    -xvf ../$docs_filename"
 cd ..
 sudo rm -rf $direname $filename "$docs_filename"
 echo $version | sudo tee /var/lib/custom-packages/$name

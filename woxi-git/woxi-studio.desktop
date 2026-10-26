@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Woxi Studio
+Comment=Native notebook editor for the Wolfram Language
+Exec=/usr/bin/woxi-studio
+TryExec=/usr/bin/woxi-studio
+Icon=woxi
+Terminal=false
+Categories=Education;Science;Math;
+StartupNotify=true
