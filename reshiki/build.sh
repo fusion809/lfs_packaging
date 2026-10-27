@@ -12,8 +12,8 @@ gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 wget -c https://github.com/Ameyanagi/ReShiki/pull/598.patch
 wget -c https://github.com/Ameyanagi/ReShiki/pull/599.patch
-patch -Np1 -i 598.patch
-patch -Np1 -i 599.patch
+patch -Np1 -i 598.patch || echo "Patching partially failed"
+patch -Np1 -i 599.patch || echo "Patching partially failed"
 cargo build --release
 if [[ -f target/release/reshiki ]]; then
 	sudo cp -r target/release/reshiki /usr/bin/
@@ -29,7 +29,8 @@ Icon=reshiki
 MimeType=chemical/x-mdl-molfile;chemical/x-mdl-rxnfile;chemical/x-smiles;chemical/x-cml;chemical/x-inchi;
 StartupNotify=true
 Categories=Education;Science;Chemistry;
+StartupWMClass=reshiki
 EOF
 cd ../
-#rm -rf "$filename" "$direname"
+rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
