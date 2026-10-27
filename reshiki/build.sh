@@ -10,6 +10,10 @@ filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
+wget -c https://github.com/Ameyanagi/ReShiki/pull/598.patch
+wget -c https://github.com/Ameyanagi/ReShiki/pull/599.patch
+patch -Np1 -i 598.patch
+patch -Np1 -i 599.patch
 cargo build --release
 if [[ -f target/release/reshiki ]]; then
 	sudo cp -r target/release/reshiki /usr/bin/
