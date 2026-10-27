@@ -18,7 +18,7 @@ cat > /usr/bin/jchempaint << EOF
 exec java -jar /opt/jchempaint/jchempaint.jar "\$@"
 EOF
 sudo chmod +x /usr/bin/jchempaint
-cat > /usr/share/applications/io.github.jchempaint.JChemPaint.desktop << EOF
+sudo tee /usr/share/applications/io.github.jchempaint.JChemPaint.desktop << EOF
 [Desktop Entry]
 Version=1.0
 Type=Application

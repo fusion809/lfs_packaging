@@ -10,15 +10,16 @@ filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
+srcdir=$PWD
 cargo build --release
 sudo install -Dm755 target/release/woxi /usr/bin/
 cd woxi-studio
 cargo build --release
-if [[ -f target/release/woxi-studio ]]; then
-	sudo cp -r target/release/woxi-studio /usr/bin
+if [[ -f $srcdir/target/release/woxi-studio ]]; then
+	sudo cp -r $srcdir/target/release/woxi-studio /usr/bin
 else
 	echo "No target/release/woxi-studio, looking for woxi-studio to install it..."
-	find -type f -name "woxi-studio" -print \
+	find $srcdir -type f -name "woxi-studio" -print \
 		-exec sudo install -Dm755 {} "/usr/bin/{}" \;
 fi
 cd ../..
