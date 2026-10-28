@@ -1,4 +1,4 @@
-# Need to run sudo pip3 install pyopengl pyqt6-sip sip pyqt-builder first
+6# Need to run sudo pip3 install pyopengl pyqt6-sip sip pyqt-builder first
 # also need freeglut
 set -e
 # Variable declarations
@@ -28,6 +28,10 @@ pip_depends=(pyopengl pyqt6-sip pyqt-builder sip)
 # Fetch and unpack source
 download_src "https://pypi.python.org/packages/source/P/PyQt6/$filename"
 unpk_enter "$filename" "$direname"
+# Qt 6.12.0 compatibility fix
+arch_patch pyqt6 qt-6.12.patch
+# Python 3.15.x compatibility fix
+sed -i '/^#include <Python.h>/a extern "C" PyObject *PyWeakref_GetObject(PyObject *ref);' qpy/QtCore/qpycore_pyqtslot.cpp
 # Compile and install
 CFLAGS="-O2 -fPIC"
 CXXFLAGS="-O2 -fPIC"

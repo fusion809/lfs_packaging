@@ -8,6 +8,7 @@ description="Systems programming language with modern features (binary)."
 version=$(gh_ver $repo)
 filename="rust-$version-x86_64-unknown-linux-gnu.tar.gz"
 direname="${filename/.tar.*/}"
+conflicts=(rust)
 download_src "https://static.rust-lang.org/dist/$filename"
 unpk_enter "$filename" "$direname"
 mkdir pkg

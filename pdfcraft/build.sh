@@ -6,4 +6,5 @@ description="An open-source, clean-room reimplementation of Adobe Acrobat built 
 homepage="https://getartcraft.com/apps/pdfcraft"
 version=$(gh_ver $repo)
 depends=(gcc glibc)
+conflicts=(pdfcraft-bin)
 craft_buildin $name $version

@@ -8,6 +8,7 @@ version=$(gh_ver $repo $name)
 filename="node-v$version.tar.xz"
 direname="${filename/.tar.*/}"
 depends=(brotli c-ares gcc glibc icu libuv nghttp2 openssl simdutf which zlib)
+conflicts=(nodejs-bin)
 download_src "https://nodejs.org/dist/v$version/$filename"
 unpk_enter "$filename" "$direname"
 configure_options=(--prefix=/usr          \

@@ -8,6 +8,7 @@ description="App catalogue for Artcraft apps."
 version=$(gh_ver $repo)
 filename="$_name-$version-linux-x86_64.AppImage"
 direname="squashfs-root"
+conflicts=(artcraft-launcher)
 ghr_download "$repo" "v$version" "$filename"
 sudo chmod +x $filename
 ./$filename --appimage-extract

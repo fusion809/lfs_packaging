@@ -5,6 +5,7 @@ homepage="https://www.rust-lang.org/"
 description="Systems programming language with modern features."
 _name=rustc
 repo=rust-lang/rust
+conflicts=(rust-bin)
 # Takes about 3hrs 10 mins to compile, roughly
 get_version() {
     local inst_ver=$(pkgver $name)

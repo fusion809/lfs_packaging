@@ -7,6 +7,7 @@ description="GitHub's modern command-line client."
 repo=$_name/$_name
 version=$(gh_ver $repo)
 depends=(glibc)
+conflicts=(gh-bin)
 filename="${_name}-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "v$version" "$filename"

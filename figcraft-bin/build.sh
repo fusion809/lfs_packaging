@@ -8,6 +8,7 @@ description="Vibe coded app for interface design and prototyping."
 version=$(gh_ver $repo)
 filename="$_name-$version-linux-x86_64.AppImage"
 direname="squashfs-root"
+conflicts=(figcraft)
 ghr_download "$repo" "v$version" "$filename"
 sudo chmod +x $filename
 ./$filename --appimage-extract

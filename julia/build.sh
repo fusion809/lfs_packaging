@@ -8,6 +8,7 @@ version=$(gh_ver $repo)
 depends=(blas-lapack gcc glibc gmp libopenssl3 libssh2 lz4 mpfr nghttp2 openssl pcre2 suitesparse xz zlib zstd)
 filename="$name-$version.tar.gz"
 direname="$name-$version"
+conflicts=(julia-bin)
 gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 make_options=(

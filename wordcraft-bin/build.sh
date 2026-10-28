@@ -6,6 +6,8 @@ repo=storytold/$_name
 homepage="https://getartcraft.com/apps/wordcraft"
 description="Vibe coded clean-room reimplementation of Microsoft Word."
 version=$(gh_ver $repo)
+depends=(gcc glibc)
+conflicts=(wordcraft)
 filename="$_name-$version-linux-x86_64.AppImage"
 direname="squashfs-root"
 ghr_download "$repo" "v$version" "$filename"

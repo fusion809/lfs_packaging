@@ -9,6 +9,7 @@ version=$(gh_ver $repo)
 depends=(gcc glibc)
 filename="node-v$version-linux-x64.tar.xz"
 direname="${filename/.tar.*/}"
+conflicts=(nodejs)
 download_src "https://nodejs.org/dist/v$version/$filename"
 unpk_enter "$filename" "$direname"
 sudo cp -a "bin/." /usr/bin/

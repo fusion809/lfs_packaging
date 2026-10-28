@@ -6,6 +6,7 @@ homepage="https://two.avogadro.cc/"
 description="Libraries that provide 3D modelling, rendering, visualization, analysis, etc."
 version=$(gh_ver $repo)
 depends=(acl avogadro-crystals avogadro-fragments avogadro-molecules boost brotli bzip2 cmake dbus double-conversion e2fsprogs eigen expat fast_float fontconfig freetype gcc genxrdpattern glew glib2 glibc graphite2 harfbuzz hdf5 icu jkqtplotter keyutils libaec libarchive libglvnd libmsym libpng libx11 libxau libxcb libxdmcp libxkbcommon libxml2 lz4 mitkrb mmtf-cpp nlohmann-json onetbb openmpi openssl pcre2 pugixml pybind11 qt6 samba spglib systemd utf8cpp xz zlib zstd)
+conflicts=(avogadro2-bin)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "$version" "$filename"

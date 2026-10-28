@@ -8,6 +8,7 @@ description="Mathematica reimplementation in Rust."
 version=$(gh_ver $repo)
 filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
+conflicts=(woxi-git)
 gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 export CARGO_HOME="$PWD"

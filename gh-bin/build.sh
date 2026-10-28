@@ -8,6 +8,7 @@ description="GitHub's modern command-line client - packaged from precompiled bin
 version=$(gh_ver $repo)
 filename="${_name}_${version}_linux_amd64.tar.gz"
 direname="${filename/.tar.*/}"
+conflicts=(gh)
 ghr_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 #mkdir pkg

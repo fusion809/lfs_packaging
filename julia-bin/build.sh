@@ -10,6 +10,7 @@ depends=(gcc glibc zlib zstd)
 majVer=$(echo $version | cut -d '.' -f1-2)
 filename="$_name-$version-linux-x86_64.tar.gz"
 direname="$_name-$version"
+conflicts=(julia)
 download_src "https://julialang-s3.julialang.org/bin/linux/x64/$majVer/$filename"
 unpk_enter "$filename" "$direname"
 sudo su -c "install -Dm755 bin/julia /usr/bin/
