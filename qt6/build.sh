@@ -10,6 +10,10 @@ majMinVer=$(echo $version | cut -d '.' -f1-2)
 depends=(abseil-cpp at-spi2-core avahi bluez brotli bzip2 cairo cups dav1d dbus double-conversion e2fsprogs elfutils expat fdk-aac ffmpeg flac fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gst-plugins-bad gst-plugins-base gstreamer gtk3 harfbuzz icu jasper keyutils lame lcms2 libaom libde265 libdrm libepoxy libevdev libffi libglvnd libgudev libheif libice libinput libjpeg-turbo libmng libogg libpciaccess libpng libseccomp libsm libsndfile tiff libunwind libva libvorbis libvpx libwacom libwebp libx11 libxau libxcb libxcomposite libxcrypt libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxml2 libxrandr libxrender libxres libxshmfence libxxf86vm llvm lm-sensors lua mesa mitkrb mpg123 mtdev numactl openssl opus orc pango pcre2 pixman protobuf pulseaudio spirv-tools sqlite svt-av1 systemd tiff util-linux wayland x264 x265 xcb-util xcb-util-cursor xcb-util-image xcb-util-keysyms xcb-util-renderutil xcb-util-wm xdg-desktop-portal-kde xz zlib zstd)
 filename="qt-everywhere-src-$version.tar.xz"
 direname="${filename/.tar.*/}"
+if (( $(df -B1 --output=avail / | tail -n 1) < 60 * 1024**3 )); then
+    printf 'ERROR: Root filesystem has less than 60 GiB of free space.\n' >&2
+    exit 1
+fi
 download_src "https://download.qt.io/archive/qt/$majMinVer/$version/single/$filename"
 unpk_enter "$filename" "$direname"
 export QT6PREFIX=/opt/qt6
