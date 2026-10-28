@@ -8,7 +8,7 @@ description="Tools to access and manipulate disks, storage devices and technolog
 version=$(gh_ver $repo)
 filename="$name-$version.tar.bz2"
 direname="${filename/.tar.bz2/}"
-depends=(acl elogind glib2 glib2 glibc kmod libatasmart libblockdev libffi libgudev openssl pcre2 polkit polkit systemd util-linux xz zlib zstd)
+depends=(acl glib2 glib2 glibc kmod libatasmart libblockdev libffi libgudev openssl pcre2 polkit polkit systemd util-linux xz zlib zstd)
 # Fetch source and unpack it
 ghr_download "$repo" "$direname" "$filename"
 unpk_enter "$filename" "$direname"

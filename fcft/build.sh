@@ -5,7 +5,7 @@ homepage="https://codeberg.org/dnkl/fcft"
 description="Simple library for font loading and glyph rasterization."
 repo=dnkl/$name
 version=$(cb_ver $repo)
-depends=(fontconfig freetype2 meson ninja pixman)
+depends=(fontconfig freetype meson ninja pixman)
 direname="$name-$version"
 filename="$name-$version.tar.gz"
 

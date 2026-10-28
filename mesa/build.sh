@@ -22,7 +22,7 @@ get_version() {
 version=$(get_version)
 direname="$name-$version"
 filename="$direname.tar.xz"
-depends=(bzip2 cbindgen coreutils elfutils expat gcc glibc glslang icu libclc libdisplay-info libdrm elfutils libffi libglvnd libpciaccess libva libx11 libxau libxcb libxdmcp libxext libxml2 libxshmfence libxxf86vm linux llvm lm-sensors make-ca meson ninja rust rust-bindgen spirv-llvm-translator spirv-tools systemd tar vulkan-loader wayland wayland-protocols xcb-util-keysyms xz zlib zstd)
+depends=(bzip2 cbindgen coreutils elfutils expat gcc glibc glslang icu libdisplay-info libdrm elfutils libffi libglvnd libpciaccess libva libx11 libxau libxcb libxdmcp libxext libxml2 libxshmfence libxxf86vm linux llvm lm-sensors make-ca meson ninja rust rust-bindgen spirv-llvm-translator spirv-tools systemd tar vulkan-loader wayland wayland-protocols xcb-util-keysyms xz zlib zstd)
 pip_depends=(pyyaml)
 download_src "https://mesa.freedesktop.org/archive/$filename"
 unpk_enter "$filename" "$direname"

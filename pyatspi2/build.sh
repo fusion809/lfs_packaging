@@ -5,7 +5,7 @@ homepage="https://gitlab.gnome.org/GNOME/pyatspi2"
 description="Python wrapper for libatspi."
 _name=pyatspi
 version=$(gn_ver $name)
-depends=(dbus-python pygobject)
+depends=(dbus pygobject)
 filename="$_name-$version.tar.xz"
 direname="${filename/.tar.*/}"
 gn_download "$filename"

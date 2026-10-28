@@ -8,11 +8,9 @@ version=$(lgd_ver $name)
 depends=(gcc glib2 glibc libffi pcre2 systemd util-linux zlib
 	exempi
 	gdk-pixbuf
-	glib
 	gnome-desktop
 	gtk3
 	hicolor-icon-theme
-	lcms
 	libhandy
 	libx11
 	meson)

@@ -5,7 +5,7 @@ repo=google/$name
 homepage="https://github.com/google/snappy"
 description="Fast compressor/decompressor library."
 version=$(gh_ver $repo)
-depends=(glibc gcc clang cmake gtest)
+depends=(glibc gcc llvm cmake gtest)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 ghr_download "$repo" "$direname" "$filename"
