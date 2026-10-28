@@ -29,7 +29,7 @@ pip_depends=(pyopengl pyqt6-sip pyqt-builder sip)
 download_src "https://pypi.python.org/packages/source/P/PyQt6/$filename"
 unpk_enter "$filename" "$direname"
 # Qt 6.12.0 compatibility fix
-arch_patch pyqt6 qt-6.12.patch
+#arch_patch pyqt6 qt-6.12.patch
 # Python 3.15.x compatibility fix
 sed -i '/^#include <Python.h>/a extern "C" PyObject *PyWeakref_GetObject(PyObject *ref);' qpy/QtCore/qpycore_pyqtslot.cpp
 # Compile and install
@@ -42,6 +42,12 @@ sip-build \
   --api-dir /opt/qt6/qsci/api/python \
   --pep484-pyi
 cd build
+# Qt 6.12 no longer provides QLocale::operator!=; SIP still generates
+# wrappers that call it for comparisons between QLocale and QLocale::Language.
+sed -i \
+  -e 's/sipRes = operator!=(QLocale(sipCpp), \*a0);/sipRes = !(QLocale(sipCpp) == *a0);/' \
+  -e 's/sipRes = operator!=(\*sipCpp, QLocale((QLocale::Language)a0));/sipRes = !(*sipCpp == QLocale((QLocale::Language)a0));/' \
+  QtCore/*.cpp
 maki
 #sudo python3 -m compileall -d / /usr/lib
 #sudo python3 -O -m compileall -d / /usr/lib

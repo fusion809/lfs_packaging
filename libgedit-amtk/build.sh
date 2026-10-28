@@ -5,7 +5,7 @@ name=libgedit-amtk
 homepage="https://gitlab.gnome.org/World/gedit/libgedit-amtk"
 description="Actions, Menus and Toolbars Kit for GTK applications."
 version=$(lgd_ver $name)
-depends=(at-spi2-core brotli bzip2 cairo dbus exempi expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glib2 glibc glycin gnome-desktop graphite2 gtk3 gtk3 harfbuzz hicolor-icon-theme lcms lcms2 libepoxy libffi libhandy libpng libseccomp libx11 libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxrandr libxrender libxres meson pango pcre2 pixman systemd util-linux wayland zlib)
+depends=(at-spi2-core brotli bzip2 cairo dbus exempi expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glib2 glibc glycin gnome-desktop graphite2 gtk3 gtk3 harfbuzz hicolor-icon-theme lcms2 libepoxy libffi libhandy libpng libseccomp libx11 libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxrandr libxrender libxres meson pango pcre2 pixman systemd util-linux wayland zlib)
 # Fetch source and unpack it
 repo_url="https://gitlab.gnome.org/World/gedit/$name.git"
 if [[ ! -d "$name/.git" ]]; then
