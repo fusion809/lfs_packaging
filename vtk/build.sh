@@ -11,7 +11,7 @@ get_version() {
 }
 repo=$name/$name
 homepage="https://vtk.org"
-description=""
+description="Software system for 3D visualization and image processing."
 version=$(get_version)
 filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
