@@ -31,7 +31,7 @@ TryExec=/usr/bin/chemcanvas-qt6
 Icon=chemcanvas
 Categories=Science;Education;Chemistry;
 StartupWMClass=chemcanvas
-MimeType=image/svg+xml;application/vnd.ksharindam.ccdx+xml;
+MimeType=application/vnd.ksharindam.ccdx+xml;image/svg+xml;application/vnd.chemdraw+xml;chemical/x-chemaxon-marvinfile;chemical/x-mdl-molfile;chemical/x-mdl-sdfile;chemical/x-daylight-smiles;
 Terminal=false
 StartupNotify=false
 EOF

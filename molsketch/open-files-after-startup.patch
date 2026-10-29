@@ -1,0 +1,28 @@
+--- a/molsketch/main.cpp
++++ b/molsketch/main.cpp
+@@ -26,6 +26,7 @@
+ #include <QSettings>
+ #include <QCommandLineParser>
+ #include <QDebug>
++#include <QTimer>
+ 
+ #include "applicationsettings.h"
+ #include "mainwindow.h"
+@@ -76,7 +77,6 @@
+   parser.addPositionalArgument("files", QApplication::translate("main", "Files to open, optionally."), "[files...]");
+   parser.process(app);
+   auto filesToOpen = parser.positionalArguments();
+-  for(auto filename : filesToOpen) (new MainWindow())->openFile(filename);
+   if (filesToOpen.isEmpty()) new MainWindow();
+ 
+   ApplicationSettings appSettings(Molsketch::SettingsFacade::persistedSettings(new QSettings));
+@@ -86,5 +86,9 @@
+     appSettings.updateReleaseNotesShownVersion();
+   }
+ 
++  for (const auto &filename : filesToOpen) {
++    QTimer::singleShot(0, [filename]() { (new MainWindow())->openFile(filename); });
++  }
++
+   return app.exec();
+ }
