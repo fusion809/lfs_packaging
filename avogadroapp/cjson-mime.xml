@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="chemical/x-cjson">
+    <comment>Avogadro Chemical JSON file</comment>
+    <glob pattern="*.cjson"/>
+  </mime-type>
+</mime-info>

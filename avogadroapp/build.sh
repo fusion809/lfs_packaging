@@ -16,6 +16,12 @@ unpk_enter "$filename" "$direname"
 cmake_options=(-DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr)
 cmaki "${cmake_options[@]}"
+sudo sed -i \
+    -e 's|^MimeType=.*$|MimeType=chemical/x-cjson;chemical/x-cml;chemical/x-xyz;chemical/x-cif;chemical/x-mmcif;chemical/x-pdb;chemical/pdby;chemical/x-mol2;chemical/x-mdl-molfile;chemical/x-mdl-sdfile;chemical/x-mdl-rxnfile;chemical/x-mdl-rdfile;chemical/x-daylight-smiles;chemical/x-inchi;chemical/x-gaussian-input;chemical/x-macromodel-input;chemical/x-vmd;|' \
+    /usr/share/applications/org.openchemistry.Avogadro2.desktop
+sudo install -Dm644 "$PWD/../../cjson-mime.xml" /usr/share/mime/packages/avogadroapp-cjson.xml
+sudo update-mime-database /usr/share/mime
+sudo update-desktop-database /usr/share/applications
 # Fix desktop config icon issue; without Avogadro2 doesn't have an icon shown in app menus
 # under WhiteSur icon theme
 sudo cp /usr/share/icons/hicolor/32x32/apps/org.openchemistry.Avogadro2.png /usr/share/pixmaps
