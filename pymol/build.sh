@@ -32,7 +32,18 @@ MimeType=chemical/x-pdb;chemical/pdby;chemical/x-mol2;chemical/x-mdl-molfile;che
 EOF
 sudo chmod +x /usr/share/applications/org.pymol.PyMOL.desktop
 python -m build -wn
-sudo python -m installer -d / dist/*.whl
+sudo python -m installer --overwrite-existing -d / dist/*.whl
+sudo rm /usr/bin/pymol
+site=$(python3 -c 'import sysconfig; print(sysconfig.get_path("purelib"))')
+sudo tee /usr/bin/pymol << EOF
+#!/bin/sh
+env -u QT_STYLE_OVERRIDE \
+  QT_PLUGIN_PATH=/opt/qt6/plugins \
+  QT_QPA_PLATFORM_PLUGIN_PATH=/opt/qt6/plugins/platforms \
+  QT_QPA_PLATFORM=xcb \
+  QT_XCB_GL_INTEGRATION=xcb_glx \
+"/usr/bin/python" "$site/pymol/__init__.py" "\$@"
+EOF
 sudo install -Dm0644 data/pymol/icons/icon2.svg "/usr/share/icons/hicolor/scalable/apps/pymol.svg"
 sudo magick -density 300 /usr/share/icons/hicolor/scalable/apps/pymol.svg /usr/share/pixmaps/pymol.png
 cd ../
