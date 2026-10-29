@@ -15,6 +15,7 @@ sudo chmod +x $filename
 ./$filename --appimage-extract
 cd $direname
 sudo cp -av usr/. /usr/
+sudo rm -rf /usr/share/doc/$_name
 sudo ln -sfv /usr/share/icons/hicolor/512x512/apps/ai.storyteller.wordcraft.png \
   /usr/share/pixmaps/ai.storyteller.wordcraft.png
 cd ../
