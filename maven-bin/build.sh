@@ -21,7 +21,7 @@ for i in bin lib boot conf
 do
 	sudo cp -r $i /opt/maven
 done
-cat > /etc/profile.d/maven.sh << EOF
+sudo tee /etc/profile.d/maven.sh << EOF
 #!/bin/bash
 export PATH=\$PATH:/opt/maven/bin
 export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/opt/maven/lib
