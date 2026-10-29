@@ -14,20 +14,16 @@ unpk_enter "$filename" "$direname"
 python - <<'PY'
 from pathlib import Path
 
-source = Path("lib/crypt-gost-yescrypt.c")
-text = source.read_text(encoding="utf-8")
-old_declaration = "  char *hptr = strchr ((const char *) intbuf->retval + 3, '$');"
-new_declaration = "  const char *hptr = strchr ((const char *) intbuf->retval + 3, '$');"
-old_input_cast = "(uint8_t *) hptr"
-new_input_cast = "(const uint8_t *) hptr"
-
-if old_declaration in text:
-    text = text.replace(old_declaration, new_declaration, 1)
-elif new_declaration not in text:
-    raise SystemExit(f"Could not find the hptr declaration in {source}")
-
-text = text.replace(old_input_cast, new_input_cast, 1)
-source.write_text(text, encoding="utf-8")
+for filename in ("crypt-gost-yescrypt.c", "crypt-sm3-yescrypt.c"):
+    source = Path("lib") / filename
+    text = source.read_text(encoding="utf-8")
+    old = "strchr ((const char *) intbuf->retval + 3, '$')"
+    new = "strchr ((char *) intbuf->retval + 3, '$')"
+    if old in text:
+        text = text.replace(old, new, 1)
+    elif new not in text:
+        raise SystemExit(f"Could not find the yescrypt output scan in {source}")
+    source.write_text(text, encoding="utf-8")
 PY
 config_options=(--prefix=/usr \
     --disable-static \
@@ -35,7 +31,7 @@ config_options=(--prefix=/usr \
     --enable-obsolete-api=glibc \
     --disable-failure-tokens)
 pkgdir=$rootdir/pkg
-mkdir $pkgdir
+mkdir -p $pkgdir
 ./configure --prefix=/usr \
     --disable-static \
     --enable-hashes=strong,glibc \
