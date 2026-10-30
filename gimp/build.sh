@@ -1,5 +1,11 @@
 #!/bin/bash
 set -e
+# Serialize builds of this package: unpk_enter removes the existing source
+# directory before extracting, so overlapping autobuild runs can delete files
+# underneath an active Meson/Ninja build.
+exec 9>/tmp/autobuild-gimp.lock
+flock 9
+
 name=gimp
 repo=GNOME/$name
 homepage="https://gimp.org"
