@@ -1,11 +1,12 @@
 #!/bin/bash
 set -e
-name=chemcanvas
-repo=ksharindam/$name
+name=chemcanvas-git
+_name=chemcanvas
+repo=ksharindam/$_name
 homepage="https://github.com/ksharindam/chemcanvas"
 description="User-friendly skeletal formula editor."
 version=$(gh_com $repo)
-filename="$name-$version.tar.gz"
+filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(python pyqt6)
 gha_download "$repo" "$version" "$filename"

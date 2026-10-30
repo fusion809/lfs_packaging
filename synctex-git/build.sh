@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 name=synctex
-repo=jlaurens/$name
+_name=synctex
+repo=jlaurens/$_name
 homepage="https://github.com/jlaurens/synctex"
 description="SyncTeX parser library and CLI."
 version=$(timeout 5 git ls-remote https://github.com/jlaurens/synctex.git refs/heads/2026-1 | sed 's/\s.*//g')

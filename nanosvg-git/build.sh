@@ -1,11 +1,12 @@
 #!/bin/bash
 set -e
-name=nanosvg
-repo=memononen/$name
+name=nanosvg-git
+_name=nanosvg
+repo=memononen/$_name
 homepage="https://github.com/memononen/nanosvg"
 description="Simple stupid SVG parser."
 version=$(gh_com $repo)
-filename="$name-$version.tar.gz"
+filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"

@@ -6,7 +6,7 @@ repo=$_name/$_name
 homepage="https://wxwidgets.org"
 description="GTK+3 implementation of wxWidgets API GUI."
 version=$(gh_ver $repo)
-depends=(cmake git glu gst-plugins-base libmspack libnotify nanosvg webkitgtk)
+depends=(cmake git glu gst-plugins-base libmspack libnotify nanosvg-git webkitgtk)
 download_git "https://github.com/wxWidgets/wxWidgets"
 cd $_name
 cmake_options=(

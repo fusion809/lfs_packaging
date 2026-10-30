@@ -1,12 +1,13 @@
 #!/bin/bash
 set -e
 # Variable declarations
-name="wl-clipboard"
-repo="bugaevc/wl-clipboard"
-homepage="https://github.com/$repo"
+name=wl-clipboard-git
+_name="wl-clipboard"
+repo="bugaevc/$_name"
+homepage="https://github.com/bugaevc/wl-clipboard"
 description="Command-line copy/paste utilities for Wayland."
 version=$(gh_com $repo)
-filename="$name-$version.tar.gz"
+filename="$_name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=(bash coreutils glibc libffi meson ninja wayland wayland wayland-protocols)
 # Fetch and unpack source
