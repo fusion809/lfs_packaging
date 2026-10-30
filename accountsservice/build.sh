@@ -16,6 +16,15 @@ meson_options=(
    -D admin_group=adm
 )
 mni "${meson_options[@]}"
+# AccountsService lists /run/systemd/seats as a read-only sandbox path. That
+# directory is created by systemd-logind, so starting AccountsService before
+# logind is ready makes systemd fail the unit during namespace setup. The
+# service can then start later via D-Bus activation, which hides the boot race.
+sudo install -d -m755 /usr/lib/systemd/system/accounts-daemon.service.d
+sudo tee /usr/lib/systemd/system/accounts-daemon.service.d/logind.conf >/dev/null <<'EOF'
+[Unit]
+After=systemd-logind.service
+EOF
 sudo su -c "cat > /etc/polkit-1/rules.d/40-adm.rules << "EOF"
 polkit.addAdminRule(function(action, subject) {
    return [\"unix-group:adm\"];
