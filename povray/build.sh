@@ -24,7 +24,7 @@ rm -frv libraries/ilmbase/Imath
     COMPILED_BY='Linux From Scratch' \
     LIBS="-lboost_thread"
   make CXXFLAGS+='-std=c++11 -lboost_thread -DBOOST_BIND_GLOBAL_PLACEHOLDERS=1 -w'
-
+sudo mkdir -p /usr/share/$name-$majMinVer
 sudo cp -r icons include ini scenes scripts "/usr/share/$name-$majMinVer"
 sudo su -c "install -Dm755 unix/povray /usr/bin/povray"
 if ! [[ -f /etc/povray/$majMinVer/povray.conf ]]; then
