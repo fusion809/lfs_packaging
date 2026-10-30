@@ -14,7 +14,7 @@ description="Sparse solver library using Gaussian elimination."
 version=$(get_version)
 filename="${_name}_$version.tar.gz"
 direname="${filename/.tar.*/}"
-depends=(bzip2 blas-lapack metis openmpi scalapack scotch zlib gcc)
+depends=(bzip2 blas-lapack-git metis openmpi scalapack scotch zlib gcc)
 download_src "https://mumps-solver.org/$filename"
 unpk_enter "$filename" "$direname"
 wget -c "https://aur.archlinux.org/cgit/aur.git/plain/Makefile.inc?h=mumps" -O Makefile.inc

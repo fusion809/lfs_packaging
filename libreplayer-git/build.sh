@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 _name=LibrePlayer
-name=libreplayer
+name=libreplayer-git
 repo="Procurador1337/$_name"
 homepage="https://github.com/$repo"
 description="Lightweight Qt6 desktop audio player."

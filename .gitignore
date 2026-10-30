@@ -62,8 +62,8 @@ x265/x265_[0-9.]*
 uninstalled/Libre*/Libre*
 */*/*
 */*/.*
-xdrawchem/xdrawchem
-ketcher-desktop/ketcher-desktop
+xdrawchem-git/xdrawchem
+ketcher-desktop-git/ketcher-desktop
 *.rpm
 wxWidgets
 *.AppImage

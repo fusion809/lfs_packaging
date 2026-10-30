@@ -2,7 +2,7 @@
 # Latest tagged version won't build
 set -e
 # Variable declarations
-name=jack
+name=jack-git
 _name=jack2
 homepage="https://jackaudio.org/"
 description="Jackdmp jack implemention for multi-processor machine."
@@ -22,7 +22,7 @@ CXXFLAGS="-O2 -fPIC"
   --prefix=/usr \
   --libdir=/usr/lib \
   --mandir=/usr/man/man1 \
-  --htmldir=/usr/doc/$name-$version/html \
+  --htmldir=/usr/doc/jack-$version/html \
   --classic \
   --dbus \
   --alsa

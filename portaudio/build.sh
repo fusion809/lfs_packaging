@@ -8,7 +8,7 @@ repo=$name/$name
 version=$(gh_ver "$repo")
 filename="$name-v$version.tar.gz"
 direname=$(echo "${filename/.tar.gz/}" | sed 's/v//g')
-depends=(alsa-lib autoconf bash cmake coreutils gcc glibc gzip jack make opus sed tar wget)
+depends=(alsa-lib autoconf bash cmake coreutils gcc glibc gzip jack-git make opus sed tar wget)
 # Fetch and unpack source
 gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"

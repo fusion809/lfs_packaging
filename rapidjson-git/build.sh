@@ -3,13 +3,14 @@
 # is too old for GNU Octave to be able to use its version of prettywriter.
 set -e
 # Variable declarations
-name=rapidjson
+name=rapidjson-git
+_name=rapidjson
 homepage="https://github.com/miloyip/rapidjson"
 description="Fast JSON parser/generator for C++ with both SAX/DOM style API."
-repo="Tencent/$name"
+repo="Tencent/$_name"
 version=$(gh_com $repo)
 depends=(bash cmake coreutils git make sed)
-filename="$name-$version.tar.gz"
+filename="$_name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 # Fetch and unpack source
 gha_download "$repo" "$version" "$filename"
@@ -23,7 +24,7 @@ cmake_options=(
       -DRAPIDJSON_HAS_STDSTRING=ON \
       -DRAPIDJSON_BUILD_CXX11=ON \
       -DRAPIDJSON_ENABLE_INSTRUMENTATION_OPT=OFF \
-      -DDOC_INSTALL_DIR=/usr/share/doc/${name}-$version \
+      -DDOC_INSTALL_DIR=/usr/share/doc/${_name}-$version \
       -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
       -DCMAKE_CXX_FLAGS="$CXXFLAGS" \
 )

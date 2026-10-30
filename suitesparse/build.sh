@@ -9,7 +9,7 @@ repo="DrTimothyAldenDavis/SuiteSparse"
 version=$(gh_ver $repo)
 filename="$_name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
-depends=(bash blas-lapack cmake coreutils gcc gcc glibc gmp make mpfr sed tar wget)
+depends=(bash blas-lapack-git cmake coreutils gcc gcc glibc gmp make mpfr sed tar wget)
 # Fetch and unpack source
 gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"

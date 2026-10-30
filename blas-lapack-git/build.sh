@@ -1,5 +1,5 @@
 #!/bin/bash
-name=blas-lapack
+name=blas-lapack-git
 _name=lapack
 repo="Reference-LAPACK/lapack"
 version=$(gh_com $repo)

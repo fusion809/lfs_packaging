@@ -4,7 +4,7 @@ name=pspp
 homepage="http://www.gnu.org/software/pspp/"
 description="Statistical analysis app; open-source alternative to SPSS."
 version=$(gnu_ver $name)
-depends=(at-spi2-core blas-lapack brotli bzip2 cairo dbus expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 gtk3 gtksourceview4 harfbuzz icu libepoxy libffi libpng libseccomp libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxml2 libxrandr libxrender libxres ncurses pango pcre2 pixman postgresql readline rust sagemath ssw systemd util-linux wayland zlib)
+depends=(at-spi2-core blas-lapack-git brotli bzip2 cairo dbus expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 gtk3 gtksourceview4 harfbuzz icu libepoxy libffi libpng libseccomp libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxml2 libxrandr libxrender libxres ncurses pango pcre2 pixman postgresql readline rust sagemath ssw systemd util-linux wayland zlib)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gnu_download "$name" "$filename"

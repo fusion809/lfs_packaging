@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-name=jkqtplotter
+name=jkqtplotter-git
 _name=JKQtPlotter
 repo=jkriege2/JKQtPlotter
 homepage="http://jkriege2.github.io/JKQtPlotter/"

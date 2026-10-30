@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 _name=LibreWeather
-name=libreweather
+name=libreweather-git
 repo=Procurador1337/$_name
 homepage="https://github.com/$repo"
 description="Lightweight command-line weather tool for Linux."

@@ -4,7 +4,7 @@ name=gsl
 homepage="http://www.gnu.org/software/gsl/"
 description="GNU Scientific Library."
 version=$(gnu_ver $name)
-depends=(blas-lapack gcc glibc openblas sagemath)
+depends=(blas-lapack-git gcc glibc openblas sagemath)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gnu_download "$name" "$filename"

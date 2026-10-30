@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 _name=LibreNote
-name=librenote
+name=librenote-git
 repo="Procurador1337/$_name"
 homepage="https://github.com/$repo"
 description="Simple, lightweight plain-text notepad based in QT6."

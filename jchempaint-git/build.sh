@@ -1,12 +1,13 @@
 #!/bin/bash
 set -e
-name=jchempaint
-repo=JChemPaint/$name
+name=jchempaint-git
+_name=jchempaint
+repo=JChemPaint/$_name
 homepage="https://jchempaint.github.io/"
 description="Skeletal structure drawing application."
 version=$(gh_com $repo)
 depends=(maven-bin)
-filename="$name-$version.tar.gz"
+filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
