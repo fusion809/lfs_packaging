@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 name=lager
-repo=$name/$name
+repo=arximboldi/$name
 homepage="https://sinusoid.es/lager"
 description="C++ library for value-oriented design."
 version=$(gh_ver $repo)

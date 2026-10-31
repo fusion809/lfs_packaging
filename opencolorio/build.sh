@@ -6,13 +6,13 @@ repo=AcademySoftwareFoundation/$_name
 homepage="https://opencolorio.org/"
 description="Colour framework for visual effects and animation."
 version=$(gh_ver $repo)
-filename="$name-$version.tar.gz"
+filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 depends=(expat freeglut imath lcms2 gcc openexr minizip-ng pystring yaml-cpp)
 ghr_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 CXXFLAGS+=" -ffat-lto-objects"
-cmake_options=(-GNinja \
+cmake_options=(-G Ninja \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBDIR=lib \

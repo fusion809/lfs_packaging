@@ -8,6 +8,7 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "$direname" "$filename"
+direname=$name-$direname
 unpk_enter "$filename" "$direname"
 cmake_options=(-DCMAKE_BUILD_TYPE=None \
     -DCMAKE_INSTALL_PREFIX=/usr \

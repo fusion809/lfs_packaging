@@ -6,6 +6,11 @@ function ghl_ver {
 		timeout 5 git ls-remote --tags --refs "$URL" \
 		| grep "tags/v[0-9.]+[-rc]*[0-9]*" -E | sed 's|.*tags/v||g' \
 		| sort -V | tail -n 1
+	elif [[ "$1" == "KDE/kseexpr" ]]; then
+		timeout 5 git ls-remote --tags --refs "$URL" \
+		| grep -v "rc" \
+		| grep -oE "refs/tags/[v]*[0-9]+\.[0-9]+\.[0-8][0-9]*\.[0-9]" \
+		| cut -d '/' -f 3 | sed 's/^v//g' | sort -V | tail -n 1 
 	elif [[ "$1" == "openpmix/prrte" ]]; then
 		timeout 5 git ls-remote --tags --refs "$URL" 2>/dev/null \
 		| cut -d '/' -f 3 | grep -viE "alpha|beta|rc|dev|snapshot|init" \
@@ -135,6 +140,11 @@ function ghl_ver {
 
 function ght_ver {
 	if [[ "$1" == "avahi/avahi" ]]; then
+		wget -T 5 -t 1 -cqO- https://github.com/$1/tags \
+		| grep -E "tags/v[0-9.]+[-rc]*[0-9]*.tar.gz" | sed 's|.*tags/v||g' \
+		| sed 's/.tar.gz.*//g' | sort -V | tail -n 1
+		return
+	elif [[ "$1" == "KDE/kseexpr" ]]; then
 		wget -T 5 -t 1 -cqO- https://github.com/$1/tags \
 		| grep -E "tags/v[0-9.]+[-rc]*[0-9]*.tar.gz" | sed 's|.*tags/v||g' \
 		| sed 's/.tar.gz.*//g' | sort -V | tail -n 1

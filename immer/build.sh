@@ -10,7 +10,7 @@ direname="${filename/.tar.*/}"
 depends=(cmake catch2)
 gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
-cmaki -DCMAKE_INSTALL_PREFIX=/usr
+cmaki -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_TESTING=OFF -Dimmer_BUILD_TESTS=OFF
 cd ../..
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
