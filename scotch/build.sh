@@ -18,7 +18,7 @@ direname="${filename/.tar.*/}"
 download_src "$homepage/-/archive/v$version/$filename"
 unpk_enter "$filename" "$direname"
 arch_patch "$name" fortify-source.patch
-arch_patch "$name" scotchconfig.patch
+patch -p1 -i "$OLDPWD/cmake-dummysizes.patch"
 cmake_options=(-G Ninja
     -W no-dev
     -DCMAKE_BUILD_TYPE=None

@@ -1,0 +1,9 @@
+diff --git a/src/libscotch/CMakeLists.txt b/src/libscotch/CMakeLists.txt
+--- a/src/libscotch/CMakeLists.txt
++++ b/src/libscotch/CMakeLists.txt
+@@ -52,1 +52,1 @@
+-add_executable(dummysizes dummysizes.c ${GENERATED_INCLUDE_DIR}/scotch.h)
++add_executable(dummysizes dummysizes.c)
+@@ -55,1 +55,1 @@
+-  add_executable(ptdummysizes dummysizes.c ${GENERATED_INCLUDE_DIR}/ptscotch.h)
++  add_executable(ptdummysizes dummysizes.c)
