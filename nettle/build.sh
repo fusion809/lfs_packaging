@@ -10,7 +10,8 @@ direname="${filename/.tar.*/}"
 gnu_download $name $filename
 unpk_enter "$filename" "$direname"
 if ! [[ -f configure ]]; then
-	autoreconf
+	sudo autoreconf
+	sudo chown $USER -R .
 fi
 export PATH=$PATH:/opt/texlive/$(ls /opt/texlive/[0-9]* -ld | sed 's|.*/opt/texlive/||g')/bin/x86_64-linux
 cmi --prefix=/usr --disable-static

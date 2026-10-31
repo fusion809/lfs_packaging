@@ -11,7 +11,7 @@ sw_download "$name" "$filename"
 unpk_enter "$filename" "$direname"
 mkdir -v build
 cd       build
-[ -f ../configure ] || (cd .. && autoreconf -fiv)
+[ -f ../configure ] || (cd .. && sudo autoreconf -fiv && sudo chown $USER -R .)
 ../configure --prefix=/usr        --sysconfdir=/etc    --enable-ld=default  --enable-plugins     --enable-shared      --disable-werror     --enable-64-bit-bfd  --enable-new-dtags   --with-system-zlib   --with-lib-path=/usr/lib  --enable-default-hash-style=gnu
 make -j$(nproc) tooldir=/usr
 if ! (make -k check); then

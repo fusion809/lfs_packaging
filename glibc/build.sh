@@ -11,7 +11,7 @@ unpk_enter "$filename" "$direname"
 gap_patches "$name"
 mkdir -v build
 cd       build
-[ -f ../configure ] || (cd .. && autoreconf -fiv)
+[ -f ../configure ] || (cd .. && sudo autoreconf -fiv && sudo chown $USER -R .)
 export LD_LIBRARY_PATH=/usr/lib:/opt/rustc/lib:/opt/qt6/lib
 ../configure --prefix=/usr                   \
              --disable-werror                \
