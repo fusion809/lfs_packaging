@@ -5,12 +5,14 @@ _name=xdrawchem
 repo=bryanherger/$_name
 homepage="https://bryanherger.github.io/xdrawchem/"
 description="Skeletal formula sketching software."
-version=$(gh_com $repo)
+#version=$(gh_com $repo)
+version=3ac7b1c5c6888f94b540168ef03d135333c436e5
 depends=(boost brotli bzip2 coordgen dbus double-conversion e2fsprogs expat fontconfig freetype gcc glib2 glibc graphite2 harfbuzz icu keyutils libglvnd libpng libx11 libxau libxcb libxdmcp libxkbcommon maeparser mitkrb openbabel openssl pcre2 qt6 systemd xz zlib zstd)
 filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 download_git "https://github.com/$repo.git"
 cd $_name/$_name
+git checkout 3ac7b1c5c6888f94b540168ef03d135333c436e5
 sed -i -e "s|CMAKE_PROJECT_VERSION:STATIC=2.1.0|CMAKE_PROJECT_VERSION:STATIC=$version|g" CMakeLists.txt
 cmake_options=(-DCMAKE_INSTALL_PREFIX=/usr
 	-DCMAKE_BUILD_TYPE=Release
