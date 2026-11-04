@@ -10,11 +10,39 @@ filename="Antigravity IDE.tar.gz"
 direname="${filename/.tar.gz/}"
 download_src "https://edgedl.me.gvt1.com/edgedl/release2/j0qc3/antigravity/stable/$version-$_build/linux-x64/$filename"
 unpk_enter "$filename" "$direname"
-sudo mkdir -p /usr/share/antigravity
-sudo ln -sf /usr/share/antigravity/bin/antigravity-ide /usr/bin/
-sudo ln -sf /usr/share/antigravity/bin/antigravity-ide /usr/bin/antigravity
-sudo cp -r * /usr/share/antigravity
-sudo cp ../$name.desktop /usr/share/applications/
+sudo mkdir -p /usr/share/$name
+sudo ln -sf /usr/share/antigravity/bin/$name /usr/bin/
+sudo cp -r * /usr/share/$name
+sudo tee /usr/share/applications/$name.desktop << EOF
+[Desktop Entry]
+Name=Antigravity IDE
+Comment=Experience liftoff
+GenericName=Text Editor
+Exec=/usr/share/$name/bin/$name %F
+Icon=$name
+Type=Application
+StartupNotify=false
+StartupWMClass=$name
+Categories=TextEditor;Development;IDE;
+MimeType=application/x-antigravity-workspace;
+Actions=new-empty-window;
+Keywords=vscode;
+
+[Desktop Action new-empty-window]
+Name=New Empty Window
+Name[cs]=Nové prázdné okno
+Name[de]=Neues leeres Fenster
+Name[es]=Nueva ventana vacía
+Name[fr]=Nouvelle fenêtre vide
+Name[it]=Nuova finestra vuota
+Name[ja]=新しい空のウィンドウ
+Name[ko]=새 빈 창
+Name[ru]=Новое пустое окно
+Name[zh_CN]=新建空窗口
+Name[zh_TW]=開新空視窗
+Exec=/usr/share/$name/bin/$name --new-window %F
+Icon=$name
+EOF
 sudo cp ../$name.png /usr/share/pixmaps/
 cd ..
 sudo rm -rf "$direname" "$filename"

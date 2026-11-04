@@ -34,6 +34,18 @@ cd ../..
 wget -c https://woxi.ad-si.com/docs/favicon.png -O woxi.png
 sudo install -Dm644 woxi.png /usr/share/pixmaps/
 sudo rm woxi.png
-sudo install -Dm644 woxi-studio.desktop /usr/share/applications
+sudo tee /usr/share/applications/woxi-studio.desktop << EOF
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Woxi Studio
+Comment=Native notebook editor for the Wolfram Language
+Exec=/usr/bin/woxi-studio
+TryExec=/usr/bin/woxi-studio
+Icon=woxi
+Terminal=false
+Categories=Education;Science;Math;
+StartupNotify=true
+EOF
 rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"
