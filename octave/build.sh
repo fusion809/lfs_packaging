@@ -46,9 +46,31 @@ sudo make install-strip DESTDIR=/
 sudo mkdir -p /usr/share/doc/$direname
 sudo cp -a $docs /usr/share/doc/$direname
 sudo install -Dm755 $HOME/lfs_packaging/octave/octave_exec /usr/bin/
-sudo install -Dm755 $HOME/lfs_packaging/octave/org.octave.Octave.desktop /usr/share/applications/
-sudo sed -i -e "s|/usr/bin/octave$|/usr/bin/octave_exec|g" \
-       -e "s|/usr/bin/octave |/usr/bin/octave_exec |g" 	/usr/share/applications/org.octave.Octave.desktop
+sudo tee /usr/share/applications/org.octave.Octave.desktop << EOF
+[Desktop Entry]
+Name=GNU Octave
+Comment=Interactive programming environment for numerical computations
+Comment[ca]=Entorn de programació interactiva per a càlculs numèrics
+Comment[de]=Interaktive Programmierumgebung für numerische Berechnungen
+Comment[es]=Entorno de programación interactiva para cálculos numéricos
+Comment[fr]=Environnement de programmation interactif pour le calcul numérique
+Comment[hu]=Interaktív programozási környezet számszerű számításokhoz
+Comment[it]=Ambiente di programmazione interattivo per il calcolo numerico
+Comment[ja]=数値計算のための対話的なプログラミング環境
+Comment[nl]=Interactieve programmeeromgeving voor numerieke berekeningen
+Comment[pt]=Ambiente de programação interativo para computação numérica
+Comment[zh]=数值计算交互式编程环境
+TryExec=/usr/bin/octave_exec
+Exec=/usr/bin/octave_exec --gui %f
+Icon=octave
+Terminal=false
+Type=Application
+Categories=Education;Science;Math;Development;
+StartupNotify=false
+StartupWMClass=GNU Octave
+MimeType=text/x-octave;text/x-matlab;
+Keywords=science;math;matrix;numerical computation;plotting;
+EOF
 # Cleanup and add to database
 cd ..
 sudo rm -rf $direname ${filename}
