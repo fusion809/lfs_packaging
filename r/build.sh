@@ -60,7 +60,14 @@ sudo cp -a \
    COPYING README SVN-REVISION VERSION VERSION-NICK \
    /usr/share/doc/$direname
 cd ..
-sudo install -Dm755 $_name.desktop /usr/share/applications
+sudo tee /usr/share/applications/$_name.desktop << EOF
+[Desktop Entry]
+Name=R
+Exec=gnome-terminal -- R
+Type=Application
+Icon=R
+Categories=Education;Math;Science;Development;
+EOF
 # Cleanup and add to database
 sudo rm -rf $filename $direname
 echo $version | sudo tee /var/lib/custom-packages/$name
