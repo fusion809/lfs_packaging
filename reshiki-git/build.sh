@@ -11,7 +11,7 @@ download_git "https://github.com/$repo.git"
 cd $_name
 git checkout $version
 sed -i -e "s|application_id: \"reshiki\".into(),|application_id: \"$name\".into(),|g" src/main.rs
-sed -i -e "s|{name}{} — ReShiki|{name}{} — ReShiki (git)|g" src/app.rs
+sed -i -e "s|{name}{} — ReShiki\"|{name}{} — ReShiki (git)\"|g" src/app.rs
 cargo build --release
 if [[ -f target/release/reshiki ]]; then
 	sudo cp -r target/release/reshiki /usr/bin/$name
