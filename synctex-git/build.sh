@@ -1,13 +1,13 @@
 #!/bin/bash
 set -e
-name=synctex
+name=synctex-git
 _name=synctex
 repo=jlaurens/$_name
 homepage="https://github.com/jlaurens/synctex"
 description="SyncTeX parser library and CLI."
-version=$(timeout 5 git ls-remote https://github.com/jlaurens/synctex.git refs/heads/2026-1 | sed 's/\s.*//g')
+version=$(timeout 5 git ls-remote https://github.com/$repo.git refs/heads/2026-1 | sed 's/\s.*//g')
 depends=(glibc texlive zlib)
-download_git "https://github.com/jlaurens/synctex"
+download_github "$repo"
 cd synctex
 git checkout 2026-1
 cd meson

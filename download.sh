@@ -12,6 +12,12 @@ function download_git {
 		git -C $name fetch --tags origin
 	fi
 }
+function download_github {
+	local repo=$1
+	curl -fsSL https://api.github.com/repos/$repo |
+python3 -c 'import json,sys; d=json.load(sys.stdin); print(f"Repository size: {d['\''size'\''] / 1024:.2f} MiB")'
+	download_git "https://github.com/$repo.git" "$2"
+}
 function download_src {
 	local URL=$1
 	if [[ -n $2 ]]

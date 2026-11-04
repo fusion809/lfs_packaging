@@ -7,7 +7,7 @@ homepage="https://wxwidgets.org"
 description="GTK+3 implementation of wxWidgets API GUI."
 version=$(gh_ver $repo)
 depends=(cmake git glu gst-plugins-base libmspack libnotify nanosvg-git webkitgtk)
-download_git "https://github.com/wxWidgets/wxWidgets"
+download_github "$repo"
 cd $_name
 cmake_options=(
 	-DCMAKE_INSTALL_PREFIX=/usr \

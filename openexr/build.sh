@@ -6,7 +6,7 @@ homepage="https://www.openexr.com/"
 description="High dynamic-range image file format library."
 version=$(gh_ver $repo)
 depends=(openjph libdeflate gcc git cmake imath)
-download_git "https://github.com/$repo.git"
+download_github "$repo"
 cd $name
 git checkout v$version
 # unpin scikit-build-core version
@@ -18,5 +18,4 @@ cmake_options=(-DCMAKE_INSTALL_PREFIX=/usr \
     -DOPENEXR_BUILD_PYTHON=ON)
 cmaki "${cmake_options[@]}"
 cd ../..
-rm -rf "$filename" "$direname"
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"

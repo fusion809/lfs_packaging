@@ -8,7 +8,7 @@ description="Electron desktop app for Ketcher skeletal formula sketcher."
 version=$(gh_com $repo)
 filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-download_git "$homepage.git"
+download_github "$repo"
 srcdir=$PWD
 cd $_name
 python - <<'PY'

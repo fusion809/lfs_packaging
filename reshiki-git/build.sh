@@ -30,5 +30,6 @@ Categories=Education;Science;Chemistry;
 StartupWMClass=$name
 EOF
 sudo rm -rf target/release/reshiki
+git stash
 cd ../
 echo "$version" | sudo tee "/var/lib/custom-packages/$name"

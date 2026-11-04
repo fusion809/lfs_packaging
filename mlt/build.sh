@@ -6,9 +6,9 @@ homepage="https://www.mltframework.org/"
 description="Open-source multimedia framework."
 version=$(gh_ver $repo)
 depends=(glibc libebur128 gcc eigen frei0r-plugins ffmpeg ladspa libexif libsamplerate lilv movit opencv rtaudio rubberband sdl_image vid.stab swig vulkan-headers)
-download_git "https://github.com/$repo.git"
+download_github "$repo"
 download_git "https://invent.kde.org/graphics/glaxnimate.git"
-download_git "https://github.com/mbasaglia/thorvg.git"
+download_github "mbasaglia/thorvg"
 srcdir=$PWD
 cd $name
 git checkout v$version
