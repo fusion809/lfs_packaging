@@ -77,9 +77,12 @@ function createWindow(inputFile = null) {""",
 
 for old, new in replacements:
     count = text.count(old)
-    if count != 1:
-        raise SystemExit(f"Expected one source patch anchor, found {count}: {old[:80]!r}")
-    text = text.replace(old, new, 1)
+    if count == 1:
+        text = text.replace(old, new, 1)
+    elif count == 0 and new in text:
+        print(f"Already applied patch: {old[:60]!r}")
+    else:
+        raise SystemExit(f"Expected one source patch anchor or its replacement, found {count}: {old[:80]!r}")
 
 main.write_text(text, encoding="utf-8")
 print(f"Enabled file opening in {main}")

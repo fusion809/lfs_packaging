@@ -33,7 +33,8 @@ meson_options=(
       -D nobody-group=nogroup \
       -D sysupdate=disabled   \
       -D ukify=disabled       \
-      -D docdir=/usr/share/doc/$direname
+      -D docdir=/usr/share/doc/$direname \
+    -D sbat-distro-url=https://www.linuxfromscratch.org/lfs/
 )
 echo "Rm systemd-udev-control.socket as it causes build failure"
 sudo rm -rf /usr/lib/systemd/system/systemd-udev-control.socket
