@@ -12,6 +12,7 @@ filename="$_name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 download_github "$repo"
 cd $_name
+git checkout $version
 srcdir=$PWD
 cargo build --release
 sudo install -Dm755 target/release/woxi /usr/bin/
