@@ -8,8 +8,6 @@ description="Open-source Mathematica alternative written in Rust - git build."
 version=$(gh_com $repo)
 depends=(gcc glibc rust)
 conflicts=(woxi)
-filename="$_name-$version.tar.gz"
-direname="${filename/.tar.*/}"
 download_github "$repo"
 cd $_name
 git checkout $version
