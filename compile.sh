@@ -249,10 +249,12 @@ function craft_buildin {
 	fi
 	local version=$2
 	local repo=storytold/$_name
-	local filename="$_name-$version.tar.gz"
-	local direname="${filename/.tar.gz/}"
-	gha_download "$repo" "v$version" "$filename"
-	unpk_enter "$filename"
+	#local filename="$_name-$version.tar.gz"
+	#local direname="${filename/.tar.gz/}"
+	#gha_download "$repo" "v$version" "$filename"
+	download_github "$repo"
+	#unpk_enter "$filename"
+	cd $_name
 	export CARGO_HOME="$PWD"
 	export CARGO_PROFILE_RELEASE_DEBUG=0
 	export CARGO_PROFILE_RELEASE_STRIP=debuginfo
