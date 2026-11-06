@@ -2,11 +2,11 @@
 set -e
 name=poppler
 description="PDF rendering library based on xpdf 3.0."
-homepage="http://poppler.freedesktop.org/"
+homepage="https://poppler.freedesktop.org/"
 get_version() {
 	local inst_ver=$(pkgver $name)
 	local lfs_vers=$(lfs_ver $name)
-	local up_ver=$(wget -T 5 -t 1 -cqO- $homepage | grep "poppler-[0-9]+\.[0-9]+\.[0-9]+" -oE | cut -d '-' -f 2 | sort -V | tail -n 1)
+	local up_ver=$(wget -T 10 -t 2 -qO- "$homepage" | grep -E "poppler-[0-9]+\.[0-9]+\.[0-9]+" -o | cut -d '-' -f 2 | sort -V | tail -n 1)
 	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
 	local mon_ver=$(uver $name)
 	ver_check "$mon_ver" "$inst_ver" "$lfs_vers" && return
@@ -20,7 +20,16 @@ get_version() {
 version=$(get_version)
 depends=(brotli bzip2 cairo curl cyrus-sasl dbus double-conversion elfutils expat fontconfig freetype gcc glib2 glibc gpgme gpgmepp graphite2 harfbuzz icu lcms2 libassuan libdrm libffi libglvnd libgpg-error libidn2 libjpeg-turbo libpciaccess libpng libpsl tiff libunistring libwebp libx11 libxau libxcb libxdmcp libxext libxkbcommon libxml2 libxrender libxshmfence libxxf86vm llvm lm-sensors mesa nghttp2 nspr nss openjpeg openldap openssl pcre2 pixman qt6 spirv-tools systemd texlive tiff util-linux wayland xz zlib zstd)
 filename="$name-$version.tar.xz"
-dversion=$(wget -cqO- $homepage | grep "poppler-data-[0-9]+\.[0-9]+\.[0-9]+" -oE | cut -d '-' -f 3 | sort -V | tail -n 1)
+dversion=$(wget -T 10 -t 2 -qO- "$homepage" 2>/dev/null | grep -E "poppler-data-[0-9]+\.[0-9]+\.[0-9]+" -o | cut -d '-' -f 3 | sort -V | tail -n 1)
+if [[ -z "$dversion" ]]; then
+	for f in "$name"-data-*.tar.gz; do
+		if [[ -f "$f" ]]; then
+			dversion=$(echo "$f" | sed -E 's/.*poppler-data-([0-9.]+)\.tar\.gz/\1/')
+			break
+		fi
+	done
+fi
+[[ -n "$dversion" ]] || dversion="0.4.12"
 data_filename="$name-data-$dversion.tar.gz"
 direname="${filename/.tar.*/}"
 download_src "https://poppler.freedesktop.org/$filename"
