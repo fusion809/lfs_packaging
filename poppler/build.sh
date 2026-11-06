@@ -17,10 +17,21 @@ get_version() {
 	ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
 	fver "$name" "$inst_ver"
 }
+get_dversion() {
+	local up_ver=$(wget -T 10 -t 2 -qO- "$homepage" 2>/dev/null | grep -E "poppler-data-[0-9]+\.[0-9]+\.[0-9]+" -o | cut -d '-' -f 3 | sort -V | tail -n 1)
+	local lfs_vers=$(wget -T 5 -t 1 -cqO- https://www.linuxfromscratch.org/blfs/view/git/general/poppler.html | grep "poppler-data-[0-9.]+" -oE | head -n 1 | sed 's/poppler-data-//g' | sed 's/\.$//g')
+	local inst_ver=$(pkgver $name 2)
+	ver_check "$up_ver" "$inst_ver" "$lfs_vers" && return
+	local arch_ver=$(aver poppler-data)
+	ver_check "$arch_ver" "$inst_ver" "$lfs_vers" && return
+	local art_ver=$(artver poppler-data)
+	ver_check "$art_ver" "$inst_ver" "$lfs_vers" && return
+	fver "$name" "$inst_ver"
+}
 version=$(get_version)
 depends=(brotli bzip2 cairo curl cyrus-sasl dbus double-conversion elfutils expat fontconfig freetype gcc glib2 glibc gpgme gpgmepp graphite2 harfbuzz icu lcms2 libassuan libdrm libffi libglvnd libgpg-error libidn2 libjpeg-turbo libpciaccess libpng libpsl tiff libunistring libwebp libx11 libxau libxcb libxdmcp libxext libxkbcommon libxml2 libxrender libxshmfence libxxf86vm llvm lm-sensors mesa nghttp2 nspr nss openjpeg openldap openssl pcre2 pixman qt6 spirv-tools systemd texlive tiff util-linux wayland xz zlib zstd)
 filename="$name-$version.tar.xz"
-dversion=$(wget -T 10 -t 2 -qO- "$homepage" 2>/dev/null | grep -E "poppler-data-[0-9]+\.[0-9]+\.[0-9]+" -o | cut -d '-' -f 3 | sort -V | tail -n 1)
+dversion=$(get_dversion)
 if [[ -z "$dversion" ]]; then
 	for f in "$name"-data-*.tar.gz; do
 		if [[ -f "$f" ]]; then
@@ -49,4 +60,4 @@ cd ${data_filename/.tar.*/}
 sudo make prefix=/usr install
 cd ../..
 rm -rf "$filename" "$direname" "$data_filename"
-echo "$version" | sudo tee "/var/lib/custom-packages/$name"
+echo "$version\n$dversion" | sudo tee "/var/lib/custom-packages/$name"
