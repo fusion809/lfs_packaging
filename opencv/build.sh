@@ -10,7 +10,10 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 gha_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
-gap_patches $name
+gap_patches $name || echo "Patching failed. Continuing build..."
+# OpenCV 5.1.0's FFmpeg 9 patch partially applies and leaves this unmatched.
+sed -i '/_opencv_ffmpeg_av_image_fill_arrays(picture, picture_buf,/{n;n;n;/^[[:space:]]*#endif$/d;}' \
+    modules/videoio/src/cap_ffmpeg_impl.hpp
 options=(-D CMAKE_INSTALL_PREFIX=/usr      \
       -D CMAKE_BUILD_TYPE=Release       \
       -D ENABLE_CXX11=ON                \
