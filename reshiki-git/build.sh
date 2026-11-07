@@ -7,7 +7,14 @@ homepage="https://reshiki.com/"
 description="Vibe-coded skeletal formula sketching app written in Rust -- git."
 version=$(gh_com $repo)
 depends=(acl at-spi2-core brotli bzip2 cairo dbus expat fontconfig freetype fribidi gcc gdk-pixbuf glib2 glibc glycin graphite2 gtk3 harfbuzz libcanberra libepoxy libffi libice libogg libpng libseccomp libselinux libsm libtool libvorbis libx11 libxau libxcb libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes libxi libxinerama libxkbcommon libxrandr libxrender libxres libxt ncurses pango pcre2 pixman systemd util-linux wayland zlib)
-download_git "https://github.com/$repo.git"
+if ! download_git "https://github.com/$repo.git"; then
+	# A concurrent build can update origin/* while download_git fetches, making
+	# Git reject the stale expected ref value. Keep going only if this pinned
+	# revision is already available; otherwise fetch it directly.
+	if ! git -C "$_name" cat-file -e "$version^{commit}" 2>/dev/null; then
+		git -C "$_name" fetch --no-tags origin "$version"
+	fi
+fi
 cd $_name
 git checkout $version
 sed -i -e "s|application_id: \"reshiki\".into(),|application_id: \"$name\".into(),|g" src/main.rs
