@@ -20,10 +20,12 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
+_version=$(echo $version | sed -E 's/\./_/g' | sed 's/p/_P/g')
 depends=(glibc libxcrypt openssl zlib)
-filename="$name-$version.tar.gz"
+repo=openssh/openssh-portable
+filename="$name-V_${_version}.tar.gz"
 direname="${filename/.tar.*/}"
-download_src "https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/$filename"
+gha_download "$repo" "V_${_version}" "$filename"
 unpk_enter "$filename" "$direname"
 #sudo su -c "install -v -g sys -m700 -d /var/lib/sshd &&
 #
