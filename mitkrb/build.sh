@@ -34,7 +34,56 @@ filename="$dirname.tar.gz"
 depends=(bash e2fsprogs glibc keyutils lmdb openssl)
 download_src "$dist/$majMinVer/$filename"
 unpk_enter "$filename" "$direname"
-gap_patches $name
+patch -Np1 <<'PATCH'
+--- a/src/plugins/tls/k5tls/openssl.c
++++ b/src/plugins/tls/k5tls/openssl.c
+@@ -162,7 +162,7 @@
+ get_cert_sans(const X509 *x)
+ {
+     int ext;
+-    X509_EXTENSION *san_ext;
++    const X509_EXTENSION *san_ext;
+ 
+     ext = X509_get_ext_by_NID(x, NID_subject_alt_name, -1);
+     if (ext < 0)
+@@ -178,12 +178,33 @@
+ static int
+ get_cert_cn(const X509 *x, char *buf, size_t bufsize)
+ {
+-    X509_NAME *name;
++    const X509_NAME *name;
++    const X509_NAME_ENTRY *entry;
++    const ASN1_STRING *data;
++    unsigned char *utf8 = NULL;
++    size_t copylen;
++    int idx, len;
+ 
+     name = X509_get_subject_name(x);
+     if (name == NULL)
+         return -1;
+-    return X509_NAME_get_text_by_NID(name, NID_commonName, buf, bufsize);
++    idx = X509_NAME_get_index_by_NID(name, NID_commonName, -1);
++    if (idx < 0)
++        return -1;
++    entry = X509_NAME_get_entry(name, idx);
++    data = X509_NAME_ENTRY_get_data(entry);
++    len = ASN1_STRING_to_UTF8(&utf8, data);
++    if (len < 0)
++        return -1;
++    if (bufsize == 0) {
++        OPENSSL_free(utf8);
++        return 0;
++    }
++    copylen = (size_t)len < bufsize - 1 ? (size_t)len : bufsize - 1;
++    memcpy(buf, utf8, copylen);
++    buf[copylen] = 0;
++    OPENSSL_free(utf8);
++    return (int)copylen;
+ }
+ 
+ /* Return true if text matches any of the addresses we can recover from x. */
+PATCH
+gap_patches $name || echo "patching failed. Continuing"
 cd src &&
 sed -i -e '/eq 0/{N;s/12 //}' plugins/kdb/db2/libdb2/test/run.test &&
 
@@ -49,8 +98,12 @@ configure_options=(
     --enable-dns-for-realm   \
     --disable-rpath
 )
-cmi "${configure_options[@]}"
-sudo cp -vfr ../doc -T /usr/share/doc/$dirname
+mkdir -p build
+cd build
+../configure "${configure_options[@]}"
+maki
+sudo cp -vfr ../../doc -T /usr/share/doc/$dirname
 export CP="/var/lib/custom-packages"
 echo "$version" | sudo tee "$CP/$name"
-rm -rf $dirname $filename
+cd ../..
+rm -rf "$dirname" "$filename"
