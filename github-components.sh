@@ -6,6 +6,9 @@ function ghl_ver {
 		timeout 5 git ls-remote --tags --refs "$URL" \
 		| grep "tags/v[0-9.]+[-rc]*[0-9]*" -E | sed 's|.*tags/v||g' \
 		| sort -V | tail -n 1
+	elif [[ "$1" == "KDE/kcalendarcore" || "$1" == "KDE/kgamma" ]]; then
+		timeout 5 git ls-remote --tags --refs "$URL" \
+                | grep -v "rc\|alpha\|beta" | grep "tags/v$(pkgver kwindowsystem | cut -d '.' -f1)[0-9.]+" -oE | grep -oE "[0-9.]+" | sort -V | tail -n 1	
 	elif [[ "$1" == "KDE/kseexpr" ]]; then
 		timeout 5 git ls-remote --tags --refs "$URL" \
 		| grep -v "rc" \
