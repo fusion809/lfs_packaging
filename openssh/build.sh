@@ -20,6 +20,7 @@ get_version() {
 	fver "$name" "$inst_ver"
 }
 version=$(get_version)
+echo "[VERSION] $name: $version"
 _version=$(echo $version | sed -E 's/\./_/g' | sed 's/p/_P/g')
 depends=(glibc libxcrypt openssl zlib)
 repo=openssh/openssh-portable

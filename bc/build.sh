@@ -5,10 +5,10 @@ homepage="https://www.gnu.org/software/bc/"
 description="An arbitrary precision calculator language."
 repo="gavinhoward/bc"
 version=$(gh_ver $repo)
-filename="$name-$version.tar.xz"
-direname="${filename/.tar.xz/}"
+filename="$name-$version.tar.gz"
+direname="${filename/.tar.*/}"
 depends=(coreutils gcc glibc make ncurses readline tar xz)
-ghr_download "$repo" "$version" "$filename"
+gha_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
 CC='gcc -std=c99' cmi --prefix=/usr -G -O3 -r
 cd ..

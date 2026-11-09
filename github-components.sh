@@ -144,6 +144,11 @@ function ght_ver {
 		| grep -E "tags/v[0-9.]+[-rc]*[0-9]*.tar.gz" | sed 's|.*tags/v||g' \
 		| sed 's/.tar.gz.*//g' | sort -V | tail -n 1
 		return
+	elif [[ "$1" == "OpenChemistry/molecules" || "$1" == "OpenChemistry/crystals" || "$1" == "gavinhoward/bc" ]]; then
+		wget -T 5 -t 1 -cqO- https://github.com/$1/tags \
+		| grep -oE "tags/[0-9]+\.[0-9]+\.[0-9]+" | sed 's|.*tags/||g' \
+		| sed 's/.tar.gz.*//g' | sort -V | tail -n 1
+		return
 	elif [[ "$1" == "KDE/kseexpr" ]]; then
 		wget -T 5 -t 1 -cqO- https://github.com/$1/tags \
 		| grep -E "tags/v[0-9.]+[-rc]*[0-9]*.tar.gz" | sed 's|.*tags/v||g' \
