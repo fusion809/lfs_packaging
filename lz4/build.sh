@@ -8,7 +8,7 @@ version=$(gh_ver $repo)
 depends=(coreutils gcc glibc gzip make tar)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
-ghr_download "$repo" "v$version" "$filename"
+gha_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
 make BUILD_STATIC=yes PREFIX=/usr -j$(nproc)
 sudo make BUILD_STATIC=yes PREFIX=/usr install
