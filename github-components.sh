@@ -147,6 +147,9 @@ function ght_ver {
 		| grep -E "tags/v[0-9.]+[-rc]*[0-9]*.tar.gz" | sed 's|.*tags/v||g' \
 		| sed 's/.tar.gz.*//g' | sort -V | tail -n 1
 		return
+	elif [[ "$1" == "nodejs/node" ]]; then
+		wget -cqO- -T 5 -t 1 https://github.com/$1/tags | grep "tags/v[0-9.]+" -E | grep ".tar.gz" | sed 's|.*/nodejs/node/archive/refs/tags/v||g' | grep -v "alpha\|beta\|rc" | sed 's|.tar.gz.*||g' | sort -V | tail -n 1
+		return
 	elif [[ "$1" == "OpenChemistry/molecules" || "$1" == "OpenChemistry/crystals" || "$1" == "gavinhoward/bc" ]]; then
 		wget -T 5 -t 1 -cqO- https://github.com/$1/tags \
 		| grep -oE "tags/[0-9]+\.[0-9]+\.[0-9]+" | sed 's|.*tags/||g' \
