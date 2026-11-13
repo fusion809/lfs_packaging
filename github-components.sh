@@ -89,7 +89,7 @@ function ghl_ver {
 			| grep -v "^[12][0-9]" | sort -V | tail -n 1
 	elif echo $1 | grep "KDE" &> /dev/null; then
 		timeout 5 git ls-remote --tags --refs "$URL" \
-		| grep -v "rc" \
+		| grep -v "rc\|26\.11\.80" \
 		| grep -oE "refs/tags/[v]*[0-9]+\.[0-9]+\.[0-8][0-9]*" \
 		| cut -d '/' -f 3 | sed 's/^v//g' | sort -V | tail -n 1 
 	elif [[ "$1" == "GNOME/libgweather" ]]; then
@@ -176,7 +176,7 @@ function ght_ver {
 		wget -T 5 -t 1 -cqO- https://github.com/golang/go/tags | grep "tag/go[0-9.]+" -oE | sed 's/.*go//g' | sort -V | tail -n 1
 		return
 	elif [[ "$1" == "open-mpi/hwloc" ]]; then
-		wget -T 5 -t 1 -cqO- https://github.com/open-mpi/hwloc/tags | grep "hwloc-[0-9.]+" -oE | grep -v "\.$" | cut -d '-' -f 2 | uniq | sort -V | tail -n 1
+		wget -T 5 -t 1 -cqO- https://github.com/open-mpi/hwloc/tags | grep -vE "rc[0-9.]+|branch" | grep "hwloc-[0-9.]+" -oE | grep -v "\.$" | cut -d '-' -f 2 | uniq | sort -V | tail -n 1
 		return
 	elif [[ "$2" == "libopenssl3" ]]; then
 		wget -T 5 -t 1 -cqO- https://github.com/$1/tags | grep "tag/openssl-3\.[0-9.]+" -oE | cut -d '-' -f 2 | sort -V | tail -n 1
@@ -262,6 +262,7 @@ function ght_ver {
 		return
     elif echo $repo | grep "KDE" &> /dev/null; then
 	    wget -T 5 -t 1 -cqO- "$URL" | grep -v "rc" \
+		| grep -v "26\.11\.80" \
 		| grep -oE "[0-9]+\.[0-9]+\.[0-8][0-9]*" \
 		| sort -V | tail -n 1
 	    return
