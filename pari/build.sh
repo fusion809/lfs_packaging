@@ -17,9 +17,8 @@ download_git "https://pari.math.u-bordeaux.fr/git/pari.git"
 cd pari
 git checkout $name-$version
 sed -e 's|DLLDFLAGS  = \$DLLDFLAGS|DLLDFLAGS  = $DLLDFLAGS $LDFLAGS|' -i config/Makefile.SH # Honor system LDFLAGS
-
-  git show 603d02feac84d67c92688cbd60e366ee19776492 -- src/basemath/ZX.c | git apply - # Fix segfault in hyperellcharpoly
-  git show 6fcdb19f551b5695a13c2ea8ec05796629dcc546 -- src/basemath/alglin3.c | git apply - # Fix float
+git show 603d02feac84d67c92688cbd60e366ee19776492 -- src/basemath/ZX.c | git apply - || echo "Patching failed... Continuing."# Fix segfault in hyperellcharpoly
+git show 6fcdb19f551b5695a13c2ea8ec05796629dcc546 -- src/basemath/alglin3.c | git apply - || echo "Patching failed... Continuing." # Fix float
 ./Configure --prefix=/usr --with-readline --mt=pthread --with-gmp
 make -j$(nproc) all
 make -C Olinux-x86_64 gp-sta -j$(nproc)
