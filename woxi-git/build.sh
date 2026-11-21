@@ -6,7 +6,7 @@ repo=ad-si/$_name
 homepage="https://github.com/ad-si/Woxi"
 description="Open-source Mathematica alternative written in Rust - git build."
 #version=$(gh_com $repo)
-version=4cad857b4484b32116097cf903052669a94a232f
+version=eebe72c716e76032e699f4ffda3e310a1b0b4211
 depends=(gcc glibc rust)
 conflicts=(woxi)
 download_github "$repo"
