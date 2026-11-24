@@ -189,7 +189,7 @@ function gn_download {
 #		truncVer=$(echo $truncVer | cut -d '.' -f1-2)
 #	fi
 	local name=$(echo $filename | sed "s/-$version.tar.*//g")
-	download_src "https://download.gnome.org/sources/$name/$truncVer/$filename"
+	download_src "https://download.gnome.org/sources/$name/$truncVer/$filename" || download_src "https://download.gnome.org/sources/$name/$(echo $version | cut -d '.' -f 1)/$filename"
 }
 
 function gnu_download {

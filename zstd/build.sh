@@ -10,8 +10,8 @@ filename="$name-$version.tar.gz"
 direname="${filename/.tar.*/}"
 ghr_download "$repo" "v$version" "$filename"
 unpk_enter "$filename" "$direname"
-make prefix=/usr
-sudo make prefix=/usr install
+make CP=cp prefix=/usr
+sudo make CP=cp prefix=/usr install
 sudo rm -v /usr/lib/libzstd.a
 cd ..
 rm -rf $filename $direname
