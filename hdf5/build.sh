@@ -9,7 +9,6 @@ version=$(gh_ver $repo)
 filename="$name-$version.tar.gz"
 direname="${filename/.tar.gz/}"
 depends=(bash cmake coreutils freetype gcc glib2 glibc gzip java libaec make sed tar wget zlib)
-openmpi)
 # Fetch and unpack source
 ghr_download "$repo" "$version" "$filename"
 unpk_enter "$filename" "$direname"
