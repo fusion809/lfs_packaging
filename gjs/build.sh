@@ -13,6 +13,7 @@ unpk_enter "$filename" "$direname"
 options=(
 	--prefix=/usr \
 	--buildtype=release \
+	-Dcpp_args=-DXP_UNIX \
 	--wrap-mode=nofallback)
 mni "${options[@]}"
 cd ../..
